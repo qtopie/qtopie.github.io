@@ -1,5 +1,6 @@
 baseURL: 'https://qtopie.web.app/'
 languageCode: 'en-us'
+defaultContentLanguage: en
 title: 'Blog | qtopierw'
 theme: 'amp-blog-theme'
 author: 
