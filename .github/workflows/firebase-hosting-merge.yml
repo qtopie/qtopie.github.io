@@ -6,12 +6,20 @@ name: Deploy to Firebase Hosting on merge
   push:
     branches:
       - main
+  repository_dispatch:
+    types: sub_commit
 jobs:
   build_and_deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - run: hugo
+        with:
+          submodules: recursive
+          token: ${{ secrets.PRIVATE_REPO_ACCESS_TOKEN }}
+      - name: PullLatestPosts
+        run: git submodule update --recursive --remote
+      - name: generate sites
+        run: sudo snap install hugo && hugo --minify
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
