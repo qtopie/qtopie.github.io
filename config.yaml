@@ -6,6 +6,7 @@ theme: 'amp-blog-theme'
 author: 
   name: 'qtopierw'
   email: qtopie.rw@gmail.com
+googleAnalytics: G-59JSK30CDQ
 
 markup:
   defaultMarkdownHandler: goldmark
