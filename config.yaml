@@ -3,10 +3,11 @@ languageCode: 'en-us'
 defaultContentLanguage: en
 title: 'Blog | qtopierw'
 theme: 'amp-blog-theme'
+googleAnalytics: G-59JSK30CDQ
 author: 
   name: 'qtopierw'
   email: qtopie.rw@gmail.com
-googleAnalytics: G-59JSK30CDQ
+copyright: Posts licensed under <a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0
 
 params:
   googleAdSense: ca-pub-3338377104827119
