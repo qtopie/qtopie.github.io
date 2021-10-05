@@ -8,6 +8,9 @@ author:
   email: qtopie.rw@gmail.com
 googleAnalytics: G-59JSK30CDQ
 
+params:
+  googleAdSense: ca-pub-3338377104827119
+
 markup:
   defaultMarkdownHandler: goldmark
   goldmark:
