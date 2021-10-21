@@ -12,6 +12,8 @@ copyright: Posts licensed under <a href="https://creativecommons.org/licenses/by
 params:
   googleAdSense: ca-pub-3338377104827119
 
+enableRobotsTXT: true
+
 markup:
   defaultMarkdownHandler: goldmark
   goldmark:
