@@ -1,4 +1,4 @@
-baseURL: 'https://qtopie.web.app/'
+baseURL: 'https://qtopie.github.io/'
 languageCode: 'en-us'
 defaultContentLanguage: en
 title: 'Blog | qtopierw'
@@ -13,6 +13,7 @@ params:
   googleAdSense: ca-pub-3338377104827119
 
 enableRobotsTXT: true
+publishDir: docs
 
 markup:
   defaultMarkdownHandler: goldmark

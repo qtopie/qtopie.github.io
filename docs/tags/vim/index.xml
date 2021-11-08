@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>vim on Blog | qtopierw</title>
+    <link>https://qtopie.github.io/tags/vim/</link>
+    <description>Recent content in vim on Blog | qtopierw</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>qtopie.rw@gmail.com (qtopierw)</managingEditor>
+    <webMaster>qtopie.rw@gmail.com (qtopierw)</webMaster>
+    <copyright>Posts licensed under &lt;a href=&#34;https://creativecommons.org/licenses/by/4.0/legalcode&#34;&gt;CC BY 4.0</copyright>
+    <lastBuildDate>Tue, 06 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/tags/vim/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>VIM安装笔记</title>
+      <link>https://qtopie.github.io/posts/vim/build-and-install-latest-vim/</link>
+      <pubDate>Tue, 06 Apr 2021 00:00:00 +0000</pubDate>
+      <author>qtopie.rw@gmail.com (qtopierw)</author>
+      <guid>https://qtopie.github.io/posts/vim/build-and-install-latest-vim/</guid>
+      <description>VIM 安装 由于debian发行版维护的vim包还未升级到最新版本，但govim需要较高版本的vim。故选择手动编译安装。这里直接选择最新版本8.2， 对应于最新的git tag版本， 8.2版本有一些实用性的功能。
+环境
+ Ubuntu 19.10 5.3.0-24-generic x84_64  构建及安装过程  安装构建工具链  sudo apt update &amp;amp;&amp;amp; sudo apt install -y git build-essential 拉取源码  git clone https://github.com/vim/vim.git # 切换到你想构建的tag git checkout v8.2.0369 开始构建  #cd src #make distclean # if you build Vim before ./configure --with-features=huge \  --enable-multibyte \  --enable-python3interp=yes \  --with-python3-config-dir=$(python3-config --configdir) \  --enable-perlinterp=yes \  --enable-luainterp=yes \  --enable-cscope \  --prefix=/usr/local make VIMRUNTIMEDIR=/usr/local/share/vim/vim82 sudo apt install checkinstall sudo checkinstall checkinstall执行完后，会安装到/usr/local/bin/vim 即可。</description>
+    </item>
+    
+    <item>
+      <title>编写vim插件</title>
+      <link>https://qtopie.github.io/posts/vim/write-a-vim-plugin/</link>
+      <pubDate>Mon, 06 Jul 2020 23:32:56 +0800</pubDate>
+      <author>qtopie.rw@gmail.com (qtopierw)</author>
+      <guid>https://qtopie.github.io/posts/vim/write-a-vim-plugin/</guid>
+      <description>Vimscript https://en.wikipedia.org/wiki/Vim_(text_editor)#Vim_script
+:h write-plugin
+channel  demoserver.py  https://github.com/vim/vim/blob/master/runtime/tools/demoserver.py
+https://github.com/vim/vim/blob/master/src/testdir/test_channel_pipe.py
+https://vimhelp.org/channel.txt.html#job-start
+目录结构 ~/.vim/colors/ define color schemes used by Vim. ~/.vim/plugin/ are run each time Vim starts. ~/.vim/ftdetect/ are run each time Vim starts. Files here are used for filetype detection derived by autocommands. ~/.vim/ftplugin/ are run when the buffer filetype is set; Vim looks in this directory for a subdirectory name matching the buffer filetype (for example: ~/.vim/ftplugin/java/ for .java files.</description>
+    </item>
+    
+  </channel>
+</rss>

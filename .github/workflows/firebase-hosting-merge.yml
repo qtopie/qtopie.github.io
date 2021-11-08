@@ -20,9 +20,9 @@ jobs:
         run: git submodule update --recursive --remote
       - name: generate sites
         run: sudo snap install hugo && hugo --minify
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_QTOPIE }}'
-          channelId: live
-          projectId: qtopie
+#      - uses: FirebaseExtended/action-hosting-deploy@v0
+#        with:
+#          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+#          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_QTOPIE }}'
+#          channelId: live
+#          projectId: qtopie
