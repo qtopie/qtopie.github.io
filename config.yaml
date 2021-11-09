@@ -13,7 +13,6 @@ params:
   googleAdSense: ca-pub-3338377104827119
 
 enableRobotsTXT: true
-publishDir: docs
 
 markup:
   defaultMarkdownHandler: goldmark
