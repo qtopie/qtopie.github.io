@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Blog | qtopierw</title><link>https://qtopie.github.io/posts/</link><description>Recent content in Posts on Blog | qtopierw</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>qtopie.rw@gmail.com (qtopierw)</managingEditor><webMaster>qtopie.rw@gmail.com (qtopierw)</webMaster><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Tue, 28 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>树莓派和HomeAssistant</title><link>https://qtopie.github.io/posts/iot/rpi/homeassistant/</link><pubDate>Tue, 28 Sep 2021 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/iot/rpi/homeassistant/</guid><description>目标 使用开源软件和米家智能硬件，实现简单的智能家居系统
+采用米家智能硬件的原因是, 小米智能家居做的比较早（也许是起初推广的更好，刚接触智能家居的时候就用的小米）, 另外一点是小米智能硬件确实物美价廉，在国外也很受欢迎，Github上也有很多相关项目.
+环境和设备 RaspberryPi 4 (4GB版本) Ubuntu arm64 树莓派版本 安装HomeAssistant 这里使用Ubuntu而不是Raspbian的一个原因是Ubuntu官方软件包更新更快（比如raspbian当前为3.7而hass需要3.8+版本)， 且自己笔记本一直用Ubuntu，统一发行版使用起来更加方便
+sudo pip3 install homeassistant 如果下载很慢，可以考虑使用pypi镜像源
+编辑/etc/pip.conf (使用豆瓣源）
+[global] index-url = https://pypi.douban.com/simple 设置开机自启动 创建systemd service unit文件 systemctl --user edit --full --force homeassistant.service 加入以下内容
+[Unit] Description=Home Assistant After=network.target [Service] Type=simple ExecStart=/home/ubuntu/.local/bin/hass Restart=on-failure RestartSec=5 [Install] WantedBy=default.target 设置用户自动登录 安装raspi-config, 然后配置 1. System Options -&amp;gt; S5 Boot / Auto Login -&amp;gt; B2 Console Autologin</description></item><item><title>vim-go</title><link>https://qtopie.github.io/posts/vim/vim-go/</link><pubDate>Sat, 28 Aug 2021 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/vim/vim-go/</guid><description>将VIM打造为Go开发利器
+平时一般使用VSCode编程，最近为了更好地刷leetcode，又换回了vim。发现笔记本小屏幕 使用vscode zen-mode沉浸式看代码很爽以后，也喜欢上了使用vim写代码, 快捷键方便、稳 定高效、功能纯粹（极简主义）。研究了一番后，发现其可行性，便整理了一下。
+主要插件 完整列表
+Plug &amp;#39;scrooloose/nerdtree&amp;#39;Plug &amp;#39;preservim/tagbar&amp;#39;Plug &amp;#39;vim-airline/vim-airline&amp;#39;Plug &amp;#39;vim-airline/vim-airline-themes&amp;#39;Plug &amp;#39;fatih/vim-go&amp;#39;, { &amp;#39;do&amp;#39;: &amp;#39;:GoUpdateBinaries&amp;#39; }Plug &amp;#39;Shougo/ddc.vim&amp;#39;Plug &amp;#39;vim-denops/denops.vim&amp;#39;Plug &amp;#39;buoto/gotests-vim&amp;#39;Plug &amp;#39;SirVer/ultisnips&amp;#39;Plug &amp;#39;honza/vim-snippets&amp;#39;vim-go vim-go是目前主要且流行的针对go的vim插件，视频[Hacking with Andrew and Brad: an HTTP/2 client] (https://www.youtube.com/watch?v=yG-UaBJXZ80)中两位大佬用vim 进行pair编程使用了就是该插件。
+PS: 当时看了这视频后，不禁佩服两位大佬的代码功底，也刷新了使用vim开发实际项目的认知, 原来使用vim写代码 还可以比eclipse/idea/vscode更顺手, 也可以装酷了：》 自己用vim一般也只是用来改改配置，写写简单的脚本，还没尝试过使用它进行正经的项目开发。 虽然以前做过尝试，不过借助vim-go插件和LSP，这成为了真正的可能。
+虽然vim-go原作者已不再参与维护该项目，但已交给社区的另外两人负责，仍然在活跃更新 https://arslan.io/2018/10/09/taking-an-indefinite-sabbatical-from-my-projects/
+govim govim是一个有意思的vim插件，它尝试使用go语言编写vim插件.
+作为一个后起之秀，它的功能并没有vim-go完善，比如debug功能（这对我来说是一个核心诉求）, 从实际使用体验来看，也不如vim-go稳定。从个人角度而言, vim, go我都喜欢，但使用vim script 编写插件应该有更好的兼容性(vim对go的支持还没有那么的好，对lua和python的支持更佳）, 所以还是选择vim-go插件。
+配置 &amp;#34;.vim/after/ftplugin/go.vim &amp;#34; shortcut like vscodennoremap &amp;lt;buffer&amp;gt; &amp;lt;silent&amp;gt; &amp;lt;F2&amp;gt; :hide GoRename&amp;lt;CR&amp;gt;nnoremap &amp;lt;buffer&amp;gt; &amp;lt;silent&amp;gt; &amp;lt;F4&amp;gt; :hide GoBuild&amp;lt;CR&amp;gt;nnoremap &amp;lt;buffer&amp;gt; &amp;lt;silent&amp;gt; &amp;lt;F5&amp;gt; :hide GoDebugStart&amp;lt;CR&amp;gt;nnoremap &amp;lt;buffer&amp;gt; &amp;lt;silent&amp;gt; &amp;lt;C-F5&amp;gt; :hide GoRun&amp;lt;CR&amp;gt;nnoremap &amp;lt;buffer&amp;gt; &amp;lt;silent&amp;gt; &amp;lt;S-F11&amp;gt; :hide GoDebugStepOut&amp;lt;CR&amp;gt;nnoremap &amp;lt;buffer&amp;gt; &amp;lt;silent&amp;gt; &amp;lt;F12&amp;gt; :hide GoDebugStop&amp;lt;CR&amp;gt;</description></item><item><title>排列组合</title><link>https://qtopie.github.io/posts/algorithms/combination-permutation/</link><pubDate>Thu, 15 Jul 2021 22:02:05 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/algorithms/combination-permutation/</guid><description>This is a testing post for writing markdown with latex
+排列组合 独立重复性事件 \: n^m 从n个不同物品中取一个物品，每次取一个，取m次的结果（考虑先后顺序）
+n^m = n \times n \times n ... \times n \tag 1 \: A_n^n 从n个不同物品中取一个物品，每次取一个, 不放回，取n次(完）的结果.（考虑先后顺序）
+第一次有n个结果， 依据独立性事件，第二次有n-1中结果，以此类推
+A_n^n = n(n-1)(n-2)... \times 2 \times 1 \tag 2 \: A_n^m 从n个不同物品中取一个物品，每次取一个, 不放回，取m次(可能不取）的结果.（考虑先后顺序），未取到的结果有\: A_{n-m}^{n-m}种
+A_n^m = \frac{A_n^n}{A_{n-m}^{n-m}} = n(n-1)(n-2)...(n-m+1) \tag 3 \: C_n^m 从n个不同物品中取一个物品，每次取一个, 不放回，取m次(可能不取）的结果.（不考虑先后顺序）
+C_n^m = \frac{A_n^m}{A_m^m} = \frac{n!}{m! \times (n-m)!} \tag 4 例子 3 * 4 的格子, 从左上走到右下角，只能往下或者往右。</description></item><item><title>Linux Command-line Handbook</title><link>https://qtopie.github.io/posts/linux/linux-cmd-handbook/</link><pubDate>Sun, 02 May 2021 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/linux/linux-cmd-handbook/</guid><description>Based on my experiences on Ubuntu
+Software Package Management set up proxy for apt sudo bash -c &amp;#39;cat &amp;lt;&amp;lt; EOF &amp;gt; /etc/apt/apt.conf.d/proxy.conf Acquire { HTTP::proxy &amp;#34;http://127.0.0.1:8118&amp;#34;; HTTPS::proxy &amp;#34;http://127.0.0.1:8118&amp;#34;; } EOF&amp;#39; System Monitoring Basic Info # memory free -m # get process id ps aux | grep &amp;lt;pattern&amp;gt; # view startup command of process ps flww -p [PID] # check cpu usage top -p &amp;lt;pid&amp;gt; # list by threads top -H -p &amp;lt;pid&amp;gt; # disk df -h # networks iostat Performance Testing Network Bindwidth Testing There are two common means to achive this</description></item><item><title>VIM安装笔记</title><link>https://qtopie.github.io/posts/vim/build-and-install-latest-vim/</link><pubDate>Tue, 06 Apr 2021 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/vim/build-and-install-latest-vim/</guid><description>VIM 安装 由于debian发行版维护的vim包还未升级到最新版本，但govim需要较高版本的vim。故选择手动编译安装。这里直接选择最新版本8.2， 对应于最新的git tag版本， 8.2版本有一些实用性的功能。
+环境
+Ubuntu 19.10 5.3.0-24-generic x84_64 构建及安装过程 安装构建工具链 sudo apt update &amp;amp;&amp;amp; sudo apt install -y git build-essential 拉取源码 git clone https://github.com/vim/vim.git # 切换到你想构建的tag git checkout v8.2.0369 开始构建 #cd src #make distclean # if you build Vim before ./configure --with-features=huge \ --enable-multibyte \ --enable-python3interp=yes \ --with-python3-config-dir=$(python3-config --configdir) \ --enable-perlinterp=yes \ --enable-luainterp=yes \ --enable-cscope \ --prefix=/usr/local make VIMRUNTIMEDIR=/usr/local/share/vim/vim82 sudo apt install checkinstall sudo checkinstall checkinstall执行完后，会安装到/usr/local/bin/vim 即可。</description></item><item><title>自动控制风扇温度</title><link>https://qtopie.github.io/posts/iot/rpi/fan-and-tempature/</link><pubDate>Mon, 03 Aug 2020 23:33:04 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/iot/rpi/fan-and-tempature/</guid><description>最近购买了一个树莓派4B 4G内存版，替换了旧的Model3 (强迫症犯了，就为了换成type c口，但因为电源适配问题还是老老实实地又买了官方电源适配器）
+树莓派4B相对3B性能提高不少，但是随之功耗和发热也上去了。 于是给它整了个金属外壳
+但是依旧烫得厉害，可能是我手动overlock了。开风扇的话，又有点吵，晚上影响睡觉。
+所以又买了一些排线和一个电磁继电器来实现自动通过风扇控制CPU等芯片温度。
+主要原理 获取GPU温度 vcgencmd
+vcgencmd measure_temp 获取CPU温度 cpu=$(&amp;lt;/sys/class/thermal/thermal_zone0/temp) echo &amp;#34;$((cpu/1000))c&amp;#34; 代码实现 网上已经有不少python版本的实现，但作为一个go粉，当然选择用go来实现了，正好练习一下gobot包的使用
+package main import ( &amp;#34;time&amp;#34; &amp;#34;gobot.io/x/gobot&amp;#34; &amp;#34;gobot.io/x/gobot/drivers/gpio&amp;#34; &amp;#34;gobot.io/x/gobot/platforms/raspi&amp;#34; &amp;#34;io/ioutil&amp;#34; &amp;#34;log&amp;#34; &amp;#34;strconv&amp;#34; &amp;#34;strings&amp;#34; ) func main() { low, high := 50, 58 r := raspi.NewAdaptor() sw := gpio.NewDirectPinDriver(r, &amp;#34;18&amp;#34;) work := func() { gobot.Every(5*time.Second, func() { t := readCpuTemp() log.Println(&amp;#34;Temp&amp;#34;, t/1000) if t &amp;lt; low*1000 { sw.</description></item><item><title>使用API自动开/关机cloudcone主机</title><link>https://qtopie.github.io/posts/diy/cloudcone-save-costs/</link><pubDate>Sat, 18 Jul 2020 22:02:05 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/diy/cloudcone-save-costs/</guid><description>Cloudcone是2017年成立于美国的一家主机供应商。继vultr变得“不靠谱”和低价vm资源经常“售尽”的情况下，我转而使用cloudcone提供的vps服务用于日常学习和开发。
+除了支持按小时计费、提供更换IP服务及支持支付宝/paypal等灵活的支付方式外，我最看重的是，它的价格能做到真正的弹性，即在vm关机状态不计费CPU/内存等费用,比online费用大概减半。
+类似于其他云供应商平台，cloudcone还提供了开放的API来管理云主机。
+这里为了方便使用和合理控制资源，自己便用go写了一个小程序
+代码实现 主要逻辑如下，通过cloudcone 提供的API。每天晚上23左右关机，次日早晨7点左右启动 如果调用失败的话，会再次重试一次。(如果依然不行的话，就当运气不好了:&amp;lt;）
+以下是草稿版本代码
+secret.go package main var ( // 配置相关信息,这里我填写的是假的啦 serverID = 123456 appSecret = &amp;#34;Q2aQr9323QE233r2&amp;#34; hashCode = &amp;#34;zXqV22222222222222222222222222222222225bL&amp;#34; ) serverID可以在compute菜单控制面板下查看，或查看浏览器url里的参数。
+appSecret和hashCode访问https://app.cloudcone.com/user/api创建即可。
+main.go /* * cloudcone api https://api.cloudcone.com/ */ package main import ( &amp;#34;context&amp;#34; &amp;#34;encoding/json&amp;#34; &amp;#34;errors&amp;#34; &amp;#34;fmt&amp;#34; &amp;#34;io/ioutil&amp;#34; &amp;#34;log&amp;#34; &amp;#34;net/http&amp;#34; &amp;#34;os&amp;#34; &amp;#34;sync&amp;#34; &amp;#34;time&amp;#34; &amp;#34;github.com/robfig/cron&amp;#34; ) // CloudconeResponse represents the API Response type CloudconeResponse struct { Status int Message string Data interface{} `json:&amp;#34;_data&amp;#34;` } const ( baseAPIURL = &amp;#34;https://api.</description></item><item><title>Yarn</title><link>https://qtopie.github.io/posts/web/yarn.zh/</link><pubDate>Sat, 20 Jun 2020 22:44:03 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/web/yarn.zh/</guid><description>Yarn是Facebook、Google等主导开发的新的Javascript包管理器。（相对于npm)
+安装 sudo npm install -g yarn --registry https://registry.npm.taobao.org 这里使用了taobao npm镜像
+配置Angular Cli使用yarn 使用ng命令设置全局使用yarn
+ng config -g cli.packageManager yarn 使用 添加依赖
+yarn add &amp;lt;DEP_NAME&amp;gt; # dev yarn add -D &amp;lt;DEP_NAME&amp;gt; 参考工具自带帮助文档
+yarn --help 包下载缓存 可以通过设置环境变量YARN_CACHE_FOLDER来指定缓存目录
+Ubuntu下修改~/.bashrc
+echo &amp;#39;YARN_CACHE_FOLDER=$HOME/.yarn&amp;#39; &amp;gt;&amp;gt; ~/.bashrc 构建速度简单比较 使用项目tour-of-heroes安装nodejs依赖。
+镜像: https://registry.npm.taobao.org
+NPM (6.14.5) Yarn (1.22.4) real 0m26.231s real 0m14.048s user 0m31.685s user 0m15.415s sys 0m5.</description></item><item><title>win10下的应用容器化开发</title><link>https://qtopie.github.io/posts/cloud-native/cicd/container-dev-on-win10.zh/</link><pubDate>Mon, 01 Jun 2020 21:15:34 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/cloud-native/cicd/container-dev-on-win10.zh/</guid><description>相对于Linux对容器化开发的良好支持（或者说各个容器化平台和工具对Linux更好的支持），在Windows下对应用进行容器化改造时的本地构建和测试并不是很直接和方便。这里记录一下，针对不同场景的相关实践经验。
+目标 支持docker构建 支持kubernetes容器服务编排 WSL WSL (Windows subsystem for Linux) 是win10新增的一个功能，可以直接在Windows上运行本机Linux命令工具。之前大家一般会去用Cgwin (或MingGw)工具。
+WSL 提供一个名为 Bash.exe 的应用程序，启动该应用程序后，会打开一个运行 Bash shell 的 Windows 控制台。 使用 Bash 可以运行命令行 Linux 工具和应用。
+具体介绍可以参考微软提供的WSL文档。
+WSL1 并没有一个完整的Linux内核，系统调用使用Windows Pico进程使用驱动翻译成NT API模拟成Linux内核的。具体架构可以参考WSL的系统架构。
+最近更新的WSL引入了微软提供的一个完整的Linux内核，增强了文件IO性能及完整的系统调用兼容性。这也意味着我们可以通过WSL2以Linux中的方式运行docker和kubernetes （这里我们使用microk8s)。
+适用场景 版本要求
+Win10 Version 2004, Build 19041 + （目前需要加入每月更新的预览版计划）
+Hyper V支持 （需要Windows支持，同时需要设备支持硬件虚拟化)
+优点 与Windows命令窗口和文件系统无缝集成，开发起来十分方便。在当前窗口输入bash就可以进入Linux下对应的目录；同时还有VSCode Remote WSL的支持。
+安装配置 启用Hyper V和Linux子系统
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux -NoRestart Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform 然后重启</description></item><item><title>Helm</title><link>https://qtopie.github.io/posts/cloud-native/k8s/helm.zh/</link><pubDate>Wed, 20 May 2020 21:15:34 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/cloud-native/k8s/helm.zh/</guid><description>这里我们使用helm 3.0+版本, 可以直接使用kube-server api, 不需要在集群安装tiler
+安装 sudo snap install helm --classic Chartmuseum repo: https://github.com/helm/chartmuseum
+本地安装
+curl -LO https://s3.amazonaws.com/chartmuseum/release/latest/bin/linux/amd64/chartmuseum chmod +x chartmuseum sudo mv chartmuseum /usr/bin/ sudo mkdir /opt/chart &amp;amp;&amp;amp; sudo chown $USER /opt/chart ./chartmuseum --storage=local --storage-local-rootdir=/opt/chart 然后打开http://localhost:8080就可以看到欢迎界面
+创建和使用chart 我们以创建一个nginx chart为例。
+使用helm创建初始化配。
+mkdir app helm create chart 然后可以看到初始化的以下配置
+artificerpi@ky-laptop:~/build/app$ tree chart chart ├── charts ├── Chart.yaml ├── templates │ ├── deployment.yaml │ ├── _helpers.tpl │ ├── ingress.yaml │ ├── NOTES.txt │ ├── serviceaccount.</description></item><item><title>JenkinsX</title><link>https://qtopie.github.io/posts/cloud-native/cicd/jenkinsx.zh/</link><pubDate>Tue, 28 Apr 2020 21:15:34 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/cloud-native/cicd/jenkinsx.zh/</guid><description>Jenkins是一款比较经典而优秀的流水线构建工具（平台）。
+为了实现现代化构建方式Run configuration as Code, Jenkins引入了Blue Ocean插件。通过该插件，我们可以使用声明式语法来编写Jenkinsfile，定义流水线构建步骤 https://www.jenkins.io/zh/doc/book/pipeline/jenkinsfile/
+然而在云原生和DevOps越来越流行的今天，传统的Jenkins模式只能满足CI的构建需求。于是Jenkins团队又引入了JenkinsX, 来实现一个现代化的GitOps平台。
+emm, 不吹水了，其实我只想做个笔记,记录下折腾了很久后的才明白的安装步骤
+目标 使用jx工具在microk8s上安装jenkinsx
+https://jenkins-x.io/docs/labs/
+因为不喜欢使用helm2在k8s上安装tiller, 所以这里直接跳级到helm3。不过这里就要使用JenkinsX Lab里的jxl工具了。(目前是实验性版本的jenkinsx，意味着要花更多时间折腾)
+结果：暂时弃坑了，直接上tektoncd
+安装 jxl本身使用gitops方式维护JenkinsX集群
+jxl 安装 从这个链接下载安装jxl工具 https://github.com/jenkins-x-labs/jxl/releases
+创建仓库 jxl boot create 这里我们选择minikube，和microk8s应该差不多。(注意不要选择更新本地jx版本，至少这篇文章写的时候这一步还有bug)
+按提示输入完毕就会初始化仓库，把jenkins bot的token记录下来, 我偷懒直接用这个访问github 私有仓库（开起了两步验证，直接使用密码没有办法直接推代码到github)
+这里还有一步是设置secret, 建议使用Hashicorp Vault存储secrets信息。 安装启动 拉取远程配置启动 jxl boot run --git-url https://github.com/artificerpi/environment-jx-dev --git-user artificerpi --git-token &amp;lt;TOKEN&amp;gt; 本地启动 （只是一个测试） cd environment-jx-dev &amp;amp;&amp;amp; jxl boot run -b 目前无法运行起来，报错/secrets/jx-boot/secrets.yaml无法找到，可能是个bug
+error: failed to load secrets YAML /secrets/jx-boot/secrets.</description></item><item><title>Caddy与http3</title><link>https://qtopie.github.io/posts/web/caddy.zh/</link><pubDate>Wed, 22 Apr 2020 00:03:52 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/web/caddy.zh/</guid><description>Caddy 简单介绍 Caddy是现代化的web代理服务器，使用Go语言编写，不直接依赖系统底层库。 另外，它很好地支持了https (也最先支持了http3), 而且它使用了现代化流行且安全的配置，几乎不需要额外配置。
+安装使用 我们可以去官网下载2.0版本 https://caddyserver.com/ 我们只需要拿到二进制文件即可。
+下载后放到/usr/local/bin/caddy, 然后编辑Caddyfile
+/etc/Caddyfile
+{ experimental_http3 } www.mwine.science { # redirect www.mwine.science to mwine.science redir https://mwine.science{uri} } mwine.science { root * /var/www/html/mwine.science/public file_server encode zstd gzip } 这里我将域名mwine.science和www.mwine.science绑定到了同一台服务器，并将www.mwine.science重定向到mwine.science
+然后创建一个文件/var/www/html/mwine.science/public/index.html
+&amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html&amp;gt; &amp;lt;body&amp;gt; Hello World ! &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt; 最后运行起来就可以了 （这里我加上了watch选项，启用根据文件配置动态更新）
+/usr/local/bin/caddy run -config /etc/Caddyfile -watch 或者我们可以将它写成systemd服务
+cat /usr/lib/systemd/system/caddy.service
+[Unit] Description=Caddy server daemon Wants=network-online.target After=network.target network-online.target multi-user.target [Service] ExecStart=/usr/local/bin/caddy run -config /etc/Caddyfile -watch Restart=on-failure RestartSec=30 TimeoutStopSec=30 [Install] WantedBy=multi-user.</description></item><item><title>Go安装</title><link>https://qtopie.github.io/posts/go/setup-go/</link><pubDate>Wed, 18 Mar 2020 22:02:05 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/go/setup-go/</guid><description>官方下载安装向导请参考这里https://golang.org/dl/
+这篇文章主要分享加速访问go依赖和资源站点的问题。
+环境 Ubuntu 19.10 x86_64 版本号 go1.14 linux/amd64 下载安装 Go安装文件可以访问国内站点 https://golang.google.cn/dl/
+解压后，移动到/usr/local/go目录，然后在/etc/profile里加入
+export GOROOT=/usr/local/go export PATH=$PATH:$GOROOT/bin 使用技巧 goproxy 使用goproxy加速go module下载(解决go get无法下载来自golang.org等站点的依赖包的问题）
+参考https://goproxy.io/zh/, 在go 1.13+下，我们可以使用以下命令在go env设置goproxy
+go env -w GO111MODULE=on go env -w GOPROXY=https://goproxy.io,direct # 设置不走 proxy 的私有仓库，多个用逗号相隔（可选） go env -w GOPRIVATE=*.corp.example.com 同样推荐使用国内站点https://goproxy.cn/
+文档查看 使用go doc命令可以在终端快速查阅文档 go doc net.Listen | vim -</description></item><item><title>Kubernetes使用入门</title><link>https://qtopie.github.io/posts/cloud-native/k8s/k8s-get-started.zh/</link><pubDate>Sat, 04 Jan 2020 00:03:52 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/cloud-native/k8s/k8s-get-started.zh/</guid><description>容器化 Containerization 容器是标准化的软件单元。容器化将软件打包成标准化的单元，从而能够以此进行开发，装载和部署。简单地说，通过底层虚拟化，容器化实现应用Write once, run anywhere， 而且是快速地run anywhere，就像docker图标里被鲸鱼背着的集装箱一样。
+容器与虚拟机的对比
+容器实现的是操作系统层面的虚拟化，而虚拟机是实现硬件层面的虚拟化。所以对于应用来说，选择容器会更加轻量级，这意味着它将占用更少的资源，能更快的启动和停止，更灵活地分配资源等等。
+PS: 这里并不是说容器一定总比虚拟机好，一般来说，不同的技术方案都有它适应的场景。比如我们需要模拟完整的硬件环境，虚拟机方案显然就更合适了。例如，在办公电脑上，我常常在windows笔记本上使用hyper-v安装一个ubuntu做开发，容器化方案在这里就相形见绌了。
+很多时候，容器和虚拟机被一起使用。比如，你买了一台性能很好的高可用服务器，1TB RAM, 64 core CPU，那么为了更合理的分配和管理资源，你可能首先在这台服务器上建立数个virtualbox虚拟机，然后再在虚拟机操作系统里安装docker。
+容器编排 容器化是我们能更方便地打包和运行应用，但当需要运行成百上千或者更多容器的时候，容器的自动化管理就十分重要了。对于习惯于实现应用自动化的程序员来说，甚至只管理两三个容器就巴不得有一个工具来完成自动化。容器编排就是来解决这个问题的，比较流行的有Google开发并开源的kubernetes, 及docker官方推的docker swarm。前者几乎已经成为业界规范，不过docker swarm对docker集成的更好，如果熟悉docker的话，docker swarm也会更加容易上手。
+容器编排常见的功能 （不想翻译)
+Expose containers by DNS name or IP address. Handle load balancing and traffic distribution for containers. Automatically mount local and cloud-based storage. Allocate specific CPU and RAM resources to containers and then fit them onto nodes. Replace or kill problematic containers without jeopardizing application performance and uptime.</description></item><item><title>Make Eclipse Great Again</title><link>https://qtopie.github.io/posts/development/make-gradle-work-with-eclipse/</link><pubDate>Sat, 28 Dec 2019 18:07:28 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/development/make-gradle-work-with-eclipse/</guid><description>Eclipse &amp;amp; Gradle 还是从那句老话开始， “工欲善其事，必先利其器”。要想熟练地完成一件事，有个好的工具往往能事半功倍。
+但是很多时候，迷信教条最终会成了造轮子而造轮子的递归循环；选择合适的工具，并掌握它，解决好问题才是正确的方向。
+这里简单说说，我选择Eclispe和Gradle的原因。
+Gradle (Gradle VS Maven or Ant); 选择gradle的原因很简单，简单而清晰的语法，强大的脚本语言，快速而稳定的构建。
+Eclipse (主要对比Idea, VS Code)
+开源及活跃而广受欢迎的社区 相对于Idea来说，个人使用经验上来看，在大Project上使用（源码多，项目多）更稳定, 且有偏向支持开源社区的因素，故使用Eclipse；VS Code对于小的Project来说还好，功能比Eclipse弱，查看多个文件及源码也不是很方便，大项目会使系统卡顿，但是小项目一般可以使用gradle + vim。 开发环境 当前开发环境
+Ubuntu 19.10 x86_64 Gradle 5.6.4 Eclipse (Snap版本) Eclipse Platform Version: 2019-03 (4.11) Build id: I20190307-0500 OS: Linux, v.5.3.0-24-generic, x86_64 / gtk 3.24.12 Java version: 1.8.0_171 Eclipse项目配置及依赖管理 我的Java项目管理方案 我不喜欢将IDE文件提交到git代码仓库，在我看来，IDE的作用就是一个文本编辑器，而且从协作角度来看，不同的开发者可能会选择不同的编辑器，所以不需要将IDE文件提交。 而Gradle脚本，不仅作为项目开发中一款重要的工具，而且包含了很多项目配置信息，因此需要提交到git仓库(有时候，如果开发人员和CI使用了统一的或兼容的gradle版本，甚至gradle wrapper都不需要提交)
+生成项目配置 默认Gradle eclipse编译输出目录为bin, 但是gradle构建输出目录为build， 因此需要改配置。</description></item><item><title>Ubuntu下使用MT7612U</title><link>https://qtopie.github.io/posts/linux/mt7612u-driver/</link><pubDate>Sat, 09 Mar 2019 11:29:38 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/linux/mt7612u-driver/</guid><description>由于墙挡住了路由器WIFI信号，虽然5G频率的WIFI传输速率很快，但是信号衰减。WIFI无线通信是双方向的，就算路由信号能覆盖到，但考虑到手机或笔记本功率和天线的限制，难保证信号稳定。所以在淘宝上买了一个功能还算强大的无线网卡ComFast 926AC v2，双频WIFI外置双天线。没提前研究，“号称免驱动&amp;quot;，结果拿回来就懵了。
+安装驱动 设备: Comfast 926AC v2 系统： Ubuntu 18.04
+因为是联发科的芯片，通常都是在同一份驱动代码上改改完成的。故从github上寻找了下面两个仓库的代码。
+ulli-kroll/mt7612u, jurobystricky/Netgear-A6210 官方驱动
+上面两驱动实际是在官方源码上改写的，但编译后，三个都不能正常工作。
+后来在openwrt/linux项目下发现该设备驱动的相关issue, 并已有大牛正在mt76驱动项目下加入该芯片的支持。故转用mt76的设备。查询linux主仓库代码发现，该驱动已随Linux内核5.0发布。因此直接下载linux 5.0内核包安装就行了。
+# 5.0: https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.0/ linux-headers-5.0.0-050000_5.0.0-050000.201903032031_all.deb linux-headers-5.0.0-050000-generic_5.0.0-050000.201903032031_amd64.deb linux-image-unsigned-5.0.0-050000-generic_5.0.0-050000.201903032031_amd64.deb linux-modules-5.0.0-050000-generic_5.0.0-050000.201903032031_amd64.deb 手动升级内核后测试能使用, 并支持AP：
+iwconfig
+wlx40a5eff2b655 IEEE 802.11 ESSID:off/any Mode:Managed Access Point: Not-Associated Tx-Power=19 dBm Retry short limit:7 RTS thr:off Fragment thr:off Power Management:off 网卡识别为存储设备的问题 mt76还未对这款comfast网卡适配，所以默认会被系统识别为存储设备，可以手动切换过来：
+sudo usb_modeswitch -KW -v 0e8d -p 2870 或者修改/lib/udev/rules.d/40-usb_modeswitch.rules文件自动切换（目前未成功）
+# MT7612U ATTR{idVendor}==&amp;quot;0e8d&amp;quot;, ATTR{idProduct}==&amp;quot;2870&amp;quot;, RUN+=&amp;quot;usb_modeswitch '%b/%k'&amp;quot; USB底座接触不良的问题 一起买的底座有点问题，开始还以为也要装什么驱动。检查后发现是接触不良的问题，因为USB口没有固定住，所以网卡很容易没有插入到底座中。解决办法比较简单，拆卸底座，然后填充底座中空部分，固定住USB接口。</description></item><item><title>Drone CI With Github</title><link>https://qtopie.github.io/posts/cloud-native/cicd/drone-ci-with-github/</link><pubDate>Tue, 05 Mar 2019 23:58:06 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/cloud-native/cicd/drone-ci-with-github/</guid><description>Yeah, another CI tool. That&amp;rsquo;s named Drone.
+We&amp;rsquo;ve been heard of Jenkins, travis-ci and even circle-ci (I have to mention this because there&amp;rsquo;re too much ads on youtube for it), so why would we need another one?
+I&amp;rsquo;ve used Jenkins and travis-ci, but they are not perfect, at least there are some slight drawbacks.
+My experience on Jenkins Jenkins is stable for production, it has long history and is used widely.</description></item><item><title>Jiri</title><link>https://qtopie.github.io/posts/cloud-native/cicd/jiri.zh/</link><pubDate>Thu, 20 Dec 2018 17:23:02 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/cloud-native/cicd/jiri.zh/</guid><description>Jiri (/jɪəri/ YEER-ee)是谷歌工程师开发的，灵活集成多个git仓库的工具，主要用来管理fuchsia操作系统源码。
+其主要功能类似于git submodule, 但使用方式更加灵活，不需要对原git仓库的行为做任何修改，也可以不用在主仓库不断更新引用。
+安装 推荐从源码编译安装 (需要安装最新版本Go语言构建工具）
+git clone https://fuchsia.googlesource.com/jiri cd jiri/cmd/jiri/jiri go build # go install sudo mv jiri /usr/local/bin/jiri Manifest manifest (文件名称为foo) &amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt; &amp;lt;manifest&amp;gt; &amp;lt;projects&amp;gt; &amp;lt;project name=&amp;#34;spring-petclinic-mybatis&amp;#34; remote=&amp;#34;https://github.com/artificerpi/spring-petclinic-mybatis&amp;#34; path=&amp;#34;backend&amp;#34;/&amp;gt; &amp;lt;project name=&amp;#34;spring-petclinic-angular&amp;#34; remote=&amp;#34;https://github.com/spring-petclinic/spring-petclinic-angular.git&amp;#34; path=&amp;#34;frontend&amp;#34;/&amp;gt; &amp;lt;/projects&amp;gt; &amp;lt;/manifest&amp;gt; 将此文件放到git仓库根目录下，本地创建目录foo
+mkdir foo &amp;amp;&amp;amp; cd foo jiri init # manifest repos jiri import foo https://github.com/artificerpi/jiri-foo jiri update 更多使用参考下面的文档和help命令
+参考 https://fuchsia.googlesource.com/jiri/</description></item><item><title>Math in Markdown</title><link>https://qtopie.github.io/posts/hugo/math-in-markdown/</link><pubDate>Thu, 20 Dec 2018 16:21:55 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/hugo/math-in-markdown/</guid><description>LaTeX Configuration I prefer to configure formular delimiters with the way using brackets:
+inline: \(...\) display: \[...\] display + equation number: \[...\] (1) For vscode, install extension Markdown+Math, then change Configuration from dollars into brackets. For mathJax, it&amp;rsquo;s provided in the default configuration.
+Good memory is not as bad as a pen.
+Permutation A_n^n=n\times(n-1)\times(n-2)\times...\times2\times1
+A_n^m=n\times(n-1)\times(n-2)\times...\times(n-m+1) = \frac{n!}{(n-m)!}
+Combination C_n^m=\frac{A_n^m}{A_m^m} = \frac{n!}{m!(n-m)!}
+C_n^m=C_n^{n-m} C_{n+1}^{r+1} = C_n^r + C_n^{r+1}
+Binomial theorem (a+b)^n = \sum_{i=0}^n{{C_n^i}a^{n-i}b^i} \tag 1 2^n =\sum_{i=0}^n{{C_n^i}} = C_n^0 + C_n^1 + C_n^2 + .</description></item><item><title>树莓派4G模块</title><link>https://qtopie.github.io/posts/iot/rpi/rpi-4g-lte-module/</link><pubDate>Wed, 05 Dec 2018 22:36:06 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/iot/rpi/rpi-4g-lte-module/</guid><description>准备环境 树莓派3B 华为4G模块：HUAWEI ME909s-821 PCIE转USB开发板 5cm天线转接线，SMA公头外螺内孔 吸盘天线全向高增益天线，SMA公头外螺内孔 中国移动4G SIM卡 4G模块技术规格及文档 技术规格 连接 基于海思芯片, 同类比较 SIM7600CE (Qualcomm MDM9206)
+文档 连接 主天线M口
+开始使用 Windows上使用该4G模块需要手动安装驱动，驱动连接
+Ubuntu下可以使用modemmanager管理4G模块
+树莓派下使用教程如下。
+查看usb设备是否被识别 lsusb # output: Bus 001 Device 004: ID 12d1:15c1 Huawei Technologies Co., Ltd. Bus 001 Device 003: ID 0424:ec00 Standard Microsystems Corp. SMSC9512/9514 Fast Ethernet Adapter Bus 001 Device 002: ID 0424:9514 Standard Microsystems Corp. SMC9514 Hub Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.</description></item><item><title>Vbox Ubuntu Server</title><link>https://qtopie.github.io/posts/linux/vbox-ubuntu-server/</link><pubDate>Tue, 27 Nov 2018 22:32:33 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/linux/vbox-ubuntu-server/</guid><description>Virtualbox with Ubuntu Server Manage Virtualbox in command line
+Installation sudo apt install virtualbox # or manually # wget https://download.virtualbox.org/virtualbox/5.2.22/virtualbox-5.2_5.2.22-126460~Ubuntu~bionic_amd64.deb # sudo dpkg -i virtualbox*.deb Install extenstion pack sudo apt install virtualbox-ext-pack # or manually # sudo VBoxManage extpack install Oracle_VM_VirtualBox_Extension_Pack-5.2.4-119785.vbox-extpack # check installation VBoxManage list extpacks Create VM Create virtual disk VBoxManage createmedium disk --filename ubuntu-server1.vdi --size 8192 Create virtual machine VBoxManage list ostypes | grep -B 1 -A 2 Ubuntu VBoxManage createvm --name ubuntu-server1 --ostype &amp;#34;Ubuntu_64&amp;#34; --register Configure virtual machine # add sata disk VBoxManage storagectl ubuntu-server1 --name SATA --add sata --controller IntelAHCI VBoxManage storageattach ubuntu-server1 --storagectl SATA --port 0 --device 0 --type hdd --medium ubuntu-server1.</description></item><item><title>怎样安全地Root你的安卓手机</title><link>https://qtopie.github.io/posts/diy/root-your-android-phone/</link><pubDate>Sun, 04 Nov 2018 20:29:38 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/diy/root-your-android-phone/</guid><description>出于各种原因，我们可能会对自己手机上的安卓系统并不满意，而Root是我们DIY自己的安卓机的一把钥匙。
+注意手机Root后并不一定安全，本文仅仅说的是用安全（较为透明公开）的方式自己root你的手机。
+但安全永远是相对的，如果你对手机ROOT后的安全性有较大顾虑，请不要进行该操作。
+对ROOT后的设备，也请远离流氓软件和恶意网站，尽可能使用可信度高的应用与服务。
+预先准备 MagiskManager Twrp APK文件从谷歌商店下载 sdk与fastboot工具 win linux mac 准备一台PC和数据线，能使用开发者模式调试安卓手机 解锁你的手机 打开开发者模式 打开设置 -&amp;gt; 关于手机 -&amp;gt; 软件信息 -&amp;gt; 内部版本号 -&amp;gt; 一直点它
+启用OEM解锁 进入开发者选项，勾选允许OEM解锁。 注意OEM解锁会清空手机数据，如果要进行下去请备份号手机数据。
+另外，解锁后，部分手机开机启动后会有一个源自安卓系统的安全警告画面，若不喜欢也建议不要继续。
+准备Magisk文件 在Magisk的Github发布页面下载apk程序进行安装，按照应用提示，下载最新的Magisk文件
+OEM 解锁 将adb和fastboot加入环境变量
+对windows用户而言，解压缩platform-tools_rx.x.x-windows.zip文件，进入解压缩后的文件夹，根目录后下会显示有adb.exe和fastboot.exe等文件。 然后将光标移到文件夹空白处，同时按下Shift键和鼠标右键，点击弹出来的菜单选项，打开命令窗口（后续操作需要在此进行，请不要关闭）。
+检查能PC检测到连入的手机
+adb kill-server &amp;amp;&amp;amp; adb start-server adb devices 重启手机进入download模式
+adb reboot download 解锁bootloader
+fastboot oem unlock fastboot flashing unlock 刷入twrp到Recovery 在download模式中刷入recovery</description></item><item><title>我的DIY与vocore</title><link>https://qtopie.github.io/posts/iot/vocore/my-vocore-playground/</link><pubDate>Thu, 26 Jul 2018 22:24:33 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/iot/vocore/my-vocore-playground/</guid><description>VoCore 硬币大小的Linux计算机（或者可以DIY的mini路由器）
+技术参数 Target: ramips Subtarget: mt7628 Package architecture: mipsel_24kc 具体参数请看官网介绍 VoCore2 Ultimate 和 openwrt列出的技术数据
+OpenWRT介绍 OpenWRT(与LEDE合并后更名为OpenWrt)是一个适用于嵌入式设备的Linux发行版，最初由Linksys公司推出的WRT-54G无线路由中使用的Linux系统开源而来。相比于路由器原厂固件而言，OpenWRT提供了一个可添加软件包的可写文件系统，这样用户就能自己定制路由器的功能。基于开放的生态和良好的技术社区环境，OpenWRT十分适合喜好DIY的科技粉来定制自己的路由器。
+OpenWRT主要使用opkg来管理软件包，默认使用LuCI作为web交互界面。下面简单列出它们的常用方式，具体使用方法请查阅文档。
+opkg
+# 安装软件包 opkg install &amp;lt;PACKAGE-NAME&amp;gt; # 卸载软件包 opkg remove &amp;lt;PACKAGE-NAME&amp;gt; uci
+# 设置option uci set &amp;lt;OPTION&amp;gt; # 查看option uci show &amp;lt;OPTION&amp;gt; 我的定制 基本设置 Change SSID Name uci set wireless.ap.ssid=&amp;#39;firefly&amp;#39; uci commit # check result uci show wireless.ap.ssid # restart networking service to make reload configuration /etc/init.</description></item><item><title>My notes on Raspberry Pi</title><link>https://qtopie.github.io/posts/iot/rpi/setup-my-raspberrypi/</link><pubDate>Sun, 29 Oct 2017 16:40:22 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/iot/rpi/setup-my-raspberrypi/</guid><description>Tricks Connect to your headless Raspberry Pi Enable ssh after flashing a raw image into your raspberry pi. Simply create an empty ssh file in the root directory of boot partition.
+Refer to https://www.raspberrypi.org/documentation/remote-access/ssh/
+Get IP of pi in lan network with your laptop sudo nmap -sP 192.168.21.* # results MAC Address: B8:27:EB:40:A9:D7 (Raspberry Pi Foundation) Nmap scan report for 192.168.31.158 Connect to your raspberry pi with an Android device.</description></item><item><title>Git快速手册</title><link>https://qtopie.github.io/posts/development/git-quick-guide/</link><pubDate>Wed, 05 Jul 2017 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/development/git-quick-guide/</guid><description>WIP
+快速开始 设置个人信息 git config --global user.name &amp;lt;YOUR-NAME&amp;gt; git config --global user.email &amp;lt;YOUR-EMAIL&amp;gt; # 查看个人配置 git config --list 将默认主仓库设置为main BLM运动 git config --global init.defaultbranch main 初始化仓库 mkdir /path/to/your/project cd /path/to/your/project git init # initialize an empty git repo git remote add origin git@repo-url.git Create your first file and push it to the remote repo echo &amp;#34;qtopie.rw&amp;#34; &amp;gt;&amp;gt; contributors.txt git add contributors.txt git commit -m &amp;#39;Initial commit with contributors&amp;#39; git push -u origin master 总结下常用操作</description></item><item><title>CSS Intro</title><link>https://qtopie.github.io/posts/web/css3/</link><pubDate>Sun, 27 Nov 2016 14:19:47 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/web/css3/</guid><description>Brief introduction CSS (Cascading Style Sheets)
+CSS is a language that describes the style of an HTML document. CSS describes how HTML elements should be displayed. CSS Example
+body { background-color: lightblue; } h1 { color: white; text-align: center; } p { font-family: verdana; font-size: 20px; } CSS Syntax  A CSS comprises of style rules that are interpreted by the browser and then applied to the corresponding elements in your document.</description></item><item><title>Dockerfile</title><link>https://qtopie.github.io/posts/cloud-native/cicd/dockerfile/</link><pubDate>Wed, 02 Nov 2016 15:52:30 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/cloud-native/cicd/dockerfile/</guid><description>Introduction Docker, an opensource container management tool based on LXC(Linux container).</description></item><item><title>Regular Expression</title><link>https://qtopie.github.io/posts/web/regex/</link><pubDate>Tue, 25 Oct 2016 00:35:03 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/web/regex/</guid><description>username:
+^[a-z0-9_-]{3,16}$ // any character of a-z, 0-9, underscore and &amp;lsquo;-&amp;rsquo;
+password:
+similar to username
+email:
+^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$
+url:
+^(https?:\/\/)?(\da-z\.-]+)\.([a-z\.]{2,6})([/\w\.-]*)*\/?$
+not
+[^]
+abc… Letters 123… Digits \d Any Digit \D Any Non-digit character . Any Character \. Period [abc] Only a, b, or c [^abc] Not a, b, nor c [a-z] Characters a to z [0-9] Numbers 0 to 9 \w Any Alphanumeric character \W Any Non-alphanumeric character {m} m Repetitions {m,n} m to n Repetitions - Zero or more repetitions + One or more repetitions ?</description></item><item><title>Ubuntu init process</title><link>https://qtopie.github.io/posts/linux/systemd-service-unit-file/</link><pubDate>Thu, 15 Sep 2016 14:20:15 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/linux/systemd-service-unit-file/</guid><description>History sysVinit upstart systemd ubuntu: sysVinit &amp;ndash;&amp;gt; upstart(6.10+) &amp;ndash;&amp;gt; systemd (15.04+)
+Features of Upstart Event Based
+Start System faster (compare with previous method). Dynamically start service when discovering new device Dynamically stop service when device is removed Systemd Systemd is a collection of system management daemons, utilities and libraries which serves as a replacement of System V init daemon. Systemd functions as central management and configuration platform for UNIX like system.</description></item><item><title>Wifi with hostapd</title><link>https://qtopie.github.io/posts/linux/hostapd-wifi/</link><pubDate>Tue, 30 Aug 2016 19:06:18 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/linux/hostapd-wifi/</guid><description>Hostapd hostapd is a user space daemon for access point and authentication server.
+Please follow the guide of Official documentation
+Installation and configuration Tested on raspbian with raspberry pi 3
+Install hostapd and configure it sudo apt-get install hostapd -y --force-yes, also sudo apt-get install haveged
+Edit hostapd.conf: /etc/hostapd/hostapd.conf
+interface=wlan0 ssid=RPi wpa_passphrase=raspberrypi auth_algs=1 wpa=2 wpa_key_mgmt=WPA-PSK rsn_pairwise=CCMP channel=10 hw_mode=g There should not be any whitespace at the end of each line</description></item><item><title>使用Hugo生成静态站点</title><link>https://qtopie.github.io/posts/hugo/getting-started-with-hugo/</link><pubDate>Mon, 02 May 2016 00:06:17 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/hugo/getting-started-with-hugo/</guid><description>本文主要分享如何使用Hugo生成静态站点，并部署到firebase (Hosting服务）上。
+updated: 2021/9/29
+静态站点 静态站点，相比于动态站点（一般指需要请求后端动态生成网站内容）来说，网站内容已提前渲染好，对搜索引擎更加友好。而且网站内容一般可以直接生成静态的html/css页面, 减少浏览器js渲染，网络传输时也可以充分利用缓存, 这样网页加载也比较快， 使用户体验更好。
+更进一步地，Google和Twitter合作开发了AMP(Accelerated Mobile Pages)技术, 通过限定HTML标签和CSS，以及CDN缓存，提升移动设备(相比于PC端：弱网、低性能）对网站的访问速度。
+本站点就是采用了AMP技术构建, 使用静态站点生成工具根据模板，将markdown文件渲染输出为静态AMP页面。
+生成工具 静态站点生成工具有很多，我主要用过的有以下两个。（目前又换回了Hugo)
+Hugo Scully PS, Hugo刚发布不久我就开始使用了，当时对这个新工具很喜欢，它是一个单独的二进制文件, 且渲染很快，模板丰富。但后面想定制一些功能（那时Hugo的文档比较少，仅官网使用文档， 且功能也没现在这么丰富), 但go的语法还是比较复杂的，也没太多时间看源码。因此当Scully出现的时候，我就立即使用了它（因为本人还是一个Angular粉），相比于Hugo，Scully几乎等同于你可以通过编写Angular应用定制你的网站, 因此十分灵活（主要的缺点是主题和应用代码分开进程渲染，调试略麻烦）。但后面发现，我本身写博客主题的时间可能比我写博客还花的多：》，也是该冷静下想想我的初衷是什么了。其实就是为了记录一些知识并分享，因此AMP才是我的需要。所以我决定我的博客主题的核心是简洁并对阅读友好, 而不是增添许多看其来很有趣的功能。
+博客主题 这里列出我用过的博客主题
+Hugo
+Robust amp-blog-theme Scully
+mdblog-theme 以下内容主要介绍Hugo使用
+安装和创建站点 目标 在本地电脑安装hugo, 在github上创建私有仓库posts，存放markdown源码及图片等文件； 在github创建私有仓库qtopie.web.app（作为集成仓库）, 对应于站点名称，存放站点配置文件。 创建firebase hosting项目，将站点qtopie.web.app发布到firebase. 仓库创建过程省略
+Hugo安装 以在Ubuntu 20.04上为例
+sudo snap install hugo 本地生成站点 初始化git各模块
+// git clone .</description></item><item><title>开始使用Ubuntu</title><link>https://qtopie.github.io/posts/linux/getting-started-with-ubuntu/</link><pubDate>Mon, 17 Nov 2014 22:24:33 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/linux/getting-started-with-ubuntu/</guid><description>介绍 Ubuntu是一个以桌面应用为主的Linux操作系统，基于Debian发行版和GNOME桌面环境(17.10又回到gnome)，与Debian的不同在于它每6个月会发布一个新版本。Ubuntu的目标在于为一般用户提供一个最新的、同时又相当稳定的主要由自由软件构建而成的操作系统。Ubuntu具有庞大的社区力量（如askubuntu)，用户可以方便地从社区获得帮助。对于我个人而言，最吸引的是Ubuntu的开放性及活跃的社区,在Ubuntu上做开发也更加得心应手。
+系统安装 以Ubuntu桌面版(amd64)为例
+预先准备 ISO文件 可格式化的U盘 (建议4G以上) 启动盘创建工具Rufus 在Windows上使用Rufus工具，将系统镜像文件写入到U盘。
+安装过程 参考以下步骤完成安装
+重启计算机进入bios设置开机顺序（找到在StartUp选项修改，设置usb优先启动），或重启时直接按F12（或其他FN)或Enter等进入设置（不同主板进入方法可能不同）。
+启动进入了ubuntu安装引导界面，开始安装过程
+-[连接网络]
+说明一下，如果选择安装第三方软件，安装过程耗时较长，如果网速很慢的话，建议先不安装，可安装好系统后在使用时根据系统提示安装。网速快的话就另当别论了。
+[安装类型]
+调整分区 此处可以设置管理员账户，建议耐心点一次设置好就ok了
+开始安装
+安装完成后，重新启动计算机就ok了！
+从旧磁盘迁移Ubuntu 有时由于更换磁盘等原因，我们需要迁移Linux系统到新的磁盘。这里给出一个本人使用过的解决方案。 假设问题： 需要将HDD上装有Ubuntu 18.04的Linux系统迁移到一块空的SSD上。
+在新磁盘上创建分区(这里我只创建了一个root分区，且原系统也只有一个分区) 使用gparted在新磁盘上创建一个root分区,格式为ext4. 或者在终端下使用parted完成该操作。
+将系统文件拷贝到新磁盘的分区(建议在live usb上完成该操作) # 旧的分区在/dev/sda5上， 新磁盘为/dev/sdb dd in=/dev/sda5 of=/dev/sdb1 bs=4M conv=noerror,sync status=progress 拷贝完后，mount新磁盘确认数据已经保存到新磁盘，就可以移走旧磁盘或删除旧系统文件。</description></item><item><title/><link>https://qtopie.github.io/posts/algorithms/selection-algorithm/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/algorithms/selection-algorithm/</guid><description>Selection Algorithm Median of medians BFPRT Reference http://speople.csail.mit.edu/rivest/pubs/BFPRT73.pdf https://en.wikipedia.org/wiki/Median_of_medians</description></item><item><title/><link>https://qtopie.github.io/posts/algorithms/sort/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/algorithms/sort/</guid><description>TimSort &amp;amp; QuickSort(dual-pivot) TimSort Reference https://www.geeksforgeeks.org/timsort/ (simplified version) http://cr.openjdk.java.net/~martin/webrevs/openjdk7/timsort/raw_files/new/src/share/classes/java/util/TimSort.java (OpenJDK version) Dual pivot QuickSort Reference</description></item><item><title/><link>https://qtopie.github.io/posts/cloud-native/cicd/jenkins/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/cloud-native/cicd/jenkins/</guid><description>https://github.com/jenkinsci/kubernetes-plugin
+war file is uncompressed under /var/jenkins_home/war
+Class files are random accessed. Not recommmend to mount with s3 (fuse), will make page slow.
+https://github.com/jenkinsci/kubernetes-plugin/blob/master/src/main/kubernetes/service-account.yml</description></item><item><title/><link>https://qtopie.github.io/posts/cloud-native/docker/readme/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/cloud-native/docker/readme/</guid><description>Docker config
+https://medium.com/better-programming/about-using-docker-config-e967d4a74b83</description></item><item><title/><link>https://qtopie.github.io/posts/cloud-native/k8s/readme/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/cloud-native/k8s/readme/</guid><description>Quick Introduction Get started Installation Shared network via service volume sharing https://github.com/ctrox/csi-s3
+Ingress Router Traefik
+https://docs.traefik.io/</description></item><item><title/><link>https://qtopie.github.io/posts/cloud-native/vault/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/cloud-native/vault/</guid><description> vault vs cloud kms</description></item><item><title/><link>https://qtopie.github.io/posts/design-pattern/design-principles/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/design-pattern/design-principles/</guid><description>Design Principles Dependency Injection (DI) With dependency injection, objects accept dependencies in their constructors. The core principle is to separate behaviour from dependency resolution.
+Compared with Direct constructor calls:
+direct constructor calls Dependency Injection direct, compile-time dependency dependencies injection problems for modularity and testability dependencies are not hidden in codes See Motivation of guice.
+Sample: https://github.com/google/guice/wiki/GettingStarted
+(Inversion of Control) IoC 参考维基百科 控制反转： 早在2004年，Martin Fowler就提出了“哪些方面的控制被反转了？”这个问题。他总结出是依赖对象的获得被反转了，因为大多数应用程序都是由两个或是更多的类通过彼此的合作来实现企业逻辑，这使得每个对象都需要获取与其合作的对象（也就是它所依赖的对象）的引用。如果这个获取过程要靠自身实现，那么这将导致代码高度耦合并且难以维护和调试。</description></item><item><title/><link>https://qtopie.github.io/posts/design-pattern/iterator/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/design-pattern/iterator/</guid><description>供一种方法来访问聚合对象，而不用暴露这个对象的内部表示，其别名为游标(Cursor)。迭代器模式是一种对象行为型模式。
+https://blog.csdn.net/yanbober/article/details/45497881
+java prev and next traverse https://docs.oracle.com/javase/8/docs/api/java/util/ListIterator.html</description></item><item><title/><link>https://qtopie.github.io/posts/web/grid-card/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/web/grid-card/</guid><description>&amp;lt;div class=&amp;#34;row pack&amp;#34;&amp;gt; {{ $paginator := .Paginate (where .Site.RegularPages &amp;#34;Section&amp;#34; &amp;#34;posts&amp;#34;) }} {{ range $paginator.Pages }} &amp;lt;div class=&amp;#34;col-md-4 card&amp;#34;&amp;gt; &amp;lt;a href=&amp;#34;{{ .Permalink }}&amp;#34; class=&amp;#34;index-anchor&amp;#34;&amp;gt; &amp;lt;div class=&amp;#34;panel panel-default&amp;#34;&amp;gt; &amp;lt;img width=&amp;#34;100%&amp;#34; class=&amp;#34;pure-img&amp;#34; src=&amp;#34;{{ .Site.BaseURL }}images/{{ .Params.img }}&amp;#34; alt=&amp;#34;{{ .Title }}&amp;#34;&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;/a&amp;gt; &amp;lt;/div&amp;gt; {{ end }} &amp;lt;/div&amp;gt; .card { float: none; background-color: white; margin: 1rem; } // 自适应 @media (min-width: 992px) { .col-md-4 { // 每行3个卡片 width: 33.33333333%; position: relative; min-height: 1px; padding-left: 15px; padding-right: 15px; } } *:before, *:after { box-sizing: border-box; } .</description></item><item><title/><link>https://qtopie.github.io/posts/web/oauth2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/web/oauth2/</guid><description>OAuth2 the industry-standard protocol for authorization
+Grant Types Authorization Code Implicit Password Client Credentials Device Code Refresh Token Authorization Code Grant Flow
+OAuth2 vs OpenIDConnect Reference https://spring.io/guides/tutorials/spring-boot-oauth2/ https://tools.ietf.org/html/rfc6749 https://oauth.net/2/ https://www.digitalocean.com/community/tutorials/an-introduction-to-oauth-2</description></item><item><title/><link>https://qtopie.github.io/posts/web/websocket/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/web/websocket/</guid><description>websocket basics https://zh.wikipedia.org/wiki/WebSocket</description></item><item><title>xrdp</title><link>https://qtopie.github.io/posts/linux/remote-desktop-with-xrdp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/linux/remote-desktop-with-xrdp/</guid><description>xrdp Connect to Ubuntu Desktop remotely with xrdp
+Environment Win10 with hyper-v support Ubuntu Desktop 20.04 Install Ubuntu 20.04 on win10-hyperv Download Ubuntu Desktop 20.04 from here
+Search Hyper-V on win10 start menu and create a virtual machine with the ISO file you just downloaded
+Follow the installation guide provided by ubuntu iso media, and setup the OS
+It&amp;rsquo;s recommended to use internal NAT network, so create a virtual network switch if necessary.</description></item></channel></rss>

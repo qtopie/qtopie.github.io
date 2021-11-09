@@ -1,0 +1,737 @@
+<!doctype html><html amp lang=en>
+<head>
+<meta charset=utf-8>
+<title>
+我的DIY与vocore
+</title>
+<link rel=canonical href=https://qtopie.github.io/posts/iot/vocore/my-vocore-playground/index.html>
+<meta name=viewport content="width=device-width">
+<meta name=amp-google-client-id-api content="googleanalytics">
+<link rel=apple-touch-icon sizes=180x180 href=/favicons/apple-touch-icon.png>
+<link rel=icon type=image/png sizes=32x32 href=/favicons/favicon-32x32.png>
+<link rel=icon type=image/png sizes=16x16 href=/favicons/favicon-16x16.png>
+<link rel=manifest href=/site.webmanifest>
+<style amp-boilerplate>
+body {
+-webkit-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+-moz-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+-ms-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+}
+@-webkit-keyframes -amp-start {
+from {
+visibility: hidden;
+}
+to {
+visibility: visible;
+}
+}
+@-moz-keyframes -amp-start {
+from {
+visibility: hidden;
+}
+to {
+visibility: visible;
+}
+}
+@-ms-keyframes -amp-start {
+from {
+visibility: hidden;
+}
+to {
+visibility: visible;
+}
+}
+@-o-keyframes -amp-start {
+from {
+visibility: hidden;
+}
+to {
+visibility: visible;
+}
+}
+@keyframes -amp-start {
+from {
+visibility: hidden;
+}
+to {
+visibility: visible;
+}
+}
+</style>
+<noscript>
+<style amp-boilerplate>
+body {
+-webkit-animation: none;
+-moz-animation: none;
+-ms-animation: none;
+animation: none;
+}
+</style>
+</noscript>
+<style amp-custom>html{font-family:sans-serif;line-height:1.15;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}#home a{text-decoration:none}article,aside,footer,header,nav,section{display:block}h1{font-size:2em;margin:.67em 0}figcaption,figure,main{display:block}figure{margin:1em 40px}hr{box-sizing:content-box;height:0;overflow:visible}pre{font-family:monospace,monospace;font-size:1em}a{background-color:transparent;-webkit-text-decoration-skip:objects}a:active,a:hover{outline-width:0}abbr[title]{border-bottom:none;text-decoration:underline;text-decoration:underline dotted}b,strong{font-weight:inherit;font-weight:bolder}code,kbd,samp{font-family:monospace,monospace;font-size:1em}dfn{font-style:italic}mark{background-color:#ff0;color:#000}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}audio,video{display:inline-block}audio:not([controls]){display:none;height:0}img{border-style:none}svg:not(:root){overflow:hidden}button,input,optgroup,select,textarea{font-family:sans-serif;font-size:100%;line-height:1.15;margin:0}button,input{overflow:visible}button,select{text-transform:none}[type=reset],[type=submit],button,html [type=button]{-webkit-appearance:button}[type=button]::-moz-focus-inner,[type=reset]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{border-style:none;padding:0}[type=button]:-moz-focusring,[type=reset]:-moz-focusring,[type=submit]:-moz-focusring,button:-moz-focusring{outline:1px dotted ButtonText}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}progress{display:inline-block;vertical-align:baseline}textarea{overflow:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-webkit-inner-spin-button,[type=number]::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}[type=search]::-webkit-search-cancel-button,[type=search]::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}details,menu{display:block}summary{display:list-item}canvas{display:inline-block}[hidden],template{display:none}.h00{font-size:4rem}.h0,.h1{font-size:3rem}.h2{font-size:2rem}.h3{font-size:1.5rem}.h4{font-size:1.125rem}.h5{font-size:.875rem}.h6{font-size:.75rem}.font-family-inherit{font-family:inherit}.font-size-inherit{font-size:inherit}.text-decoration-none{text-decoration:none}.bold{font-weight:700}.regular{font-weight:400}.italic{font-style:italic}.caps{text-transform:uppercase;letter-spacing:.2em}.left-align{text-align:left}.center{text-align:center}.right-align{text-align:right}.justify{text-align:justify}.nowrap{white-space:nowrap}.break-word{word-wrap:break-word}.line-height-1{line-height:1rem}.line-height-2{line-height:1.125rem}.line-height-3{line-height:1.5rem}.line-height-4{line-height:2rem}.list-style-none{list-style:none}.underline{text-decoration:underline}.truncate{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.list-reset{list-style:none;padding-left:0}.inline{display:inline}.block{display:block}.inline-block{display:inline-block}.table{display:table}.table-cell{display:table-cell}.overflow-hidden{overflow:hidden}.overflow-scroll{overflow:scroll}.overflow-auto{overflow:auto}.clearfix:after,.clearfix:before{content:" ";display:table}.clearfix:after{clear:both}.left{float:left}.right{float:right}.fit{max-width:100%}.max-width-1{max-width:24rem}.max-width-2{max-width:32rem}.max-width-3{max-width:48rem}.max-width-4{max-width:64rem}.border-box{box-sizing:border-box}.align-baseline{vertical-align:baseline}.align-top{vertical-align:top}.align-middle{vertical-align:middle}.align-bottom{vertical-align:bottom}.m0{margin:0}.mt0{margin-top:0}.mr0{margin-right:0}.mb0{margin-bottom:0}.ml0,.mx0{margin-left:0}.mx0{margin-right:0}.my0{margin-top:0;margin-bottom:0}.m1{margin:.5rem}.mt1{margin-top:.5rem}.mr1{margin-right:.5rem}.mb1{margin-bottom:.5rem}.ml1,.mx1{margin-left:.5rem}.mx1{margin-right:.5rem}.my1{margin-top:.5rem;margin-bottom:.5rem}.m2{margin:1rem}.mt2{margin-top:1rem}.mr2{margin-right:1rem}.mb2{margin-bottom:1rem}.ml2,.mx2{margin-left:1rem}.mx2{margin-right:1rem}.my2{margin-top:1rem;margin-bottom:1rem}.m3{margin:1.5rem}.mt3{margin-top:1.5rem}.mr3{margin-right:1.5rem}.mb3{margin-bottom:1.5rem}.ml3,.mx3{margin-left:1.5rem}.mx3{margin-right:1.5rem}.my3{margin-top:1.5rem;margin-bottom:1.5rem}.m4{margin:2rem}.mt4{margin-top:2rem}.mr4{margin-right:2rem}.mb4{margin-bottom:2rem}.ml4,.mx4{margin-left:2rem}.mx4{margin-right:2rem}.my4{margin-top:2rem;margin-bottom:2rem}.mxn1{margin-left:calc(.5rem * -1);margin-right:calc(.5rem * -1)}.mxn2{margin-left:calc(1rem * -1);margin-right:calc(1rem * -1)}.mxn3{margin-left:calc(1.5rem * -1);margin-right:calc(1.5rem * -1)}.mxn4{margin-left:calc(2rem * -1);margin-right:calc(2rem * -1)}.m-auto{margin:auto}.mt-auto{margin-top:auto}.mr-auto{margin-right:auto}.mb-auto{margin-bottom:auto}.ml-auto,.mx-auto{margin-left:auto}.mx-auto{margin-right:auto}.my-auto{margin-top:auto;margin-bottom:auto}.p0{padding:0}.pt0{padding-top:0}.pr0{padding-right:0}.pb0{padding-bottom:0}.pl0,.px0{padding-left:0}.px0{padding-right:0}.py0{padding-top:0;padding-bottom:0}.p1{padding:.5rem}.pt1{padding-top:.5rem}.pr1{padding-right:.5rem}.pb1{padding-bottom:.5rem}.pl1{padding-left:.5rem}.py1{padding-top:.5rem;padding-bottom:.5rem}.px1{padding-left:.5rem;padding-right:.5rem}.p2{padding:1rem}.pt2{padding-top:1rem}.pr2{padding-right:1rem}.pb2{padding-bottom:1rem}.pl2{padding-left:1rem}.py2{padding-top:1rem;padding-bottom:1rem}.px2{padding-left:1rem;padding-right:1rem}.p3{padding:1.5rem}.pt3{padding-top:1.5rem}.pr3{padding-right:1.5rem}.pb3{padding-bottom:1.5rem}.pl3{padding-left:1.5rem}.py3{padding-top:1.5rem;padding-bottom:1.5rem}.px3{padding-left:1.5rem;padding-right:1.5rem}.p4{padding:2rem}.pt4{padding-top:2rem}.pr4{padding-right:2rem}.pb4{padding-bottom:2rem}.pl4{padding-left:2rem}.py4{padding-top:2rem;padding-bottom:2rem}.px4{padding-left:2rem;padding-right:2rem}.col{float:left}.col,.col-right{box-sizing:border-box}.col-right{float:right}.col-1{width:8.33333%}.col-2{width:16.66667%}.col-3{width:25%}.col-4{width:33.33333%}.col-5{width:41.66667%}.col-6{width:50%}.col-7{width:58.33333%}.col-8{width:66.66667%}.col-9{width:75%}.col-10{width:83.33333%}.col-11{width:91.66667%}.col-12{width:100%}@media(min-width:40.06rem){.sm-col{float:left;box-sizing:border-box}.sm-col-right{float:right;box-sizing:border-box}.sm-col-1{width:8.33333%}.sm-col-2{width:16.66667%}.sm-col-3{width:25%}.sm-col-4{width:33.33333%}.sm-col-5{width:41.66667%}.sm-col-6{width:50%}.sm-col-7{width:58.33333%}.sm-col-8{width:66.66667%}.sm-col-9{width:75%}.sm-col-10{width:83.33333%}.sm-col-11{width:91.66667%}.sm-col-12{width:100%}}@media(min-width:52.06rem){.md-col{float:left;box-sizing:border-box}.md-col-right{float:right;box-sizing:border-box}.md-col-1{width:8.33333%}.md-col-2{width:16.66667%}.md-col-3{width:25%}.md-col-4{width:33.33333%}.md-col-5{width:41.66667%}.md-col-6{width:50%}.md-col-7{width:58.33333%}.md-col-8{width:66.66667%}.md-col-9{width:75%}.md-col-10{width:83.33333%}.md-col-11{width:91.66667%}.md-col-12{width:100%}}@media(min-width:64.06rem){.lg-col{float:left;box-sizing:border-box}.lg-col-right{float:right;box-sizing:border-box}.lg-col-1{width:8.33333%}.lg-col-2{width:16.66667%}.lg-col-3{width:25%}.lg-col-4{width:33.33333%}.lg-col-5{width:41.66667%}.lg-col-6{width:50%}.lg-col-7{width:58.33333%}.lg-col-8{width:66.66667%}.lg-col-9{width:75%}.lg-col-10{width:83.33333%}.lg-col-11{width:91.66667%}.lg-col-12{width:100%}}.flex{display:-ms-flexbox;display:flex}@media(min-width:40.06rem){.sm-flex{display:-ms-flexbox;display:flex}}@media(min-width:52.06rem){.md-flex{display:-ms-flexbox;display:flex}}@media(min-width:64.06rem){.lg-flex{display:-ms-flexbox;display:flex}}.flex-column{-ms-flex-direction:column;flex-direction:column}.flex-wrap{-ms-flex-wrap:wrap;flex-wrap:wrap}.items-start{-ms-flex-align:start;align-items:flex-start}.items-end{-ms-flex-align:end;align-items:flex-end}.items-center{-ms-flex-align:center;align-items:center}.items-baseline{-ms-flex-align:baseline;align-items:baseline}.items-stretch{-ms-flex-align:stretch;align-items:stretch}.self-start{-ms-flex-item-align:start;align-self:flex-start}.self-end{-ms-flex-item-align:end;align-self:flex-end}.self-center{-ms-flex-item-align:center;-ms-grid-row-align:center;align-self:center}.self-baseline{-ms-flex-item-align:baseline;align-self:baseline}.self-stretch{-ms-flex-item-align:stretch;-ms-grid-row-align:stretch;align-self:stretch}.justify-start{-ms-flex-pack:start;justify-content:flex-start}.justify-end{-ms-flex-pack:end;justify-content:flex-end}.justify-center{-ms-flex-pack:center;justify-content:center}.justify-between{-ms-flex-pack:justify;justify-content:space-between}.justify-around{-ms-flex-pack:distribute;justify-content:space-around}.justify-evenly{-ms-flex-pack:space-evenly;justify-content:space-evenly}.content-start{-ms-flex-line-pack:start;align-content:flex-start}.content-end{-ms-flex-line-pack:end;align-content:flex-end}.content-center{-ms-flex-line-pack:center;align-content:center}.content-between{-ms-flex-line-pack:justify;align-content:space-between}.content-around{-ms-flex-line-pack:distribute;align-content:space-around}.content-stretch{-ms-flex-line-pack:stretch;align-content:stretch}.flex-auto{-ms-flex:1 1 auto;flex:auto;min-width:0;min-height:0}.flex-none{-ms-flex:none;flex:none}.order-0{-ms-flex-order:0;order:0}.order-1{-ms-flex-order:1;order:1}.order-2{-ms-flex-order:2;order:2}.order-3{-ms-flex-order:3;order:3}.order-last{-ms-flex-order:99999;order:99999}.relative{position:relative}.absolute{position:absolute}.fixed{position:fixed}.top-0{top:0}.right-0{right:0}.bottom-0{bottom:0}.left-0{left:0}.z1{z-index:1}.z2{z-index:2}.z3{z-index:3}.z4{z-index:4}.border{border-style:solid;border-width:1px}.border-top{border-top-style:solid;border-top-width:1px}.border-right{border-right-style:solid;border-right-width:1px}.border-bottom{border-bottom-style:solid;border-bottom-width:1px}.border-left{border-left-style:solid;border-left-width:1px}.border-none{border:0}.rounded{border-radius:3px}.circle{border-radius:50%}.rounded-top{border-radius:3px 3px 0 0}.rounded-right{border-radius:0 3px 3px 0}.rounded-bottom{border-radius:0 0 3px 3px}.rounded-left{border-radius:3px 0 0 3px}.not-rounded{border-radius:0}.hide{position:absolute;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px)}@media(max-width:40rem){.xs-hide{display:none}}@media(min-width:40.06rem) and (max-width:52rem){.sm-hide{display:none}}@media(min-width:52.06rem) and (max-width:64rem){.md-hide{display:none}}@media(min-width:64.06rem){.lg-hide{display:none}}.display-none{display:none}*{box-sizing:border-box}body{background:#fff;color:#4a4a4a;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,Arial,sans-serif;min-width:315px;overflow-x:hidden;font-smooth:always;-webkit-font-smoothing:antialiased}p{padding:0;margin:0}.ampstart-accent{color:#003f93}#content:target{margin-top:calc(0px - 3.5rem);padding-top:3.5rem}.ampstart-title-lg{font-size:3rem;line-height:3.5rem;letter-spacing:.06rem}.ampstart-title-md{font-size:2rem;line-height:2.5rem;letter-spacing:.06rem}.ampstart-title-sm{font-size:1.5rem;line-height:2rem;letter-spacing:.06rem}.ampstart-byline,.ampstart-caption,.ampstart-hint,.ampstart-label{font-size:.875rem;color:#4f4f4f;line-height:1.125rem;letter-spacing:.06rem}.ampstart-label{text-transform:uppercase}.ampstart-footer,.ampstart-small-text{font-size:.75rem;line-height:1rem;letter-spacing:.06rem}.ampstart-card{box-shadow:0 1px 1px rgba(0,0,0,.14),0 1px 1px -1px rgba(0,0,0,.14),0 1px 5px rgba(0,0,0,.12)}.h1,h1{font-size:3rem;line-height:3.5rem}.h2,h2{font-size:2rem;line-height:2.5rem}.h3,h3{font-size:1.5rem;line-height:2rem}.h4,h4{font-size:1.125rem;line-height:1.5rem}.h5,h5{font-size:.875rem;line-height:1.125rem}.h6,h6{font-size:.75rem;line-height:1rem}h1,h2,h3,h4,h5,h6{margin:0;padding:0;font-weight:400;letter-spacing:.06rem}a,a:active,a:visited{color:inherit}.ampstart-btn{font-family:inherit;font-weight:inherit;font-size:1rem;line-height:1.125rem;padding:.7em .8em;text-decoration:none;white-space:nowrap;word-wrap:normal;vertical-align:middle;cursor:pointer;background-color:#000;color:#fff;border:1px solid #fff}.ampstart-btn:visited{color:#fff}.ampstart-btn-secondary{background-color:#fff;color:#000;border:1px solid #000}.ampstart-btn-secondary:visited{color:#000}.ampstart-btn:active .ampstart-btn:focus{opacity:.8}.ampstart-btn[disabled],.ampstart-btn[disabled]:active,.ampstart-btn[disabled]:focus,.ampstart-btn[disabled]:hover{opacity:.5;outline:0;cursor:default}.ampstart-dropcap:first-letter{color:#000;font-size:3rem;font-weight:700;float:left;overflow:hidden;line-height:3rem;margin-left:0;margin-right:.5rem}.ampstart-initialcap{padding-top:1rem;margin-top:1.5rem}.ampstart-initialcap:first-letter{color:#000;font-size:3rem;font-weight:700;margin-left:-2px}.ampstart-pullquote{border:none;border-left:4px solid #000;font-size:1.5rem;padding-left:1.5rem}.ampstart-byline time{font-style:normal;white-space:nowrap}.amp-carousel-button-next{background-image:url('data:image/svg+xml;charset=utf-8,<svg width="18" height="18" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><title>Next</title><path d="M25.557 14.7L13.818 2.961 16.8 0l16.8 16.8-16.8 16.8-2.961-2.961L25.557 18.9H0v-4.2z" fill="%23FFF" fill-rule="evenodd"/></svg>')}.amp-carousel-button-prev{background-image:url('data:image/svg+xml;charset=utf-8,<svg width="18" height="18" viewBox="0 0 34 34" xmlns="http://www.w3.org/2000/svg"><title>Previous</title><path d="M33.6 14.7H8.043L19.782 2.961 16.8 0 0 16.8l16.8 16.8 2.961-2.961L8.043 18.9H33.6z" fill="%23FFF" fill-rule="evenodd"/></svg>')}.ampstart-dropdown{min-width:200px}.ampstart-dropdown.absolute{z-index:100}.ampstart-dropdown.absolute>section,.ampstart-dropdown.absolute>section>header{height:100%}.ampstart-dropdown>section>header{background-color:#000;border:0;color:#fff}.ampstart-dropdown>section>header:after{display:inline-block;content:"+";padding:0 0 0 1.5rem;color:#003f93}.ampstart-dropdown>[expanded]>header:after{content:"–"}.absolute .ampstart-dropdown-items{z-index:200}.ampstart-dropdown-item{background-color:#000;color:#003f93;opacity:.9}.ampstart-dropdown-item:active,.ampstart-dropdown-item:hover{opacity:1}.ampstart-footer{background-color:#fff;color:#000;padding-top:5rem;padding-bottom:5rem}.ampstart-footer .ampstart-icon{fill:#000}.ampstart-footer .ampstart-social-follow li:last-child{margin-right:0}.ampstart-input{max-width:100%;width:300px;min-width:100px;font-size:1rem;line-height:1.5rem}.ampstart-input [disabled],.ampstart-input [disabled]+label{opacity:.5}.ampstart-input [disabled]:focus{outline:0}.ampstart-input>input,.ampstart-input>select,.ampstart-input>textarea{width:100%;margin-top:1rem;line-height:1.5rem;border:0;border-radius:0;border-bottom:1px solid #4a4a4a;background:0 0;color:#4a4a4a;outline:0}.ampstart-input>label{color:#003f93;pointer-events:none;text-align:left;font-size:.875rem;line-height:1rem;opacity:0;animation:.2s;animation-timing-function:cubic-bezier(.4,0,.2,1);animation-fill-mode:forwards}.ampstart-input>input:focus,.ampstart-input>select:focus,.ampstart-input>textarea:focus{outline:0}.ampstart-input>input:focus:-ms-input-placeholder,.ampstart-input>select:focus:-ms-input-placeholder,.ampstart-input>textarea:focus:-ms-input-placeholder{color:transparent}.ampstart-input>input:focus::placeholder,.ampstart-input>select:focus::placeholder,.ampstart-input>textarea:focus::placeholder{color:transparent}.ampstart-input>input:not(:placeholder-shown):not([disabled])+label,.ampstart-input>select:not(:placeholder-shown):not([disabled])+label,.ampstart-input>textarea:not(:placeholder-shown):not([disabled])+label{opacity:1}.ampstart-input>input:focus+label,.ampstart-input>select:focus+label,.ampstart-input>textarea:focus+label{animation-name:a}@keyframes a{to{opacity:1}}.ampstart-input>label:after{content:"";height:2px;position:absolute;bottom:0;left:45%;background:#003f93;transition:.2s;transition-timing-function:cubic-bezier(.4,0,.2,1);visibility:hidden;width:10px}.ampstart-input>input:focus+label:after,.ampstart-input>select:focus+label:after,.ampstart-input>textarea:focus+label:after{left:0;width:100%;visibility:visible}.ampstart-input>input[type=search]{-webkit-appearance:none;-moz-appearance:none;appearance:none}.ampstart-input>input[type=range]{border-bottom:0}.ampstart-input>input[type=range]+label:after{display:none}.ampstart-input>select{-webkit-appearance:none;-moz-appearance:none;appearance:none}.ampstart-input>select+label:before{content:"⌄";line-height:1.5rem;position:absolute;right:5px;zoom:2;top:0;bottom:0;color:#003f93}.ampstart-input-chk,.ampstart-input-radio{width:auto;color:#4a4a4a}.ampstart-input input[type=checkbox],.ampstart-input input[type=radio]{margin-top:0;-webkit-appearance:none;-moz-appearance:none;appearance:none;width:20px;height:20px;border:1px solid #003f93;vertical-align:middle;margin-right:.5rem;text-align:center}.ampstart-input input[type=radio]{border-radius:20px}.ampstart-input input[type=checkbox]:not([disabled])+label,.ampstart-input input[type=radio]:not([disabled])+label{pointer-events:auto;animation:none;vertical-align:middle;opacity:1;cursor:pointer}.ampstart-input input[type=checkbox]+label:after,.ampstart-input input[type=radio]+label:after{display:none}.ampstart-input input[type=checkbox]:after,.ampstart-input input[type=radio]:after{position:absolute;top:0;left:0;bottom:0;right:0;content:" ";line-height:1.4rem;vertical-align:middle;text-align:center;background-color:#fff}.ampstart-input input[type=checkbox]:checked:after{background-color:#003f93;color:#fff;content:"✓"}.ampstart-input input[type=radio]:checked{background-color:#fff}.ampstart-input input[type=radio]:after{top:3px;bottom:3px;left:3px;right:3px;border-radius:12px}.ampstart-input input[type=radio]:checked:after{content:"";font-size:3rem;background-color:#003f93}.ampstart-input>label,_:-ms-lang(x){opacity:1}.ampstart-input>input:-ms-input-placeholder,_:-ms-lang(x){color:transparent}.ampstart-input>input::placeholder,_:-ms-lang(x){color:transparent}.ampstart-input>input::-ms-input-placeholder,_:-ms-lang(x){color:transparent}.ampstart-input>select::-ms-expand{display:none}.ampstart-headerbar{background-color:#fff;color:#000;z-index:999;box-shadow:0 0 5px 2px rgba(0,0,0,.1)}.ampstart-headerbar+:not(amp-sidebar),.ampstart-headerbar+amp-sidebar+*{margin-top:3.5rem}.ampstart-headerbar-nav .ampstart-nav-item{padding:0 1rem;background:0 0;opacity:.8}.ampstart-headerbar-nav{line-height:3.5rem}.ampstart-nav-item:active,.ampstart-nav-item:focus,.ampstart-nav-item:hover{opacity:1}.ampstart-navbar-trigger:focus{outline:none}.ampstart-nav a,.ampstart-navbar-trigger,.ampstart-sidebar-faq a{cursor:pointer;text-decoration:none}.ampstart-nav .ampstart-label{color:inherit}.ampstart-navbar-trigger{line-height:3.5rem;font-size:2rem}.ampstart-headerbar-nav{-ms-flex:1;flex:1}.ampstart-nav-search{-ms-flex-positive:.5;flex-grow:.5}.ampstart-headerbar .ampstart-nav-search:active,.ampstart-headerbar .ampstart-nav-search:focus,.ampstart-headerbar .ampstart-nav-search:hover{box-shadow:none}.ampstart-nav-search>input{border:none;border-radius:3px;line-height:normal}.ampstart-nav-dropdown{min-width:200px}.ampstart-nav-dropdown amp-accordion header{background-color:#fff;border:none}.ampstart-nav-dropdown amp-accordion ul{background-color:#fff}.ampstart-nav-dropdown .ampstart-dropdown-item,.ampstart-nav-dropdown .ampstart-dropdown>section>header{background-color:#fff;color:#000}.ampstart-nav-dropdown .ampstart-dropdown-item{color:#003f93}.ampstart-sidebar{background-color:#fff;color:#000;min-width:300px;width:300px}.ampstart-sidebar .ampstart-icon{fill:#003f93}.ampstart-sidebar-header{line-height:3.5rem;min-height:3.5rem}.ampstart-sidebar .ampstart-dropdown-item,.ampstart-sidebar .ampstart-dropdown header,.ampstart-sidebar .ampstart-faq-item,.ampstart-sidebar .ampstart-nav-item,.ampstart-sidebar .ampstart-social-follow{margin:0 0 2rem}.ampstart-sidebar .ampstart-nav-dropdown{margin:0}.ampstart-sidebar .ampstart-navbar-trigger{line-height:inherit}.ampstart-navbar-trigger svg{pointer-events:none}.ampstart-related-article-section{border-color:#4a4a4a}.ampstart-related-article-section .ampstart-heading{color:#4a4a4a;font-weight:400}.ampstart-related-article-readmore{color:#000;letter-spacing:0}.ampstart-related-section-items>li{border-bottom:1px solid #4a4a4a}.ampstart-related-section-items>li:last-child{border:none}.ampstart-related-section-items .ampstart-image-with-caption{display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;-ms-flex-align:center;align-items:center;margin-bottom:0}.ampstart-related-section-items .ampstart-image-with-caption>amp-img,.ampstart-related-section-items .ampstart-image-with-caption>figcaption{-ms-flex:1;flex:1}.ampstart-related-section-items .ampstart-image-with-caption>figcaption{padding-left:1rem}@media(min-width:40.06rem){.ampstart-related-section-items>li{border:none}.ampstart-related-section-items .ampstart-image-with-caption>figcaption{padding:1rem 0}.ampstart-related-section-items .ampstart-image-with-caption>amp-img,.ampstart-related-section-items .ampstart-image-with-caption>figcaption{-ms-flex-preferred-size:100%;flex-basis:100%}}.ampstart-social-box{display:-ms-flexbox;display:flex}.ampstart-social-box>amp-social-share{background-color:#000}.ampstart-icon{fill:#003f93}#all-tags ul li,#all-categories ul li{display:inline;margin-right:.5rem}#all-categories ul li{text-transform:uppercase}@media(min-width:40.06rem){.ampstart-related-section-items>li{border:none}.ampstart-related-section-items .ampstart-image-with-caption>figcaption{padding:1rem 0}.ampstart-related-section-items .ampstart-image-with-caption>amp-img,.ampstart-related-section-items .ampstart-image-with-caption>figcaption{-ms-flex-preferred-size:100%;flex-basis:100%}}amp-sidebar aside#sidebar{margin-top:1rem;border-top:1px solid #ccc;border-bottom:1px solid #ccc;padding-bottom:3px;margin-bottom:1rem;padding-right:.5rem}main{max-width:800px;margin:0 auto;padding-top:.5rem}.ampstart-subtitle,body{line-height:1.5rem;letter-spacing:normal}.ampstart-subtitle{color:#003f93;font-size:1rem}.ampstart-image-fullpage-hero{color:#fff}.ampstart-fullpage-hero-heading-text,.ampstart-image-fullpage-hero .ampstart-image-credit{-webkit-box-decoration-break:clone;box-decoration-break:clone;background:#000;padding:0 1rem .2rem}.ampstart-image-fullpage-hero>amp-img{max-height:calc(100vh - 3.5rem)}.ampstart-image-fullpage-hero>amp-img img{-o-object-fit:cover;object-fit:cover}.ampstart-fullpage-hero-heading{line-height:3.5rem}.ampstart-fullpage-hero-cta{background:0 0}.ampstart-readmore{background:linear-gradient(0deg,rgba(0,0,0,.65) 0,transparent);color:#fff;margin-top:5rem;padding-bottom:3.5rem}.ampstart-readmore:after{display:block;content:"⌄";font-size:2rem}.ampstart-readmore-text{background:#000}@media(min-width:52.06rem){.ampstart-image-fullpage-hero>amp-img{height:60vh}}.ampstart-image-heading{color:#fff;background:linear-gradient(0deg,rgba(0,0,0,.65) 0,transparent)}.ampstart-image-heading>*{margin:0}amp-carousel .ampstart-image-with-heading{margin-bottom:0}.ampstart-image-with-caption figcaption{color:#4f4f4f;line-height:1.125rem}amp-carousel .ampstart-image-with-caption{margin-bottom:0}article.text-content{padding-top:1rem;padding-left:.5rem;padding-right:.5rem}article h1{border-bottom:1px solid #ccc;padding-bottom:3px;margin-bottom:1rem}h2::before{content:' ';margin-top:3rem;display:inline-block}h3::before{content:' ';margin-top:2rem;display:inline-block}h4::before{content:' ';margin-top:1rem;display:inline-block}article pre{overflow-x:auto}article blockquote,article p{overflow-wrap:break-word}.container article img{max-width:-webkit-fill-available}.fixed-height-container{position:relative;width:100%;height:300px}amp-img.contain img{object-fit:contain}:root{--color-primary:#005AF0;--color-secondary:#00DCC0;--color-text-light:#fff;--space-2:1rem;--box-shadow-1:0 1px 1px 0 rgba(0, 0, 0, .14), 0 1px 1px -1px rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12)}.scrollToTop{color:var(--color-text-light);font-size:1.4em;box-shadow:var(--box-shadow-1);width:50px;height:50px;border-radius:50%;border:none;outline:none;background:var(--color-primary);z-index:9999;bottom:var(--space-2);right:var(--space-2);position:fixed;opacity:0;visibility:hidden}.spacer{width:100vw;max-width:700px;height:200vh;background-color:var(--color-secondary)}.target{position:relative}.target-anchor{position:absolute;top:-72px;left:0}#post-tags ul,#post-categories ul{padding-left:.5rem;margin:0}#post-tags ul li,#post-categories ul li{display:inline;margin-right:.5rem}#post-categories ul li.category-item{font-size:x-small;text-transform:uppercase}#post-tags ul li.tag-item{background-color:#adff2f;font-size:small}</style>
+<script async src=https://cdn.ampproject.org/v0.js></script>
+<script async custom-element=amp-sidebar src=https://cdn.ampproject.org/v0/amp-sidebar-0.1.js></script>
+<script async custom-element=amp-accordion src=https://cdn.ampproject.org/v0/amp-accordion-0.1.js></script>
+<script async custom-element=amp-analytics src=https://cdn.ampproject.org/v0/amp-analytics-0.1.js></script>
+<script async custom-element=amp-auto-ads src=https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js></script>
+<script async custom-element=amp-lightbox-gallery src=https://cdn.ampproject.org/v0/amp-lightbox-gallery-0.1.js></script>
+<script async custom-element=amp-instagram src=https://cdn.ampproject.org/v0/amp-instagram-0.1.js></script>
+<script async custom-element=amp-carousel src=https://cdn.ampproject.org/v0/amp-carousel-0.1.js></script>
+<script async custom-element=amp-social-share src=https://cdn.ampproject.org/v0/amp-social-share-0.1.js></script>
+<script async custom-element=amp-position-observer src=https://cdn.ampproject.org/v0/amp-position-observer-0.1.js></script>
+<script async custom-element=amp-animation src=https://cdn.ampproject.org/v0/amp-animation-0.1.js></script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"我的DIY与vocore","image":"https://qtopie.github.io/images/article-header-background-img.webp","datePublished":"2018-07-26T22:24:33+08:00","dateModified":"2018-07-26T22:24:33+08:00","inLanguage":"en-us","isFamilyFriendly":"true","author":{"@type":"Person","name":"qtopierw","url":"https:\/\/qtopie.github.io\/about/"},"copyrightHolder":"qtopierw","copyrightYear":"2018","copyrightNotice":"Posts licensed under \u003ca href=\"https://creativecommons.org/licenses/by/4.0/legalcode\"\u003eCC BY 4.0","mainEntityOfPage":{"@type":"WebPage"},"publisher":{"@type":"Organization","name":"qtopierw","logo":{"@type":"ImageObject","url":"https:\/\/qtopie.github.io\/favicons/favicon-32x32.png"}},"description":"VoCore 硬币大小的Linux计算机（或者可以DIY的mini路由器）\n技术参数  Target: ramips Subtarget: mt7628 Package architecture: mipsel_24kc  具体参数请看官网 …","keywords":["vocore"]}</script>
+</head>
+<body>
+<amp-auto-ads type=adsense data-ad-client=ca-pub-3338377104827119></amp-auto-ads>
+<amp-analytics type=gtag data-credentials=include>
+<script type=application/json>{"vars":{"gtag_id":"UA-209364110-1","config":{"UA-209364110-1":{"groups":"default"}}}}</script>
+</amp-analytics>
+<header class="ampstart-headerbar fixed flex justify-start items-center top-0 left-0 right-0 pl2 pr4">
+<div role=button aria-label="open sidebar" on=tap:header-sidebar.toggle tabindex=0 class="ampstart-navbar-trigger pr2">☰
+</div>
+<nav>
+<span id=home><a href=https://qtopie.github.io/>Blog | qtopierw</a></span>
+</nav>
+</header>
+<amp-sidebar id=header-sidebar class="ampstart-sidebar px3" layout=nodisplay>
+<div class="flex justify-start items-center ampstart-sidebar-header">
+<div role=button aria-label="close sidebar" on=tap:header-sidebar.toggle tabindex=0 class="ampstart-navbar-trigger items-start">✕</div>
+</div>
+<ul class="ampstart-sidebar-faq list-reset m0">
+<li class=ampstart-faq-item><a href=https://qtopie.github.io/about/ class=text-decoration-none>About</a></li>
+<li class=ampstart-faq-item><a href=mailto:qtopie.rw@gmail.com class=text-decoration-none>Contact</a></li>
+</ul>
+<aside id=sidebar>
+<div id=all-categories>
+<h3>Categories</h3>
+<ul>
+<li><a href=/categories/development>development</a></li>
+<li><a href=/categories/diy>diy</a></li>
+<li><a href=/categories/iot>iot</a></li>
+<li><a href=/categories/linux>linux</a></li>
+<li><a href=/categories/network>network</a></li>
+<li><a href=/categories/other>other</a></li>
+<li><a href=/categories/tool>tool</a></li>
+</ul>
+</div>
+<div id=all-tags>
+<h3>Tags</h3>
+<ul>
+<li><a href=/tags/raspberrypi>raspberrypi</a> (3)</li>
+<li><a href=/tags/ubuntu>ubuntu</a> (2)</li>
+<li><a href=/tags/4g-lte>4g-lte</a> (1)</li>
+<li><a href=/tags/algorithm>algorithm</a> (1)</li>
+<li><a href=/tags/android>android</a> (1)</li>
+<li><a href=/tags/cloudcone>cloudcone</a> (1)</li>
+<li><a href=/tags/css>css</a> (1)</li>
+<li><a href=/tags/eclispe>eclispe</a> (1)</li>
+<li><a href=/tags/git>git</a> (1)</li>
+<li><a href=/tags/go>go</a> (1)</li>
+<li><a href=/tags/homeassistant>homeassistant</a> (1)</li>
+<li><a href=/tags/hostapd>hostapd</a> (1)</li>
+<li><a href=/tags/hugo>hugo</a> (1)</li>
+<li><a href=/tags/iot>iot</a> (1)</li>
+<li><a href=/tags/java>java</a> (1)</li>
+<li><a href=/tags/latex>latex</a> (1)</li>
+<li><a href=/tags/mt7612u>mt7612u</a> (1)</li>
+<li><a href=/tags/other>other</a> (1)</li>
+<li><a href=/tags/root>root</a> (1)</li>
+<li><a href=/tags/vim>vim</a> (1)</li>
+</ul>
+</div>
+</aside>
+</amp-sidebar>
+<div id=content>
+<main role=main class=container>
+<div class=target>
+<a class=target-anchor id=top></a>
+<amp-position-observer on="enter:hideAnim.start; exit:showAnim.start" layout=nodisplay>
+</amp-position-observer>
+</div>
+<section class=toc>
+<h2>Table Of Contents</h2>
+<nav id=TableOfContents>
+<ul>
+<li><a href=#vocorehttpvocoreio><a href=http://vocore.io/>VoCore</a></a></li>
+<li><a href=#技术参数>技术参数</a></li>
+<li><a href=#openwrt介绍>OpenWRT介绍</a></li>
+<li><a href=#我的定制>我的定制</a>
+<ul>
+<li><a href=#基本设置>基本设置</a></li>
+</ul>
+</li>
+<li><a href=#wget-ssl>wget ssl</a>
+<ul>
+<li><a href=#apsta模式-或者叫无线中继器>AP+STA模式 （或者叫无线中继器）</a></li>
+<li><a href=#代理与web过滤shadowsocks--privoxy>代理与Web过滤（Shadowsocks + Privoxy）</a></li>
+<li><a href=#bbr>BBR</a></li>
+<li><a href=#网络包分析>网络包分析</a></li>
+<li><a href=#远程下载-aria2>远程下载 （aria2)</a></li>
+<li><a href=#usb-20存储挂载>USB 2.0存储挂载</a></li>
+<li><a href=#nas服务>NAS服务</a></li>
+<li><a href=#声音播放与流媒体功能dlna>声音播放与流媒体功能（DLNA)</a></li>
+<li><a href=#guest-wifi和wifidog>Guest WIFI和wifidog</a></li>
+<li><a href=#web管理界面luci中文支持>Web管理界面luci中文支持</a></li>
+</ul>
+</li>
+<li><a href=#变成假硬币怎么办>变成“假硬币”怎么办？</a>
+<ul>
+<li><a href=#使用串口连接vocore>使用串口连接vocore</a></li>
+</ul>
+</li>
+<li><a href=#compile-openwrt-for-vocore2>Compile OpenWRT for VoCore2</a></li>
+<li><a href=#openwrt-1806>OpenWRT 18.06</a></li>
+<li><a href=#openwrt相关diy>OpenWRT相关DIY</a></li>
+<li><a href=#dns配置>DNS配置</a></li>
+<li><a href=#源镜像>源镜像</a></li>
+<li><a href=#wan-口和-lan口互换>wan 口和 lan口互换</a></li>
+<li><a href=#vlan>VLAN</a></li>
+<li><a href=#4g-lte>4G LTE</a></li>
+<li><a href=#参考链接>参考链接</a></li>
+</ul>
+</nav>
+</section>
+<div class=taxonomy>
+<span id=post-categories>
+<ul>
+<li><strong>Categories</strong>:&nbsp;</li>
+<li class=category-item><a href=https://qtopie.github.io/categories/diy>DIY</a> </li>
+</ul>
+</span>
+<span id=post-tags>
+<ul>
+<li><strong>Tags</strong>:&nbsp;</li>
+<li class=tag-item><a href=https://qtopie.github.io/tags/vocore><em>vocore</em></a> </li>
+</ul>
+</span>
+</div>
+<article class=text-content>
+<h2 id=vocorehttpvocoreio><a href=http://vocore.io/>VoCore</a></h2>
+<p>硬币大小的Linux计算机（或者可以DIY的mini路由器）</p>
+<h2 id=技术参数>技术参数</h2>
+<ul>
+<li>Target: <a href=https://openwrt.org/docs/techref/targets/ramips>ramips</a></li>
+<li>Subtarget: <code>mt7628</code></li>
+<li>Package architecture: <code>mipsel_24kc</code></li>
+</ul>
+<p>具体参数请看官网介绍 <a href=http://vocore.io/v2u.html>VoCore2 Ultimate</a> 和 <a href=https://openwrt.org/toh/hwdata/vocore/vocore_vocore2>openwrt列出的技术数据</a></p>
+<h2 id=openwrt介绍>OpenWRT介绍</h2>
+<p>OpenWRT(与<a href=https://zh.wikipedia.org/wiki/LEDE>LEDE</a>合并后更名为OpenWrt)是一个适用于嵌入式设备的Linux发行版，最初<a href=https://zh.wikipedia.org/wiki/OpenWrt>由Linksys公司推出的WRT-54G无线路由中使用的Linux系统开源而来</a>。相比于路由器原厂固件而言，OpenWRT提供了一个可添加软件包的可写文件系统，这样用户就能自己定制路由器的功能。基于开放的生态和良好的技术社区环境，OpenWRT十分适合喜好DIY的科技粉来定制自己的路由器。</p>
+<p>OpenWRT主要使用opkg来管理软件包，默认使用LuCI作为web交互界面。下面简单列出它们的常用方式，具体使用方法请查阅文档。</p>
+<ul>
+<li>
+<p>opkg</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-sh data-lang=sh><span style=color:#09f;font-style:italic># 安装软件包</span>
+opkg install &lt;PACKAGE-NAME&gt;
+<span style=color:#09f;font-style:italic># 卸载软件包</span>
+opkg remove &lt;PACKAGE-NAME&gt;
+</code></pre></div></li>
+<li>
+<p>uci</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-sh data-lang=sh><span style=color:#09f;font-style:italic># 设置option</span>
+uci <span style=color:#366>set</span> &lt;OPTION&gt;
+<span style=color:#09f;font-style:italic># 查看option</span>
+uci show &lt;OPTION&gt;
+</code></pre></div></li>
+</ul>
+<h2 id=我的定制>我的定制</h2>
+<h3 id=基本设置>基本设置</h3>
+<ul>
+<li>Change SSID Name</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-sh data-lang=sh>uci <span style=color:#366>set</span> wireless.ap.ssid<span style=color:#555>=</span><span style=color:#c30>&#39;firefly&#39;</span>
+uci commit 
+
+<span style=color:#09f;font-style:italic># check result</span>
+uci show wireless.ap.ssid
+<span style=color:#09f;font-style:italic># restart networking service to make reload configuration</span>
+/etc/init.d/network restart
+<span style=color:#09f;font-style:italic># check network in another machine</span>
+sudo iw dev wlan0 scan | grep SSID
+</code></pre></div><h2 id=wget-ssl>wget ssl</h2>
+<pre tabindex=0><code>opkg install libustream-openssl ca-bundle ca-certificates
+</code></pre><h3 id=apsta模式-或者叫无线中继器>AP+STA模式 （或者叫无线中继器）</h3>
+<ul>
+<li>使用固件 <a href=http://vonger.cn/misc/vocore2/20180723V.bin>vocore2-20180723V</a></li>
+</ul>
+<p>配置信息(仅供参考)：</p>
+<p><code>uci show wireless</code></p>
+<pre tabindex=0><code class=language-uci data-lang=uci>wireless.ra0=wifi-device
+wireless.ra0.type='ralink'
+wireless.ra0.variant='mt7628'
+wireless.ra0.country='CN'
+wireless.ra0.channel='auto'
+wireless.ra0.disabled='0'
+wireless.ra0.hwmode='11g'
+wireless.ap=wifi-iface
+wireless.ap.device='ra0'
+wireless.ap.mode='ap'
+wireless.ap.network='lan'
+wireless.ap.ifname='ra0'
+wireless.ap.ssid='“放大后”的WIFI-名称'
+wireless.ap.key='密码不告诉你:)'
+wireless.ap.encryption='psk2'
+wireless.sta=wifi-iface
+wireless.sta.device='ra0'
+wireless.sta.mode='sta'
+wireless.sta.network='wwan'
+wireless.sta.ifname='apcli0'
+wireless.sta.key='密码不告诉你:)'
+wireless.sta.disabled='0'
+wireless.sta.encryption='psk2'
+wireless.sta.ssid='所中继连接的源WIFI-名称'
+</code></pre><p>网络信息 <code>uci show network</code>：</p>
+<pre tabindex=0><code class=language-uci data-lang=uci>network.loopback=interface
+network.loopback.ifname='lo'
+network.loopback.proto='static'
+network.loopback.ipaddr='127.0.0.1'
+network.loopback.netmask='255.0.0.0'
+network.globals=globals
+network.globals.ula_prefix='fd15:39fa:4166::/48'
+network.lan=interface
+network.lan.ifname='eth0.1'
+network.lan.force_link='1'
+network.lan.macaddr='b8:d8:12:67:01:71'
+network.lan.type='bridge'
+network.lan.proto='static'
+network.lan.ipaddr='192.168.61.1'
+network.lan.netmask='255.255.255.0'
+network.lan.ip6assign='60'
+network.wan=interface
+network.wan.ifname='eth0.2'
+network.wan.force_link='1'
+network.wan.macaddr='b8:d8:12:67:01:72'
+network.wan.proto='dhcp'
+network.wan6=interface
+network.wan6.ifname='eth0.2'
+network.wan6.proto='dhcpv6'
+network.@switch[0]=switch
+network.@switch[0].name='switch0'
+network.@switch[0].reset='1'
+network.@switch[0].enable_vlan='1'
+network.@switch_vlan[0]=switch_vlan
+network.@switch_vlan[0].device='switch0'
+network.@switch_vlan[0].vlan='1'
+network.@switch_vlan[0].ports='1 2 3 4 6t'
+network.@switch_vlan[1]=switch_vlan
+network.@switch_vlan[1].device='switch0'
+network.@switch_vlan[1].vlan='2'
+network.@switch_vlan[1].ports='0 6t'
+</code></pre><p>注意此处没有lan_dev桥接网络，并且有固定的mac地址，所以能从以太网分配到IP（待确认，openwrt 18.06.1 默为桥接以太网https://unix.stackexchange.com/questions/493378/no-ethernet-ip-address-in-my-vocore2) 。</p>
+<p>配置好后的无线网络信息截图如下：
+如果喜欢通过图形界面进行设置，请参考<a href="http://vonger.cn/?p=14525">vonger的博客</a>。不过个人偏好命令行配置（uci），更简单可靠。</p>
+<h4 id=相关问题>相关问题</h4>
+<ul>
+<li>
+<p>供电电压过低时STA模式不能正常工作</p>
+<p>此时一般会提示<code>[ 826.460057] MlmeEnqueueForRecv(): un-recongnized mgmt->subtype=4, STA-xx:xx:xx:xx:xx:xx</code>的日志错误信息。</p>
+<p>参考github上的这个<a href=https://github.com/Vonger/vocore2/issues/2>Issue</a></p>
+</li>
+</ul>
+<h4 id=pppoeasdl拨号上网>pppoe(ASDL拨号上网)</h4>
+<ul>
+<li>添加vlan端口</li>
+<li>设置wan接口连接方式为pppoe和以上vlan端口</li>
+</ul>
+<h3 id=代理与web过滤shadowsocks--privoxy>代理与Web过滤（Shadowsocks + Privoxy）</h3>
+<ul>
+<li>
+<p><strong>Shadowsocks</strong></p>
+<p>考虑到<a href=https://github.com/golang/go/wiki/Linux>go此时对mipsel架构的支持还有限</a>, 而且openWRT版本的<a href=https://github.com/shadowsocks/openwrt-shadowsocks>shadowsocks-libev</a>具有体积小、轻量级、功能支持丰富的特点，就采用了<a href=https://github.com/shadowsocks/shadowsocks-libev>shadowsocks-libev</a>来作为Shadowsocks的客户端。</p>
+<p>这里使用了<a href=http://openwrt-dist.sourceforge.net/>OpenWrt-dist</a>提供的源进行安装。可以通过命令从远程下载直接安装，也可以下载指定ipk安装包后进行安装。</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-sh data-lang=sh>opkg install shadowsocks-libev-ss-local luci-app-shadowsocks-libev
+</code></pre></div><p>v2ray需要openwrt支持SSL， 我们可以启用luci的SSL顺便解决该问题</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash>opkg install luci-ssl-openssl ca-bundle luci-ssl-nginx
+</code></pre></div><p>注意这里我们使用luci-ssl-nginx替换原有的httpd，uhttpd目前会有性能问题导致https页面加载非常慢。</p>
+</li>
+<li>
+<p><strong>Privoxy</strong></p>
+</li>
+</ul>
+<p>当前所使用的OpenWRT版本已经支持从官方源中下载安装<code>privoxy</code>, 也可以去<a href=http://downloads.openwrt.org/>http://downloads.openwrt.org/</a>找到对应的<code>privoxy</code>安装包手动下载安装。</p>
+<p>目前我所使用的<code>privoxy</code>版本信息为：<code>Privoxy version 3.0.26 (https://www.privoxy.org/)</code>，但是我在使用它的时候不太确定是否一个bug, 通过<code>uci</code>所配置的<code>list</code>项信息（如actionsfile和filterfile）无法生效，故修改了<code>/etc/init.d/privoxy</code>启动脚本并使用树莓派上<code>privoxy</code>的默认配置文件<code>/etc/privoxy/config</code>作为配置，<a href=https://wiki.openwrt.org/zh-cn/doc/howto/proxy.privoxy>回退到旧的配置方式</a>。</p>
+<p>重要配置示例：</p>
+<pre tabindex=0><code class=language-actionsfile data-lang=actionsfile># filename: pac.action
+# please add pac.action actionsfile into /etc/privoxy/config
+
+{{alias}}
+# http    = +forward-override{forward 127.0.0.1:8080}
+direct  = +forward-override{forward .}
+socks5  = +forward-override{forward-socks5 127.0.0.1:1080 .}
+default = direct
+
+# Default proxy
+{default}
+/
+
+{direct}
+.edu.cn
+.lan
+
+# Shadowsocks
+{socks5}
+.abc.xyz
+.google.com.hk
+</code></pre><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash>uci add_list privoxy.privoxy.actionsfile<span style=color:#555>=</span>pac.action
+</code></pre></div><h3 id=bbr>BBR</h3>
+<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash>opkg install kmod-tcp-bbr
+</code></pre></div><h3 id=网络包分析>网络包分析</h3>
+<p>安装以下软件包，以便进行网络数据包分析。vocore2性能有限，只适合抓包和处理少量的数据包。</p>
+<ul>
+<li>libpcap</li>
+<li>reaver</li>
+<li>aircrack-ng</li>
+<li>airmon-ng</li>
+<li>tcpdump</li>
+</ul>
+<h4 id=显示多个ssid>显示多个SSID</h4>
+<p>修改<code>/etc/wireless/mt7628/mt7628.dat</code> (实际上为文本文件)：</p>
+<pre tabindex=0><code># BSSID数量设为4 ra0, ra1, ra2, ra3
+BssidNum=4
+SSID1=VoCore2
+SSID2=VoCore2-GUEST
+SSID3=VoCore2-HOST
+SSID4=VoCore2-NAS
+</code></pre><p>参考： <a href="http://vonger.cn/?p=14496">http://vonger.cn/?p=14496</a></p>
+<h4 id=启用网卡嗅探sniffer模式>启用网卡嗅探(Sniffer)模式</h4>
+<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-sh data-lang=sh><span style=color:#09f;font-style:italic># Supposed libpcap.ipk and tcpdump.ipk have been installed.</span>
+<span style=color:#09f;font-style:italic># MonitorMode=2 is MONITOR_MODE_FULL, =1 is MONITOR_MODE_REGULAR_RX, =0 is OFF.</span>
+ifconfig mon0 up
+iwpriv ra0 <span style=color:#366>set</span> <span style=color:#033>MonitorMode</span><span style=color:#555>=</span><span style=color:#f60>2</span>
+
+<span style=color:#09f;font-style:italic># capturing</span>
+tcpdump -i mon0 -w /tmp/store.cap -vv
+</code></pre></div><ul>
+<li>
+<p>Packet capturing of raw 802.11 frames (use <code>tcpdump</code> alternative to <code>airodump-ng</code>)</p>
+<ul>
+<li>set channel to the same as AP (needed, otherwise you&rsquo;re not able to capture the handshake packets, check <a href="https://www.aircrack-ng.org/doku.php?id=cracking_wpa#aircrack-ng_says_0_handshakes">https://www.aircrack-ng.org/doku.php?id=cracking_wpa#aircrack-ng_says_0_handshakes</a>)</li>
+</ul>
+<p>以下方式在vocore中暂时不能使用</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-sh data-lang=sh><span style=color:#09f;font-style:italic># check current channel of the interface</span>
+iwlist mon0 channel
+<span style=color:#09f;font-style:italic># change channel</span>
+iwconfig mon0 channel &lt;CHANNEL_NUM&gt;
+</code></pre></div></li>
+<li>
+<p>改变无线网卡的CHANNEL</p>
+</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-sh data-lang=sh>uci <span style=color:#366>set</span> wireless.@wifi-device<span style=color:#555>[</span>0<span style=color:#555>]</span>.channel<span style=color:#555>=</span><span style=color:#f60>6</span> 
+</code></pre></div><ul>
+<li>Use <a href=https://hashcat.net/cap2hccapx/>cap2hccapx</a> to filter packets</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-sh data-lang=sh>cap2hccapx.bin  /tmp/store.cap tmp.hccap
+</code></pre></div><ul>
+<li>查看AP已经连接的CLIENT信息</li>
+</ul>
+<p><strong><code>airodump-ng</code> 同时可以用来过滤握手包，可以在<code>tcpdump</code>抓包的同时使用该工具查看数据包文件</strong></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-sh data-lang=sh>airodump-ng -c &lt;TARGET-CH&gt; --bssid &lt;SSID&gt; -r /tmp/store.cap 
+</code></pre></div><ul>
+<li>发送DEAUTH包强制断开已连接WIFI的客户端</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-sh data-lang=sh>aireplay-ng -0 <span style=color:#f60>2</span> -a &lt;SSID&gt; -c &lt;CLIENT-MAC&gt; mon0
+</code></pre></div><p><em>参考</em></p>
+<ul>
+<li><a href="http://vonger.cn/?p=14501">http://vonger.cn/?p=14501</a></li>
+<li><a href=https://wiki.openwrt.org/zh-cn/doc/uci/wireless>https://wiki.openwrt.org/zh-cn/doc/uci/wireless</a></li>
+</ul>
+<h3 id=远程下载-aria2>远程下载 （aria2)</h3>
+<p>采用默认配置</p>
+<ul>
+<li>aria2</li>
+<li><a href=https://github.com/openwrt/luci/tree/master/applications/luci-app-aria2>luci-app-aria2</a></li>
+</ul>
+<p>在界面上配置启用和下载目录，开放路由远程监听端口，可通过luci界面配置进行管理下载</p>
+<h4 id=客户端>客户端</h4>
+<ul>
+<li>web: <a href=https://github.com/ziahamza/webui-aria2>https://github.com/ziahamza/webui-aria2</a></li>
+<li>android: Aria2App <a href="https://play.google.com/store/apps/details?id=com.gianlu.aria2app&hl=zh">https://play.google.com/store/apps/details?id=com.gianlu.aria2app&hl=zh</a></li>
+</ul>
+<p>参考https://aria2.github.io/</p>
+<h3 id=usb-20存储挂载>USB 2.0存储挂载</h3>
+<p>可通过Web界面luci进行管理，手动挂载存储设备 (系统-> 挂载点)
+参考 <a href=https://openwrt.org/docs/guide-user/storage/fstab>https://openwrt.org/docs/guide-user/storage/fstab</a></p>
+<ul>
+<li>kmod-usb2</li>
+<li>block-mount</li>
+<li>kmod-usb-storage</li>
+<li>kmod-usb-storage-uas</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash>opkg install kmod-fs-exfat kmod-fs-ext4 kmod-fs-ntfs kmod-fs-vfat
+</code></pre></div><p>手动mount存储介质到/mnt/sda1目录</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=color:#09f;font-style:italic># 假设移动存储设备为/dev/sda1</span>
+mkdir /mnt/sda1
+mount /dev/sda1 /mnt/sda1
+</code></pre></div><p>参考openWRT官方文档<a href=https://wiki.openwrt.org/doc/howto/usb.essentials>usb.essentials</a></p>
+<h3 id=nas服务>NAS服务</h3>
+<p>这里列出了许多NAS服务https://openwrt.org/docs/guide-user/services/nas/start 。</p>
+<p>我主要考虑了两种：nfs和samba。推荐使用nfs, <a href=https://ferhatakgun.com/network-share-performance-differences-between-nfs-smb/>性能更好一点</a></p>
+<p>安装可以参考官方文档https://openwrt.org/docs/guide-user/services/nas/cifs.server</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash>
+</code></pre></div><p>PS: http服务器可以使用uhttpd服务，默认根目录在<code>/www</code>, 可以新建一个shared文件夹，把文件丢过去就好了（只推荐存储小的配置文件); 参考https://openwrt.org/docs/guide-user/services/webserver/http.uhttpd</p>
+<h3 id=声音播放与流媒体功能dlna>声音播放与流媒体功能（DLNA)</h3>
+<p>采用默认配置</p>
+<ul>
+<li><a href=https://wiki.openwrt.org/doc/uci/minidlna>minidlna</a></li>
+<li><a href=https://openwrt.org/docs/guide-user/services/media_server/dlna>luci-app-minidlna</a></li>
+</ul>
+<p>更改dlna根目录</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash>uci <span style=color:#366>set</span> minidlna.config.media_dir<span style=color:#555>=</span><span style=color:#c30>&#39;/mnt/usb&#39;</span>
+uci <span style=color:#366>set</span> minidlna.config.user<span style=color:#555>=</span><span style=color:#c30>&#39;root&#39;</span>
+</code></pre></div><p>配置示例</p>
+<pre tabindex=0><code>minidlna.config=minidlna
+minidlna.config.enabled='1'
+minidlna.config.port='8200'
+minidlna.config.interface='br-lan'
+minidlna.config.friendly_name='OpenWrt DLNA Server'
+minidlna.config.db_dir='/var/run/minidlna'
+minidlna.config.log_dir='/var/log'
+minidlna.config.inotify='1'
+minidlna.config.enable_tivo='0'
+minidlna.config.wide_links='0'
+minidlna.config.strict_dlna='0'
+minidlna.config.notify_interval='900'
+minidlna.config.serial='12345678'
+minidlna.config.model_number='1'
+minidlna.config.root_container='.'
+minidlna.config.album_art_names='Cover.jpg/cover.jpg/AlbumArtSmall.jpg/albumartsmall.jpg/AlbumArt.jpg/albumart.jpg/Album.jpg/album.jpg/Folder.jpg/folder.jpg/Thumb.jpg/thumb.jpg'
+minidlna.config.media_dir='/mnt/sda1'
+</code></pre><p>参考https://openwrt.org/docs/guide-user/services/media_server/minidlna</p>
+<h3 id=guest-wifi和wifidog>Guest WIFI和wifidog</h3>
+<ul>
+<li>参考openwrt<a href=https://openwrt.org/docs/guide-user/network/wifi/guestwifi/guest-wlan>此官方文档</a>创建guest开放网络</li>
+<li>安装nodogsplash,并设置用户名密码登录 <a href=https://nodogsplash.readthedocs.io/en/latest/binauth.html>https://nodogsplash.readthedocs.io/en/latest/binauth.html</a>
+设定需要portal登录的interface为br-guest</li>
+<li>使用splash.html认证的方式密码是明文，建议偶尔使用，长期使用可改用FAS登录。</li>
+</ul>
+<h3 id=web管理界面luci中文支持>Web管理界面luci中文支持</h3>
+<p>安装中文语言包 和 material界面</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-sh data-lang=sh>opkg install luci-i18n-base-zh-cn luci-theme-material
+</code></pre></div><p>然后在luci界面上选择中文作为默认语言。</p>
+<h2 id=变成假硬币怎么办>变成“假硬币”怎么办？</h2>
+<p>一般情况下，如果设定了错误的配置导致vocore无法正常工作，可以尝试修复配置完成。这里只给出个人的方案，官网有更全面更安全的方式。</p>
+<p>如果修复不了配置，直接恢复到默认设置：</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-sh data-lang=sh>firstboot <span style=color:#555>&amp;&amp;</span> reboot
+</code></pre></div><p>如果是固件出现了问题，可尝试通过刷入新的固件来解决</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-sh data-lang=sh>sysupgrade -v &lt;VOCORE-FIRMWARE.BIN&gt;
+</code></pre></div><p>如果无法通过网络连接vocore，那么只用尝试通过串口连接了。</p>
+<h3 id=使用串口连接vocore>使用串口连接vocore</h3>
+<p>设定好参数后可以通过USB串口连接到vocore2 <code>UART speed: 115200bps; 8bits; no even; 1 stop bit</code></p>
+<ul>
+<li>Windows下putty连接COM端口 (驱动<a href=http://vonger.cn/misc/vocore2/tools/usb2ttl.zip>usb2ttl</a>)</li>
+<li>Ubuntu中使用minicom连接</li>
+</ul>
+<h4 id=使用串口刷入固件仅在sysupgrade方式不可用时推荐>使用串口刷入固件（仅在sysupgrade方式不可用时推荐)</h4>
+<ul>
+<li>安装ckermit</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash>sudo apt-get install ckermit
+
+<span style=color:#09f;font-style:italic># 旧版本ckermit在Ubuntu 20.04中已经废弃, The Kermit Project at Columbia University is cancelled effective 1 July 2011</span>
+<span style=color:#09f;font-style:italic># 从新网站下载源码编译 http://www.kermitproject.org/ck90.html</span>
+make linux
+sudo make install
+</code></pre></div><p>配置 <code>/etc/kermit/kermrc 或者</code>/root/.mykermrc`</p>
+<pre tabindex=0><code>; 添加如下内容
+set line          /dev/ttyACM0 
+set speed         115200 
+set carrier-watch off 
+set handshake     none 
+set flow-control none 
+robust 
+set file type     bin 
+set file name     lit 
+set rec pack      1000 
+set send pack     1000 
+set window        5 
+</code></pre><ul>
+<li>使用minicom连接vocore2并选择<code>0: Load system code then write to Flash via SERIAL.</code></li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=color:#09f;font-style:italic># config Minicom</span>
+sudo minicom -s
+
+<span style=color:#09f;font-style:italic># connect </span>
+sudo minicom
+</code></pre></div><p>接上电源启动vocore并快速按0，进入刷机模式</p>
+<ul>
+<li>使用minicom传输固件</li>
+</ul>
+<p>vocore2进入待刷机模式后，按下快捷键Ctrl+A+Z, 打开minicom菜单选择send files,并使用kermit协议，然后输入文件名回车开始发送文件，完成刷机。
+<div class=fixed-height-container>
+<amp-img class=contain alt=示例 src=https://qtopie.github.io/posts/iot/vocore/https://i.stack.imgur.com/ZRTtN.png layout=fill lightbox>
+</amp-img>
+</div></p>
+<h2 id=compile-openwrt-for-vocore2>Compile OpenWRT for VoCore2</h2>
+<ol>
+<li>Install packages to compile OpenWRT</li>
+</ol>
+<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash>sudo apt-get install gcc g++ binutils patch bzip2 flex bison make autoconf gettext texinfo unzip sharutils subversion libncurses5-dev ncurses-term zlib1g-dev libssl-dev python
+</code></pre></div><ol start=2>
+<li>Follow link <a href=https://github.com/Vonger/vocore2>https://github.com/Vonger/vocore2</a></li>
+</ol>
+<ul>
+<li>指定内核版本</li>
+</ul>
+<p>include/kernel-version.mk</p>
+<p><em>PS： 如果想购买一个玩一下，不必在官网上买，国内某宝上有卖，而且貌似是官方的，因为<a href=https://github.com/Vonger>它来自中国</a>。</em></p>
+<h2 id=openwrt-1806>OpenWRT 18.06</h2>
+<p>当前vocore2的官方固件基于openwrt 15.05, 该版本openwrt支持的软件包比较少，openwrt 18.06对vocore已有较好的支持。</p>
+<p>推荐：刷入vonger提供的vocore2固件 <a href=http://vonger.cn/misc/vocore2/20180419.bin>http://vonger.cn/misc/vocore2/20180419.bin</a></p>
+<p>注意默认配置下openwrt未启用AP模式,使用以下命令更改(使用vonger固件不需要执行该命令)</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash>uci <span style=color:#366>set</span> wireless.@wifi-device<span style=color:#555>[</span>0<span style=color:#555>]</span>.disabled<span style=color:#555>=</span>0; uci commit wireless; wifi
+</code></pre></div><h2 id=openwrt相关diy>OpenWRT相关DIY</h2>
+<p>小米路由器3g (256MB内存版本, 2代貌似涨价了而且配置缩水了)</p>
+<p>刷机等相关文档参考这个链接 <a href=https://forum.openwrt.org/t/xiaomi-wifi-router-3g/5377>https://forum.openwrt.org/t/xiaomi-wifi-router-3g/5377</a></p>
+<p>提示：mt7621 v2ray版本选择mipsle_sf</p>
+<h2 id=dns配置>DNS配置</h2>
+<p>我们配置dns避免DNS污染和劫持</p>
+<ul>
+<li>设置上游DNS</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=color:#09f;font-style:italic># Configure DNS provider</span>
+uci -q delete network.wan.dns
+uci add_list network.wan.dns<span style=color:#555>=</span><span style=color:#c30>&#34;8.8.8.8&#34;</span>
+uci add_list network.wan.dns<span style=color:#555>=</span><span style=color:#c30>&#34;8.8.4.4&#34;</span>
+ 
+<span style=color:#09f;font-style:italic># Configure DNS6 provider</span>
+uci -q delete network.wan6.dns
+uci add_list network.wan6.dns<span style=color:#555>=</span><span style=color:#c30>&#34;2001:4860:4860::8888&#34;</span>
+uci add_list network.wan6.dns<span style=color:#555>=</span><span style=color:#c30>&#34;2001:4860:4860::8844&#34;</span>
+ 
+<span style=color:#09f;font-style:italic># Disable peer DNS</span>
+uci <span style=color:#366>set</span> network.wan.peerdns<span style=color:#555>=</span><span style=color:#c30>&#34;0&#34;</span>
+uci <span style=color:#366>set</span> network.wan6.peerdns<span style=color:#555>=</span><span style=color:#c30>&#34;0&#34;</span>
+ 
+<span style=color:#09f;font-style:italic># Save and apply</span>
+uci commit network
+/etc/init.d/network restart
+</code></pre></div><p>参考 <a href=https://openwrt.org/docs/guide-user/base-system/dhcp_configuration>https://openwrt.org/docs/guide-user/base-system/dhcp_configuration</a></p>
+<ul>
+<li>dns over https</li>
+</ul>
+<p>参考 <a href=https://openwrt.org/docs/guide-user/services/dns/doh_dnsmasq_https-dns-proxy>https://openwrt.org/docs/guide-user/services/dns/doh_dnsmasq_https-dns-proxy</a></p>
+<h2 id=源镜像>源镜像</h2>
+<p><a href=https://mirrors.tuna.tsinghua.edu.cn/openwrt>https://mirrors.tuna.tsinghua.edu.cn/openwrt</a></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash>sed -i <span style=color:#c30>&#39;s/http:\/\/downloads.openwrt.org/https:\/\/mirrors.tuna.tsinghua.edu.cn\/openwrt/g&#39;</span> distfeeds.conf
+</code></pre></div><p>推荐使用openwrt官网固件。 目前固件较稳定19.07，使用稳定发布版本可以找到完整的依赖包。保持与默认界面与设置统一。</p>
+<h2 id=wan-口和-lan口互换>wan 口和 lan口互换</h2>
+<p>默认以太网口为lan口，可以通过以太网共享vocore网络给其他设备。</p>
+<p>切换为wan口，只需要将wan设备的物理接口换成eth0.1, 将lan设备的物理接口换成eth0.2</p>
+<p>此链接仅供参考http://vonger.cn/?p=8127</p>
+<h2 id=vlan>VLAN</h2>
+<p><a href=https://x-nagi.com/2019/openwrt-and-switch.html>https://x-nagi.com/2019/openwrt-and-switch.html</a></p>
+<p><a href=https://zhuanlan.zhihu.com/p/35616289>https://zhuanlan.zhihu.com/p/35616289</a></p>
+<p>主机映射</p>
+<h2 id=4g-lte>4G LTE</h2>
+<ul>
+<li>dial.sh script</li>
+</ul>
+<pre tabindex=0><code>#!/bin/bash
+
+if &bsol;[ ! &quot;$(lsusb -d '161c:f010')&quot; &bsol;]; then printf &quot;usb not plugged\n&quot; ; fi
+
+# switch from mass storage to modem devices
+#usb_modeswitch -v 161c -p f010 -W -M 55534243123456780000000000000606f50402527000000000000000000000
+usbmode -s -v -c usb-mode.json
+
+modprobe qmi_wwan
+echo &quot;161c f101&quot; &gt; /sys/bus/usb/drivers/qmi_wwan/new_id
+
+sleep 2
+
+echo 1-1:1.0 &gt; /sys/bus/usb/drivers/qmi_wwan/unbind
+echo 1-1:1.1 &gt; /sys/bus/usb/drivers/qmi_wwan/unbind
+
+sleep 1
+echo 1-1:1.1 &gt; /sys/bus/usb/drivers/qmi_wwan/bind
+
+sleep 1
+
+modprobe option
+echo '161c f101' &gt; /sys/bus/usb-serial/drivers/option1/new_id
+
+ifup wan
+
+# ip route add default dev 3g-wan metric 100
+</code></pre><ul>
+<li>network config</li>
+</ul>
+<p>set metric to 100, so network traffic goes through this interface by default.</p>
+<pre tabindex=0><code>config interface 'wan'
+        option device '/dev/ttyUSB0'
+        option apn '3gnet'
+        option proto '3g'
+        option service 'umts'
+        option ipv6 'auto'
+        option dialnumber '*99#'
+        option ifname 'ppp0'
+        option metric '100'
+</code></pre><ul>
+<li>usb-mode.json</li>
+</ul>
+<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-json data-lang=json>{
+        <span style=color:#309;font-weight:700>&#34;messages&#34;</span> : [
+                <span style=color:#c30>&#34;55534243123456780000000000000606f50402527000000000000000000000&#34;</span>,
+],
+<span style=color:#309;font-weight:700>&#34;devices&#34;</span> : {
+                <span style=color:#309;font-weight:700>&#34;161c:f010&#34;</span>: {
+                        <span style=color:#309;font-weight:700>&#34;*&#34;</span>: {
+                                <span style=color:#309;font-weight:700>&#34;t_vendor&#34;</span>: <span style=color:#f60>5660</span>,
+                                <span style=color:#309;font-weight:700>&#34;t_product&#34;</span>: &bsol;[ <span style=color:#f60>61697</span> &bsol;],
+                                <span style=color:#309;font-weight:700>&#34;msg&#34;</span>: &bsol;[ <span style=color:#f60>0</span> &bsol;],
+                                <span style=color:#309;font-weight:700>&#34;response&#34;</span>: <span style=color:#069;font-weight:700>true</span>
+                        }
+                },
+        }
+}
+</code></pre></div><h2 id=参考链接>参考链接</h2>
+<ul>
+<li><a href=https://help.ubuntu.com/community/Minicom>https://help.ubuntu.com/community/Minicom</a></li>
+<li><a href=http://vocore.io/v2.html>http://vocore.io/v2.html</a></li>
+<li><a href=https://openwrt.org/docs/guide-user/network/wifi/relay_configuration>https://openwrt.org/docs/guide-user/network/wifi/relay_configuration</a></li>
+<li><a href=http://downloads.openwrt.org/snapshots/targets/ramips/mt76x8/packages/>http://downloads.openwrt.org/snapshots/targets/ramips/mt76x8/packages/</a></li>
+<li><a href=https://wiki.openwrt.org/zh-cn/doc/techref/opkg>https://wiki.openwrt.org/zh-cn/doc/techref/opkg</a></li>
+<li><a href=https://oldwiki.archive.openwrt.org/doc/uci/wireless>https://oldwiki.archive.openwrt.org/doc/uci/wireless</a></li>
+<li><a href=http://vonger.cn/misc/vocore2/>http://vonger.cn/misc/vocore2/</a></li>
+<li><a href=https://openwrt.org/docs/guide-user/luci/start>https://openwrt.org/docs/guide-user/luci/start</a></li>
+</ul>
+</article><amp-animation id=showAnim layout=nodisplay>
+<script type=application/json>{"duration":"200ms","fill":"both","iterations":"1","direction":"alternate","animations":[{"selector":"#scrollToTopButton","keyframes":[{"opacity":"1","visibility":"visible"}]}]}</script>
+</amp-animation>
+<amp-animation id=hideAnim layout=nodisplay>
+<script type=application/json>{"duration":"200ms","fill":"both","iterations":"1","direction":"alternate","animations":[{"selector":"#scrollToTopButton","keyframes":[{"opacity":"0","visibility":"hidden"}]}]}</script>
+</amp-animation>
+<button id=scrollToTopButton on="tap:top.scrollTo(duration=200)" class=scrollToTop>⌃</button></main>
+</div>
+<footer class="ampstart-footer flex flex-column items-center px3">
+<ul class="ampstart-social-follow list-reset flex justify-around items-center flex-wrap m0 mb4">
+<li>
+<a href=# target=_blank class="inline-block p1" aria-label="Link to AMP HTML Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="22.2" viewBox="0 0 53 49"><title>Twitter</title><path d="M45 6.9c-1.6 1-3.3 1.6-5.2 2-1.5-1.6-3.6-2.6-5.9-2.6-4.5.0-8.2 3.7-8.2 8.3.0.6.1 1.3.2 1.9-6.8-.4-12.8-3.7-16.8-8.7C8.4 9 8 10.5 8 12c0 2.8 1.4 5.4 3.6 6.9-1.3-.1-2.6-.5-3.7-1.1v.1c0 4 2.8 7.4 6.6 8.1-.7.2-1.5.3-2.2.3-.5.0-1 0-1.5-.1 1 3.3 4 5.7 7.6 5.7-2.8 2.2-6.3 3.6-10.2 3.6-.6.0-1.3-.1-1.9-.1 3.6 2.3 7.9 3.7 12.5 3.7 15.1.0 23.3-12.6 23.3-23.6.0-.3.0-.7-.1-1 1.6-1.2 3-2.7 4.1-4.3-1.4.6-3 1.1-4.7 1.3 1.7-1 3-2.7 3.6-4.6" class="ampstart-icon ampstart-icon-twitter"/></svg></a>
+</li>
+<li>
+<a href=# target=_blank class="inline-block p1" aria-label="Link to AMP HTML Facebook"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="23.6" viewBox="0 0 56 55"><title>Facebook</title><path d="M47.5 43c0 1.2-.9 2.1-2.1 2.1h-10V30h5.1l.8-5.9h-5.9v-3.7c0-1.7.5-2.9 3-2.9h3.1v-5.3c-.6.0-2.4-.2-4.6-.2-4.5.0-7.5 2.7-7.5 7.8v4.3h-5.1V30h5.1v15.1H10.7c-1.2.0-2.2-.9-2.2-2.1V8.3c0-1.2 1-2.2 2.2-2.2h34.7c1.2.0 2.1 1 2.1 2.2V43" class="ampstart-icon ampstart-icon-fb"/></svg></a>
+</li>
+<li>
+<a href=# target=_blank class="inline-block p1" aria-label="Link to AMP HTML pin trest"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="28.5" viewBox="0 0 43 51"><title>pinterest</title><path d="M8.134 18.748c0-1.6.2-3 .8-4.4.5-1.4 1.2-2.6 2.2-3.6.9-1 2-1.9 3.2-2.6 1.2-.8 2.5-1.3 3.9-1.7 1.5-.4 2.9-.5 4.4-.5 2.2.0 4.3.4 6.2 1.4 1.9.9 3.5 2.3 4.7 4.1 1.2 1.9 1.8 3.9 1.8 6.2.0 1.4-.1 2.7-.4 4-.2 1.3-.7 2.6-1.2 3.8-.6 1.2-1.3 2.3-2.2 3.2-.8.9-1.8 1.7-3.1 2.2-1.2.6-2.5.9-4 .9-1 0-1.9-.3-2.9-.7-.9-.5-1.6-1.1-2-1.9-.1.5-.3 1.4-.6 2.4-.3 1.1-.4 1.7-.5 2-.1.3-.2.9-.4 1.6-.3.7-.4 1.2-.6 1.5-.1.3-.4.7-.7 1.3-.3.6-.6 1.2-1 1.7-.3.5-.7 1.1-1.3 1.8l-.3.1-.2-.2c-.2-2.2-.3-3.6-.3-4 0-1.3.2-2.8.5-4.4.3-1.7.8-3.7 1.4-6.2s1-3.9 1.1-4.4c-.5-.9-.7-2.1-.7-3.6.0-1.2.4-2.3 1.1-3.3.8-1.1 1.7-1.6 2.8-1.6.9.0 1.6.3 2.1.9.4.6.7 1.3.7 2.2s-.3 2.3-1 4.1c-.6 1.8-.9 3.1-.9 4s.3 1.6 1 2.2c.6.6 1.4.9 2.3.9.8.0 1.5-.2 2.2-.5.6-.4 1.2-.9 1.6-1.5.5-.6.9-1.3 1.2-2 .4-.8.6-1.5.8-2.4.2-.8.4-1.6.5-2.4.1-.7.1-1.4.1-2.1.0-2.5-.8-4.4-2.3-5.8-1.6-1.4-3.6-2.1-6.1-2.1-2.8.0-5.2 1-7.1 2.8-1.9 1.9-2.9 4.2-2.9 7.1.0.6.1 1.2.3 1.8.2.6.4 1.1.6 1.4.2.3.4.7.5 1 .2.3.3.5.3.6.0.4-.1.9-.3 1.6-.2.6-.5 1-.8 1 0 0-.1-.1-.4-.1-.7-.2-1.3-.6-1.9-1.2-.5-.6-1-1.3-1.3-2-.3-.8-.5-1.6-.7-2.4-.2-.7-.2-1.5-.2-2.2z" class="ampstart-icon ampstart-icon-pinterest"/></svg></a>
+</li>
+<li>
+<a href="mailto:?subject=I wanted you to see this site&body=Check out this site https%3a%2f%2fqtopie.github.io%2fposts%2fiot%2fvocore%2fmy-vocore-playground%2f." title="Share by Email" target=_blank class="inline-block p1" aria-label="Link to AMP HTML E-mail"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="18.4" viewBox="0 0 56 43"><title>email</title><path d="M10.5 6.4C9.1 6.4 8 7.5 8 8.9v21.3c0 1.3 1.1 2.5 2.5 2.5h34.9c1.4.0 2.5-1.2 2.5-2.5V8.9c0-1.4-1.1-2.5-2.5-2.5H10.5zm2.1 2.5h30.7L27.9 22.3 12.6 8.9zm-2.1 1.4 16.6 14.6c.5.4 1.2.4 1.7.0l16.6-14.6v19.9H10.5V10.3z" class="ampstart-icon ampstart-icon-email"/></svg></a>
+</li>
+</ul>
+<nav class=ampstart-footer-nav>
+<ul class="list-reset flex flex-wrap mb3">
+<li class=px1><a class="text-decoration-none ampstart-label" href=https://qtopie.github.io/about/>About</a></li>
+<li class=px1><a class="text-decoration-none ampstart-label" href="mailto:qtopie.rw@gmail.com?subject=disscussion on this page&body=Check out this post https%3a%2f%2fqtopie.github.io%2fposts%2fiot%2fvocore%2fmy-vocore-playground%2f.">Contact</a></li>
+<li class=px1><a class="text-decoration-none ampstart-label" href=https://qtopie.github.io/terms/>Terms</a></li>
+</ul>
+</nav>
+<small>
+© qtopierw, 2021
+</small>
+<small>Posts licensed under <a href=https://creativecommons.org/licenses/by/4.0/legalcode>CC BY 4.0</small>
+</footer>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>tool on Blog | qtopierw</title><link>https://qtopie.github.io/categories/tool/</link><description>Recent content in tool on Blog | qtopierw</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>qtopie.rw@gmail.com (qtopierw)</managingEditor><webMaster>qtopie.rw@gmail.com (qtopierw)</webMaster><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Tue, 06 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/categories/tool/index.xml" rel="self" type="application/rss+xml"/><item><title>VIM安装笔记</title><link>https://qtopie.github.io/posts/vim/build-and-install-latest-vim/</link><pubDate>Tue, 06 Apr 2021 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/vim/build-and-install-latest-vim/</guid><description>VIM 安装 由于debian发行版维护的vim包还未升级到最新版本，但govim需要较高版本的vim。故选择手动编译安装。这里直接选择最新版本8.2， 对应于最新的git tag版本， 8.2版本有一些实用性的功能。
+环境
+Ubuntu 19.10 5.3.0-24-generic x84_64 构建及安装过程 安装构建工具链 sudo apt update &amp;amp;&amp;amp; sudo apt install -y git build-essential 拉取源码 git clone https://github.com/vim/vim.git # 切换到你想构建的tag git checkout v8.2.0369 开始构建 #cd src #make distclean # if you build Vim before ./configure --with-features=huge \ --enable-multibyte \ --enable-python3interp=yes \ --with-python3-config-dir=$(python3-config --configdir) \ --enable-perlinterp=yes \ --enable-luainterp=yes \ --enable-cscope \ --prefix=/usr/local make VIMRUNTIMEDIR=/usr/local/share/vim/vim82 sudo apt install checkinstall sudo checkinstall checkinstall执行完后，会安装到/usr/local/bin/vim 即可。</description></item><item><title>使用Hugo生成静态站点</title><link>https://qtopie.github.io/posts/hugo/getting-started-with-hugo/</link><pubDate>Mon, 02 May 2016 00:06:17 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/hugo/getting-started-with-hugo/</guid><description>本文主要分享如何使用Hugo生成静态站点，并部署到firebase (Hosting服务）上。
+updated: 2021/9/29
+静态站点 静态站点，相比于动态站点（一般指需要请求后端动态生成网站内容）来说，网站内容已提前渲染好，对搜索引擎更加友好。而且网站内容一般可以直接生成静态的html/css页面, 减少浏览器js渲染，网络传输时也可以充分利用缓存, 这样网页加载也比较快， 使用户体验更好。
+更进一步地，Google和Twitter合作开发了AMP(Accelerated Mobile Pages)技术, 通过限定HTML标签和CSS，以及CDN缓存，提升移动设备(相比于PC端：弱网、低性能）对网站的访问速度。
+本站点就是采用了AMP技术构建, 使用静态站点生成工具根据模板，将markdown文件渲染输出为静态AMP页面。
+生成工具 静态站点生成工具有很多，我主要用过的有以下两个。（目前又换回了Hugo)
+Hugo Scully PS, Hugo刚发布不久我就开始使用了，当时对这个新工具很喜欢，它是一个单独的二进制文件, 且渲染很快，模板丰富。但后面想定制一些功能（那时Hugo的文档比较少，仅官网使用文档， 且功能也没现在这么丰富), 但go的语法还是比较复杂的，也没太多时间看源码。因此当Scully出现的时候，我就立即使用了它（因为本人还是一个Angular粉），相比于Hugo，Scully几乎等同于你可以通过编写Angular应用定制你的网站, 因此十分灵活（主要的缺点是主题和应用代码分开进程渲染，调试略麻烦）。但后面发现，我本身写博客主题的时间可能比我写博客还花的多：》，也是该冷静下想想我的初衷是什么了。其实就是为了记录一些知识并分享，因此AMP才是我的需要。所以我决定我的博客主题的核心是简洁并对阅读友好, 而不是增添许多看其来很有趣的功能。
+博客主题 这里列出我用过的博客主题
+Hugo
+Robust amp-blog-theme Scully
+mdblog-theme 以下内容主要介绍Hugo使用
+安装和创建站点 目标 在本地电脑安装hugo, 在github上创建私有仓库posts，存放markdown源码及图片等文件； 在github创建私有仓库qtopie.web.app（作为集成仓库）, 对应于站点名称，存放站点配置文件。 创建firebase hosting项目，将站点qtopie.web.app发布到firebase. 仓库创建过程省略
+Hugo安装 以在Ubuntu 20.04上为例
+sudo snap install hugo 本地生成站点 初始化git各模块
+// git clone .</description></item></channel></rss>
