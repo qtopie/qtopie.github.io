@@ -1,10 +1,10 @@
-<!doctype html><html amp lang=en>
+<!doctype html><html amp lang=zh>
 <head>
 <meta charset=utf-8>
 <title>
 Go安装
 </title>
-<link rel=canonical href=https://qtopie.github.io/posts/go/setup-go/index.html>
+<link rel=canonical href=https://qtopie.github.io/posts/go/setup-go/>
 <meta name=viewport content="width=device-width">
 <meta name=amp-google-client-id-api content="googleanalytics">
 <link rel=apple-touch-icon sizes=180x180 href=/favicons/apple-touch-icon.png>
@@ -81,7 +81,7 @@ animation: none;
 <script async custom-element=amp-social-share src=https://cdn.ampproject.org/v0/amp-social-share-0.1.js></script>
 <script async custom-element=amp-position-observer src=https://cdn.ampproject.org/v0/amp-position-observer-0.1.js></script>
 <script async custom-element=amp-animation src=https://cdn.ampproject.org/v0/amp-animation-0.1.js></script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Go安装","image":"https://qtopie.github.io/images/article-header-background-img.webp","datePublished":"2020-03-18T22:02:05+08:00","dateModified":"2020-03-18T22:02:05+08:00","inLanguage":"en-us","isFamilyFriendly":"true","author":{"@type":"Person","name":"qtopierw","url":"https:\/\/qtopie.github.io\/about/"},"copyrightHolder":"qtopierw","copyrightYear":"2020","copyrightNotice":"Posts licensed under \u003ca href=\"https://creativecommons.org/licenses/by/4.0/legalcode\"\u003eCC BY 4.0","mainEntityOfPage":{"@type":"WebPage"},"publisher":{"@type":"Organization","name":"qtopierw","logo":{"@type":"ImageObject","url":"https:\/\/qtopie.github.io\/favicons/favicon-32x32.png"}},"description":"官方下载安装向导请参考这里https://golang.org/dl/\n这篇文章主要分享加速访问go依赖和资源站点的问题。\n环境  Ubuntu 19.10 x86_64 版本号 go1.14 linux/amd64  下载安装 Go安装文 …","keywords":["go"]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Go安装","image":"https://qtopie.github.io/images/article-header-background-img.webp","datePublished":"2020-03-18T22:02:05+08:00","dateModified":"2020-03-18T22:02:05+08:00","inLanguage":"zh","isFamilyFriendly":"true","author":{"@type":"Person","name":"qtopierw","url":"https:\/\/qtopie.github.io\/about/"},"copyrightHolder":"qtopierw","copyrightYear":"2020","copyrightNotice":"Posts licensed under \u003ca href=\"https://creativecommons.org/licenses/by/4.0/legalcode\"\u003eCC BY 4.0","mainEntityOfPage":{"@type":"WebPage"},"publisher":{"@type":"Organization","name":"qtopierw","logo":{"@type":"ImageObject","url":"https:\/\/qtopie.github.io\/favicons/favicon-32x32.png"}},"description":"官方下载安装向导请参考这里https://golang.org/dl/\n这篇文章主要分享加速访问go依赖和资源站点的问题。\n环境  Ubuntu 19.10 x86_64 版本号 go1.14 linux/amd64  下载安装 Go安装文 …","keywords":["go"]}</script>
 </head>
 <body>
 <amp-auto-ads type=adsense data-ad-client=ca-pub-3338377104827119></amp-auto-ads>
@@ -121,6 +121,7 @@ animation: none;
 <ul>
 <li><a href=/tags/raspberrypi>raspberrypi</a> (3)</li>
 <li><a href=/tags/ubuntu>ubuntu</a> (2)</li>
+<li><a href=/tags/vim>vim</a> (2)</li>
 <li><a href=/tags/4g-lte>4g-lte</a> (1)</li>
 <li><a href=/tags/algorithm>algorithm</a> (1)</li>
 <li><a href=/tags/android>android</a> (1)</li>
@@ -138,7 +139,6 @@ animation: none;
 <li><a href=/tags/mt7612u>mt7612u</a> (1)</li>
 <li><a href=/tags/other>other</a> (1)</li>
 <li><a href=/tags/root>root</a> (1)</li>
-<li><a href=/tags/vim>vim</a> (1)</li>
 </ul>
 </div>
 </aside>
@@ -189,10 +189,10 @@ go env -w <span style=color:#033>GOPRIVATE</span><span style=color:#555>=</span>
 </code></pre></div><p>同样推荐使用国内站点https://goproxy.cn/</p>
 <h3 id=文档查看>文档查看</h3>
 <ul>
-<li>使用<code>go doc</code>命令可以在终端快速查阅文档</li>
+<li>使用<code>go doc</code>命令可以在终端快速查阅文档, 例如</li>
 </ul>
 <div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash>go doc net.Listen | vim -
-</code></pre></div>
+</code></pre></div><h2 id=参考>参考</h2>
 </article><amp-animation id=showAnim layout=nodisplay>
 <script type=application/json>{"duration":"200ms","fill":"both","iterations":"1","direction":"alternate","animations":[{"selector":"#scrollToTopButton","keyframes":[{"opacity":"1","visibility":"visible"}]}]}</script>
 </amp-animation>

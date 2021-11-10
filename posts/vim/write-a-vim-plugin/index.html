@@ -2,9 +2,9 @@
 <head>
 <meta charset=utf-8>
 <title>
-Git快速手册
+编写vim插件
 </title>
-<link rel=canonical href=https://qtopie.github.io/posts/development/git-quick-guide/>
+<link rel=canonical href=https://qtopie.github.io/posts/vim/write-a-vim-plugin/>
 <meta name=viewport content="width=device-width">
 <meta name=amp-google-client-id-api content="googleanalytics">
 <link rel=apple-touch-icon sizes=180x180 href=/favicons/apple-touch-icon.png>
@@ -81,7 +81,7 @@ animation: none;
 <script async custom-element=amp-social-share src=https://cdn.ampproject.org/v0/amp-social-share-0.1.js></script>
 <script async custom-element=amp-position-observer src=https://cdn.ampproject.org/v0/amp-position-observer-0.1.js></script>
 <script async custom-element=amp-animation src=https://cdn.ampproject.org/v0/amp-animation-0.1.js></script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Git快速手册","image":"https://qtopie.github.io/images/article-header-background-img.webp","datePublished":"2017-07-05T00:00:00Z","dateModified":"2017-07-05T00:00:00Z","inLanguage":"zh","isFamilyFriendly":"true","author":{"@type":"Person","name":"qtopierw","url":"https:\/\/qtopie.github.io\/about/"},"copyrightHolder":"qtopierw","copyrightYear":"2017","copyrightNotice":"Posts licensed under \u003ca href=\"https://creativecommons.org/licenses/by/4.0/legalcode\"\u003eCC BY 4.0","mainEntityOfPage":{"@type":"WebPage"},"publisher":{"@type":"Organization","name":"qtopierw","logo":{"@type":"ImageObject","url":"https:\/\/qtopie.github.io\/favicons/favicon-32x32.png"}},"description":"WIP\n快速开始  设置个人信息  git config --global user.name \u0026amp;lt;YOUR-NAME\u0026amp;gt; git config --global user.email \u0026amp;lt;YOUR-EMAIL\u0026amp;gt; # 查看 …","keywords":["git"]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"编写vim插件","image":"https://qtopie.github.io/images/article-header-background-img.webp","datePublished":"2020-07-06T23:32:56+08:00","dateModified":"2020-07-06T23:32:56+08:00","inLanguage":"zh","isFamilyFriendly":"true","author":{"@type":"Person","name":"qtopierw","url":"https:\/\/qtopie.github.io\/about/"},"copyrightHolder":"qtopierw","copyrightYear":"2020","copyrightNotice":"Posts licensed under \u003ca href=\"https://creativecommons.org/licenses/by/4.0/legalcode\"\u003eCC BY 4.0","mainEntityOfPage":{"@type":"WebPage"},"publisher":{"@type":"Organization","name":"qtopierw","logo":{"@type":"ImageObject","url":"https:\/\/qtopie.github.io\/favicons/favicon-32x32.png"}},"description":"Vimscript https://en.wikipedia.org/wiki/Vim_(text_editor)#Vim_script\n:h write-plugin\nchannel  demoserver.py …","keywords":["vim","vim-plugin"]}</script>
 </head>
 <body>
 <amp-auto-ads type=adsense data-ad-client=ca-pub-3338377104827119></amp-auto-ads>
@@ -150,134 +150,46 @@ animation: none;
 <amp-position-observer on="enter:hideAnim.start; exit:showAnim.start" layout=nodisplay>
 </amp-position-observer>
 </div>
-<section class=toc>
-<h2>Table Of Contents</h2>
-<nav id=TableOfContents>
-<ul>
-<li><a href=#快速开始>快速开始</a>
-<ul>
-<li><a href=#create-your-first-file-and-push-it-to-the-remote-repo>Create your first file and push it to the remote repo</a></li>
-</ul>
-</li>
-<li><a href=#more>More</a></li>
-<li><a href=#creating-release>Creating Release</a>
-<ul>
-<li><a href=#tag>Tag</a></li>
-</ul>
-</li>
-<li><a href=#pull-request-pr>Pull Request (PR)</a></li>
-<li><a href=#参考>参考</a></li>
-</ul>
-</nav>
-</section>
 <div class=taxonomy>
-<span id=post-categories>
-<ul>
-<li><strong>Categories</strong>:&nbsp;</li>
-<li class=category-item><a href=https://qtopie.github.io/categories/development>development</a> </li>
-</ul>
-</span>
 <span id=post-tags>
 <ul>
 <li><strong>Tags</strong>:&nbsp;</li>
-<li class=tag-item><a href=https://qtopie.github.io/tags/git><em>git</em></a> </li>
+<li class=tag-item><a href=https://qtopie.github.io/tags/vim><em>vim</em></a> </li>
+<li class=tag-item><a href=https://qtopie.github.io/tags/vim-plugin><em>vim-plugin</em></a> </li>
 </ul>
 </span>
 </div>
 <article class=text-content>
-<p><strong>WIP</strong></p>
-<h2 id=快速开始>快速开始</h2>
+<h2 id=vimscript>Vimscript</h2>
+<p><a href=https://en.wikipedia.org/wiki/Vim_(text_editor)#Vim_script>https://en.wikipedia.org/wiki/Vim_(text_editor)#Vim_script</a></p>
+<p><a href=https://vimhelp.org/usr_41.txt.html#write-plugin><code>:h write-plugin</code></a></p>
+<h2 id=channel>channel</h2>
 <ul>
-<li>设置个人信息</li>
+<li>demoserver.py</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash>git config --global user.name &lt;YOUR-NAME&gt;
-git config --global user.email &lt;YOUR-EMAIL&gt;
-
-<span style=color:#09f;font-style:italic># 查看个人配置</span>
-git config --list
-</code></pre></div><ul>
-<li>将默认主仓库设置为<code>main</code> <a href=https://github.com/github/renaming>BLM运动</a></li>
-</ul>
-<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash>git config --global init.defaultbranch main
-</code></pre></div><ul>
-<li>初始化仓库</li>
-</ul>
-<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash>mkdir /path/to/your/project
-<span style=color:#366>cd</span> /path/to/your/project
-git init  			<span style=color:#09f;font-style:italic># initialize an empty git repo</span>
-git remote add origin git@repo-url.git
-</code></pre></div><h3 id=create-your-first-file-and-push-it-to-the-remote-repo>Create your first file and push it to the remote repo</h3>
-<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=color:#366>echo</span> <span style=color:#c30>&#34;qtopie.rw&#34;</span> &gt;&gt; contributors.txt
-git add contributors.txt
-git commit -m <span style=color:#c30>&#39;Initial commit with contributors&#39;</span>
-git push -u origin master
-</code></pre></div><p>总结下常用操作</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash>git init
-git add .
-git commit -m <span style=color:#c30>&#34;first commit&#34;</span>
-git remote add origin remote &lt;repo-url&gt;
-git branch --set-upstream-to origin/main main
-git remote -v
-git push 
-</code></pre></div><h2 id=more>More</h2>
+<p><a href=https://github.com/vim/vim/blob/master/runtime/tools/demoserver.py>https://github.com/vim/vim/blob/master/runtime/tools/demoserver.py</a></p>
+<p><a href=https://github.com/vim/vim/blob/master/src/testdir/test_channel_pipe.py>https://github.com/vim/vim/blob/master/src/testdir/test_channel_pipe.py</a></p>
+<p><a href=https://vimhelp.org/channel.txt.html#job-start>https://vimhelp.org/channel.txt.html#job-start</a></p>
+<h2 id=目录结构>目录结构</h2>
+<p>~/.vim/colors/ define color schemes used by Vim.
+~/.vim/plugin/ are run each time Vim starts.
+~/.vim/ftdetect/ are run each time Vim starts. Files here are used for filetype detection derived by autocommands.
+~/.vim/ftplugin/ are run when the buffer filetype is set; Vim looks in this directory for a subdirectory name matching the buffer filetype (for example: ~/.vim/ftplugin/java/ for .java files.
+~/.vim/indent/ are loaded similarly to ~/.vim/ftplugin but placed in this directory to specify their use case of indent definition.
+~/.vim/after are run everytime Vim starts but after the files in ~/.vim/plugin/ are loaded.
+~/.vim/autoload/ can be used to delay the loading of plugin code until necessary.
+~/.vim/doc define documentation to be loaded using the :help command.</p>
+<p><code>:h runtimepath</code></p>
+<h2 id=代码规范>代码规范</h2>
+<p><a href=https://google.github.io/styleguide/vimscriptguide.xml>Google Vimscript Style Guide</a></p>
+<h2 id=参考>参考</h2>
 <ul>
-<li>change a commit message: <code>git commit --amend</code></li>
+<li><a href=http://andrewscala.com/vimscript/>vimscript</a></li>
+<li><a href=https://learnvimscriptthehardway.stevelosh.com/>Learn Vimscript the Hard Way</a></li>
 </ul>
-<h2 id=creating-release>Creating Release</h2>
-<h3 id=tag>Tag</h3>
-<ul>
-<li>list Tag</li>
-</ul>
-<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash>git tag
-</code></pre></div><ul>
-<li>create new tag</li>
-</ul>
-<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash>git tag v0.2
-</code></pre></div><ul>
-<li>push new tag</li>
-</ul>
-<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash>git push origin v0.2
-</code></pre></div><ul>
-<li>delete a tag</li>
-</ul>
-<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash>git tag -d v0.21
-</code></pre></div><h2 id=pull-request-pr>Pull Request (PR)</h2>
-<p><strong>Steps</strong></p>
-<ul>
-<li>
-<p>Fork the original repo</p>
-</li>
-<li>
-<p>Clone your forked repo and create a feature branch with the head refs from original repo (named <code>upstream</code>)</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash>git fetch upstream
-<span style=color:#09f;font-style:italic># Name of feature branch is BRANCH-FOO</span>
-git checkout -b upstream/BRANCH-FOO
-</code></pre></div></li>
-<li>
-<p>Supposed you have made modifications locally, and added codes and committed the changes, now push it to your forked repo and create a new branch if it does not exist.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash>git push -u origin BRANCH-FOO
-</code></pre></div></li>
-<li>
-<p>Then creating a merge request to original repo, and ask someone to review the codes, either accept or close the merge request.</p>
-</li>
-</ul>
-<p>Note that you can use <code>git stash</code> if you want to switch branches without bringing changes into another branch.</p>
-<ul>
-<li>代理设置</li>
-</ul>
-<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=color:#09f;font-style:italic># socks5</span>
-git config --global http.proxy <span style=color:#c30>&#39;socks5://127.0.0.1:1080&#39;</span>
-git config --global https.proxy <span style=color:#c30>&#39;socks5://127.0.0.1:1080&#39;</span>
-
-<span style=color:#09f;font-style:italic># http</span>
-git config --global http.proxy <span style=color:#c30>&#39;http://127.0.0.1:3128&#39;</span>
-git config --global https.proxy <span style=color:#c30>&#39;http://127.0.0.1:3128&#39;</span>
-</code></pre></div><h2 id=参考>参考</h2>
-<ul>
-<li><a href=https://www.atlassian.com/git/tutorials/making-a-pull-request>https://www.atlassian.com/git/tutorials/making-a-pull-request</a></li>
-<li><a href=https://www.atlassian.com/git/tutorials/comparing-workflows>https://www.atlassian.com/git/tutorials/comparing-workflows</a></li>
-<li><a href=https://nvie.com/posts/a-successful-git-branching-model/>GitFlow</a></li>
-</ul>
+<p>hello</p>
+<p>are you ok?</p>
+<p>hahahahah</p>
 </article><amp-animation id=showAnim layout=nodisplay>
 <script type=application/json>{"duration":"200ms","fill":"both","iterations":"1","direction":"alternate","animations":[{"selector":"#scrollToTopButton","keyframes":[{"opacity":"1","visibility":"visible"}]}]}</script>
 </amp-animation>
@@ -298,13 +210,13 @@ git config --global https.proxy <span style=color:#c30>&#39;http://127.0.0.1:312
 <a href=# target=_blank class="inline-block p1" aria-label="Link to AMP HTML pin trest"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="28.5" viewBox="0 0 43 51"><title>pinterest</title><path d="M8.134 18.748c0-1.6.2-3 .8-4.4.5-1.4 1.2-2.6 2.2-3.6.9-1 2-1.9 3.2-2.6 1.2-.8 2.5-1.3 3.9-1.7 1.5-.4 2.9-.5 4.4-.5 2.2.0 4.3.4 6.2 1.4 1.9.9 3.5 2.3 4.7 4.1 1.2 1.9 1.8 3.9 1.8 6.2.0 1.4-.1 2.7-.4 4-.2 1.3-.7 2.6-1.2 3.8-.6 1.2-1.3 2.3-2.2 3.2-.8.9-1.8 1.7-3.1 2.2-1.2.6-2.5.9-4 .9-1 0-1.9-.3-2.9-.7-.9-.5-1.6-1.1-2-1.9-.1.5-.3 1.4-.6 2.4-.3 1.1-.4 1.7-.5 2-.1.3-.2.9-.4 1.6-.3.7-.4 1.2-.6 1.5-.1.3-.4.7-.7 1.3-.3.6-.6 1.2-1 1.7-.3.5-.7 1.1-1.3 1.8l-.3.1-.2-.2c-.2-2.2-.3-3.6-.3-4 0-1.3.2-2.8.5-4.4.3-1.7.8-3.7 1.4-6.2s1-3.9 1.1-4.4c-.5-.9-.7-2.1-.7-3.6.0-1.2.4-2.3 1.1-3.3.8-1.1 1.7-1.6 2.8-1.6.9.0 1.6.3 2.1.9.4.6.7 1.3.7 2.2s-.3 2.3-1 4.1c-.6 1.8-.9 3.1-.9 4s.3 1.6 1 2.2c.6.6 1.4.9 2.3.9.8.0 1.5-.2 2.2-.5.6-.4 1.2-.9 1.6-1.5.5-.6.9-1.3 1.2-2 .4-.8.6-1.5.8-2.4.2-.8.4-1.6.5-2.4.1-.7.1-1.4.1-2.1.0-2.5-.8-4.4-2.3-5.8-1.6-1.4-3.6-2.1-6.1-2.1-2.8.0-5.2 1-7.1 2.8-1.9 1.9-2.9 4.2-2.9 7.1.0.6.1 1.2.3 1.8.2.6.4 1.1.6 1.4.2.3.4.7.5 1 .2.3.3.5.3.6.0.4-.1.9-.3 1.6-.2.6-.5 1-.8 1 0 0-.1-.1-.4-.1-.7-.2-1.3-.6-1.9-1.2-.5-.6-1-1.3-1.3-2-.3-.8-.5-1.6-.7-2.4-.2-.7-.2-1.5-.2-2.2z" class="ampstart-icon ampstart-icon-pinterest"/></svg></a>
 </li>
 <li>
-<a href="mailto:?subject=I wanted you to see this site&body=Check out this site https%3a%2f%2fqtopie.github.io%2fposts%2fdevelopment%2fgit-quick-guide%2f." title="Share by Email" target=_blank class="inline-block p1" aria-label="Link to AMP HTML E-mail"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="18.4" viewBox="0 0 56 43"><title>email</title><path d="M10.5 6.4C9.1 6.4 8 7.5 8 8.9v21.3c0 1.3 1.1 2.5 2.5 2.5h34.9c1.4.0 2.5-1.2 2.5-2.5V8.9c0-1.4-1.1-2.5-2.5-2.5H10.5zm2.1 2.5h30.7L27.9 22.3 12.6 8.9zm-2.1 1.4 16.6 14.6c.5.4 1.2.4 1.7.0l16.6-14.6v19.9H10.5V10.3z" class="ampstart-icon ampstart-icon-email"/></svg></a>
+<a href="mailto:?subject=I wanted you to see this site&body=Check out this site https%3a%2f%2fqtopie.github.io%2fposts%2fvim%2fwrite-a-vim-plugin%2f." title="Share by Email" target=_blank class="inline-block p1" aria-label="Link to AMP HTML E-mail"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="18.4" viewBox="0 0 56 43"><title>email</title><path d="M10.5 6.4C9.1 6.4 8 7.5 8 8.9v21.3c0 1.3 1.1 2.5 2.5 2.5h34.9c1.4.0 2.5-1.2 2.5-2.5V8.9c0-1.4-1.1-2.5-2.5-2.5H10.5zm2.1 2.5h30.7L27.9 22.3 12.6 8.9zm-2.1 1.4 16.6 14.6c.5.4 1.2.4 1.7.0l16.6-14.6v19.9H10.5V10.3z" class="ampstart-icon ampstart-icon-email"/></svg></a>
 </li>
 </ul>
 <nav class=ampstart-footer-nav>
 <ul class="list-reset flex flex-wrap mb3">
 <li class=px1><a class="text-decoration-none ampstart-label" href=https://qtopie.github.io/about/>About</a></li>
-<li class=px1><a class="text-decoration-none ampstart-label" href="mailto:qtopie.rw@gmail.com?subject=disscussion on this page&body=Check out this post https%3a%2f%2fqtopie.github.io%2fposts%2fdevelopment%2fgit-quick-guide%2f.">Contact</a></li>
+<li class=px1><a class="text-decoration-none ampstart-label" href="mailto:qtopie.rw@gmail.com?subject=disscussion on this page&body=Check out this post https%3a%2f%2fqtopie.github.io%2fposts%2fvim%2fwrite-a-vim-plugin%2f.">Contact</a></li>
 <li class=px1><a class="text-decoration-none ampstart-label" href=https://qtopie.github.io/terms/>Terms</a></li>
 </ul>
 </nav>

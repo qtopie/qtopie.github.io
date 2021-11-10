@@ -5,4 +5,4 @@
 export GOROOT=/usr/local/go export PATH=$PATH:$GOROOT/bin 使用技巧 goproxy 使用goproxy加速go module下载(解决go get无法下载来自golang.org等站点的依赖包的问题）
 参考https://goproxy.io/zh/, 在go 1.13+下，我们可以使用以下命令在go env设置goproxy
 go env -w GO111MODULE=on go env -w GOPROXY=https://goproxy.io,direct # 设置不走 proxy 的私有仓库，多个用逗号相隔（可选） go env -w GOPRIVATE=*.corp.example.com 同样推荐使用国内站点https://goproxy.cn/
-文档查看 使用go doc命令可以在终端快速查阅文档 go doc net.Listen | vim -</description></item></channel></rss>
+文档查看 使用go doc命令可以在终端快速查阅文档, 例如 go doc net.Listen | vim - 参考</description></item></channel></rss>
