@@ -4,6 +4,6 @@
 /etc/Caddyfile
 { # debug servers { protocol { experimental_http3 } } } www.mwine.science { # redirect www.mwine.science to mwine.science redir https://mwine.science{uri} } mwine.science { root * /var/www/html/mwine.science file_server encode zstd gzip } 配置参考 https://caddyserver.com/docs/caddyfile/options
 这里我将域名mwine.science和www.mwine.science绑定到了同一台服务器，并将www.mwine.science重定向到mwine.science
-然后创建一个文件/var/www/html/mwine.science/public/index.html
+然后创建一个文件/var/www/html/mwine.science/index.html
 &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html&amp;gt; &amp;lt;body&amp;gt; Hello World ! &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt; 最后运行起来就可以了 （这里我加上了watch选项，启用根据文件配置动态更新）
 /usr/local/bin/caddy run -config /etc/Caddyfile -watch 或者我们可以将它写成systemd服务，输入命令编辑sudo systemctl edit --force --full caddy.</description></item></channel></rss>
