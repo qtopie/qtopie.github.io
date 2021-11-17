@@ -35,7 +35,7 @@ package main import ( &amp;#34;time&amp;#34; &amp;#34;gobot.io/x/gobot&amp;#34; 
 以下是草稿版本代码
 secret.go package main var ( // 配置相关信息,这里我填写的是假的啦 serverID = 123456 appSecret = &amp;#34;Q2aQr9323QE233r2&amp;#34; hashCode = &amp;#34;zXqV22222222222222222222222222222222225bL&amp;#34; ) serverID可以在compute菜单控制面板下查看，或查看浏览器url里的参数。
 appSecret和hashCode访问https://app.cloudcone.com/user/api创建即可。
-main.go /* * cloudcone api https://api.cloudcone.com/ */ package main import ( &amp;#34;context&amp;#34; &amp;#34;encoding/json&amp;#34; &amp;#34;errors&amp;#34; &amp;#34;fmt&amp;#34; &amp;#34;io/ioutil&amp;#34; &amp;#34;log&amp;#34; &amp;#34;net/http&amp;#34; &amp;#34;os&amp;#34; &amp;#34;sync&amp;#34; &amp;#34;time&amp;#34; &amp;#34;github.com/robfig/cron&amp;#34; ) // CloudconeResponse represents the API Response type CloudconeResponse struct { Status int Message string Data interface{} `json:&amp;#34;_data&amp;#34;` } const ( baseAPIURL = &amp;#34;https://api.</description></item><item><title>Yarn</title><link>https://qtopie.github.io/posts/web/yarn.zh/</link><pubDate>Sat, 20 Jun 2020 22:44:03 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/web/yarn.zh/</guid><description>Yarn是Facebook、Google等主导开发的新的Javascript包管理器。（相对于npm)
+main.go /* * cloudcone api https://api.cloudcone.com/ */ package main import ( &amp;#34;context&amp;#34; &amp;#34;encoding/json&amp;#34; &amp;#34;errors&amp;#34; &amp;#34;fmt&amp;#34; &amp;#34;io/ioutil&amp;#34; &amp;#34;log&amp;#34; &amp;#34;net/http&amp;#34; &amp;#34;os&amp;#34; &amp;#34;sync&amp;#34; &amp;#34;time&amp;#34; &amp;#34;github.com/robfig/cron&amp;#34; ) // CloudconeResponse represents the API Response type CloudconeResponse struct { Status int Message string Data interface{} `json:&amp;#34;_data&amp;#34;` } const ( baseAPIURL = &amp;#34;https://api.</description></item><item><title>Yarn</title><link>https://qtopie.github.io/posts/web/yarn/</link><pubDate>Sat, 20 Jun 2020 22:44:03 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/web/yarn/</guid><description>Yarn是Facebook、Google等主导开发的新的Javascript包管理器。（相对于npm)
 安装 sudo npm install -g yarn --registry https://registry.npm.taobao.org 这里使用了taobao npm镜像
 配置Angular Cli使用yarn 使用ng命令设置全局使用yarn
 ng config -g cli.packageManager yarn 使用 添加依赖
@@ -50,12 +50,12 @@ WSL 提供一个名为 Bash.exe 的应用程序，启动该应用程序后，会
 具体介绍可以参考微软提供的WSL文档。
 WSL1 并没有一个完整的Linux内核，系统调用使用Windows Pico进程使用驱动翻译成NT API模拟成Linux内核的。具体架构可以参考WSL的系统架构。
 最近更新的WSL引入了微软提供的一个完整的Linux内核，增强了文件IO性能及完整的系统调用兼容性。这也意味着我们可以通过WSL2以Linux中的方式运行docker和kubernetes （这里我们使用microk8s)。
+Windows下可直接使用WSL里Linux命令， 如netstat -an | wsl grep :8443, 在pipe后面加上wsl即可
 适用场景 版本要求
 Win10 Version 2004, Build 19041 + （目前需要加入每月更新的预览版计划）
 Hyper V支持 （需要Windows支持，同时需要设备支持硬件虚拟化)
 优点 与Windows命令窗口和文件系统无缝集成，开发起来十分方便。在当前窗口输入bash就可以进入Linux下对应的目录；同时还有VSCode Remote WSL的支持。
-安装配置 启用Hyper V和Linux子系统
-Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux -NoRestart Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform 然后重启</description></item><item><title>Helm</title><link>https://qtopie.github.io/posts/cloud-native/k8s/helm.zh/</link><pubDate>Wed, 20 May 2020 21:15:34 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/cloud-native/k8s/helm.zh/</guid><description>这里我们使用helm 3.0+版本, 可以直接使用kube-server api, 不需要在集群安装tiler
+安装配置 启用Hyper V和Linux子系统</description></item><item><title>Helm</title><link>https://qtopie.github.io/posts/cloud-native/k8s/helm.zh/</link><pubDate>Wed, 20 May 2020 21:15:34 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/cloud-native/k8s/helm.zh/</guid><description>这里我们使用helm 3.0+版本, 可以直接使用kube-server api, 不需要在集群安装tiler
 安装 sudo snap install helm --classic Chartmuseum repo: https://github.com/helm/chartmuseum
 本地安装
 curl -LO https://s3.amazonaws.com/chartmuseum/release/latest/bin/linux/amd64/chartmuseum chmod +x chartmuseum sudo mv chartmuseum /usr/bin/ sudo mkdir /opt/chart &amp;amp;&amp;amp; sudo chown $USER /opt/chart ./chartmuseum --storage=local --storage-local-rootdir=/opt/chart 然后打开http://localhost:8080就可以看到欢迎界面
@@ -75,16 +75,15 @@ jxl 安装 从这个链接下载安装jxl工具 https://github.com/jenkins-x-lab
 创建仓库 jxl boot create 这里我们选择minikube，和microk8s应该差不多。(注意不要选择更新本地jx版本，至少这篇文章写的时候这一步还有bug)
 按提示输入完毕就会初始化仓库，把jenkins bot的token记录下来, 我偷懒直接用这个访问github 私有仓库（开起了两步验证，直接使用密码没有办法直接推代码到github)
 这里还有一步是设置secret, 建议使用Hashicorp Vault存储secrets信息。 安装启动 拉取远程配置启动 jxl boot run --git-url https://github.com/artificerpi/environment-jx-dev --git-user artificerpi --git-token &amp;lt;TOKEN&amp;gt; 本地启动 （只是一个测试） cd environment-jx-dev &amp;amp;&amp;amp; jxl boot run -b 目前无法运行起来，报错/secrets/jx-boot/secrets.yaml无法找到，可能是个bug
-error: failed to load secrets YAML /secrets/jx-boot/secrets.</description></item><item><title>Caddy与http3</title><link>https://qtopie.github.io/posts/web/caddy.zh/</link><pubDate>Wed, 22 Apr 2020 00:03:52 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/web/caddy.zh/</guid><description>Caddy 简单介绍 Caddy是现代化的web代理服务器，使用Go语言编写，不直接依赖系统底层库。 另外，它很好地支持了https (也最先支持了http3), 而且它使用了现代化流行且安全的配置，几乎不需要额外配置。
+error: failed to load secrets YAML /secrets/jx-boot/secrets.</description></item><item><title>Caddy与http3</title><link>https://qtopie.github.io/posts/web/caddy/</link><pubDate>Wed, 22 Apr 2020 00:03:52 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/web/caddy/</guid><description>Caddy 简单介绍 Caddy是现代化的web代理服务器，使用Go语言编写，不直接依赖系统底层库。 另外，它很好地支持了https (也最先支持了http3), 而且它使用了现代化流行且安全的配置，几乎不需要额外配置。
 安装使用 我们可以去官网下载2.0版本 https://caddyserver.com/ 我们只需要拿到二进制文件即可。
 下载后放到/usr/local/bin/caddy, 然后编辑Caddyfile
 /etc/Caddyfile
-{ experimental_http3 } www.mwine.science { # redirect www.mwine.science to mwine.science redir https://mwine.science{uri} } mwine.science { root * /var/www/html/mwine.science/public file_server encode zstd gzip } 这里我将域名mwine.science和www.mwine.science绑定到了同一台服务器，并将www.mwine.science重定向到mwine.science
+{ # debug servers { protocol { experimental_http3 } } } www.mwine.science { # redirect www.mwine.science to mwine.science redir https://mwine.science{uri} } mwine.science { root * /var/www/html/mwine.science file_server encode zstd gzip } 配置参考 https://caddyserver.com/docs/caddyfile/options
+这里我将域名mwine.science和www.mwine.science绑定到了同一台服务器，并将www.mwine.science重定向到mwine.science
 然后创建一个文件/var/www/html/mwine.science/public/index.html
 &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html&amp;gt; &amp;lt;body&amp;gt; Hello World ! &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt; 最后运行起来就可以了 （这里我加上了watch选项，启用根据文件配置动态更新）
-/usr/local/bin/caddy run -config /etc/Caddyfile -watch 或者我们可以将它写成systemd服务
-cat /usr/lib/systemd/system/caddy.service
-[Unit] Description=Caddy server daemon Wants=network-online.target After=network.target network-online.target multi-user.target [Service] ExecStart=/usr/local/bin/caddy run -config /etc/Caddyfile -watch Restart=on-failure RestartSec=30 TimeoutStopSec=30 [Install] WantedBy=multi-user.</description></item><item><title>Go安装</title><link>https://qtopie.github.io/posts/go/setup-go/</link><pubDate>Wed, 18 Mar 2020 22:02:05 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/go/setup-go/</guid><description>官方下载安装向导请参考这里https://golang.org/dl/
+/usr/local/bin/caddy run -config /etc/Caddyfile -watch 或者我们可以将它写成systemd服务，输入命令编辑sudo systemctl edit --force --full caddy.</description></item><item><title>Go安装</title><link>https://qtopie.github.io/posts/go/setup-go/</link><pubDate>Wed, 18 Mar 2020 22:02:05 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/go/setup-go/</guid><description>官方下载安装向导请参考这里https://golang.org/dl/
 这篇文章主要分享加速访问go依赖和资源站点的问题。
 环境 Ubuntu 19.10 x86_64 版本号 go1.14 linux/amd64 下载安装 Go安装文件可以访问国内站点 https://golang.google.cn/dl/
 解压后，移动到/usr/local/go目录，然后在/etc/profile里加入

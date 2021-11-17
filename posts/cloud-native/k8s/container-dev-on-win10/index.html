@@ -124,6 +124,7 @@ animation: none;
 <li><a href=/tags/4g-lte>4g-lte</a> (1)</li>
 <li><a href=/tags/algorithm>algorithm</a> (1)</li>
 <li><a href=/tags/android>android</a> (1)</li>
+<li><a href=/tags/caddy>caddy</a> (1)</li>
 <li><a href=/tags/cloudcone>cloudcone</a> (1)</li>
 <li><a href=/tags/css>css</a> (1)</li>
 <li><a href=/tags/eclispe>eclispe</a> (1)</li>
@@ -138,7 +139,6 @@ animation: none;
 <li><a href=/tags/mt7612u>mt7612u</a> (1)</li>
 <li><a href=/tags/other>other</a> (1)</li>
 <li><a href=/tags/root>root</a> (1)</li>
-<li><a href=/tags/vim>vim</a> (1)</li>
 </ul>
 </div>
 </aside>
@@ -192,6 +192,9 @@ animation: none;
 <p>具体介绍可以参考微软提供的<a href=https://docs.microsoft.com/zh-cn/windows/wsl/>WSL文档</a>。</p>
 <p>WSL1 并没有一个完整的Linux内核，系统调用使用Windows Pico进程使用驱动翻译成NT API模拟成Linux内核的。具体架构可以参考<a href=https://docs.microsoft.com/zh-cn/archive/blogs/wsl/windows-subsystem-for-linux-overview>WSL的系统架构</a>。</p>
 <p>最近<a href=https://docs.microsoft.com/en-us/windows/wsl/compare-versions>更新的WSL</a>引入了微软提供的一个完整的Linux内核，增强了文件IO性能及完整的系统调用兼容性。这也意味着我们可以通过WSL2以Linux中的方式运行docker和kubernetes （这里我们使用microk8s)。</p>
+<blockquote>
+<p>Windows下可直接使用WSL里Linux命令， 如<code>netstat -an | wsl grep :8443</code>, 在pipe后面加上wsl即可</p>
+</blockquote>
 <h3 id=适用场景>适用场景</h3>
 <ul>
 <li>
@@ -218,6 +221,7 @@ Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform
 <div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=color:#09f;font-style:italic># Create the starting script for SystemD</span>
 vi /etc/profile.d/00-wsl2-systemd.sh
 <span style=color:#033>SYSTEMD_PID</span><span style=color:#555>=</span><span style=color:#069;font-weight:700>$(</span>ps -ef | grep <span style=color:#c30>&#39;/lib/systemd/systemd --system-unit=basic.target$&#39;</span> | grep -v unshare | awk <span style=color:#c30>&#39;{print $2}&#39;</span><span style=color:#069;font-weight:700>)</span>
+<span style=color:#033>PWD</span><span style=color:#555>=</span><span style=color:#069;font-weight:700>$(</span><span style=color:#366>pwd</span><span style=color:#069;font-weight:700>)</span>
 
 <span style=color:#069;font-weight:700>if</span> <span style=color:#555>[</span> -z <span style=color:#c30>&#34;</span><span style=color:#033>$SYSTEMD_PID</span><span style=color:#c30>&#34;</span> <span style=color:#555>]</span>; <span style=color:#069;font-weight:700>then</span>
    sudo /usr/bin/daemonize /usr/bin/unshare --fork --pid --mount-proc /lib/systemd/systemd --system-unit<span style=color:#555>=</span>basic.target
@@ -225,7 +229,7 @@ vi /etc/profile.d/00-wsl2-systemd.sh
 <span style=color:#069;font-weight:700>fi</span>
 
 <span style=color:#069;font-weight:700>if</span> <span style=color:#555>[</span> -n <span style=color:#c30>&#34;</span><span style=color:#033>$SYSTEMD_PID</span><span style=color:#c30>&#34;</span> <span style=color:#555>]</span> <span style=color:#555>&amp;&amp;</span> <span style=color:#555>[</span> <span style=color:#c30>&#34;</span><span style=color:#033>$SYSTEMD_PID</span><span style=color:#c30>&#34;</span> !<span style=color:#555>=</span> <span style=color:#c30>&#34;1&#34;</span> <span style=color:#555>]</span>; <span style=color:#069;font-weight:700>then</span>
-    <span style=color:#366>exec</span> sudo /usr/bin/nsenter -t <span style=color:#033>$SYSTEMD_PID</span> -a su - <span style=color:#033>$LOGNAME</span>
+    <span style=color:#366>exec</span> sudo /usr/bin/nsenter --wd<span style=color:#555>=</span><span style=color:#c30>&#34;</span><span style=color:#033>$PWD</span><span style=color:#c30>&#34;</span> -t <span style=color:#033>$SYSTEMD_PID</span> -a su <span style=color:#033>$LOGNAME</span>
 <span style=color:#069;font-weight:700>fi</span>
 </code></pre></div><p>然后就可以按照官方文档安装docker和用snap命令安装microk8s了。</p>
 <blockquote>

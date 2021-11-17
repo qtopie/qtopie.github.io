@@ -1,10 +1,10 @@
-<!doctype html><html amp lang=en>
+<!doctype html><html amp lang=zh>
 <head>
 <meta charset=utf-8>
 <title>
-Yarn
+Caddy与http3
 </title>
-<link rel=canonical href=https://qtopie.github.io/posts/web/yarn.zh/>
+<link rel=canonical href=https://qtopie.github.io/posts/web/caddy/>
 <meta name=viewport content="width=device-width">
 <meta name=amp-google-client-id-api content="googleanalytics">
 <link rel=apple-touch-icon sizes=180x180 href=/favicons/apple-touch-icon.png>
@@ -81,7 +81,7 @@ animation: none;
 <script async custom-element=amp-social-share src=https://cdn.ampproject.org/v0/amp-social-share-0.1.js></script>
 <script async custom-element=amp-position-observer src=https://cdn.ampproject.org/v0/amp-position-observer-0.1.js></script>
 <script async custom-element=amp-animation src=https://cdn.ampproject.org/v0/amp-animation-0.1.js></script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Yarn","image":"https://qtopie.github.io/images/article-header-background-img.webp","datePublished":"2020-06-20T22:44:03+08:00","dateModified":"2020-06-20T22:44:03+08:00","inLanguage":"en-us","isFamilyFriendly":"true","author":{"@type":"Person","name":"qtopierw","url":"https:\/\/qtopie.github.io\/about/"},"copyrightHolder":"qtopierw","copyrightYear":"2020","copyrightNotice":"Posts licensed under \u003ca href=\"https://creativecommons.org/licenses/by/4.0/legalcode\"\u003eCC BY 4.0","mainEntityOfPage":{"@type":"WebPage"},"publisher":{"@type":"Organization","name":"qtopierw","logo":{"@type":"ImageObject","url":"https:\/\/qtopie.github.io\/favicons/favicon-32x32.png"}},"description":"Yarn是Facebook、Google等主导开发的新的Javascript包管理器。（相对于npm)\n安装 sudo npm install -g yarn --registry …","keywords":[]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"Caddy与http3","image":"https://qtopie.github.io/images/article-header-background-img.webp","datePublished":"2020-04-22T00:03:52+08:00","dateModified":"2020-04-22T00:03:52+08:00","inLanguage":"zh","isFamilyFriendly":"true","author":{"@type":"Person","name":"qtopierw","url":"https:\/\/qtopie.github.io\/about/"},"copyrightHolder":"qtopierw","copyrightYear":"2020","copyrightNotice":"Posts licensed under \u003ca href=\"https://creativecommons.org/licenses/by/4.0/legalcode\"\u003eCC BY 4.0","mainEntityOfPage":{"@type":"WebPage"},"publisher":{"@type":"Organization","name":"qtopierw","logo":{"@type":"ImageObject","url":"https:\/\/qtopie.github.io\/favicons/favicon-32x32.png"}},"description":"Caddy 简单介绍 Caddy是现代化的web代理服务器，使用Go语言编写，不直接依赖系统底层库。 另外，它很好地支持了https (也最先支持了http3), 而且它使用了现代化流行且安全的配置，几乎不需要额外配置。\n安装使用 我们可以 …","keywords":["caddy"]}</script>
 </head>
 <body>
 <amp-auto-ads type=adsense data-ad-client=ca-pub-3338377104827119></amp-auto-ads>
@@ -124,6 +124,7 @@ animation: none;
 <li><a href=/tags/4g-lte>4g-lte</a> (1)</li>
 <li><a href=/tags/algorithm>algorithm</a> (1)</li>
 <li><a href=/tags/android>android</a> (1)</li>
+<li><a href=/tags/caddy>caddy</a> (1)</li>
 <li><a href=/tags/cloudcone>cloudcone</a> (1)</li>
 <li><a href=/tags/css>css</a> (1)</li>
 <li><a href=/tags/eclispe>eclispe</a> (1)</li>
@@ -138,7 +139,6 @@ animation: none;
 <li><a href=/tags/mt7612u>mt7612u</a> (1)</li>
 <li><a href=/tags/other>other</a> (1)</li>
 <li><a href=/tags/root>root</a> (1)</li>
-<li><a href=/tags/vim>vim</a> (1)</li>
 </ul>
 </div>
 </aside>
@@ -151,86 +151,77 @@ animation: none;
 </amp-position-observer>
 </div>
 <div class=taxonomy>
+<span id=post-tags>
+<ul>
+<li><strong>Tags</strong>:&nbsp;</li>
+<li class=tag-item><a href=https://qtopie.github.io/tags/caddy><em>caddy</em></a> </li>
+</ul>
+</span>
 </div>
 <article class=text-content>
-<p><a href=https://yarnpkg.com/>Yarn</a>是Facebook、Google等主导开发的新的Javascript包管理器。（相对于npm)</p>
-<h2 id=安装httpsyarnpkgcomgetting-startedinstall><a href=https://yarnpkg.com/getting-started/install>安装</a></h2>
-<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash>sudo npm install -g yarn --registry https://registry.npm.taobao.org
-</code></pre></div><p>这里使用了<a href="https://developer.aliyun.com/mirror/NPM?from=tnpm">taobao npm镜像</a></p>
-<ul>
-<li>配置Angular Cli使用yarn</li>
-</ul>
-<p>使用ng命令设置全局使用yarn</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash>ng config -g cli.packageManager yarn
-</code></pre></div><h2 id=使用>使用</h2>
-<p>添加依赖</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash>yarn add &lt;DEP_NAME&gt;
-
-<span style=color:#09f;font-style:italic># dev</span>
-yarn add -D &lt;DEP_NAME&gt;
-</code></pre></div><p>参考工具自带帮助文档</p>
-<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash>yarn --help
-</code></pre></div><h2 id=包下载缓存httpsclassicyarnpkgcomendocsclicache><a href=https://classic.yarnpkg.com/en/docs/cli/cache/>包下载缓存</a></h2>
-<p>可以通过设置环境变量<code>YARN_CACHE_FOLDER</code>来指定缓存目录</p>
-<p>Ubuntu下修改<code>~/.bashrc</code></p>
-<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=color:#366>echo</span> <span style=color:#c30>&#39;YARN_CACHE_FOLDER=$HOME/.yarn&#39;</span> &gt;&gt; ~/.bashrc
-</code></pre></div><h3 id=构建速度简单比较>构建速度简单比较</h3>
-<p>使用项目<a href=https://github.com/artificerpi/tour-of-heroes>tour-of-heroes</a>安装nodejs依赖。</p>
-<p>镜像: <a href=https://registry.npm.taobao.org>https://registry.npm.taobao.org</a></p>
-<table>
-<thead>
-<tr>
-<th>NPM (6.14.5)</th>
-<th>Yarn (1.22.4)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>real 0m26.231s</td>
-<td>real 0m14.048s</td>
-</tr>
-<tr>
-<td>user 0m31.685s</td>
-<td>user 0m15.415s</td>
-</tr>
-<tr>
-<td>sys 0m5.247s</td>
-<td>sys 0m5.666s</td>
-</tr>
-</tbody>
-</table>
-<p>可以看到yarn明显要快一些。
-类似于npm安装依赖时创建<code>package-lock.json</code>文件，yarn也会创建<code>yarn.lock</code>文件锁定依赖。（这时安装已有包换registry会不生效)</p>
-<h3 id=包下载镜像>包下载镜像</h3>
-<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=color:#033>SASS_BINARY_SITE</span><span style=color:#555>=</span>https://npm.taobao.org/mirrors/node-sass/
-<span style=color:#033>PHANTOMJS_CDNURL</span><span style=color:#555>=</span>https://npm.taobao.org/mirrors/phantomjs/
-<span style=color:#033>ELECTRON_MIRROR</span><span style=color:#555>=</span>https://npm.taobao.org/mirrors/electron/
-</code></pre></div><blockquote>
-<p>可以自己搭建一个镜像，解决内网防火墙内无法下载包的问题</p>
-</blockquote>
-<ul>
-<li>使用Caddy反向代理taobao镜像</li>
-</ul>
-<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-Caddyfile data-lang=Caddyfile><span style=color:#030;font-weight:700>:8080</span> {<span style=color:#09f;font-style:italic>
-</span><span style=color:#09f;font-style:italic>  # https://npm.taobao.org/mirrors/node-sass/
-</span><span style=color:#09f;font-style:italic></span>  <span style=color:#069;font-weight:700>route</span> <span style=color:#99f>/dist/node-sass/*</span> {
-    <span style=color:#069;font-weight:700>reverse_proxy</span> <span style=color:#c30>https://cdn.npm.taobao.org</span> {
-      <span style=color:#069;font-weight:700>header_up</span> <span style=color:#c30>Host</span> <span style=color:#c30;font-weight:700>{http.reverse_proxy.upstream.hostport}</span>
+<h2 id=caddy-简单介绍>Caddy 简单介绍</h2>
+<p>Caddy是现代化的web代理服务器，使用Go语言编写，不直接依赖系统底层库。
+另外，它很好地支持了https (也最先支持了http3), 而且它使用了现代化流行且安全的配置，几乎不需要额外配置。</p>
+<h2 id=安装使用>安装使用</h2>
+<p>我们可以去官网下载2.0版本 <a href=https://caddyserver.com/>https://caddyserver.com/</a> 我们只需要拿到二进制文件即可。</p>
+<p>下载后放到<code>/usr/local/bin/caddy</code>, 然后编辑Caddyfile</p>
+<p>/etc/Caddyfile</p>
+<pre tabindex=0><code>{
+  # debug
+  servers {
+    protocol {
+	    experimental_http3
     }
-  }<span style=color:#09f;font-style:italic>
-</span><span style=color:#09f;font-style:italic>
-</span><span style=color:#09f;font-style:italic>  # https://npm.taobao.org/mirrors/phantomjs/
-</span><span style=color:#09f;font-style:italic></span>  <span style=color:#069;font-weight:700>reverse_proxy</span> <span style=color:#99f>/dist/phantomjs/*</span> <span style=color:#c30>https://cdn.npm.taobao.org</span> {
-    <span style=color:#069;font-weight:700>header_up</span> <span style=color:#c30>Host</span> <span style=color:#c30;font-weight:700>{http.reverse_proxy.upstream.hostport}</span>
   }
 }
-</code></pre></div><ul>
-<li>node-sass 离线安装</li>
+
+www.mwine.science {
+    # redirect www.mwine.science to mwine.science
+	redir https://mwine.science{uri}
+}
+
+mwine.science {
+	root * /var/www/html/mwine.science
+	file_server
+	encode zstd gzip 
+}
+</code></pre><blockquote>
+<p>配置参考 <a href=https://caddyserver.com/docs/caddyfile/options>https://caddyserver.com/docs/caddyfile/options</a></p>
+</blockquote>
+<p>这里我将域名<code>mwine.science</code>和<code>www.mwine.science</code>绑定到了同一台服务器，并将<code>www.mwine.science</code>重定向到<code>mwine.science</code></p>
+<p>然后创建一个文件<code>/var/www/html/mwine.science/public/index.html</code></p>
+<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-html data-lang=html><span style=color:#099>&lt;!DOCTYPE html&gt;</span>
+&lt;<span style=color:#309;font-weight:700>html</span>&gt;
+&lt;<span style=color:#309;font-weight:700>body</span>&gt;
+  Hello World !
+&lt;/<span style=color:#309;font-weight:700>body</span>&gt;
+&lt;/<span style=color:#309;font-weight:700>html</span>&gt;
+
+</code></pre></div><p>最后运行起来就可以了 （这里我加上了watch选项，启用根据文件配置动态更新）</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash>/usr/local/bin/caddy run -config /etc/Caddyfile -watch
+</code></pre></div><p>或者我们可以将它写成systemd服务，输入命令编辑<code>sudo systemctl edit --force --full caddy.service</code></p>
+<p>粘贴以下内容</p>
+<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=color:#555>[</span>Unit<span style=color:#555>]</span>                                                                          
+<span style=color:#033>Description</span><span style=color:#555>=</span>Caddy server daemon                                          
+<span style=color:#033>Wants</span><span style=color:#555>=</span>network-online.target
+<span style=color:#033>After</span><span style=color:#555>=</span>network.target network-online.target multi-user.target 
+                                                                                 
+<span style=color:#555>[</span>Service<span style=color:#555>]</span>                                                                        
+<span style=color:#033>ExecStart</span><span style=color:#555>=</span>/usr/local/bin/caddy run -config /etc/Caddyfile -watch
+<span style=color:#033>Restart</span><span style=color:#555>=</span>on-failure                                                               
+<span style=color:#033>RestartSec</span><span style=color:#555>=</span><span style=color:#f60>30</span>
+<span style=color:#033>TimeoutStopSec</span><span style=color:#555>=</span><span style=color:#f60>30</span>
+                                                                                 
+<span style=color:#555>[</span>Install<span style=color:#555>]</span>                                                                        
+<span style=color:#033>WantedBy</span><span style=color:#555>=</span>multi-user.target
+</code></pre></div><p>酱紫就完成了, 然后你就有了一个http3的网站！</p>
+<p>这意味着什么？ （薅羊毛）</p>
+<ul>
+<li>http3内置了tls1.3, 所以网站的安全性大大提升了，而且更快（具体可以了解http3协议）</li>
+<li>DNS解析可以使用Cloudflare去实现，毕竟他家宣称有最快的<code>1.1.1.1</code> DNS服务器 (当然还有其他功能呢）</li>
+<li>然后TLS证书哪里来的？ 实际上caddy自动帮你完成了<code>Let's Encrypt</code>证书服务的接入和更新，可以通过日志查看。</li>
 </ul>
-<p>下载地址 <a href=https://github.com/sass/node-sass/releases>https://github.com/sass/node-sass/releases</a></p>
-<div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash><span style=color:#09f;font-style:italic># 设置环境变量，注意使用绝对路径</span>
-<span style=color:#366>export</span> <span style=color:#033>SASS_BINARY_PATH</span><span style=color:#555>=</span>&lt;absolute_path_to_file&gt;
-</code></pre></div>
+<p>而它们都是免费的！</p>
 </article><amp-animation id=showAnim layout=nodisplay>
 <script type=application/json>{"duration":"200ms","fill":"both","iterations":"1","direction":"alternate","animations":[{"selector":"#scrollToTopButton","keyframes":[{"opacity":"1","visibility":"visible"}]}]}</script>
 </amp-animation>
@@ -251,13 +242,13 @@ yarn add -D &lt;DEP_NAME&gt;
 <a href=# target=_blank class="inline-block p1" aria-label="Link to AMP HTML pin trest"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="28.5" viewBox="0 0 43 51"><title>pinterest</title><path d="M8.134 18.748c0-1.6.2-3 .8-4.4.5-1.4 1.2-2.6 2.2-3.6.9-1 2-1.9 3.2-2.6 1.2-.8 2.5-1.3 3.9-1.7 1.5-.4 2.9-.5 4.4-.5 2.2.0 4.3.4 6.2 1.4 1.9.9 3.5 2.3 4.7 4.1 1.2 1.9 1.8 3.9 1.8 6.2.0 1.4-.1 2.7-.4 4-.2 1.3-.7 2.6-1.2 3.8-.6 1.2-1.3 2.3-2.2 3.2-.8.9-1.8 1.7-3.1 2.2-1.2.6-2.5.9-4 .9-1 0-1.9-.3-2.9-.7-.9-.5-1.6-1.1-2-1.9-.1.5-.3 1.4-.6 2.4-.3 1.1-.4 1.7-.5 2-.1.3-.2.9-.4 1.6-.3.7-.4 1.2-.6 1.5-.1.3-.4.7-.7 1.3-.3.6-.6 1.2-1 1.7-.3.5-.7 1.1-1.3 1.8l-.3.1-.2-.2c-.2-2.2-.3-3.6-.3-4 0-1.3.2-2.8.5-4.4.3-1.7.8-3.7 1.4-6.2s1-3.9 1.1-4.4c-.5-.9-.7-2.1-.7-3.6.0-1.2.4-2.3 1.1-3.3.8-1.1 1.7-1.6 2.8-1.6.9.0 1.6.3 2.1.9.4.6.7 1.3.7 2.2s-.3 2.3-1 4.1c-.6 1.8-.9 3.1-.9 4s.3 1.6 1 2.2c.6.6 1.4.9 2.3.9.8.0 1.5-.2 2.2-.5.6-.4 1.2-.9 1.6-1.5.5-.6.9-1.3 1.2-2 .4-.8.6-1.5.8-2.4.2-.8.4-1.6.5-2.4.1-.7.1-1.4.1-2.1.0-2.5-.8-4.4-2.3-5.8-1.6-1.4-3.6-2.1-6.1-2.1-2.8.0-5.2 1-7.1 2.8-1.9 1.9-2.9 4.2-2.9 7.1.0.6.1 1.2.3 1.8.2.6.4 1.1.6 1.4.2.3.4.7.5 1 .2.3.3.5.3.6.0.4-.1.9-.3 1.6-.2.6-.5 1-.8 1 0 0-.1-.1-.4-.1-.7-.2-1.3-.6-1.9-1.2-.5-.6-1-1.3-1.3-2-.3-.8-.5-1.6-.7-2.4-.2-.7-.2-1.5-.2-2.2z" class="ampstart-icon ampstart-icon-pinterest"/></svg></a>
 </li>
 <li>
-<a href="mailto:?subject=I wanted you to see this site&body=Check out this site https%3a%2f%2fqtopie.github.io%2fposts%2fweb%2fyarn.zh%2f." title="Share by Email" target=_blank class="inline-block p1" aria-label="Link to AMP HTML E-mail"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="18.4" viewBox="0 0 56 43"><title>email</title><path d="M10.5 6.4C9.1 6.4 8 7.5 8 8.9v21.3c0 1.3 1.1 2.5 2.5 2.5h34.9c1.4.0 2.5-1.2 2.5-2.5V8.9c0-1.4-1.1-2.5-2.5-2.5H10.5zm2.1 2.5h30.7L27.9 22.3 12.6 8.9zm-2.1 1.4 16.6 14.6c.5.4 1.2.4 1.7.0l16.6-14.6v19.9H10.5V10.3z" class="ampstart-icon ampstart-icon-email"/></svg></a>
+<a href="mailto:?subject=I wanted you to see this site&body=Check out this site https%3a%2f%2fqtopie.github.io%2fposts%2fweb%2fcaddy%2f." title="Share by Email" target=_blank class="inline-block p1" aria-label="Link to AMP HTML E-mail"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="18.4" viewBox="0 0 56 43"><title>email</title><path d="M10.5 6.4C9.1 6.4 8 7.5 8 8.9v21.3c0 1.3 1.1 2.5 2.5 2.5h34.9c1.4.0 2.5-1.2 2.5-2.5V8.9c0-1.4-1.1-2.5-2.5-2.5H10.5zm2.1 2.5h30.7L27.9 22.3 12.6 8.9zm-2.1 1.4 16.6 14.6c.5.4 1.2.4 1.7.0l16.6-14.6v19.9H10.5V10.3z" class="ampstart-icon ampstart-icon-email"/></svg></a>
 </li>
 </ul>
 <nav class=ampstart-footer-nav>
 <ul class="list-reset flex flex-wrap mb3">
 <li class=px1><a class="text-decoration-none ampstart-label" href=https://qtopie.github.io/about/>About</a></li>
-<li class=px1><a class="text-decoration-none ampstart-label" href="mailto:qtopie.rw@gmail.com?subject=disscussion on this page&body=Check out this post https%3a%2f%2fqtopie.github.io%2fposts%2fweb%2fyarn.zh%2f.">Contact</a></li>
+<li class=px1><a class="text-decoration-none ampstart-label" href="mailto:qtopie.rw@gmail.com?subject=disscussion on this page&body=Check out this post https%3a%2f%2fqtopie.github.io%2fposts%2fweb%2fcaddy%2f.">Contact</a></li>
 <li class=px1><a class="text-decoration-none ampstart-label" href=https://qtopie.github.io/terms/>Terms</a></li>
 </ul>
 </nav>
