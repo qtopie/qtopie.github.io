@@ -81,7 +81,7 @@ animation: none;
 <script async custom-element=amp-social-share src=https://cdn.ampproject.org/v0/amp-social-share-0.1.js></script>
 <script async custom-element=amp-position-observer src=https://cdn.ampproject.org/v0/amp-position-observer-0.1.js></script>
 <script async custom-element=amp-animation src=https://cdn.ampproject.org/v0/amp-animation-0.1.js></script>
-<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"My notes on Raspberry Pi","image":"https://qtopie.github.io/images/article-header-background-img.webp","datePublished":"2017-10-29T16:40:22+08:00","dateModified":"2017-10-29T16:40:22+08:00","inLanguage":"en-us","isFamilyFriendly":"true","author":{"@type":"Person","name":"qtopierw","url":"https:\/\/qtopie.github.io\/about/"},"copyrightHolder":"qtopierw","copyrightYear":"2017","copyrightNotice":"Posts licensed under \u003ca href=\"https://creativecommons.org/licenses/by/4.0/legalcode\"\u003eCC BY 4.0","mainEntityOfPage":{"@type":"WebPage"},"publisher":{"@type":"Organization","name":"qtopierw","logo":{"@type":"ImageObject","url":"https:\/\/qtopie.github.io\/favicons/favicon-32x32.png"}},"description":"Tricks Connect to your headless Raspberry Pi Enable ssh after flashing a raw image into your raspberry pi. Simply create …","keywords":[]}</script>
+<script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"My notes on Raspberry Pi","image":"https://qtopie.github.io/images/article-header-background-img.webp","datePublished":"2017-10-29T16:40:22+08:00","dateModified":"2017-10-29T16:40:22+08:00","inLanguage":"en-us","isFamilyFriendly":"true","author":{"@type":"Person","name":"qtopierw","url":"https:\/\/qtopie.github.io\/about/"},"copyrightHolder":"qtopierw","copyrightYear":"2017","copyrightNotice":"Posts licensed under \u003ca href=\"https://creativecommons.org/licenses/by/4.0/legalcode\"\u003eCC BY 4.0","mainEntityOfPage":{"@type":"WebPage"},"publisher":{"@type":"Organization","name":"qtopierw","logo":{"@type":"ImageObject","url":"https:\/\/qtopie.github.io\/favicons/favicon-32x32.png"}},"description":"Headless setup (no external monitor or keyboard) Networking  Auto connect to wifi  create an wpa_supplicant.conf file in …","keywords":[]}</script>
 </head>
 <body>
 <amp-auto-ads type=adsense data-ad-client=ca-pub-3338377104827119></amp-auto-ads>
@@ -153,27 +153,43 @@ animation: none;
 <div class=taxonomy>
 </div>
 <article class=text-content>
-<h1 id=tricks>Tricks</h1>
-<h2 id=connect-to-your-headless-raspberry-pi>Connect to your headless Raspberry Pi</h2>
-<h3 id=enable-ssh-after-flashing-a-raw-image-into-your-raspberry-pi>Enable ssh after flashing a raw image into your raspberry pi.</h3>
+<h2 id=headless-setup-no-external-monitor-or-keyboard>Headless setup (no external monitor or keyboard)</h2>
+<h2 id=networking>Networking</h2>
+<ul>
+<li>Auto connect to wifi</li>
+</ul>
+<p>create an <code>wpa_supplicant.conf</code> file in boot partition</p>
+<pre tabindex=0><code class=language-conf data-lang=conf>country=us
+update_config=1
+ctrl_interface=/var/run/wpa_supplicant
+
+network={
+ scan_ssid=1
+ ssid=&quot;Your-SSID&quot;
+ psk=&quot;replace-with-your-password&quot;
+ priority=100
+}
+</code></pre><ul>
+<li>Connect to WIFI with CLI</li>
+</ul>
+<p>Refer to <a href=https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md>https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md</a></p>
+<h3 id=enable-ssh>Enable SSH</h3>
 <p>Simply create an empty <code>ssh</code> file in the root directory of boot partition.</p>
 <p>Refer to <a href=https://www.raspberrypi.org/documentation/remote-access/ssh/>https://www.raspberrypi.org/documentation/remote-access/ssh/</a></p>
-<h3 id=get-ip-of-pi-in-lan-network-with-your-laptop>Get IP of pi in lan network with your laptop</h3>
+<h3 id=get-ip-of-your-pi>Get IP of your pi</h3>
+<h4 id=with-computer>With Computer</h4>
 <div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2><code class=language-bash data-lang=bash>sudo nmap -sP 192.168.21.*
 
 <span style=color:#09f;font-style:italic># results </span>
 MAC Address: B8:27:EB:40:A9:D7 <span style=color:#555>(</span>Raspberry Pi Foundation<span style=color:#555>)</span>
 Nmap scan report <span style=color:#069;font-weight:700>for</span> 192.168.31.158
-</code></pre></div><h2 id=connect-to-your-raspberry-pi-with-an-android-device>Connect to your raspberry pi with an Android device.</h2>
+</code></pre></div><h4 id=with-android-phone>With Android Phone</h4>
 <ul>
-<li>Install connectBot</li>
+<li>Install connectBot or other terminal app</li>
 <li>Share the network of your android device with usb network;</li>
 <li>Enter local mode, use <code>ip neighbor</code> command to get the ip address of your raspberrypi</li>
-<li>now you can ssh to your raspberry pi with this ip.</li>
 </ul>
-<h2 id=network>Network</h2>
-<h3 id=connect-to-wifi-with-cli>Connect to WIFI with CLI</h3>
-<p>Refer to <a href=https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md>https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md</a></p>
+<p>Now you can ssh to your raspberry pi with this ip.</p>
 <h2 id=compiling-kernel-manually>Compiling kernel manually</h2>
 <p>Refer to <a href=https://www.raspberrypi.org/documentation/linux/kernel/building.md>https://www.raspberrypi.org/documentation/linux/kernel/building.md</a></p>
 <p>Note that you may need to change /dev/sdbX with /dev/mmcblk0pN</p>
