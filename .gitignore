@@ -1,3 +1,4 @@
 public/
 .firebase/
 *.lock
+.vscode/
