@@ -1,14 +1,37 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>android on Blog | qtopierw</title><link>https://qtopie.github.io/tags/android/</link><description>Recent content in android on Blog | qtopierw</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>qtopie.rw@gmail.com (qtopierw)</managingEditor><webMaster>qtopie.rw@gmail.com (qtopierw)</webMaster><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Sun, 04 Nov 2018 20:29:38 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/android/index.xml" rel="self" type="application/rss+xml"/><item><title>怎样安全地Root你的安卓手机</title><link>https://qtopie.github.io/posts/diy/root-your-android-phone/</link><pubDate>Sun, 04 Nov 2018 20:29:38 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/diy/root-your-android-phone/</guid><description>出于各种原因，我们可能会对自己手机上的安卓系统并不满意，而Root是我们DIY自己的安卓机的一把钥匙。
-注意手机Root后并不一定安全，本文仅仅说的是用安全（较为透明公开）的方式自己root你的手机。
-但安全永远是相对的，如果你对手机ROOT后的安全性有较大顾虑，请不要进行该操作。
-对ROOT后的设备，也请远离流氓软件和恶意网站，尽可能使用可信度高的应用与服务。
-预先准备 MagiskManager Twrp APK文件从谷歌商店下载 sdk与fastboot工具 win linux mac 准备一台PC和数据线，能使用开发者模式调试安卓手机 解锁你的手机 打开开发者模式 打开设置 -&amp;gt; 关于手机 -&amp;gt; 软件信息 -&amp;gt; 内部版本号 -&amp;gt; 一直点它
-启用OEM解锁 进入开发者选项，勾选允许OEM解锁。 注意OEM解锁会清空手机数据，如果要进行下去请备份号手机数据。
-另外，解锁后，部分手机开机启动后会有一个源自安卓系统的安全警告画面，若不喜欢也建议不要继续。
-准备Magisk文件 在Magisk的Github发布页面下载apk程序进行安装，按照应用提示，下载最新的Magisk文件
-OEM 解锁 将adb和fastboot加入环境变量
-对windows用户而言，解压缩platform-tools_rx.x.x-windows.zip文件，进入解压缩后的文件夹，根目录后下会显示有adb.exe和fastboot.exe等文件。 然后将光标移到文件夹空白处，同时按下Shift键和鼠标右键，点击弹出来的菜单选项，打开命令窗口（后续操作需要在此进行，请不要关闭）。
-检查能PC检测到连入的手机
-adb kill-server &amp;amp;&amp;amp; adb start-server adb devices 重启手机进入download模式
-adb reboot download 解锁bootloader
-fastboot oem unlock fastboot flashing unlock 刷入twrp到Recovery 在download模式中刷入recovery</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Android on Blog | qtopierw</title><link>https://qtopie.github.io/tags/android/</link><description>Recent content in Android on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><managingEditor>qtopie.rw@gmail.com (qtopierw)</managingEditor><webMaster>qtopie.rw@gmail.com (qtopierw)</webMaster><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Sun, 04 Nov 2018 20:29:38 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/android/index.xml" rel="self" type="application/rss+xml"/><item><title>怎样安全地Root你的安卓手机</title><link>https://qtopie.github.io/posts/diy/root-your-android-phone/</link><pubDate>Sun, 04 Nov 2018 20:29:38 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/diy/root-your-android-phone/</guid><description>&lt;p>出于各种原因，我们可能会对自己手机上的安卓系统并不满意，而Root是我们DIY自己的安卓机的一把钥匙。&lt;/p>
+&lt;p>注意手机Root后并不一定安全，本文仅仅说的是用安全（较为透明公开）的方式自己root你的手机。&lt;/p>
+&lt;p>但安全永远是相对的，如果你对手机ROOT后的安全性有较大顾虑，请不要进行该操作。&lt;/p>
+&lt;p>对ROOT后的设备，也请远离流氓软件和恶意网站，尽可能使用可信度高的应用与服务。&lt;/p>
+&lt;h2 id="预先准备">预先准备&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/topjohnwu/Magisk/releases">MagiskManager&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://twrp.me/">Twrp&lt;/a> &lt;a href="https://play.google.com/store/apps/details?id=me.twrp.twrpapp">APK文件从谷歌商店下载&lt;/a>&lt;/li>
+&lt;li>sdk与fastboot工具 &lt;a href="https://dl.google.com/android/repository/platform-tools-latest-windows.zip">win&lt;/a> &lt;a href="https://dl.google.com/android/repository/platform-tools-latest-linux.zip">linux&lt;/a> &lt;a href="https://dl.google.com/android/repository/platform-tools-latest-darwin.zip">mac&lt;/a>&lt;/li>
+&lt;li>准备一台PC和数据线，能使用开发者模式调试安卓手机&lt;/li>
+&lt;/ul>
+&lt;h2 id="解锁你的手机">解锁你的手机&lt;/h2>
+&lt;ul>
+&lt;li>打开开发者模式&lt;/li>
+&lt;/ul>
+&lt;p>打开设置 -&amp;gt; 关于手机 -&amp;gt; 软件信息 -&amp;gt; 内部版本号 -&amp;gt; 一直点它&lt;/p>
+&lt;ul>
+&lt;li>启用OEM解锁&lt;/li>
+&lt;/ul>
+&lt;p>进入开发者选项，勾选允许OEM解锁。 注意OEM解锁会清空手机数据，如果要进行下去请备份号手机数据。&lt;/p>
+&lt;p>另外，解锁后，部分手机开机启动后会有一个源自安卓系统的安全警告画面，若不喜欢也建议不要继续。&lt;/p>
+&lt;h2 id="准备magisk文件">准备Magisk文件&lt;/h2>
+&lt;p>在Magisk的Github发布页面下载apk程序进行安装，按照应用提示，下载最新的Magisk文件&lt;/p>
+&lt;h2 id="oem-解锁">OEM 解锁&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>将adb和fastboot加入环境变量&lt;/p>
+&lt;p>对windows用户而言，解压缩&lt;code>platform-tools_rx.x.x-windows.zip&lt;/code>文件，进入解压缩后的文件夹，根目录后下会显示有&lt;code>adb.exe&lt;/code>和&lt;code>fastboot.exe&lt;/code>等文件。
+然后将光标移到文件夹空白处，同时按下Shift键和鼠标右键，点击弹出来的菜单选项，打开命令窗口（后续操作需要在此进行，请不要关闭）。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>检查能PC检测到连入的手机&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>adb kill-server &lt;span style="color:#555">&amp;amp;&amp;amp;&lt;/span> adb start-server
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>adb devices
+&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item></channel></rss>

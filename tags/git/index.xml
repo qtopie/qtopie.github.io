@@ -1,2 +1,22 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>git on Blog | qtopierw</title><link>https://qtopie.github.io/tags/git/</link><description>Recent content in git on Blog | qtopierw</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>qtopie.rw@gmail.com (qtopierw)</managingEditor><webMaster>qtopie.rw@gmail.com (qtopierw)</webMaster><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Wed, 05 Jul 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/tags/git/index.xml" rel="self" type="application/rss+xml"/><item><title>Git快速手册</title><link>https://qtopie.github.io/posts/development/git-quick-guide/</link><pubDate>Wed, 05 Jul 2017 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/development/git-quick-guide/</guid><description>WIP
-快速开始 设置个人信息 git config --global user.name &amp;lt;YOUR-NAME&amp;gt; git config --global user.email &amp;lt;YOUR-EMAIL&amp;gt; # 查看个人配置 git config --list 将默认主仓库设置为main BLM运动 git config --global init.defaultbranch main 初始化仓库 mkdir /path/to/your/project cd /path/to/your/project git init # initialize an empty git repo git remote add origin git@repo-url.git Create your first file and push it to the remote repo echo &amp;#34;qtopie.rw&amp;#34; &amp;gt;&amp;gt; contributors.txt git add contributors.txt git commit -m &amp;#39;Initial commit with contributors&amp;#39; git push -u origin master 总结下常用操作</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Git on Blog | qtopierw</title><link>https://qtopie.github.io/tags/git/</link><description>Recent content in Git on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><managingEditor>qtopie.rw@gmail.com (qtopierw)</managingEditor><webMaster>qtopie.rw@gmail.com (qtopierw)</webMaster><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Wed, 05 Jul 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/tags/git/index.xml" rel="self" type="application/rss+xml"/><item><title>Git快速手册</title><link>https://qtopie.github.io/notes/development/git-quick-guide/</link><pubDate>Wed, 05 Jul 2017 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/development/git-quick-guide/</guid><description>&lt;p>&lt;strong>WIP&lt;/strong>&lt;/p>
+&lt;h2 id="快速开始">快速开始&lt;/h2>
+&lt;ul>
+&lt;li>设置个人信息&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git config --global user.name &amp;lt;YOUR-NAME&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git config --global user.email &amp;lt;YOUR-EMAIL&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># 查看个人配置&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git config --list
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>将默认主仓库设置为&lt;code>main&lt;/code> &lt;a href="https://github.com/github/renaming">BLM运动&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git config --global init.defaultbranch main
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>初始化仓库&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mkdir /path/to/your/project
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#366">cd&lt;/span> /path/to/your/project
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git init 			&lt;span style="color:#09f;font-style:italic"># initialize an empty git repo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git remote add origin git@repo-url.git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item></channel></rss>

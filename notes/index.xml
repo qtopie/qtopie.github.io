@@ -1,0 +1,859 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Notes on Blog | qtopierw</title><link>https://qtopie.github.io/notes/</link><description>Recent content in Notes on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><managingEditor>qtopie.rw@gmail.com (qtopierw)</managingEditor><webMaster>qtopie.rw@gmail.com (qtopierw)</webMaster><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Tue, 28 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/notes/index.xml" rel="self" type="application/rss+xml"/><item><title>树莓派和HomeAssistant</title><link>https://qtopie.github.io/notes/iot/rpi/homeassistant/</link><pubDate>Tue, 28 Sep 2021 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/iot/rpi/homeassistant/</guid><description>&lt;h2 id="目标">目标&lt;/h2>
+&lt;p>使用开源软件和米家智能硬件，实现简单的智能家居系统&lt;/p>
+&lt;blockquote>
+&lt;p>采用米家智能硬件的原因是, 小米智能家居做的比较早（也许是起初推广的更好，刚接触智能家居的时候就用的小米）,
+另外一点是小米智能硬件确实物美价廉，在国外也很受欢迎，Github上也有很多相关项目.&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;div class="fixed-height-container">
+ &lt;amp-img class="contain" alt="" src="https://qtopie.github.io/notes/iot/rpi/homeassistant.assets/img-2021-10-16-12-14-50.png" 
+ layout="fill" 
+ lightbox>
+ &lt;/amp-img>
+&lt;/div>&lt;/p>
+&lt;h2 id="环境和设备">环境和设备&lt;/h2>
+&lt;ul>
+&lt;li>RaspberryPi 4 (4GB版本)&lt;/li>
+&lt;li>Ubuntu arm64 树莓派版本&lt;/li>
+&lt;/ul>
+&lt;h3 id="安装homeassistant">安装HomeAssistant&lt;/h3>
+&lt;blockquote>
+&lt;p>这里使用Ubuntu而不是Raspbian的一个原因是Ubuntu官方软件包更新更快（比如raspbian当前为3.7而hass需要3.8+版本)，
+且自己笔记本一直用Ubuntu，统一发行版使用起来更加方便&lt;/p>
+&lt;/blockquote>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo pip3 install homeassistant
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果下载很慢，可以考虑使用pypi镜像源&lt;/p>
+&lt;p>编辑&lt;code>/etc/pip.conf&lt;/code> (使用豆瓣源）&lt;/p>
+&lt;pre tabindex="0">&lt;code>[global]
+index-url = https://pypi.douban.com/simple
+&lt;/code>&lt;/pr</description></item><item><title>vim-go</title><link>https://qtopie.github.io/notes/vim/vim-go/</link><pubDate>Sat, 28 Aug 2021 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/vim/vim-go/</guid><description>&lt;p>&lt;em>将VIM打造为Go开发利器&lt;/em>&lt;/p>
+&lt;p>平时一般使用VSCode编程，最近为了更好地刷leetcode，又换回了vim。发现笔记本小屏幕
+使用vscode zen-mode沉浸式看代码很爽以后，也喜欢上了使用vim写代码, 快捷键方便、稳
+定高效、功能纯粹（极简主义）。研究了一番后，发现其可行性，便整理了一下。&lt;/p>
+&lt;h2 id="主要插件">主要插件&lt;/h2>
+&lt;p>完整列表&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-vim" data-lang="vim">&lt;span style="display:flex;">&lt;span>Plug &lt;span style="color:#c30">&amp;#39;scrooloose/nerdtree&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Plug &lt;span style="color:#c30">&amp;#39;preservim/tagbar&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Plug &lt;span style="color:#c30">&amp;#39;vim-airline/vim-airline&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Plug &lt;span style="color:#c30">&amp;#39;vim-airline/vim-airline-themes&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Plug &lt;span style="color:#c30">&amp;#39;fatih/vim-go&amp;#39;&lt;/span>, { &lt;span style="color:#c30">&amp;#39;do&amp;#39;&lt;/span>: &lt;span style="color:#c30">&amp;#39;:GoUpdateBinaries&amp;#39;&lt;/span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Plug &lt;span style="color:#c30">&amp;#39;Shougo/ddc.vim&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Plug &lt;span style="color:#c30">&amp;#39;vim-denops/denops.vim&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Plug &lt;span style="color:#c30">&amp;#39;buoto/gotests-vim&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Plug &lt;span style="color:#c30">&amp;#39;SirVer/ultisnips&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Plug &lt;span style="color:#c30">&amp;#39;honza/vim-snippets&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="vim-gohttpsgithubcomfatihvim-go">&lt;a href="https://github.com/fatih/vim-go">vim-go&lt;/a>&lt;/h3>
+&lt;p>&lt;code>vim-go&lt;/code>是目前主要且流行的针对go的vim插件，视频[Hacking with Andrew and Brad: an HTTP/2 client]
+(&lt;a href="https://www.youtube.com/watch?v=yG-UaBJXZ80">https://www.youtube.com/watch?v=yG-UaBJXZ80&lt;/a>)中两位大佬用vim 进行pair编程使用了就是该插件。&lt;/p></description></item><item><title>排列组合</title><link>https://qtopie.github.io/notes/algorithms/combination-permutation/</link><pubDate>Thu, 15 Jul 2021 22:02:05 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/algorithms/combination-permutation/</guid><description>&lt;p>&lt;strong>This is a testing post for writing markdown with latex&lt;/strong>&lt;/p>
+&lt;h1 id="排列组合">排列组合&lt;/h1>
+&lt;h2 id="独立重复性事件">独立重复性事件&lt;/h2>
+&lt;h2 id="-nm">&lt;code>\: n^m&lt;/code>&lt;/h2>
+&lt;p>从n个不同物品中取一个物品，每次取一个，取m次的结果（考虑先后顺序）&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-math" data-lang="math">n^m = n \times n \times n ... \times n \tag 1
+&lt;/code>&lt;/pre>&lt;h2 id="-a_nn">&lt;code>\: A_n^n&lt;/code>&lt;/h2>
+&lt;p>从n个不同物品中取一个物品，每次取一个, &lt;strong>不放回&lt;/strong>，取n次(完）的结果.（考虑先后顺序）&lt;/p>
+&lt;p>第一次有n个结果， 依据独立性事件，第二次有n-1中结果，以此类推&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-math" data-lang="math">A_n^n = n(n-1)(n-2)... \times 2 \times 1 \tag 2
+&lt;/code>&lt;/pre>&lt;h3 id="-a_nm">&lt;code>\: A_n^m&lt;/code>&lt;/h3>
+&lt;p>从n个不同物品中取一个物品，每次取一个, &lt;strong>不放回&lt;/strong>，取m次(可能不取）的结果.（考虑先后顺序），未取到的结果有&lt;code>\: A_{n-m}^{n-m}&lt;/code>种&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-math" data-lang="math">A_n^m = \frac{A_n^n}{A_{n-m}^{n-m}} = n(n-1)(n-2)...(n-m+1) \tag 3
+&lt;/code>&lt;/pr</description></item><item><title>Linux Command-line Handbook</title><link>https://qtopie.github.io/notes/linux/linux-cmd-handbook/</link><pubDate>Sun, 02 May 2021 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/linux/linux-cmd-handbook/</guid><description>&lt;p>&lt;em>Based on my experiences on Ubuntu&lt;/em>&lt;/p>
+&lt;h2 id="software-package-management">Software Package Management&lt;/h2>
+&lt;ul>
+&lt;li>set up proxy for apt&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo bash -c &lt;span style="color:#c30">&amp;#39;cat &amp;lt;&amp;lt; EOF &amp;gt; /etc/apt/apt.conf.d/proxy.conf
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#c30">Acquire {
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#c30"> HTTP::proxy &amp;#34;http://127.0.0.1:8118&amp;#34;;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#c30"> HTTPS::proxy &amp;#34;http://127.0.0.1:8118&amp;#34;;
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#c30">}
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#c30">EOF&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="system-monitoring">System Monitoring&lt;/h2>
+&lt;h3 id="basic-info">Basic Info&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># memory&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>free -m 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># get process id&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ps aux | grep &amp;lt;pattern&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># view startup command of process&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ps flww -p &lt;span style="color:#555">[&lt;/span>PID&lt;span style="color:#555">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># check cpu usage&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>top -p &amp;lt;pid&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># list by threads&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>top -H -p &amp;lt;pid&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># disk&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>df -h
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># networks&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iostat
+&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title>VIM安装笔记</title><link>https://qtopie.github.io/notes/vim/build-and-install-latest-vim/</link><pubDate>Tue, 06 Apr 2021 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/vim/build-and-install-latest-vim/</guid><description>&lt;h1 id="vim-安装">VIM 安装&lt;/h1>
+&lt;p>由于debian发行版维护的vim包还未升级到最新版本，但govim需要较高版本的vim。故选择手动编译安装。这里直接选择最新版本8.2， 对应于最新的git tag版本， &lt;a href="https://www.vim.org/vim-8.2-released.php">8.2版本有一些实用性的功能&lt;/a>。&lt;/p>
+&lt;p>&lt;strong>环境&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Ubuntu 19.10&lt;/li>
+&lt;li>5.3.0-24-generic x84_64&lt;/li>
+&lt;/ul>
+&lt;h2 id="构建及安装过程">构建及安装过程&lt;/h2>
+&lt;ol>
+&lt;li>安装构建工具链&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo apt update &lt;span style="color:#555">&amp;amp;&amp;amp;&lt;/span> sudo apt install -y git build-essential
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
+&lt;li>拉取源码&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git clone https://github.com/vim/vim.git
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># 切换到你想构建的tag&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git checkout v8.2.0369
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>开始构建&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">#cd src&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">#make distclean # if you build Vim before&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./configure --with-features&lt;span style="color:#555">=&lt;/span>huge &lt;span style="color:#c30;font-weight:bold">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#c30;font-weight:bold">&lt;/span> --enable-multibyte &lt;span style="color:#c30;font-weight:bold">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#c30;font-weight:bold">&lt;/span> --enable-python3interp&lt;span style="color:#555">=&lt;/span>yes &lt;span style="color:#c30;font-weight:bold">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#c30;font-weight:bold">&lt;/span> --with-python3-config-dir&lt;span style="color:#555">=&lt;/span>&lt;span style="color:#069;font-weight:bold">$(&lt;/span>python3-config --configdir&lt;span style="color:#069;font-weight:bold">)&lt;/span> &lt;span style="color:#c30;font-weight:bold">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#c30;font-weight:bold">&lt;/span> --enable-perlinterp&lt;span style="color:#555">=&lt;/span>yes &lt;span style="color:#c30;font-weight:bold">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#c30;font-weight:bold">&lt;/span> --enable-luainterp&lt;span style="color:#555">=&lt;/span>yes &lt;span style="color:#c30;font-weight:bold">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#c30;font-weight:bold">&lt;/span> --enable-cscope &lt;span style="color:#c30;font-weight:bold">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#c30;font-weight:bold">&lt;/span> --prefix&lt;span style="color:#555">=&lt;/span>/usr/local
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>make &lt;span style="color:#033">VIMRUNTIMEDIR&lt;/span>&lt;span style="color:#555">=&lt;/span>/usr/local/share/vim/vim82
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt install checkinstall
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo checkinstall
+&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title>自动控制风扇温度</title><link>https://qtopie.github.io/notes/iot/rpi/fan-and-tempature/</link><pubDate>Mon, 03 Aug 2020 23:33:04 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/iot/rpi/fan-and-tempature/</guid><description>&lt;p>最近购买了一个树莓派4B 4G内存版，替换了旧的Model3 (强迫症犯了，就为了换成type c口，但因为电源适配问题还是老老实实地又买了官方电源适配器）&lt;/p>
+&lt;p>树莓派4B相对3B性能提高不少，但是随之功耗和发热也上去了。 于是给它整了个金属外壳&lt;/p>
+&lt;p>&lt;div class="fixed-height-container">
+ &lt;amp-img class="contain" alt="" src="https://qtopie.github.io/notes/iot/rpi/fan-and-tempature.assets/img-20211029155258.webp" 
+ layout="fill" 
+ lightbox>
+ &lt;/amp-img>
+&lt;/div>&lt;/p>
+&lt;p>但是依旧烫得厉害，可能是我手动overlock了。开风扇的话，又有点吵，晚上影响睡觉。&lt;/p>
+&lt;p>所以又买了一些排线和一个电磁继电器来实现自动通过风扇控制CPU等芯片温度。&lt;/p>
+&lt;h2 id="主要原理">主要原理&lt;/h2>
+&lt;ul>
+&lt;li>获取GPU温度&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a href="https://www.nicm.dev/vcgencmd/">vcgencmd&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>vcgencmd measure_temp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>获取CPU温度&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#033">cpu&lt;/span>&lt;span style="color:#555">=&lt;/span>&lt;span style="color:#069;font-weight:bold">$(&lt;/span>&amp;lt;/sys/class/thermal/thermal_zone0/temp&lt;span style="color:#069;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#366">echo&lt;/span> &lt;span style="color:#c30">&amp;#34;&lt;/span>&lt;span style="color:#069;font-weight:bold">$((&lt;/span>cpu/1000&lt;span style="color:#069;font-weight:bold">))&lt;/span>&lt;span style="color:#c30"> c&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title>Yarn</title><link>https://qtopie.github.io/notes/web/yarn/</link><pubDate>Sat, 20 Jun 2020 22:44:03 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/web/yarn/</guid><description>&lt;p>&lt;a href="https://yarnpkg.com/">Yarn&lt;/a>是Facebook、Google等主导开发的新的Javascript包管理器。（相对于npm)&lt;/p>
+&lt;h2 id="安装httpsyarnpkgcomgetting-startedinstall">&lt;a href="https://yarnpkg.com/getting-started/install">安装&lt;/a>&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo npm install -g yarn --registry https://registry.npm.taobao.org
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这里使用了&lt;a href="https://developer.aliyun.com/mirror/NPM?from=tnpm">taobao npm镜像&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>配置Angular Cli使用yarn&lt;/li>
+&lt;/ul>
+&lt;p>使用ng命令设置全局使用yarn&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>ng config -g cli.packageManager yarn
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="使用">使用&lt;/h2>
+&lt;p>添加依赖&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>yarn add &amp;lt;DEP_NAME&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># dev&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yarn add -D &amp;lt;DEP_NAME&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>参考工具自带帮助文档&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>yarn --help
+&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title>win10下的应用容器化开发</title><link>https://qtopie.github.io/notes/cloud-native/k8s/container-dev-on-win10/</link><pubDate>Mon, 01 Jun 2020 21:15:34 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/cloud-native/k8s/container-dev-on-win10/</guid><description>&lt;p>相对于Linux对容器化开发的良好支持（或者说各个容器化平台和工具对Linux更好的支持），在Windows下对应用进行容器化改造时的本地构建和测试并不是很直接和方便。这里记录一下，针对不同场景的相关实践经验。&lt;/p>
+&lt;h2 id="目标">目标&lt;/h2>
+&lt;ul>
+&lt;li>支持docker构建&lt;/li>
+&lt;li>支持kubernetes容器服务编排&lt;/li>
+&lt;/ul>
+&lt;h2 id="wsl">WSL&lt;/h2>
+&lt;p>WSL (Windows subsystem for Linux) 是win10新增的一个功能，可以直接在Windows上运行本机Linux命令工具。之前大家一般会去用Cgwin (或MingGw)工具。&lt;/p>
+&lt;p>WSL 提供一个名为 Bash.exe 的应用程序，启动该应用程序后，会打开一个运行 Bash shell 的 Windows 控制台。 使用 Bash 可以运行命令行 Linux 工具和应用。&lt;/p>
+&lt;p>具体介绍可以参考微软提供的&lt;a href="https://docs.microsoft.com/zh-cn/windows/wsl/">WSL文档&lt;/a>。&lt;/p>
+&lt;p>WSL1 并没有一个完整的Linux内核，系统调用使用Windows Pico进程使用驱动翻译成NT API模拟成Linux内核的。具体架构可以参考&lt;a href="https://docs.microsoft.com/zh-cn/archive/blogs/wsl/windows-subsystem-for-linux-overview">WSL的系统架构&lt;/a>。&lt;/p>
+&lt;p>最近&lt;a href="https://docs.microsoft.com/en-us/windows/wsl/compare-versions">更新的WSL&lt;/a>引入了微软提供的一个完整的Linux内核，增强了文件IO性能及完整的系统调用兼容性。这也意味着我们可以通过WSL2以Linux中的方式运行docker和kubernetes （这里我们使用microk8s)。&lt;/p>
+&lt;blockquote>
+&lt;p>Windows下可直接使用WSL里Linux命令， 如&lt;code>netstat -an | wsl grep :8443&lt;/code>, 在pipe后面加上wsl即可&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="适用场景">适用场景&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;p>版本要求&lt;/p>
+&lt;p>Win10 Version 2004, Build 19041 + （目前需要加入每月更新的预览版计划）&lt;/p></description></item><item><title>Helm</title><link>https://qtopie.github.io/notes/cloud-native/k8s/helm.zh/</link><pubDate>Wed, 20 May 2020 21:15:34 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/cloud-native/k8s/helm.zh/</guid><description>&lt;p>这里我们使用helm 3.0+版本, 可以直接使用kube-server api, 不需要在集群安装tiler&lt;/p>
+&lt;h2 id="安装">安装&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo snap install helm --classic
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="chartmuseum">Chartmuseum&lt;/h2>
+&lt;p>repo: &lt;a href="https://github.com/helm/chartmuseum">https://github.com/helm/chartmuseum&lt;/a>&lt;/p>
+&lt;p>本地安装&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>curl -LO https://s3.amazonaws.com/chartmuseum/release/latest/bin/linux/amd64/chartmuseum
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>chmod +x chartmuseum
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo mv chartmuseum /usr/bin/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo mkdir /opt/chart &lt;span style="color:#555">&amp;amp;&amp;amp;&lt;/span> sudo chown &lt;span style="color:#033">$USER&lt;/span> /opt/chart
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./chartmuseum --storage&lt;span style="color:#555">=&lt;/span>&lt;span style="color:#366">local&lt;/span> --storage-local-rootdir&lt;span style="color:#555">=&lt;/span>/opt/chart
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后打开http://localhost:8080就可以看到欢迎界面&lt;/p>
+&lt;h2 id="创建和使用chart">创建和使用chart&lt;/h2>
+&lt;p>我们以创建一个nginx chart为例。&lt;/p></description></item><item><title>JenkinsX</title><link>https://qtopie.github.io/notes/cloud-native/cicd/jenkinsx.zh/</link><pubDate>Tue, 28 Apr 2020 21:15:34 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/cloud-native/cicd/jenkinsx.zh/</guid><description>&lt;p>Jenkins是一款比较经典而优秀的流水线构建工具（平台）。&lt;/p>
+&lt;p>为了实现现代化构建方式Run configuration as Code, Jenkins引入了Blue Ocean插件。通过该插件，我们可以使用声明式语法来编写Jenkinsfile，定义流水线构建步骤 &lt;a href="https://www.jenkins.io/zh/doc/book/pipeline/jenkinsfile/">https://www.jenkins.io/zh/doc/book/pipeline/jenkinsfile/&lt;/a>&lt;/p>
+&lt;p>然而在云原生和DevOps越来越流行的今天，传统的Jenkins模式只能满足CI的构建需求。于是Jenkins团队又引入了&lt;a href="https://jenkins-x.io/">JenkinsX&lt;/a>, 来实现一个现代化的GitOps平台。&lt;/p>
+&lt;p>&lt;em>emm, 不吹水了，其实我只想做个笔记,记录下折腾了很久后的才明白的安装步骤&lt;/em>&lt;/p>
+&lt;h2 id="目标">目标&lt;/h2>
+&lt;p>使用jx工具在microk8s上安装jenkinsx&lt;/p>
+&lt;p>&lt;a href="https://jenkins-x.io/docs/labs/">https://jenkins-x.io/docs/labs/&lt;/a>&lt;/p>
+&lt;p>因为不喜欢使用helm2在k8s上安装tiller, 所以这里直接跳级到helm3。不过这里就要使用JenkinsX Lab里的jxl工具了。(目前是实验性版本的jenkinsx，意味着要花更多时间折腾)&lt;/p>
+&lt;p>结果：暂时弃坑了，直接上tektoncd&lt;/p>
+&lt;h2 id="安装">安装&lt;/h2>
+&lt;p>jxl本身使用gitops方式维护JenkinsX集群&lt;/p>
+&lt;h3 id="jxl-安装">jxl 安装&lt;/h3>
+&lt;p>从这个链接下载安装jxl工具 &lt;a href="https://github.com/jenkins-x-labs/jxl/releases">https://github.com/jenkins-x-labs/jxl/releases&lt;/a>&lt;/p>
+&lt;h3 id="创建仓库">创建仓库&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>jxl boot create
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这里我们选择minikube，和microk8s应该差不多。(注意不要选择更新本地jx版本，至少这篇文章写的时候这一步还有bug)&lt;/p>
+&lt;p>按提示输入完毕就会初始化仓库，把jenkins bot的token记录下来, 我偷懒直接用这个访问github 私有仓库（开起了两步验证，直接使用密码没有办法直接推代码到github)&lt;/p>
+&lt;ul>
+&lt;li>这里还有一步是设置secret, 建议使用Hashicorp Vault存储secrets信息。&lt;/li>
+&lt;/ul>
+&lt;h3 id="安装启动">安装启动&lt;/h3>
+&lt;ul>
+&lt;li>拉取远程配置启动&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>jxl boot run --git-url https://github.com/artificerpi/environment-jx-dev --git-user artificerpi --git-token &amp;lt;TOKEN&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title>Caddy与http3</title><link>https://qtopie.github.io/notes/web/caddy/</link><pubDate>Wed, 22 Apr 2020 00:03:52 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/web/caddy/</guid><description>&lt;h2 id="caddy-简单介绍">Caddy 简单介绍&lt;/h2>
+&lt;p>Caddy是现代化的web代理服务器，使用Go语言编写，不直接依赖系统底层库。
+另外，它很好地支持了https (也最先支持了http3), 而且它使用了现代化流行且安全的配置，几乎不需要额外配置。&lt;/p>
+&lt;h2 id="安装使用">安装使用&lt;/h2>
+&lt;p>我们可以去官网下载2.0版本 &lt;a href="https://caddyserver.com/">https://caddyserver.com/&lt;/a> 我们只需要拿到二进制文件即可。&lt;/p>
+&lt;p>下载后放到&lt;code>/usr/local/bin/caddy&lt;/code>, 然后编辑Caddyfile&lt;/p>
+&lt;p>/etc/Caddyfile&lt;/p>
+&lt;pre tabindex="0">&lt;code>{
+ # debug
+ servers {
+ protocol {
+	 experimental_http3
+ }
+ }
+}
+
+www.mwine.science {
+ # redirect www.mwine.science to mwine.science
+	redir https://mwine.science{uri}
+}
+
+mwine.science {
+	root * /var/www/html/mwine.science
+	file_server
+	encode zstd gzip 
+}
+&lt;/code>&lt;/pr</description></item><item><title>Go安装</title><link>https://qtopie.github.io/notes/go/setup-go/</link><pubDate>Wed, 18 Mar 2020 22:02:05 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/go/setup-go/</guid><description>&lt;p>官方下载安装向导请参考这里https://golang.org/dl/&lt;/p>
+&lt;p>这篇文章主要分享加速访问go依赖和资源站点的问题。&lt;/p>
+&lt;h2 id="环境">环境&lt;/h2>
+&lt;ul>
+&lt;li>Ubuntu 19.10 x86_64&lt;/li>
+&lt;li>版本号 go1.14 linux/amd64&lt;/li>
+&lt;/ul>
+&lt;h2 id="下载安装">下载安装&lt;/h2>
+&lt;p>Go安装文件可以访问国内站点 &lt;a href="https://golang.google.cn/dl/">https://golang.google.cn/dl/&lt;/a>&lt;/p>
+&lt;p>解压后，移动到&lt;code>/usr/local/go&lt;/code>目录，然后在&lt;code>/etc/profile&lt;/code>里加入&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#366">export&lt;/span> &lt;span style="color:#033">GOROOT&lt;/span>&lt;span style="color:#555">=&lt;/span>/usr/local/go
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#366">export&lt;/span> &lt;span style="color:#033">PATH&lt;/span>&lt;span style="color:#555">=&lt;/span>&lt;span style="color:#033">$PATH&lt;/span>:&lt;span style="color:#033">$GOROOT&lt;/span>/bin
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="使用技巧">使用技巧&lt;/h2>
+&lt;h3 id="goproxy">goproxy&lt;/h3>
+&lt;p>使用goproxy加速&lt;code>go module&lt;/code>下载(解决&lt;code>go get&lt;/code>无法下载来自golang.org等站点的依赖包的问题）&lt;/p>
+&lt;p>参考https://goproxy.io/zh/, 在go 1.13+下，我们可以使用以下命令在go env设置goproxy&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>go env -w &lt;span style="color:#033">GO111MODULE&lt;/span>&lt;span style="color:#555">=&lt;/span>on
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>go env -w &lt;span style="color:#033">GOPROXY&lt;/span>&lt;span style="color:#555">=&lt;/span>https://goproxy.io,direct
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># 设置不走 proxy 的私有仓库，多个用逗号相隔（可选）&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>go env -w &lt;span style="color:#033">GOPRIVATE&lt;/span>&lt;span style="color:#555">=&lt;/span>*.corp.example.com
+&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title>Kubernetes使用入门</title><link>https://qtopie.github.io/notes/cloud-native/k8s/k8s-get-started/</link><pubDate>Sat, 04 Jan 2020 00:03:52 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/cloud-native/k8s/k8s-get-started/</guid><description>&lt;h2 id="容器化-containerization">容器化 Containerization&lt;/h2>
+&lt;p>容器是标准化的软件单元。容器化将软件打包成标准化的单元，从而能够以此进行开发，装载和部署。简单地说，通过底层虚拟化，容器化实现应用Write once, run anywhere， 而且是快速地run anywhere，就像docker图标里被鲸鱼背着的集装箱一样。&lt;/p>
+&lt;h3 id="容器与虚拟机的对比">容器与虚拟机的对比&lt;/h3>
+&lt;p>&lt;div class="fixed-height-container">
+ &lt;amp-img class="contain" alt="container" src="https://qtopie.github.io/notes/cloud-native/k8s/https://www.docker.com/sites/default/files/d8/2018-11/docker-containerized-appliction-blue-border_2.png" 
+ layout="fill" 
+ lightbox>
+ &lt;/amp-img>
+&lt;/div>
+&lt;div class="fixed-height-container">
+ &lt;amp-img class="contain" alt="vm" src="https://qtopie.github.io/notes/cloud-native/k8s/https://www.docker.com/sites/default/files/d8/2018-11/container-vm-whatcontainer_2.png" 
+ layout="fill" 
+ lightbox>
+ &lt;/amp-img>
+&lt;/div>&lt;/p>
+&lt;p>容器实现的是操作系统层面的虚拟化，而虚拟机是实现硬件层面的虚拟化。所以对于应用来说，选择容器会更加轻量级，这意味着它将占用更少的资源，能更快的启动和停止，更灵活地分配资源等等。&lt;/p>
+&lt;p>PS: 这里并不是说容器一定总比虚拟机好，一般来说，不同的技术方案都有它适应的场景。比如我们需要模拟完整的硬件环境，虚拟机方案显然就更合适了。例如，在办公电脑上，我常常在windows笔记本上使用hyper-v安装一个ubuntu做开发，容器化方案在这里就相形见绌了。&lt;/p>
+&lt;p>很多时候，容器和虚拟机被一起使用。比如，你买了一台性能很好的高可用服务器，1TB RAM, 64 core CPU，那么为了更合理的分配和管理资源，你可能首先在这台服务器上建立数个virtualbox虚拟机，然后再在虚拟机操作系统里安装docker。&lt;/p></description></item><item><title>Make Eclipse Great Again</title><link>https://qtopie.github.io/notes/development/make-gradle-work-with-eclipse/</link><pubDate>Sat, 28 Dec 2019 18:07:28 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/development/make-gradle-work-with-eclipse/</guid><description>&lt;h1 id="eclipse--gradle">Eclipse &amp;amp; Gradle&lt;/h1>
+&lt;p>还是从那句老话开始， “工欲善其事，必先利其器”。要想熟练地完成一件事，有个好的工具往往能事半功倍。&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;em>但是很多时候，迷信教条最终会成了造轮子而造轮子的递归循环；选择合适的工具，并掌握它，解决好问题才是正确的方向。&lt;/em>&lt;/p>
+&lt;/blockquote>
+&lt;p>这里简单说说，我选择Eclispe和Gradle的原因。&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Gradle (Gradle VS Maven or Ant); 选择gradle的原因很简单，简单而清晰的语法，强大的脚本语言，快速而稳定的构建。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Eclipse (主要对比Idea, VS Code)&lt;/p>
+&lt;ul>
+&lt;li>开源及活跃而广受欢迎的社区&lt;/li>
+&lt;li>相对于Idea来说，个人使用经验上来看，在大Project上使用（源码多，项目多）更稳定, 且有偏向支持开源社区的因素，故使用Eclipse；VS Code对于小的Project来说还好，功能比Eclipse弱，查看多个文件及源码也不是很方便，大项目会使系统卡顿，但是小项目一般可以使用gradle + vim。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="开发环境">开发环境&lt;/h2>
+&lt;p>当前开发环境&lt;/p>
+&lt;ul>
+&lt;li>Ubuntu 19.10 x86_64&lt;/li>
+&lt;li>Gradle 5.6.4&lt;/li>
+&lt;li>Eclipse (Snap版本)&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>Eclipse Platform
+Version: 2019-03 (4.11)
+Build id: I20190307-0500
+OS: Linux, v.5.3.0-24-generic, x86_64 / gtk 3.24.12
+Java version: 1.8.0_171
+&lt;/code>&lt;/pr</description></item><item><title>Ubuntu下使用MT7612U</title><link>https://qtopie.github.io/notes/linux/mt7612u-driver/</link><pubDate>Sat, 09 Mar 2019 11:29:38 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/linux/mt7612u-driver/</guid><description>&lt;p>由于墙挡住了路由器WIFI信号，虽然5G频率的WIFI传输速率很快，但是信号衰减。WIFI无线通信是双方向的，就算路由信号能覆盖到，但考虑到手机或笔记本功率和天线的限制，难保证信号稳定。所以在淘宝上买了一个功能还算强大的无线网卡ComFast 926AC v2，双频WIFI外置双天线。没提前研究，“号称免驱动&amp;quot;，结果拿回来就懵了。&lt;/p>
+&lt;h2 id="安装驱动">安装驱动&lt;/h2>
+&lt;p>设备: Comfast 926AC v2
+系统： Ubuntu 18.04&lt;/p>
+&lt;p>因为是联发科的芯片，通常都是在同一份驱动代码上改改完成的。故从github上寻找了下面两个仓库的代码。&lt;/p>
+&lt;p>&lt;a href="https://github.com/ulli-kroll/mt7612u">ulli-kroll/mt7612u&lt;/a>, &lt;a href="https://github.com/jurobystricky/Netgear-A6210">jurobystricky/Netgear-A6210&lt;/a>
+&lt;a href="https://www.mediatek.com/products/broadbandWifi/mt7612u">官方驱动&lt;/a>&lt;/p>
+&lt;p>上面两驱动实际是在官方源码上改写的，但编译后，三个都不能正常工作。&lt;/p>
+&lt;p>后来在&lt;code>openwrt/linux&lt;/code>项目下发现该设备驱动的相关issue, 并已有大牛正在mt76驱动项目下加入该芯片的支持。故转用mt76的设备。查询linux主仓库代码发现，该驱动已随Linux内核5.0发布。因此直接下载linux 5.0内核包安装就行了。&lt;/p>
+&lt;pre tabindex="0">&lt;code> # 5.0: https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.0/
+ linux-headers-5.0.0-050000_5.0.0-050000.201903032031_all.deb
+ linux-headers-5.0.0-050000-generic_5.0.0-050000.201903032031_amd64.deb
+ linux-image-unsigned-5.0.0-050000-generic_5.0.0-050000.201903032031_amd64.deb
+ linux-modules-5.0.0-050000-generic_5.0.0-050000.201903032031_amd64.deb
+&lt;/code>&lt;/pre>&lt;p>手动升级内核后测试能使用, 并支持AP：&lt;/p>
+&lt;p>iwconfig&lt;/p>
+&lt;pre tabindex="0">&lt;code>wlx40a5eff2b655 IEEE 802.11 ESSID:off/any 
+ Mode:Managed Access Point: Not-Associated Tx-Power=19 dBm 
+ Retry short limit:7 RTS thr:off Fragment thr:off
+ Power Management:off
+&lt;/code>&lt;/pr</description></item><item><title>Drone CI With Github</title><link>https://qtopie.github.io/notes/cloud-native/cicd/drone-ci-with-github/</link><pubDate>Tue, 05 Mar 2019 23:58:06 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/cloud-native/cicd/drone-ci-with-github/</guid><description>&lt;p>Yeah, another CI tool. That&amp;rsquo;s named &lt;a href="https://drone.io/">&lt;code>Drone&lt;/code>&lt;/a>.&lt;/p>
+&lt;p>We&amp;rsquo;ve been heard of Jenkins, travis-ci and even circle-ci (I have to mention this because there&amp;rsquo;re too much ads on youtube for it), so why would we need another one?&lt;/p>
+&lt;p>I&amp;rsquo;ve used Jenkins and travis-ci, but they are not perfect, at least there are some slight drawbacks.&lt;/p>
+&lt;h2 id="my-experience-on-jenkins">My experience on Jenkins&lt;/h2>
+&lt;p>Jenkins is stable for production, it has long history and is used widely. But sometimes I find Jenkins is too slow, and configuration is not straightforward. And it&amp;rsquo;s a pain to upgrade to a new pipeline, you have to copy and paste jobs from UI (while accessing is pretty slow). You might able to config jobs with XML config files, but it&amp;rsquo;s still a bit of complicated.&lt;/p></description></item><item><title>Jiri</title><link>https://qtopie.github.io/notes/cloud-native/cicd/jiri.zh/</link><pubDate>Thu, 20 Dec 2018 17:23:02 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/cloud-native/cicd/jiri.zh/</guid><description>&lt;p>Jiri (/jɪəri/ YEER-ee)是谷歌工程师开发的，灵活集成多个git仓库的工具，主要用来管理fuchsia操作系统源码。&lt;/p>
+&lt;p>其主要功能类似于&lt;code>git submodule&lt;/code>, 但使用方式更加灵活，不需要对原git仓库的行为做任何修改，也可以不用在主仓库不断更新引用。&lt;/p>
+&lt;h2 id="安装">安装&lt;/h2>
+&lt;p>推荐从源码编译安装 (需要安装最新版本Go语言构建工具）&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git clone https://fuchsia.googlesource.com/jiri
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#366">cd&lt;/span> jiri/cmd/jiri/jiri 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>go build
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># go install&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo mv jiri /usr/local/bin/jiri
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="manifest">Manifest&lt;/h2>
+&lt;ul>
+&lt;li>manifest (文件名称为foo)&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#099">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#309;font-weight:bold">&amp;lt;manifest&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#309;font-weight:bold">&amp;lt;projects&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#309;font-weight:bold">&amp;lt;project&lt;/span> &lt;span style="color:#309">name=&lt;/span>&lt;span style="color:#c30">&amp;#34;spring-petclinic-mybatis&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#309">remote=&lt;/span>&lt;span style="color:#c30">&amp;#34;https://github.com/artificerpi/spring-petclinic-mybatis&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#309">path=&lt;/span>&lt;span style="color:#c30">&amp;#34;backend&amp;#34;&lt;/span>&lt;span style="color:#309;font-weight:bold">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#309;font-weight:bold">&amp;lt;project&lt;/span> &lt;span style="color:#309">name=&lt;/span>&lt;span style="color:#c30">&amp;#34;spring-petclinic-angular&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#309">remote=&lt;/span>&lt;span style="color:#c30">&amp;#34;https://github.com/spring-petclinic/spring-petclinic-angular.git&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#309">path=&lt;/span>&lt;span style="color:#c30">&amp;#34;frontend&amp;#34;&lt;/span>&lt;span style="color:#309;font-weight:bold">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#309;font-weight:bold">&amp;lt;/projects&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#309;font-weight:bold">&amp;lt;/manifest&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title>树莓派4G模块</title><link>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</link><pubDate>Wed, 05 Dec 2018 22:36:06 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</guid><description>&lt;h2 id="准备环境">准备环境&lt;/h2>
+&lt;ul>
+&lt;li>树莓派3B&lt;/li>
+&lt;li>华为4G模块：HUAWEI ME909s-821&lt;/li>
+&lt;li>PCIE转USB开发板&lt;/li>
+&lt;li>5cm天线转接线，SMA公头外螺内孔&lt;/li>
+&lt;li>吸盘天线全向高增益天线，SMA公头外螺内孔&lt;/li>
+&lt;li>中国移动4G SIM卡&lt;/li>
+&lt;/ul>
+&lt;h2 id="4g模块技术规格及文档">4G模块技术规格及文档&lt;/h2>
+&lt;ul>
+&lt;li>技术规格 &lt;a href="http://consumer.huawei.com/solutions/m2m-solutions/en/products/tech-specs/me909s_821_en.htm">连接&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>基于海思芯片, 同类比较 SIM7600CE (Qualcomm MDM9206)&lt;/p>
+&lt;ul>
+&lt;li>文档 &lt;a href="http://download-c1.huawei.com/download/downloadCenter?downloadId=60305&amp;amp;version=200311&amp;amp;siteCode=worldwide&amp;amp;view=true">连接&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>主天线M口&lt;/p>
+&lt;h2 id="开始使用">开始使用&lt;/h2>
+&lt;p>&lt;em>Windows上使用该4G模块需要手动安装驱动，驱动&lt;a href="https://techship.com/downloads/category/software-software-huawei-me909s-821-lga/">连接&lt;/a>&lt;/em>&lt;/p>
+&lt;p>&lt;em>Ubuntu下可以使用&lt;code>modemmanager&lt;/code>管理4G模块&lt;/em>&lt;/p>
+&lt;p>树莓派下使用教程如下。&lt;/p>
+&lt;ul>
+&lt;li>查看usb设备是否被识别&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>lsusb
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># output:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Bus &lt;span style="color:#f60">001&lt;/span> Device 004: ID 12d1:15c1 Huawei Technologies Co., Ltd. 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Bus &lt;span style="color:#f60">001&lt;/span> Device 003: ID 0424:ec00 Standard Microsystems Corp. SMSC9512/9514 Fast Ethernet Adapter
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Bus &lt;span style="color:#f60">001&lt;/span> Device 002: ID 0424:9514 Standard Microsystems Corp. SMC9514 Hub
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Bus &lt;span style="color:#f60">001&lt;/span> Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title>Vbox Ubuntu Server</title><link>https://qtopie.github.io/notes/linux/vbox-ubuntu-server/</link><pubDate>Tue, 27 Nov 2018 22:32:33 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/linux/vbox-ubuntu-server/</guid><description>&lt;h1 id="virtualbox-with-ubuntu-server">Virtualbox with Ubuntu Server&lt;/h1>
+&lt;p>&lt;em>Manage Virtualbox in command line&lt;/em>&lt;/p>
+&lt;h2 id="installation">Installation&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo apt install virtualbox
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># or manually&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># wget https://download.virtualbox.org/virtualbox/5.2.22/virtualbox-5.2_5.2.22-126460~Ubuntu~bionic_amd64.deb&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># sudo dpkg -i virtualbox*.deb&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="install-extenstion-pack">Install extenstion pack&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo apt install virtualbox-ext-pack 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># or manually&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># sudo VBoxManage extpack install Oracle_VM_VirtualBox_Extension_Pack-5.2.4-119785.vbox-extpack&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># check installation&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>VBoxManage list extpacks
+&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title>我的DIY与vocore</title><link>https://qtopie.github.io/notes/iot/vocore/my-vocore-playground/</link><pubDate>Thu, 26 Jul 2018 22:24:33 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/iot/vocore/my-vocore-playground/</guid><description>&lt;h2 id="vocorehttpvocoreio">&lt;a href="http://vocore.io/">VoCore&lt;/a>&lt;/h2>
+&lt;p>硬币大小的Linux计算机（或者可以DIY的mini路由器）&lt;/p>
+&lt;h2 id="技术参数">技术参数&lt;/h2>
+&lt;ul>
+&lt;li>Target: &lt;a href="https://openwrt.org/docs/techref/targets/ramips">ramips&lt;/a>&lt;/li>
+&lt;li>Subtarget: &lt;code>mt7628&lt;/code>&lt;/li>
+&lt;li>Package architecture: &lt;code>mipsel_24kc&lt;/code>&lt;/li>
+&lt;li>&lt;a href="https://openwrt.org/toh/hwdata/vocore/vocore_vocore2">OpenWRT techdata&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>具体参数请看官网介绍 &lt;a href="http://vocore.io/v2u.html">VoCore2 Ultimate&lt;/a> 和 &lt;a href="https://openwrt.org/toh/hwdata/vocore/vocore_vocore2">openwrt列出的技术数据&lt;/a>&lt;/p>
+&lt;h2 id="openwrt介绍">OpenWRT介绍&lt;/h2>
+&lt;p>OpenWRT(与&lt;a href="https://zh.wikipedia.org/wiki/LEDE">LEDE&lt;/a>合并后更名为OpenWrt)是一个适用于嵌入式设备的Linux发行版，最初&lt;a href="https://zh.wikipedia.org/wiki/OpenWrt">由Linksys公司推出的WRT-54G无线路由中使用的Linux系统开源而来&lt;/a>。相比于路由器原厂固件而言，OpenWRT提供了一个可添加软件包的可写文件系统，这样用户就能自己定制路由器的功能。基于开放的生态和良好的技术社区环境，OpenWRT十分适合喜好DIY的科技粉来定制自己的路由器。&lt;/p>
+&lt;p>OpenWRT主要使用opkg来管理软件包，默认使用LuCI作为web交互界面。下面简单列出它们的常用方式，具体使用方法请查阅文档。&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>opkg&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># 安装软件包&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>opkg install &amp;lt;PACKAGE-NAME&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># 卸载软件包&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>opkg remove &amp;lt;PACKAGE-NAME&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>uci&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># 设置option&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>uci &lt;span style="color:#366">set&lt;/span> &amp;lt;OPTION&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># 查看option&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>uci show &amp;lt;OPTION&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title>My notes on Raspberry Pi</title><link>https://qtopie.github.io/notes/iot/rpi/setup-my-raspberrypi/</link><pubDate>Sun, 29 Oct 2017 16:40:22 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/iot/rpi/setup-my-raspberrypi/</guid><description>&lt;h2 id="headless-setup-no-external-monitor-or-keyboard">Headless setup (no external monitor or keyboard)&lt;/h2>
+&lt;p>&lt;strong>Updated: according to the &lt;a href="https://www.raspberrypi.com/documentation/computers/getting-started.html#configuration-on-first-boot">Raspibian Documentation&lt;/a>,
+use Raspberry Pi Imagger is strongly recommended&lt;/strong>&lt;/p>
+&lt;h3 id="networking">Networking&lt;/h3>
+&lt;ul>
+&lt;li>Auto connect to wifi&lt;/li>
+&lt;/ul>
+&lt;p>create an &lt;code>wpa_supplicant.conf&lt;/code> file in boot partition&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-conf" data-lang="conf">country=us
+update_config=1
+ctrl_interface=/var/run/wpa_supplicant
+
+network={
+ scan_ssid=1
+ ssid=&amp;#34;Your-SSID&amp;#34;
+ psk=&amp;#34;replace-with-your-password&amp;#34;
+ priority=100
+}
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Connect to WIFI with CLI&lt;/li>
+&lt;/ul>
+&lt;p>Refer to &lt;a href="https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md">https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md&lt;/a>&lt;/p>
+&lt;h3 id="enable-ssh">Enable SSH&lt;/h3>
+&lt;p>Simply create an empty &lt;code>ssh&lt;/code> file in the root directory of boot partition.&lt;/p></description></item><item><title>Git快速手册</title><link>https://qtopie.github.io/notes/development/git-quick-guide/</link><pubDate>Wed, 05 Jul 2017 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/development/git-quick-guide/</guid><description>&lt;p>&lt;strong>WIP&lt;/strong>&lt;/p>
+&lt;h2 id="快速开始">快速开始&lt;/h2>
+&lt;ul>
+&lt;li>设置个人信息&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git config --global user.name &amp;lt;YOUR-NAME&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git config --global user.email &amp;lt;YOUR-EMAIL&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># 查看个人配置&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git config --list
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>将默认主仓库设置为&lt;code>main&lt;/code> &lt;a href="https://github.com/github/renaming">BLM运动&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git config --global init.defaultbranch main
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>初始化仓库&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mkdir /path/to/your/project
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#366">cd&lt;/span> /path/to/your/project
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git init 			&lt;span style="color:#09f;font-style:italic"># initialize an empty git repo&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git remote add origin git@repo-url.git
+&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title>Dockerfile</title><link>https://qtopie.github.io/notes/cloud-native/cicd/dockerfile/</link><pubDate>Wed, 02 Nov 2016 15:52:30 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/cloud-native/cicd/dockerfile/</guid><description>&lt;h2 id="introduction">Introduction&lt;/h2>
+&lt;p>Docker, an opensource container management tool based on LXC(Linux container).&lt;/p>
+&lt;!-- raw HTML omitted -->
+&lt;!-- raw HTML omitted --></description></item><item><title>Regular Expression</title><link>https://qtopie.github.io/notes/web/regex/</link><pubDate>Tue, 25 Oct 2016 00:35:03 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/web/regex/</guid><description>&lt;ul>
+&lt;li>
+&lt;p>username:&lt;/p>
+&lt;p>&lt;code>^[a-z0-9_-]{3,16}$&lt;/code> // any character of a-z, 0-9, underscore and &amp;lsquo;-&amp;rsquo;&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>password:&lt;/p>
+&lt;p>similar to username&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>email:&lt;/p>
+&lt;p>&lt;code>^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>url:&lt;/p>
+&lt;p>&lt;code>^(https?:\/\/)?(\da-z\.-]+)\.([a-z\.]{2,6})([/\w\.-]*)*\/?$&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>not&lt;/p>
+&lt;p>[^]&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>abc…	Letters
+123…	Digits
+\d	Any Digit
+\D	Any Non-digit character
+.	Any Character
+\.	Period
+[abc]	Only a, b, or c
+[^abc]	Not a, b, nor c
+[a-z]	Characters a to z
+[0-9]	Numbers 0 to 9
+\w	Any Alphanumeric character
+\W	Any Non-alphanumeric character
+{m}	m Repetitions
+{m,n}	m to n Repetitions
+
+-	Zero or more repetitions
++	One or more repetitions
+?	Optional character
+\s	Any Whitespace
+\S	Any Non-whitespace character
+^…$	Starts and ends
+(…)	Capture Group
+(a(bc))	Capture Sub-group
+(.*)	Capture all
+(abc|def)	Matches abc or def
+&lt;/code>&lt;/pr</description></item><item><title>Ubuntu init process</title><link>https://qtopie.github.io/notes/linux/systemd-service-unit-file/</link><pubDate>Thu, 15 Sep 2016 14:20:15 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/linux/systemd-service-unit-file/</guid><description>&lt;h2 id="history">History&lt;/h2>
+&lt;ul>
+&lt;li>sysVinit&lt;/li>
+&lt;li>&lt;a href="http://upstart.ubuntu.com/">upstart&lt;/a>&lt;/li>
+&lt;li>systemd&lt;/li>
+&lt;/ul>
+&lt;p>ubuntu: sysVinit &amp;ndash;&amp;gt; upstart(6.10+) &amp;ndash;&amp;gt; systemd (15.04+)&lt;/p>
+&lt;h3 id="features-of-upstart">Features of Upstart&lt;/h3>
+&lt;p>&lt;em>Event Based&lt;/em>&lt;/p>
+&lt;ul>
+&lt;li>Start System faster (compare with previous method).&lt;/li>
+&lt;li>Dynamically start service when discovering new device&lt;/li>
+&lt;li>Dynamically stop service when device is removed&lt;/li>
+&lt;/ul>
+&lt;h2 id="systemd">Systemd&lt;/h2>
+&lt;p>Systemd is a collection of system management daemons, utilities and libraries which serves as a replacement of System V init daemon. Systemd functions as
+central management and configuration platform for UNIX like system.&lt;/p></description></item><item><title>Wifi with hostapd</title><link>https://qtopie.github.io/notes/linux/hostapd-wifi/</link><pubDate>Tue, 30 Aug 2016 19:06:18 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/linux/hostapd-wifi/</guid><description>&lt;h2 id="hostapdhttpsw1fihostapd">&lt;a href="https://w1.fi/hostapd/">Hostapd&lt;/a>&lt;/h2>
+&lt;p>hostapd is a user space daemon for access point and authentication server.&lt;/p>
+&lt;p>&lt;strong>Please follow the guide of &lt;a href="https://www.raspberrypi.org/documentation/configuration/wireless/access-point.md">Official documentation&lt;/a>&lt;/strong>&lt;/p>
+&lt;h2 id="installation-and-configuration">Installation and configuration&lt;/h2>
+&lt;p>&lt;em>Tested on raspbian with raspberry pi 3&lt;/em>&lt;/p>
+&lt;h3 id="install-hostapd-and-configure-it">Install hostapd and configure it&lt;/h3>
+&lt;p>&lt;code>sudo apt-get install hostapd -y --force-yes&lt;/code>,
+also &lt;code>sudo apt-get install haveged&lt;/code>&lt;/p>
+&lt;ul>
+&lt;li>Edit &lt;code>hostapd.conf&lt;/code>:&lt;/li>
+&lt;/ul>
+&lt;p>&lt;em>&lt;code>/etc/hostapd/hostapd.conf&lt;/code>&lt;/em>&lt;/p>
+&lt;pre tabindex="0">&lt;code>interface=wlan0
+ssid=RPi
+wpa_passphrase=raspberrypi
+auth_algs=1
+wpa=2
+wpa_key_mgmt=WPA-PSK
+rsn_pairwise=CCMP
+channel=10
+hw_mode=g
+&lt;/code>&lt;/pr</description></item><item><title>开始使用Ubuntu</title><link>https://qtopie.github.io/notes/linux/getting-started-with-ubuntu/</link><pubDate>Mon, 17 Nov 2014 22:24:33 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/linux/getting-started-with-ubuntu/</guid><description>&lt;h2 id="介绍">介绍&lt;/h2>
+&lt;p>Ubuntu是一个以桌面应用为主的Linux操作系统，基于Debian发行版和GNOME桌面环境(17.10又回到gnome)，与Debian的不同在于它每6个月会发布一个新版本。Ubuntu的目标在于为一般用户提供一个最新的、同时又相当稳定的主要由自由软件构建而成的操作系统。Ubuntu具有庞大的社区力量（如&lt;a href="https://askubuntu.com/">askubuntu&lt;/a>)，用户可以方便地从社区获得帮助。对于我个人而言，最吸引的是Ubuntu的开放性及活跃的社区,在Ubuntu上做开发也更加得心应手。&lt;/p>
+&lt;h2 id="系统安装">系统安装&lt;/h2>
+&lt;p>以Ubuntu桌面版(amd64)为例&lt;/p>
+&lt;h3 id="预先准备">预先准备&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://cn.ubuntu.com/download/desktop">ISO文件&lt;/a>&lt;/li>
+&lt;li>可格式化的U盘 (建议4G以上)&lt;/li>
+&lt;li>启动盘创建工具&lt;a href="https://rufus.ie/zh/">Rufus&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>在Windows上使用Rufus工具，将系统镜像文件写入到U盘。&lt;/p>
+&lt;h3 id="安装过程">安装过程&lt;/h3>
+&lt;p>参考以下步骤完成安装&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>重启计算机进入bios设置开机顺序（找到在StartUp选项修改，设置usb优先启动），或重启时直接按F12（或其他FN)或Enter等进入设置（不同主板进入方法可能不同）。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>启动进入了ubuntu安装引导界面，开始安装过程&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;p>&lt;div class="fixed-height-container">
+ &lt;amp-img class="contain" alt="安装引导界面" src="https://qtopie.github.io/notes/linux/getting-started-with-ubuntu.assets/img-2021-10-05-16-59-25.png" 
+ layout="fill" 
+ lightbox>
+ &lt;/amp-img>
+&lt;/div>&lt;/p>
+&lt;p>-[连接网络]&lt;/p>
+&lt;blockquote>
+&lt;p>说明一下，如果选择安装第三方软件，安装过程耗时较长，如果网速很慢的话，建议先不安装，可安装好系统后在使用时根据系统提示安装。网速快的话就另当别论了。&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>[安装类型]&lt;/li>
+&lt;/ul>
+&lt;p>&lt;div class="fixed-height-container">
+ &lt;amp-img class="contain" alt="" src="https://qtopie.github.io/notes/linux/getting-started-with-ubuntu.assets/img-2021-10-05-18-09-14.png" 
+ layout="fill" 
+ lightbox>
+ &lt;/amp-img>
+&lt;/div>&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/algorithms/bitwise-operators/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/algorithms/bitwise-operators/</guid><description>&lt;h1 id="bitwise-operators">Bitwise Operators&lt;/h1>
+&lt;h2 id="list">List&lt;/h2>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">Operator&lt;/th>
+ &lt;th style="text-align: left">Sign&lt;/th>
+ &lt;th style="text-align: left">example&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">AND&lt;/td>
+ &lt;td style="text-align: left">&amp;amp;&lt;/td>
+ &lt;td style="text-align: left">1 &amp;amp; 1 = 1&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">OR&lt;/td>
+ &lt;td style="text-align: left">|&lt;/td>
+ &lt;td style="text-align: left">1 | 0 = 1&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">XOR&lt;/td>
+ &lt;td style="text-align: left">^&lt;/td>
+ &lt;td style="text-align: left">1 ^ 0 = 1&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">left shift&lt;/td>
+ &lt;td style="text-align: left">&amp;laquo;&lt;/td>
+ &lt;td style="text-align: left">1 &amp;laquo; 1 = 2&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">right shift&lt;/td>
+ &lt;td style="text-align: left">&amp;raquo;&lt;/td>
+ &lt;td style="text-align: left">1 &amp;raquo; 1 = 0&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">NOT&lt;/td>
+ &lt;td style="text-align: left">~&lt;/td>
+ &lt;td style="text-align: left">~10101 = 1010&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;h2 id="application">Application&lt;/h2>
+&lt;h3 id="data-integrity">data integrity&lt;/h3>
+&lt;h2 id="reference">Reference&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://www.geeksforgeeks.org/bitwise-operators-in-c-cpp/">bitwise-operators-in-c-cpp, GeeksforGeeks&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title/><link>https://qtopie.github.io/notes/algorithms/linked-list.zh/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/algorithms/linked-list.zh/</guid><description>&lt;h1 id="链表">链表&lt;/h1>
+&lt;h2 id="链表反转">链表反转&lt;/h2>
+&lt;h2 id="判断链表是否有环">判断链表是否有环&lt;/h2>
+&lt;p>解法: 指针内存地址Hash, 快慢双指针(追及问题)&lt;/p>
+&lt;p>内存地址Hash的思路是将遍历过的记录存储下来, 然后把当前访问的节点与历史节点进行比较.&lt;/p>
+&lt;p>快慢双指针: 定义一个慢指针slow, 一个快指针fast, 慢指针走一次时快指针走两次.
+根据物理知识, 如果链表有环, 快指针一定会追上慢指针. 而且快指针走的步数一定是慢指针的两倍, 因为快指针每次只能追赶一步, 追上的时候也就在一起了.&lt;/p>
+&lt;p>如果fast和slow中间间隔一个,则本次追不上&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>fast -&amp;gt; node2 -&amp;gt; slow -&amp;gt; node4
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>fast和slow相邻的时候,下次追上&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>fast -&amp;gt; slow -&amp;gt; node5
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>怎么找到环开始的点?&lt;/p>
+&lt;p>因为快指针走的路是慢指针的两倍, 慢指针走完一圈,恰好回到环开始的地方. 而当两个指针相遇的时候, (先假设快指针恰好多走一圈)&lt;/p>
+&lt;p>快慢指针同时走, 慢指针走完终点, 则快指针走完一圈再加上从开头到环入口的路才刚好走完链表的两次遍历.&lt;/p>
+&lt;p>所以如果快慢指针相遇时, 从链表开头到环入口的距离和相遇点到环入口的距离相等.&lt;/p>
+&lt;ul>
+&lt;li>判断两个链表是否相交及求相交的部分&lt;/li>
+&lt;/ul>
+&lt;h2 id="reference">Reference&lt;/h2>
+&lt;ul>
+&lt;li>link1&lt;/li>
+&lt;/ul></description></item><item><title/><link>https://qtopie.github.io/notes/algorithms/readme/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/algorithms/readme/</guid><description>&lt;p>Algorithm and Data Structures&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/algorithms/selection-algorithm/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/algorithms/selection-algorithm/</guid><description>&lt;h1 id="selection-algorithm">Selection Algorithm&lt;/h1>
+&lt;h2 id="median-of-medians">Median of medians&lt;/h2>
+&lt;h3 id="bfprt">BFPRT&lt;/h3>
+&lt;h2 id="reference">Reference&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="http://speople.csail.mit.edu/rivest/pubs/BFPRT73.pdf">http://speople.csail.mit.edu/rivest/pubs/BFPRT73.pdf&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://en.wikipedia.org/wiki/Median_of_medians">https://en.wikipedia.org/wiki/Median_of_medians&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title/><link>https://qtopie.github.io/notes/algorithms/sort/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/algorithms/sort/</guid><description>&lt;h1 id="timsort--quicksortdual-pivot">TimSort &amp;amp; QuickSort(dual-pivot)&lt;/h1>
+&lt;h2 id="timsort">TimSort&lt;/h2>
+&lt;h3 id="reference">Reference&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://www.geeksforgeeks.org/timsort/">https://www.geeksforgeeks.org/timsort/&lt;/a> (simplified version)&lt;/li>
+&lt;li>&lt;a href="http://cr.openjdk.java.net/~martin/webrevs/openjdk7/timsort/raw_files/new/src/share/classes/java/util/TimSort.java">http://cr.openjdk.java.net/~martin/webrevs/openjdk7/timsort/raw_files/new/src/share/classes/java/util/TimSort.java&lt;/a> (OpenJDK version)&lt;/li>
+&lt;/ul>
+&lt;h2 id="dual-pivot-quicksort">Dual pivot QuickSort&lt;/h2>
+&lt;h3 id="reference-1">Reference&lt;/h3></description></item><item><title/><link>https://qtopie.github.io/notes/cloud-native/cicd/jenkins/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/cloud-native/cicd/jenkins/</guid><description>&lt;p>&lt;a href="https://github.com/jenkinsci/kubernetes-plugin">https://github.com/jenkinsci/kubernetes-plugin&lt;/a>&lt;/p>
+&lt;p>war file is uncompressed under /var/jenkins_home/war&lt;/p>
+&lt;p>Class files are random accessed. Not recommmend to mount with s3 (fuse), will make page slow.&lt;/p>
+&lt;p>&lt;a href="https://github.com/jenkinsci/kubernetes-plugin/blob/master/src/main/kubernetes/service-account.yml">https://github.com/jenkinsci/kubernetes-plugin/blob/master/src/main/kubernetes/service-account.yml&lt;/a>&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/cloud-native/docker/readme/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/cloud-native/docker/readme/</guid><description>&lt;p>Docker config&lt;/p>
+&lt;p>&lt;a href="https://medium.com/better-programming/about-using-docker-config-e967d4a74b83">https://medium.com/better-programming/about-using-docker-config-e967d4a74b83&lt;/a>&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/cloud-native/k8s/kube-cluster-with-multipass/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/cloud-native/k8s/kube-cluster-with-multipass/</guid><description>&lt;h1 id="kubenetes-cluster-with-multipass">Kubenetes cluster with multipass&lt;/h1>
+&lt;h2 id="reference">Reference&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://www.digitalocean.com/community/tutorials/how-to-use-cloud-config-for-your-initial-server-setup#goals">Simple Guide to use cloud-init&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://cloud-init.io/">Official Cloud-init site&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title/><link>https://qtopie.github.io/notes/cloud-native/k8s/readme/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/cloud-native/k8s/readme/</guid><description>&lt;h2 id="quick-introduction">Quick Introduction&lt;/h2>
+&lt;h2 id="get-started">Get started&lt;/h2>
+&lt;h2 id="installation">Installation&lt;/h2>
+&lt;h2 id="shared-network-via-service">Shared network via service&lt;/h2>
+&lt;h2 id="volume-sharing">volume sharing&lt;/h2>
+&lt;p>&lt;a href="https://github.com/ctrox/csi-s3">https://github.com/ctrox/csi-s3&lt;/a>&lt;/p>
+&lt;h2 id="ingress-router">Ingress Router&lt;/h2>
+&lt;p>Traefik&lt;/p>
+&lt;p>&lt;a href="https://docs.traefik.io/">https://docs.traefik.io/&lt;/a>&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/cloud-native/vault/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/cloud-native/vault/</guid><description>&lt;ul>
+&lt;li>&lt;a href="https://www.hashicorp.com/resources/how-vault-compare-cloud-kms/">vault vs cloud kms&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title/><link>https://qtopie.github.io/notes/cloud-native/vitess/setup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/cloud-native/vitess/setup/</guid><description>&lt;h1 id="quick-guide-for-vitess">Quick guide for vitess&lt;/h1>
+&lt;h2 id="addons">addons&lt;/h2>
+&lt;p>&lt;code>microk8s enable dns hostpath-storage ingress&lt;/code>&lt;/p>
+&lt;p>pull images behind firewall&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#033">https_proxy&lt;/span>&lt;span style="color:#555">=&lt;/span>socks5://192.168.50.1:1080 microk8s.ctr image pull registry.k8s.io/ingress-nginx/controller:v1.5.1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>check resources&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># list crd&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mkctl get crd
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># list all resource names&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mkctl api-resources --verbs&lt;span style="color:#555">=&lt;/span>list -o name
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># list viteness cluster kind resource&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mkctl get VitessCluster
+&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title/><link>https://qtopie.github.io/notes/cloud-native/vitess/vitess-intro/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/cloud-native/vitess/vitess-intro/</guid><description>&lt;h1 id="vitess">Vitess&lt;/h1>
+&lt;p>&lt;a href="https://vitess.io/">vitess&lt;/a>是Google开发的可伸缩、可靠的、兼容MySQL的云原生分布式数据库。&lt;/p>
+&lt;blockquote>
+&lt;p>vitess最初由谷歌开发来支持youtube, 而youtube已成为全球第二大网站，有海量的视频上传和用户访问, 足以说明该方案的可靠性。&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="为什么要分库分表">为什么要分库分表?&lt;/h2>
+&lt;p>通常情况下，单库单表的方式就可以支撑绝大多数场景。&lt;/p>
+&lt;p>如果流量较高，使用读写分离的方式也可以缓解数据库压力（一般读的流量比写高很多）。&lt;/p>
+&lt;p>但如果记录有千万以上（或根据实际业务情况判断），当单机容量不够或单节点读写出现性能瓶颈时，就可以考虑分库分表来拆分流量了。&lt;/p>
+&lt;h2 id="分库分表方案">分库分表方案&lt;/h2>
+&lt;p>通常分库分表有Embedded-SDK模式和Proxy模式。&lt;/p>
+&lt;p>Embedded SDK模式的优点是，其部署架构更加简单，且去中心化。&lt;/p>
+&lt;p>代表性的方案如sharding-jdbc, mycat等.&lt;/p>
+&lt;p>&lt;div class="fixed-height-container">
+ &lt;amp-img class="contain" alt="Sharding-JDBC Architecture" src="https://qtopie.github.io/notes/cloud-native/vitess/https://shardingsphere.apache.org/document/legacy/3.x/document/img/sharding-jdbc-brief.png" 
+ layout="fill" 
+ lightbox>
+ &lt;/amp-img>
+&lt;/div>&lt;/p>
+&lt;p>Proxy模式则对应用提供了类似标准JDBC或者DB SQL连接的方式，给应用开发者的感觉就是直接连数据库一样，基本不用关注实现细节。而且Proxy模式比较容易定制监控/自动扩缩容方案，因此运维成本一般较低。以及在代理层实现连接复用提高io性能。&lt;/p>
+&lt;p>代表性的方案如vitess, sharding-proxy&lt;/p>
+&lt;p>&lt;div class="fixed-height-container">
+ &lt;amp-img class="contain" alt="Sharding-Proxy Architecture" src="https://qtopie.github.io/notes/cloud-native/vitess/https://shardingsphere.apache.org/document/legacy/3.x/document/img/sharding-proxy-brief_v2.png" 
+ layout="fill" 
+ lightbox>
+ &lt;/amp-img>
+&lt;/div>&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/design-pattern/design-principles/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/design-pattern/design-principles/</guid><description>&lt;h1 id="design-principles">Design Principles&lt;/h1>
+&lt;h2 id="dependency-injection-di">Dependency Injection (DI)&lt;/h2>
+&lt;p>With dependency injection, objects accept dependencies in their constructors.
+The core principle is to separate behaviour from dependency resolution.&lt;/p>
+&lt;p>Compared with Direct constructor calls:&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">direct constructor calls&lt;/th>
+ &lt;th style="text-align: left">Dependency Injection&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">direct, compile-time dependency&lt;/td>
+ &lt;td style="text-align: left">dependencies injection&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">problems for modularity and testability&lt;/td>
+ &lt;td style="text-align: left">dependencies are not hidden in codes&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;p>See &lt;a href="https://github.com/google/guice/wiki/Motivation">Motivation of guice&lt;/a>.&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/design-pattern/iterator/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/design-pattern/iterator/</guid><description>&lt;p>供一种方法来访问聚合对象，而不用暴露这个对象的内部表示，其别名为游标(Cursor)。迭代器模式是一种对象行为型模式。&lt;/p>
+&lt;p>&lt;a href="https://blog.csdn.net/yanbober/article/details/45497881">https://blog.csdn.net/yanbober/article/details/45497881&lt;/a>&lt;/p>
+&lt;p>java prev and next traverse
+&lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/ListIterator.html">https://docs.oracle.com/javase/8/docs/api/java/util/ListIterator.html&lt;/a>&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/iot/asus-router/merlin-firmware/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/iot/asus-router/merlin-firmware/</guid><description>&lt;h1 id="asus-router-with-merlin-firmware">ASUS Router with Merlin Firmware&lt;/h1>
+&lt;p>AiMesh Devices&lt;/p>
+&lt;ul>
+&lt;li>RT-AX82U (Master)&lt;/li>
+&lt;li>ZenWifi XD4 (RT-AX56-XD4)&lt;/li>
+&lt;/ul>
+&lt;h2 id="firmware">Firmware&lt;/h2>
+&lt;p>&lt;a href="https://github.com/gnuton/asuswrt-merlin.ng">https://github.com/gnuton/asuswrt-merlin.ng&lt;/a>&lt;/p>
+&lt;h2 id="jffs-partition">&lt;code>jffs&lt;/code> partition&lt;/h2>
+&lt;p>User Scripts: &lt;code>/jffs/scripts&lt;/code> &lt;a href="https://github.com/RMerl/asuswrt-merlin.ng/wiki/User-scripts">https://github.com/RMerl/asuswrt-merlin.ng/wiki/User-scripts&lt;/a>&lt;/p>
+&lt;h2 id="run-scripts-on-boot">Run scripts on boot&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>nvram &lt;span style="color:#366">set&lt;/span> &lt;span style="color:#033">script_usbhotplug&lt;/span>&lt;span style="color:#555">=&lt;/span>&lt;span style="color:#c30">&amp;#34;sh /jffs/configs/usb-mount-hook.sh&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>nvram commit
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>service reboot
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>Tips of &lt;code>nvram&lt;/code> utility
+command to show all configs: &lt;code>nvram show&lt;/code>
+set config: &lt;code>nvram set &amp;lt;config-key:config-value&amp;gt;&lt;/code>
+query config: &lt;code>nvram get &amp;lt;config-key&amp;gt;&lt;/code>&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/iot/rpi/portable-5g/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/iot/rpi/portable-5g/</guid><description>&lt;h1 id="树莓派5g-nr上网折腾记">树莓派5G NR上网折腾记&lt;/h1>
+&lt;h2 id="背景">背景&lt;/h2>
+&lt;p>每年春节回老家过年的时候，都需要解决上网的问题。基本需求是, 需要通过路由器为家里的电视、手机等设备提供一个可靠的网络覆盖，&lt;/p>
+&lt;p>而且网络的质量需要满足要求。因为平时不在老家住，开通宽带一般需要按年计费，不太划算。所以之前也尝试过买流量卡, 一个月可能&lt;/p>
+&lt;p>有几十G流量，然后使用树莓派和4G模块上网，共享网络给路由器满足需求。2020年春节期间隔离在家，不得不在家办公一个月,&lt;/p>
+&lt;p>还开通过电信宽带。当时用的是电信129元十全十美套餐，绑定银行卡优惠30元（当时没想着长期用，就没绑定 ：&amp;lt; ), 因为合约期两年&lt;/p>
+&lt;p>后面出去打工后就没管了，送的三张卡也没有用。后面却发现欠费好几百，考虑可能影响到个人征信，因此又补缴了费用。相当于没有使用&lt;/p>
+&lt;p>却给电信捐款， 略坑。 因此一直在调研其他的方案，来满足春节短期的上网需求。&lt;/p>
+&lt;p>由于宽带一般都需要长期开通，成本才会降低。而且在人口密集的城市和乡村地区，宽带价格差异很大。基层业务人员服务也不够好,&lt;/p>
+&lt;p>一不小心又会掉进坑里。所以宽带不是一个好的选择。&lt;/p>
+&lt;p>5G网络的全国覆盖已经比较广了，其实4G+的网速(150Mbps~300Mbps)已经可以满足绝大多数上网场景的需求。&lt;/p>
+&lt;p>而且国内的电信运营商, 如果设备支持5G的话，就算使用的是4G套餐，也会支持5G的网络。虽然会被限速，但网速依然会提升不少，延迟也相对较低。&lt;/p>
+&lt;blockquote>
+&lt;p>毕竟5G设备已经安装在那里，不用的话也会浪费。&lt;/p>
+&lt;/blockquote>
+&lt;p>所以树莓派+5G上网模块就是一个好的选择。 剩下要做的事情就是选择一个可靠且实惠的5G上网模块和套餐资费了。&lt;/p>
+&lt;p>这里不进行比较，我选择的方案就是 Rapsberrry Pi 3 + RM500U-CN + 天际通卡.&lt;/p>
+&lt;p>作为一个树莓派粉，设备我当然有了，而且每一代都有(还是在低位入手的）, 暂时不计成本。&lt;/p>
+&lt;p>RM500U-CN 大概需要 900块。&lt;/p>
+&lt;p>天际通卡一年资费500多，但有按月的套餐99/月， 一个月的流量2000GB。非常适合我的需求。&lt;/p>
+&lt;p>虽然整体成本要1000+, 比一年的100M宽带价格 800左右并没有便宜多少。 但是设备是买到是我自己的，我还可以继续折腾，&lt;/p>
+&lt;p>从物品和精神上也都保值呢。&lt;/p>
+&lt;blockquote>
+&lt;p>这比开通了宽带但是没有使用依然扣费划算不少，可能只是心理舒坦 :&amp;gt;&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/iot/vocore/vocore-network-audio/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/iot/vocore/vocore-network-audio/</guid><description>&lt;h1 id="network-audio-by-vocore">Network Audio by Vocore&lt;/h1>
+&lt;h2 id="firmware">Firmware&lt;/h2>
+&lt;p>Currently 2022/12/3, only openwrt 21.02 is supported. (patch is not working ins 22.03)&lt;/p>
+&lt;p>see &lt;a href="https://github.com/Vonger/vocore2">https://github.com/Vonger/vocore2&lt;/a>&lt;/p>
+&lt;p>Because audio is enabled by &lt;em>kmod+&lt;/em> packages, so I need to build the firmware myself.&lt;/p>
+&lt;h2 id="alsa">Alsa&lt;/h2>
+&lt;p>install &lt;code>alsa-utils&lt;/code> packages, then add configuration to init sound card&lt;/p>
+&lt;p>in &lt;code>/etc/rc.local&lt;/code> file&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>alsactl init
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="adjust-volume">Adjust volume&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>use &lt;code>alsamixer&lt;/code>&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/the-little-linux-cmd-book/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/the-little-linux-cmd-book/</guid><description>&lt;h1 id="the-little-linux-command-line-book">The Little Linux Command Line Book&lt;/h1>
+&lt;h2 id="cpu">CPU&lt;/h2>
+&lt;p>top&lt;/p>
+&lt;h2 id="memory">Memory&lt;/h2>
+&lt;p>virtual memory
+swapfile&lt;/p>
+&lt;p>&lt;code>free&lt;/code> command&lt;/p>
+&lt;h2 id="io">I/O&lt;/h2></description></item><item><title>xrdp</title><link>https://qtopie.github.io/notes/linux/remote-desktop-with-xrdp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/linux/remote-desktop-with-xrdp/</guid><description>&lt;h1 id="xrdp">xrdp&lt;/h1>
+&lt;p>&lt;em>Connect to Ubuntu Desktop remotely with xrdp&lt;/em>&lt;/p>
+&lt;h2 id="environment">Environment&lt;/h2>
+&lt;ul>
+&lt;li>Win10 with hyper-v support&lt;/li>
+&lt;li>Ubuntu Desktop 20.04&lt;/li>
+&lt;/ul>
+&lt;h3 id="install-ubuntu-2004-on-win10-hyperv">Install Ubuntu 20.04 on win10-hyperv&lt;/h3>
+&lt;ul>
+&lt;li>
+&lt;p>Download Ubuntu Desktop 20.04 from &lt;a href="https://ubuntu.com/download/desktop">here&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Search Hyper-V on win10 start menu and create a virtual machine with the ISO file you just downloaded&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Follow the installation guide provided by ubuntu iso media, and setup the OS&lt;/p></description></item></channel></rss>

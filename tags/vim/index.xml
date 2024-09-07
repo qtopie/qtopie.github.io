@@ -1,3 +1,39 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>vim on Blog | qtopierw</title><link>https://qtopie.github.io/tags/vim/</link><description>Recent content in vim on Blog | qtopierw</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>qtopie.rw@gmail.com (qtopierw)</managingEditor><webMaster>qtopie.rw@gmail.com (qtopierw)</webMaster><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Tue, 06 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/tags/vim/index.xml" rel="self" type="application/rss+xml"/><item><title>VIM安装笔记</title><link>https://qtopie.github.io/posts/vim/build-and-install-latest-vim/</link><pubDate>Tue, 06 Apr 2021 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/vim/build-and-install-latest-vim/</guid><description>VIM 安装 由于debian发行版维护的vim包还未升级到最新版本，但govim需要较高版本的vim。故选择手动编译安装。这里直接选择最新版本8.2， 对应于最新的git tag版本， 8.2版本有一些实用性的功能。
-环境
-Ubuntu 19.10 5.3.0-24-generic x84_64 构建及安装过程 安装构建工具链 sudo apt update &amp;amp;&amp;amp; sudo apt install -y git build-essential 拉取源码 git clone https://github.com/vim/vim.git # 切换到你想构建的tag git checkout v8.2.0369 开始构建 #cd src #make distclean # if you build Vim before ./configure --with-features=huge \ --enable-multibyte \ --enable-python3interp=yes \ --with-python3-config-dir=$(python3-config --configdir) \ --enable-perlinterp=yes \ --enable-luainterp=yes \ --enable-cscope \ --prefix=/usr/local make VIMRUNTIMEDIR=/usr/local/share/vim/vim82 sudo apt install checkinstall sudo checkinstall checkinstall执行完后，会安装到/usr/local/bin/vim 即可。</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Vim on Blog | qtopierw</title><link>https://qtopie.github.io/tags/vim/</link><description>Recent content in Vim on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><managingEditor>qtopie.rw@gmail.com (qtopierw)</managingEditor><webMaster>qtopie.rw@gmail.com (qtopierw)</webMaster><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Tue, 06 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/tags/vim/index.xml" rel="self" type="application/rss+xml"/><item><title>VIM安装笔记</title><link>https://qtopie.github.io/notes/vim/build-and-install-latest-vim/</link><pubDate>Tue, 06 Apr 2021 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/vim/build-and-install-latest-vim/</guid><description>&lt;h1 id="vim-安装">VIM 安装&lt;/h1>
+&lt;p>由于debian发行版维护的vim包还未升级到最新版本，但govim需要较高版本的vim。故选择手动编译安装。这里直接选择最新版本8.2， 对应于最新的git tag版本， &lt;a href="https://www.vim.org/vim-8.2-released.php">8.2版本有一些实用性的功能&lt;/a>。&lt;/p>
+&lt;p>&lt;strong>环境&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Ubuntu 19.10&lt;/li>
+&lt;li>5.3.0-24-generic x84_64&lt;/li>
+&lt;/ul>
+&lt;h2 id="构建及安装过程">构建及安装过程&lt;/h2>
+&lt;ol>
+&lt;li>安装构建工具链&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo apt update &lt;span style="color:#555">&amp;amp;&amp;amp;&lt;/span> sudo apt install -y git build-essential
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="2">
+&lt;li>拉取源码&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git clone https://github.com/vim/vim.git
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># 切换到你想构建的tag&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git checkout v8.2.0369
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ol start="3">
+&lt;li>开始构建&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">#cd src&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">#make distclean # if you build Vim before&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./configure --with-features&lt;span style="color:#555">=&lt;/span>huge &lt;span style="color:#c30;font-weight:bold">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#c30;font-weight:bold">&lt;/span> --enable-multibyte &lt;span style="color:#c30;font-weight:bold">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#c30;font-weight:bold">&lt;/span> --enable-python3interp&lt;span style="color:#555">=&lt;/span>yes &lt;span style="color:#c30;font-weight:bold">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#c30;font-weight:bold">&lt;/span> --with-python3-config-dir&lt;span style="color:#555">=&lt;/span>&lt;span style="color:#069;font-weight:bold">$(&lt;/span>python3-config --configdir&lt;span style="color:#069;font-weight:bold">)&lt;/span> &lt;span style="color:#c30;font-weight:bold">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#c30;font-weight:bold">&lt;/span> --enable-perlinterp&lt;span style="color:#555">=&lt;/span>yes &lt;span style="color:#c30;font-weight:bold">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#c30;font-weight:bold">&lt;/span> --enable-luainterp&lt;span style="color:#555">=&lt;/span>yes &lt;span style="color:#c30;font-weight:bold">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#c30;font-weight:bold">&lt;/span> --enable-cscope &lt;span style="color:#c30;font-weight:bold">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#c30;font-weight:bold">&lt;/span> --prefix&lt;span style="color:#555">=&lt;/span>/usr/local
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>make &lt;span style="color:#033">VIMRUNTIMEDIR&lt;/span>&lt;span style="color:#555">=&lt;/span>/usr/local/share/vim/vim82
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt install checkinstall
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo checkinstall
+&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item></channel></rss>

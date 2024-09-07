@@ -1,39 +1,137 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>diy on Blog | qtopierw</title><link>https://qtopie.github.io/categories/diy/</link><description>Recent content in diy on Blog | qtopierw</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>qtopie.rw@gmail.com (qtopierw)</managingEditor><webMaster>qtopie.rw@gmail.com (qtopierw)</webMaster><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Mon, 03 Aug 2020 23:33:04 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/categories/diy/index.xml" rel="self" type="application/rss+xml"/><item><title>自动控制风扇温度</title><link>https://qtopie.github.io/posts/iot/rpi/fan-and-tempature/</link><pubDate>Mon, 03 Aug 2020 23:33:04 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/iot/rpi/fan-and-tempature/</guid><description>最近购买了一个树莓派4B 4G内存版，替换了旧的Model3 (强迫症犯了，就为了换成type c口，但因为电源适配问题还是老老实实地又买了官方电源适配器）
-树莓派4B相对3B性能提高不少，但是随之功耗和发热也上去了。 于是给它整了个金属外壳
-但是依旧烫得厉害，可能是我手动overlock了。开风扇的话，又有点吵，晚上影响睡觉。
-所以又买了一些排线和一个电磁继电器来实现自动通过风扇控制CPU等芯片温度。
-主要原理 获取GPU温度 vcgencmd
-vcgencmd measure_temp 获取CPU温度 cpu=$(&amp;lt;/sys/class/thermal/thermal_zone0/temp) echo &amp;#34;$((cpu/1000))c&amp;#34; 代码实现 网上已经有不少python版本的实现，但作为一个go粉，当然选择用go来实现了，正好练习一下gobot包的使用
-package main import ( &amp;#34;time&amp;#34; &amp;#34;gobot.io/x/gobot&amp;#34; &amp;#34;gobot.io/x/gobot/drivers/gpio&amp;#34; &amp;#34;gobot.io/x/gobot/platforms/raspi&amp;#34; &amp;#34;io/ioutil&amp;#34; &amp;#34;log&amp;#34; &amp;#34;strconv&amp;#34; &amp;#34;strings&amp;#34; ) func main() { low, high := 50, 58 r := raspi.NewAdaptor() sw := gpio.NewDirectPinDriver(r, &amp;#34;18&amp;#34;) work := func() { gobot.Every(5*time.Second, func() { t := readCpuTemp() log.Println(&amp;#34;Temp&amp;#34;, t/1000) if t &amp;lt; low*1000 { sw.</description></item><item><title>使用API管理cloudcone主机</title><link>https://qtopie.github.io/posts/diy/cloudcone-save-costs/</link><pubDate>Sat, 18 Jul 2020 22:02:05 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/diy/cloudcone-save-costs/</guid><description>Cloudcone是2017年成立于美国的一家主机供应商。继vultr变得“不靠谱”和低价vm资源经常“售尽”的情况下，我转而使用cloudcone提供的vps服务用于日常学习和开发。
-除了支持按小时计费、提供更换IP服务及支持支付宝/paypal等灵活的支付方式外，我最看重的是，它的价格能做到真正的弹性，即在vm关机状态不计费CPU/内存等费用,比online费用大概减半。
-类似于其他云供应商平台，cloudcone还提供了开放的API来管理云主机。
-这里为了方便使用和合理控制资源，自己便用go写了一个小程序
-代码实现 主要逻辑如下，通过cloudcone 提供的API。每天晚上23左右关机，次日早晨7点左右启动 如果调用失败的话，会再次重试一次。(如果依然不行的话，就当运气不好了:&amp;lt;）
-以下是草稿版本代码
-secret.go package main var ( // 配置相关信息,这里我填写的是假的啦 serverID = 123456 appSecret = &amp;#34;Q2aQr9323QE233r2&amp;#34; hashCode = &amp;#34;zXqV22222222222222222222222222222222225bL&amp;#34; ) serverID可以在compute菜单控制面板下查看，或查看浏览器url里的参数。
-appSecret和hashCode访问https://app.cloudcone.com/user/api创建即可。
-main.go /* * cloudcone api https://api.cloudcone.com/ */ package main import ( &amp;#34;context&amp;#34; &amp;#34;encoding/json&amp;#34; &amp;#34;errors&amp;#34; &amp;#34;fmt&amp;#34; &amp;#34;io/ioutil&amp;#34; &amp;#34;log&amp;#34; &amp;#34;net/http&amp;#34; &amp;#34;os&amp;#34; &amp;#34;sync&amp;#34; &amp;#34;time&amp;#34; &amp;#34;github.com/robfig/cron&amp;#34; ) // CloudconeResponse represents the API Response type CloudconeResponse struct { Status int Message string Data interface{} `json:&amp;#34;_data&amp;#34;` } const ( baseAPIURL = &amp;#34;https://api.</description></item><item><title>树莓派4G模块</title><link>https://qtopie.github.io/posts/iot/rpi/rpi-4g-lte-module/</link><pubDate>Wed, 05 Dec 2018 22:36:06 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/iot/rpi/rpi-4g-lte-module/</guid><description>准备环境 树莓派3B 华为4G模块：HUAWEI ME909s-821 PCIE转USB开发板 5cm天线转接线，SMA公头外螺内孔 吸盘天线全向高增益天线，SMA公头外螺内孔 中国移动4G SIM卡 4G模块技术规格及文档 技术规格 连接 基于海思芯片, 同类比较 SIM7600CE (Qualcomm MDM9206)
-文档 连接 主天线M口
-开始使用 Windows上使用该4G模块需要手动安装驱动，驱动连接
-Ubuntu下可以使用modemmanager管理4G模块
-树莓派下使用教程如下。
-查看usb设备是否被识别 lsusb # output: Bus 001 Device 004: ID 12d1:15c1 Huawei Technologies Co., Ltd. Bus 001 Device 003: ID 0424:ec00 Standard Microsystems Corp. SMSC9512/9514 Fast Ethernet Adapter Bus 001 Device 002: ID 0424:9514 Standard Microsystems Corp. SMC9514 Hub Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.</description></item><item><title>怎样安全地Root你的安卓手机</title><link>https://qtopie.github.io/posts/diy/root-your-android-phone/</link><pubDate>Sun, 04 Nov 2018 20:29:38 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/diy/root-your-android-phone/</guid><description>出于各种原因，我们可能会对自己手机上的安卓系统并不满意，而Root是我们DIY自己的安卓机的一把钥匙。
-注意手机Root后并不一定安全，本文仅仅说的是用安全（较为透明公开）的方式自己root你的手机。
-但安全永远是相对的，如果你对手机ROOT后的安全性有较大顾虑，请不要进行该操作。
-对ROOT后的设备，也请远离流氓软件和恶意网站，尽可能使用可信度高的应用与服务。
-预先准备 MagiskManager Twrp APK文件从谷歌商店下载 sdk与fastboot工具 win linux mac 准备一台PC和数据线，能使用开发者模式调试安卓手机 解锁你的手机 打开开发者模式 打开设置 -&amp;gt; 关于手机 -&amp;gt; 软件信息 -&amp;gt; 内部版本号 -&amp;gt; 一直点它
-启用OEM解锁 进入开发者选项，勾选允许OEM解锁。 注意OEM解锁会清空手机数据，如果要进行下去请备份号手机数据。
-另外，解锁后，部分手机开机启动后会有一个源自安卓系统的安全警告画面，若不喜欢也建议不要继续。
-准备Magisk文件 在Magisk的Github发布页面下载apk程序进行安装，按照应用提示，下载最新的Magisk文件
-OEM 解锁 将adb和fastboot加入环境变量
-对windows用户而言，解压缩platform-tools_rx.x.x-windows.zip文件，进入解压缩后的文件夹，根目录后下会显示有adb.exe和fastboot.exe等文件。 然后将光标移到文件夹空白处，同时按下Shift键和鼠标右键，点击弹出来的菜单选项，打开命令窗口（后续操作需要在此进行，请不要关闭）。
-检查能PC检测到连入的手机
-adb kill-server &amp;amp;&amp;amp; adb start-server adb devices 重启手机进入download模式
-adb reboot download 解锁bootloader
-fastboot oem unlock fastboot flashing unlock 刷入twrp到Recovery 在download模式中刷入recovery</description></item><item><title>我的DIY与vocore</title><link>https://qtopie.github.io/posts/iot/vocore/my-vocore-playground/</link><pubDate>Thu, 26 Jul 2018 22:24:33 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/iot/vocore/my-vocore-playground/</guid><description>VoCore 硬币大小的Linux计算机（或者可以DIY的mini路由器）
-技术参数 Target: ramips Subtarget: mt7628 Package architecture: mipsel_24kc 具体参数请看官网介绍 VoCore2 Ultimate 和 openwrt列出的技术数据
-OpenWRT介绍 OpenWRT(与LEDE合并后更名为OpenWrt)是一个适用于嵌入式设备的Linux发行版，最初由Linksys公司推出的WRT-54G无线路由中使用的Linux系统开源而来。相比于路由器原厂固件而言，OpenWRT提供了一个可添加软件包的可写文件系统，这样用户就能自己定制路由器的功能。基于开放的生态和良好的技术社区环境，OpenWRT十分适合喜好DIY的科技粉来定制自己的路由器。
-OpenWRT主要使用opkg来管理软件包，默认使用LuCI作为web交互界面。下面简单列出它们的常用方式，具体使用方法请查阅文档。
-opkg
-# 安装软件包 opkg install &amp;lt;PACKAGE-NAME&amp;gt; # 卸载软件包 opkg remove &amp;lt;PACKAGE-NAME&amp;gt; uci
-# 设置option uci set &amp;lt;OPTION&amp;gt; # 查看option uci show &amp;lt;OPTION&amp;gt; 我的定制 基本设置 Change SSID Name uci set wireless.ap.ssid=&amp;#39;firefly&amp;#39; uci commit # check result uci show wireless.ap.ssid # restart networking service to make reload configuration /etc/init.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Diy on Blog | qtopierw</title><link>https://qtopie.github.io/categories/diy/</link><description>Recent content in Diy on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><managingEditor>qtopie.rw@gmail.com (qtopierw)</managingEditor><webMaster>qtopie.rw@gmail.com (qtopierw)</webMaster><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Mon, 03 Aug 2020 23:33:04 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/categories/diy/index.xml" rel="self" type="application/rss+xml"/><item><title>自动控制风扇温度</title><link>https://qtopie.github.io/notes/iot/rpi/fan-and-tempature/</link><pubDate>Mon, 03 Aug 2020 23:33:04 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/iot/rpi/fan-and-tempature/</guid><description>&lt;p>最近购买了一个树莓派4B 4G内存版，替换了旧的Model3 (强迫症犯了，就为了换成type c口，但因为电源适配问题还是老老实实地又买了官方电源适配器）&lt;/p>
+&lt;p>树莓派4B相对3B性能提高不少，但是随之功耗和发热也上去了。 于是给它整了个金属外壳&lt;/p>
+&lt;p>&lt;div class="fixed-height-container">
+ &lt;amp-img class="contain" alt="" src="https://qtopie.github.io/notes/iot/rpi/fan-and-tempature.assets/img-20211029155258.webp" 
+ layout="fill" 
+ lightbox>
+ &lt;/amp-img>
+&lt;/div>&lt;/p>
+&lt;p>但是依旧烫得厉害，可能是我手动overlock了。开风扇的话，又有点吵，晚上影响睡觉。&lt;/p>
+&lt;p>所以又买了一些排线和一个电磁继电器来实现自动通过风扇控制CPU等芯片温度。&lt;/p>
+&lt;h2 id="主要原理">主要原理&lt;/h2>
+&lt;ul>
+&lt;li>获取GPU温度&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a href="https://www.nicm.dev/vcgencmd/">vcgencmd&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>vcgencmd measure_temp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>获取CPU温度&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#033">cpu&lt;/span>&lt;span style="color:#555">=&lt;/span>&lt;span style="color:#069;font-weight:bold">$(&lt;/span>&amp;lt;/sys/class/thermal/thermal_zone0/temp&lt;span style="color:#069;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#366">echo&lt;/span> &lt;span style="color:#c30">&amp;#34;&lt;/span>&lt;span style="color:#069;font-weight:bold">$((&lt;/span>cpu/1000&lt;span style="color:#069;font-weight:bold">))&lt;/span>&lt;span style="color:#c30"> c&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title>使用API管理cloudcone主机</title><link>https://qtopie.github.io/posts/diy/cloudcone-save-costs/</link><pubDate>Sat, 18 Jul 2020 22:02:05 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/diy/cloudcone-save-costs/</guid><description>&lt;p>&lt;a href="https://app.cloudcone.com/?ref=4442">Cloudcone&lt;/a>是2017年成立于美国的一家主机供应商。继vultr变得“不靠谱”和低价vm资源经常“售尽”的情况下，我转而使用cloudcone提供的vps服务用于日常学习和开发。&lt;/p>
+&lt;p>除了支持按小时计费、提供更换IP服务及支持支付宝/paypal等灵活的支付方式外，我最看重的是，它的价格能做到真正的弹性，即在vm关机状态不计费CPU/内存等费用,比online费用大概减半。&lt;/p>
+&lt;p>类似于其他云供应商平台，cloudcone还提供了&lt;a href="https://api.cloudcone.com/">开放的API来管理云主机&lt;/a>。&lt;/p>
+&lt;p>这里为了方便使用和合理控制资源，自己便用go写了一个小程序&lt;/p>
+&lt;h2 id="代码实现">代码实现&lt;/h2>
+&lt;p>主要逻辑如下，通过cloudcone 提供的API。每天晚上23左右关机，次日早晨7点左右启动
+如果调用失败的话，会再次重试一次。(如果依然不行的话，就当运气不好了:&amp;lt;）&lt;/p>
+&lt;p>以下是草稿版本代码&lt;/p>
+&lt;ul>
+&lt;li>secret.go&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">package&lt;/span> main
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">var&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#09f;font-style:italic">// 配置相关信息,这里我填写的是假的啦
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span>	serverID = &lt;span style="color:#f60">123456&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	appSecret = &lt;span style="color:#c30">&amp;#34;Q2aQr9323QE233r2&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	hashCode = &lt;span style="color:#c30">&amp;#34;zXqV22222222222222222222222222222222225bL&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>serverID&lt;/code>可以在compute菜单控制面板下查看，或查看浏览器url里的参数。&lt;/p>
+&lt;p>&lt;code>appSecret&lt;/code>和&lt;code>hashCode&lt;/code>访问https://app.cloudcone.com/user/api创建即可。&lt;/p></description></item><item><title>树莓派4G模块</title><link>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</link><pubDate>Wed, 05 Dec 2018 22:36:06 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</guid><description>&lt;h2 id="准备环境">准备环境&lt;/h2>
+&lt;ul>
+&lt;li>树莓派3B&lt;/li>
+&lt;li>华为4G模块：HUAWEI ME909s-821&lt;/li>
+&lt;li>PCIE转USB开发板&lt;/li>
+&lt;li>5cm天线转接线，SMA公头外螺内孔&lt;/li>
+&lt;li>吸盘天线全向高增益天线，SMA公头外螺内孔&lt;/li>
+&lt;li>中国移动4G SIM卡&lt;/li>
+&lt;/ul>
+&lt;h2 id="4g模块技术规格及文档">4G模块技术规格及文档&lt;/h2>
+&lt;ul>
+&lt;li>技术规格 &lt;a href="http://consumer.huawei.com/solutions/m2m-solutions/en/products/tech-specs/me909s_821_en.htm">连接&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>基于海思芯片, 同类比较 SIM7600CE (Qualcomm MDM9206)&lt;/p>
+&lt;ul>
+&lt;li>文档 &lt;a href="http://download-c1.huawei.com/download/downloadCenter?downloadId=60305&amp;amp;version=200311&amp;amp;siteCode=worldwide&amp;amp;view=true">连接&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>主天线M口&lt;/p>
+&lt;h2 id="开始使用">开始使用&lt;/h2>
+&lt;p>&lt;em>Windows上使用该4G模块需要手动安装驱动，驱动&lt;a href="https://techship.com/downloads/category/software-software-huawei-me909s-821-lga/">连接&lt;/a>&lt;/em>&lt;/p>
+&lt;p>&lt;em>Ubuntu下可以使用&lt;code>modemmanager&lt;/code>管理4G模块&lt;/em>&lt;/p>
+&lt;p>树莓派下使用教程如下。&lt;/p>
+&lt;ul>
+&lt;li>查看usb设备是否被识别&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>lsusb
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># output:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Bus &lt;span style="color:#f60">001&lt;/span> Device 004: ID 12d1:15c1 Huawei Technologies Co., Ltd. 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Bus &lt;span style="color:#f60">001&lt;/span> Device 003: ID 0424:ec00 Standard Microsystems Corp. SMSC9512/9514 Fast Ethernet Adapter
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Bus &lt;span style="color:#f60">001&lt;/span> Device 002: ID 0424:9514 Standard Microsystems Corp. SMC9514 Hub
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Bus &lt;span style="color:#f60">001&lt;/span> Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title>怎样安全地Root你的安卓手机</title><link>https://qtopie.github.io/posts/diy/root-your-android-phone/</link><pubDate>Sun, 04 Nov 2018 20:29:38 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/diy/root-your-android-phone/</guid><description>&lt;p>出于各种原因，我们可能会对自己手机上的安卓系统并不满意，而Root是我们DIY自己的安卓机的一把钥匙。&lt;/p>
+&lt;p>注意手机Root后并不一定安全，本文仅仅说的是用安全（较为透明公开）的方式自己root你的手机。&lt;/p>
+&lt;p>但安全永远是相对的，如果你对手机ROOT后的安全性有较大顾虑，请不要进行该操作。&lt;/p>
+&lt;p>对ROOT后的设备，也请远离流氓软件和恶意网站，尽可能使用可信度高的应用与服务。&lt;/p>
+&lt;h2 id="预先准备">预先准备&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/topjohnwu/Magisk/releases">MagiskManager&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://twrp.me/">Twrp&lt;/a> &lt;a href="https://play.google.com/store/apps/details?id=me.twrp.twrpapp">APK文件从谷歌商店下载&lt;/a>&lt;/li>
+&lt;li>sdk与fastboot工具 &lt;a href="https://dl.google.com/android/repository/platform-tools-latest-windows.zip">win&lt;/a> &lt;a href="https://dl.google.com/android/repository/platform-tools-latest-linux.zip">linux&lt;/a> &lt;a href="https://dl.google.com/android/repository/platform-tools-latest-darwin.zip">mac&lt;/a>&lt;/li>
+&lt;li>准备一台PC和数据线，能使用开发者模式调试安卓手机&lt;/li>
+&lt;/ul>
+&lt;h2 id="解锁你的手机">解锁你的手机&lt;/h2>
+&lt;ul>
+&lt;li>打开开发者模式&lt;/li>
+&lt;/ul>
+&lt;p>打开设置 -&amp;gt; 关于手机 -&amp;gt; 软件信息 -&amp;gt; 内部版本号 -&amp;gt; 一直点它&lt;/p>
+&lt;ul>
+&lt;li>启用OEM解锁&lt;/li>
+&lt;/ul>
+&lt;p>进入开发者选项，勾选允许OEM解锁。 注意OEM解锁会清空手机数据，如果要进行下去请备份号手机数据。&lt;/p>
+&lt;p>另外，解锁后，部分手机开机启动后会有一个源自安卓系统的安全警告画面，若不喜欢也建议不要继续。&lt;/p>
+&lt;h2 id="准备magisk文件">准备Magisk文件&lt;/h2>
+&lt;p>在Magisk的Github发布页面下载apk程序进行安装，按照应用提示，下载最新的Magisk文件&lt;/p>
+&lt;h2 id="oem-解锁">OEM 解锁&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>将adb和fastboot加入环境变量&lt;/p>
+&lt;p>对windows用户而言，解压缩&lt;code>platform-tools_rx.x.x-windows.zip&lt;/code>文件，进入解压缩后的文件夹，根目录后下会显示有&lt;code>adb.exe&lt;/code>和&lt;code>fastboot.exe&lt;/code>等文件。
+然后将光标移到文件夹空白处，同时按下Shift键和鼠标右键，点击弹出来的菜单选项，打开命令窗口（后续操作需要在此进行，请不要关闭）。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>检查能PC检测到连入的手机&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>adb kill-server &lt;span style="color:#555">&amp;amp;&amp;amp;&lt;/span> adb start-server
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>adb devices
+&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title>我的DIY与vocore</title><link>https://qtopie.github.io/notes/iot/vocore/my-vocore-playground/</link><pubDate>Thu, 26 Jul 2018 22:24:33 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/iot/vocore/my-vocore-playground/</guid><description>&lt;h2 id="vocorehttpvocoreio">&lt;a href="http://vocore.io/">VoCore&lt;/a>&lt;/h2>
+&lt;p>硬币大小的Linux计算机（或者可以DIY的mini路由器）&lt;/p>
+&lt;h2 id="技术参数">技术参数&lt;/h2>
+&lt;ul>
+&lt;li>Target: &lt;a href="https://openwrt.org/docs/techref/targets/ramips">ramips&lt;/a>&lt;/li>
+&lt;li>Subtarget: &lt;code>mt7628&lt;/code>&lt;/li>
+&lt;li>Package architecture: &lt;code>mipsel_24kc&lt;/code>&lt;/li>
+&lt;li>&lt;a href="https://openwrt.org/toh/hwdata/vocore/vocore_vocore2">OpenWRT techdata&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>具体参数请看官网介绍 &lt;a href="http://vocore.io/v2u.html">VoCore2 Ultimate&lt;/a> 和 &lt;a href="https://openwrt.org/toh/hwdata/vocore/vocore_vocore2">openwrt列出的技术数据&lt;/a>&lt;/p>
+&lt;h2 id="openwrt介绍">OpenWRT介绍&lt;/h2>
+&lt;p>OpenWRT(与&lt;a href="https://zh.wikipedia.org/wiki/LEDE">LEDE&lt;/a>合并后更名为OpenWrt)是一个适用于嵌入式设备的Linux发行版，最初&lt;a href="https://zh.wikipedia.org/wiki/OpenWrt">由Linksys公司推出的WRT-54G无线路由中使用的Linux系统开源而来&lt;/a>。相比于路由器原厂固件而言，OpenWRT提供了一个可添加软件包的可写文件系统，这样用户就能自己定制路由器的功能。基于开放的生态和良好的技术社区环境，OpenWRT十分适合喜好DIY的科技粉来定制自己的路由器。&lt;/p>
+&lt;p>OpenWRT主要使用opkg来管理软件包，默认使用LuCI作为web交互界面。下面简单列出它们的常用方式，具体使用方法请查阅文档。&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>opkg&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># 安装软件包&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>opkg install &amp;lt;PACKAGE-NAME&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># 卸载软件包&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>opkg remove &amp;lt;PACKAGE-NAME&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>uci&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># 设置option&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>uci &lt;span style="color:#366">set&lt;/span> &amp;lt;OPTION&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># 查看option&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>uci show &amp;lt;OPTION&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item></channel></rss>

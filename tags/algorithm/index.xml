@@ -1,7 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>algorithm on Blog | qtopierw</title><link>https://qtopie.github.io/tags/algorithm/</link><description>Recent content in algorithm on Blog | qtopierw</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>qtopie.rw@gmail.com (qtopierw)</managingEditor><webMaster>qtopie.rw@gmail.com (qtopierw)</webMaster><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Thu, 15 Jul 2021 22:02:05 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/algorithm/index.xml" rel="self" type="application/rss+xml"/><item><title>排列组合</title><link>https://qtopie.github.io/posts/algorithms/combination-permutation/</link><pubDate>Thu, 15 Jul 2021 22:02:05 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/algorithms/combination-permutation/</guid><description>This is a testing post for writing markdown with latex
-排列组合 独立重复性事件 \: n^m 从n个不同物品中取一个物品，每次取一个，取m次的结果（考虑先后顺序）
-n^m = n \times n \times n ... \times n \tag 1 \: A_n^n 从n个不同物品中取一个物品，每次取一个, 不放回，取n次(完）的结果.（考虑先后顺序）
-第一次有n个结果， 依据独立性事件，第二次有n-1中结果，以此类推
-A_n^n = n(n-1)(n-2)... \times 2 \times 1 \tag 2 \: A_n^m 从n个不同物品中取一个物品，每次取一个, 不放回，取m次(可能不取）的结果.（考虑先后顺序），未取到的结果有\: A_{n-m}^{n-m}种
-A_n^m = \frac{A_n^n}{A_{n-m}^{n-m}} = n(n-1)(n-2)...(n-m+1) \tag 3 \: C_n^m 从n个不同物品中取一个物品，每次取一个, 不放回，取m次(可能不取）的结果.（不考虑先后顺序）
-C_n^m = \frac{A_n^m}{A_m^m} = \frac{n!}{m! \times (n-m)!} \tag 4 例子 3 * 4 的格子, 从左上走到右下角，只能往下或者往右。</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Algorithm on Blog | qtopierw</title><link>https://qtopie.github.io/tags/algorithm/</link><description>Recent content in Algorithm on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><managingEditor>qtopie.rw@gmail.com (qtopierw)</managingEditor><webMaster>qtopie.rw@gmail.com (qtopierw)</webMaster><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Thu, 15 Jul 2021 22:02:05 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/algorithm/index.xml" rel="self" type="application/rss+xml"/><item><title>排列组合</title><link>https://qtopie.github.io/notes/algorithms/combination-permutation/</link><pubDate>Thu, 15 Jul 2021 22:02:05 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/algorithms/combination-permutation/</guid><description>&lt;p>&lt;strong>This is a testing post for writing markdown with latex&lt;/strong>&lt;/p>
+&lt;h1 id="排列组合">排列组合&lt;/h1>
+&lt;h2 id="独立重复性事件">独立重复性事件&lt;/h2>
+&lt;h2 id="-nm">&lt;code>\: n^m&lt;/code>&lt;/h2>
+&lt;p>从n个不同物品中取一个物品，每次取一个，取m次的结果（考虑先后顺序）&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-math" data-lang="math">n^m = n \times n \times n ... \times n \tag 1
+&lt;/code>&lt;/pre>&lt;h2 id="-a_nn">&lt;code>\: A_n^n&lt;/code>&lt;/h2>
+&lt;p>从n个不同物品中取一个物品，每次取一个, &lt;strong>不放回&lt;/strong>，取n次(完）的结果.（考虑先后顺序）&lt;/p>
+&lt;p>第一次有n个结果， 依据独立性事件，第二次有n-1中结果，以此类推&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-math" data-lang="math">A_n^n = n(n-1)(n-2)... \times 2 \times 1 \tag 2
+&lt;/code>&lt;/pre>&lt;h3 id="-a_nm">&lt;code>\: A_n^m&lt;/code>&lt;/h3>
+&lt;p>从n个不同物品中取一个物品，每次取一个, &lt;strong>不放回&lt;/strong>，取m次(可能不取）的结果.（考虑先后顺序），未取到的结果有&lt;code>\: A_{n-m}^{n-m}&lt;/code>种&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-math" data-lang="math">A_n^m = \frac{A_n^n}{A_{n-m}^{n-m}} = n(n-1)(n-2)...(n-m+1) \tag 3
+&lt;/code>&lt;/pr</description></item></channel></rss>

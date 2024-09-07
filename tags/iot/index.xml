@@ -1,7 +1,22 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>iot on Blog | qtopierw</title><link>https://qtopie.github.io/tags/iot/</link><description>Recent content in iot on Blog | qtopierw</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>qtopie.rw@gmail.com (qtopierw)</managingEditor><webMaster>qtopie.rw@gmail.com (qtopierw)</webMaster><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Mon, 03 Aug 2020 23:33:04 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/iot/index.xml" rel="self" type="application/rss+xml"/><item><title>自动控制风扇温度</title><link>https://qtopie.github.io/posts/iot/rpi/fan-and-tempature/</link><pubDate>Mon, 03 Aug 2020 23:33:04 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/iot/rpi/fan-and-tempature/</guid><description>最近购买了一个树莓派4B 4G内存版，替换了旧的Model3 (强迫症犯了，就为了换成type c口，但因为电源适配问题还是老老实实地又买了官方电源适配器）
-树莓派4B相对3B性能提高不少，但是随之功耗和发热也上去了。 于是给它整了个金属外壳
-但是依旧烫得厉害，可能是我手动overlock了。开风扇的话，又有点吵，晚上影响睡觉。
-所以又买了一些排线和一个电磁继电器来实现自动通过风扇控制CPU等芯片温度。
-主要原理 获取GPU温度 vcgencmd
-vcgencmd measure_temp 获取CPU温度 cpu=$(&amp;lt;/sys/class/thermal/thermal_zone0/temp) echo &amp;#34;$((cpu/1000))c&amp;#34; 代码实现 网上已经有不少python版本的实现，但作为一个go粉，当然选择用go来实现了，正好练习一下gobot包的使用
-package main import ( &amp;#34;time&amp;#34; &amp;#34;gobot.io/x/gobot&amp;#34; &amp;#34;gobot.io/x/gobot/drivers/gpio&amp;#34; &amp;#34;gobot.io/x/gobot/platforms/raspi&amp;#34; &amp;#34;io/ioutil&amp;#34; &amp;#34;log&amp;#34; &amp;#34;strconv&amp;#34; &amp;#34;strings&amp;#34; ) func main() { low, high := 50, 58 r := raspi.NewAdaptor() sw := gpio.NewDirectPinDriver(r, &amp;#34;18&amp;#34;) work := func() { gobot.Every(5*time.Second, func() { t := readCpuTemp() log.Println(&amp;#34;Temp&amp;#34;, t/1000) if t &amp;lt; low*1000 { sw.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Iot on Blog | qtopierw</title><link>https://qtopie.github.io/tags/iot/</link><description>Recent content in Iot on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><managingEditor>qtopie.rw@gmail.com (qtopierw)</managingEditor><webMaster>qtopie.rw@gmail.com (qtopierw)</webMaster><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Mon, 03 Aug 2020 23:33:04 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/iot/index.xml" rel="self" type="application/rss+xml"/><item><title>自动控制风扇温度</title><link>https://qtopie.github.io/notes/iot/rpi/fan-and-tempature/</link><pubDate>Mon, 03 Aug 2020 23:33:04 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/iot/rpi/fan-and-tempature/</guid><description>&lt;p>最近购买了一个树莓派4B 4G内存版，替换了旧的Model3 (强迫症犯了，就为了换成type c口，但因为电源适配问题还是老老实实地又买了官方电源适配器）&lt;/p>
+&lt;p>树莓派4B相对3B性能提高不少，但是随之功耗和发热也上去了。 于是给它整了个金属外壳&lt;/p>
+&lt;p>&lt;div class="fixed-height-container">
+ &lt;amp-img class="contain" alt="" src="https://qtopie.github.io/notes/iot/rpi/fan-and-tempature.assets/img-20211029155258.webp" 
+ layout="fill" 
+ lightbox>
+ &lt;/amp-img>
+&lt;/div>&lt;/p>
+&lt;p>但是依旧烫得厉害，可能是我手动overlock了。开风扇的话，又有点吵，晚上影响睡觉。&lt;/p>
+&lt;p>所以又买了一些排线和一个电磁继电器来实现自动通过风扇控制CPU等芯片温度。&lt;/p>
+&lt;h2 id="主要原理">主要原理&lt;/h2>
+&lt;ul>
+&lt;li>获取GPU温度&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a href="https://www.nicm.dev/vcgencmd/">vcgencmd&lt;/a>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>vcgencmd measure_temp
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>获取CPU温度&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#033">cpu&lt;/span>&lt;span style="color:#555">=&lt;/span>&lt;span style="color:#069;font-weight:bold">$(&lt;/span>&amp;lt;/sys/class/thermal/thermal_zone0/temp&lt;span style="color:#069;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#366">echo&lt;/span> &lt;span style="color:#c30">&amp;#34;&lt;/span>&lt;span style="color:#069;font-weight:bold">$((&lt;/span>cpu/1000&lt;span style="color:#069;font-weight:bold">))&lt;/span>&lt;span style="color:#c30"> c&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item></channel></rss>

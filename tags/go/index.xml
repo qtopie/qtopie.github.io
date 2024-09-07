@@ -1,8 +1,22 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>go on Blog | qtopierw</title><link>https://qtopie.github.io/tags/go/</link><description>Recent content in go on Blog | qtopierw</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>qtopie.rw@gmail.com (qtopierw)</managingEditor><webMaster>qtopie.rw@gmail.com (qtopierw)</webMaster><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Wed, 18 Mar 2020 22:02:05 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/go/index.xml" rel="self" type="application/rss+xml"/><item><title>Go安装</title><link>https://qtopie.github.io/posts/go/setup-go/</link><pubDate>Wed, 18 Mar 2020 22:02:05 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/go/setup-go/</guid><description>官方下载安装向导请参考这里https://golang.org/dl/
-这篇文章主要分享加速访问go依赖和资源站点的问题。
-环境 Ubuntu 19.10 x86_64 版本号 go1.14 linux/amd64 下载安装 Go安装文件可以访问国内站点 https://golang.google.cn/dl/
-解压后，移动到/usr/local/go目录，然后在/etc/profile里加入
-export GOROOT=/usr/local/go export PATH=$PATH:$GOROOT/bin 使用技巧 goproxy 使用goproxy加速go module下载(解决go get无法下载来自golang.org等站点的依赖包的问题）
-参考https://goproxy.io/zh/, 在go 1.13+下，我们可以使用以下命令在go env设置goproxy
-go env -w GO111MODULE=on go env -w GOPROXY=https://goproxy.io,direct # 设置不走 proxy 的私有仓库，多个用逗号相隔（可选） go env -w GOPRIVATE=*.corp.example.com 同样推荐使用国内站点https://goproxy.cn/
-文档查看 使用go doc命令可以在终端快速查阅文档, 例如 go doc net.Listen | vim - 参考</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Go on Blog | qtopierw</title><link>https://qtopie.github.io/tags/go/</link><description>Recent content in Go on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><managingEditor>qtopie.rw@gmail.com (qtopierw)</managingEditor><webMaster>qtopie.rw@gmail.com (qtopierw)</webMaster><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Wed, 18 Mar 2020 22:02:05 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/go/index.xml" rel="self" type="application/rss+xml"/><item><title>Go安装</title><link>https://qtopie.github.io/notes/go/setup-go/</link><pubDate>Wed, 18 Mar 2020 22:02:05 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/go/setup-go/</guid><description>&lt;p>官方下载安装向导请参考这里https://golang.org/dl/&lt;/p>
+&lt;p>这篇文章主要分享加速访问go依赖和资源站点的问题。&lt;/p>
+&lt;h2 id="环境">环境&lt;/h2>
+&lt;ul>
+&lt;li>Ubuntu 19.10 x86_64&lt;/li>
+&lt;li>版本号 go1.14 linux/amd64&lt;/li>
+&lt;/ul>
+&lt;h2 id="下载安装">下载安装&lt;/h2>
+&lt;p>Go安装文件可以访问国内站点 &lt;a href="https://golang.google.cn/dl/">https://golang.google.cn/dl/&lt;/a>&lt;/p>
+&lt;p>解压后，移动到&lt;code>/usr/local/go&lt;/code>目录，然后在&lt;code>/etc/profile&lt;/code>里加入&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#366">export&lt;/span> &lt;span style="color:#033">GOROOT&lt;/span>&lt;span style="color:#555">=&lt;/span>/usr/local/go
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#366">export&lt;/span> &lt;span style="color:#033">PATH&lt;/span>&lt;span style="color:#555">=&lt;/span>&lt;span style="color:#033">$PATH&lt;/span>:&lt;span style="color:#033">$GOROOT&lt;/span>/bin
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="使用技巧">使用技巧&lt;/h2>
+&lt;h3 id="goproxy">goproxy&lt;/h3>
+&lt;p>使用goproxy加速&lt;code>go module&lt;/code>下载(解决&lt;code>go get&lt;/code>无法下载来自golang.org等站点的依赖包的问题）&lt;/p>
+&lt;p>参考https://goproxy.io/zh/, 在go 1.13+下，我们可以使用以下命令在go env设置goproxy&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>go env -w &lt;span style="color:#033">GO111MODULE&lt;/span>&lt;span style="color:#555">=&lt;/span>on
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>go env -w &lt;span style="color:#033">GOPROXY&lt;/span>&lt;span style="color:#555">=&lt;/span>https://goproxy.io,direct
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># 设置不走 proxy 的私有仓库，多个用逗号相隔（可选）&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>go env -w &lt;span style="color:#033">GOPRIVATE&lt;/span>&lt;span style="color:#555">=&lt;/span>*.corp.example.com
+&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item></channel></rss>
