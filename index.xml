@@ -1,4 +1,50 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blog | qtopierw</title><link>https://qtopie.github.io/</link><description>Recent content on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><managingEditor>qtopie.rw@gmail.com (qtopierw)</managingEditor><webMaster>qtopie.rw@gmail.com (qtopierw)</webMaster><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Tue, 28 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>树莓派和HomeAssistant</title><link>https://qtopie.github.io/notes/iot/rpi/homeassistant/</link><pubDate>Tue, 28 Sep 2021 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/iot/rpi/homeassistant/</guid><description>&lt;h2 id="目标">目标&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blog | qtopierw</title><link>https://qtopie.github.io/</link><description>Recent content on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><managingEditor>qtopie.rw@gmail.com (qtopierw)</managingEditor><webMaster>qtopie.rw@gmail.com (qtopierw)</webMaster><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Sat, 07 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>链表反转</title><link>https://qtopie.github.io/notes/codejam/list/reverse-list/</link><pubDate>Sat, 07 Sep 2024 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/codejam/list/reverse-list/</guid><description>&lt;h2 id="链表反转深入浅出">链表反转：深入浅出&lt;/h2>
+&lt;h3 id="链表反转是什么">链表反转是什么？&lt;/h3>
+&lt;p>链表反转，顾名思义，就是将一个链表的节点顺序颠倒过来。例如，原本的链表是1-&amp;gt;2-&amp;gt;3-&amp;gt;4，反转后就变成4-&amp;gt;3-&amp;gt;2-&amp;gt;1。&lt;/p>
+&lt;h3 id="为什么需要链表反转">为什么需要链表反转？&lt;/h3>
+&lt;p>链表反转是链表操作中一个非常基础且常见的操作，它在很多算法和数据结构中都有应用，比如：&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>栈的实现：&lt;/strong> 链表反转可以用来实现一个栈的数据结构。&lt;/li>
+&lt;li>&lt;strong>队列的实现：&lt;/strong> 链表反转可以用来实现一个队列的数据结构。&lt;/li>
+&lt;li>&lt;strong>算法优化：&lt;/strong> 有些算法中，通过链表反转可以优化时间或空间复杂度。&lt;/li>
+&lt;/ul>
+&lt;h3 id="链表反转的实现">链表反转的实现&lt;/h3>
+&lt;h4 id="迭代法">迭代法&lt;/h4>
+&lt;p>迭代法是实现链表反转最常用的方法。其核心思想是：&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>初始化三个指针：&lt;/strong>
+&lt;ul>
+&lt;li>&lt;code>prev&lt;/code>: 指向当前节点的前一个节点&lt;/li>
+&lt;li>&lt;code>curr&lt;/code>: 指向当前节点&lt;/li>
+&lt;li>&lt;code>next&lt;/code>: 指向当前节点的后一个节点&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>遍历链表：&lt;/strong>
+&lt;ul>
+&lt;li>将 &lt;code>curr&lt;/code> 的 &lt;code>next&lt;/code> 指针指向 &lt;code>prev&lt;/code>，实现反转&lt;/li>
+&lt;li>将 &lt;code>prev&lt;/code> 和 &lt;code>curr&lt;/code> 指针都向后移动一位&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>返回新的头节点：&lt;/strong> 遍历结束后，&lt;code>curr&lt;/code> 指向新的头节点&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">func&lt;/span> &lt;span style="color:#c0f">reverseList&lt;/span>(head &lt;span style="color:#555">*&lt;/span>ListNode) &lt;span style="color:#555">*&lt;/span>ListNode {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#09f;font-style:italic">// 初始化第一个前驱指针指向null, 即为末端
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span> &lt;span style="color:#069;font-weight:bold">var&lt;/span> prev &lt;span style="color:#555">*&lt;/span>ListNode
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">for&lt;/span> curr&lt;span style="color:#555">:=&lt;/span> head; curr &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span>; {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#09f;font-style:italic">// 先用临时指针next保存下一个开始位置
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span> next &lt;span style="color:#555">:=&lt;/span> curr.Next;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#09f;font-style:italic">// 将当前指针指反转
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span> curr.Next = prev;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#09f;font-style:italic">// 移动指针
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span> prev = curr;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> curr = next;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">return&lt;/span> prev;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title>树莓派和HomeAssistant</title><link>https://qtopie.github.io/notes/iot/rpi/homeassistant/</link><pubDate>Tue, 28 Sep 2021 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/iot/rpi/homeassistant/</guid><description>&lt;h2 id="目标">目标&lt;/h2>
 &lt;p>使用开源软件和米家智能硬件，实现简单的智能家居系统&lt;/p>
 &lt;blockquote>
 &lt;p>采用米家智能硬件的原因是, 小米智能家居做的比较早（也许是起初推广的更好，刚接触智能家居的时候就用的小米）,
@@ -965,50 +1011,4 @@ swapfile&lt;/p>
 &lt;p>Search Hyper-V on win10 start menu and create a virtual machine with the ISO file you just downloaded&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>Follow the installation guide provided by ubuntu iso media, and setup the OS&lt;/p></description></item><item><title>链表反转</title><link>https://qtopie.github.io/notes/codejam/list/reverse-list/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/codejam/list/reverse-list/</guid><description>&lt;h2 id="链表反转深入浅出">链表反转：深入浅出&lt;/h2>
-&lt;h3 id="链表反转是什么">链表反转是什么？&lt;/h3>
-&lt;p>链表反转，顾名思义，就是将一个链表的节点顺序颠倒过来。例如，原本的链表是1-&amp;gt;2-&amp;gt;3-&amp;gt;4，反转后就变成4-&amp;gt;3-&amp;gt;2-&amp;gt;1。&lt;/p>
-&lt;h3 id="为什么需要链表反转">为什么需要链表反转？&lt;/h3>
-&lt;p>链表反转是链表操作中一个非常基础且常见的操作，它在很多算法和数据结构中都有应用，比如：&lt;/p>
-&lt;ul>
-&lt;li>&lt;strong>栈的实现：&lt;/strong> 链表反转可以用来实现一个栈的数据结构。&lt;/li>
-&lt;li>&lt;strong>队列的实现：&lt;/strong> 链表反转可以用来实现一个队列的数据结构。&lt;/li>
-&lt;li>&lt;strong>算法优化：&lt;/strong> 有些算法中，通过链表反转可以优化时间或空间复杂度。&lt;/li>
-&lt;/ul>
-&lt;h3 id="链表反转的实现">链表反转的实现&lt;/h3>
-&lt;h4 id="迭代法">迭代法&lt;/h4>
-&lt;p>迭代法是实现链表反转最常用的方法。其核心思想是：&lt;/p>
-&lt;ol>
-&lt;li>&lt;strong>初始化三个指针：&lt;/strong>
-&lt;ul>
-&lt;li>&lt;code>prev&lt;/code>: 指向当前节点的前一个节点&lt;/li>
-&lt;li>&lt;code>curr&lt;/code>: 指向当前节点&lt;/li>
-&lt;li>&lt;code>next&lt;/code>: 指向当前节点的后一个节点&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>&lt;strong>遍历链表：&lt;/strong>
-&lt;ul>
-&lt;li>将 &lt;code>curr&lt;/code> 的 &lt;code>next&lt;/code> 指针指向 &lt;code>prev&lt;/code>，实现反转&lt;/li>
-&lt;li>将 &lt;code>prev&lt;/code> 和 &lt;code>curr&lt;/code> 指针都向后移动一位&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>&lt;strong>返回新的头节点：&lt;/strong> 遍历结束后，&lt;code>curr&lt;/code> 指向新的头节点&lt;/li>
-&lt;/ol>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">func&lt;/span> &lt;span style="color:#c0f">reverseList&lt;/span>(head &lt;span style="color:#555">*&lt;/span>ListNode) &lt;span style="color:#555">*&lt;/span>ListNode {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#09f;font-style:italic">// 初始化第一个前驱指针指向null, 即为末端
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span> &lt;span style="color:#069;font-weight:bold">var&lt;/span> prev &lt;span style="color:#555">*&lt;/span>ListNode
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">for&lt;/span> curr&lt;span style="color:#555">:=&lt;/span> head; curr &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span>; {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#09f;font-style:italic">// 先用临时指针next保存下一个开始位置
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span> next &lt;span style="color:#555">:=&lt;/span> curr.Next;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#09f;font-style:italic">// 将当前指针指反转
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span> curr.Next = prev;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#09f;font-style:italic">// 移动指针
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span> prev = curr;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> curr = next;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">return&lt;/span> prev;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item></channel></rss>
+&lt;p>Follow the installation guide provided by ubuntu iso media, and setup the OS&lt;/p></description></item></channel></rss>
