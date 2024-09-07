@@ -51,3 +51,8 @@ markup:
     endLevel: 3
     ordered: false
     startLevel: 2
+
+pagination:
+  disableAliases: false
+  pagerSize: 5
+  path: page
