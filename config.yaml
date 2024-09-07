@@ -56,3 +56,11 @@ pagination:
   disableAliases: false
   pagerSize: 5
   path: page
+
+
+module:
+  mounts:
+  - source: posts/articles
+    target: content/posts
+  - source: posts/notes
+    target: content/notes
