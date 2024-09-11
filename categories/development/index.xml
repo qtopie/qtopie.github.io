@@ -19,7 +19,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># 设置不走 proxy 的私有仓库，多个用逗号相隔（可选）&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>go env -w &lt;span style="color:#033">GOPRIVATE&lt;/span>&lt;span style="color:#555">=&lt;/span>*.corp.example.com
-&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title>Make Eclipse Great Again</title><link>https://qtopie.github.io/notes/development/make-gradle-work-with-eclipse/</link><pubDate>Sat, 28 Dec 2019 18:07:28 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/development/make-gradle-work-with-eclipse/</guid><description>&lt;h1 id="eclipse--gradle">Eclipse &amp;amp; Gradle&lt;/h1>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title>Make Eclipse Great Again</title><link>https://qtopie.github.io/notes/dev/make-gradle-work-with-eclipse/</link><pubDate>Sat, 28 Dec 2019 18:07:28 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/dev/make-gradle-work-with-eclipse/</guid><description>&lt;h1 id="eclipse--gradle">Eclipse &amp;amp; Gradle&lt;/h1>
 &lt;p>还是从那句老话开始， “工欲善其事，必先利其器”。要想熟练地完成一件事，有个好的工具往往能事半功倍。&lt;/p>
 &lt;blockquote>
 &lt;p>&lt;em>但是很多时候，迷信教条最终会成了造轮子而造轮子的递归循环；选择合适的工具，并掌握它，解决好问题才是正确的方向。&lt;/em>&lt;/p>
@@ -49,7 +49,7 @@ Version: 2019-03 (4.11)
 Build id: I20190307-0500
 OS: Linux, v.5.3.0-24-generic, x86_64 / gtk 3.24.12
 Java version: 1.8.0_171
-&lt;/code>&lt;/pr</description></item><item><title>Git快速手册</title><link>https://qtopie.github.io/notes/development/git-quick-guide/</link><pubDate>Wed, 05 Jul 2017 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/development/git-quick-guide/</guid><description>&lt;p>&lt;strong>WIP&lt;/strong>&lt;/p>
+&lt;/code>&lt;/pr</description></item><item><title>Git快速手册</title><link>https://qtopie.github.io/notes/dev/git-quick-guide/</link><pubDate>Wed, 05 Jul 2017 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/dev/git-quick-guide/</guid><description>&lt;p>&lt;strong>WIP&lt;/strong>&lt;/p>
 &lt;h2 id="快速开始">快速开始&lt;/h2>
 &lt;ul>
 &lt;li>设置个人信息&lt;/li>

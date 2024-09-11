@@ -1,4 +1,8 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blog | qtopierw</title><link>https://qtopie.github.io/</link><description>Recent content on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><managingEditor>qtopie.rw@gmail.com (qtopierw)</managingEditor><webMaster>qtopie.rw@gmail.com (qtopierw)</webMaster><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Sat, 07 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>链表反转</title><link>https://qtopie.github.io/notes/codejam/list/reverse-list/</link><pubDate>Sat, 07 Sep 2024 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/codejam/list/reverse-list/</guid><description>&lt;h2 id="链表反转深入浅出">链表反转：深入浅出&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blog | qtopierw</title><link>https://qtopie.github.io/</link><description>Recent content on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><managingEditor>qtopie.rw@gmail.com (qtopierw)</managingEditor><webMaster>qtopie.rw@gmail.com (qtopierw)</webMaster><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Sat, 07 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>缓存过期</title><link>https://qtopie.github.io/notes/system-design/cache-expiration/</link><pubDate>Sat, 07 Sep 2024 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/system-design/cache-expiration/</guid><description>&lt;h2 id="缓存的模式">缓存的模式&lt;/h2>
+&lt;h2 id="参考">参考&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://hazelcast.com/blog/a-hitchhikers-guide-to-caching-patterns/">https://hazelcast.com/blog/a-hitchhikers-guide-to-caching-patterns/&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>链表反转</title><link>https://qtopie.github.io/notes/codejam/list/reverse-list/</link><pubDate>Sat, 07 Sep 2024 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/codejam/list/reverse-list/</guid><description>&lt;h2 id="链表反转深入浅出">链表反转：深入浅出&lt;/h2>
 &lt;h3 id="链表反转是什么">链表反转是什么？&lt;/h3>
 &lt;p>链表反转，顾名思义，就是将一个链表的节点顺序颠倒过来。例如，原本的链表是1-&amp;gt;2-&amp;gt;3-&amp;gt;4，反转后就变成4-&amp;gt;3-&amp;gt;2-&amp;gt;1。&lt;/p>
 &lt;h3 id="为什么需要链表反转">为什么需要链表反转？&lt;/h3>
@@ -352,7 +356,7 @@ mwine.science {
 &lt;/div>&lt;/p>
 &lt;p>容器实现的是操作系统层面的虚拟化，而虚拟机是实现硬件层面的虚拟化。所以对于应用来说，选择容器会更加轻量级，这意味着它将占用更少的资源，能更快的启动和停止，更灵活地分配资源等等。&lt;/p>
 &lt;p>PS: 这里并不是说容器一定总比虚拟机好，一般来说，不同的技术方案都有它适应的场景。比如我们需要模拟完整的硬件环境，虚拟机方案显然就更合适了。例如，在办公电脑上，我常常在windows笔记本上使用hyper-v安装一个ubuntu做开发，容器化方案在这里就相形见绌了。&lt;/p>
-&lt;p>很多时候，容器和虚拟机被一起使用。比如，你买了一台性能很好的高可用服务器，1TB RAM, 64 core CPU，那么为了更合理的分配和管理资源，你可能首先在这台服务器上建立数个virtualbox虚拟机，然后再在虚拟机操作系统里安装docker。&lt;/p></description></item><item><title>Make Eclipse Great Again</title><link>https://qtopie.github.io/notes/development/make-gradle-work-with-eclipse/</link><pubDate>Sat, 28 Dec 2019 18:07:28 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/development/make-gradle-work-with-eclipse/</guid><description>&lt;h1 id="eclipse--gradle">Eclipse &amp;amp; Gradle&lt;/h1>
+&lt;p>很多时候，容器和虚拟机被一起使用。比如，你买了一台性能很好的高可用服务器，1TB RAM, 64 core CPU，那么为了更合理的分配和管理资源，你可能首先在这台服务器上建立数个virtualbox虚拟机，然后再在虚拟机操作系统里安装docker。&lt;/p></description></item><item><title>Make Eclipse Great Again</title><link>https://qtopie.github.io/notes/dev/make-gradle-work-with-eclipse/</link><pubDate>Sat, 28 Dec 2019 18:07:28 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/dev/make-gradle-work-with-eclipse/</guid><description>&lt;h1 id="eclipse--gradle">Eclipse &amp;amp; Gradle&lt;/h1>
 &lt;p>还是从那句老话开始， “工欲善其事，必先利其器”。要想熟练地完成一件事，有个好的工具往往能事半功倍。&lt;/p>
 &lt;blockquote>
 &lt;p>&lt;em>但是很多时候，迷信教条最终会成了造轮子而造轮子的递归循环；选择合适的工具，并掌握它，解决好问题才是正确的方向。&lt;/em>&lt;/p>
@@ -579,7 +583,7 @@ network={
 &lt;/ul>
 &lt;p>Refer to &lt;a href="https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md">https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md&lt;/a>&lt;/p>
 &lt;h3 id="enable-ssh">Enable SSH&lt;/h3>
-&lt;p>Simply create an empty &lt;code>ssh&lt;/code> file in the root directory of boot partition.&lt;/p></description></item><item><title>Git快速手册</title><link>https://qtopie.github.io/notes/development/git-quick-guide/</link><pubDate>Wed, 05 Jul 2017 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/development/git-quick-guide/</guid><description>&lt;p>&lt;strong>WIP&lt;/strong>&lt;/p>
+&lt;p>Simply create an empty &lt;code>ssh&lt;/code> file in the root directory of boot partition.&lt;/p></description></item><item><title>Git快速手册</title><link>https://qtopie.github.io/notes/dev/git-quick-guide/</link><pubDate>Wed, 05 Jul 2017 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/dev/git-quick-guide/</guid><description>&lt;p>&lt;strong>WIP&lt;/strong>&lt;/p>
 &lt;h2 id="快速开始">快速开始&lt;/h2>
 &lt;ul>
 &lt;li>设置个人信息&lt;/li>
@@ -995,7 +999,15 @@ query config: &lt;code>nvram get &amp;lt;config-key&amp;gt;&lt;/code>&lt;/p></de
 &lt;p>virtual memory
 swapfile&lt;/p>
 &lt;p>&lt;code>free&lt;/code> command&lt;/p>
-&lt;h2 id="io">I/O&lt;/h2></description></item><item><title>xrdp</title><link>https://qtopie.github.io/notes/linux/remote-desktop-with-xrdp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/linux/remote-desktop-with-xrdp/</guid><description>&lt;h1 id="xrdp">xrdp&lt;/h1>
+&lt;h2 id="io">I/O&lt;/h2></description></item><item><title>Google IP地址范围</title><link>https://qtopie.github.io/notes/dev/google-ip-address/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/dev/google-ip-address/</guid><description>&lt;p>google ip address range&lt;/p>
+&lt;p>&lt;a href="https://www.gstatic.com/ipranges/goog.json">https://www.gstatic.com/ipranges/goog.json&lt;/a>&lt;/p>
+&lt;p>github ip address range
+&lt;a href="https://api.github.com/meta">https://api.github.com/meta&lt;/a>&lt;/p>
+&lt;h2 id="参考">参考&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://support.google.com/a/answer/10026322?hl=en">https://support.google.com/a/answer/10026322?hl=en&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-githubs-ip-addresses">https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-githubs-ip-addresses&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>xrdp</title><link>https://qtopie.github.io/notes/linux/remote-desktop-with-xrdp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/linux/remote-desktop-with-xrdp/</guid><description>&lt;h1 id="xrdp">xrdp&lt;/h1>
 &lt;p>&lt;em>Connect to Ubuntu Desktop remotely with xrdp&lt;/em>&lt;/p>
 &lt;h2 id="environment">Environment&lt;/h2>
 &lt;ul>
