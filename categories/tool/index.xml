@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tool on Blog | qtopierw</title><link>https://qtopie.github.io/categories/tool/</link><description>Recent content in Tool on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><managingEditor>qtopie.rw@gmail.com (qtopierw)</managingEditor><webMaster>qtopie.rw@gmail.com (qtopierw)</webMaster><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Tue, 06 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/categories/tool/index.xml" rel="self" type="application/rss+xml"/><item><title>VIM安装笔记</title><link>https://qtopie.github.io/notes/vim/build-and-install-latest-vim/</link><pubDate>Tue, 06 Apr 2021 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/vim/build-and-install-latest-vim/</guid><description>&lt;h1 id="vim-安装">VIM 安装&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Tool on Blog | qtopierw</title><link>https://qtopie.github.io/categories/tool/</link><description>Recent content in Tool on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Tue, 06 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/categories/tool/index.xml" rel="self" type="application/rss+xml"/><item><title>VIM安装笔记</title><link>https://qtopie.github.io/notes/vim/build-and-install-latest-vim/</link><pubDate>Tue, 06 Apr 2021 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/vim/build-and-install-latest-vim/</guid><description>&lt;h1 id="vim-安装">VIM 安装&lt;/h1>
 &lt;p>由于debian发行版维护的vim包还未升级到最新版本，但govim需要较高版本的vim。故选择手动编译安装。这里直接选择最新版本8.2， 对应于最新的git tag版本， &lt;a href="https://www.vim.org/vim-8.2-released.php">8.2版本有一些实用性的功能&lt;/a>。&lt;/p>
 &lt;p>&lt;strong>环境&lt;/strong>&lt;/p>
 &lt;ul>
@@ -36,7 +36,7 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt install checkinstall
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo checkinstall
-&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title>使用Hugo生成静态站点</title><link>https://qtopie.github.io/posts/hugo/getting-started-with-hugo/</link><pubDate>Mon, 02 May 2016 00:06:17 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/hugo/getting-started-with-hugo/</guid><description>&lt;p>本文主要分享如何使用Hugo生成静态站点，并部署到firebase (Hosting服务）上。&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>checkinstall&lt;/code>执行完后，会安装到&lt;code>/usr/local/bin/vim&lt;/code> 即可。&lt;/p></description></item><item><title>使用Hugo生成静态站点</title><link>https://qtopie.github.io/posts/hugo/getting-started-with-hugo/</link><pubDate>Mon, 02 May 2016 00:06:17 +0800</pubDate><guid>https://qtopie.github.io/posts/hugo/getting-started-with-hugo/</guid><description>&lt;p>本文主要分享如何使用Hugo生成静态站点，并部署到firebase (Hosting服务）上。&lt;/p>
 &lt;p>updated: 2021/9/29&lt;/p>
 &lt;h2 id="静态站点">静态站点&lt;/h2>
 &lt;p>静态站点，相比于动态站点（一般指需要请求后端动态生成网站内容）来说，网站内容已提前渲染好，对搜索引擎更加友好。而且网站内容一般可以直接生成静态的html/css页面, 减少浏览器js渲染，网络传输时也可以充分利用缓存, 这样网页加载也比较快， 使用户体验更好。&lt;/p>
@@ -76,4 +76,15 @@
 &lt;li>在github创建私有仓库&lt;code>qtopie.web.app&lt;/code>（作为集成仓库）, 对应于站点名称，存放站点配置文件。&lt;/li>
 &lt;li>创建firebase hosting项目，将站点&lt;code>qtopie.web.app&lt;/code>发布到firebase.&lt;/li>
 &lt;/ul>
-&lt;p>&lt;em>仓库创建过程省略&lt;/em>&lt;/p></description></item></channel></rss>
+&lt;p>&lt;em>仓库创建过程省略&lt;/em>&lt;/p>
+&lt;h3 id="hugo安装">Hugo安装&lt;/h3>
+&lt;p>以在Ubuntu 20.04上为例&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo snap install hugo
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="本地生成站点">本地生成站点&lt;/h3>
+&lt;p>初始化git各模块&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>// git clone ... ; &lt;span style="color:#366">cd&lt;/span> &amp;lt;repo&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hugo new site .
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git submodule add https://github.com/qtopierw/amp-blog-theme.git themes/amp-blog-theme
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git submodule add git@github.com:&amp;lt;username&amp;gt;/posts.git content/posts
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>创建&lt;code>.gitignore&lt;/code>文件, 并加入&lt;code>public&lt;/code>目录&lt;/p></description></item></channel></rss>

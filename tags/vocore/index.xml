@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Vocore on Blog | qtopierw</title><link>https://qtopie.github.io/tags/vocore/</link><description>Recent content in Vocore on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><managingEditor>qtopie.rw@gmail.com (qtopierw)</managingEditor><webMaster>qtopie.rw@gmail.com (qtopierw)</webMaster><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Thu, 26 Jul 2018 22:24:33 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/vocore/index.xml" rel="self" type="application/rss+xml"/><item><title>我的DIY与vocore</title><link>https://qtopie.github.io/notes/iot/vocore/my-vocore-playground/</link><pubDate>Thu, 26 Jul 2018 22:24:33 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/iot/vocore/my-vocore-playground/</guid><description>&lt;h2 id="vocorehttpvocoreio">&lt;a href="http://vocore.io/">VoCore&lt;/a>&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Vocore on Blog | qtopierw</title><link>https://qtopie.github.io/tags/vocore/</link><description>Recent content in Vocore on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Thu, 26 Jul 2018 22:24:33 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/vocore/index.xml" rel="self" type="application/rss+xml"/><item><title>我的DIY与vocore</title><link>https://qtopie.github.io/notes/iot/vocore/my-vocore-playground/</link><pubDate>Thu, 26 Jul 2018 22:24:33 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/vocore/my-vocore-playground/</guid><description>&lt;h2 id="vocorehttpvocoreio">&lt;a href="http://vocore.io/">VoCore&lt;/a>&lt;/h2>
 &lt;p>硬币大小的Linux计算机（或者可以DIY的mini路由器）&lt;/p>
 &lt;h2 id="技术参数">技术参数&lt;/h2>
 &lt;ul>
@@ -25,4 +25,26 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>uci &lt;span style="color:#366">set&lt;/span> &amp;lt;OPTION&amp;gt;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># 查看option&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>uci show &amp;lt;OPTION&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;h2 id="我的定制">我的定制&lt;/h2>
+&lt;h3 id="基本设置">基本设置&lt;/h3>
+&lt;ul>
+&lt;li>Change SSID Name&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>uci &lt;span style="color:#366">set&lt;/span> wireless.ap.ssid&lt;span style="color:#555">=&lt;/span>&lt;span style="color:#c30">&amp;#39;firefly&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>uci commit 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># check result&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>uci show wireless.ap.ssid
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># restart networking service to make reload configuration&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/etc/init.d/network restart
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># check network in another machine&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo iw dev wlan0 scan | grep SSID
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="wget-ssl">wget ssl&lt;/h2>
+&lt;pre tabindex="0">&lt;code>opkg install libustream-openssl ca-bundle ca-certificates
+&lt;/code>&lt;/pre>&lt;h3 id="apsta模式-或者叫无线中继器">AP+STA模式 （或者叫无线中继器）&lt;/h3>
+&lt;ul>
+&lt;li>使用固件 &lt;a href="http://vonger.cn/misc/vocore2/20180723V.bin">vocore2-20180723V&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>配置信息(仅供参考)：&lt;/p></description></item></channel></rss>

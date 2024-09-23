@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Latex on Blog | qtopierw</title><link>https://qtopie.github.io/tags/latex/</link><description>Recent content in Latex on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><managingEditor>qtopie.rw@gmail.com (qtopierw)</managingEditor><webMaster>qtopie.rw@gmail.com (qtopierw)</webMaster><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Thu, 20 Dec 2018 16:21:55 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/latex/index.xml" rel="self" type="application/rss+xml"/><item><title>Math in Markdown</title><link>https://qtopie.github.io/posts/hugo/math-in-markdown/</link><pubDate>Thu, 20 Dec 2018 16:21:55 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/hugo/math-in-markdown/</guid><description>&lt;h2 id="latex">LaTeX&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Latex on Blog | qtopierw</title><link>https://qtopie.github.io/tags/latex/</link><description>Recent content in Latex on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Thu, 20 Dec 2018 16:21:55 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/latex/index.xml" rel="self" type="application/rss+xml"/><item><title>Math in Markdown</title><link>https://qtopie.github.io/posts/hugo/math-in-markdown/</link><pubDate>Thu, 20 Dec 2018 16:21:55 +0800</pubDate><guid>https://qtopie.github.io/posts/hugo/math-in-markdown/</guid><description>&lt;h2 id="latex">LaTeX&lt;/h2>
 &lt;h3 id="configuration">Configuration&lt;/h3>
 &lt;p>I prefer to configure formular delimiters with the way using brackets:&lt;/p>
 &lt;pre tabindex="0">&lt;code>inline: \(...\)
@@ -11,4 +11,9 @@ For &lt;code>mathJax&lt;/code>, it&amp;rsquo;s provided in the default configura
 &lt;p>&lt;code>A_n^n=n\times(n-1)\times(n-2)\times...\times2\times1&lt;/code>&lt;/p>
 &lt;p>&lt;code>A_n^m=n\times(n-1)\times(n-2)\times...\times(n-m+1) = \frac{n!}{(n-m)!}&lt;/code>&lt;/p>
 &lt;h2 id="combination">Combination&lt;/h2>
-&lt;p>&lt;code>C_n^m=\frac{A_n^m}{A_m^m} = \frac{n!}{m!(n-m)!}&lt;/code>&lt;/p></description></item></channel></rss>
+&lt;p>&lt;code>C_n^m=\frac{A_n^m}{A_m^m} = \frac{n!}{m!(n-m)!}&lt;/code>&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-math" data-lang="math">C_n^m=C_n^{n-m}
+&lt;/code>&lt;/pre>&lt;p>&lt;code>C_{n+1}^{r+1} = C_n^r + C_n^{r+1}&lt;/code>&lt;/p>
+&lt;h3 id="binomial-theorem">Binomial theorem&lt;/h3>
+&lt;pre tabindex="0">&lt;code class="language-math" data-lang="math">(a+b)^n = \sum_{i=0}^n{{C_n^i}a^{n-i}b^i} \tag 1
+&lt;/code>&lt;/pre>&lt;p>&lt;code>2^n =\sum_{i=0}^n{{C_n^i}} = C_n^0 + C_n^1 + C_n^2 + ... + C_n^n&lt;/code>&lt;/p></description></item></channel></rss>

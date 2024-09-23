@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>4G LTE on Blog | qtopierw</title><link>https://qtopie.github.io/tags/4g-lte/</link><description>Recent content in 4G LTE on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><managingEditor>qtopie.rw@gmail.com (qtopierw)</managingEditor><webMaster>qtopie.rw@gmail.com (qtopierw)</webMaster><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Wed, 05 Dec 2018 22:36:06 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/4g-lte/index.xml" rel="self" type="application/rss+xml"/><item><title>树莓派4G模块</title><link>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</link><pubDate>Wed, 05 Dec 2018 22:36:06 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</guid><description>&lt;h2 id="准备环境">准备环境&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>4G LTE on Blog | qtopierw</title><link>https://qtopie.github.io/tags/4g-lte/</link><description>Recent content in 4G LTE on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Wed, 05 Dec 2018 22:36:06 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/4g-lte/index.xml" rel="self" type="application/rss+xml"/><item><title>树莓派4G模块</title><link>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</link><pubDate>Wed, 05 Dec 2018 22:36:06 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</guid><description>&lt;h2 id="准备环境">准备环境&lt;/h2>
 &lt;ul>
 &lt;li>树莓派3B&lt;/li>
 &lt;li>华为4G模块：HUAWEI ME909s-821&lt;/li>
@@ -30,4 +30,29 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Bus &lt;span style="color:#f60">001&lt;/span> Device 003: ID 0424:ec00 Standard Microsystems Corp. SMSC9512/9514 Fast Ethernet Adapter
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Bus &lt;span style="color:#f60">001&lt;/span> Device 002: ID 0424:9514 Standard Microsystems Corp. SMC9514 Hub
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Bus &lt;span style="color:#f60">001&lt;/span> Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
-&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>安装拨号软件&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo apt-get update
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt-get install ppp usb-modeswitch wvdial
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>初始化wvdial配置&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo wvdialconf /etc/wvdial.conf
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>修改&lt;code>wvdial&lt;/code>配置&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>[Dialer Defaults]
+Init1 = ATZ
+Init2 = ATQ0 V1 E1 S0=0
+Init3 = AT+CGDCONT=1,&amp;#34;IP&amp;#34;, &amp;#34;cmnet&amp;#34;
+Modem Type = Analog Modem
+Baud = 9600
+New PPPD = yes
+Modem = /dev/ttyUSB0
+ISDN = 0
+Phone = *99***1#
+Password = { }
+Username = { }
+Auto DNS = on
+&lt;/code>&lt;/pre>&lt;p>APN和拨号设置参考&lt;/p></description></item></channel></rss>

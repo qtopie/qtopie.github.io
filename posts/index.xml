@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Blog | qtopierw</title><link>https://qtopie.github.io/posts/</link><description>Recent content in Posts on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><managingEditor>qtopie.rw@gmail.com (qtopierw)</managingEditor><webMaster>qtopie.rw@gmail.com (qtopierw)</webMaster><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Sat, 18 Jul 2020 22:02:05 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>使用API管理cloudcone主机</title><link>https://qtopie.github.io/posts/diy/cloudcone-save-costs/</link><pubDate>Sat, 18 Jul 2020 22:02:05 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/diy/cloudcone-save-costs/</guid><description>&lt;p>&lt;a href="https://app.cloudcone.com/?ref=4442">Cloudcone&lt;/a>是2017年成立于美国的一家主机供应商。继vultr变得“不靠谱”和低价vm资源经常“售尽”的情况下，我转而使用cloudcone提供的vps服务用于日常学习和开发。&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Blog | qtopierw</title><link>https://qtopie.github.io/posts/</link><description>Recent content in Posts on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Sat, 18 Jul 2020 22:02:05 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>使用API管理cloudcone主机</title><link>https://qtopie.github.io/posts/diy/cloudcone-save-costs/</link><pubDate>Sat, 18 Jul 2020 22:02:05 +0800</pubDate><guid>https://qtopie.github.io/posts/diy/cloudcone-save-costs/</guid><description>&lt;p>&lt;a href="https://app.cloudcone.com/?ref=4442">Cloudcone&lt;/a>是2017年成立于美国的一家主机供应商。继vultr变得“不靠谱”和低价vm资源经常“售尽”的情况下，我转而使用cloudcone提供的vps服务用于日常学习和开发。&lt;/p>
 &lt;p>除了支持按小时计费、提供更换IP服务及支持支付宝/paypal等灵活的支付方式外，我最看重的是，它的价格能做到真正的弹性，即在vm关机状态不计费CPU/内存等费用,比online费用大概减半。&lt;/p>
 &lt;p>类似于其他云供应商平台，cloudcone还提供了&lt;a href="https://api.cloudcone.com/">开放的API来管理云主机&lt;/a>。&lt;/p>
 &lt;p>这里为了方便使用和合理控制资源，自己便用go写了一个小程序&lt;/p>
@@ -18,7 +18,165 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	hashCode = &lt;span style="color:#c30">&amp;#34;zXqV22222222222222222222222222222222225bL&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>serverID&lt;/code>可以在compute菜单控制面板下查看，或查看浏览器url里的参数。&lt;/p>
-&lt;p>&lt;code>appSecret&lt;/code>和&lt;code>hashCode&lt;/code>访问https://app.cloudcone.com/user/api创建即可。&lt;/p></description></item><item><title>Math in Markdown</title><link>https://qtopie.github.io/posts/hugo/math-in-markdown/</link><pubDate>Thu, 20 Dec 2018 16:21:55 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/hugo/math-in-markdown/</guid><description>&lt;h2 id="latex">LaTeX&lt;/h2>
+&lt;p>&lt;code>appSecret&lt;/code>和&lt;code>hashCode&lt;/code>访问https://app.cloudcone.com/user/api创建即可。&lt;/p>
+&lt;ul>
+&lt;li>main.go&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">/*
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">* cloudcone api https://api.cloudcone.com/
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">package&lt;/span> main
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;context&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;encoding/json&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;errors&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;io/ioutil&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;log&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;net/http&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;os&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;sync&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;time&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;github.com/robfig/cron&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">// CloudconeResponse represents the API Response
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span>&lt;span style="color:#069;font-weight:bold">type&lt;/span> CloudconeResponse &lt;span style="color:#069;font-weight:bold">struct&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	Status &lt;span style="color:#078;font-weight:bold">int&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	Message &lt;span style="color:#078;font-weight:bold">string&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	Data &lt;span style="color:#069;font-weight:bold">interface&lt;/span>{} &lt;span style="color:#c30">`json:&amp;#34;_data&amp;#34;`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">const&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	baseAPIURL = &lt;span style="color:#c30">&amp;#34;https://api.cloudcone.com/api/v1&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">var&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	client = &lt;span style="color:#555">&amp;amp;&lt;/span>http.Client{}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">func&lt;/span> &lt;span style="color:#c0f">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	f, err &lt;span style="color:#555">:=&lt;/span> os.&lt;span style="color:#c0f">OpenFile&lt;/span>(&lt;span style="color:#c30">&amp;#34;app.log&amp;#34;&lt;/span>, os.O_RDWR|os.O_CREATE|os.O_APPEND|os.O_TRUNC, &lt;span style="color:#f60">0644&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		log.&lt;span style="color:#c0f">Fatalf&lt;/span>(&lt;span style="color:#c30">&amp;#34;Error while opening file: %v\n&amp;#34;&lt;/span>, err)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">defer&lt;/span> f.&lt;span style="color:#c0f">Close&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	log.&lt;span style="color:#c0f">SetOutput&lt;/span>(f)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	wg &lt;span style="color:#555">:=&lt;/span> sync.WaitGroup{}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	_, cancel &lt;span style="color:#555">:=&lt;/span> context.&lt;span style="color:#c0f">WithCancel&lt;/span>(context.&lt;span style="color:#c0f">Background&lt;/span>())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	c &lt;span style="color:#555">:=&lt;/span> cron.&lt;span style="color:#c0f">New&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#09f;font-style:italic">// boot at 07:00
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span>	c.&lt;span style="color:#c0f">AddFunc&lt;/span>(&lt;span style="color:#c30">&amp;#34;0 0 7 * * *&amp;#34;&lt;/span>, &lt;span style="color:#069;font-weight:bold">func&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		log.&lt;span style="color:#c0f">Println&lt;/span>(&lt;span style="color:#c30">&amp;#34;booting at time&amp;#34;&lt;/span>, time.&lt;span style="color:#c0f">Now&lt;/span>())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">:=&lt;/span> &lt;span style="color:#c0f">boot&lt;/span>(); err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			log.&lt;span style="color:#c0f">Println&lt;/span>(err)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			time.&lt;span style="color:#c0f">Sleep&lt;/span>(&lt;span style="color:#f60">15&lt;/span> &lt;span style="color:#555">*&lt;/span> time.Second)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			&lt;span style="color:#09f;font-style:italic">// try again
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span>			&lt;span style="color:#c0f">boot&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	})
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#09f;font-style:italic">// shutdown at 23:45
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span>	c.&lt;span style="color:#c0f">AddFunc&lt;/span>(&lt;span style="color:#c30">&amp;#34;0 45 23 * * *&amp;#34;&lt;/span>, &lt;span style="color:#069;font-weight:bold">func&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		log.&lt;span style="color:#c0f">Println&lt;/span>(&lt;span style="color:#c30">&amp;#34;Shutdown at time&amp;#34;&lt;/span>, time.&lt;span style="color:#c0f">Now&lt;/span>())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">:=&lt;/span> &lt;span style="color:#c0f">shutdown&lt;/span>(); err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			log.&lt;span style="color:#c0f">Println&lt;/span>(err)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			time.&lt;span style="color:#c0f">Sleep&lt;/span>(&lt;span style="color:#f60">15&lt;/span> &lt;span style="color:#555">*&lt;/span> time.Second)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			&lt;span style="color:#09f;font-style:italic">// try again
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span>			&lt;span style="color:#c0f">shutdown&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	})
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	c.&lt;span style="color:#c0f">Start&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	wg.&lt;span style="color:#c0f">Add&lt;/span>(&lt;span style="color:#f60">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">go&lt;/span> &lt;span style="color:#069;font-weight:bold">func&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">defer&lt;/span> wg.&lt;span style="color:#c0f">Done&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		os.Stdin.&lt;span style="color:#c0f">Read&lt;/span>(&lt;span style="color:#366">make&lt;/span>([]&lt;span style="color:#078;font-weight:bold">byte&lt;/span>, &lt;span style="color:#f60">1&lt;/span>)) &lt;span style="color:#09f;font-style:italic">// wait for Enter keystroke
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span>		c.&lt;span style="color:#c0f">Stop&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#c0f">cancel&lt;/span>() &lt;span style="color:#09f;font-style:italic">// cancel the associated context
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span>	}()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	log.&lt;span style="color:#c0f">Println&lt;/span>(&lt;span style="color:#c30">&amp;#34;Running...&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	wg.&lt;span style="color:#c0f">Wait&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">func&lt;/span> &lt;span style="color:#c0f">boot&lt;/span>() &lt;span style="color:#078;font-weight:bold">error&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#09f;font-style:italic">// compute/:id/boot
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span>	endpoint &lt;span style="color:#555">:=&lt;/span> fmt.&lt;span style="color:#c0f">Sprintf&lt;/span>(&lt;span style="color:#c30">&amp;#34;%s/compute/%d/%s&amp;#34;&lt;/span>, baseAPIURL, serverID, &lt;span style="color:#c30">&amp;#34;boot&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	req, err &lt;span style="color:#555">:=&lt;/span> http.&lt;span style="color:#c0f">NewRequest&lt;/span>(&lt;span style="color:#c30">&amp;#34;GET&amp;#34;&lt;/span>, endpoint, &lt;span style="color:#069;font-weight:bold">nil&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> err
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	req.Header.&lt;span style="color:#c0f">Set&lt;/span>(&lt;span style="color:#c30">&amp;#34;App-Secret&amp;#34;&lt;/span>, appSecret)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	req.Header.&lt;span style="color:#c0f">Set&lt;/span>(&lt;span style="color:#c30">&amp;#34;Hash&amp;#34;&lt;/span>, hashCode)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	resp, err &lt;span style="color:#555">:=&lt;/span> client.&lt;span style="color:#c0f">Do&lt;/span>(req)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> err
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">defer&lt;/span> resp.Body.&lt;span style="color:#c0f">Close&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	body, err &lt;span style="color:#555">:=&lt;/span> ioutil.&lt;span style="color:#c0f">ReadAll&lt;/span>(resp.Body)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> err
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	fmt.&lt;span style="color:#c0f">Println&lt;/span>(&lt;span style="color:#366">string&lt;/span>(body))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">var&lt;/span> dat CloudconeResponse
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">:=&lt;/span> json.&lt;span style="color:#c0f">Unmarshal&lt;/span>(body, &lt;span style="color:#555">&amp;amp;&lt;/span>dat); err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> err
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> dat.Status &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#f60">1&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> errors.&lt;span style="color:#c0f">New&lt;/span>(dat.Message)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	log.&lt;span style="color:#c0f">Println&lt;/span>(dat.Message)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">return&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">func&lt;/span> &lt;span style="color:#c0f">shutdown&lt;/span>() &lt;span style="color:#078;font-weight:bold">error&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#09f;font-style:italic">// compute/:id/shutdown
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span>	endpoint &lt;span style="color:#555">:=&lt;/span> fmt.&lt;span style="color:#c0f">Sprintf&lt;/span>(&lt;span style="color:#c30">&amp;#34;%s/compute/%d/%s&amp;#34;&lt;/span>, baseAPIURL, serverID, &lt;span style="color:#c30">&amp;#34;shutdown&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	req, err &lt;span style="color:#555">:=&lt;/span> http.&lt;span style="color:#c0f">NewRequest&lt;/span>(&lt;span style="color:#c30">&amp;#34;GET&amp;#34;&lt;/span>, endpoint, &lt;span style="color:#069;font-weight:bold">nil&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> err
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	req.Header.&lt;span style="color:#c0f">Set&lt;/span>(&lt;span style="color:#c30">&amp;#34;App-Secret&amp;#34;&lt;/span>, appSecret)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	req.Header.&lt;span style="color:#c0f">Set&lt;/span>(&lt;span style="color:#c30">&amp;#34;Hash&amp;#34;&lt;/span>, hashCode)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	resp, err &lt;span style="color:#555">:=&lt;/span> client.&lt;span style="color:#c0f">Do&lt;/span>(req)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> err
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">defer&lt;/span> resp.Body.&lt;span style="color:#c0f">Close&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	body, err &lt;span style="color:#555">:=&lt;/span> ioutil.&lt;span style="color:#c0f">ReadAll&lt;/span>(resp.Body)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> err
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">var&lt;/span> dat CloudconeResponse
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">:=&lt;/span> json.&lt;span style="color:#c0f">Unmarshal&lt;/span>(body, &lt;span style="color:#555">&amp;amp;&lt;/span>dat); err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> err
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> dat.Status &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#f60">1&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> errors.&lt;span style="color:#c0f">New&lt;/span>(dat.Message)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	log.&lt;span style="color:#c0f">Println&lt;/span>(dat.Message)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">return&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="参考">参考&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://www.vpsjxw.com/provider_intro/cloudcone_intro/">cloudcone中文介绍&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Math in Markdown</title><link>https://qtopie.github.io/posts/hugo/math-in-markdown/</link><pubDate>Thu, 20 Dec 2018 16:21:55 +0800</pubDate><guid>https://qtopie.github.io/posts/hugo/math-in-markdown/</guid><description>&lt;h2 id="latex">LaTeX&lt;/h2>
 &lt;h3 id="configuration">Configuration&lt;/h3>
 &lt;p>I prefer to configure formular delimiters with the way using brackets:&lt;/p>
 &lt;pre tabindex="0">&lt;code>inline: \(...\)
@@ -31,7 +189,12 @@ For &lt;code>mathJax&lt;/code>, it&amp;rsquo;s provided in the default configura
 &lt;p>&lt;code>A_n^n=n\times(n-1)\times(n-2)\times...\times2\times1&lt;/code>&lt;/p>
 &lt;p>&lt;code>A_n^m=n\times(n-1)\times(n-2)\times...\times(n-m+1) = \frac{n!}{(n-m)!}&lt;/code>&lt;/p>
 &lt;h2 id="combination">Combination&lt;/h2>
-&lt;p>&lt;code>C_n^m=\frac{A_n^m}{A_m^m} = \frac{n!}{m!(n-m)!}&lt;/code>&lt;/p></description></item><item><title>怎样安全地Root你的安卓手机</title><link>https://qtopie.github.io/posts/diy/root-your-android-phone/</link><pubDate>Sun, 04 Nov 2018 20:29:38 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/diy/root-your-android-phone/</guid><description>&lt;p>出于各种原因，我们可能会对自己手机上的安卓系统并不满意，而Root是我们DIY自己的安卓机的一把钥匙。&lt;/p>
+&lt;p>&lt;code>C_n^m=\frac{A_n^m}{A_m^m} = \frac{n!}{m!(n-m)!}&lt;/code>&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-math" data-lang="math">C_n^m=C_n^{n-m}
+&lt;/code>&lt;/pre>&lt;p>&lt;code>C_{n+1}^{r+1} = C_n^r + C_n^{r+1}&lt;/code>&lt;/p>
+&lt;h3 id="binomial-theorem">Binomial theorem&lt;/h3>
+&lt;pre tabindex="0">&lt;code class="language-math" data-lang="math">(a+b)^n = \sum_{i=0}^n{{C_n^i}a^{n-i}b^i} \tag 1
+&lt;/code>&lt;/pre>&lt;p>&lt;code>2^n =\sum_{i=0}^n{{C_n^i}} = C_n^0 + C_n^1 + C_n^2 + ... + C_n^n&lt;/code>&lt;/p></description></item><item><title>怎样安全地Root你的安卓手机</title><link>https://qtopie.github.io/posts/diy/root-your-android-phone/</link><pubDate>Sun, 04 Nov 2018 20:29:38 +0800</pubDate><guid>https://qtopie.github.io/posts/diy/root-your-android-phone/</guid><description>&lt;p>出于各种原因，我们可能会对自己手机上的安卓系统并不满意，而Root是我们DIY自己的安卓机的一把钥匙。&lt;/p>
 &lt;p>注意手机Root后并不一定安全，本文仅仅说的是用安全（较为透明公开）的方式自己root你的手机。&lt;/p>
 &lt;p>但安全永远是相对的，如果你对手机ROOT后的安全性有较大顾虑，请不要进行该操作。&lt;/p>
 &lt;p>对ROOT后的设备，也请远离流氓软件和恶意网站，尽可能使用可信度高的应用与服务。&lt;/p>
@@ -67,7 +230,34 @@ For &lt;code>mathJax&lt;/code>, it&amp;rsquo;s provided in the default configura
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>adb kill-server &lt;span style="color:#555">&amp;amp;&amp;amp;&lt;/span> adb start-server
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>adb devices
-&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title>使用Hugo生成静态站点</title><link>https://qtopie.github.io/posts/hugo/getting-started-with-hugo/</link><pubDate>Mon, 02 May 2016 00:06:17 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/hugo/getting-started-with-hugo/</guid><description>&lt;p>本文主要分享如何使用Hugo生成静态站点，并部署到firebase (Hosting服务）上。&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>
+&lt;p>重启手机进入&lt;code>download&lt;/code>模式&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>adb reboot download
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>解锁bootloader&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>fastboot oem unlock
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fastboot flashing unlock
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;h2 id="刷入twrp到recovery">刷入twrp到Recovery&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>在&lt;code>download&lt;/code>模式中刷入recovery&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>fastboot flash recovery twrp.img
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fastboot reboot recovery
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;h2 id="刷入magisk文件">刷入Magisk文件&lt;/h2>
+&lt;p>在上述步骤完成进入recovery后，可以看到twrp的一些管理菜单，选择安装我们刚才下载的magisk zip文件， 完成后重启手机。&lt;/p>
+&lt;h2 id="定制自己的rom极客需要熟悉一些计算机程序知识">定制自己的ROM（极客，需要熟悉一些计算机程序知识）&lt;/h2>
+&lt;p>推荐一个工具来完成 &lt;a href="https://github.com/artificerpi/android_system_extraction_and_repack_tool">https://github.com/artificerpi/android_system_extraction_and_repack_tool&lt;/a>&lt;/p>
+&lt;h2 id="参考">参考&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://twrp.me/htc/htcu11.html">https://twrp.me/htc/htcu11.html&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>使用Hugo生成静态站点</title><link>https://qtopie.github.io/posts/hugo/getting-started-with-hugo/</link><pubDate>Mon, 02 May 2016 00:06:17 +0800</pubDate><guid>https://qtopie.github.io/posts/hugo/getting-started-with-hugo/</guid><description>&lt;p>本文主要分享如何使用Hugo生成静态站点，并部署到firebase (Hosting服务）上。&lt;/p>
 &lt;p>updated: 2021/9/29&lt;/p>
 &lt;h2 id="静态站点">静态站点&lt;/h2>
 &lt;p>静态站点，相比于动态站点（一般指需要请求后端动态生成网站内容）来说，网站内容已提前渲染好，对搜索引擎更加友好。而且网站内容一般可以直接生成静态的html/css页面, 减少浏览器js渲染，网络传输时也可以充分利用缓存, 这样网页加载也比较快， 使用户体验更好。&lt;/p>
@@ -107,4 +297,15 @@ For &lt;code>mathJax&lt;/code>, it&amp;rsquo;s provided in the default configura
 &lt;li>在github创建私有仓库&lt;code>qtopie.web.app&lt;/code>（作为集成仓库）, 对应于站点名称，存放站点配置文件。&lt;/li>
 &lt;li>创建firebase hosting项目，将站点&lt;code>qtopie.web.app&lt;/code>发布到firebase.&lt;/li>
 &lt;/ul>
-&lt;p>&lt;em>仓库创建过程省略&lt;/em>&lt;/p></description></item></channel></rss>
+&lt;p>&lt;em>仓库创建过程省略&lt;/em>&lt;/p>
+&lt;h3 id="hugo安装">Hugo安装&lt;/h3>
+&lt;p>以在Ubuntu 20.04上为例&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo snap install hugo
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="本地生成站点">本地生成站点&lt;/h3>
+&lt;p>初始化git各模块&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>// git clone ... ; &lt;span style="color:#366">cd&lt;/span> &amp;lt;repo&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hugo new site .
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git submodule add https://github.com/qtopierw/amp-blog-theme.git themes/amp-blog-theme
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git submodule add git@github.com:&amp;lt;username&amp;gt;/posts.git content/posts
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>创建&lt;code>.gitignore&lt;/code>文件, 并加入&lt;code>public&lt;/code>目录&lt;/p></description></item></channel></rss>

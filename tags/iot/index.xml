@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Iot on Blog | qtopierw</title><link>https://qtopie.github.io/tags/iot/</link><description>Recent content in Iot on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><managingEditor>qtopie.rw@gmail.com (qtopierw)</managingEditor><webMaster>qtopie.rw@gmail.com (qtopierw)</webMaster><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Mon, 03 Aug 2020 23:33:04 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/iot/index.xml" rel="self" type="application/rss+xml"/><item><title>自动控制风扇温度</title><link>https://qtopie.github.io/notes/iot/rpi/fan-and-tempature/</link><pubDate>Mon, 03 Aug 2020 23:33:04 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/iot/rpi/fan-and-tempature/</guid><description>&lt;p>最近购买了一个树莓派4B 4G内存版，替换了旧的Model3 (强迫症犯了，就为了换成type c口，但因为电源适配问题还是老老实实地又买了官方电源适配器）&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Iot on Blog | qtopierw</title><link>https://qtopie.github.io/tags/iot/</link><description>Recent content in Iot on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Mon, 03 Aug 2020 23:33:04 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/iot/index.xml" rel="self" type="application/rss+xml"/><item><title>自动控制风扇温度</title><link>https://qtopie.github.io/notes/iot/rpi/fan-and-tempature/</link><pubDate>Mon, 03 Aug 2020 23:33:04 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/fan-and-tempature/</guid><description>&lt;p>最近购买了一个树莓派4B 4G内存版，替换了旧的Model3 (强迫症犯了，就为了换成type c口，但因为电源适配问题还是老老实实地又买了官方电源适配器）&lt;/p>
 &lt;p>树莓派4B相对3B性能提高不少，但是随之功耗和发热也上去了。 于是给它整了个金属外壳&lt;/p>
 &lt;p>&lt;div class="fixed-height-container">
  &lt;amp-img class="contain" alt="" src="https://qtopie.github.io/notes/iot/rpi/fan-and-tempature.assets/img-20211029155258.webp" 
@@ -19,4 +19,69 @@
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#033">cpu&lt;/span>&lt;span style="color:#555">=&lt;/span>&lt;span style="color:#069;font-weight:bold">$(&lt;/span>&amp;lt;/sys/class/thermal/thermal_zone0/temp&lt;span style="color:#069;font-weight:bold">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#366">echo&lt;/span> &lt;span style="color:#c30">&amp;#34;&lt;/span>&lt;span style="color:#069;font-weight:bold">$((&lt;/span>cpu/1000&lt;span style="color:#069;font-weight:bold">))&lt;/span>&lt;span style="color:#c30"> c&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="代码实现">代码实现&lt;/h2>
+&lt;p>网上已经有不少python版本的实现，但作为一个go粉，当然选择用go来实现了，正好练习一下gobot包的使用&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">package&lt;/span> main
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;time&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;gobot.io/x/gobot&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;gobot.io/x/gobot/drivers/gpio&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;gobot.io/x/gobot/platforms/raspi&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;io/ioutil&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;log&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;strconv&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;strings&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">func&lt;/span> &lt;span style="color:#c0f">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	low, high &lt;span style="color:#555">:=&lt;/span> &lt;span style="color:#f60">50&lt;/span>, &lt;span style="color:#f60">58&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	r &lt;span style="color:#555">:=&lt;/span> raspi.&lt;span style="color:#c0f">NewAdaptor&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	sw &lt;span style="color:#555">:=&lt;/span> gpio.&lt;span style="color:#c0f">NewDirectPinDriver&lt;/span>(r, &lt;span style="color:#c30">&amp;#34;18&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	work &lt;span style="color:#555">:=&lt;/span> &lt;span style="color:#069;font-weight:bold">func&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		gobot.&lt;span style="color:#c0f">Every&lt;/span>(&lt;span style="color:#f60">5&lt;/span>&lt;span style="color:#555">*&lt;/span>time.Second, &lt;span style="color:#069;font-weight:bold">func&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			t &lt;span style="color:#555">:=&lt;/span> &lt;span style="color:#c0f">readCpuTemp&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			log.&lt;span style="color:#c0f">Println&lt;/span>(&lt;span style="color:#c30">&amp;#34;Temp&amp;#34;&lt;/span>, t&lt;span style="color:#555">/&lt;/span>&lt;span style="color:#f60">1000&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			&lt;span style="color:#069;font-weight:bold">if&lt;/span> t &amp;lt; low&lt;span style="color:#555">*&lt;/span>&lt;span style="color:#f60">1000&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>				sw.&lt;span style="color:#c0f">Off&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			&lt;span style="color:#069;font-weight:bold">if&lt;/span> t &amp;gt; high&lt;span style="color:#555">*&lt;/span>&lt;span style="color:#f60">1000&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#09f;font-style:italic">// turn on only ater 7 oclock
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span>				&lt;span style="color:#069;font-weight:bold">if&lt;/span> h, _, _ &lt;span style="color:#555">:=&lt;/span> time.&lt;span style="color:#c0f">Now&lt;/span>().&lt;span style="color:#c0f">Clock&lt;/span>(); h &amp;gt; &lt;span style="color:#f60">7&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>					sw.&lt;span style="color:#c0f">On&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>				}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		})
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	robot &lt;span style="color:#555">:=&lt;/span> gobot.&lt;span style="color:#c0f">NewRobot&lt;/span>(&lt;span style="color:#c30">&amp;#34;blinkBot&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		[]gobot.Connection{r},
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		[]gobot.Device{sw},
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		work,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	robot.&lt;span style="color:#c0f">Start&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">func&lt;/span> &lt;span style="color:#c0f">readCpuTemp&lt;/span>() &lt;span style="color:#078;font-weight:bold">int&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">var&lt;/span> na = &lt;span style="color:#555">-&lt;/span>&lt;span style="color:#f60">274150&lt;/span> &lt;span style="color:#09f;font-style:italic">// set not valid value to -274.15C
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span>	dat, err &lt;span style="color:#555">:=&lt;/span> ioutil.&lt;span style="color:#c0f">ReadFile&lt;/span>(&lt;span style="color:#c30">&amp;#34;/sys/class/thermal/thermal_zone0/temp&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		log.&lt;span style="color:#c0f">Println&lt;/span>(err)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> na
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	s &lt;span style="color:#555">:=&lt;/span> strings.&lt;span style="color:#c0f">TrimSuffix&lt;/span>(&lt;span style="color:#366">string&lt;/span>(dat), &lt;span style="color:#c30">&amp;#34;\n&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	t, err &lt;span style="color:#555">:=&lt;/span> strconv.&lt;span style="color:#c0f">Atoi&lt;/span>(s)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		log.&lt;span style="color:#c0f">Println&lt;/span>(err)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> na
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">return&lt;/span> t
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>实现的效果是，当温度高于58度时，启动风扇；温度低于50度时关闭风扇。(风扇一直不停转，大概也只能到45度左右，可能深圳有点热）&lt;/p></description></item></channel></rss>

@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blog | qtopierw</title><link>https://qtopie.github.io/</link><description>Recent content on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><managingEditor>qtopie.rw@gmail.com (qtopierw)</managingEditor><webMaster>qtopie.rw@gmail.com (qtopierw)</webMaster><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Sat, 07 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>缓存过期</title><link>https://qtopie.github.io/notes/system-design/cache-expiration/</link><pubDate>Sat, 07 Sep 2024 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/system-design/cache-expiration/</guid><description>&lt;h2 id="缓存的模式">缓存的模式&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Blog | qtopierw</title><link>https://qtopie.github.io/</link><description>Recent content on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Sat, 07 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>缓存过期</title><link>https://qtopie.github.io/notes/system-design/cache-expiration/</link><pubDate>Sat, 07 Sep 2024 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/system-design/cache-expiration/</guid><description>&lt;h2 id="缓存的模式">缓存的模式&lt;/h2>
 &lt;h2 id="参考">参考&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a href="https://hazelcast.com/blog/a-hitchhikers-guide-to-caching-patterns/">https://hazelcast.com/blog/a-hitchhikers-guide-to-caching-patterns/&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>链表反转</title><link>https://qtopie.github.io/notes/codejam/list/reverse-list/</link><pubDate>Sat, 07 Sep 2024 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/codejam/list/reverse-list/</guid><description>&lt;h2 id="链表反转深入浅出">链表反转：深入浅出&lt;/h2>
+&lt;/ul></description></item><item><title>链表反转</title><link>https://qtopie.github.io/notes/codejam/list/reverse-list/</link><pubDate>Sat, 07 Sep 2024 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/codejam/list/reverse-list/</guid><description>&lt;h2 id="链表反转深入浅出">链表反转：深入浅出&lt;/h2>
 &lt;h3 id="链表反转是什么">链表反转是什么？&lt;/h3>
 &lt;p>链表反转，顾名思义，就是将一个链表的节点顺序颠倒过来。例如，原本的链表是1-&amp;gt;2-&amp;gt;3-&amp;gt;4，反转后就变成4-&amp;gt;3-&amp;gt;2-&amp;gt;1。&lt;/p>
 &lt;h3 id="为什么需要链表反转">为什么需要链表反转？&lt;/h3>
@@ -48,7 +48,8 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">return&lt;/span> prev;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title>树莓派和HomeAssistant</title><link>https://qtopie.github.io/notes/iot/rpi/homeassistant/</link><pubDate>Tue, 28 Sep 2021 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/iot/rpi/homeassistant/</guid><description>&lt;h2 id="目标">目标&lt;/h2>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="递归法">递归法&lt;/h4>
+&lt;p>递归法是一种更加优雅的实现方式。其核心思想是：&lt;/p></description></item><item><title>树莓派和HomeAssistant</title><link>https://qtopie.github.io/notes/iot/rpi/homeassistant/</link><pubDate>Tue, 28 Sep 2021 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/homeassistant/</guid><description>&lt;h2 id="目标">目标&lt;/h2>
 &lt;p>使用开源软件和米家智能硬件，实现简单的智能家居系统&lt;/p>
 &lt;blockquote>
 &lt;p>采用米家智能硬件的原因是, 小米智能家居做的比较早（也许是起初推广的更好，刚接触智能家居的时候就用的小米）,
@@ -75,7 +76,34 @@
 &lt;p>编辑&lt;code>/etc/pip.conf&lt;/code> (使用豆瓣源）&lt;/p>
 &lt;pre tabindex="0">&lt;code>[global]
 index-url = https://pypi.douban.com/simple
-&lt;/code>&lt;/pr</description></item><item><title>vim-go</title><link>https://qtopie.github.io/notes/vim/vim-go/</link><pubDate>Sat, 28 Aug 2021 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/vim/vim-go/</guid><description>&lt;p>&lt;em>将VIM打造为Go开发利器&lt;/em>&lt;/p>
+&lt;/code>&lt;/pre>&lt;h4 id="设置开机自启动">设置开机自启动&lt;/h4>
+&lt;ul>
+&lt;li>创建systemd service unit文件&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>systemctl --user edit --full --force homeassistant.service
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>加入以下内容&lt;/p>
+&lt;pre tabindex="0">&lt;code>[Unit]
+Description=Home Assistant
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/home/ubuntu/.local/bin/hass
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>设置用户自动登录&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a href="https://raspberrypi.stackexchange.com/questions/111728/how-to-get-raspi-config-on-ubuntu-20-04">安装&lt;code>raspi-config&lt;/code>&lt;/a>,
+然后配置 &lt;code>1. System Options&lt;/code> -&amp;gt; &lt;code>S5 Boot / Auto Login&lt;/code> -&amp;gt; &lt;code>B2 Console Autologin&lt;/code>&lt;/p>
+&lt;p>会生成&lt;code>/etc/systemd/system/getty@tty1.service.d/autologin.conf&lt;/code>, 内容如下&lt;/p>
+&lt;pre tabindex="0">&lt;code>[Service]
+ExecStart=
+ExecStart=-/sbin/agetty --autologin ubuntu --noclear %I $TERM
+&lt;/code>&lt;/pre>&lt;p>重启即可生效&lt;/p></description></item><item><title>vim-go</title><link>https://qtopie.github.io/notes/vim/vim-go/</link><pubDate>Sat, 28 Aug 2021 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/vim/vim-go/</guid><description>&lt;p>&lt;em>将VIM打造为Go开发利器&lt;/em>&lt;/p>
 &lt;p>平时一般使用VSCode编程，最近为了更好地刷leetcode，又换回了vim。发现笔记本小屏幕
 使用vscode zen-mode沉浸式看代码很爽以后，也喜欢上了使用vim写代码, 快捷键方便、稳
 定高效、功能纯粹（极简主义）。研究了一番后，发现其可行性，便整理了一下。&lt;/p>
@@ -93,7 +121,44 @@ index-url = https://pypi.douban.com/simple
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Plug &lt;span style="color:#c30">&amp;#39;honza/vim-snippets&amp;#39;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="vim-gohttpsgithubcomfatihvim-go">&lt;a href="https://github.com/fatih/vim-go">vim-go&lt;/a>&lt;/h3>
 &lt;p>&lt;code>vim-go&lt;/code>是目前主要且流行的针对go的vim插件，视频[Hacking with Andrew and Brad: an HTTP/2 client]
-(&lt;a href="https://www.youtube.com/watch?v=yG-UaBJXZ80">https://www.youtube.com/watch?v=yG-UaBJXZ80&lt;/a>)中两位大佬用vim 进行pair编程使用了就是该插件。&lt;/p></description></item><item><title>排列组合</title><link>https://qtopie.github.io/notes/algorithms/combination-permutation/</link><pubDate>Thu, 15 Jul 2021 22:02:05 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/algorithms/combination-permutation/</guid><description>&lt;p>&lt;strong>This is a testing post for writing markdown with latex&lt;/strong>&lt;/p>
+(&lt;a href="https://www.youtube.com/watch?v=yG-UaBJXZ80">https://www.youtube.com/watch?v=yG-UaBJXZ80&lt;/a>)中两位大佬用vim 进行pair编程使用了就是该插件。&lt;/p>
+&lt;blockquote>
+&lt;p>PS: 当时看了这视频后，不禁佩服两位大佬的代码功底，也刷新了使用vim开发实际项目的认知, 原来使用vim写代码
+还可以比eclipse/idea/vscode更顺手, 也可以装酷了：》
+自己用vim一般也只是用来改改配置，写写简单的脚本，还没尝试过使用它进行正经的项目开发。
+虽然以前做过尝试，不过借助&lt;code>vim-go&lt;/code>插件和&lt;code>LSP&lt;/code>，这成为了真正的可能。&lt;/p>
+&lt;/blockquote>
+&lt;blockquote>
+&lt;p>虽然vim-go原作者已不再参与维护该项目，但已交给社区的另外两人负责，仍然在活跃更新
+&lt;a href="https://arslan.io/2018/10/09/taking-an-indefinite-sabbatical-from-my-projects/">https://arslan.io/2018/10/09/taking-an-indefinite-sabbatical-from-my-projects/&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/govim/govim">&lt;code>govim&lt;/code>&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>govim是一个有意思的vim插件，它&lt;a href="https://github.com/govim/govim/wiki/FAQ">尝试使用go语言编写vim插件&lt;/a>.&lt;/p>
+&lt;p>作为一个后起之秀，它的功能并没有&lt;code>vim-go&lt;/code>完善，比如debug功能（这对我来说是一个核心诉求）,
+从实际使用体验来看，也不如&lt;code>vim-go&lt;/code>稳定。从个人角度而言, vim, go我都喜欢，但使用vim script
+编写插件应该有更好的兼容性(vim对go的支持还没有那么的好，对lua和python的支持更佳）,
+所以还是选择&lt;code>vim-go&lt;/code>插件。&lt;/p>
+&lt;ul>
+&lt;li>配置&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-vim" data-lang="vim">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&amp;#34;.vim/after/ftplugin/go.vim &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&amp;#34; shortcut like vscode&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>nnoremap &amp;lt;buffer&amp;gt; &amp;lt;silent&amp;gt; &amp;lt;F2&amp;gt; :hide GoRename&amp;lt;CR&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>nnoremap &amp;lt;buffer&amp;gt; &amp;lt;silent&amp;gt; &amp;lt;F4&amp;gt; :hide GoBuild&amp;lt;CR&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>nnoremap &amp;lt;buffer&amp;gt; &amp;lt;silent&amp;gt; &amp;lt;F5&amp;gt; :hide GoDebugStart&amp;lt;CR&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>nnoremap &amp;lt;buffer&amp;gt; &amp;lt;silent&amp;gt; &amp;lt;C-F5&amp;gt; :hide GoRun&amp;lt;CR&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>nnoremap &amp;lt;buffer&amp;gt; &amp;lt;silent&amp;gt; &amp;lt;S-F11&amp;gt; :hide GoDebugStepOut&amp;lt;CR&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>nnoremap &amp;lt;buffer&amp;gt; &amp;lt;silent&amp;gt; &amp;lt;F12&amp;gt; :hide GoDebugStop&amp;lt;CR&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;div class="fixed-height-container">
+ &lt;amp-img class="contain" alt="vim-go debug" src="https://qtopie.github.io/notes/vim/vim-go.assets/img-2021-10-07-16-02-58.png" 
+ layout="fill" 
+ lightbox>
+ &lt;/amp-img>
+&lt;/div>&lt;/p></description></item><item><title>排列组合</title><link>https://qtopie.github.io/notes/algorithms/combination-permutation/</link><pubDate>Thu, 15 Jul 2021 22:02:05 +0800</pubDate><guid>https://qtopie.github.io/notes/algorithms/combination-permutation/</guid><description>&lt;p>&lt;strong>This is a testing post for writing markdown with latex&lt;/strong>&lt;/p>
 &lt;h1 id="排列组合">排列组合&lt;/h1>
 &lt;h2 id="独立重复性事件">独立重复性事件&lt;/h2>
 &lt;h2 id="-nm">&lt;code>\: n^m&lt;/code>&lt;/h2>
@@ -106,7 +171,11 @@ index-url = https://pypi.douban.com/simple
 &lt;/code>&lt;/pre>&lt;h3 id="-a_nm">&lt;code>\: A_n^m&lt;/code>&lt;/h3>
 &lt;p>从n个不同物品中取一个物品，每次取一个, &lt;strong>不放回&lt;/strong>，取m次(可能不取）的结果.（考虑先后顺序），未取到的结果有&lt;code>\: A_{n-m}^{n-m}&lt;/code>种&lt;/p>
 &lt;pre tabindex="0">&lt;code class="language-math" data-lang="math">A_n^m = \frac{A_n^n}{A_{n-m}^{n-m}} = n(n-1)(n-2)...(n-m+1) \tag 3
-&lt;/code>&lt;/pr</description></item><item><title>Linux Command-line Handbook</title><link>https://qtopie.github.io/notes/linux/linux-cmd-handbook/</link><pubDate>Sun, 02 May 2021 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/linux/linux-cmd-handbook/</guid><description>&lt;p>&lt;em>Based on my experiences on Ubuntu&lt;/em>&lt;/p>
+&lt;/code>&lt;/pre>&lt;h2 id="-c_nm">&lt;code>\: C_n^m&lt;/code>&lt;/h2>
+&lt;p>从n个不同物品中取一个物品，每次取一个, &lt;strong>不放回&lt;/strong>，取m次(可能不取）的结果.（不考虑先后顺序）&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-math" data-lang="math">C_n^m = \frac{A_n^m}{A_m^m} = \frac{n!}{m! \times (n-m)!} \tag 4
+&lt;/code>&lt;/pre>&lt;h2 id="例子">例子&lt;/h2>
+&lt;p>3 * 4 的格子, 从左上走到右下角，只能往下或者往右。&lt;/p></description></item><item><title>Linux Command-line Handbook</title><link>https://qtopie.github.io/notes/linux/linux-cmd-handbook/</link><pubDate>Sun, 02 May 2021 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/linux/linux-cmd-handbook/</guid><description>&lt;p>&lt;em>Based on my experiences on Ubuntu&lt;/em>&lt;/p>
 &lt;h2 id="software-package-management">Software Package Management&lt;/h2>
 &lt;ul>
 &lt;li>set up proxy for apt&lt;/li>
@@ -139,7 +208,9 @@ index-url = https://pypi.douban.com/simple
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># networks&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>iostat
-&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title>VIM安装笔记</title><link>https://qtopie.github.io/notes/vim/build-and-install-latest-vim/</link><pubDate>Tue, 06 Apr 2021 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/vim/build-and-install-latest-vim/</guid><description>&lt;h1 id="vim-安装">VIM 安装&lt;/h1>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="performance-testing">Performance Testing&lt;/h2>
+&lt;h3 id="network-bindwidth-testing">Network Bindwidth Testing&lt;/h3>
+&lt;p>There are two common means to achive this&lt;/p></description></item><item><title>VIM安装笔记</title><link>https://qtopie.github.io/notes/vim/build-and-install-latest-vim/</link><pubDate>Tue, 06 Apr 2021 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/vim/build-and-install-latest-vim/</guid><description>&lt;h1 id="vim-安装">VIM 安装&lt;/h1>
 &lt;p>由于debian发行版维护的vim包还未升级到最新版本，但govim需要较高版本的vim。故选择手动编译安装。这里直接选择最新版本8.2， 对应于最新的git tag版本， &lt;a href="https://www.vim.org/vim-8.2-released.php">8.2版本有一些实用性的功能&lt;/a>。&lt;/p>
 &lt;p>&lt;strong>环境&lt;/strong>&lt;/p>
 &lt;ul>
@@ -177,7 +248,7 @@ index-url = https://pypi.douban.com/simple
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt install checkinstall
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo checkinstall
-&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title>自动控制风扇温度</title><link>https://qtopie.github.io/notes/iot/rpi/fan-and-tempature/</link><pubDate>Mon, 03 Aug 2020 23:33:04 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/iot/rpi/fan-and-tempature/</guid><description>&lt;p>最近购买了一个树莓派4B 4G内存版，替换了旧的Model3 (强迫症犯了，就为了换成type c口，但因为电源适配问题还是老老实实地又买了官方电源适配器）&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>checkinstall&lt;/code>执行完后，会安装到&lt;code>/usr/local/bin/vim&lt;/code> 即可。&lt;/p></description></item><item><title>自动控制风扇温度</title><link>https://qtopie.github.io/notes/iot/rpi/fan-and-tempature/</link><pubDate>Mon, 03 Aug 2020 23:33:04 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/fan-and-tempature/</guid><description>&lt;p>最近购买了一个树莓派4B 4G内存版，替换了旧的Model3 (强迫症犯了，就为了换成type c口，但因为电源适配问题还是老老实实地又买了官方电源适配器）&lt;/p>
 &lt;p>树莓派4B相对3B性能提高不少，但是随之功耗和发热也上去了。 于是给它整了个金属外壳&lt;/p>
 &lt;p>&lt;div class="fixed-height-container">
  &lt;amp-img class="contain" alt="" src="https://qtopie.github.io/notes/iot/rpi/fan-and-tempature.assets/img-20211029155258.webp" 
@@ -198,7 +269,72 @@ index-url = https://pypi.douban.com/simple
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#033">cpu&lt;/span>&lt;span style="color:#555">=&lt;/span>&lt;span style="color:#069;font-weight:bold">$(&lt;/span>&amp;lt;/sys/class/thermal/thermal_zone0/temp&lt;span style="color:#069;font-weight:bold">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#366">echo&lt;/span> &lt;span style="color:#c30">&amp;#34;&lt;/span>&lt;span style="color:#069;font-weight:bold">$((&lt;/span>cpu/1000&lt;span style="color:#069;font-weight:bold">))&lt;/span>&lt;span style="color:#c30"> c&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title>使用API管理cloudcone主机</title><link>https://qtopie.github.io/posts/diy/cloudcone-save-costs/</link><pubDate>Sat, 18 Jul 2020 22:02:05 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/diy/cloudcone-save-costs/</guid><description>&lt;p>&lt;a href="https://app.cloudcone.com/?ref=4442">Cloudcone&lt;/a>是2017年成立于美国的一家主机供应商。继vultr变得“不靠谱”和低价vm资源经常“售尽”的情况下，我转而使用cloudcone提供的vps服务用于日常学习和开发。&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="代码实现">代码实现&lt;/h2>
+&lt;p>网上已经有不少python版本的实现，但作为一个go粉，当然选择用go来实现了，正好练习一下gobot包的使用&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">package&lt;/span> main
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;time&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;gobot.io/x/gobot&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;gobot.io/x/gobot/drivers/gpio&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;gobot.io/x/gobot/platforms/raspi&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;io/ioutil&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;log&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;strconv&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;strings&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">func&lt;/span> &lt;span style="color:#c0f">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	low, high &lt;span style="color:#555">:=&lt;/span> &lt;span style="color:#f60">50&lt;/span>, &lt;span style="color:#f60">58&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	r &lt;span style="color:#555">:=&lt;/span> raspi.&lt;span style="color:#c0f">NewAdaptor&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	sw &lt;span style="color:#555">:=&lt;/span> gpio.&lt;span style="color:#c0f">NewDirectPinDriver&lt;/span>(r, &lt;span style="color:#c30">&amp;#34;18&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	work &lt;span style="color:#555">:=&lt;/span> &lt;span style="color:#069;font-weight:bold">func&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		gobot.&lt;span style="color:#c0f">Every&lt;/span>(&lt;span style="color:#f60">5&lt;/span>&lt;span style="color:#555">*&lt;/span>time.Second, &lt;span style="color:#069;font-weight:bold">func&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			t &lt;span style="color:#555">:=&lt;/span> &lt;span style="color:#c0f">readCpuTemp&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			log.&lt;span style="color:#c0f">Println&lt;/span>(&lt;span style="color:#c30">&amp;#34;Temp&amp;#34;&lt;/span>, t&lt;span style="color:#555">/&lt;/span>&lt;span style="color:#f60">1000&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			&lt;span style="color:#069;font-weight:bold">if&lt;/span> t &amp;lt; low&lt;span style="color:#555">*&lt;/span>&lt;span style="color:#f60">1000&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>				sw.&lt;span style="color:#c0f">Off&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			&lt;span style="color:#069;font-weight:bold">if&lt;/span> t &amp;gt; high&lt;span style="color:#555">*&lt;/span>&lt;span style="color:#f60">1000&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#09f;font-style:italic">// turn on only ater 7 oclock
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span>				&lt;span style="color:#069;font-weight:bold">if&lt;/span> h, _, _ &lt;span style="color:#555">:=&lt;/span> time.&lt;span style="color:#c0f">Now&lt;/span>().&lt;span style="color:#c0f">Clock&lt;/span>(); h &amp;gt; &lt;span style="color:#f60">7&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>					sw.&lt;span style="color:#c0f">On&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>				}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		})
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	robot &lt;span style="color:#555">:=&lt;/span> gobot.&lt;span style="color:#c0f">NewRobot&lt;/span>(&lt;span style="color:#c30">&amp;#34;blinkBot&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		[]gobot.Connection{r},
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		[]gobot.Device{sw},
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		work,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	robot.&lt;span style="color:#c0f">Start&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">func&lt;/span> &lt;span style="color:#c0f">readCpuTemp&lt;/span>() &lt;span style="color:#078;font-weight:bold">int&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">var&lt;/span> na = &lt;span style="color:#555">-&lt;/span>&lt;span style="color:#f60">274150&lt;/span> &lt;span style="color:#09f;font-style:italic">// set not valid value to -274.15C
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span>	dat, err &lt;span style="color:#555">:=&lt;/span> ioutil.&lt;span style="color:#c0f">ReadFile&lt;/span>(&lt;span style="color:#c30">&amp;#34;/sys/class/thermal/thermal_zone0/temp&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		log.&lt;span style="color:#c0f">Println&lt;/span>(err)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> na
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	s &lt;span style="color:#555">:=&lt;/span> strings.&lt;span style="color:#c0f">TrimSuffix&lt;/span>(&lt;span style="color:#366">string&lt;/span>(dat), &lt;span style="color:#c30">&amp;#34;\n&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	t, err &lt;span style="color:#555">:=&lt;/span> strconv.&lt;span style="color:#c0f">Atoi&lt;/span>(s)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		log.&lt;span style="color:#c0f">Println&lt;/span>(err)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> na
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">return&lt;/span> t
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>实现的效果是，当温度高于58度时，启动风扇；温度低于50度时关闭风扇。(风扇一直不停转，大概也只能到45度左右，可能深圳有点热）&lt;/p></description></item><item><title>使用API管理cloudcone主机</title><link>https://qtopie.github.io/posts/diy/cloudcone-save-costs/</link><pubDate>Sat, 18 Jul 2020 22:02:05 +0800</pubDate><guid>https://qtopie.github.io/posts/diy/cloudcone-save-costs/</guid><description>&lt;p>&lt;a href="https://app.cloudcone.com/?ref=4442">Cloudcone&lt;/a>是2017年成立于美国的一家主机供应商。继vultr变得“不靠谱”和低价vm资源经常“售尽”的情况下，我转而使用cloudcone提供的vps服务用于日常学习和开发。&lt;/p>
 &lt;p>除了支持按小时计费、提供更换IP服务及支持支付宝/paypal等灵活的支付方式外，我最看重的是，它的价格能做到真正的弹性，即在vm关机状态不计费CPU/内存等费用,比online费用大概减半。&lt;/p>
 &lt;p>类似于其他云供应商平台，cloudcone还提供了&lt;a href="https://api.cloudcone.com/">开放的API来管理云主机&lt;/a>。&lt;/p>
 &lt;p>这里为了方便使用和合理控制资源，自己便用go写了一个小程序&lt;/p>
@@ -218,7 +354,165 @@ index-url = https://pypi.douban.com/simple
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	hashCode = &lt;span style="color:#c30">&amp;#34;zXqV22222222222222222222222222222222225bL&amp;#34;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>serverID&lt;/code>可以在compute菜单控制面板下查看，或查看浏览器url里的参数。&lt;/p>
-&lt;p>&lt;code>appSecret&lt;/code>和&lt;code>hashCode&lt;/code>访问https://app.cloudcone.com/user/api创建即可。&lt;/p></description></item><item><title>Yarn</title><link>https://qtopie.github.io/notes/web/yarn/</link><pubDate>Sat, 20 Jun 2020 22:44:03 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/web/yarn/</guid><description>&lt;p>&lt;a href="https://yarnpkg.com/">Yarn&lt;/a>是Facebook、Google等主导开发的新的Javascript包管理器。（相对于npm)&lt;/p>
+&lt;p>&lt;code>appSecret&lt;/code>和&lt;code>hashCode&lt;/code>访问https://app.cloudcone.com/user/api创建即可。&lt;/p>
+&lt;ul>
+&lt;li>main.go&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">/*
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">* cloudcone api https://api.cloudcone.com/
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"> */&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">package&lt;/span> main
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">import&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;context&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;encoding/json&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;errors&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;fmt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;io/ioutil&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;log&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;net/http&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;os&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;sync&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;time&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;github.com/robfig/cron&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">// CloudconeResponse represents the API Response
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span>&lt;span style="color:#069;font-weight:bold">type&lt;/span> CloudconeResponse &lt;span style="color:#069;font-weight:bold">struct&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	Status &lt;span style="color:#078;font-weight:bold">int&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	Message &lt;span style="color:#078;font-weight:bold">string&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	Data &lt;span style="color:#069;font-weight:bold">interface&lt;/span>{} &lt;span style="color:#c30">`json:&amp;#34;_data&amp;#34;`&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">const&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	baseAPIURL = &lt;span style="color:#c30">&amp;#34;https://api.cloudcone.com/api/v1&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">var&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	client = &lt;span style="color:#555">&amp;amp;&lt;/span>http.Client{}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">func&lt;/span> &lt;span style="color:#c0f">main&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	f, err &lt;span style="color:#555">:=&lt;/span> os.&lt;span style="color:#c0f">OpenFile&lt;/span>(&lt;span style="color:#c30">&amp;#34;app.log&amp;#34;&lt;/span>, os.O_RDWR|os.O_CREATE|os.O_APPEND|os.O_TRUNC, &lt;span style="color:#f60">0644&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		log.&lt;span style="color:#c0f">Fatalf&lt;/span>(&lt;span style="color:#c30">&amp;#34;Error while opening file: %v\n&amp;#34;&lt;/span>, err)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">defer&lt;/span> f.&lt;span style="color:#c0f">Close&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	log.&lt;span style="color:#c0f">SetOutput&lt;/span>(f)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	wg &lt;span style="color:#555">:=&lt;/span> sync.WaitGroup{}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	_, cancel &lt;span style="color:#555">:=&lt;/span> context.&lt;span style="color:#c0f">WithCancel&lt;/span>(context.&lt;span style="color:#c0f">Background&lt;/span>())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	c &lt;span style="color:#555">:=&lt;/span> cron.&lt;span style="color:#c0f">New&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#09f;font-style:italic">// boot at 07:00
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span>	c.&lt;span style="color:#c0f">AddFunc&lt;/span>(&lt;span style="color:#c30">&amp;#34;0 0 7 * * *&amp;#34;&lt;/span>, &lt;span style="color:#069;font-weight:bold">func&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		log.&lt;span style="color:#c0f">Println&lt;/span>(&lt;span style="color:#c30">&amp;#34;booting at time&amp;#34;&lt;/span>, time.&lt;span style="color:#c0f">Now&lt;/span>())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">:=&lt;/span> &lt;span style="color:#c0f">boot&lt;/span>(); err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			log.&lt;span style="color:#c0f">Println&lt;/span>(err)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			time.&lt;span style="color:#c0f">Sleep&lt;/span>(&lt;span style="color:#f60">15&lt;/span> &lt;span style="color:#555">*&lt;/span> time.Second)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			&lt;span style="color:#09f;font-style:italic">// try again
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span>			&lt;span style="color:#c0f">boot&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	})
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#09f;font-style:italic">// shutdown at 23:45
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span>	c.&lt;span style="color:#c0f">AddFunc&lt;/span>(&lt;span style="color:#c30">&amp;#34;0 45 23 * * *&amp;#34;&lt;/span>, &lt;span style="color:#069;font-weight:bold">func&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		log.&lt;span style="color:#c0f">Println&lt;/span>(&lt;span style="color:#c30">&amp;#34;Shutdown at time&amp;#34;&lt;/span>, time.&lt;span style="color:#c0f">Now&lt;/span>())
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">:=&lt;/span> &lt;span style="color:#c0f">shutdown&lt;/span>(); err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			log.&lt;span style="color:#c0f">Println&lt;/span>(err)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			time.&lt;span style="color:#c0f">Sleep&lt;/span>(&lt;span style="color:#f60">15&lt;/span> &lt;span style="color:#555">*&lt;/span> time.Second)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			&lt;span style="color:#09f;font-style:italic">// try again
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span>			&lt;span style="color:#c0f">shutdown&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	})
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	c.&lt;span style="color:#c0f">Start&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	wg.&lt;span style="color:#c0f">Add&lt;/span>(&lt;span style="color:#f60">1&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">go&lt;/span> &lt;span style="color:#069;font-weight:bold">func&lt;/span>() {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">defer&lt;/span> wg.&lt;span style="color:#c0f">Done&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		os.Stdin.&lt;span style="color:#c0f">Read&lt;/span>(&lt;span style="color:#366">make&lt;/span>([]&lt;span style="color:#078;font-weight:bold">byte&lt;/span>, &lt;span style="color:#f60">1&lt;/span>)) &lt;span style="color:#09f;font-style:italic">// wait for Enter keystroke
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span>		c.&lt;span style="color:#c0f">Stop&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#c0f">cancel&lt;/span>() &lt;span style="color:#09f;font-style:italic">// cancel the associated context
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span>	}()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	log.&lt;span style="color:#c0f">Println&lt;/span>(&lt;span style="color:#c30">&amp;#34;Running...&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	wg.&lt;span style="color:#c0f">Wait&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">func&lt;/span> &lt;span style="color:#c0f">boot&lt;/span>() &lt;span style="color:#078;font-weight:bold">error&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#09f;font-style:italic">// compute/:id/boot
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span>	endpoint &lt;span style="color:#555">:=&lt;/span> fmt.&lt;span style="color:#c0f">Sprintf&lt;/span>(&lt;span style="color:#c30">&amp;#34;%s/compute/%d/%s&amp;#34;&lt;/span>, baseAPIURL, serverID, &lt;span style="color:#c30">&amp;#34;boot&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	req, err &lt;span style="color:#555">:=&lt;/span> http.&lt;span style="color:#c0f">NewRequest&lt;/span>(&lt;span style="color:#c30">&amp;#34;GET&amp;#34;&lt;/span>, endpoint, &lt;span style="color:#069;font-weight:bold">nil&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> err
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	req.Header.&lt;span style="color:#c0f">Set&lt;/span>(&lt;span style="color:#c30">&amp;#34;App-Secret&amp;#34;&lt;/span>, appSecret)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	req.Header.&lt;span style="color:#c0f">Set&lt;/span>(&lt;span style="color:#c30">&amp;#34;Hash&amp;#34;&lt;/span>, hashCode)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	resp, err &lt;span style="color:#555">:=&lt;/span> client.&lt;span style="color:#c0f">Do&lt;/span>(req)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> err
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">defer&lt;/span> resp.Body.&lt;span style="color:#c0f">Close&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	body, err &lt;span style="color:#555">:=&lt;/span> ioutil.&lt;span style="color:#c0f">ReadAll&lt;/span>(resp.Body)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> err
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	fmt.&lt;span style="color:#c0f">Println&lt;/span>(&lt;span style="color:#366">string&lt;/span>(body))
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">var&lt;/span> dat CloudconeResponse
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">:=&lt;/span> json.&lt;span style="color:#c0f">Unmarshal&lt;/span>(body, &lt;span style="color:#555">&amp;amp;&lt;/span>dat); err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> err
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> dat.Status &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#f60">1&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> errors.&lt;span style="color:#c0f">New&lt;/span>(dat.Message)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	log.&lt;span style="color:#c0f">Println&lt;/span>(dat.Message)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">return&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">func&lt;/span> &lt;span style="color:#c0f">shutdown&lt;/span>() &lt;span style="color:#078;font-weight:bold">error&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#09f;font-style:italic">// compute/:id/shutdown
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span>	endpoint &lt;span style="color:#555">:=&lt;/span> fmt.&lt;span style="color:#c0f">Sprintf&lt;/span>(&lt;span style="color:#c30">&amp;#34;%s/compute/%d/%s&amp;#34;&lt;/span>, baseAPIURL, serverID, &lt;span style="color:#c30">&amp;#34;shutdown&amp;#34;&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	req, err &lt;span style="color:#555">:=&lt;/span> http.&lt;span style="color:#c0f">NewRequest&lt;/span>(&lt;span style="color:#c30">&amp;#34;GET&amp;#34;&lt;/span>, endpoint, &lt;span style="color:#069;font-weight:bold">nil&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> err
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	req.Header.&lt;span style="color:#c0f">Set&lt;/span>(&lt;span style="color:#c30">&amp;#34;App-Secret&amp;#34;&lt;/span>, appSecret)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	req.Header.&lt;span style="color:#c0f">Set&lt;/span>(&lt;span style="color:#c30">&amp;#34;Hash&amp;#34;&lt;/span>, hashCode)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	resp, err &lt;span style="color:#555">:=&lt;/span> client.&lt;span style="color:#c0f">Do&lt;/span>(req)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> err
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">defer&lt;/span> resp.Body.&lt;span style="color:#c0f">Close&lt;/span>()
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	body, err &lt;span style="color:#555">:=&lt;/span> ioutil.&lt;span style="color:#c0f">ReadAll&lt;/span>(resp.Body)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> err
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">var&lt;/span> dat CloudconeResponse
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">:=&lt;/span> json.&lt;span style="color:#c0f">Unmarshal&lt;/span>(body, &lt;span style="color:#555">&amp;amp;&lt;/span>dat); err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> err
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> dat.Status &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#f60">1&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> errors.&lt;span style="color:#c0f">New&lt;/span>(dat.Message)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	log.&lt;span style="color:#c0f">Println&lt;/span>(dat.Message)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">return&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="参考">参考&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://www.vpsjxw.com/provider_intro/cloudcone_intro/">cloudcone中文介绍&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Yarn</title><link>https://qtopie.github.io/notes/web/yarn/</link><pubDate>Sat, 20 Jun 2020 22:44:03 +0800</pubDate><guid>https://qtopie.github.io/notes/web/yarn/</guid><description>&lt;p>&lt;a href="https://yarnpkg.com/">Yarn&lt;/a>是Facebook、Google等主导开发的新的Javascript包管理器。（相对于npm)&lt;/p>
 &lt;h2 id="安装httpsyarnpkgcomgetting-startedinstall">&lt;a href="https://yarnpkg.com/getting-started/install">安装&lt;/a>&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo npm install -g yarn --registry https://registry.npm.taobao.org
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这里使用了&lt;a href="https://developer.aliyun.com/mirror/NPM?from=tnpm">taobao npm镜像&lt;/a>&lt;/p>
@@ -235,7 +529,64 @@ index-url = https://pypi.douban.com/simple
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>yarn add -D &amp;lt;DEP_NAME&amp;gt;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>参考工具自带帮助文档&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>yarn --help
-&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title>win10下的应用容器化开发</title><link>https://qtopie.github.io/notes/cloud-native/k8s/container-dev-on-win10/</link><pubDate>Mon, 01 Jun 2020 21:15:34 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/cloud-native/k8s/container-dev-on-win10/</guid><description>&lt;p>相对于Linux对容器化开发的良好支持（或者说各个容器化平台和工具对Linux更好的支持），在Windows下对应用进行容器化改造时的本地构建和测试并不是很直接和方便。这里记录一下，针对不同场景的相关实践经验。&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="包下载缓存httpsclassicyarnpkgcomendocsclicache">&lt;a href="https://classic.yarnpkg.com/en/docs/cli/cache/">包下载缓存&lt;/a>&lt;/h2>
+&lt;p>可以通过设置环境变量&lt;code>YARN_CACHE_FOLDER&lt;/code>来指定缓存目录&lt;/p>
+&lt;p>Ubuntu下修改&lt;code>~/.bashrc&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#366">echo&lt;/span> &lt;span style="color:#c30">&amp;#39;YARN_CACHE_FOLDER=$HOME/.yarn&amp;#39;&lt;/span> &amp;gt;&amp;gt; ~/.bashrc
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="构建速度简单比较">构建速度简单比较&lt;/h3>
+&lt;p>使用项目&lt;a href="https://github.com/artificerpi/tour-of-heroes">tour-of-heroes&lt;/a>安装nodejs依赖。&lt;/p>
+&lt;p>镜像: &lt;a href="https://registry.npm.taobao.org">https://registry.npm.taobao.org&lt;/a>&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: left">NPM (6.14.5)&lt;/th>
+ &lt;th style="text-align: left">Yarn (1.22.4)&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: left">real	0m26.231s&lt;/td>
+ &lt;td style="text-align: left">real 0m14.048s&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">user	0m31.685s&lt;/td>
+ &lt;td style="text-align: left">user	0m15.415s&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: left">sys	 0m5.247s&lt;/td>
+ &lt;td style="text-align: left">sys	0m5.666s&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;p>可以看到yarn明显要快一些。
+类似于npm安装依赖时创建&lt;code>package-lock.json&lt;/code>文件，yarn也会创建&lt;code>yarn.lock&lt;/code>文件锁定依赖。（这时安装已有包换registry会不生效)&lt;/p>
+&lt;h3 id="包下载镜像">包下载镜像&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#033">SASS_BINARY_SITE&lt;/span>&lt;span style="color:#555">=&lt;/span>https://npm.taobao.org/mirrors/node-sass/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#033">PHANTOMJS_CDNURL&lt;/span>&lt;span style="color:#555">=&lt;/span>https://npm.taobao.org/mirrors/phantomjs/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#033">ELECTRON_MIRROR&lt;/span>&lt;span style="color:#555">=&lt;/span>https://npm.taobao.org/mirrors/electron/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>可以自己搭建一个镜像，解决内网防火墙内无法下载包的问题&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>使用Caddy反向代理taobao镜像&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-Caddyfile" data-lang="Caddyfile">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#030;font-weight:bold">:8080&lt;/span> {&lt;span style="color:#09f;font-style:italic">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"> # https://npm.taobao.org/mirrors/node-sass/
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span> &lt;span style="color:#069;font-weight:bold">route&lt;/span> &lt;span style="color:#99f">/dist/node-sass/*&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">reverse_proxy&lt;/span> &lt;span style="color:#c30">https://cdn.npm.taobao.org&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">header_up&lt;/span> &lt;span style="color:#c30">Host&lt;/span> &lt;span style="color:#c30;font-weight:bold">{http.reverse_proxy.upstream.hostport}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }&lt;span style="color:#09f;font-style:italic">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"> # https://npm.taobao.org/mirrors/phantomjs/
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span> &lt;span style="color:#069;font-weight:bold">reverse_proxy&lt;/span> &lt;span style="color:#99f">/dist/phantomjs/*&lt;/span> &lt;span style="color:#c30">https://cdn.npm.taobao.org&lt;/span> {
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">header_up&lt;/span> &lt;span style="color:#c30">Host&lt;/span> &lt;span style="color:#c30;font-weight:bold">{http.reverse_proxy.upstream.hostport}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> }
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>node-sass 离线安装&lt;/li>
+&lt;/ul>
+&lt;p>下载地址 &lt;a href="https://github.com/sass/node-sass/releases">https://github.com/sass/node-sass/releases&lt;/a>&lt;/p></description></item><item><title>win10下的应用容器化开发</title><link>https://qtopie.github.io/notes/cloud-native/k8s/container-dev-on-win10/</link><pubDate>Mon, 01 Jun 2020 21:15:34 +0800</pubDate><guid>https://qtopie.github.io/notes/cloud-native/k8s/container-dev-on-win10/</guid><description>&lt;p>相对于Linux对容器化开发的良好支持（或者说各个容器化平台和工具对Linux更好的支持），在Windows下对应用进行容器化改造时的本地构建和测试并不是很直接和方便。这里记录一下，针对不同场景的相关实践经验。&lt;/p>
 &lt;h2 id="目标">目标&lt;/h2>
 &lt;ul>
 &lt;li>支持docker构建&lt;/li>
@@ -254,7 +605,19 @@ index-url = https://pypi.douban.com/simple
 &lt;ul>
 &lt;li>
 &lt;p>版本要求&lt;/p>
-&lt;p>Win10 Version 2004, Build 19041 + （目前需要加入每月更新的预览版计划）&lt;/p></description></item><item><title>Helm</title><link>https://qtopie.github.io/notes/cloud-native/k8s/helm.zh/</link><pubDate>Wed, 20 May 2020 21:15:34 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/cloud-native/k8s/helm.zh/</guid><description>&lt;p>这里我们使用helm 3.0+版本, 可以直接使用kube-server api, 不需要在集群安装tiler&lt;/p>
+&lt;p>Win10 Version 2004, Build 19041 + （目前需要加入每月更新的预览版计划）&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Hyper V支持 （需要Windows支持，同时需要设备支持硬件虚拟化)&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h4 id="优点">优点&lt;/h4>
+&lt;p>与Windows命令窗口和文件系统无缝集成，开发起来十分方便。在当前窗口输入&lt;code>bash&lt;/code>就可以进入Linux下对应的目录；同时还有VSCode Remote WSL的支持。&lt;/p>
+&lt;h3 id="安装配置">安装配置&lt;/h3>
+&lt;p>启用Hyper V和Linux子系统&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux -NoRestart
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后重启&lt;/p></description></item><item><title>Helm</title><link>https://qtopie.github.io/notes/cloud-native/k8s/helm.zh/</link><pubDate>Wed, 20 May 2020 21:15:34 +0800</pubDate><guid>https://qtopie.github.io/notes/cloud-native/k8s/helm.zh/</guid><description>&lt;p>这里我们使用helm 3.0+版本, 可以直接使用kube-server api, 不需要在集群安装tiler&lt;/p>
 &lt;h2 id="安装">安装&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo snap install helm --classic
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="chartmuseum">Chartmuseum&lt;/h2>
@@ -267,7 +630,28 @@ index-url = https://pypi.douban.com/simple
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>./chartmuseum --storage&lt;span style="color:#555">=&lt;/span>&lt;span style="color:#366">local&lt;/span> --storage-local-rootdir&lt;span style="color:#555">=&lt;/span>/opt/chart
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后打开http://localhost:8080就可以看到欢迎界面&lt;/p>
 &lt;h2 id="创建和使用chart">创建和使用chart&lt;/h2>
-&lt;p>我们以创建一个nginx chart为例。&lt;/p></description></item><item><title>JenkinsX</title><link>https://qtopie.github.io/notes/cloud-native/cicd/jenkinsx.zh/</link><pubDate>Tue, 28 Apr 2020 21:15:34 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/cloud-native/cicd/jenkinsx.zh/</guid><description>&lt;p>Jenkins是一款比较经典而优秀的流水线构建工具（平台）。&lt;/p>
+&lt;p>我们以创建一个nginx chart为例。&lt;/p>
+&lt;p>使用helm创建初始化配。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mkdir app
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>helm create chart
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>然后可以看到初始化的以下配置&lt;/p>
+&lt;pre tabindex="0">&lt;code>artificerpi@ky-laptop:~/build/app$ tree chart
+chart
+├── charts
+├── Chart.yaml
+├── templates
+│   ├── deployment.yaml
+│   ├── _helpers.tpl
+│   ├── ingress.yaml
+│   ├── NOTES.txt
+│   ├── serviceaccount.yaml
+│   ├── service.yaml
+│   └── tests
+│   └── test-connection.yaml
+└── values.yaml
+
+3 directories, 9 files
+&lt;/code>&lt;/pre>&lt;p>修改chart/Chart.yaml文件，将name字段改为&lt;code>nginx-foo&lt;/code>&lt;/p></description></item><item><title>JenkinsX</title><link>https://qtopie.github.io/notes/cloud-native/cicd/jenkinsx.zh/</link><pubDate>Tue, 28 Apr 2020 21:15:34 +0800</pubDate><guid>https://qtopie.github.io/notes/cloud-native/cicd/jenkinsx.zh/</guid><description>&lt;p>Jenkins是一款比较经典而优秀的流水线构建工具（平台）。&lt;/p>
 &lt;p>为了实现现代化构建方式Run configuration as Code, Jenkins引入了Blue Ocean插件。通过该插件，我们可以使用声明式语法来编写Jenkinsfile，定义流水线构建步骤 &lt;a href="https://www.jenkins.io/zh/doc/book/pipeline/jenkinsfile/">https://www.jenkins.io/zh/doc/book/pipeline/jenkinsfile/&lt;/a>&lt;/p>
 &lt;p>然而在云原生和DevOps越来越流行的今天，传统的Jenkins模式只能满足CI的构建需求。于是Jenkins团队又引入了&lt;a href="https://jenkins-x.io/">JenkinsX&lt;/a>, 来实现一个现代化的GitOps平台。&lt;/p>
 &lt;p>&lt;em>emm, 不吹水了，其实我只想做个笔记,记录下折腾了很久后的才明白的安装步骤&lt;/em>&lt;/p>
@@ -292,7 +676,13 @@ index-url = https://pypi.douban.com/simple
 &lt;li>拉取远程配置启动&lt;/li>
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>jxl boot run --git-url https://github.com/artificerpi/environment-jx-dev --git-user artificerpi --git-token &amp;lt;TOKEN&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title>Caddy与http3</title><link>https://qtopie.github.io/notes/web/caddy/</link><pubDate>Wed, 22 Apr 2020 00:03:52 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/web/caddy/</guid><description>&lt;h2 id="caddy-简单介绍">Caddy 简单介绍&lt;/h2>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>本地启动 （只是一个测试）&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#366">cd&lt;/span> environment-jx-dev &lt;span style="color:#555">&amp;amp;&amp;amp;&lt;/span> jxl boot run -b
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>目前无法运行起来，报错&lt;code>/secrets/jx-boot/secrets.yaml&lt;/code>无法找到，可能是个bug&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-log" data-lang="log">error: failed to load secrets YAML /secrets/jx-boot/secrets.yaml: open /secrets/jx-boot/secrets.yaml: no such file or directory
+&lt;/code>&lt;/pre></description></item><item><title>Caddy与http3</title><link>https://qtopie.github.io/notes/web/caddy/</link><pubDate>Wed, 22 Apr 2020 00:03:52 +0800</pubDate><guid>https://qtopie.github.io/notes/web/caddy/</guid><description>&lt;h2 id="caddy-简单介绍">Caddy 简单介绍&lt;/h2>
 &lt;p>Caddy是现代化的web代理服务器，使用Go语言编写，不直接依赖系统底层库。
 另外，它很好地支持了https (也最先支持了http3), 而且它使用了现代化流行且安全的配置，几乎不需要额外配置。&lt;/p>
 &lt;h2 id="安装使用">安装使用&lt;/h2>
@@ -318,7 +708,21 @@ mwine.science {
 	file_server
 	encode zstd gzip 
 }
-&lt;/code>&lt;/pr</description></item><item><title>Go安装</title><link>https://qtopie.github.io/notes/go/setup-go/</link><pubDate>Wed, 18 Mar 2020 22:02:05 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/go/setup-go/</guid><description>&lt;p>官方下载安装向导请参考这里https://golang.org/dl/&lt;/p>
+&lt;/code>&lt;/pre>&lt;blockquote>
+&lt;p>配置参考 &lt;a href="https://caddyserver.com/docs/caddyfile/options">https://caddyserver.com/docs/caddyfile/options&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>这里我将域名&lt;code>mwine.science&lt;/code>和&lt;code>www.mwine.science&lt;/code>绑定到了同一台服务器，并将&lt;code>www.mwine.science&lt;/code>重定向到&lt;code>mwine.science&lt;/code>&lt;/p>
+&lt;p>然后创建一个文件&lt;code>/var/www/html/mwine.science/index.html&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-html" data-lang="html">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#099">&amp;lt;!DOCTYPE html&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;&lt;span style="color:#309;font-weight:bold">html&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;&lt;span style="color:#309;font-weight:bold">body&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Hello World !
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;/&lt;span style="color:#309;font-weight:bold">body&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;/&lt;span style="color:#309;font-weight:bold">html&lt;/span>&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>最后运行起来就可以了 （这里我加上了watch选项，启用根据文件配置动态更新）&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>/usr/local/bin/caddy run -config /etc/Caddyfile -watch
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或者我们可以将它写成systemd服务，输入命令编辑&lt;code>sudo systemctl edit --force --full caddy.service&lt;/code>&lt;/p>
+&lt;p>粘贴以下内容&lt;/p></description></item><item><title>Go安装</title><link>https://qtopie.github.io/notes/go/setup-go/</link><pubDate>Wed, 18 Mar 2020 22:02:05 +0800</pubDate><guid>https://qtopie.github.io/notes/go/setup-go/</guid><description>&lt;p>官方下载安装向导请参考这里https://golang.org/dl/&lt;/p>
 &lt;p>这篇文章主要分享加速访问go依赖和资源站点的问题。&lt;/p>
 &lt;h2 id="环境">环境&lt;/h2>
 &lt;ul>
@@ -339,7 +743,13 @@ mwine.science {
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># 设置不走 proxy 的私有仓库，多个用逗号相隔（可选）&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>go env -w &lt;span style="color:#033">GOPRIVATE&lt;/span>&lt;span style="color:#555">=&lt;/span>*.corp.example.com
-&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title>Kubernetes使用入门</title><link>https://qtopie.github.io/notes/cloud-native/k8s/k8s-get-started/</link><pubDate>Sat, 04 Jan 2020 00:03:52 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/cloud-native/k8s/k8s-get-started/</guid><description>&lt;h2 id="容器化-containerization">容器化 Containerization&lt;/h2>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>同样推荐使用国内站点https://goproxy.cn/&lt;/p>
+&lt;h3 id="文档查看">文档查看&lt;/h3>
+&lt;ul>
+&lt;li>使用&lt;code>go doc&lt;/code>命令可以在终端快速查阅文档, 例如&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>go doc net.Listen | vim -
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="参考">参考&lt;/h2></description></item><item><title>Kubernetes使用入门</title><link>https://qtopie.github.io/notes/cloud-native/k8s/k8s-get-started/</link><pubDate>Sat, 04 Jan 2020 00:03:52 +0800</pubDate><guid>https://qtopie.github.io/notes/cloud-native/k8s/k8s-get-started/</guid><description>&lt;h2 id="容器化-containerization">容器化 Containerization&lt;/h2>
 &lt;p>容器是标准化的软件单元。容器化将软件打包成标准化的单元，从而能够以此进行开发，装载和部署。简单地说，通过底层虚拟化，容器化实现应用Write once, run anywhere， 而且是快速地run anywhere，就像docker图标里被鲸鱼背着的集装箱一样。&lt;/p>
 &lt;h3 id="容器与虚拟机的对比">容器与虚拟机的对比&lt;/h3>
 &lt;p>&lt;div class="fixed-height-container">
@@ -356,7 +766,28 @@ mwine.science {
 &lt;/div>&lt;/p>
 &lt;p>容器实现的是操作系统层面的虚拟化，而虚拟机是实现硬件层面的虚拟化。所以对于应用来说，选择容器会更加轻量级，这意味着它将占用更少的资源，能更快的启动和停止，更灵活地分配资源等等。&lt;/p>
 &lt;p>PS: 这里并不是说容器一定总比虚拟机好，一般来说，不同的技术方案都有它适应的场景。比如我们需要模拟完整的硬件环境，虚拟机方案显然就更合适了。例如，在办公电脑上，我常常在windows笔记本上使用hyper-v安装一个ubuntu做开发，容器化方案在这里就相形见绌了。&lt;/p>
-&lt;p>很多时候，容器和虚拟机被一起使用。比如，你买了一台性能很好的高可用服务器，1TB RAM, 64 core CPU，那么为了更合理的分配和管理资源，你可能首先在这台服务器上建立数个virtualbox虚拟机，然后再在虚拟机操作系统里安装docker。&lt;/p></description></item><item><title>Make Eclipse Great Again</title><link>https://qtopie.github.io/notes/dev/make-gradle-work-with-eclipse/</link><pubDate>Sat, 28 Dec 2019 18:07:28 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/dev/make-gradle-work-with-eclipse/</guid><description>&lt;h1 id="eclipse--gradle">Eclipse &amp;amp; Gradle&lt;/h1>
+&lt;p>很多时候，容器和虚拟机被一起使用。比如，你买了一台性能很好的高可用服务器，1TB RAM, 64 core CPU，那么为了更合理的分配和管理资源，你可能首先在这台服务器上建立数个virtualbox虚拟机，然后再在虚拟机操作系统里安装docker。&lt;/p>
+&lt;h3 id="容器编排">容器编排&lt;/h3>
+&lt;p>容器化是我们能更方便地打包和运行应用，但当需要运行成百上千或者更多容器的时候，容器的自动化管理就十分重要了。对于习惯于实现应用自动化的程序员来说，甚至只管理两三个容器就巴不得有一个工具来完成自动化。容器编排就是来解决这个问题的，比较流行的有Google开发并开源的kubernetes, 及docker官方推的docker swarm。前者几乎已经成为业界规范，不过docker swarm对docker集成的更好，如果熟悉docker的话，docker swarm也会更加容易上手。&lt;/p>
+&lt;p>容器编排常见的功能 （不想翻译)&lt;/p>
+&lt;ul>
+&lt;li>Expose containers by DNS name or IP address.&lt;/li>
+&lt;li>Handle load balancing and traffic distribution for containers.&lt;/li>
+&lt;li>Automatically mount local and cloud-based storage.&lt;/li>
+&lt;li>Allocate specific CPU and RAM resources to containers and then fit them onto nodes.&lt;/li>
+&lt;li>Replace or kill problematic containers without jeopardizing application performance and uptime.&lt;/li>
+&lt;li>Manage sensitive information like password and tokens without rebuilding containers.&lt;/li>
+&lt;li>Change the state of containers and roll back old containers to replace them with new ones.&lt;/li>
+&lt;/ul>
+&lt;h3 id="参考">参考&lt;/h3>
+&lt;ul>
+&lt;li>&lt;a href="https://www.citrix.com/glossary/what-is-containerization.html">什么是容器化&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.ibm.com/cloud/blog/the-benefits-of-containerization-and-what-it-means-for-you">容器化的优点&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://www.docker.com/resources/what-container">什么是container&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="安装">安装&lt;/h2>
+&lt;h3 id="docker-安装">docker 安装&lt;/h3>
+&lt;p>不推荐使用系统源或者snap包方式安装docker, 使用的时候会遇到环境或者兼容性的问题。&lt;/p></description></item><item><title>Make Eclipse Great Again</title><link>https://qtopie.github.io/notes/dev/make-gradle-work-with-eclipse/</link><pubDate>Sat, 28 Dec 2019 18:07:28 +0800</pubDate><guid>https://qtopie.github.io/notes/dev/make-gradle-work-with-eclipse/</guid><description>&lt;h1 id="eclipse--gradle">Eclipse &amp;amp; Gradle&lt;/h1>
 &lt;p>还是从那句老话开始， “工欲善其事，必先利其器”。要想熟练地完成一件事，有个好的工具往往能事半功倍。&lt;/p>
 &lt;blockquote>
 &lt;p>&lt;em>但是很多时候，迷信教条最终会成了造轮子而造轮子的递归循环；选择合适的工具，并掌握它，解决好问题才是正确的方向。&lt;/em>&lt;/p>
@@ -386,7 +817,52 @@ Version: 2019-03 (4.11)
 Build id: I20190307-0500
 OS: Linux, v.5.3.0-24-generic, x86_64 / gtk 3.24.12
 Java version: 1.8.0_171
-&lt;/code>&lt;/pr</description></item><item><title>Ubuntu下使用MT7612U</title><link>https://qtopie.github.io/notes/linux/mt7612u-driver/</link><pubDate>Sat, 09 Mar 2019 11:29:38 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/linux/mt7612u-driver/</guid><description>&lt;p>由于墙挡住了路由器WIFI信号，虽然5G频率的WIFI传输速率很快，但是信号衰减。WIFI无线通信是双方向的，就算路由信号能覆盖到，但考虑到手机或笔记本功率和天线的限制，难保证信号稳定。所以在淘宝上买了一个功能还算强大的无线网卡ComFast 926AC v2，双频WIFI外置双天线。没提前研究，“号称免驱动&amp;quot;，结果拿回来就懵了。&lt;/p>
+&lt;/code>&lt;/pre>&lt;h2 id="eclipse项目配置及依赖管理">Eclipse项目配置及依赖管理&lt;/h2>
+&lt;h3 id="我的java项目管理方案">我的Java项目管理方案&lt;/h3>
+&lt;p>我不喜欢将IDE文件提交到git代码仓库，在我看来，IDE的作用就是一个文本编辑器，而且从协作角度来看，不同的开发者可能会选择不同的编辑器，所以不需要将IDE文件提交。 而Gradle脚本，不仅作为项目开发中一款重要的工具，而且包含了很多项目配置信息，因此需要提交到git仓库(有时候，如果开发人员和CI使用了统一的或兼容的gradle版本，甚至gradle wrapper都不需要提交)&lt;/p>
+&lt;ul>
+&lt;li>生成项目配置&lt;/li>
+&lt;/ul>
+&lt;p>默认Gradle eclipse编译输出目录为bin, 但是gradle构建输出目录为build， 因此需要改配置。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-groovy" data-lang="groovy">&lt;span style="display:flex;">&lt;span>plugins &lt;span style="color:#555">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> id &lt;span style="color:#c30">&amp;#39;java&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> id &lt;span style="color:#c30">&amp;#39;eclipse&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#555">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>eclipse &lt;span style="color:#555">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> project&lt;span style="color:#555">.&lt;/span>&lt;span style="color:#309">natures&lt;/span> &lt;span style="color:#c30">&amp;#39;org.eclipse.buildship.core.gradleprojectnature&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> classpath &lt;span style="color:#555">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> downloadJavadoc &lt;span style="color:#555">=&lt;/span> &lt;span style="color:#069;font-weight:bold">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> downloadSources &lt;span style="color:#555">=&lt;/span> &lt;span style="color:#069;font-weight:bold">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> defaultOutputDir &lt;span style="color:#555">=&lt;/span> file&lt;span style="color:#555">(&lt;/span>&lt;span style="color:#c30">&amp;#39;build/default&amp;#39;&lt;/span>&lt;span style="color:#555">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> file&lt;span style="color:#555">.&lt;/span>&lt;span style="color:#309">whenMerged&lt;/span> &lt;span style="color:#555">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> entries&lt;span style="color:#555">.&lt;/span>&lt;span style="color:#309">each&lt;/span> &lt;span style="color:#555">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> source &lt;span style="color:#555">-&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#09f;font-style:italic">// This seems kludgy. If the second test is omitted, it fails processing a &amp;#39;Project Dependency&amp;#39; entry
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span> &lt;span style="color:#069;font-weight:bold">if&lt;/span> &lt;span style="color:#555">(&lt;/span>source&lt;span style="color:#555">.&lt;/span>&lt;span style="color:#309">kind&lt;/span> &lt;span style="color:#555">==&lt;/span> &lt;span style="color:#c30">&amp;#39;src&amp;#39;&lt;/span> &lt;span style="color:#555">&amp;amp;&amp;amp;&lt;/span> source&lt;span style="color:#555">.&lt;/span>&lt;span style="color:#309">hasProperty&lt;/span>&lt;span style="color:#555">(&lt;/span>&lt;span style="color:#c30">&amp;#39;output&amp;#39;&lt;/span>&lt;span style="color:#555">))&lt;/span> &lt;span style="color:#555">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#078;font-weight:bold">def&lt;/span> outputPath &lt;span style="color:#555">=&lt;/span> source&lt;span style="color:#555">.&lt;/span>&lt;span style="color:#309">output&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">switch&lt;/span>&lt;span style="color:#555">(&lt;/span>source&lt;span style="color:#555">.&lt;/span>&lt;span style="color:#309">path&lt;/span>&lt;span style="color:#555">)&lt;/span> &lt;span style="color:#555">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">case&lt;/span> &lt;span style="color:#c30">&amp;#39;src/main/java&amp;#39;&lt;/span>&lt;span style="color:#555">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> source&lt;span style="color:#555">.&lt;/span>&lt;span style="color:#309">output&lt;/span> &lt;span style="color:#555">=&lt;/span> &lt;span style="color:#c30">&amp;#39;build/classes/java/main&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">break&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">case&lt;/span> &lt;span style="color:#c30">&amp;#39;src/main/resources&amp;#39;&lt;/span>&lt;span style="color:#555">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> source&lt;span style="color:#555">.&lt;/span>&lt;span style="color:#309">output&lt;/span> &lt;span style="color:#555">=&lt;/span> &lt;span style="color:#c30">&amp;#39;build/resources/main&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">break&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">case&lt;/span> &lt;span style="color:#c30">&amp;#39;src/test/java&amp;#39;&lt;/span>&lt;span style="color:#555">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> source&lt;span style="color:#555">.&lt;/span>&lt;span style="color:#309">output&lt;/span> &lt;span style="color:#555">=&lt;/span> &lt;span style="color:#c30">&amp;#39;build/classes/java/test&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">break&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">case&lt;/span> &lt;span style="color:#c30">&amp;#39;src/test/resources&amp;#39;&lt;/span>&lt;span style="color:#555">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> source&lt;span style="color:#555">.&lt;/span>&lt;span style="color:#309">output&lt;/span> &lt;span style="color:#555">=&lt;/span> &lt;span style="color:#c30">&amp;#39;build/resources/test&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">break&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#555">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#555">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#555">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#555">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#555">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#555">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
+&lt;p>&lt;a href="https://github.com/gradle/gradle/issues/3839">https://github.com/gradle/gradle/issues/3839&lt;/a>&lt;/p></description></item><item><title>Ubuntu下使用MT7612U</title><link>https://qtopie.github.io/notes/linux/mt7612u-driver/</link><pubDate>Sat, 09 Mar 2019 11:29:38 +0800</pubDate><guid>https://qtopie.github.io/notes/linux/mt7612u-driver/</guid><description>&lt;p>由于墙挡住了路由器WIFI信号，虽然5G频率的WIFI传输速率很快，但是信号衰减。WIFI无线通信是双方向的，就算路由信号能覆盖到，但考虑到手机或笔记本功率和天线的限制，难保证信号稳定。所以在淘宝上买了一个功能还算强大的无线网卡ComFast 926AC v2，双频WIFI外置双天线。没提前研究，“号称免驱动&amp;quot;，结果拿回来就懵了。&lt;/p>
 &lt;h2 id="安装驱动">安装驱动&lt;/h2>
 &lt;p>设备: Comfast 926AC v2
 系统： Ubuntu 18.04&lt;/p>
@@ -406,11 +882,31 @@ Java version: 1.8.0_171
  Mode:Managed Access Point: Not-Associated Tx-Power=19 dBm 
  Retry short limit:7 RTS thr:off Fragment thr:off
  Power Management:off
-&lt;/code>&lt;/pr</description></item><item><title>Drone CI With Github</title><link>https://qtopie.github.io/notes/cloud-native/cicd/drone-ci-with-github/</link><pubDate>Tue, 05 Mar 2019 23:58:06 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/cloud-native/cicd/drone-ci-with-github/</guid><description>&lt;p>Yeah, another CI tool. That&amp;rsquo;s named &lt;a href="https://drone.io/">&lt;code>Drone&lt;/code>&lt;/a>.&lt;/p>
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>网卡识别为存储设备的问题&lt;/li>
+&lt;/ul>
+&lt;p>mt76还未对这款comfast网卡适配，所以默认会被系统识别为存储设备，可以手动切换过来：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo usb_modeswitch -KW -v 0e8d -p &lt;span style="color:#f60">2870&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或者修改&lt;code>/lib/udev/rules.d/40-usb_modeswitch.rules&lt;/code>文件自动切换（目前未成功）&lt;/p>
+&lt;pre tabindex="0">&lt;code># MT7612U 
+ATTR{idVendor}==&amp;#34;0e8d&amp;#34;, ATTR{idProduct}==&amp;#34;2870&amp;#34;, RUN+=&amp;#34;usb_modeswitch &amp;#39;%b/%k&amp;#39;&amp;#34;
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>USB底座接触不良的问题&lt;/li>
+&lt;/ul>
+&lt;p>一起买的底座有点问题，开始还以为也要装什么驱动。检查后发现是接触不良的问题，因为USB口没有固定住，所以网卡很容易没有插入到底座中。解决办法比较简单，拆卸底座，然后填充底座中空部分，固定住USB接口。&lt;/p>
+&lt;ul>
+&lt;li>其他适配问题&lt;/li>
+&lt;/ul>
+&lt;p>网卡的LED灯不能正常工作。&lt;/p>
+&lt;pre tabindex="0">&lt;code>pi@raspberrypi:~ $ sudo ifconfig wlan1 down
+pi@raspberrypi:~ $ sudo ifconfig wlan1 hw ether 00:28:C7:0A:42:A2
+pi@raspberrypi:~ $ sudo ifconfig wlan1 up
+&lt;/code>&lt;/pre>&lt;h2 id="尝试在树梅派上编译驱动">尝试在树梅派上编译驱动&lt;/h2>
+&lt;p>&lt;del>4.19.y已经加入mt7612u的支持，但是经过测试，并不能使用。&lt;/del>[更新] 在5.1.y上编译可以正常使用（STA模式）, 注意默认缺失了&lt;code>/lib/firmware/mt7662.bin /lib/firmware/mt7662_rom_patch.bin&lt;/code> 两个文件，可以从其它系统拷贝或网络下载到树梅派。&lt;/p></description></item><item><title>Drone CI With Github</title><link>https://qtopie.github.io/notes/cloud-native/cicd/drone-ci-with-github/</link><pubDate>Tue, 05 Mar 2019 23:58:06 +0800</pubDate><guid>https://qtopie.github.io/notes/cloud-native/cicd/drone-ci-with-github/</guid><description>&lt;p>Yeah, another CI tool. That&amp;rsquo;s named &lt;a href="https://drone.io/">&lt;code>Drone&lt;/code>&lt;/a>.&lt;/p>
 &lt;p>We&amp;rsquo;ve been heard of Jenkins, travis-ci and even circle-ci (I have to mention this because there&amp;rsquo;re too much ads on youtube for it), so why would we need another one?&lt;/p>
 &lt;p>I&amp;rsquo;ve used Jenkins and travis-ci, but they are not perfect, at least there are some slight drawbacks.&lt;/p>
 &lt;h2 id="my-experience-on-jenkins">My experience on Jenkins&lt;/h2>
-&lt;p>Jenkins is stable for production, it has long history and is used widely. But sometimes I find Jenkins is too slow, and configuration is not straightforward. And it&amp;rsquo;s a pain to upgrade to a new pipeline, you have to copy and paste jobs from UI (while accessing is pretty slow). You might able to config jobs with XML config files, but it&amp;rsquo;s still a bit of complicated.&lt;/p></description></item><item><title>Jiri</title><link>https://qtopie.github.io/notes/cloud-native/cicd/jiri.zh/</link><pubDate>Thu, 20 Dec 2018 17:23:02 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/cloud-native/cicd/jiri.zh/</guid><description>&lt;p>Jiri (/jɪəri/ YEER-ee)是谷歌工程师开发的，灵活集成多个git仓库的工具，主要用来管理fuchsia操作系统源码。&lt;/p>
+&lt;p>Jenkins is stable for production, it has long history and is used widely. But sometimes I find Jenkins is too slow, and configuration is not straightforward. And it&amp;rsquo;s a pain to upgrade to a new pipeline, you have to copy and paste jobs from UI (while accessing is pretty slow). You might able to config jobs with XML config files, but it&amp;rsquo;s still a bit of complicated.&lt;/p></description></item><item><title>Jiri</title><link>https://qtopie.github.io/notes/cloud-native/cicd/jiri.zh/</link><pubDate>Thu, 20 Dec 2018 17:23:02 +0800</pubDate><guid>https://qtopie.github.io/notes/cloud-native/cicd/jiri.zh/</guid><description>&lt;p>Jiri (/jɪəri/ YEER-ee)是谷歌工程师开发的，灵活集成多个git仓库的工具，主要用来管理fuchsia操作系统源码。&lt;/p>
 &lt;p>其主要功能类似于&lt;code>git submodule&lt;/code>, 但使用方式更加灵活，不需要对原git仓库的行为做任何修改，也可以不用在主仓库不断更新引用。&lt;/p>
 &lt;h2 id="安装">安装&lt;/h2>
 &lt;p>推荐从源码编译安装 (需要安装最新版本Go语言构建工具）&lt;/p>
@@ -436,7 +932,18 @@ Java version: 1.8.0_171
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#309">path=&lt;/span>&lt;span style="color:#c30">&amp;#34;frontend&amp;#34;&lt;/span>&lt;span style="color:#309;font-weight:bold">/&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#309;font-weight:bold">&amp;lt;/projects&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#309;font-weight:bold">&amp;lt;/manifest&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title>Math in Markdown</title><link>https://qtopie.github.io/posts/hugo/math-in-markdown/</link><pubDate>Thu, 20 Dec 2018 16:21:55 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/hugo/math-in-markdown/</guid><description>&lt;h2 id="latex">LaTeX&lt;/h2>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>将此文件放到git仓库根目录下，本地创建目录foo&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mkdir foo &lt;span style="color:#555">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#366">cd&lt;/span> foo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jiri init
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># manifest repos&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jiri import foo https://github.com/artificerpi/jiri-foo
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jiri update
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>更多使用参考下面的文档和help命令&lt;/p>
+&lt;h2 id="参考">参考&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://fuchsia.googlesource.com/jiri/">https://fuchsia.googlesource.com/jiri/&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Math in Markdown</title><link>https://qtopie.github.io/posts/hugo/math-in-markdown/</link><pubDate>Thu, 20 Dec 2018 16:21:55 +0800</pubDate><guid>https://qtopie.github.io/posts/hugo/math-in-markdown/</guid><description>&lt;h2 id="latex">LaTeX&lt;/h2>
 &lt;h3 id="configuration">Configuration&lt;/h3>
 &lt;p>I prefer to configure formular delimiters with the way using brackets:&lt;/p>
 &lt;pre tabindex="0">&lt;code>inline: \(...\)
@@ -449,7 +956,12 @@ For &lt;code>mathJax&lt;/code>, it&amp;rsquo;s provided in the default configura
 &lt;p>&lt;code>A_n^n=n\times(n-1)\times(n-2)\times...\times2\times1&lt;/code>&lt;/p>
 &lt;p>&lt;code>A_n^m=n\times(n-1)\times(n-2)\times...\times(n-m+1) = \frac{n!}{(n-m)!}&lt;/code>&lt;/p>
 &lt;h2 id="combination">Combination&lt;/h2>
-&lt;p>&lt;code>C_n^m=\frac{A_n^m}{A_m^m} = \frac{n!}{m!(n-m)!}&lt;/code>&lt;/p></description></item><item><title>树莓派4G模块</title><link>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</link><pubDate>Wed, 05 Dec 2018 22:36:06 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</guid><description>&lt;h2 id="准备环境">准备环境&lt;/h2>
+&lt;p>&lt;code>C_n^m=\frac{A_n^m}{A_m^m} = \frac{n!}{m!(n-m)!}&lt;/code>&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-math" data-lang="math">C_n^m=C_n^{n-m}
+&lt;/code>&lt;/pre>&lt;p>&lt;code>C_{n+1}^{r+1} = C_n^r + C_n^{r+1}&lt;/code>&lt;/p>
+&lt;h3 id="binomial-theorem">Binomial theorem&lt;/h3>
+&lt;pre tabindex="0">&lt;code class="language-math" data-lang="math">(a+b)^n = \sum_{i=0}^n{{C_n^i}a^{n-i}b^i} \tag 1
+&lt;/code>&lt;/pre>&lt;p>&lt;code>2^n =\sum_{i=0}^n{{C_n^i}} = C_n^0 + C_n^1 + C_n^2 + ... + C_n^n&lt;/code>&lt;/p></description></item><item><title>树莓派4G模块</title><link>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</link><pubDate>Wed, 05 Dec 2018 22:36:06 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</guid><description>&lt;h2 id="准备环境">准备环境&lt;/h2>
 &lt;ul>
 &lt;li>树莓派3B&lt;/li>
 &lt;li>华为4G模块：HUAWEI ME909s-821&lt;/li>
@@ -481,7 +993,32 @@ For &lt;code>mathJax&lt;/code>, it&amp;rsquo;s provided in the default configura
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Bus &lt;span style="color:#f60">001&lt;/span> Device 003: ID 0424:ec00 Standard Microsystems Corp. SMSC9512/9514 Fast Ethernet Adapter
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Bus &lt;span style="color:#f60">001&lt;/span> Device 002: ID 0424:9514 Standard Microsystems Corp. SMC9514 Hub
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Bus &lt;span style="color:#f60">001&lt;/span> Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
-&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title>Vbox Ubuntu Server</title><link>https://qtopie.github.io/notes/linux/vbox-ubuntu-server/</link><pubDate>Tue, 27 Nov 2018 22:32:33 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/linux/vbox-ubuntu-server/</guid><description>&lt;h1 id="virtualbox-with-ubuntu-server">Virtualbox with Ubuntu Server&lt;/h1>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>安装拨号软件&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo apt-get update
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt-get install ppp usb-modeswitch wvdial
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>初始化wvdial配置&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo wvdialconf /etc/wvdial.conf
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>修改&lt;code>wvdial&lt;/code>配置&lt;/li>
+&lt;/ul>
+&lt;pre tabindex="0">&lt;code>[Dialer Defaults]
+Init1 = ATZ
+Init2 = ATQ0 V1 E1 S0=0
+Init3 = AT+CGDCONT=1,&amp;#34;IP&amp;#34;, &amp;#34;cmnet&amp;#34;
+Modem Type = Analog Modem
+Baud = 9600
+New PPPD = yes
+Modem = /dev/ttyUSB0
+ISDN = 0
+Phone = *99***1#
+Password = { }
+Username = { }
+Auto DNS = on
+&lt;/code>&lt;/pre>&lt;p>APN和拨号设置参考&lt;/p></description></item><item><title>Vbox Ubuntu Server</title><link>https://qtopie.github.io/notes/linux/vbox-ubuntu-server/</link><pubDate>Tue, 27 Nov 2018 22:32:33 +0800</pubDate><guid>https://qtopie.github.io/notes/linux/vbox-ubuntu-server/</guid><description>&lt;h1 id="virtualbox-with-ubuntu-server">Virtualbox with Ubuntu Server&lt;/h1>
 &lt;p>&lt;em>Manage Virtualbox in command line&lt;/em>&lt;/p>
 &lt;h2 id="installation">Installation&lt;/h2>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo apt install virtualbox
@@ -497,7 +1034,42 @@ For &lt;code>mathJax&lt;/code>, it&amp;rsquo;s provided in the default configura
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># check installation&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>VBoxManage list extpacks
-&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title>怎样安全地Root你的安卓手机</title><link>https://qtopie.github.io/posts/diy/root-your-android-phone/</link><pubDate>Sun, 04 Nov 2018 20:29:38 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/diy/root-your-android-phone/</guid><description>&lt;p>出于各种原因，我们可能会对自己手机上的安卓系统并不满意，而Root是我们DIY自己的安卓机的一把钥匙。&lt;/p>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="create-vm">Create VM&lt;/h2>
+&lt;ul>
+&lt;li>Create virtual disk&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>VBoxManage createmedium disk --filename ubuntu-server1.vdi --size &lt;span style="color:#f60">8192&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>Create virtual machine&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>VBoxManage list ostypes | grep -B &lt;span style="color:#f60">1&lt;/span> -A &lt;span style="color:#f60">2&lt;/span> Ubuntu
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>VBoxManage createvm --name ubuntu-server1 --ostype &lt;span style="color:#c30">&amp;#34;Ubuntu_64&amp;#34;&lt;/span> --register
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>Configure virtual machine&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># add sata disk&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>VBoxManage storagectl ubuntu-server1 --name SATA --add sata --controller IntelAHCI
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>VBoxManage storageattach ubuntu-server1 --storagectl SATA --port &lt;span style="color:#f60">0&lt;/span> --device &lt;span style="color:#f60">0&lt;/span> --type hdd --medium ubuntu-server1.vdi
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># mount dvd bootable iso file&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>VBoxManage storagectl ubuntu-server1 --name IDE --add ide
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>VBoxManage storageattach ubuntu-server1 --storagectl IDE --port &lt;span style="color:#f60">0&lt;/span> --device &lt;span style="color:#f60">0&lt;/span> --type dvddrive --medium ~/Downloads/mini.iso
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>VBoxManage modifyvm ubuntu-server1 --ioapic on
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>VBoxManage modifyvm ubuntu-server1 --boot1 dvd --boot2 disk --boot3 none --boot4 none
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>VBoxManage modifyvm ubuntu-server1 --memory &lt;span style="color:#f60">512&lt;/span> --vram &lt;span style="color:#f60">8&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>VBoxManage modifyvm ubuntu-server1 --nic1 nat
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>Set for VRDE (optional)&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>VBoxManage setproperty vrdeextpack &lt;span style="color:#c30">&amp;#34;Oracle VM VirtualBox Extension Pack&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># vrde port 5000, 5010, 5011 or 5012&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>VBoxManage modifyvm ubuntu-server1 --vrde on --vrdeport 5000,5010-5012 
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>Start vm&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>VBoxManage startvm ubuntu-server1 --type headless
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>VBoxManage showvminfo ubuntu-server1
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Test it &lt;code>rdesktop -a 16 -N &amp;lt;HOST-IP&amp;gt;:&amp;lt;PORT&amp;gt;&lt;/code>&lt;/p></description></item><item><title>怎样安全地Root你的安卓手机</title><link>https://qtopie.github.io/posts/diy/root-your-android-phone/</link><pubDate>Sun, 04 Nov 2018 20:29:38 +0800</pubDate><guid>https://qtopie.github.io/posts/diy/root-your-android-phone/</guid><description>&lt;p>出于各种原因，我们可能会对自己手机上的安卓系统并不满意，而Root是我们DIY自己的安卓机的一把钥匙。&lt;/p>
 &lt;p>注意手机Root后并不一定安全，本文仅仅说的是用安全（较为透明公开）的方式自己root你的手机。&lt;/p>
 &lt;p>但安全永远是相对的，如果你对手机ROOT后的安全性有较大顾虑，请不要进行该操作。&lt;/p>
 &lt;p>对ROOT后的设备，也请远离流氓软件和恶意网站，尽可能使用可信度高的应用与服务。&lt;/p>
@@ -533,7 +1105,34 @@ For &lt;code>mathJax&lt;/code>, it&amp;rsquo;s provided in the default configura
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>adb kill-server &lt;span style="color:#555">&amp;amp;&amp;amp;&lt;/span> adb start-server
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>adb devices
-&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title>我的DIY与vocore</title><link>https://qtopie.github.io/notes/iot/vocore/my-vocore-playground/</link><pubDate>Thu, 26 Jul 2018 22:24:33 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/iot/vocore/my-vocore-playground/</guid><description>&lt;h2 id="vocorehttpvocoreio">&lt;a href="http://vocore.io/">VoCore&lt;/a>&lt;/h2>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>
+&lt;p>重启手机进入&lt;code>download&lt;/code>模式&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>adb reboot download
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>解锁bootloader&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>fastboot oem unlock
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fastboot flashing unlock
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;h2 id="刷入twrp到recovery">刷入twrp到Recovery&lt;/h2>
+&lt;ul>
+&lt;li>
+&lt;p>在&lt;code>download&lt;/code>模式中刷入recovery&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>fastboot flash recovery twrp.img
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fastboot reboot recovery
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;h2 id="刷入magisk文件">刷入Magisk文件&lt;/h2>
+&lt;p>在上述步骤完成进入recovery后，可以看到twrp的一些管理菜单，选择安装我们刚才下载的magisk zip文件， 完成后重启手机。&lt;/p>
+&lt;h2 id="定制自己的rom极客需要熟悉一些计算机程序知识">定制自己的ROM（极客，需要熟悉一些计算机程序知识）&lt;/h2>
+&lt;p>推荐一个工具来完成 &lt;a href="https://github.com/artificerpi/android_system_extraction_and_repack_tool">https://github.com/artificerpi/android_system_extraction_and_repack_tool&lt;/a>&lt;/p>
+&lt;h2 id="参考">参考&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://twrp.me/htc/htcu11.html">https://twrp.me/htc/htcu11.html&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>我的DIY与vocore</title><link>https://qtopie.github.io/notes/iot/vocore/my-vocore-playground/</link><pubDate>Thu, 26 Jul 2018 22:24:33 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/vocore/my-vocore-playground/</guid><description>&lt;h2 id="vocorehttpvocoreio">&lt;a href="http://vocore.io/">VoCore&lt;/a>&lt;/h2>
 &lt;p>硬币大小的Linux计算机（或者可以DIY的mini路由器）&lt;/p>
 &lt;h2 id="技术参数">技术参数&lt;/h2>
 &lt;ul>
@@ -560,7 +1159,29 @@ For &lt;code>mathJax&lt;/code>, it&amp;rsquo;s provided in the default configura
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>uci &lt;span style="color:#366">set&lt;/span> &amp;lt;OPTION&amp;gt;
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># 查看option&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>uci show &amp;lt;OPTION&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title>My notes on Raspberry Pi</title><link>https://qtopie.github.io/notes/iot/rpi/setup-my-raspberrypi/</link><pubDate>Sun, 29 Oct 2017 16:40:22 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/iot/rpi/setup-my-raspberrypi/</guid><description>&lt;h2 id="headless-setup-no-external-monitor-or-keyboard">Headless setup (no external monitor or keyboard)&lt;/h2>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;h2 id="我的定制">我的定制&lt;/h2>
+&lt;h3 id="基本设置">基本设置&lt;/h3>
+&lt;ul>
+&lt;li>Change SSID Name&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>uci &lt;span style="color:#366">set&lt;/span> wireless.ap.ssid&lt;span style="color:#555">=&lt;/span>&lt;span style="color:#c30">&amp;#39;firefly&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>uci commit 
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># check result&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>uci show wireless.ap.ssid
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># restart networking service to make reload configuration&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/etc/init.d/network restart
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># check network in another machine&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo iw dev wlan0 scan | grep SSID
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="wget-ssl">wget ssl&lt;/h2>
+&lt;pre tabindex="0">&lt;code>opkg install libustream-openssl ca-bundle ca-certificates
+&lt;/code>&lt;/pre>&lt;h3 id="apsta模式-或者叫无线中继器">AP+STA模式 （或者叫无线中继器）&lt;/h3>
+&lt;ul>
+&lt;li>使用固件 &lt;a href="http://vonger.cn/misc/vocore2/20180723V.bin">vocore2-20180723V&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>配置信息(仅供参考)：&lt;/p></description></item><item><title>My notes on Raspberry Pi</title><link>https://qtopie.github.io/notes/iot/rpi/setup-my-raspberrypi/</link><pubDate>Sun, 29 Oct 2017 16:40:22 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/setup-my-raspberrypi/</guid><description>&lt;h2 id="headless-setup-no-external-monitor-or-keyboard">Headless setup (no external monitor or keyboard)&lt;/h2>
 &lt;p>&lt;strong>Updated: according to the &lt;a href="https://www.raspberrypi.com/documentation/computers/getting-started.html#configuration-on-first-boot">Raspibian Documentation&lt;/a>,
 use Raspberry Pi Imagger is strongly recommended&lt;/strong>&lt;/p>
 &lt;h3 id="networking">Networking&lt;/h3>
@@ -583,7 +1204,22 @@ network={
 &lt;/ul>
 &lt;p>Refer to &lt;a href="https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md">https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md&lt;/a>&lt;/p>
 &lt;h3 id="enable-ssh">Enable SSH&lt;/h3>
-&lt;p>Simply create an empty &lt;code>ssh&lt;/code> file in the root directory of boot partition.&lt;/p></description></item><item><title>Git快速手册</title><link>https://qtopie.github.io/notes/dev/git-quick-guide/</link><pubDate>Wed, 05 Jul 2017 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/dev/git-quick-guide/</guid><description>&lt;p>&lt;strong>WIP&lt;/strong>&lt;/p>
+&lt;p>Simply create an empty &lt;code>ssh&lt;/code> file in the root directory of boot partition.&lt;/p>
+&lt;p>Refer to &lt;a href="https://www.raspberrypi.org/documentation/remote-access/ssh/">https://www.raspberrypi.org/documentation/remote-access/ssh/&lt;/a>&lt;/p>
+&lt;h3 id="get-ip-of-your-pi">Get IP of your pi&lt;/h3>
+&lt;h4 id="with-computer">With Computer&lt;/h4>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo nmap -sP 192.168.21.*
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># results &lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>MAC Address: B8:27:EB:40:A9:D7 &lt;span style="color:#555">(&lt;/span>Raspberry Pi Foundation&lt;span style="color:#555">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Nmap scan report &lt;span style="color:#069;font-weight:bold">for&lt;/span> 192.168.31.158
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h4 id="with-android-phone">With Android Phone&lt;/h4>
+&lt;ul>
+&lt;li>Install connectBot or other terminal app&lt;/li>
+&lt;li>Share the network of your android device with usb network;&lt;/li>
+&lt;li>Enter local mode, use &lt;code>ip neighbor&lt;/code> command to get the ip address of your raspberrypi&lt;/li>
+&lt;/ul>
+&lt;p>Now you can ssh to your raspberry pi with this ip.&lt;/p></description></item><item><title>Git快速手册</title><link>https://qtopie.github.io/notes/dev/git-quick-guide/</link><pubDate>Wed, 05 Jul 2017 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/dev/git-quick-guide/</guid><description>&lt;p>&lt;strong>WIP&lt;/strong>&lt;/p>
 &lt;h2 id="快速开始">快速开始&lt;/h2>
 &lt;ul>
 &lt;li>设置个人信息&lt;/li>
@@ -604,10 +1240,15 @@ network={
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#366">cd&lt;/span> /path/to/your/project
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git init 			&lt;span style="color:#09f;font-style:italic"># initialize an empty git repo&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git remote add origin git@repo-url.git
-&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title>Dockerfile</title><link>https://qtopie.github.io/notes/cloud-native/cicd/dockerfile/</link><pubDate>Wed, 02 Nov 2016 15:52:30 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/cloud-native/cicd/dockerfile/</guid><description>&lt;h2 id="introduction">Introduction&lt;/h2>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="create-your-first-file-and-push-it-to-the-remote-repo">Create your first file and push it to the remote repo&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#366">echo&lt;/span> &lt;span style="color:#c30">&amp;#34;qtopie.rw&amp;#34;&lt;/span> &amp;gt;&amp;gt; contributors.txt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git add contributors.txt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git commit -m &lt;span style="color:#c30">&amp;#39;Initial commit with contributors&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git push -u origin master
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>总结下常用操作&lt;/p></description></item><item><title>Dockerfile</title><link>https://qtopie.github.io/notes/cloud-native/cicd/dockerfile/</link><pubDate>Wed, 02 Nov 2016 15:52:30 +0800</pubDate><guid>https://qtopie.github.io/notes/cloud-native/cicd/dockerfile/</guid><description>&lt;h2 id="introduction">Introduction&lt;/h2>
 &lt;p>Docker, an opensource container management tool based on LXC(Linux container).&lt;/p>
 &lt;!-- raw HTML omitted -->
-&lt;!-- raw HTML omitted --></description></item><item><title>Regular Expression</title><link>https://qtopie.github.io/notes/web/regex/</link><pubDate>Tue, 25 Oct 2016 00:35:03 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/web/regex/</guid><description>&lt;ul>
+&lt;!-- raw HTML omitted --></description></item><item><title>Regular Expression</title><link>https://qtopie.github.io/notes/web/regex/</link><pubDate>Tue, 25 Oct 2016 00:35:03 +0800</pubDate><guid>https://qtopie.github.io/notes/web/regex/</guid><description>&lt;ul>
 &lt;li>
 &lt;p>username:&lt;/p>
 &lt;p>&lt;code>^[a-z0-9_-]{3,16}$&lt;/code> // any character of a-z, 0-9, underscore and &amp;lsquo;-&amp;rsquo;&lt;/p>
@@ -654,7 +1295,8 @@ network={
 (a(bc))	Capture Sub-group
 (.*)	Capture all
 (abc|def)	Matches abc or def
-&lt;/code>&lt;/pr</description></item><item><title>Ubuntu init process</title><link>https://qtopie.github.io/notes/linux/systemd-service-unit-file/</link><pubDate>Thu, 15 Sep 2016 14:20:15 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/linux/systemd-service-unit-file/</guid><description>&lt;h2 id="history">History&lt;/h2>
+&lt;/code>&lt;/pre>&lt;p>To help you better understand the regular expressions, &lt;a href="https://regexper.com">Visualized with
+Regexper&lt;/a>&lt;/p></description></item><item><title>Ubuntu init process</title><link>https://qtopie.github.io/notes/linux/systemd-service-unit-file/</link><pubDate>Thu, 15 Sep 2016 14:20:15 +0800</pubDate><guid>https://qtopie.github.io/notes/linux/systemd-service-unit-file/</guid><description>&lt;h2 id="history">History&lt;/h2>
 &lt;ul>
 &lt;li>sysVinit&lt;/li>
 &lt;li>&lt;a href="http://upstart.ubuntu.com/">upstart&lt;/a>&lt;/li>
@@ -670,7 +1312,7 @@ network={
 &lt;/ul>
 &lt;h2 id="systemd">Systemd&lt;/h2>
 &lt;p>Systemd is a collection of system management daemons, utilities and libraries which serves as a replacement of System V init daemon. Systemd functions as
-central management and configuration platform for UNIX like system.&lt;/p></description></item><item><title>Wifi with hostapd</title><link>https://qtopie.github.io/notes/linux/hostapd-wifi/</link><pubDate>Tue, 30 Aug 2016 19:06:18 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/linux/hostapd-wifi/</guid><description>&lt;h2 id="hostapdhttpsw1fihostapd">&lt;a href="https://w1.fi/hostapd/">Hostapd&lt;/a>&lt;/h2>
+central management and configuration platform for UNIX like system.&lt;/p></description></item><item><title>Wifi with hostapd</title><link>https://qtopie.github.io/notes/linux/hostapd-wifi/</link><pubDate>Tue, 30 Aug 2016 19:06:18 +0800</pubDate><guid>https://qtopie.github.io/notes/linux/hostapd-wifi/</guid><description>&lt;h2 id="hostapdhttpsw1fihostapd">&lt;a href="https://w1.fi/hostapd/">Hostapd&lt;/a>&lt;/h2>
 &lt;p>hostapd is a user space daemon for access point and authentication server.&lt;/p>
 &lt;p>&lt;strong>Please follow the guide of &lt;a href="https://www.raspberrypi.org/documentation/configuration/wireless/access-point.md">Official documentation&lt;/a>&lt;/strong>&lt;/p>
 &lt;h2 id="installation-and-configuration">Installation and configuration&lt;/h2>
@@ -691,7 +1333,9 @@ wpa_key_mgmt=WPA-PSK
 rsn_pairwise=CCMP
 channel=10
 hw_mode=g
-&lt;/code>&lt;/pr</description></item><item><title>使用Hugo生成静态站点</title><link>https://qtopie.github.io/posts/hugo/getting-started-with-hugo/</link><pubDate>Mon, 02 May 2016 00:06:17 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/posts/hugo/getting-started-with-hugo/</guid><description>&lt;p>本文主要分享如何使用Hugo生成静态站点，并部署到firebase (Hosting服务）上。&lt;/p>
+&lt;/code>&lt;/pre>&lt;p>&lt;strong>There should not be any whitespace at the end of each line&lt;/strong>&lt;/p>
+&lt;p>then modify file &lt;code>/etc/default/hostapd&lt;/code> to let the configuration work
+automatically.&lt;/p></description></item><item><title>使用Hugo生成静态站点</title><link>https://qtopie.github.io/posts/hugo/getting-started-with-hugo/</link><pubDate>Mon, 02 May 2016 00:06:17 +0800</pubDate><guid>https://qtopie.github.io/posts/hugo/getting-started-with-hugo/</guid><description>&lt;p>本文主要分享如何使用Hugo生成静态站点，并部署到firebase (Hosting服务）上。&lt;/p>
 &lt;p>updated: 2021/9/29&lt;/p>
 &lt;h2 id="静态站点">静态站点&lt;/h2>
 &lt;p>静态站点，相比于动态站点（一般指需要请求后端动态生成网站内容）来说，网站内容已提前渲染好，对搜索引擎更加友好。而且网站内容一般可以直接生成静态的html/css页面, 减少浏览器js渲染，网络传输时也可以充分利用缓存, 这样网页加载也比较快， 使用户体验更好。&lt;/p>
@@ -731,7 +1375,18 @@ hw_mode=g
 &lt;li>在github创建私有仓库&lt;code>qtopie.web.app&lt;/code>（作为集成仓库）, 对应于站点名称，存放站点配置文件。&lt;/li>
 &lt;li>创建firebase hosting项目，将站点&lt;code>qtopie.web.app&lt;/code>发布到firebase.&lt;/li>
 &lt;/ul>
-&lt;p>&lt;em>仓库创建过程省略&lt;/em>&lt;/p></description></item><item><title>开始使用Ubuntu</title><link>https://qtopie.github.io/notes/linux/getting-started-with-ubuntu/</link><pubDate>Mon, 17 Nov 2014 22:24:33 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/linux/getting-started-with-ubuntu/</guid><description>&lt;h2 id="介绍">介绍&lt;/h2>
+&lt;p>&lt;em>仓库创建过程省略&lt;/em>&lt;/p>
+&lt;h3 id="hugo安装">Hugo安装&lt;/h3>
+&lt;p>以在Ubuntu 20.04上为例&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo snap install hugo
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="本地生成站点">本地生成站点&lt;/h3>
+&lt;p>初始化git各模块&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>// git clone ... ; &lt;span style="color:#366">cd&lt;/span> &amp;lt;repo&amp;gt;
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hugo new site .
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git submodule add https://github.com/qtopierw/amp-blog-theme.git themes/amp-blog-theme
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git submodule add git@github.com:&amp;lt;username&amp;gt;/posts.git content/posts
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>创建&lt;code>.gitignore&lt;/code>文件, 并加入&lt;code>public&lt;/code>目录&lt;/p></description></item><item><title>开始使用Ubuntu</title><link>https://qtopie.github.io/notes/linux/getting-started-with-ubuntu/</link><pubDate>Mon, 17 Nov 2014 22:24:33 +0800</pubDate><guid>https://qtopie.github.io/notes/linux/getting-started-with-ubuntu/</guid><description>&lt;h2 id="介绍">介绍&lt;/h2>
 &lt;p>Ubuntu是一个以桌面应用为主的Linux操作系统，基于Debian发行版和GNOME桌面环境(17.10又回到gnome)，与Debian的不同在于它每6个月会发布一个新版本。Ubuntu的目标在于为一般用户提供一个最新的、同时又相当稳定的主要由自由软件构建而成的操作系统。Ubuntu具有庞大的社区力量（如&lt;a href="https://askubuntu.com/">askubuntu&lt;/a>)，用户可以方便地从社区获得帮助。对于我个人而言，最吸引的是Ubuntu的开放性及活跃的社区,在Ubuntu上做开发也更加得心应手。&lt;/p>
 &lt;h2 id="系统安装">系统安装&lt;/h2>
 &lt;p>以Ubuntu桌面版(amd64)为例&lt;/p>
@@ -770,7 +1425,89 @@ hw_mode=g
  layout="fill" 
  lightbox>
  &lt;/amp-img>
-&lt;/div>&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/algorithms/bitwise-operators/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/algorithms/bitwise-operators/</guid><description>&lt;h1 id="bitwise-operators">Bitwise Operators&lt;/h1>
+&lt;/div>&lt;/p>
+&lt;ul>
+&lt;li>调整分区&lt;/li>
+&lt;/ul>
+&lt;p>此处可以设置管理员账户，建议耐心点一次设置好就ok了&lt;/p>
+&lt;p>&lt;div class="fixed-height-container">
+ &lt;amp-img class="contain" alt="用户" src="https://qtopie.github.io/notes/linux/getting-started-with-ubuntu.assets/img-2021-10-05-18-09-35.png" 
+ layout="fill" 
+ lightbox>
+ &lt;/amp-img>
+&lt;/div>&lt;/p>
+&lt;ul>
+&lt;li>开始安装&lt;/li>
+&lt;/ul>
+&lt;p>&lt;div class="fixed-height-container">
+ &lt;amp-img class="contain" alt="" src="https://qtopie.github.io/notes/linux/getting-started-with-ubuntu.assets/img-2021-10-05-18-10-09.png" 
+ layout="fill" 
+ lightbox>
+ &lt;/amp-img>
+&lt;/div>&lt;/p>
+&lt;p>安装完成后，重新启动计算机就ok了！&lt;/p>
+&lt;p>&lt;div class="fixed-height-container">
+ &lt;amp-img class="contain" alt="" src="https://qtopie.github.io/notes/linux/getting-started-with-ubuntu.assets/img-2021-10-05-18-10-22.png" 
+ layout="fill" 
+ lightbox>
+ &lt;/amp-img>
+&lt;/div>&lt;/p>
+&lt;h3 id="从旧磁盘迁移ubuntu">从旧磁盘迁移Ubuntu&lt;/h3>
+&lt;p>有时由于更换磁盘等原因，我们需要迁移Linux系统到新的磁盘。这里给出一个本人使用过的解决方案。
+假设问题： 需要将HDD上装有Ubuntu 18.04的Linux系统迁移到一块空的SSD上。&lt;/p>
+&lt;ul>
+&lt;li>在新磁盘上创建分区(这里我只创建了一个root分区，且原系统也只有一个分区)&lt;/li>
+&lt;/ul>
+&lt;p>使用&lt;a href="https://gparted.org/">gparted&lt;/a>在新磁盘上创建一个root分区,格式为ext4.
+或者在终端下使用&lt;a href="http://manpages.ubuntu.com/manpages/xenial/man8/parted.8.html">parted&lt;/a>完成该操作。&lt;/p>
+&lt;ul>
+&lt;li>将系统文件拷贝到新磁盘的分区(建议在&lt;a href="http://www.ubuntu.com/download/desktop/create-a-usb-stick-on-ubuntu">live usb&lt;/a>上完成该操作)&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># 旧的分区在/dev/sda5上， 新磁盘为/dev/sdb&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>dd &lt;span style="color:#033">in&lt;/span>&lt;span style="color:#555">=&lt;/span>/dev/sda5 &lt;span style="color:#033">of&lt;/span>&lt;span style="color:#555">=&lt;/span>/dev/sdb1 &lt;span style="color:#033">bs&lt;/span>&lt;span style="color:#555">=&lt;/span>4M &lt;span style="color:#033">conv&lt;/span>&lt;span style="color:#555">=&lt;/span>noerror,sync &lt;span style="color:#033">status&lt;/span>&lt;span style="color:#555">=&lt;/span>progress
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>拷贝完后，mount新磁盘确认数据已经保存到新磁盘，就可以移走旧磁盘或删除旧系统文件。&lt;/p>
+&lt;ul>
+&lt;li>使用live usb安装grub到新磁盘的文件系统&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># mount新磁盘分区到 /mnt&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo mount /dev/sdb1 /mnt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># mount当前操作系统文件必要目录&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">for&lt;/span> i in sys proc run dev; &lt;span style="color:#069;font-weight:bold">do&lt;/span> sudo mount --bind &lt;span style="color:#c30">&amp;#34;/&lt;/span>&lt;span style="color:#033">$i&lt;/span>&lt;span style="color:#c30">&amp;#34;&lt;/span> &lt;span style="color:#c30">&amp;#34;/mnt/&lt;/span>&lt;span style="color:#033">$i&lt;/span>&lt;span style="color:#c30">&amp;#34;&lt;/span>; &lt;span style="color:#069;font-weight:bold">done&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># 如果使用的是UEFI系统，也需要将它mount到mnt，这里我的UEFI在/dev/sda1上，可通过磁盘工具查看&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo mount /dev/sda1 /mnt/boot/efi
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># chroot&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo chroot /mnt
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># 更新grub&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>update-grub
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>grub-install /dev/sdb
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>update-grub
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#366">exit&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># 重启&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo reboot
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>创建swapfile (可选，如果启动时提示无swapfile使用)&lt;/li>
+&lt;/ul>
+&lt;p>首先确认swap文件是否存在 &lt;code>sudo swapon -s&lt;/code>&lt;/p></description></item><item><title>OAuth</title><link>https://qtopie.github.io/notes/system-design/oauth/</link><pubDate>Sun, 23 Aug 1970 06:28:43 +0000</pubDate><guid>https://qtopie.github.io/notes/system-design/oauth/</guid><description>&lt;pre tabindex="0">&lt;code> +--------+ +---------------+
+ | |--(A)- Authorization Request -&amp;gt;| Resource |
+ | | | Owner |
+ | |&amp;lt;-(B)-- Authorization Grant ---| |
+ | | +---------------+
+ | |
+ | | +---------------+
+ | |--(C)-- Authorization Grant --&amp;gt;| Authorization |
+ | Client | | Server |
+ | |&amp;lt;-(D)----- Access Token -------| |
+ | | +---------------+
+ | |
+ | | +---------------+
+ | |--(E)----- Access Token ------&amp;gt;| Resource |
+ | | | Server |
+ | |&amp;lt;-(F)--- Protected Resource ---| |
+ +--------+ +---------------+
+&lt;/code>&lt;/pre>&lt;h2 id="相关安全问题">相关安全问题&lt;/h2>
+&lt;h3 id="csrf-cross-site-request-forgery">CSRF (Cross Site Request Forgery)&lt;/h3>
+&lt;p>CSRF（Cross-site request forgery，跨站请求伪造），也被称为“One Click Attack”或Session Riding，通常缩写为CSRF或者XSRF，是基于客户端操作的请求伪造，是一种对网站的恶意利用。&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/algorithms/bitwise-operators/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/algorithms/bitwise-operators/</guid><description>&lt;h1 id="bitwise-operators">Bitwise Operators&lt;/h1>
 &lt;h2 id="list">List&lt;/h2>
 &lt;table>
  &lt;thead>
@@ -818,7 +1555,7 @@ hw_mode=g
 &lt;h2 id="reference">Reference&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a href="https://www.geeksforgeeks.org/bitwise-operators-in-c-cpp/">bitwise-operators-in-c-cpp, GeeksforGeeks&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title/><link>https://qtopie.github.io/notes/algorithms/linked-list.zh/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/algorithms/linked-list.zh/</guid><description>&lt;h1 id="链表">链表&lt;/h1>
+&lt;/ul></description></item><item><title/><link>https://qtopie.github.io/notes/algorithms/linked-list.zh/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/algorithms/linked-list.zh/</guid><description>&lt;h1 id="链表">链表&lt;/h1>
 &lt;h2 id="链表反转">链表反转&lt;/h2>
 &lt;h2 id="判断链表是否有环">判断链表是否有环&lt;/h2>
 &lt;p>解法: 指针内存地址Hash, 快慢双指针(追及问题)&lt;/p>
@@ -839,14 +1576,14 @@ hw_mode=g
 &lt;h2 id="reference">Reference&lt;/h2>
 &lt;ul>
 &lt;li>link1&lt;/li>
-&lt;/ul></description></item><item><title/><link>https://qtopie.github.io/notes/algorithms/readme/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/algorithms/readme/</guid><description>&lt;p>Algorithm and Data Structures&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/algorithms/selection-algorithm/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/algorithms/selection-algorithm/</guid><description>&lt;h1 id="selection-algorithm">Selection Algorithm&lt;/h1>
+&lt;/ul></description></item><item><title/><link>https://qtopie.github.io/notes/algorithms/readme/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/algorithms/readme/</guid><description>&lt;p>Algorithm and Data Structures&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/algorithms/selection-algorithm/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/algorithms/selection-algorithm/</guid><description>&lt;h1 id="selection-algorithm">Selection Algorithm&lt;/h1>
 &lt;h2 id="median-of-medians">Median of medians&lt;/h2>
 &lt;h3 id="bfprt">BFPRT&lt;/h3>
 &lt;h2 id="reference">Reference&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a href="http://speople.csail.mit.edu/rivest/pubs/BFPRT73.pdf">http://speople.csail.mit.edu/rivest/pubs/BFPRT73.pdf&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://en.wikipedia.org/wiki/Median_of_medians">https://en.wikipedia.org/wiki/Median_of_medians&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title/><link>https://qtopie.github.io/notes/algorithms/sort/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/algorithms/sort/</guid><description>&lt;h1 id="timsort--quicksortdual-pivot">TimSort &amp;amp; QuickSort(dual-pivot)&lt;/h1>
+&lt;/ul></description></item><item><title/><link>https://qtopie.github.io/notes/algorithms/sort/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/algorithms/sort/</guid><description>&lt;h1 id="timsort--quicksortdual-pivot">TimSort &amp;amp; QuickSort(dual-pivot)&lt;/h1>
 &lt;h2 id="timsort">TimSort&lt;/h2>
 &lt;h3 id="reference">Reference&lt;/h3>
 &lt;ul>
@@ -854,16 +1591,16 @@ hw_mode=g
 &lt;li>&lt;a href="http://cr.openjdk.java.net/~martin/webrevs/openjdk7/timsort/raw_files/new/src/share/classes/java/util/TimSort.java">http://cr.openjdk.java.net/~martin/webrevs/openjdk7/timsort/raw_files/new/src/share/classes/java/util/TimSort.java&lt;/a> (OpenJDK version)&lt;/li>
 &lt;/ul>
 &lt;h2 id="dual-pivot-quicksort">Dual pivot QuickSort&lt;/h2>
-&lt;h3 id="reference-1">Reference&lt;/h3></description></item><item><title/><link>https://qtopie.github.io/notes/cloud-native/cicd/jenkins/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/cloud-native/cicd/jenkins/</guid><description>&lt;p>&lt;a href="https://github.com/jenkinsci/kubernetes-plugin">https://github.com/jenkinsci/kubernetes-plugin&lt;/a>&lt;/p>
+&lt;h3 id="reference-1">Reference&lt;/h3></description></item><item><title/><link>https://qtopie.github.io/notes/cloud-native/cicd/jenkins/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/cloud-native/cicd/jenkins/</guid><description>&lt;p>&lt;a href="https://github.com/jenkinsci/kubernetes-plugin">https://github.com/jenkinsci/kubernetes-plugin&lt;/a>&lt;/p>
 &lt;p>war file is uncompressed under /var/jenkins_home/war&lt;/p>
 &lt;p>Class files are random accessed. Not recommmend to mount with s3 (fuse), will make page slow.&lt;/p>
-&lt;p>&lt;a href="https://github.com/jenkinsci/kubernetes-plugin/blob/master/src/main/kubernetes/service-account.yml">https://github.com/jenkinsci/kubernetes-plugin/blob/master/src/main/kubernetes/service-account.yml&lt;/a>&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/cloud-native/docker/readme/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/cloud-native/docker/readme/</guid><description>&lt;p>Docker config&lt;/p>
-&lt;p>&lt;a href="https://medium.com/better-programming/about-using-docker-config-e967d4a74b83">https://medium.com/better-programming/about-using-docker-config-e967d4a74b83&lt;/a>&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/cloud-native/k8s/kube-cluster-with-multipass/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/cloud-native/k8s/kube-cluster-with-multipass/</guid><description>&lt;h1 id="kubenetes-cluster-with-multipass">Kubenetes cluster with multipass&lt;/h1>
+&lt;p>&lt;a href="https://github.com/jenkinsci/kubernetes-plugin/blob/master/src/main/kubernetes/service-account.yml">https://github.com/jenkinsci/kubernetes-plugin/blob/master/src/main/kubernetes/service-account.yml&lt;/a>&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/cloud-native/docker/readme/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/cloud-native/docker/readme/</guid><description>&lt;p>Docker config&lt;/p>
+&lt;p>&lt;a href="https://medium.com/better-programming/about-using-docker-config-e967d4a74b83">https://medium.com/better-programming/about-using-docker-config-e967d4a74b83&lt;/a>&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/cloud-native/k8s/kube-cluster-with-multipass/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/cloud-native/k8s/kube-cluster-with-multipass/</guid><description>&lt;h1 id="kubenetes-cluster-with-multipass">Kubenetes cluster with multipass&lt;/h1>
 &lt;h2 id="reference">Reference&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a href="https://www.digitalocean.com/community/tutorials/how-to-use-cloud-config-for-your-initial-server-setup#goals">Simple Guide to use cloud-init&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://cloud-init.io/">Official Cloud-init site&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title/><link>https://qtopie.github.io/notes/cloud-native/k8s/readme/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/cloud-native/k8s/readme/</guid><description>&lt;h2 id="quick-introduction">Quick Introduction&lt;/h2>
+&lt;/ul></description></item><item><title/><link>https://qtopie.github.io/notes/cloud-native/k8s/readme/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/cloud-native/k8s/readme/</guid><description>&lt;h2 id="quick-introduction">Quick Introduction&lt;/h2>
 &lt;h2 id="get-started">Get started&lt;/h2>
 &lt;h2 id="installation">Installation&lt;/h2>
 &lt;h2 id="shared-network-via-service">Shared network via service&lt;/h2>
@@ -871,9 +1608,9 @@ hw_mode=g
 &lt;p>&lt;a href="https://github.com/ctrox/csi-s3">https://github.com/ctrox/csi-s3&lt;/a>&lt;/p>
 &lt;h2 id="ingress-router">Ingress Router&lt;/h2>
 &lt;p>Traefik&lt;/p>
-&lt;p>&lt;a href="https://docs.traefik.io/">https://docs.traefik.io/&lt;/a>&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/cloud-native/vault/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/cloud-native/vault/</guid><description>&lt;ul>
+&lt;p>&lt;a href="https://docs.traefik.io/">https://docs.traefik.io/&lt;/a>&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/cloud-native/vault/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/cloud-native/vault/</guid><description>&lt;ul>
 &lt;li>&lt;a href="https://www.hashicorp.com/resources/how-vault-compare-cloud-kms/">vault vs cloud kms&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title/><link>https://qtopie.github.io/notes/cloud-native/vitess/setup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/cloud-native/vitess/setup/</guid><description>&lt;h1 id="quick-guide-for-vitess">Quick guide for vitess&lt;/h1>
+&lt;/ul></description></item><item><title/><link>https://qtopie.github.io/notes/cloud-native/vitess/setup/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/cloud-native/vitess/setup/</guid><description>&lt;h1 id="quick-guide-for-vitess">Quick guide for vitess&lt;/h1>
 &lt;h2 id="addons">addons&lt;/h2>
 &lt;p>&lt;code>microk8s enable dns hostpath-storage ingress&lt;/code>&lt;/p>
 &lt;p>pull images behind firewall&lt;/p>
@@ -887,7 +1624,10 @@ hw_mode=g
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># list viteness cluster kind resource&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mkctl get VitessCluster
-&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item><item><title/><link>https://qtopie.github.io/notes/cloud-native/vitess/vitess-intro/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/cloud-native/vitess/vitess-intro/</guid><description>&lt;h1 id="vitess">Vitess&lt;/h1>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="reference">Reference&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://vitess.io/docs/16.0/get-started/operator/">https://vitess.io/docs/16.0/get-started/operator/&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title/><link>https://qtopie.github.io/notes/cloud-native/vitess/vitess-intro/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/cloud-native/vitess/vitess-intro/</guid><description>&lt;h1 id="vitess">Vitess&lt;/h1>
 &lt;p>&lt;a href="https://vitess.io/">vitess&lt;/a>是Google开发的可伸缩、可靠的、兼容MySQL的云原生分布式数据库。&lt;/p>
 &lt;blockquote>
 &lt;p>vitess最初由谷歌开发来支持youtube, 而youtube已成为全球第二大网站，有海量的视频上传和用户访问, 足以说明该方案的可靠性。&lt;/p>
@@ -913,7 +1653,76 @@ hw_mode=g
  layout="fill" 
  lightbox>
  &lt;/amp-img>
-&lt;/div>&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/design-pattern/design-principles/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/design-pattern/design-principles/</guid><description>&lt;h1 id="design-principles">Design Principles&lt;/h1>
+&lt;/div>&lt;/p>
+&lt;p>从另一个角度考虑，如果数据库要支持多个语言访问，Embedded-SDK模式就需要新的支持该语言的SDK；而Proxy模式则不用，只用标准JDBC连接即可。&lt;/p>
+&lt;h2 id="vitess特性">Vitess特性&lt;/h2>
+&lt;h2 id="vitess架构">Vitess架构&lt;/h2>
+&lt;p>&lt;div class="fixed-height-container">
+ &lt;amp-img class="contain" alt="Architecture Diagram" src="https://qtopie.github.io/notes/cloud-native/vitess/https://vitess.io/docs/16.0/overview/img/architecture.svg" 
+ layout="fill" 
+ lightbox>
+ &lt;/amp-img>
+&lt;/div>&lt;/p>
+&lt;p>类似于Kubernetes, Viteness的组件分为Control Plane（控制切面）和Data Plane(数据切面两部分)。&lt;/p>
+&lt;p>一般Control Plane承载元数据存储、调度和管理、监控等功能，而Data Plane直接对上游提供服务，承载业务流量。&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: center">名称&lt;/th>
+ &lt;th style="text-align: left">说明&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: center">VTGate&lt;/td>
+ &lt;td style="text-align: left">Vitess网关，将流量路由到VTTablet&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: center">VTTablet&lt;/td>
+ &lt;td style="text-align: left">一个tablet由一个mysqld进程和一个对应的vttablet进程组成，一般运行在一个机器上。&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: center">VTAdmin&lt;/td>
+ &lt;td style="text-align: left">Vitess Web管理界面&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: center">vtctld&lt;/td>
+ &lt;td style="text-align: left">用来访HTTP服务器，通常用来诊断集群的状态；也为vtctlclient提供服务&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: center">vtorc&lt;/td>
+ &lt;td style="text-align: left">vtorc即（Vitess Orchestration), 根据https://github.com/openark/orchestrator改写。主要实现mysql实例集群的复制和高可用&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;p>其他比较重要的概念&lt;/p>
+&lt;table>
+ &lt;thead>
+ &lt;tr>
+ &lt;th style="text-align: center">名称&lt;/th>
+ &lt;th style="text-align: left">说明&lt;/th>
+ &lt;/tr>
+ &lt;/thead>
+ &lt;tbody>
+ &lt;tr>
+ &lt;td style="text-align: center">Keyspace&lt;/td>
+ &lt;td style="text-align: left">keyspace是一个逻辑上的数据库。如果不使用sharding, 它会直接映射到数据库名称; 使用sharding时，它会映射到多个mysql分库。&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: center">Shard&lt;/td>
+ &lt;td style="text-align: left">Shard是keyspace的子集，通常是一个MySQL主库和多个MySQL从库&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: center">VSchema&lt;/td>
+ &lt;td style="text-align: left">VSchema用来定义如何分库分表，即如何数据如何存储在keyspaces和shards。 通在路由查询和重新分片的时候用到&lt;/td>
+ &lt;/tr>
+ &lt;tr>
+ &lt;td style="text-align: center">Cell&lt;/td>
+ &lt;td style="text-align: left">Cell是一组servers的集合，通常是在一个可用区(availability zone)里面，与其他的cell冗灾。每一个cell有自己的拓扑服务，如上面的架构图。&lt;/td>
+ &lt;/tr>
+ &lt;/tbody>
+&lt;/table>
+&lt;p>TODO 多个cell的场景&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/design-patterns/design-principles/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/design-patterns/design-principles/</guid><description>&lt;h1 id="design-principles">Design Principles&lt;/h1>
 &lt;h2 id="dependency-injection-di">Dependency Injection (DI)&lt;/h2>
 &lt;p>With dependency injection, objects accept dependencies in their constructors.
 The core principle is to separate behaviour from dependency resolution.&lt;/p>
@@ -936,10 +1745,24 @@ The core principle is to separate behaviour from dependency resolution.&lt;/p>
  &lt;/tr>
  &lt;/tbody>
 &lt;/table>
-&lt;p>See &lt;a href="https://github.com/google/guice/wiki/Motivation">Motivation of guice&lt;/a>.&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/design-pattern/iterator/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/design-pattern/iterator/</guid><description>&lt;p>供一种方法来访问聚合对象，而不用暴露这个对象的内部表示，其别名为游标(Cursor)。迭代器模式是一种对象行为型模式。&lt;/p>
+&lt;p>See &lt;a href="https://github.com/google/guice/wiki/Motivation">Motivation of guice&lt;/a>.&lt;/p>
+&lt;p>Sample: &lt;a href="https://github.com/google/guice/wiki/GettingStarted">https://github.com/google/guice/wiki/GettingStarted&lt;/a>&lt;/p>
+&lt;h2 id="inversion-of-control-ioc">(Inversion of Control) IoC&lt;/h2>
+&lt;p>参考维基百科 &lt;a href="https://zh.wikipedia.org/wiki/%E6%8E%A7%E5%88%B6%E5%8F%8D%E8%BD%AC">控制反转&lt;/a>：
+&lt;code>早在2004年，Martin Fowler就提出了“哪些方面的控制被反转了？”这个问题。他总结出是依赖对象的获得被反转了，因为大多数应用程序都是由两个或是更多的类通过彼此的合作来实现企业逻辑，这使得每个对象都需要获取与其合作的对象（也就是它所依赖的对象）的引用。如果这个获取过程要靠自身实现，那么这将导致代码高度耦合并且难以维护和调试。&lt;/code>&lt;/p>
+&lt;ul>
+&lt;li>Common implementation methods
+&lt;ul>
+&lt;li>Dependency Injection&lt;/li>
+&lt;li>Dependency Lookup (ServiceReistry)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="aop">AOP&lt;/h2>
+&lt;p>&lt;code>In computing, aspect-oriented programming (AOP) is a programming paradigm that aims to increase modularity by allowing the separation of cross-cutting concerns. It does so by adding additional behavior to existing code (an advice) without modifying the code itself, instead separately specifying which code is modified via a &amp;quot;pointcut&amp;quot; specification, such as &amp;quot;log all function calls when the function's name begins with 'set'&amp;quot;. This allows behaviors that are not central to the business logic (such as logging) to be added to a program without cluttering the code, core to the functionality. AOP forms a basis for aspect-oriented software development.&lt;/code>&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/design-patterns/iterator/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/design-patterns/iterator/</guid><description>&lt;p>供一种方法来访问聚合对象，而不用暴露这个对象的内部表示，其别名为游标(Cursor)。迭代器模式是一种对象行为型模式。&lt;/p>
 &lt;p>&lt;a href="https://blog.csdn.net/yanbober/article/details/45497881">https://blog.csdn.net/yanbober/article/details/45497881&lt;/a>&lt;/p>
 &lt;p>java prev and next traverse
-&lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/ListIterator.html">https://docs.oracle.com/javase/8/docs/api/java/util/ListIterator.html&lt;/a>&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/iot/asus-router/merlin-firmware/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/iot/asus-router/merlin-firmware/</guid><description>&lt;h1 id="asus-router-with-merlin-firmware">ASUS Router with Merlin Firmware&lt;/h1>
+&lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/ListIterator.html">https://docs.oracle.com/javase/8/docs/api/java/util/ListIterator.html&lt;/a>&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/iot/asus-router/merlin-firmware/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/iot/asus-router/merlin-firmware/</guid><description>&lt;h1 id="asus-router-with-merlin-firmware">ASUS Router with Merlin Firmware&lt;/h1>
 &lt;p>AiMesh Devices&lt;/p>
 &lt;ul>
 &lt;li>RT-AX82U (Master)&lt;/li>
@@ -957,7 +1780,26 @@ The core principle is to separate behaviour from dependency resolution.&lt;/p>
 &lt;p>Tips of &lt;code>nvram&lt;/code> utility
 command to show all configs: &lt;code>nvram show&lt;/code>
 set config: &lt;code>nvram set &amp;lt;config-key:config-value&amp;gt;&lt;/code>
-query config: &lt;code>nvram get &amp;lt;config-key&amp;gt;&lt;/code>&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/iot/rpi/portable-5g/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/iot/rpi/portable-5g/</guid><description>&lt;h1 id="树莓派5g-nr上网折腾记">树莓派5G NR上网折腾记&lt;/h1>
+query config: &lt;code>nvram get &amp;lt;config-key&amp;gt;&lt;/code>&lt;/p>
+&lt;/blockquote>
+&lt;ul>
+&lt;li>content of &lt;code>usb-mount-hook.sh&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;p>Test whether file exists, then execute script if found&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#099">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#099">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">if&lt;/span> &lt;span style="color:#555">[&lt;/span> -e &lt;span style="color:#c30">&amp;#34;/mnt/usb/scripts/startup.sh&amp;#34;&lt;/span> &lt;span style="color:#555">]&lt;/span>; &lt;span style="color:#069;font-weight:bold">then&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> bash -c &lt;span style="color:#c30">&amp;#34;/mnt/usb/scripts/startup.sh&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">fi&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>Content of &lt;code>/mnt/usb/scripts/startup.sh&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#099">#!/bin/bash
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#099">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/mnt/usb/scripts/autoproxy.sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/mnt/usb/scripts/shadowsocks.sh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="proxy">proxy&lt;/h3>
+&lt;p>Default to direct&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/iot/rpi/portable-5g/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/portable-5g/</guid><description>&lt;h1 id="树莓派5g-nr上网折腾记">树莓派5G NR上网折腾记&lt;/h1>
 &lt;h2 id="背景">背景&lt;/h2>
 &lt;p>每年春节回老家过年的时候，都需要解决上网的问题。基本需求是, 需要通过路由器为家里的电视、手机等设备提供一个可靠的网络覆盖，&lt;/p>
 &lt;p>而且网络的质量需要满足要求。因为平时不在老家住，开通宽带一般需要按年计费，不太划算。所以之前也尝试过买流量卡, 一个月可能&lt;/p>
@@ -980,7 +1822,25 @@ query config: &lt;code>nvram get &amp;lt;config-key&amp;gt;&lt;/code>&lt;/p></de
 &lt;p>虽然整体成本要1000+, 比一年的100M宽带价格 800左右并没有便宜多少。 但是设备是买到是我自己的，我还可以继续折腾，&lt;/p>
 &lt;p>从物品和精神上也都保值呢。&lt;/p>
 &lt;blockquote>
-&lt;p>这比开通了宽带但是没有使用依然扣费划算不少，可能只是心理舒坦 :&amp;gt;&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/iot/vocore/vocore-network-audio/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/iot/vocore/vocore-network-audio/</guid><description>&lt;h1 id="network-audio-by-vocore">Network Audio by Vocore&lt;/h1>
+&lt;p>这比开通了宽带但是没有使用依然扣费划算不少，可能只是心理舒坦 :&amp;gt;&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="rm500-cn">RM500-CN&lt;/h3>
+&lt;p>RM500U-CN是一款相对物美价廉的产品，微雪电子对其定制了扩展版和外壳天线等，简单的组装一下就可以比的上商业产品的质量。&lt;/p>
+&lt;p>&lt;a href="https://www.waveshare.net/shop/RM500U-CN-5G-HAT-with-case.htm">RM500U-CN商品链接&lt;/a>&lt;/p>
+&lt;h3 id="天际通卡">天际通卡&lt;/h3>
+&lt;p>天际通14001号码的卡支持SA网络， 14000的不支持。可以通过卡后面的号码区分。&lt;/p>
+&lt;blockquote>
+&lt;p>为了保证能买到14001卡, 我从闲鱼上找卖家购买并确认。 一般来说，华为移动路由设备送的卡是14001卡。
+我买的那张卡, 应该是闲鱼卖家从回收的华为设备里单独拿出来卖的；
+一个技巧是, 确认这个卡没有人使用，自己可以实名认证，防止用别人的卡充值后被别人挂失找回，造成不必要的经济损失&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="组装">组装&lt;/h2>
+&lt;p>组装教程 &lt;a href="https://www.waveshare.net/w/upload/8/8b/PI4-CASE-4G-5G-M.2-Assembly-cn.jpg">https://www.waveshare.net/w/upload/8/8b/PI4-CASE-4G-5G-M.2-Assembly-cn.jpg&lt;/a>&lt;/p>
+&lt;p>实际上按照从底部往上组装的顺序比较容易。&lt;/p>
+&lt;p>因为我们用的是RM500U-CN, 是通过usb(不是gpio）共享扩展版的网络到树莓派，所以需要插好A-to-A的USB接口.&lt;/p>
+&lt;h2 id="调试和使用">调试和使用&lt;/h2>
+&lt;p>这里推荐安装ubuntu-server 20.04, 经测试可以运行。而且ubuntu对树莓派本身也有良好的支持，是raspbian的近亲。&lt;/p>
+&lt;p>安装好ubuntu-server后，根据waveshare提供的补丁，添加USB设备描述符(vendor ID/product ID)&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/iot/vocore/vocore-network-audio/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/iot/vocore/vocore-network-audio/</guid><description>&lt;h1 id="network-audio-by-vocore">Network Audio by Vocore&lt;/h1>
 &lt;h2 id="firmware">Firmware&lt;/h2>
 &lt;p>Currently 2022/12/3, only openwrt 21.02 is supported. (patch is not working ins 22.03)&lt;/p>
 &lt;p>see &lt;a href="https://github.com/Vonger/vocore2">https://github.com/Vonger/vocore2&lt;/a>&lt;/p>
@@ -992,14 +1852,27 @@ query config: &lt;code>nvram get &amp;lt;config-key&amp;gt;&lt;/code>&lt;/p></de
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="adjust-volume">Adjust volume&lt;/h2>
 &lt;ul>
 &lt;li>
-&lt;p>use &lt;code>alsamixer&lt;/code>&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/the-little-linux-cmd-book/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/the-little-linux-cmd-book/</guid><description>&lt;h1 id="the-little-linux-command-line-book">The Little Linux Command Line Book&lt;/h1>
+&lt;p>use &lt;code>alsamixer&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>use &lt;code>amixer&lt;/code>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>amixer scontrols 
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="test-audio">test audio&lt;/h2>
+&lt;p>use &lt;code>madplay&lt;/code> to play sounds&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>madplay -A -5 -r /tmp/5314e49717753082b203497887a7a7ec_5512980116828022124.mp3
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="reference">Reference&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://openwrt.org/docs/guide-user/hardware/audio/pulseaudio">OpenWrt PulseAudio Guide&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title/><link>https://qtopie.github.io/notes/the-little-linux-cmd-book/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/the-little-linux-cmd-book/</guid><description>&lt;h1 id="the-little-linux-command-line-book">The Little Linux Command Line Book&lt;/h1>
 &lt;h2 id="cpu">CPU&lt;/h2>
 &lt;p>top&lt;/p>
 &lt;h2 id="memory">Memory&lt;/h2>
 &lt;p>virtual memory
 swapfile&lt;/p>
 &lt;p>&lt;code>free&lt;/code> command&lt;/p>
-&lt;h2 id="io">I/O&lt;/h2></description></item><item><title>Google IP地址范围</title><link>https://qtopie.github.io/notes/dev/google-ip-address/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/dev/google-ip-address/</guid><description>&lt;p>google ip address range&lt;/p>
+&lt;h2 id="io">I/O&lt;/h2></description></item><item><title>Google IP地址范围</title><link>https://qtopie.github.io/notes/dev/google-ip-address/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/dev/google-ip-address/</guid><description>&lt;p>google ip address range&lt;/p>
 &lt;p>&lt;a href="https://www.gstatic.com/ipranges/goog.json">https://www.gstatic.com/ipranges/goog.json&lt;/a>&lt;/p>
 &lt;p>github ip address range
 &lt;a href="https://api.github.com/meta">https://api.github.com/meta&lt;/a>&lt;/p>
@@ -1007,7 +1880,7 @@ swapfile&lt;/p>
 &lt;ul>
 &lt;li>&lt;a href="https://support.google.com/a/answer/10026322?hl=en">https://support.google.com/a/answer/10026322?hl=en&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-githubs-ip-addresses">https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/about-githubs-ip-addresses&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>xrdp</title><link>https://qtopie.github.io/notes/linux/remote-desktop-with-xrdp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/linux/remote-desktop-with-xrdp/</guid><description>&lt;h1 id="xrdp">xrdp&lt;/h1>
+&lt;/ul></description></item><item><title>xrdp</title><link>https://qtopie.github.io/notes/linux/remote-desktop-with-xrdp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/linux/remote-desktop-with-xrdp/</guid><description>&lt;h1 id="xrdp">xrdp&lt;/h1>
 &lt;p>&lt;em>Connect to Ubuntu Desktop remotely with xrdp&lt;/em>&lt;/p>
 &lt;h2 id="environment">Environment&lt;/h2>
 &lt;ul>
@@ -1023,4 +1896,8 @@ swapfile&lt;/p>
 &lt;p>Search Hyper-V on win10 start menu and create a virtual machine with the ISO file you just downloaded&lt;/p>
 &lt;/li>
 &lt;li>
-&lt;p>Follow the installation guide provided by ubuntu iso media, and setup the OS&lt;/p></description></item></channel></rss>
+&lt;p>Follow the installation guide provided by ubuntu iso media, and setup the OS&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>It&amp;rsquo;s recommended to use internal NAT network, so create a virtual network switch if necessary.&lt;/p></description></item></channel></rss>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Go on Blog | qtopierw</title><link>https://qtopie.github.io/tags/go/</link><description>Recent content in Go on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><managingEditor>qtopie.rw@gmail.com (qtopierw)</managingEditor><webMaster>qtopie.rw@gmail.com (qtopierw)</webMaster><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Wed, 18 Mar 2020 22:02:05 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/go/index.xml" rel="self" type="application/rss+xml"/><item><title>Go安装</title><link>https://qtopie.github.io/notes/go/setup-go/</link><pubDate>Wed, 18 Mar 2020 22:02:05 +0800</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/go/setup-go/</guid><description>&lt;p>官方下载安装向导请参考这里https://golang.org/dl/&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Go on Blog | qtopierw</title><link>https://qtopie.github.io/tags/go/</link><description>Recent content in Go on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Wed, 18 Mar 2020 22:02:05 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/go/index.xml" rel="self" type="application/rss+xml"/><item><title>Go安装</title><link>https://qtopie.github.io/notes/go/setup-go/</link><pubDate>Wed, 18 Mar 2020 22:02:05 +0800</pubDate><guid>https://qtopie.github.io/notes/go/setup-go/</guid><description>&lt;p>官方下载安装向导请参考这里https://golang.org/dl/&lt;/p>
 &lt;p>这篇文章主要分享加速访问go依赖和资源站点的问题。&lt;/p>
 &lt;h2 id="环境">环境&lt;/h2>
 &lt;ul>
@@ -19,4 +19,10 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># 设置不走 proxy 的私有仓库，多个用逗号相隔（可选）&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>go env -w &lt;span style="color:#033">GOPRIVATE&lt;/span>&lt;span style="color:#555">=&lt;/span>*.corp.example.com
-&lt;/span>&lt;/span>&lt;/code>&lt;/pr</description></item></channel></rss>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>同样推荐使用国内站点https://goproxy.cn/&lt;/p>
+&lt;h3 id="文档查看">文档查看&lt;/h3>
+&lt;ul>
+&lt;li>使用&lt;code>go doc&lt;/code>命令可以在终端快速查阅文档, 例如&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>go doc net.Listen | vim -
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="参考">参考&lt;/h2></description></item></channel></rss>

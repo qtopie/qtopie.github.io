@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Iot on Blog | qtopierw</title><link>https://qtopie.github.io/categories/iot/</link><description>Recent content in Iot on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><managingEditor>qtopie.rw@gmail.com (qtopierw)</managingEditor><webMaster>qtopie.rw@gmail.com (qtopierw)</webMaster><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Tue, 28 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/categories/iot/index.xml" rel="self" type="application/rss+xml"/><item><title>树莓派和HomeAssistant</title><link>https://qtopie.github.io/notes/iot/rpi/homeassistant/</link><pubDate>Tue, 28 Sep 2021 00:00:00 +0000</pubDate><author>qtopie.rw@gmail.com (qtopierw)</author><guid>https://qtopie.github.io/notes/iot/rpi/homeassistant/</guid><description>&lt;h2 id="目标">目标&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Iot on Blog | qtopierw</title><link>https://qtopie.github.io/categories/iot/</link><description>Recent content in Iot on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Tue, 28 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/categories/iot/index.xml" rel="self" type="application/rss+xml"/><item><title>树莓派和HomeAssistant</title><link>https://qtopie.github.io/notes/iot/rpi/homeassistant/</link><pubDate>Tue, 28 Sep 2021 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/homeassistant/</guid><description>&lt;h2 id="目标">目标&lt;/h2>
 &lt;p>使用开源软件和米家智能硬件，实现简单的智能家居系统&lt;/p>
 &lt;blockquote>
 &lt;p>采用米家智能硬件的原因是, 小米智能家居做的比较早（也许是起初推广的更好，刚接触智能家居的时候就用的小米）,
@@ -25,4 +25,31 @@
 &lt;p>编辑&lt;code>/etc/pip.conf&lt;/code> (使用豆瓣源）&lt;/p>
 &lt;pre tabindex="0">&lt;code>[global]
 index-url = https://pypi.douban.com/simple
-&lt;/code>&lt;/pr</description></item></channel></rss>
+&lt;/code>&lt;/pre>&lt;h4 id="设置开机自启动">设置开机自启动&lt;/h4>
+&lt;ul>
+&lt;li>创建systemd service unit文件&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>systemctl --user edit --full --force homeassistant.service
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>加入以下内容&lt;/p>
+&lt;pre tabindex="0">&lt;code>[Unit]
+Description=Home Assistant
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/home/ubuntu/.local/bin/hass
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=default.target
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>设置用户自动登录&lt;/li>
+&lt;/ul>
+&lt;p>&lt;a href="https://raspberrypi.stackexchange.com/questions/111728/how-to-get-raspi-config-on-ubuntu-20-04">安装&lt;code>raspi-config&lt;/code>&lt;/a>,
+然后配置 &lt;code>1. System Options&lt;/code> -&amp;gt; &lt;code>S5 Boot / Auto Login&lt;/code> -&amp;gt; &lt;code>B2 Console Autologin&lt;/code>&lt;/p>
+&lt;p>会生成&lt;code>/etc/systemd/system/getty@tty1.service.d/autologin.conf&lt;/code>, 内容如下&lt;/p>
+&lt;pre tabindex="0">&lt;code>[Service]
+ExecStart=
+ExecStart=-/sbin/agetty --autologin ubuntu --noclear %I $TERM
+&lt;/code>&lt;/pre>&lt;p>重启即可生效&lt;/p></description></item></channel></rss>
