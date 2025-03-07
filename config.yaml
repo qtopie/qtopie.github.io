@@ -2,7 +2,7 @@ baseURL: 'https://qtopie.github.io/'
 languageCode: 'en-us'
 defaultContentLanguage: en
 title: 'Blog | qtopierw'
-theme: 'amp-blog-theme'
+theme: 'hugo-book'
 googleAnalytics: UA-209364110-1
 author: 
   name: 'qtopierw'
@@ -11,6 +11,7 @@ copyright: Posts licensed under <a href="https://creativecommons.org/licenses/by
 
 params:
   googleAdSense: ca-pub-3338377104827119
+  math: true
 
 enableRobotsTXT: true
 
@@ -35,6 +36,17 @@ markup:
       hardWraps: false
       unsafe: false
       xhtml: false
+    passthrough:
+        delimiters:
+          block:
+          - - \[
+            - \]
+          - - $$
+            - $$
+          inline:
+          - - \(
+            - \)
+        enable: true
   highlight:
     anchorLineNos: false
     codeFences: true

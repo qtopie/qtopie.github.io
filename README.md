@@ -9,3 +9,7 @@ Personal Blog of site https://qtopie.github.io/
 ```bash
 git submodule set-url themes/amp-blog-theme git@github.com:qtopierw/amp-blog-theme.git
 ```
+
+## Math
+
+https://gohugo.io/content-management/mathematics/
