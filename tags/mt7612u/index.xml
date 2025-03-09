@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Mt7612u on Blog | qtopierw</title><link>https://qtopie.github.io/tags/mt7612u/</link><description>Recent content in Mt7612u on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Sat, 09 Mar 2019 11:29:38 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/mt7612u/index.xml" rel="self" type="application/rss+xml"/><item><title>Ubuntu下使用MT7612U</title><link>https://qtopie.github.io/notes/linux/mt7612u-driver/</link><pubDate>Sat, 09 Mar 2019 11:29:38 +0800</pubDate><guid>https://qtopie.github.io/notes/linux/mt7612u-driver/</guid><description>&lt;p>由于墙挡住了路由器WIFI信号，虽然5G频率的WIFI传输速率很快，但是信号衰减。WIFI无线通信是双方向的，就算路由信号能覆盖到，但考虑到手机或笔记本功率和天线的限制，难保证信号稳定。所以在淘宝上买了一个功能还算强大的无线网卡ComFast 926AC v2，双频WIFI外置双天线。没提前研究，“号称免驱动&amp;quot;，结果拿回来就懵了。&lt;/p>
-&lt;h2 id="安装驱动">安装驱动&lt;/h2>
+&lt;h2 id="安装驱动">
+ 安装驱动
+ &lt;a class="anchor" href="#%e5%ae%89%e8%a3%85%e9%a9%b1%e5%8a%a8">#&lt;/a>
+&lt;/h2>
 &lt;p>设备: Comfast 926AC v2
 系统： Ubuntu 18.04&lt;/p>
 &lt;p>因为是联发科的芯片，通常都是在同一份驱动代码上改改完成的。故从github上寻找了下面两个仓库的代码。&lt;/p>
@@ -37,5 +40,8 @@ ATTR{idVendor}==&amp;#34;0e8d&amp;#34;, ATTR{idProduct}==&amp;#34;2870&amp;#34;,
 &lt;pre tabindex="0">&lt;code>pi@raspberrypi:~ $ sudo ifconfig wlan1 down
 pi@raspberrypi:~ $ sudo ifconfig wlan1 hw ether 00:28:C7:0A:42:A2
 pi@raspberrypi:~ $ sudo ifconfig wlan1 up
-&lt;/code>&lt;/pre>&lt;h2 id="尝试在树梅派上编译驱动">尝试在树梅派上编译驱动&lt;/h2>
+&lt;/code>&lt;/pre>&lt;h2 id="尝试在树梅派上编译驱动">
+ 尝试在树梅派上编译驱动
+ &lt;a class="anchor" href="#%e5%b0%9d%e8%af%95%e5%9c%a8%e6%a0%91%e6%a2%85%e6%b4%be%e4%b8%8a%e7%bc%96%e8%af%91%e9%a9%b1%e5%8a%a8">#&lt;/a>
+&lt;/h2>
 &lt;p>&lt;del>4.19.y已经加入mt7612u的支持，但是经过测试，并不能使用。&lt;/del>[更新] 在5.1.y上编译可以正常使用（STA模式）, 注意默认缺失了&lt;code>/lib/firmware/mt7662.bin /lib/firmware/mt7662_rom_patch.bin&lt;/code> 两个文件，可以从其它系统拷贝或网络下载到树梅派。&lt;/p></description></item></channel></rss>

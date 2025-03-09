@@ -2,14 +2,20 @@
 &lt;p>注意手机Root后并不一定安全，本文仅仅说的是用安全（较为透明公开）的方式自己root你的手机。&lt;/p>
 &lt;p>但安全永远是相对的，如果你对手机ROOT后的安全性有较大顾虑，请不要进行该操作。&lt;/p>
 &lt;p>对ROOT后的设备，也请远离流氓软件和恶意网站，尽可能使用可信度高的应用与服务。&lt;/p>
-&lt;h2 id="预先准备">预先准备&lt;/h2>
+&lt;h2 id="预先准备">
+ 预先准备
+ &lt;a class="anchor" href="#%e9%a2%84%e5%85%88%e5%87%86%e5%a4%87">#&lt;/a>
+&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a href="https://github.com/topjohnwu/Magisk/releases">MagiskManager&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://twrp.me/">Twrp&lt;/a> &lt;a href="https://play.google.com/store/apps/details?id=me.twrp.twrpapp">APK文件从谷歌商店下载&lt;/a>&lt;/li>
 &lt;li>sdk与fastboot工具 &lt;a href="https://dl.google.com/android/repository/platform-tools-latest-windows.zip">win&lt;/a> &lt;a href="https://dl.google.com/android/repository/platform-tools-latest-linux.zip">linux&lt;/a> &lt;a href="https://dl.google.com/android/repository/platform-tools-latest-darwin.zip">mac&lt;/a>&lt;/li>
 &lt;li>准备一台PC和数据线，能使用开发者模式调试安卓手机&lt;/li>
 &lt;/ul>
-&lt;h2 id="解锁你的手机">解锁你的手机&lt;/h2>
+&lt;h2 id="解锁你的手机">
+ 解锁你的手机
+ &lt;a class="anchor" href="#%e8%a7%a3%e9%94%81%e4%bd%a0%e7%9a%84%e6%89%8b%e6%9c%ba">#&lt;/a>
+&lt;/h2>
 &lt;ul>
 &lt;li>打开开发者模式&lt;/li>
 &lt;/ul>
@@ -19,9 +25,15 @@
 &lt;/ul>
 &lt;p>进入开发者选项，勾选允许OEM解锁。 注意OEM解锁会清空手机数据，如果要进行下去请备份号手机数据。&lt;/p>
 &lt;p>另外，解锁后，部分手机开机启动后会有一个源自安卓系统的安全警告画面，若不喜欢也建议不要继续。&lt;/p>
-&lt;h2 id="准备magisk文件">准备Magisk文件&lt;/h2>
+&lt;h2 id="准备magisk文件">
+ 准备Magisk文件
+ &lt;a class="anchor" href="#%e5%87%86%e5%a4%87magisk%e6%96%87%e4%bb%b6">#&lt;/a>
+&lt;/h2>
 &lt;p>在Magisk的Github发布页面下载apk程序进行安装，按照应用提示，下载最新的Magisk文件&lt;/p>
-&lt;h2 id="oem-解锁">OEM 解锁&lt;/h2>
+&lt;h2 id="oem-解锁">
+ OEM 解锁
+ &lt;a class="anchor" href="#oem-%e8%a7%a3%e9%94%81">#&lt;/a>
+&lt;/h2>
 &lt;ul>
 &lt;li>
 &lt;p>将adb和fastboot加入环境变量&lt;/p>
@@ -45,7 +57,10 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fastboot flashing unlock
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;/ul>
-&lt;h2 id="刷入twrp到recovery">刷入twrp到Recovery&lt;/h2>
+&lt;h2 id="刷入twrp到recovery">
+ 刷入twrp到Recovery
+ &lt;a class="anchor" href="#%e5%88%b7%e5%85%a5twrp%e5%88%b0recovery">#&lt;/a>
+&lt;/h2>
 &lt;ul>
 &lt;li>
 &lt;p>在&lt;code>download&lt;/code>模式中刷入recovery&lt;/p>
@@ -54,11 +69,8 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fastboot reboot recovery
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;/ul>
-&lt;h2 id="刷入magisk文件">刷入Magisk文件&lt;/h2>
-&lt;p>在上述步骤完成进入recovery后，可以看到twrp的一些管理菜单，选择安装我们刚才下载的magisk zip文件， 完成后重启手机。&lt;/p>
-&lt;h2 id="定制自己的rom极客需要熟悉一些计算机程序知识">定制自己的ROM（极客，需要熟悉一些计算机程序知识）&lt;/h2>
-&lt;p>推荐一个工具来完成 &lt;a href="https://github.com/artificerpi/android_system_extraction_and_repack_tool">https://github.com/artificerpi/android_system_extraction_and_repack_tool&lt;/a>&lt;/p>
-&lt;h2 id="参考">参考&lt;/h2>
-&lt;ul>
-&lt;li>&lt;a href="https://twrp.me/htc/htcu11.html">https://twrp.me/htc/htcu11.html&lt;/a>&lt;/li>
-&lt;/ul></description></item></channel></rss>
+&lt;h2 id="刷入magisk文件">
+ 刷入Magisk文件
+ &lt;a class="anchor" href="#%e5%88%b7%e5%85%a5magisk%e6%96%87%e4%bb%b6">#&lt;/a>
+&lt;/h2>
+&lt;p>在上述步骤完成进入recovery后，可以看到twrp的一些管理菜单，选择安装我们刚才下载的magisk zip文件， 完成后重启手机。&lt;/p></description></item></channel></rss>

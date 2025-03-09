@@ -1,11 +1,17 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Vim on Blog | qtopierw</title><link>https://qtopie.github.io/tags/vim/</link><description>Recent content in Vim on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Tue, 06 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/tags/vim/index.xml" rel="self" type="application/rss+xml"/><item><title>VIM安装笔记</title><link>https://qtopie.github.io/notes/vim/build-and-install-latest-vim/</link><pubDate>Tue, 06 Apr 2021 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/vim/build-and-install-latest-vim/</guid><description>&lt;h1 id="vim-安装">VIM 安装&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Vim on Blog | qtopierw</title><link>https://qtopie.github.io/tags/vim/</link><description>Recent content in Vim on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Tue, 06 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/tags/vim/index.xml" rel="self" type="application/rss+xml"/><item><title>VIM安装笔记</title><link>https://qtopie.github.io/notes/vim/build-and-install-latest-vim/</link><pubDate>Tue, 06 Apr 2021 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/vim/build-and-install-latest-vim/</guid><description>&lt;h1 id="vim-安装">
+ VIM 安装
+ &lt;a class="anchor" href="#vim-%e5%ae%89%e8%a3%85">#&lt;/a>
+&lt;/h1>
 &lt;p>由于debian发行版维护的vim包还未升级到最新版本，但govim需要较高版本的vim。故选择手动编译安装。这里直接选择最新版本8.2， 对应于最新的git tag版本， &lt;a href="https://www.vim.org/vim-8.2-released.php">8.2版本有一些实用性的功能&lt;/a>。&lt;/p>
 &lt;p>&lt;strong>环境&lt;/strong>&lt;/p>
 &lt;ul>
 &lt;li>Ubuntu 19.10&lt;/li>
 &lt;li>5.3.0-24-generic x84_64&lt;/li>
 &lt;/ul>
-&lt;h2 id="构建及安装过程">构建及安装过程&lt;/h2>
+&lt;h2 id="构建及安装过程">
+ 构建及安装过程
+ &lt;a class="anchor" href="#%e6%9e%84%e5%bb%ba%e5%8f%8a%e5%ae%89%e8%a3%85%e8%bf%87%e7%a8%8b">#&lt;/a>
+&lt;/h2>
 &lt;ol>
 &lt;li>安装构建工具链&lt;/li>
 &lt;/ol>

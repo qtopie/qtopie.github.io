@@ -1,4 +1,7 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>4G LTE on Blog | qtopierw</title><link>https://qtopie.github.io/tags/4g-lte/</link><description>Recent content in 4G LTE on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Wed, 05 Dec 2018 22:36:06 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/4g-lte/index.xml" rel="self" type="application/rss+xml"/><item><title>树莓派4G模块</title><link>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</link><pubDate>Wed, 05 Dec 2018 22:36:06 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</guid><description>&lt;h2 id="准备环境">准备环境&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>4G LTE on Blog | qtopierw</title><link>https://qtopie.github.io/tags/4g-lte/</link><description>Recent content in 4G LTE on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Wed, 05 Dec 2018 22:36:06 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/4g-lte/index.xml" rel="self" type="application/rss+xml"/><item><title>树莓派4G模块</title><link>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</link><pubDate>Wed, 05 Dec 2018 22:36:06 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</guid><description>&lt;h2 id="准备环境">
+ 准备环境
+ &lt;a class="anchor" href="#%e5%87%86%e5%a4%87%e7%8e%af%e5%a2%83">#&lt;/a>
+&lt;/h2>
 &lt;ul>
 &lt;li>树莓派3B&lt;/li>
 &lt;li>华为4G模块：HUAWEI ME909s-821&lt;/li>
@@ -7,7 +10,10 @@
 &lt;li>吸盘天线全向高增益天线，SMA公头外螺内孔&lt;/li>
 &lt;li>中国移动4G SIM卡&lt;/li>
 &lt;/ul>
-&lt;h2 id="4g模块技术规格及文档">4G模块技术规格及文档&lt;/h2>
+&lt;h2 id="4g模块技术规格及文档">
+ 4G模块技术规格及文档
+ &lt;a class="anchor" href="#4g%e6%a8%a1%e5%9d%97%e6%8a%80%e6%9c%af%e8%a7%84%e6%a0%bc%e5%8f%8a%e6%96%87%e6%a1%a3">#&lt;/a>
+&lt;/h2>
 &lt;ul>
 &lt;li>技术规格 &lt;a href="http://consumer.huawei.com/solutions/m2m-solutions/en/products/tech-specs/me909s_821_en.htm">连接&lt;/a>&lt;/li>
 &lt;/ul>
@@ -16,7 +22,10 @@
 &lt;li>文档 &lt;a href="http://download-c1.huawei.com/download/downloadCenter?downloadId=60305&amp;amp;version=200311&amp;amp;siteCode=worldwide&amp;amp;view=true">连接&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>主天线M口&lt;/p>
-&lt;h2 id="开始使用">开始使用&lt;/h2>
+&lt;h2 id="开始使用">
+ 开始使用
+ &lt;a class="anchor" href="#%e5%bc%80%e5%a7%8b%e4%bd%bf%e7%94%a8">#&lt;/a>
+&lt;/h2>
 &lt;p>&lt;em>Windows上使用该4G模块需要手动安装驱动，驱动&lt;a href="https://techship.com/downloads/category/software-software-huawei-me909s-821-lga/">连接&lt;/a>&lt;/em>&lt;/p>
 &lt;p>&lt;em>Ubuntu下可以使用&lt;code>modemmanager&lt;/code>管理4G模块&lt;/em>&lt;/p>
 &lt;p>树莓派下使用教程如下。&lt;/p>

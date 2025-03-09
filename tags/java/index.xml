@@ -1,8 +1,10 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Java on Blog | qtopierw</title><link>https://qtopie.github.io/tags/java/</link><description>Recent content in Java on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Sat, 28 Dec 2019 18:07:28 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/java/index.xml" rel="self" type="application/rss+xml"/><item><title>Make Eclipse Great Again</title><link>https://qtopie.github.io/notes/dev/make-gradle-work-with-eclipse/</link><pubDate>Sat, 28 Dec 2019 18:07:28 +0800</pubDate><guid>https://qtopie.github.io/notes/dev/make-gradle-work-with-eclipse/</guid><description>&lt;h1 id="eclipse--gradle">Eclipse &amp;amp; Gradle&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Java on Blog | qtopierw</title><link>https://qtopie.github.io/tags/java/</link><description>Recent content in Java on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Sat, 28 Dec 2019 18:07:28 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/java/index.xml" rel="self" type="application/rss+xml"/><item><title>Make Eclipse Great Again</title><link>https://qtopie.github.io/notes/dev/make-gradle-work-with-eclipse/</link><pubDate>Sat, 28 Dec 2019 18:07:28 +0800</pubDate><guid>https://qtopie.github.io/notes/dev/make-gradle-work-with-eclipse/</guid><description>&lt;h1 id="eclipse--gradle">
+ Eclipse &amp;amp; Gradle
+ &lt;a class="anchor" href="#eclipse--gradle">#&lt;/a>
+&lt;/h1>
 &lt;p>还是从那句老话开始， “工欲善其事，必先利其器”。要想熟练地完成一件事，有个好的工具往往能事半功倍。&lt;/p>
 &lt;blockquote>
-&lt;p>&lt;em>但是很多时候，迷信教条最终会成了造轮子而造轮子的递归循环；选择合适的工具，并掌握它，解决好问题才是正确的方向。&lt;/em>&lt;/p>
-&lt;/blockquote>
+&lt;p>&lt;em>但是很多时候，迷信教条最终会成了造轮子而造轮子的递归循环；选择合适的工具，并掌握它，解决好问题才是正确的方向。&lt;/em>&lt;/p>&lt;/blockquote>
 &lt;p>这里简单说说，我选择Eclispe和Gradle的原因。&lt;/p>
 &lt;ul>
 &lt;li>
@@ -16,7 +18,10 @@
 &lt;/ul>
 &lt;/li>
 &lt;/ul>
-&lt;h2 id="开发环境">开发环境&lt;/h2>
+&lt;h2 id="开发环境">
+ 开发环境
+ &lt;a class="anchor" href="#%e5%bc%80%e5%8f%91%e7%8e%af%e5%a2%83">#&lt;/a>
+&lt;/h2>
 &lt;p>当前开发环境&lt;/p>
 &lt;ul>
 &lt;li>Ubuntu 19.10 x86_64&lt;/li>
@@ -28,8 +33,14 @@ Version: 2019-03 (4.11)
 Build id: I20190307-0500
 OS: Linux, v.5.3.0-24-generic, x86_64 / gtk 3.24.12
 Java version: 1.8.0_171
-&lt;/code>&lt;/pre>&lt;h2 id="eclipse项目配置及依赖管理">Eclipse项目配置及依赖管理&lt;/h2>
-&lt;h3 id="我的java项目管理方案">我的Java项目管理方案&lt;/h3>
+&lt;/code>&lt;/pre>&lt;h2 id="eclipse项目配置及依赖管理">
+ Eclipse项目配置及依赖管理
+ &lt;a class="anchor" href="#eclipse%e9%a1%b9%e7%9b%ae%e9%85%8d%e7%bd%ae%e5%8f%8a%e4%be%9d%e8%b5%96%e7%ae%a1%e7%90%86">#&lt;/a>
+&lt;/h2>
+&lt;h3 id="我的java项目管理方案">
+ 我的Java项目管理方案
+ &lt;a class="anchor" href="#%e6%88%91%e7%9a%84java%e9%a1%b9%e7%9b%ae%e7%ae%a1%e7%90%86%e6%96%b9%e6%a1%88">#&lt;/a>
+&lt;/h3>
 &lt;p>我不喜欢将IDE文件提交到git代码仓库，在我看来，IDE的作用就是一个文本编辑器，而且从协作角度来看，不同的开发者可能会选择不同的编辑器，所以不需要将IDE文件提交。 而Gradle脚本，不仅作为项目开发中一款重要的工具，而且包含了很多项目配置信息，因此需要提交到git仓库(有时候，如果开发人员和CI使用了统一的或兼容的gradle版本，甚至gradle wrapper都不需要提交)&lt;/p>
 &lt;ul>
 &lt;li>生成项目配置&lt;/li>
