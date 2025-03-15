@@ -1195,7 +1195,7 @@ Auto DNS = on
 &lt;ul>
 &lt;li>使用固件 &lt;a href="http://vonger.cn/misc/vocore2/20180723V.bin">vocore2-20180723V&lt;/a>&lt;/li>
 &lt;/ul>
-&lt;p>配置信息(仅供参考)：&lt;/p></description></item><item><title>My notes on Raspberry Pi</title><link>https://qtopie.github.io/notes/iot/rpi/setup-my-raspberrypi/</link><pubDate>Sun, 29 Oct 2017 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/setup-my-raspberrypi/</guid><description>&lt;h2 id="headless-setup-no-external-monitor-or-keyboard">
+&lt;p>配置信息(仅供参考)：&lt;/p></description></item><item><title>My notes on Raspberry Pi</title><link>https://qtopie.github.io/notes/iot/rpi/setup-my-raspberrypi/</link><pubDate>Sun, 29 Oct 2017 16:40:22 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/setup-my-raspberrypi/</guid><description>&lt;h2 id="headless-setup-no-external-monitor-or-keyboard">
  Headless setup (no external monitor or keyboard)
  &lt;a class="anchor" href="#headless-setup-no-external-monitor-or-keyboard">#&lt;/a>
 &lt;/h2>
@@ -1836,48 +1836,7 @@ The core principle is to separate behaviour from dependency resolution.&lt;/p>
 &lt;p>&lt;code>In computing, aspect-oriented programming (AOP) is a programming paradigm that aims to increase modularity by allowing the separation of cross-cutting concerns. It does so by adding additional behavior to existing code (an advice) without modifying the code itself, instead separately specifying which code is modified via a &amp;quot;pointcut&amp;quot; specification, such as &amp;quot;log all function calls when the function's name begins with 'set'&amp;quot;. This allows behaviors that are not central to the business logic (such as logging) to be added to a program without cluttering the code, core to the functionality. AOP forms a basis for aspect-oriented software development.&lt;/code>&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/design-patterns/iterator/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/design-patterns/iterator/</guid><description>&lt;p>供一种方法来访问聚合对象，而不用暴露这个对象的内部表示，其别名为游标(Cursor)。迭代器模式是一种对象行为型模式。&lt;/p>
 &lt;p>&lt;a href="https://blog.csdn.net/yanbober/article/details/45497881">https://blog.csdn.net/yanbober/article/details/45497881&lt;/a>&lt;/p>
 &lt;p>java prev and next traverse
-&lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/ListIterator.html">https://docs.oracle.com/javase/8/docs/api/java/util/ListIterator.html&lt;/a>&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/fuchsia/get-started/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/fuchsia/get-started/</guid><description>&lt;h1 id="fuchsia">
- Fuchsia
- &lt;a class="anchor" href="#fuchsia">#&lt;/a>
-&lt;/h1>
-&lt;p>&lt;a href="https://fuchsia.dev/fuchsia-src/get-started">https://fuchsia.dev/fuchsia-src/get-started&lt;/a>&lt;/p>
-&lt;h2 id="using-mirror">
- Using mirror
- &lt;a class="anchor" href="#using-mirror">#&lt;/a>
-&lt;/h2>
-&lt;p>&lt;a href="https://fuchsia.fsf.org.cn/#intro">https://fuchsia.fsf.org.cn/#intro&lt;/a>&lt;/p>
-&lt;ul>
-&lt;li>get tools&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mkdir fuchsia &lt;span style="color:#555">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#366">cd&lt;/span> fuchsia
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl --location --create-dirs --output .jiri_root/bin/cipd https://fuchsia.fsf.org.cn/bootstrap/cipd-linux-amd64
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl --location --create-dirs --output .jiri_root/bin/jiri https://fuchsia.fsf.org.cn/bootstrap/jiri-linux-amd64
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>chmod +x .jiri_root/bin/jiri .jiri_root/bin/jiri
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#366">export&lt;/span> &lt;span style="color:#033">PATH&lt;/span>&lt;span style="color:#555">=&lt;/span>&lt;span style="color:#a00">${&lt;/span>&lt;span style="color:#033">PATH&lt;/span>&lt;span style="color:#a00">}&lt;/span>:&lt;span style="color:#a00">${&lt;/span>&lt;span style="color:#033">PWD&lt;/span>&lt;span style="color:#a00">}&lt;/span>/.jiri_root/bin
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>Download from mirror&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mkdir -p build &lt;span style="color:#555">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#366">echo&lt;/span> &lt;span style="color:#c30">&amp;#34;internal_access = false&amp;#34;&lt;/span> &amp;gt;build/cipd.gni
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jiri init -keep-git-hooks&lt;span style="color:#555">=&lt;/span>&lt;span style="color:#366">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jiri import -name&lt;span style="color:#555">=&lt;/span>integration flower https://fuchsia.fsf.org.cn/git/fuchsia-integration
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jiri update -v
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#366">echo&lt;/span> &lt;span style="color:#c30">&amp;#34;have_firmware = false&amp;#34;&lt;/span> &amp;gt;zircon/prebuilt/config.gni
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>Switch back to official repos&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>rm -rf integration jiri .jiri_manifest .jiri_root
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rm -rf integration jiri .jiri_manifest .jiri_root
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl -s https://fuchsia.googlesource.com/jiri/+/master/scripts/bootstrap_jiri?format&lt;span style="color:#555">=&lt;/span>TEXT | base64 --decode | bash -s &lt;span style="color:#a00">${&lt;/span>&lt;span style="color:#033">PWD&lt;/span>&lt;span style="color:#a00">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jiri init -keep-git-hooks&lt;span style="color:#555">=&lt;/span>&lt;span style="color:#366">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jiri import -name&lt;span style="color:#555">=&lt;/span>integration flower https://fuchsia.googlesource.com/integration
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jiri update -v
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="proxy">
- proxy
- &lt;a class="anchor" href="#proxy">#&lt;/a>
-&lt;/h2>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#366">export&lt;/span> &lt;span style="color:#033">https_proxy&lt;/span>&lt;span style="color:#555">=&lt;/span>127.0.0.1:8118
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>use curl with socks5 proxy&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/iot/asus-router/merlin-firmware/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/iot/asus-router/merlin-firmware/</guid><description>&lt;h1 id="asus-router-with-merlin-firmware">
+&lt;a href="https://docs.oracle.com/javase/8/docs/api/java/util/ListIterator.html">https://docs.oracle.com/javase/8/docs/api/java/util/ListIterator.html&lt;/a>&lt;/p></description></item><item><title/><link>https://qtopie.github.io/notes/iot/asus-router/merlin-firmware/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/iot/asus-router/merlin-firmware/</guid><description>&lt;h1 id="asus-router-with-merlin-firmware">
  ASUS Router with Merlin Firmware
  &lt;a class="anchor" href="#asus-router-with-merlin-firmware">#&lt;/a>
 &lt;/h1>
@@ -2034,7 +1993,48 @@ swapfile&lt;/p>
 &lt;h2 id="io">
  I/O
  &lt;a class="anchor" href="#io">#&lt;/a>
-&lt;/h2></description></item><item><title>Google IP地址范围</title><link>https://qtopie.github.io/notes/dev/google-ip-address/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/dev/google-ip-address/</guid><description>&lt;p>google ip address range&lt;/p>
+&lt;/h2></description></item><item><title>Build and Try Fuchsia</title><link>https://qtopie.github.io/notes/fuchsia/get-started/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/fuchsia/get-started/</guid><description>&lt;h1 id="fuchsia">
+ Fuchsia
+ &lt;a class="anchor" href="#fuchsia">#&lt;/a>
+&lt;/h1>
+&lt;p>&lt;a href="https://fuchsia.dev/fuchsia-src/get-started">https://fuchsia.dev/fuchsia-src/get-started&lt;/a>&lt;/p>
+&lt;h2 id="using-mirror">
+ Using mirror
+ &lt;a class="anchor" href="#using-mirror">#&lt;/a>
+&lt;/h2>
+&lt;p>&lt;a href="https://fuchsia.fsf.org.cn/#intro">https://fuchsia.fsf.org.cn/#intro&lt;/a>&lt;/p>
+&lt;ul>
+&lt;li>get tools&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mkdir fuchsia &lt;span style="color:#555">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#366">cd&lt;/span> fuchsia
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl --location --create-dirs --output .jiri_root/bin/cipd https://fuchsia.fsf.org.cn/bootstrap/cipd-linux-amd64
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl --location --create-dirs --output .jiri_root/bin/jiri https://fuchsia.fsf.org.cn/bootstrap/jiri-linux-amd64
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>chmod +x .jiri_root/bin/jiri .jiri_root/bin/jiri
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#366">export&lt;/span> &lt;span style="color:#033">PATH&lt;/span>&lt;span style="color:#555">=&lt;/span>&lt;span style="color:#a00">${&lt;/span>&lt;span style="color:#033">PATH&lt;/span>&lt;span style="color:#a00">}&lt;/span>:&lt;span style="color:#a00">${&lt;/span>&lt;span style="color:#033">PWD&lt;/span>&lt;span style="color:#a00">}&lt;/span>/.jiri_root/bin
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>Download from mirror&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mkdir -p build &lt;span style="color:#555">&amp;amp;&amp;amp;&lt;/span> &lt;span style="color:#366">echo&lt;/span> &lt;span style="color:#c30">&amp;#34;internal_access = false&amp;#34;&lt;/span> &amp;gt;build/cipd.gni
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jiri init -keep-git-hooks&lt;span style="color:#555">=&lt;/span>&lt;span style="color:#366">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jiri import -name&lt;span style="color:#555">=&lt;/span>integration flower https://fuchsia.fsf.org.cn/git/fuchsia-integration
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jiri update -v
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#366">echo&lt;/span> &lt;span style="color:#c30">&amp;#34;have_firmware = false&amp;#34;&lt;/span> &amp;gt;zircon/prebuilt/config.gni
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
+&lt;li>Switch back to official repos&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>rm -rf integration jiri .jiri_manifest .jiri_root
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>rm -rf integration jiri .jiri_manifest .jiri_root
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>curl -s https://fuchsia.googlesource.com/jiri/+/master/scripts/bootstrap_jiri?format&lt;span style="color:#555">=&lt;/span>TEXT | base64 --decode | bash -s &lt;span style="color:#a00">${&lt;/span>&lt;span style="color:#033">PWD&lt;/span>&lt;span style="color:#a00">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jiri init -keep-git-hooks&lt;span style="color:#555">=&lt;/span>&lt;span style="color:#366">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jiri import -name&lt;span style="color:#555">=&lt;/span>integration flower https://fuchsia.googlesource.com/integration
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>jiri update -v
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="proxy">
+ proxy
+ &lt;a class="anchor" href="#proxy">#&lt;/a>
+&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#366">export&lt;/span> &lt;span style="color:#033">https_proxy&lt;/span>&lt;span style="color:#555">=&lt;/span>127.0.0.1:8118
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>use curl with socks5 proxy&lt;/p></description></item><item><title>Google IP地址范围</title><link>https://qtopie.github.io/notes/dev/google-ip-address/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/dev/google-ip-address/</guid><description>&lt;p>google ip address range&lt;/p>
 &lt;p>&lt;a href="https://www.gstatic.com/ipranges/goog.json">https://www.gstatic.com/ipranges/goog.json&lt;/a>&lt;/p>
 &lt;p>github ip address range
 &lt;a href="https://api.github.com/meta">https://api.github.com/meta&lt;/a>&lt;/p>

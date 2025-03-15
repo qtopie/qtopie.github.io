@@ -190,7 +190,7 @@
  Configuration
  &lt;a class="anchor" href="#configuration">#&lt;/a>
 &lt;/h3>
-&lt;p>I prefer to configure formular delimiters with the way using brackets:&lt;/p>
+&lt;p>I prefer to configure formula delimiters with the way using brackets:&lt;/p>
 &lt;pre tabindex="0">&lt;code>inline: \(...\)
 display: \[...\]
 display + equation number: \[...\] (1)
