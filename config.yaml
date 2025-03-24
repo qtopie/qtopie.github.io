@@ -11,7 +11,6 @@ copyright: Posts licensed under <a href="https://creativecommons.org/licenses/by
 
 params:
   googleAdSense: ca-pub-3338377104827119
-  math: true
 
 enableRobotsTXT: true
 
@@ -38,17 +37,6 @@ markup:
       hardWraps: false
       unsafe: false
       xhtml: false
-    passthrough:
-        delimiters:
-          block:
-          - - \[
-            - \]
-          - - $$
-            - $$
-          inline:
-            - \(
-            - \)
-        enable: true
   highlight:
     anchorLineNos: false
     codeFences: true
