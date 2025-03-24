@@ -1,11 +1,5 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Math on Blog | qtopierw</title><link>https://qtopie.github.io/tags/math/</link><description>Recent content in Math on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Thu, 20 Dec 2018 16:21:55 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/math/index.xml" rel="self" type="application/rss+xml"/><item><title>Math in Markdown</title><link>https://qtopie.github.io/posts/hugo/math-in-markdown/</link><pubDate>Thu, 20 Dec 2018 16:21:55 +0800</pubDate><guid>https://qtopie.github.io/posts/hugo/math-in-markdown/</guid><description>&lt;h2 id="latex">
- LaTeX
- &lt;a class="anchor" href="#latex">#&lt;/a>
-&lt;/h2>
-&lt;h3 id="configuration">
- Configuration
- &lt;a class="anchor" href="#configuration">#&lt;/a>
-&lt;/h3>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Math on Blog | Qtopie</title><link>https://qtopie.github.io/tags/math/</link><description>Recent content in Math on Blog | Qtopie</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Thu, 20 Dec 2018 16:21:55 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/math/index.xml" rel="self" type="application/rss+xml"/><item><title>Math in Markdown</title><link>https://qtopie.github.io/posts/hugo/math-in-markdown/</link><pubDate>Thu, 20 Dec 2018 16:21:55 +0800</pubDate><guid>https://qtopie.github.io/posts/hugo/math-in-markdown/</guid><description>&lt;h2 id="latex">LaTeX&lt;/h2>
+&lt;h3 id="configuration">Configuration&lt;/h3>
 &lt;p>I prefer to configure formula delimiters with the way using brackets:&lt;/p>
 &lt;pre tabindex="0">&lt;code>inline: \(...\)
 display: \[...\]
@@ -13,16 +7,23 @@ display + equation number: \[...\] (1)
 &lt;/code>&lt;/pre>&lt;p>For &lt;code>vscode&lt;/code>, install extension &lt;code>Markdown+Math&lt;/code>, then change Configuration from &lt;code>dollars&lt;/code> into &lt;code>brackets&lt;/code>.
 For &lt;code>mathJax&lt;/code>, it&amp;rsquo;s provided in the default configuration.&lt;/p>
 &lt;p>&lt;em>Good memory is not as bad as a pen.&lt;/em>&lt;/p>
-&lt;h2 id="permutation">
- Permutation
- &lt;a class="anchor" href="#permutation">#&lt;/a>
-&lt;/h2>
+&lt;h2 id="permutation">Permutation&lt;/h2>
 &lt;p>&lt;code>A_n^n=n\times(n-1)\times(n-2)\times...\times2\times1&lt;/code>&lt;/p>
 &lt;p>&lt;code>A_n^m=n\times(n-1)\times(n-2)\times...\times(n-m+1) = \frac{n!}{(n-m)!}&lt;/code>&lt;/p>
-&lt;h2 id="combination">
- Combination
- &lt;a class="anchor" href="#combination">#&lt;/a>
-&lt;/h2>
+&lt;h2 id="combination">Combination&lt;/h2>
 &lt;p>&lt;code>C_n^m=\frac{A_n^m}{A_m^m} = \frac{n!}{m!(n-m)!}&lt;/code>&lt;/p>
-&lt;pre tabindex="0">&lt;code class="language-math" data-lang="math">C_n^m=C_n^{n-m}
-&lt;/code>&lt;/pre>&lt;p>&lt;code>C_{n+1}^{r+1} = C_n^r + C_n^{r+1}&lt;/code>&lt;/p></description></item></channel></rss>
+&lt;pre class="math">
+ &lt;amp-mathml 
+ layout="container" 
+ data-formula="\[C_n^m=C_n^{n-m}\]">
+ &lt;/amp-mathml>
+&lt;/pre>
+&lt;p>&lt;code>C_{n+1}^{r+1} = C_n^r + C_n^{r+1}&lt;/code>&lt;/p>
+&lt;h3 id="binomial-theorem">Binomial theorem&lt;/h3>
+&lt;pre class="math">
+ &lt;amp-mathml 
+ layout="container" 
+ data-formula="\[(a&amp;#43;b)^n = \sum_{i=0}^n{{C_n^i}a^{n-i}b^i} \tag 1\]">
+ &lt;/amp-mathml>
+&lt;/pre>
+&lt;p>&lt;code>2^n =\sum_{i=0}^n{{C_n^i}} = C_n^0 + C_n^1 + C_n^2 + ... + C_n^n&lt;/code>&lt;/p></description></item></channel></rss>

@@ -1,13 +1,7 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Caddy on Blog | qtopierw</title><link>https://qtopie.github.io/tags/caddy/</link><description>Recent content in Caddy on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Wed, 22 Apr 2020 00:03:52 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/caddy/index.xml" rel="self" type="application/rss+xml"/><item><title>Caddy与http3</title><link>https://qtopie.github.io/notes/web/caddy/</link><pubDate>Wed, 22 Apr 2020 00:03:52 +0800</pubDate><guid>https://qtopie.github.io/notes/web/caddy/</guid><description>&lt;h2 id="caddy-简单介绍">
- Caddy 简单介绍
- &lt;a class="anchor" href="#caddy-%e7%ae%80%e5%8d%95%e4%bb%8b%e7%bb%8d">#&lt;/a>
-&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Caddy on Blog | Qtopie</title><link>https://qtopie.github.io/tags/caddy/</link><description>Recent content in Caddy on Blog | Qtopie</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Wed, 22 Apr 2020 00:03:52 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/caddy/index.xml" rel="self" type="application/rss+xml"/><item><title>Caddy与http3</title><link>https://qtopie.github.io/notes/web/caddy/</link><pubDate>Wed, 22 Apr 2020 00:03:52 +0800</pubDate><guid>https://qtopie.github.io/notes/web/caddy/</guid><description>&lt;h2 id="caddy-简单介绍">Caddy 简单介绍&lt;/h2>
 &lt;p>Caddy是现代化的web代理服务器，使用Go语言编写，不直接依赖系统底层库。
 另外，它很好地支持了https (也最先支持了http3), 而且它使用了现代化流行且安全的配置，几乎不需要额外配置。&lt;/p>
-&lt;h2 id="安装使用">
- 安装使用
- &lt;a class="anchor" href="#%e5%ae%89%e8%a3%85%e4%bd%bf%e7%94%a8">#&lt;/a>
-&lt;/h2>
+&lt;h2 id="安装使用">安装使用&lt;/h2>
 &lt;p>我们可以去官网下载2.0版本 &lt;a href="https://caddyserver.com/">https://caddyserver.com/&lt;/a> 我们只需要拿到二进制文件即可。&lt;/p>
 &lt;p>下载后放到&lt;code>/usr/local/bin/caddy&lt;/code>, 然后编辑Caddyfile&lt;/p>
 &lt;p>/etc/Caddyfile&lt;/p>

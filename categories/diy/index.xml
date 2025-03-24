@@ -1,12 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Diy on Blog | qtopierw</title><link>https://qtopie.github.io/categories/diy/</link><description>Recent content in Diy on Blog | qtopierw</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Mon, 03 Aug 2020 23:33:04 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/categories/diy/index.xml" rel="self" type="application/rss+xml"/><item><title>自动控制风扇温度</title><link>https://qtopie.github.io/notes/iot/rpi/fan-and-tempature/</link><pubDate>Mon, 03 Aug 2020 23:33:04 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/fan-and-tempature/</guid><description>&lt;p>最近购买了一个树莓派4B 4G内存版，替换了旧的Model3 (强迫症犯了，就为了换成type c口，但因为电源适配问题还是老老实实地又买了官方电源适配器）&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Diy on Blog | Qtopie</title><link>https://qtopie.github.io/categories/diy/</link><description>Recent content in Diy on Blog | Qtopie</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Mon, 03 Aug 2020 23:33:04 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/categories/diy/index.xml" rel="self" type="application/rss+xml"/><item><title>自动控制风扇温度</title><link>https://qtopie.github.io/notes/iot/rpi/fan-and-tempature/</link><pubDate>Mon, 03 Aug 2020 23:33:04 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/fan-and-tempature/</guid><description>&lt;p>最近购买了一个树莓派4B 4G内存版，替换了旧的Model3 (强迫症犯了，就为了换成type c口，但因为电源适配问题还是老老实实地又买了官方电源适配器）&lt;/p>
 &lt;p>树莓派4B相对3B性能提高不少，但是随之功耗和发热也上去了。 于是给它整了个金属外壳&lt;/p>
-&lt;p>&lt;img src="fan-and-tempature.assets/img-20211029155258.webp" alt="" />&lt;/p>
+&lt;p>&lt;div class="fixed-height-container">
+ &lt;amp-img class="contain" alt="" src="https://qtopie.github.io/notes/iot/rpi/fan-and-tempature.assets/img-20211029155258.webp" 
+ layout="fill" 
+ lightbox>
+ &lt;/amp-img>
+&lt;/div>&lt;/p>
 &lt;p>但是依旧烫得厉害，可能是我手动overlock了。开风扇的话，又有点吵，晚上影响睡觉。&lt;/p>
 &lt;p>所以又买了一些排线和一个电磁继电器来实现自动通过风扇控制CPU等芯片温度。&lt;/p>
-&lt;h2 id="主要原理">
- 主要原理
- &lt;a class="anchor" href="#%e4%b8%bb%e8%a6%81%e5%8e%9f%e7%90%86">#&lt;/a>
-&lt;/h2>
+&lt;h2 id="主要原理">主要原理&lt;/h2>
 &lt;ul>
 &lt;li>获取GPU温度&lt;/li>
 &lt;/ul>
@@ -17,10 +19,7 @@
 &lt;/ul>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#033">cpu&lt;/span>&lt;span style="color:#555">=&lt;/span>&lt;span style="color:#069;font-weight:bold">$(&lt;/span>&amp;lt;/sys/class/thermal/thermal_zone0/temp&lt;span style="color:#069;font-weight:bold">)&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#366">echo&lt;/span> &lt;span style="color:#c30">&amp;#34;&lt;/span>&lt;span style="color:#069;font-weight:bold">$((&lt;/span>cpu/1000&lt;span style="color:#069;font-weight:bold">))&lt;/span>&lt;span style="color:#c30"> c&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="代码实现">
- 代码实现
- &lt;a class="anchor" href="#%e4%bb%a3%e7%a0%81%e5%ae%9e%e7%8e%b0">#&lt;/a>
-&lt;/h2>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="代码实现">代码实现&lt;/h2>
 &lt;p>网上已经有不少python版本的实现，但作为一个go粉，当然选择用go来实现了，正好练习一下gobot包的使用&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">package&lt;/span> main
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
@@ -89,10 +88,7 @@
 &lt;p>除了支持按小时计费、提供更换IP服务及支持支付宝/paypal等灵活的支付方式外，我最看重的是，它的价格能做到真正的弹性，即在vm关机状态不计费CPU/内存等费用,比online费用大概减半。&lt;/p>
 &lt;p>类似于其他云供应商平台，cloudcone还提供了&lt;a href="https://api.cloudcone.com/">开放的API来管理云主机&lt;/a>。&lt;/p>
 &lt;p>这里为了方便使用和合理控制资源，自己便用go写了一个小程序&lt;/p>
-&lt;h2 id="代码实现">
- 代码实现
- &lt;a class="anchor" href="#%e4%bb%a3%e7%a0%81%e5%ae%9e%e7%8e%b0">#&lt;/a>
-&lt;/h2>
+&lt;h2 id="代码实现">代码实现&lt;/h2>
 &lt;p>主要逻辑如下，通过cloudcone 提供的API。每天晚上23左右关机，次日早晨7点左右启动
 如果调用失败的话，会再次重试一次。(如果依然不行的话，就当运气不好了:&amp;lt;）&lt;/p>
 &lt;p>以下是草稿版本代码&lt;/p>
@@ -263,16 +259,10 @@
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	log.&lt;span style="color:#c0f">Println&lt;/span>(dat.Message)
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">return&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="参考">
- 参考
- &lt;a class="anchor" href="#%e5%8f%82%e8%80%83">#&lt;/a>
-&lt;/h2>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="参考">参考&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a href="https://www.vpsjxw.com/provider_intro/cloudcone_intro/">cloudcone中文介绍&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>树莓派4G模块</title><link>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</link><pubDate>Wed, 05 Dec 2018 22:36:06 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</guid><description>&lt;h2 id="准备环境">
- 准备环境
- &lt;a class="anchor" href="#%e5%87%86%e5%a4%87%e7%8e%af%e5%a2%83">#&lt;/a>
-&lt;/h2>
+&lt;/ul></description></item><item><title>树莓派4G模块</title><link>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</link><pubDate>Wed, 05 Dec 2018 22:36:06 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</guid><description>&lt;h2 id="准备环境">准备环境&lt;/h2>
 &lt;ul>
 &lt;li>树莓派3B&lt;/li>
 &lt;li>华为4G模块：HUAWEI ME909s-821&lt;/li>
@@ -281,10 +271,7 @@
 &lt;li>吸盘天线全向高增益天线，SMA公头外螺内孔&lt;/li>
 &lt;li>中国移动4G SIM卡&lt;/li>
 &lt;/ul>
-&lt;h2 id="4g模块技术规格及文档">
- 4G模块技术规格及文档
- &lt;a class="anchor" href="#4g%e6%a8%a1%e5%9d%97%e6%8a%80%e6%9c%af%e8%a7%84%e6%a0%bc%e5%8f%8a%e6%96%87%e6%a1%a3">#&lt;/a>
-&lt;/h2>
+&lt;h2 id="4g模块技术规格及文档">4G模块技术规格及文档&lt;/h2>
 &lt;ul>
 &lt;li>技术规格 &lt;a href="http://consumer.huawei.com/solutions/m2m-solutions/en/products/tech-specs/me909s_821_en.htm">连接&lt;/a>&lt;/li>
 &lt;/ul>
@@ -293,10 +280,7 @@
 &lt;li>文档 &lt;a href="http://download-c1.huawei.com/download/downloadCenter?downloadId=60305&amp;amp;version=200311&amp;amp;siteCode=worldwide&amp;amp;view=true">连接&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>主天线M口&lt;/p>
-&lt;h2 id="开始使用">
- 开始使用
- &lt;a class="anchor" href="#%e5%bc%80%e5%a7%8b%e4%bd%bf%e7%94%a8">#&lt;/a>
-&lt;/h2>
+&lt;h2 id="开始使用">开始使用&lt;/h2>
 &lt;p>&lt;em>Windows上使用该4G模块需要手动安装驱动，驱动&lt;a href="https://techship.com/downloads/category/software-software-huawei-me909s-821-lga/">连接&lt;/a>&lt;/em>&lt;/p>
 &lt;p>&lt;em>Ubuntu下可以使用&lt;code>modemmanager&lt;/code>管理4G模块&lt;/em>&lt;/p>
 &lt;p>树莓派下使用教程如下。&lt;/p>
@@ -339,20 +323,14 @@ Auto DNS = on
 &lt;p>注意手机Root后并不一定安全，本文仅仅说的是用安全（较为透明公开）的方式自己root你的手机。&lt;/p>
 &lt;p>但安全永远是相对的，如果你对手机ROOT后的安全性有较大顾虑，请不要进行该操作。&lt;/p>
 &lt;p>对ROOT后的设备，也请远离流氓软件和恶意网站，尽可能使用可信度高的应用与服务。&lt;/p>
-&lt;h2 id="预先准备">
- 预先准备
- &lt;a class="anchor" href="#%e9%a2%84%e5%85%88%e5%87%86%e5%a4%87">#&lt;/a>
-&lt;/h2>
+&lt;h2 id="预先准备">预先准备&lt;/h2>
 &lt;ul>
 &lt;li>&lt;a href="https://github.com/topjohnwu/Magisk/releases">MagiskManager&lt;/a>&lt;/li>
 &lt;li>&lt;a href="https://twrp.me/">Twrp&lt;/a> &lt;a href="https://play.google.com/store/apps/details?id=me.twrp.twrpapp">APK文件从谷歌商店下载&lt;/a>&lt;/li>
 &lt;li>sdk与fastboot工具 &lt;a href="https://dl.google.com/android/repository/platform-tools-latest-windows.zip">win&lt;/a> &lt;a href="https://dl.google.com/android/repository/platform-tools-latest-linux.zip">linux&lt;/a> &lt;a href="https://dl.google.com/android/repository/platform-tools-latest-darwin.zip">mac&lt;/a>&lt;/li>
 &lt;li>准备一台PC和数据线，能使用开发者模式调试安卓手机&lt;/li>
 &lt;/ul>
-&lt;h2 id="解锁你的手机">
- 解锁你的手机
- &lt;a class="anchor" href="#%e8%a7%a3%e9%94%81%e4%bd%a0%e7%9a%84%e6%89%8b%e6%9c%ba">#&lt;/a>
-&lt;/h2>
+&lt;h2 id="解锁你的手机">解锁你的手机&lt;/h2>
 &lt;ul>
 &lt;li>打开开发者模式&lt;/li>
 &lt;/ul>
@@ -362,15 +340,9 @@ Auto DNS = on
 &lt;/ul>
 &lt;p>进入开发者选项，勾选允许OEM解锁。 注意OEM解锁会清空手机数据，如果要进行下去请备份号手机数据。&lt;/p>
 &lt;p>另外，解锁后，部分手机开机启动后会有一个源自安卓系统的安全警告画面，若不喜欢也建议不要继续。&lt;/p>
-&lt;h2 id="准备magisk文件">
- 准备Magisk文件
- &lt;a class="anchor" href="#%e5%87%86%e5%a4%87magisk%e6%96%87%e4%bb%b6">#&lt;/a>
-&lt;/h2>
+&lt;h2 id="准备magisk文件">准备Magisk文件&lt;/h2>
 &lt;p>在Magisk的Github发布页面下载apk程序进行安装，按照应用提示，下载最新的Magisk文件&lt;/p>
-&lt;h2 id="oem-解锁">
- OEM 解锁
- &lt;a class="anchor" href="#oem-%e8%a7%a3%e9%94%81">#&lt;/a>
-&lt;/h2>
+&lt;h2 id="oem-解锁">OEM 解锁&lt;/h2>
 &lt;ul>
 &lt;li>
 &lt;p>将adb和fastboot加入环境变量&lt;/p>
@@ -394,10 +366,7 @@ Auto DNS = on
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fastboot flashing unlock
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;/ul>
-&lt;h2 id="刷入twrp到recovery">
- 刷入twrp到Recovery
- &lt;a class="anchor" href="#%e5%88%b7%e5%85%a5twrp%e5%88%b0recovery">#&lt;/a>
-&lt;/h2>
+&lt;h2 id="刷入twrp到recovery">刷入twrp到Recovery&lt;/h2>
 &lt;ul>
 &lt;li>
 &lt;p>在&lt;code>download&lt;/code>模式中刷入recovery&lt;/p>
@@ -406,19 +375,16 @@ Auto DNS = on
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fastboot reboot recovery
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;/ul>
-&lt;h2 id="刷入magisk文件">
- 刷入Magisk文件
- &lt;a class="anchor" href="#%e5%88%b7%e5%85%a5magisk%e6%96%87%e4%bb%b6">#&lt;/a>
-&lt;/h2>
-&lt;p>在上述步骤完成进入recovery后，可以看到twrp的一些管理菜单，选择安装我们刚才下载的magisk zip文件， 完成后重启手机。&lt;/p></description></item><item><title>我的DIY与vocore</title><link>https://qtopie.github.io/notes/iot/vocore/my-vocore-playground/</link><pubDate>Thu, 26 Jul 2018 22:24:33 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/vocore/my-vocore-playground/</guid><description>&lt;h2 id="vocore">
- &lt;a href="http://vocore.io/">VoCore&lt;/a>
- &lt;a class="anchor" href="#vocore">#&lt;/a>
-&lt;/h2>
+&lt;h2 id="刷入magisk文件">刷入Magisk文件&lt;/h2>
+&lt;p>在上述步骤完成进入recovery后，可以看到twrp的一些管理菜单，选择安装我们刚才下载的magisk zip文件， 完成后重启手机。&lt;/p>
+&lt;h2 id="定制自己的rom极客需要熟悉一些计算机程序知识">定制自己的ROM（极客，需要熟悉一些计算机程序知识）&lt;/h2>
+&lt;p>推荐一个工具来完成 &lt;a href="https://github.com/artificerpi/android_system_extraction_and_repack_tool">https://github.com/artificerpi/android_system_extraction_and_repack_tool&lt;/a>&lt;/p>
+&lt;h2 id="参考">参考&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://twrp.me/htc/htcu11.html">https://twrp.me/htc/htcu11.html&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>我的DIY与vocore</title><link>https://qtopie.github.io/notes/iot/vocore/my-vocore-playground/</link><pubDate>Thu, 26 Jul 2018 22:24:33 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/vocore/my-vocore-playground/</guid><description>&lt;h2 id="vocore">&lt;a href="http://vocore.io/">VoCore&lt;/a>&lt;/h2>
 &lt;p>硬币大小的Linux计算机（或者可以DIY的mini路由器）&lt;/p>
-&lt;h2 id="技术参数">
- 技术参数
- &lt;a class="anchor" href="#%e6%8a%80%e6%9c%af%e5%8f%82%e6%95%b0">#&lt;/a>
-&lt;/h2>
+&lt;h2 id="技术参数">技术参数&lt;/h2>
 &lt;ul>
 &lt;li>Target: &lt;a href="https://openwrt.org/docs/techref/targets/ramips">ramips&lt;/a>&lt;/li>
 &lt;li>Subtarget: &lt;code>mt7628&lt;/code>&lt;/li>
@@ -426,10 +392,7 @@ Auto DNS = on
 &lt;li>&lt;a href="https://openwrt.org/toh/hwdata/vocore/vocore_vocore2">OpenWRT techdata&lt;/a>&lt;/li>
 &lt;/ul>
 &lt;p>具体参数请看官网介绍 &lt;a href="http://vocore.io/v2u.html">VoCore2 Ultimate&lt;/a> 和 &lt;a href="https://openwrt.org/toh/hwdata/vocore/vocore_vocore2">openwrt列出的技术数据&lt;/a>&lt;/p>
-&lt;h2 id="openwrt介绍">
- OpenWRT介绍
- &lt;a class="anchor" href="#openwrt%e4%bb%8b%e7%bb%8d">#&lt;/a>
-&lt;/h2>
+&lt;h2 id="openwrt介绍">OpenWRT介绍&lt;/h2>
 &lt;p>OpenWRT(与&lt;a href="https://zh.wikipedia.org/wiki/LEDE">LEDE&lt;/a>合并后更名为OpenWrt)是一个适用于嵌入式设备的Linux发行版，最初&lt;a href="https://zh.wikipedia.org/wiki/OpenWrt">由Linksys公司推出的WRT-54G无线路由中使用的Linux系统开源而来&lt;/a>。相比于路由器原厂固件而言，OpenWRT提供了一个可添加软件包的可写文件系统，这样用户就能自己定制路由器的功能。基于开放的生态和良好的技术社区环境，OpenWRT十分适合喜好DIY的科技粉来定制自己的路由器。&lt;/p>
 &lt;p>OpenWRT主要使用opkg来管理软件包，默认使用LuCI作为web交互界面。下面简单列出它们的常用方式，具体使用方法请查阅文档。&lt;/p>
 &lt;ul>
@@ -448,14 +411,8 @@ Auto DNS = on
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>uci show &amp;lt;OPTION&amp;gt;
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
 &lt;/ul>
-&lt;h2 id="我的定制">
- 我的定制
- &lt;a class="anchor" href="#%e6%88%91%e7%9a%84%e5%ae%9a%e5%88%b6">#&lt;/a>
-&lt;/h2>
-&lt;h3 id="基本设置">
- 基本设置
- &lt;a class="anchor" href="#%e5%9f%ba%e6%9c%ac%e8%ae%be%e7%bd%ae">#&lt;/a>
-&lt;/h3>
+&lt;h2 id="我的定制">我的定制&lt;/h2>
+&lt;h3 id="基本设置">基本设置&lt;/h3>
 &lt;ul>
 &lt;li>Change SSID Name&lt;/li>
 &lt;/ul>
@@ -468,15 +425,9 @@ Auto DNS = on
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/etc/init.d/network restart
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># check network in another machine&lt;/span>
 &lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo iw dev wlan0 scan | grep SSID
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="wget-ssl">
- wget ssl
- &lt;a class="anchor" href="#wget-ssl">#&lt;/a>
-&lt;/h2>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="wget-ssl">wget ssl&lt;/h2>
 &lt;pre tabindex="0">&lt;code>opkg install libustream-openssl ca-bundle ca-certificates
-&lt;/code>&lt;/pre>&lt;h3 id="apsta模式-或者叫无线中继器">
- AP+STA模式 （或者叫无线中继器）
- &lt;a class="anchor" href="#apsta%e6%a8%a1%e5%bc%8f-%e6%88%96%e8%80%85%e5%8f%ab%e6%97%a0%e7%ba%bf%e4%b8%ad%e7%bb%a7%e5%99%a8">#&lt;/a>
-&lt;/h3>
+&lt;/code>&lt;/pre>&lt;h3 id="apsta模式-或者叫无线中继器">AP+STA模式 （或者叫无线中继器）&lt;/h3>
 &lt;ul>
 &lt;li>使用固件 &lt;a href="http://vonger.cn/misc/vocore2/20180723V.bin">vocore2-20180723V&lt;/a>&lt;/li>
 &lt;/ul>
