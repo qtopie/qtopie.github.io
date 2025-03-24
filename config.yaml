@@ -1,8 +1,8 @@
 baseURL: 'https://qtopie.github.io/'
 languageCode: 'en-us'
 defaultContentLanguage: en
-title: 'Blog | qtopierw'
-theme: 'hugo-book'
+title: 'Blog | Qtopie'
+theme: 'amp-blog-theme'
 googleAnalytics: UA-209364110-1
 author: 
   name: 'qtopierw'
@@ -18,6 +18,8 @@ enableRobotsTXT: true
 markup:
   defaultMarkdownHandler: goldmark
   goldmark:
+    renderer:
+      unsafe: true
     extensions:
       definitionList: true
       footnote: true
@@ -44,7 +46,7 @@ markup:
           - - $$
             - $$
           inline:
-          - - \(
+            - \(
             - \)
         enable: true
   highlight:
