@@ -7,7 +7,7 @@ Personal Blog of site https://qtopie.github.io/
 * set git submodule to ssh url
 
 ```bash
-git submodule set-url themes/amp-blog-theme git@github.com:qtopierw/amp-blog-theme.git
+git submodule set-url themes/amp-blog-theme git@github.com:qtopie/amp-blog-theme.git
 ```
 
 ## Math
