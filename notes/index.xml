@@ -1,4 +1,81 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Notes on Blog | Qtopie</title><link>https://qtopie.github.io/notes/</link><description>Recent content in Notes on Blog | Qtopie</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Wed, 11 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/notes/index.xml" rel="self" type="application/rss+xml"/><item><title>JVM线程分析</title><link>https://qtopie.github.io/notes/java/thread/</link><pubDate>Wed, 11 Sep 2024 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/java/thread/</guid><description>&lt;h2 id="线程的状态">线程的状态&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Notes on Blog | Qtopie</title><link>https://qtopie.github.io/notes/</link><description>Recent content in Notes on Blog | Qtopie</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Sun, 29 Jun 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/notes/index.xml" rel="self" type="application/rss+xml"/><item><title>G1 垃圾回收器（Garbage-First, G1 GC）</title><link>https://qtopie.github.io/notes/java/g1/</link><pubDate>Sun, 29 Jun 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/java/g1/</guid><description>&lt;p>G1 是 Java HotSpot 虚拟机自 JDK7u4 起提供的服务器端垃圾回收器，目标是替代 CMS，适用于大堆内存、低延迟场景。G1 通过分区、并发和自适应等机制，实现高吞吐量和可预测的停顿时间。&lt;/p>
+&lt;hr>
+&lt;h2 id="g1-的主要特点">G1 的主要特点&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>分区管理（Region）&lt;/strong>：将堆划分为多个大小相等的 Region，每个 Region 可作为 Eden、Survivor 或 Old 区，灵活管理内存。&lt;/li>
+&lt;li>&lt;strong>分代收集&lt;/strong>：同时支持年轻代和老年代的垃圾收集。&lt;/li>
+&lt;li>&lt;strong>可预测停顿时间&lt;/strong>：允许用户设置最大停顿时间目标（如 &lt;code>-XX:MaxGCPauseMillis&lt;/code>），G1 会自适应调整回收行为以尽量满足目标。&lt;/li>
+&lt;li>&lt;strong>并发与并行&lt;/strong>：支持多线程并发标记和回收，减少 Stop-The-World（STW）时间。&lt;/li>
+&lt;li>&lt;strong>垃圾优先&lt;/strong>：优先回收垃圾最多的 Region，提高回收效率。&lt;/li>
+&lt;li>&lt;strong>整体堆回收&lt;/strong>：可对整个堆进行回收，避免碎片化。&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="g1-垃圾回收过程">G1 垃圾回收过程&lt;/h2>
+&lt;h3 id="触发条件">触发条件&lt;/h3>
+&lt;ul>
+&lt;li>年轻代空间不足时触发 Young GC。&lt;/li>
+&lt;li>老年代空间不足或达到阈值时触发 Mixed GC 或 Full GC。&lt;/li>
+&lt;li>显式调用 &lt;code>System.gc()&lt;/code> 可能触发 Full GC。&lt;/li>
+&lt;/ul>
+&lt;h3 id="回收阶段">回收阶段&lt;/h3>
+&lt;p>G1 的回收阶段分为两类：&lt;strong>Young Only GC&lt;/strong> 和 &lt;strong>Mixed GC&lt;/strong>。&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Young Only GC 阶段&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>仅回收年轻代（Eden 和 Survivor 区）的 Region。&lt;/li>
+&lt;li>触发条件：年轻代空间不足。&lt;/li>
+&lt;li>过程：采用并行回收，通常伴随初始标记（Initial Mark），会发生短暂的 STW（Stop-The-World）暂停。&lt;/li>
+&lt;li>目标：快速回收短生命周期对象，腾出新生代空间。&lt;/li>
+&lt;/ul>
+&lt;h3 id="young-only-gc-的过程">Young Only GC 的过程&lt;/h3>
+&lt;p>Young Only GC 主要针对年轻代（Eden 和 Survivor 区）的 Region 进行回收，流程如下：&lt;/p></description></item><item><title>ZGC</title><link>https://qtopie.github.io/notes/java/zgc/</link><pubDate>Sun, 29 Jun 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/java/zgc/</guid><description>&lt;h2 id="zgc-简介">ZGC 简介&lt;/h2>
+&lt;p>**ZGC（Z Garbage Collector）**是 Java HotSpot 虚拟机自 JDK 11 引入的一款可扩展、低延迟的垃圾回收器，专为大堆内存和对延迟极为敏感的应用场景设计。&lt;/p>
+&lt;h3 id="主要特点">主要特点&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>超低延迟&lt;/strong>：GC 停顿时间通常不超过 1~2 毫秒，与堆大小几乎无关（即使 TB 级堆）。&lt;/li>
+&lt;li>&lt;strong>并发回收&lt;/strong>：大部分垃圾回收工作与应用线程并发进行，极大减少 Stop-The-World（STW）时间。&lt;/li>
+&lt;li>&lt;strong>可扩展性强&lt;/strong>：支持超大堆（数 TB 级别），适合大数据、在线服务等场景。&lt;/li>
+&lt;li>&lt;strong>Regionless 设计&lt;/strong>：不像 G1 那样分 Region，ZGC 采用按需分配的内存块（Chunk），简化内存管理。&lt;/li>
+&lt;li>&lt;strong>着色指针（Colored Pointers）&lt;/strong>：利用对象引用的高位存储元数据，实现高效的并发标记和转移。&lt;/li>
+&lt;/ul>
+&lt;h3 id="工作原理">工作原理&lt;/h3>
+&lt;ol>
+&lt;li>&lt;strong>并发标记&lt;/strong>：与应用线程并发，标记所有可达对象。&lt;/li>
+&lt;li>&lt;strong>并发重定位&lt;/strong>：对象在后台被迁移到新内存，引用通过着色指针和读屏障自动修正。&lt;/li>
+&lt;li>&lt;strong>并发清理&lt;/strong>：回收不可达对象占用的内存。&lt;/li>
+&lt;li>&lt;strong>极短暂停&lt;/strong>：只有少量阶段（如初始标记、重新标记）会有极短的 STW 停顿。&lt;/li>
+&lt;/ol>
+&lt;h3 id="启用方式">启用方式&lt;/h3>
+&lt;ul>
+&lt;li>JDK 11+：&lt;code>-XX:+UseZGC&lt;/code>&lt;/li>
+&lt;li>JDK 15+ 支持 Windows/macOS&lt;/li>
+&lt;li>常用参数：
+&lt;ul>
+&lt;li>&lt;code>-Xmx&lt;/code>、&lt;code>-Xms&lt;/code> 设置堆大小&lt;/li>
+&lt;li>&lt;code>-XX:ConcGCThreads&lt;/code> 并发 GC 线程数&lt;/li>
+&lt;li>&lt;code>-XX:MaxGCPauseMillis&lt;/code> 期望最大停顿时间&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="适用场景">适用场景&lt;/h3>
+&lt;ul>
+&lt;li>需要极低 GC 停顿的在线服务&lt;/li>
+&lt;li>大内存、大对象、大吞吐量应用&lt;/li>
+&lt;li>金融、电商、广告、实时分析等领域&lt;/li>
+&lt;/ul>
+&lt;h2 id="zgc-的垃圾回收过程">ZGC 的垃圾回收过程&lt;/h2>
+&lt;p>ZGC 的回收过程高度并发，主要分为以下几个阶段：&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>初始标记（Initial Mark）&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>标记从 GC Roots 直接可达的对象。&lt;/li>
+&lt;li>该阶段会有一次极短的 Stop-The-World（STW）暂停。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>并发标记（Concurrent Mark）&lt;/strong>&lt;/p></description></item><item><title>JVM线程分析</title><link>https://qtopie.github.io/notes/java/thread/</link><pubDate>Wed, 11 Sep 2024 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/java/thread/</guid><description>&lt;h2 id="线程的状态">线程的状态&lt;/h2>
 &lt;p>参考定义 &lt;code>java.lang.Thread.State&lt;/code>&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">public&lt;/span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#069;font-weight:bold">enum&lt;/span>&lt;span style="color:#bbb"> &lt;/span>State&lt;span style="color:#bbb"> &lt;/span>{&lt;span style="color:#bbb">
 &lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#bbb"> &lt;/span>&lt;span style="color:#09f;font-style:italic">/**
@@ -1259,7 +1336,63 @@ automatically.&lt;/p></description></item><item><title>开始使用Ubuntu</title
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
 &lt;li>创建swapfile (可选，如果启动时提示无swapfile使用)&lt;/li>
 &lt;/ul>
-&lt;p>首先确认swap文件是否存在 &lt;code>sudo swapon -s&lt;/code>&lt;/p></description></item><item><title>OAuth</title><link>https://qtopie.github.io/notes/system-design/oauth/</link><pubDate>Sun, 23 Aug 1970 06:28:43 +0000</pubDate><guid>https://qtopie.github.io/notes/system-design/oauth/</guid><description>&lt;pre tabindex="0">&lt;code> +--------+ +---------------+
+&lt;p>首先确认swap文件是否存在 &lt;code>sudo swapon -s&lt;/code>&lt;/p></description></item><item><title>分布式事务</title><link>https://qtopie.github.io/notes/system-design/tcc/</link><pubDate>Sun, 23 Aug 1970 09:10:29 +0000</pubDate><guid>https://qtopie.github.io/notes/system-design/tcc/</guid><description>&lt;h2 id="基础理论">基础理论&lt;/h2>
+&lt;ul>
+&lt;li>&lt;strong>ACID&lt;/strong>：原子性（Atomicity）、一致性（Consistency）、隔离性（Isolation）、持久性（Durability）。&lt;/li>
+&lt;li>&lt;strong>CAP&lt;/strong>：一致性（Consistency）、可用性（Availability）、分区容忍性（Partition tolerance）。&lt;/li>
+&lt;li>&lt;strong>BASE&lt;/strong>：基本可用（Basically Available）、软状态（Soft State）、最终一致性（Eventually Consistent）。&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="2pc两阶段提交">2PC（两阶段提交）&lt;/h2>
+&lt;p>两阶段提交（Two-Phase Commit, 2PC）是一种经典的分布式事务协议，用于确保多个分布式系统中的操作要么全部成功，要么全部失败，保证数据一致性。&lt;/p>
+&lt;h3 id="流程">流程&lt;/h3>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>准备阶段（Prepare Phase）&lt;/strong>&lt;br>
+协调者（Coordinator）向所有参与者（Participant）发送准备提交请求（prepare）。&lt;br>
+参与者执行本地事务操作，但不提交，只写入预提交日志，并锁定相关资源。&lt;br>
+参与者将执行结果（可以提交/不能提交）反馈给协调者。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>提交阶段（Commit Phase）&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>如果所有参与者都反馈“可以提交”，协调者向所有参与者发送提交（commit）请求，参与者正式提交本地事务，释放资源。&lt;/li>
+&lt;li>如果有任何一个参与者反馈“不能提交”或超时未响应，协调者向所有参与者发送回滚（rollback）请求，参与者回滚本地事务，释放资源。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;pre tabindex="0">&lt;code class="language-mermaid" data-lang="mermaid">flowchart TD
+ A[事务发起者发起TCC事务] --&amp;gt; B{各参与者Try阶段&amp;lt;br&amp;gt;预留资源}
+ B -- 所有Try成功 --&amp;gt; C[各参与者Confirm阶段&amp;lt;br&amp;gt;正式提交]
+ C --&amp;gt; D[事务完成]
+ B -- 有Try失败或超时 --&amp;gt; E[各参与者Cancel阶段&amp;lt;br&amp;gt;释放资源/回滚]
+ E --&amp;gt; D
+&lt;/code>&lt;/pre>&lt;h3 id="优缺点">优缺点&lt;/h3>
+&lt;ul>
+&lt;li>&lt;strong>优点&lt;/strong>：实现简单，能保证强一致性。&lt;/li>
+&lt;li>&lt;strong>缺点&lt;/strong>：同步阻塞，性能较低；协调者单点故障会导致参与者长时间锁定资源，存在阻塞和脑裂风险。&lt;/li>
+&lt;/ul>
+&lt;blockquote>
+&lt;p>2PC 常用于分布式数据库、消息队列等场景。实际生产环境中，通常会用 TCC、SAGA 等更灵活的方案来替代 2PC。&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;h2 id="3pc三阶段提交">3PC（三阶段提交）&lt;/h2>
+&lt;p>三阶段提交（Three-Phase Commit, 3PC）是在 2PC 基础上改进的一种分布式事务协议，主要目的是减少协调者单点故障导致的阻塞和脑裂风险。3PC 将提交过程分为三个阶段：&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>CanCommit 阶段（询问阶段）&lt;/strong>&lt;br>
+协调者向所有参与者发送“是否可以提交”请求（canCommit）。&lt;br>
+参与者收到后判断自己是否可以执行事务，并反馈“可以”或“不可以”。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>PreCommit 阶段（预提交阶段）&lt;/strong>&lt;br>
+如果所有参与者都同意可以提交，协调者发送“预提交”请求（preCommit）。&lt;br>
+参与者收到后执行事务操作并写入预提交日志，但还未正式提交，并反馈“已预提交”。&lt;br>
+此时参与者可以安全地提交事务，但如果出现故障也可以回滚。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>DoCommit 阶段（正式提交阶段）&lt;/strong>&lt;br>
+协调者收到所有参与者的“已预提交”反馈后，发送“正式提交”请求（doCommit）。&lt;br>
+参与者收到后正式提交事务并释放资源。&lt;/p></description></item><item><title>OAuth</title><link>https://qtopie.github.io/notes/system-design/oauth/</link><pubDate>Sun, 23 Aug 1970 06:28:43 +0000</pubDate><guid>https://qtopie.github.io/notes/system-design/oauth/</guid><description>&lt;pre tabindex="0">&lt;code> +--------+ +---------------+
  | |--(A)- Authorization Request -&amp;gt;| Resource |
  | | | Owner |
  | |&amp;lt;-(B)-- Authorization Grant ---| |
@@ -1645,7 +1778,20 @@ The core principle is to separate behaviour from dependency resolution.&lt;/p>
 &lt;p>virtual memory
 swapfile&lt;/p>
 &lt;p>&lt;code>free&lt;/code> command&lt;/p>
-&lt;h2 id="io">I/O&lt;/h2></description></item><item><title>Build and Try Fuchsia</title><link>https://qtopie.github.io/notes/fuchsia/get-started/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/fuchsia/get-started/</guid><description>&lt;h1 id="fuchsia">Fuchsia&lt;/h1>
+&lt;h2 id="io">I/O&lt;/h2></description></item><item><title/><link>https://qtopie.github.io/notes/web/quic/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/web/quic/</guid><description>&lt;h1 id="quic">QUIC&lt;/h1>
+&lt;p>需要 HTTP/3 的主要原因是为了解决 HTTP/1.1 和 HTTP/2 在使用 TCP 协议时遇到的性能瓶颈和限制，尤其是在存在丢包和网络切换的情况下。&lt;/p>
+&lt;p>以下是需要 HTTP/3 的几个关键原因：&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>解决 TCP 的队头阻塞 (Head-of-Line Blocking - HOLB) 问题：&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>HTTP/1.1 的 HOLB:&lt;/strong> 在 HTTP/1.1 中，即使开启了 Pipelining（尽管实际应用中问题很多），在一个连接上，前一个请求的响应必须完全接收后，下一个请求的响应才能开始发送。如果中间某个请求或响应被阻塞，后续的所有请求都会被延迟。&lt;/li>
+&lt;li>&lt;strong>HTTP/2 的 TCP HOLB:&lt;/strong> HTTP/2 通过多路复用（Multiplexing）解决了应用层的 HOLB，允许在同一个 TCP 连接上同时发送多个请求和接收多个响应。然而，HTTP/2 仍然运行在 TCP 协议之上。TCP 是一个保证可靠和有序传输的协议，它要求数据包按顺序到达。如果在传输过程中，某个 TCP 数据包丢失了，TCP 会暂停整个连接的数据传输，直到丢失的数据包被重传并正确插入到序列中。这意味着，即使丢失的数据包只影响到 HTTP/2 连接中的某一个流（Stream），整个连接上的所有其他流都会被这个丢包事件阻塞，等待重传完成。这就是 TCP 层的队头阻塞，它极大地影响了 HTTP/2 在丢包环境下的性能。&lt;/li>
+&lt;li>&lt;strong>HTTP/3 (基于 QUIC) 的解决方案：&lt;/strong> HTTP/3 使用了基于 UDP 的 QUIC 协议。QUIC 在应用层实现了类似 TCP 的可靠传输、流量控制和拥塞控制，但它是基于“流”来管理的。每个 HTTP 请求都被分配到一个独立的 QUIC 流。即使一个流中的数据包丢失，只会阻塞该流的传输，而同一连接上的其他流可以继续独立地传输数据，不会受到影响。这彻底解决了 TCP 层的 HOLB 问题，显著提升了在丢包率较高或网络不稳定的环境下的性能。&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>更快的连接建立：&lt;/strong>&lt;/p></description></item><item><title>Build and Try Fuchsia</title><link>https://qtopie.github.io/notes/fuchsia/get-started/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/fuchsia/get-started/</guid><description>&lt;h1 id="fuchsia">Fuchsia&lt;/h1>
 &lt;p>&lt;a href="https://fuchsia.dev/fuchsia-src/get-started">https://fuchsia.dev/fuchsia-src/get-started&lt;/a>&lt;/p>
 &lt;h2 id="using-mirror">Using mirror&lt;/h2>
 &lt;p>&lt;a href="https://fuchsia.fsf.org.cn/#intro">https://fuchsia.fsf.org.cn/#intro&lt;/a>&lt;/p>
