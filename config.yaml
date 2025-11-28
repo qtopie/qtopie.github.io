@@ -1,11 +1,11 @@
 baseURL: 'https://qtopie.github.io/'
 languageCode: 'en-us'
 defaultContentLanguage: en
-title: 'Blog | Qtopie'
-theme: 'amp-blog-theme'
+title: 'Blog | qtopie'
+theme: 'drift-blog-theme'
 googleAnalytics: UA-209364110-1
 author: 
-  name: 'qtopierw'
+  name: 'qtopie'
   email: qtopie.rw@gmail.com
 copyright: Posts licensed under <a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0
 
