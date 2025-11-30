@@ -1,9 +1,6 @@
 [submodule "posts"]
 	path = posts
 	url = git@github.com:qtopie/posts.git
-[submodule "themes/amp-blog-theme"]
-	path = themes/amp-blog-theme
-	url = git@github.com:qtopie/amp-blog-theme.git
 [submodule "themes/drift-blog-theme"]
 	path = themes/drift-blog-theme
 	url = https://github.com/qtopie/drift-blog-theme.git

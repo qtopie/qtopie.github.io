@@ -11,6 +11,9 @@ copyright: Posts licensed under <a href="https://creativecommons.org/licenses/by
 
 params:
   googleAdSense: ca-pub-3338377104827119
+  author:
+    name: 'qtopie'
+    url: 'https://github.com/qtopie'
 
 enableRobotsTXT: true
 
@@ -64,3 +67,7 @@ module:
     target: content/posts
   - source: posts/notes
     target: content/notes
+
+# Enable JSON output for home page (search index)
+outputs:
+  home: ["HTML", "JSON"]
