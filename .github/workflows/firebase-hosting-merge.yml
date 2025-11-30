@@ -18,6 +18,11 @@ jobs:
           token: ${{ secrets.PRIVATE_REPO_ACCESS_TOKEN }}
       - name: PullLatestPosts
         run: git submodule update --recursive --remote
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - run: npm install --prefix themes/drift-blog-theme/react-app/
+      - run: npm run build --prefix themes/drift-blog-theme/react-app/
       - name: generate sites
         run: sudo snap install hugo && hugo --minify
       
