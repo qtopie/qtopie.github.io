@@ -1,35 +1,32 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Homeassistant on Blog | Qtopie</title><link>https://qtopie.github.io/tags/homeassistant/</link><description>Recent content in Homeassistant on Blog | Qtopie</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Tue, 28 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/tags/homeassistant/index.xml" rel="self" type="application/rss+xml"/><item><title>树莓派和HomeAssistant</title><link>https://qtopie.github.io/notes/iot/rpi/homeassistant/</link><pubDate>Tue, 28 Sep 2021 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/homeassistant/</guid><description>&lt;h2 id="目标">目标&lt;/h2>
-&lt;p>使用开源软件和米家智能硬件，实现简单的智能家居系统&lt;/p>
-&lt;blockquote>
-&lt;p>采用米家智能硬件的原因是, 小米智能家居做的比较早（也许是起初推广的更好，刚接触智能家居的时候就用的小米）,
-另外一点是小米智能硬件确实物美价廉，在国外也很受欢迎，Github上也有很多相关项目.&lt;/p>&lt;/blockquote>
-&lt;p>&lt;div class="fixed-height-container">
- &lt;amp-img class="contain" alt="" src="https://qtopie.github.io/notes/iot/rpi/homeassistant.assets/img-2021-10-16-12-14-50.png" 
- layout="fill" 
- lightbox>
- &lt;/amp-img>
-&lt;/div>&lt;/p>
-&lt;h2 id="环境和设备">环境和设备&lt;/h2>
-&lt;ul>
-&lt;li>RaspberryPi 4 (4GB版本)&lt;/li>
-&lt;li>Ubuntu arm64 树莓派版本&lt;/li>
-&lt;/ul>
-&lt;h3 id="安装homeassistant">安装HomeAssistant&lt;/h3>
-&lt;blockquote>
-&lt;p>这里使用Ubuntu而不是Raspbian的一个原因是Ubuntu官方软件包更新更快（比如raspbian当前为3.7而hass需要3.8+版本)，
-且自己笔记本一直用Ubuntu，统一发行版使用起来更加方便&lt;/p>&lt;/blockquote>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo pip3 install homeassistant
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>如果下载很慢，可以考虑使用pypi镜像源&lt;/p>
-&lt;p>编辑&lt;code>/etc/pip.conf&lt;/code> (使用豆瓣源）&lt;/p>
-&lt;pre tabindex="0">&lt;code>[global]
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Homeassistant on Blog | qtopie</title><link>https://qtopie.github.io/tags/homeassistant/</link><description>Recent content in Homeassistant on Blog | qtopie</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Tue, 28 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/tags/homeassistant/index.xml" rel="self" type="application/rss+xml"/><item><title>树莓派和HomeAssistant</title><link>https://qtopie.github.io/notes/iot/rpi/homeassistant/</link><pubDate>Tue, 28 Sep 2021 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/homeassistant/</guid><description>&lt;h2 id="目标"&gt;目标&lt;/h2&gt;
+&lt;p&gt;使用开源软件和米家智能硬件，实现简单的智能家居系统&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;采用米家智能硬件的原因是, 小米智能家居做的比较早（也许是起初推广的更好，刚接触智能家居的时候就用的小米）,
+另外一点是小米智能硬件确实物美价廉，在国外也很受欢迎，Github上也有很多相关项目.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;img src="homeassistant.assets/img-2021-10-16-12-14-50.png" alt=""&gt;&lt;/p&gt;
+&lt;h2 id="环境和设备"&gt;环境和设备&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;RaspberryPi 4 (4GB版本)&lt;/li&gt;
+&lt;li&gt;Ubuntu arm64 树莓派版本&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="安装homeassistant"&gt;安装HomeAssistant&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这里使用Ubuntu而不是Raspbian的一个原因是Ubuntu官方软件包更新更快（比如raspbian当前为3.7而hass需要3.8+版本)，
+且自己笔记本一直用Ubuntu，统一发行版使用起来更加方便&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo pip3 install homeassistant
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果下载很慢，可以考虑使用pypi镜像源&lt;/p&gt;
+&lt;p&gt;编辑&lt;code&gt;/etc/pip.conf&lt;/code&gt; (使用豆瓣源）&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;[global]
 index-url = https://pypi.douban.com/simple
-&lt;/code>&lt;/pre>&lt;h4 id="设置开机自启动">设置开机自启动&lt;/h4>
-&lt;ul>
-&lt;li>创建systemd service unit文件&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>systemctl --user edit --full --force homeassistant.service
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>加入以下内容&lt;/p>
-&lt;pre tabindex="0">&lt;code>[Unit]
+&lt;/code&gt;&lt;/pre&gt;&lt;h4 id="设置开机自启动"&gt;设置开机自启动&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;创建systemd service unit文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;systemctl --user edit --full --force homeassistant.service
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;加入以下内容&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;[Unit]
 Description=Home Assistant
 After=network.target
 
@@ -41,9 +38,13 @@ RestartSec=5
 
 [Install]
 WantedBy=default.target
-&lt;/code>&lt;/pre>&lt;ul>
-&lt;li>设置用户自动登录&lt;/li>
-&lt;/ul>
-&lt;p>&lt;a href="https://raspberrypi.stackexchange.com/questions/111728/how-to-get-raspi-config-on-ubuntu-20-04">安装&lt;code>raspi-config&lt;/code>&lt;/a>,
-然后配置 &lt;code>1. System Options&lt;/code> -&amp;gt; &lt;code>S5 Boot / Auto Login&lt;/code> -&amp;gt; &lt;code>B2 Console Autologin&lt;/code>&lt;/p>
-&lt;p>会生成&lt;code>/etc/systemd/system/getty@tty1.service.d/autologin.conf&lt;/code>, 内容如下&lt;/p></description></item></channel></rss>
+&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;设置用户自动登录&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href="https://raspberrypi.stackexchange.com/questions/111728/how-to-get-raspi-config-on-ubuntu-20-04"&gt;安装&lt;code&gt;raspi-config&lt;/code&gt;&lt;/a&gt;,
+然后配置 &lt;code&gt;1. System Options&lt;/code&gt; -&amp;gt; &lt;code&gt;S5 Boot / Auto Login&lt;/code&gt; -&amp;gt; &lt;code&gt;B2 Console Autologin&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;会生成&lt;code&gt;/etc/systemd/system/getty@tty1.service.d/autologin.conf&lt;/code&gt;, 内容如下&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;[Service]
+ExecStart=
+ExecStart=-/sbin/agetty --autologin ubuntu --noclear %I $TERM
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;重启即可生效&lt;/p&gt;</description></item></channel></rss>

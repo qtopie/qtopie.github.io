@@ -1,48 +1,48 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>4G LTE on Blog | Qtopie</title><link>https://qtopie.github.io/tags/4g-lte/</link><description>Recent content in 4G LTE on Blog | Qtopie</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Wed, 05 Dec 2018 22:36:06 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/4g-lte/index.xml" rel="self" type="application/rss+xml"/><item><title>树莓派4G模块</title><link>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</link><pubDate>Wed, 05 Dec 2018 22:36:06 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</guid><description>&lt;h2 id="准备环境">准备环境&lt;/h2>
-&lt;ul>
-&lt;li>树莓派3B&lt;/li>
-&lt;li>华为4G模块：HUAWEI ME909s-821&lt;/li>
-&lt;li>PCIE转USB开发板&lt;/li>
-&lt;li>5cm天线转接线，SMA公头外螺内孔&lt;/li>
-&lt;li>吸盘天线全向高增益天线，SMA公头外螺内孔&lt;/li>
-&lt;li>中国移动4G SIM卡&lt;/li>
-&lt;/ul>
-&lt;h2 id="4g模块技术规格及文档">4G模块技术规格及文档&lt;/h2>
-&lt;ul>
-&lt;li>技术规格 &lt;a href="http://consumer.huawei.com/solutions/m2m-solutions/en/products/tech-specs/me909s_821_en.htm">连接&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;p>基于海思芯片, 同类比较 SIM7600CE (Qualcomm MDM9206)&lt;/p>
-&lt;ul>
-&lt;li>文档 &lt;a href="http://download-c1.huawei.com/download/downloadCenter?downloadId=60305&amp;amp;version=200311&amp;amp;siteCode=worldwide&amp;amp;view=true">连接&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;p>主天线M口&lt;/p>
-&lt;h2 id="开始使用">开始使用&lt;/h2>
-&lt;p>&lt;em>Windows上使用该4G模块需要手动安装驱动，驱动&lt;a href="https://techship.com/downloads/category/software-software-huawei-me909s-821-lga/">连接&lt;/a>&lt;/em>&lt;/p>
-&lt;p>&lt;em>Ubuntu下可以使用&lt;code>modemmanager&lt;/code>管理4G模块&lt;/em>&lt;/p>
-&lt;p>树莓派下使用教程如下。&lt;/p>
-&lt;ul>
-&lt;li>查看usb设备是否被识别&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>lsusb
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># output:&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Bus &lt;span style="color:#f60">001&lt;/span> Device 004: ID 12d1:15c1 Huawei Technologies Co., Ltd. 
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Bus &lt;span style="color:#f60">001&lt;/span> Device 003: ID 0424:ec00 Standard Microsystems Corp. SMSC9512/9514 Fast Ethernet Adapter
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Bus &lt;span style="color:#f60">001&lt;/span> Device 002: ID 0424:9514 Standard Microsystems Corp. SMC9514 Hub
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Bus &lt;span style="color:#f60">001&lt;/span> Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>安装拨号软件&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo apt-get update
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt-get install ppp usb-modeswitch wvdial
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>初始化wvdial配置&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo wvdialconf /etc/wvdial.conf
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>修改&lt;code>wvdial&lt;/code>配置&lt;/li>
-&lt;/ul>
-&lt;pre tabindex="0">&lt;code>[Dialer Defaults]
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>4G LTE on Blog | qtopie</title><link>https://qtopie.github.io/tags/4g-lte/</link><description>Recent content in 4G LTE on Blog | qtopie</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Wed, 05 Dec 2018 22:36:06 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/4g-lte/index.xml" rel="self" type="application/rss+xml"/><item><title>树莓派4G模块</title><link>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</link><pubDate>Wed, 05 Dec 2018 22:36:06 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</guid><description>&lt;h2 id="准备环境"&gt;准备环境&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;树莓派3B&lt;/li&gt;
+&lt;li&gt;华为4G模块：HUAWEI ME909s-821&lt;/li&gt;
+&lt;li&gt;PCIE转USB开发板&lt;/li&gt;
+&lt;li&gt;5cm天线转接线，SMA公头外螺内孔&lt;/li&gt;
+&lt;li&gt;吸盘天线全向高增益天线，SMA公头外螺内孔&lt;/li&gt;
+&lt;li&gt;中国移动4G SIM卡&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="4g模块技术规格及文档"&gt;4G模块技术规格及文档&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;技术规格 &lt;a href="http://consumer.huawei.com/solutions/m2m-solutions/en/products/tech-specs/me909s_821_en.htm"&gt;连接&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;基于海思芯片, 同类比较 SIM7600CE (Qualcomm MDM9206)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;文档 &lt;a href="http://download-c1.huawei.com/download/downloadCenter?downloadId=60305&amp;amp;version=200311&amp;amp;siteCode=worldwide&amp;amp;view=true"&gt;连接&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;主天线M口&lt;/p&gt;
+&lt;h2 id="开始使用"&gt;开始使用&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;Windows上使用该4G模块需要手动安装驱动，驱动&lt;a href="https://techship.com/downloads/category/software-software-huawei-me909s-821-lga/"&gt;连接&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Ubuntu下可以使用&lt;code&gt;modemmanager&lt;/code&gt;管理4G模块&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;树莓派下使用教程如下。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;查看usb设备是否被识别&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;lsusb
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# output:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Bus &lt;span style="color:#f60"&gt;001&lt;/span&gt; Device 004: ID 12d1:15c1 Huawei Technologies Co., Ltd. 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Bus &lt;span style="color:#f60"&gt;001&lt;/span&gt; Device 003: ID 0424:ec00 Standard Microsystems Corp. SMSC9512/9514 Fast Ethernet Adapter
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Bus &lt;span style="color:#f60"&gt;001&lt;/span&gt; Device 002: ID 0424:9514 Standard Microsystems Corp. SMC9514 Hub
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Bus &lt;span style="color:#f60"&gt;001&lt;/span&gt; Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;安装拨号软件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt-get update
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt-get install ppp usb-modeswitch wvdial
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;初始化wvdial配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo wvdialconf /etc/wvdial.conf
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;修改&lt;code&gt;wvdial&lt;/code&gt;配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;[Dialer Defaults]
 Init1 = ATZ
 Init2 = ATQ0 V1 E1 S0=0
 Init3 = AT+CGDCONT=1,&amp;#34;IP&amp;#34;, &amp;#34;cmnet&amp;#34;
@@ -55,4 +55,4 @@ Phone = *99***1#
 Password = { }
 Username = { }
 Auto DNS = on
-&lt;/code>&lt;/pre>&lt;p>APN和拨号设置参考&lt;/p></description></item></channel></rss>
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;APN和拨号设置参考&lt;/p&gt;</description></item></channel></rss>

@@ -1,51 +1,52 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hugo on Blog | Qtopie</title><link>https://qtopie.github.io/tags/hugo/</link><description>Recent content in Hugo on Blog | Qtopie</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Mon, 02 May 2016 00:06:17 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml"/><item><title>使用Hugo生成静态站点</title><link>https://qtopie.github.io/posts/hugo/getting-started-with-hugo/</link><pubDate>Mon, 02 May 2016 00:06:17 +0800</pubDate><guid>https://qtopie.github.io/posts/hugo/getting-started-with-hugo/</guid><description>&lt;p>本文主要分享如何使用Hugo生成静态站点，并部署到firebase (Hosting服务）上。&lt;/p>
-&lt;p>updated: 2021/9/29&lt;/p>
-&lt;h2 id="静态站点">静态站点&lt;/h2>
-&lt;p>静态站点，相比于动态站点（一般指需要请求后端动态生成网站内容）来说，网站内容已提前渲染好，对搜索引擎更加友好。而且网站内容一般可以直接生成静态的html/css页面, 减少浏览器js渲染，网络传输时也可以充分利用缓存, 这样网页加载也比较快， 使用户体验更好。&lt;/p>
-&lt;p>更进一步地，Google和Twitter合作开发了AMP(Accelerated Mobile Pages)技术, 通过限定HTML标签和CSS，以及CDN缓存，提升移动设备(相比于PC端：弱网、低性能）对网站的访问速度。&lt;/p>
-&lt;p>本站点就是采用了AMP技术构建, 使用静态站点生成工具根据模板，将markdown文件渲染输出为静态AMP页面。&lt;/p>
-&lt;h3 id="生成工具">生成工具&lt;/h3>
-&lt;p>静态站点生成工具有很多，我主要用过的有以下两个。（目前又换回了Hugo)&lt;/p>
-&lt;ul>
-&lt;li>&lt;a href="https://gohugo.io/">Hugo&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://scully.io/">Scully&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;blockquote>
-&lt;p>PS, Hugo刚发布不久我就开始使用了，当时对这个新工具很喜欢，它是一个单独的二进制文件, 且渲染很快，模板丰富。但后面想定制一些功能（那时Hugo的文档比较少，仅官网使用文档， 且功能也没现在这么丰富), 但go的语法还是比较复杂的，也没太多时间看源码。因此当Scully出现的时候，我就立即使用了它（因为本人还是一个Angular粉），相比于Hugo，Scully几乎等同于你可以通过编写Angular应用定制你的网站, 因此十分灵活（主要的缺点是主题和应用代码分开进程渲染，调试略麻烦）。但后面发现，我本身写博客主题的时间可能比我写博客还花的多：》，也是该冷静下想想我的初衷是什么了。其实就是为了记录一些知识并分享，因此AMP才是我的需要。所以我决定我的博客主题的核心是简洁并对阅读友好, 而不是增添许多看其来很有趣的功能。&lt;/p>&lt;/blockquote>
-&lt;h3 id="博客主题">博客主题&lt;/h3>
-&lt;p>这里列出我用过的博客主题&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>Hugo&lt;/p>
-&lt;ul>
-&lt;li>&lt;a href="">Robust&lt;/a>&lt;/li>
-&lt;li>&lt;a href="">amp-blog-theme&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;li>
-&lt;p>Scully&lt;/p>
-&lt;ul>
-&lt;li>&lt;a href="">mdblog-theme&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;p>&lt;em>以下内容主要介绍Hugo使用&lt;/em>&lt;/p>
-&lt;h2 id="安装和创建站点">安装和创建站点&lt;/h2>
-&lt;h3 id="目标">目标&lt;/h3>
-&lt;ul>
-&lt;li>在本地电脑安装hugo, 在github上创建私有仓库&lt;code>posts&lt;/code>，存放markdown源码及图片等文件；&lt;/li>
-&lt;li>在github创建私有仓库&lt;code>qtopie.web.app&lt;/code>（作为集成仓库）, 对应于站点名称，存放站点配置文件。&lt;/li>
-&lt;li>创建firebase hosting项目，将站点&lt;code>qtopie.web.app&lt;/code>发布到firebase.&lt;/li>
-&lt;/ul>
-&lt;p>&lt;em>仓库创建过程省略&lt;/em>&lt;/p>
-&lt;h3 id="hugo安装">Hugo安装&lt;/h3>
-&lt;p>以在Ubuntu 20.04上为例&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo snap install hugo
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="本地生成站点">本地生成站点&lt;/h3>
-&lt;p>初始化git各模块&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>// git clone ... ; &lt;span style="color:#366">cd&lt;/span> &amp;lt;repo&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hugo new site .
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git submodule add https://github.com/qtopierw/amp-blog-theme.git themes/amp-blog-theme
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git submodule add git@github.com:&amp;lt;username&amp;gt;/posts.git content/posts
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>创建&lt;code>.gitignore&lt;/code>文件, 并加入&lt;code>public&lt;/code>目录&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hugo on Blog | qtopie</title><link>https://qtopie.github.io/tags/hugo/</link><description>Recent content in Hugo on Blog | qtopie</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Mon, 02 May 2016 00:06:17 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml"/><item><title>使用Hugo生成静态站点</title><link>https://qtopie.github.io/posts/hugo/getting-started-with-hugo/</link><pubDate>Mon, 02 May 2016 00:06:17 +0800</pubDate><guid>https://qtopie.github.io/posts/hugo/getting-started-with-hugo/</guid><description>&lt;p&gt;本文主要分享如何使用Hugo生成静态站点，并部署到firebase (Hosting服务）上。&lt;/p&gt;
+&lt;p&gt;updated: 2021/9/29&lt;/p&gt;
+&lt;h2 id="静态站点"&gt;静态站点&lt;/h2&gt;
+&lt;p&gt;静态站点，相比于动态站点（一般指需要请求后端动态生成网站内容）来说，网站内容已提前渲染好，对搜索引擎更加友好。而且网站内容一般可以直接生成静态的html/css页面, 减少浏览器js渲染，网络传输时也可以充分利用缓存, 这样网页加载也比较快， 使用户体验更好。&lt;/p&gt;
+&lt;p&gt;更进一步地，Google和Twitter合作开发了AMP(Accelerated Mobile Pages)技术, 通过限定HTML标签和CSS，以及CDN缓存，提升移动设备(相比于PC端：弱网、低性能）对网站的访问速度。&lt;/p&gt;
+&lt;p&gt;本站点就是采用了AMP技术构建, 使用静态站点生成工具根据模板，将markdown文件渲染输出为静态AMP页面。&lt;/p&gt;
+&lt;h3 id="生成工具"&gt;生成工具&lt;/h3&gt;
+&lt;p&gt;静态站点生成工具有很多，我主要用过的有以下两个。（目前又换回了Hugo)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://gohugo.io/"&gt;Hugo&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://scully.io/"&gt;Scully&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;PS, Hugo刚发布不久我就开始使用了，当时对这个新工具很喜欢，它是一个单独的二进制文件, 且渲染很快，模板丰富。但后面想定制一些功能（那时Hugo的文档比较少，仅官网使用文档， 且功能也没现在这么丰富), 但go的语法还是比较复杂的，也没太多时间看源码。因此当Scully出现的时候，我就立即使用了它（因为本人还是一个Angular粉），相比于Hugo，Scully几乎等同于你可以通过编写Angular应用定制你的网站, 因此十分灵活（主要的缺点是主题和应用代码分开进程渲染，调试略麻烦）。但后面发现，我本身写博客主题的时间可能比我写博客还花的多：》，也是该冷静下想想我的初衷是什么了。其实就是为了记录一些知识并分享，因此AMP才是我的需要。所以我决定我的博客主题的核心是简洁并对阅读友好, 而不是增添许多看其来很有趣的功能。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id="博客主题"&gt;博客主题&lt;/h3&gt;
+&lt;p&gt;这里列出我用过的博客主题&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Hugo&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=""&gt;Robust&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=""&gt;amp-blog-theme&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Scully&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=""&gt;mdblog-theme&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;以下内容主要介绍Hugo使用&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id="安装和创建站点"&gt;安装和创建站点&lt;/h2&gt;
+&lt;h3 id="目标"&gt;目标&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;在本地电脑安装hugo, 在github上创建私有仓库&lt;code&gt;posts&lt;/code&gt;，存放markdown源码及图片等文件；&lt;/li&gt;
+&lt;li&gt;在github创建私有仓库&lt;code&gt;qtopie.web.app&lt;/code&gt;（作为集成仓库）, 对应于站点名称，存放站点配置文件。&lt;/li&gt;
+&lt;li&gt;创建firebase hosting项目，将站点&lt;code&gt;qtopie.web.app&lt;/code&gt;发布到firebase.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;仓库创建过程省略&lt;/em&gt;&lt;/p&gt;
+&lt;h3 id="hugo安装"&gt;Hugo安装&lt;/h3&gt;
+&lt;p&gt;以在Ubuntu 20.04上为例&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo snap install hugo
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="本地生成站点"&gt;本地生成站点&lt;/h3&gt;
+&lt;p&gt;初始化git各模块&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;// git clone ... ; &lt;span style="color:#366"&gt;cd&lt;/span&gt; &amp;lt;repo&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;hugo new site .
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git submodule add https://github.com/qtopierw/amp-blog-theme.git themes/amp-blog-theme
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git submodule add git@github.com:&amp;lt;username&amp;gt;/posts.git content/posts
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;创建&lt;code&gt;.gitignore&lt;/code&gt;文件, 并加入&lt;code&gt;public&lt;/code&gt;目录&lt;/p&gt;</description></item></channel></rss>

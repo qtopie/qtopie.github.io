@@ -1,2 +1,53 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Other on Blog | Qtopie</title><link>https://qtopie.github.io/categories/other/</link><description>Recent content in Other on Blog | Qtopie</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Wed, 02 Nov 2016 15:52:30 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/categories/other/index.xml" rel="self" type="application/rss+xml"/><item><title>Dockerfile</title><link>https://qtopie.github.io/notes/cloud-native/cicd/dockerfile/</link><pubDate>Wed, 02 Nov 2016 15:52:30 +0800</pubDate><guid>https://qtopie.github.io/notes/cloud-native/cicd/dockerfile/</guid><description>&lt;h2 id="introduction">Introduction&lt;/h2>
-&lt;p>Docker, an opensource container management tool based on LXC(Linux container).&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Other on Blog | qtopie</title><link>https://qtopie.github.io/categories/other/</link><description>Recent content in Other on Blog | qtopie</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Wed, 02 Nov 2016 15:52:30 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/categories/other/index.xml" rel="self" type="application/rss+xml"/><item><title>Dockerfile</title><link>https://qtopie.github.io/notes/cloud-native/cicd/dockerfile/</link><pubDate>Wed, 02 Nov 2016 15:52:30 +0800</pubDate><guid>https://qtopie.github.io/notes/cloud-native/cicd/dockerfile/</guid><description>&lt;h2 id="introduction"&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Docker, an opensource container management tool based on LXC(Linux container).&lt;/p&gt;
+&lt;!-- ## Write Dockerfile
+
+### A simple example with NGINX
+```dockerfile
+# Nginx
+#
+# VERSION 0.0.1
+
+FROM ubuntu
+MAINTAINER Victor Vieux &lt;victor@docker.com&gt;
+
+LABEL Description="This image is used to start the foobar executable" Vendor="ACME Products" Version="1.0"
+RUN apt-get update &amp;&amp; apt-get install -y inotify-tools nginx apache2 openssh-server
+```
+you can build by run: `docker build .`
+
+## Tips
+- Sometimes when you are using ubuntu as the base image, running `apt-get` may
+	takes lots of time, usually it's because the official mirror is slow to
+	reach.
+	You can change to a source by following command:
+
+``` Dockerfile
+RUN sed -i 's/http:\/\/archive&gt;ubuntu&gt;com\/ubuntu\//http:\/\/mirrors&gt;163&gt;com\/ubuntu\//g' /etc/apt/sources.list
+```
+
+## Simple Tutorial for starting with docker
+- Pull an image from docker repo:
+
+``` bash
+docker pull ubuntu 		# pull `ubuntu` image from official repo: dockerhub
+```
+
+- Instantiate to a docker container
+
+``` bash
+docker run ubuntu
+
+# or specify a container name 
+docker run --name my-container ubuntu
+```
+
+- Attach it to enter the container
+
+``` bash
+docker exec -it my-container /bin/bash
+```
+
+
+## Reference 
+https://docs.docker.com/engine/reference/builder/ --&gt;</description></item></channel></rss>

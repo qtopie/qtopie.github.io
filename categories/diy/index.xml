@@ -1,312 +1,326 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Diy on Blog | Qtopie</title><link>https://qtopie.github.io/categories/diy/</link><description>Recent content in Diy on Blog | Qtopie</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Mon, 03 Aug 2020 23:33:04 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/categories/diy/index.xml" rel="self" type="application/rss+xml"/><item><title>自动控制风扇温度</title><link>https://qtopie.github.io/notes/iot/rpi/fan-and-tempature/</link><pubDate>Mon, 03 Aug 2020 23:33:04 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/fan-and-tempature/</guid><description>&lt;p>最近购买了一个树莓派4B 4G内存版，替换了旧的Model3 (强迫症犯了，就为了换成type c口，但因为电源适配问题还是老老实实地又买了官方电源适配器）&lt;/p>
-&lt;p>树莓派4B相对3B性能提高不少，但是随之功耗和发热也上去了。 于是给它整了个金属外壳&lt;/p>
-&lt;p>&lt;div class="fixed-height-container">
- &lt;amp-img class="contain" alt="" src="https://qtopie.github.io/notes/iot/rpi/fan-and-tempature.assets/img-20211029155258.webp" 
- layout="fill" 
- lightbox>
- &lt;/amp-img>
-&lt;/div>&lt;/p>
-&lt;p>但是依旧烫得厉害，可能是我手动overlock了。开风扇的话，又有点吵，晚上影响睡觉。&lt;/p>
-&lt;p>所以又买了一些排线和一个电磁继电器来实现自动通过风扇控制CPU等芯片温度。&lt;/p>
-&lt;h2 id="主要原理">主要原理&lt;/h2>
-&lt;ul>
-&lt;li>获取GPU温度&lt;/li>
-&lt;/ul>
-&lt;p>&lt;a href="https://www.nicm.dev/vcgencmd/">vcgencmd&lt;/a>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>vcgencmd measure_temp
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>获取CPU温度&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#033">cpu&lt;/span>&lt;span style="color:#555">=&lt;/span>&lt;span style="color:#069;font-weight:bold">$(&lt;/span>&amp;lt;/sys/class/thermal/thermal_zone0/temp&lt;span style="color:#069;font-weight:bold">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#366">echo&lt;/span> &lt;span style="color:#c30">&amp;#34;&lt;/span>&lt;span style="color:#069;font-weight:bold">$((&lt;/span>cpu/1000&lt;span style="color:#069;font-weight:bold">))&lt;/span>&lt;span style="color:#c30"> c&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="代码实现">代码实现&lt;/h2>
-&lt;p>网上已经有不少python版本的实现，但作为一个go粉，当然选择用go来实现了，正好练习一下gobot包的使用&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">package&lt;/span> main
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">import&lt;/span> (
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;time&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;gobot.io/x/gobot&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;gobot.io/x/gobot/drivers/gpio&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;gobot.io/x/gobot/platforms/raspi&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;io/ioutil&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;log&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;strconv&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;strings&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">func&lt;/span> &lt;span style="color:#c0f">main&lt;/span>() {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	low, high &lt;span style="color:#555">:=&lt;/span> &lt;span style="color:#f60">50&lt;/span>, &lt;span style="color:#f60">58&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	r &lt;span style="color:#555">:=&lt;/span> raspi.&lt;span style="color:#c0f">NewAdaptor&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	sw &lt;span style="color:#555">:=&lt;/span> gpio.&lt;span style="color:#c0f">NewDirectPinDriver&lt;/span>(r, &lt;span style="color:#c30">&amp;#34;18&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	work &lt;span style="color:#555">:=&lt;/span> &lt;span style="color:#069;font-weight:bold">func&lt;/span>() {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		gobot.&lt;span style="color:#c0f">Every&lt;/span>(&lt;span style="color:#f60">5&lt;/span>&lt;span style="color:#555">*&lt;/span>time.Second, &lt;span style="color:#069;font-weight:bold">func&lt;/span>() {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			t &lt;span style="color:#555">:=&lt;/span> &lt;span style="color:#c0f">readCpuTemp&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			log.&lt;span style="color:#c0f">Println&lt;/span>(&lt;span style="color:#c30">&amp;#34;Temp&amp;#34;&lt;/span>, t&lt;span style="color:#555">/&lt;/span>&lt;span style="color:#f60">1000&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			&lt;span style="color:#069;font-weight:bold">if&lt;/span> t &amp;lt; low&lt;span style="color:#555">*&lt;/span>&lt;span style="color:#f60">1000&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>				sw.&lt;span style="color:#c0f">Off&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			&lt;span style="color:#069;font-weight:bold">if&lt;/span> t &amp;gt; high&lt;span style="color:#555">*&lt;/span>&lt;span style="color:#f60">1000&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#09f;font-style:italic">// turn on only ater 7 oclock&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>				&lt;span style="color:#069;font-weight:bold">if&lt;/span> h, _, _ &lt;span style="color:#555">:=&lt;/span> time.&lt;span style="color:#c0f">Now&lt;/span>().&lt;span style="color:#c0f">Clock&lt;/span>(); h &amp;gt; &lt;span style="color:#f60">7&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>					sw.&lt;span style="color:#c0f">On&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>				}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		})
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	robot &lt;span style="color:#555">:=&lt;/span> gobot.&lt;span style="color:#c0f">NewRobot&lt;/span>(&lt;span style="color:#c30">&amp;#34;blinkBot&amp;#34;&lt;/span>,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		[]gobot.Connection{r},
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		[]gobot.Device{sw},
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		work,
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	robot.&lt;span style="color:#c0f">Start&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">func&lt;/span> &lt;span style="color:#c0f">readCpuTemp&lt;/span>() &lt;span style="color:#078;font-weight:bold">int&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">var&lt;/span> na = &lt;span style="color:#555">-&lt;/span>&lt;span style="color:#f60">274150&lt;/span> &lt;span style="color:#09f;font-style:italic">// set not valid value to -274.15C&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	dat, err &lt;span style="color:#555">:=&lt;/span> ioutil.&lt;span style="color:#c0f">ReadFile&lt;/span>(&lt;span style="color:#c30">&amp;#34;/sys/class/thermal/thermal_zone0/temp&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		log.&lt;span style="color:#c0f">Println&lt;/span>(err)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> na
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	s &lt;span style="color:#555">:=&lt;/span> strings.&lt;span style="color:#c0f">TrimSuffix&lt;/span>(&lt;span style="color:#366">string&lt;/span>(dat), &lt;span style="color:#c30">&amp;#34;\n&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	t, err &lt;span style="color:#555">:=&lt;/span> strconv.&lt;span style="color:#c0f">Atoi&lt;/span>(s)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		log.&lt;span style="color:#c0f">Println&lt;/span>(err)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> na
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">return&lt;/span> t
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>实现的效果是，当温度高于58度时，启动风扇；温度低于50度时关闭风扇。(风扇一直不停转，大概也只能到45度左右，可能深圳有点热）&lt;/p></description></item><item><title>使用API管理cloudcone主机</title><link>https://qtopie.github.io/posts/diy/cloudcone-save-costs/</link><pubDate>Sat, 18 Jul 2020 22:02:05 +0800</pubDate><guid>https://qtopie.github.io/posts/diy/cloudcone-save-costs/</guid><description>&lt;p>&lt;a href="https://app.cloudcone.com/?ref=4442">Cloudcone&lt;/a>是2017年成立于美国的一家主机供应商。继vultr变得“不靠谱”和低价vm资源经常“售尽”的情况下，我转而使用cloudcone提供的vps服务用于日常学习和开发。&lt;/p>
-&lt;p>除了支持按小时计费、提供更换IP服务及支持支付宝/paypal等灵活的支付方式外，我最看重的是，它的价格能做到真正的弹性，即在vm关机状态不计费CPU/内存等费用,比online费用大概减半。&lt;/p>
-&lt;p>类似于其他云供应商平台，cloudcone还提供了&lt;a href="https://api.cloudcone.com/">开放的API来管理云主机&lt;/a>。&lt;/p>
-&lt;p>这里为了方便使用和合理控制资源，自己便用go写了一个小程序&lt;/p>
-&lt;h2 id="代码实现">代码实现&lt;/h2>
-&lt;p>主要逻辑如下，通过cloudcone 提供的API。每天晚上23左右关机，次日早晨7点左右启动
-如果调用失败的话，会再次重试一次。(如果依然不行的话，就当运气不好了:&amp;lt;）&lt;/p>
-&lt;p>以下是草稿版本代码&lt;/p>
-&lt;ul>
-&lt;li>secret.go&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">package&lt;/span> main
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">var&lt;/span> (
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#09f;font-style:italic">// 配置相关信息,这里我填写的是假的啦&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	serverID = &lt;span style="color:#f60">123456&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	appSecret = &lt;span style="color:#c30">&amp;#34;Q2aQr9323QE233r2&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	hashCode = &lt;span style="color:#c30">&amp;#34;zXqV22222222222222222222222222222222225bL&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>serverID&lt;/code>可以在compute菜单控制面板下查看，或查看浏览器url里的参数。&lt;/p>
-&lt;p>&lt;code>appSecret&lt;/code>和&lt;code>hashCode&lt;/code>访问https://app.cloudcone.com/user/api创建即可。&lt;/p>
-&lt;ul>
-&lt;li>main.go&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-go" data-lang="go">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">/*
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">* cloudcone api https://api.cloudcone.com/
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"> */&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">package&lt;/span> main
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">import&lt;/span> (
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;context&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;encoding/json&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;errors&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;fmt&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;io/ioutil&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;log&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;net/http&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;os&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;sync&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;time&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#c30">&amp;#34;github.com/robfig/cron&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">// CloudconeResponse represents the API Response&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">type&lt;/span> CloudconeResponse &lt;span style="color:#069;font-weight:bold">struct&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	Status &lt;span style="color:#078;font-weight:bold">int&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	Message &lt;span style="color:#078;font-weight:bold">string&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	Data &lt;span style="color:#069;font-weight:bold">interface&lt;/span>{} &lt;span style="color:#c30">`json:&amp;#34;_data&amp;#34;`&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">const&lt;/span> (
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	baseAPIURL = &lt;span style="color:#c30">&amp;#34;https://api.cloudcone.com/api/v1&amp;#34;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">var&lt;/span> (
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	client = &lt;span style="color:#555">&amp;amp;&lt;/span>http.Client{}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">func&lt;/span> &lt;span style="color:#c0f">main&lt;/span>() {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	f, err &lt;span style="color:#555">:=&lt;/span> os.&lt;span style="color:#c0f">OpenFile&lt;/span>(&lt;span style="color:#c30">&amp;#34;app.log&amp;#34;&lt;/span>, os.O_RDWR|os.O_CREATE|os.O_APPEND|os.O_TRUNC, &lt;span style="color:#f60">0644&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		log.&lt;span style="color:#c0f">Fatalf&lt;/span>(&lt;span style="color:#c30">&amp;#34;Error while opening file: %v\n&amp;#34;&lt;/span>, err)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">defer&lt;/span> f.&lt;span style="color:#c0f">Close&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	log.&lt;span style="color:#c0f">SetOutput&lt;/span>(f)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	wg &lt;span style="color:#555">:=&lt;/span> sync.WaitGroup{}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	_, cancel &lt;span style="color:#555">:=&lt;/span> context.&lt;span style="color:#c0f">WithCancel&lt;/span>(context.&lt;span style="color:#c0f">Background&lt;/span>())
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	c &lt;span style="color:#555">:=&lt;/span> cron.&lt;span style="color:#c0f">New&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#09f;font-style:italic">// boot at 07:00&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	c.&lt;span style="color:#c0f">AddFunc&lt;/span>(&lt;span style="color:#c30">&amp;#34;0 0 7 * * *&amp;#34;&lt;/span>, &lt;span style="color:#069;font-weight:bold">func&lt;/span>() {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		log.&lt;span style="color:#c0f">Println&lt;/span>(&lt;span style="color:#c30">&amp;#34;booting at time&amp;#34;&lt;/span>, time.&lt;span style="color:#c0f">Now&lt;/span>())
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">:=&lt;/span> &lt;span style="color:#c0f">boot&lt;/span>(); err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			log.&lt;span style="color:#c0f">Println&lt;/span>(err)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			time.&lt;span style="color:#c0f">Sleep&lt;/span>(&lt;span style="color:#f60">15&lt;/span> &lt;span style="color:#555">*&lt;/span> time.Second)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			&lt;span style="color:#09f;font-style:italic">// try again&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			&lt;span style="color:#c0f">boot&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	})
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#09f;font-style:italic">// shutdown at 23:45&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	c.&lt;span style="color:#c0f">AddFunc&lt;/span>(&lt;span style="color:#c30">&amp;#34;0 45 23 * * *&amp;#34;&lt;/span>, &lt;span style="color:#069;font-weight:bold">func&lt;/span>() {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		log.&lt;span style="color:#c0f">Println&lt;/span>(&lt;span style="color:#c30">&amp;#34;Shutdown at time&amp;#34;&lt;/span>, time.&lt;span style="color:#c0f">Now&lt;/span>())
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">:=&lt;/span> &lt;span style="color:#c0f">shutdown&lt;/span>(); err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			log.&lt;span style="color:#c0f">Println&lt;/span>(err)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			time.&lt;span style="color:#c0f">Sleep&lt;/span>(&lt;span style="color:#f60">15&lt;/span> &lt;span style="color:#555">*&lt;/span> time.Second)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			&lt;span style="color:#09f;font-style:italic">// try again&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>			&lt;span style="color:#c0f">shutdown&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	})
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	c.&lt;span style="color:#c0f">Start&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	wg.&lt;span style="color:#c0f">Add&lt;/span>(&lt;span style="color:#f60">1&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">go&lt;/span> &lt;span style="color:#069;font-weight:bold">func&lt;/span>() {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">defer&lt;/span> wg.&lt;span style="color:#c0f">Done&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		os.Stdin.&lt;span style="color:#c0f">Read&lt;/span>(&lt;span style="color:#366">make&lt;/span>([]&lt;span style="color:#078;font-weight:bold">byte&lt;/span>, &lt;span style="color:#f60">1&lt;/span>)) &lt;span style="color:#09f;font-style:italic">// wait for Enter keystroke&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		c.&lt;span style="color:#c0f">Stop&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#c0f">cancel&lt;/span>() &lt;span style="color:#09f;font-style:italic">// cancel the associated context&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	log.&lt;span style="color:#c0f">Println&lt;/span>(&lt;span style="color:#c30">&amp;#34;Running...&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	wg.&lt;span style="color:#c0f">Wait&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">func&lt;/span> &lt;span style="color:#c0f">boot&lt;/span>() &lt;span style="color:#078;font-weight:bold">error&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#09f;font-style:italic">// compute/:id/boot&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	endpoint &lt;span style="color:#555">:=&lt;/span> fmt.&lt;span style="color:#c0f">Sprintf&lt;/span>(&lt;span style="color:#c30">&amp;#34;%s/compute/%d/%s&amp;#34;&lt;/span>, baseAPIURL, serverID, &lt;span style="color:#c30">&amp;#34;boot&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	req, err &lt;span style="color:#555">:=&lt;/span> http.&lt;span style="color:#c0f">NewRequest&lt;/span>(&lt;span style="color:#c30">&amp;#34;GET&amp;#34;&lt;/span>, endpoint, &lt;span style="color:#069;font-weight:bold">nil&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> err
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	req.Header.&lt;span style="color:#c0f">Set&lt;/span>(&lt;span style="color:#c30">&amp;#34;App-Secret&amp;#34;&lt;/span>, appSecret)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	req.Header.&lt;span style="color:#c0f">Set&lt;/span>(&lt;span style="color:#c30">&amp;#34;Hash&amp;#34;&lt;/span>, hashCode)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	resp, err &lt;span style="color:#555">:=&lt;/span> client.&lt;span style="color:#c0f">Do&lt;/span>(req)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> err
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">defer&lt;/span> resp.Body.&lt;span style="color:#c0f">Close&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	body, err &lt;span style="color:#555">:=&lt;/span> ioutil.&lt;span style="color:#c0f">ReadAll&lt;/span>(resp.Body)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> err
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	fmt.&lt;span style="color:#c0f">Println&lt;/span>(&lt;span style="color:#366">string&lt;/span>(body))
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">var&lt;/span> dat CloudconeResponse
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">:=&lt;/span> json.&lt;span style="color:#c0f">Unmarshal&lt;/span>(body, &lt;span style="color:#555">&amp;amp;&lt;/span>dat); err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> err
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> dat.Status &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#f60">1&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> errors.&lt;span style="color:#c0f">New&lt;/span>(dat.Message)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	log.&lt;span style="color:#c0f">Println&lt;/span>(dat.Message)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">return&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#069;font-weight:bold">func&lt;/span> &lt;span style="color:#c0f">shutdown&lt;/span>() &lt;span style="color:#078;font-weight:bold">error&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#09f;font-style:italic">// compute/:id/shutdown&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	endpoint &lt;span style="color:#555">:=&lt;/span> fmt.&lt;span style="color:#c0f">Sprintf&lt;/span>(&lt;span style="color:#c30">&amp;#34;%s/compute/%d/%s&amp;#34;&lt;/span>, baseAPIURL, serverID, &lt;span style="color:#c30">&amp;#34;shutdown&amp;#34;&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	req, err &lt;span style="color:#555">:=&lt;/span> http.&lt;span style="color:#c0f">NewRequest&lt;/span>(&lt;span style="color:#c30">&amp;#34;GET&amp;#34;&lt;/span>, endpoint, &lt;span style="color:#069;font-weight:bold">nil&lt;/span>)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> err
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	req.Header.&lt;span style="color:#c0f">Set&lt;/span>(&lt;span style="color:#c30">&amp;#34;App-Secret&amp;#34;&lt;/span>, appSecret)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	req.Header.&lt;span style="color:#c0f">Set&lt;/span>(&lt;span style="color:#c30">&amp;#34;Hash&amp;#34;&lt;/span>, hashCode)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	resp, err &lt;span style="color:#555">:=&lt;/span> client.&lt;span style="color:#c0f">Do&lt;/span>(req)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> err
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">defer&lt;/span> resp.Body.&lt;span style="color:#c0f">Close&lt;/span>()
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	body, err &lt;span style="color:#555">:=&lt;/span> ioutil.&lt;span style="color:#c0f">ReadAll&lt;/span>(resp.Body)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> err
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">var&lt;/span> dat CloudconeResponse
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> err &lt;span style="color:#555">:=&lt;/span> json.&lt;span style="color:#c0f">Unmarshal&lt;/span>(body, &lt;span style="color:#555">&amp;amp;&lt;/span>dat); err &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> err
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">if&lt;/span> dat.Status &lt;span style="color:#555">!=&lt;/span> &lt;span style="color:#f60">1&lt;/span> {
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>		&lt;span style="color:#069;font-weight:bold">return&lt;/span> errors.&lt;span style="color:#c0f">New&lt;/span>(dat.Message)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	}
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	log.&lt;span style="color:#c0f">Println&lt;/span>(dat.Message)
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>	&lt;span style="color:#069;font-weight:bold">return&lt;/span> &lt;span style="color:#069;font-weight:bold">nil&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="参考">参考&lt;/h2>
-&lt;ul>
-&lt;li>&lt;a href="https://www.vpsjxw.com/provider_intro/cloudcone_intro/">cloudcone中文介绍&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>树莓派4G模块</title><link>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</link><pubDate>Wed, 05 Dec 2018 22:36:06 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</guid><description>&lt;h2 id="准备环境">准备环境&lt;/h2>
-&lt;ul>
-&lt;li>树莓派3B&lt;/li>
-&lt;li>华为4G模块：HUAWEI ME909s-821&lt;/li>
-&lt;li>PCIE转USB开发板&lt;/li>
-&lt;li>5cm天线转接线，SMA公头外螺内孔&lt;/li>
-&lt;li>吸盘天线全向高增益天线，SMA公头外螺内孔&lt;/li>
-&lt;li>中国移动4G SIM卡&lt;/li>
-&lt;/ul>
-&lt;h2 id="4g模块技术规格及文档">4G模块技术规格及文档&lt;/h2>
-&lt;ul>
-&lt;li>技术规格 &lt;a href="http://consumer.huawei.com/solutions/m2m-solutions/en/products/tech-specs/me909s_821_en.htm">连接&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;p>基于海思芯片, 同类比较 SIM7600CE (Qualcomm MDM9206)&lt;/p>
-&lt;ul>
-&lt;li>文档 &lt;a href="http://download-c1.huawei.com/download/downloadCenter?downloadId=60305&amp;amp;version=200311&amp;amp;siteCode=worldwide&amp;amp;view=true">连接&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;p>主天线M口&lt;/p>
-&lt;h2 id="开始使用">开始使用&lt;/h2>
-&lt;p>&lt;em>Windows上使用该4G模块需要手动安装驱动，驱动&lt;a href="https://techship.com/downloads/category/software-software-huawei-me909s-821-lga/">连接&lt;/a>&lt;/em>&lt;/p>
-&lt;p>&lt;em>Ubuntu下可以使用&lt;code>modemmanager&lt;/code>管理4G模块&lt;/em>&lt;/p>
-&lt;p>树莓派下使用教程如下。&lt;/p>
-&lt;ul>
-&lt;li>查看usb设备是否被识别&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>lsusb
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># output:&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Bus &lt;span style="color:#f60">001&lt;/span> Device 004: ID 12d1:15c1 Huawei Technologies Co., Ltd. 
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Bus &lt;span style="color:#f60">001&lt;/span> Device 003: ID 0424:ec00 Standard Microsystems Corp. SMSC9512/9514 Fast Ethernet Adapter
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Bus &lt;span style="color:#f60">001&lt;/span> Device 002: ID 0424:9514 Standard Microsystems Corp. SMC9514 Hub
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Bus &lt;span style="color:#f60">001&lt;/span> Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>安装拨号软件&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo apt-get update
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo apt-get install ppp usb-modeswitch wvdial
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>初始化wvdial配置&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>sudo wvdialconf /etc/wvdial.conf
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>修改&lt;code>wvdial&lt;/code>配置&lt;/li>
-&lt;/ul>
-&lt;pre tabindex="0">&lt;code>[Dialer Defaults]
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Diy on Blog | qtopie</title><link>https://qtopie.github.io/categories/diy/</link><description>Recent content in Diy on Blog | qtopie</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Mon, 03 Aug 2020 23:33:04 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/categories/diy/index.xml" rel="self" type="application/rss+xml"/><item><title>自动控制风扇温度</title><link>https://qtopie.github.io/notes/iot/rpi/fan-and-tempature/</link><pubDate>Mon, 03 Aug 2020 23:33:04 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/fan-and-tempature/</guid><description>&lt;p&gt;最近购买了一个树莓派4B 4G内存版，替换了旧的Model3 (强迫症犯了，就为了换成type c口，但因为电源适配问题还是老老实实地又买了官方电源适配器）&lt;/p&gt;
+&lt;p&gt;树莓派4B相对3B性能提高不少，但是随之功耗和发热也上去了。 于是给它整了个金属外壳&lt;/p&gt;
+&lt;p&gt;&lt;img src="fan-and-tempature.assets/img-20211029155258.webp" alt=""&gt;&lt;/p&gt;
+&lt;p&gt;但是依旧烫得厉害，可能是我手动overlock了。开风扇的话，又有点吵，晚上影响睡觉。&lt;/p&gt;
+&lt;p&gt;所以又买了一些排线和一个电磁继电器来实现自动通过风扇控制CPU等芯片温度。&lt;/p&gt;
+&lt;h2 id="主要原理"&gt;主要原理&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;获取GPU温度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href="https://www.nicm.dev/vcgencmd/"&gt;vcgencmd&lt;/a&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;vcgencmd measure_temp
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;获取CPU温度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#033"&gt;cpu&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;$(&lt;/span&gt;&amp;lt;/sys/class/thermal/thermal_zone0/temp&lt;span style="color:#069;font-weight:bold"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#366"&gt;echo&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;$((&lt;/span&gt;cpu/1000&lt;span style="color:#069;font-weight:bold"&gt;))&lt;/span&gt;&lt;span style="color:#c30"&gt; c&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="代码实现"&gt;代码实现&lt;/h2&gt;
+&lt;p&gt;网上已经有不少python版本的实现，但作为一个go粉，当然选择用go来实现了，正好练习一下gobot包的使用&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;package&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;main&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;import&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;(&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;time&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;gobot.io/x/gobot&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;gobot.io/x/gobot/drivers/gpio&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;gobot.io/x/gobot/platforms/raspi&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;io/ioutil&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;log&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;strconv&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;strings&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;&lt;/span&gt;)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;func&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#c0f"&gt;main&lt;/span&gt;()&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;low,&lt;span style="color:#bbb"&gt; &lt;/span&gt;high&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#f60"&gt;50&lt;/span&gt;,&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#f60"&gt;58&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;r&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;raspi.&lt;span style="color:#c0f"&gt;NewAdaptor&lt;/span&gt;()&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;sw&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;gpio.&lt;span style="color:#c0f"&gt;NewDirectPinDriver&lt;/span&gt;(r,&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;18&amp;#34;&lt;/span&gt;)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;work&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;func&lt;/span&gt;()&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;gobot.&lt;span style="color:#c0f"&gt;Every&lt;/span&gt;(&lt;span style="color:#f60"&gt;5&lt;/span&gt;&lt;span style="color:#555"&gt;*&lt;/span&gt;time.Second,&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;func&lt;/span&gt;()&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;			&lt;/span&gt;t&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#c0f"&gt;readCpuTemp&lt;/span&gt;()&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;			&lt;/span&gt;log.&lt;span style="color:#c0f"&gt;Println&lt;/span&gt;(&lt;span style="color:#c30"&gt;&amp;#34;Temp&amp;#34;&lt;/span&gt;,&lt;span style="color:#bbb"&gt; &lt;/span&gt;t&lt;span style="color:#555"&gt;/&lt;/span&gt;&lt;span style="color:#f60"&gt;1000&lt;/span&gt;)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;			&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;if&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;t&lt;span style="color:#bbb"&gt; &lt;/span&gt;&amp;lt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;low&lt;span style="color:#555"&gt;*&lt;/span&gt;&lt;span style="color:#f60"&gt;1000&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;				&lt;/span&gt;sw.&lt;span style="color:#c0f"&gt;Off&lt;/span&gt;()&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;			&lt;/span&gt;}&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;			&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;if&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;t&lt;span style="color:#bbb"&gt; &lt;/span&gt;&amp;gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;high&lt;span style="color:#555"&gt;*&lt;/span&gt;&lt;span style="color:#f60"&gt;1000&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#09f;font-style:italic"&gt;// turn on only ater 7 oclock&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;				&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;if&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;h,&lt;span style="color:#bbb"&gt; &lt;/span&gt;_,&lt;span style="color:#bbb"&gt; &lt;/span&gt;_&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;time.&lt;span style="color:#c0f"&gt;Now&lt;/span&gt;().&lt;span style="color:#c0f"&gt;Clock&lt;/span&gt;();&lt;span style="color:#bbb"&gt; &lt;/span&gt;h&lt;span style="color:#bbb"&gt; &lt;/span&gt;&amp;gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#f60"&gt;7&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;					&lt;/span&gt;sw.&lt;span style="color:#c0f"&gt;On&lt;/span&gt;()&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;				&lt;/span&gt;}&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;			&lt;/span&gt;}&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;})&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;}&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;robot&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;gobot.&lt;span style="color:#c0f"&gt;NewRobot&lt;/span&gt;(&lt;span style="color:#c30"&gt;&amp;#34;blinkBot&amp;#34;&lt;/span&gt;,&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;[]gobot.Connection{r},&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;[]gobot.Device{sw},&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;work,&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;robot.&lt;span style="color:#c0f"&gt;Start&lt;/span&gt;()&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;&lt;/span&gt;}&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;func&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#c0f"&gt;readCpuTemp&lt;/span&gt;()&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#078;font-weight:bold"&gt;int&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;var&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;na&lt;span style="color:#bbb"&gt; &lt;/span&gt;=&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;-&lt;/span&gt;&lt;span style="color:#f60"&gt;274150&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#09f;font-style:italic"&gt;// set not valid value to -274.15C&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;dat,&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;ioutil.&lt;span style="color:#c0f"&gt;ReadFile&lt;/span&gt;(&lt;span style="color:#c30"&gt;&amp;#34;/sys/class/thermal/thermal_zone0/temp&amp;#34;&lt;/span&gt;)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;if&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;!=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;nil&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;log.&lt;span style="color:#c0f"&gt;Println&lt;/span&gt;(err)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;return&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;na&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;}&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;s&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;strings.&lt;span style="color:#c0f"&gt;TrimSuffix&lt;/span&gt;(&lt;span style="color:#366"&gt;string&lt;/span&gt;(dat),&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;\n&amp;#34;&lt;/span&gt;)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;t,&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;strconv.&lt;span style="color:#c0f"&gt;Atoi&lt;/span&gt;(s)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;if&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;!=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;nil&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;log.&lt;span style="color:#c0f"&gt;Println&lt;/span&gt;(err)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;return&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;na&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;}&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;return&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;t&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;&lt;/span&gt;}&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;实现的效果是，当温度高于58度时，启动风扇；温度低于50度时关闭风扇。(风扇一直不停转，大概也只能到45度左右，可能深圳有点热）&lt;/p&gt;</description></item><item><title>使用API管理cloudcone主机</title><link>https://qtopie.github.io/posts/diy/cloudcone-save-costs/</link><pubDate>Sat, 18 Jul 2020 22:02:05 +0800</pubDate><guid>https://qtopie.github.io/posts/diy/cloudcone-save-costs/</guid><description>&lt;p&gt;&lt;a href="https://app.cloudcone.com/?ref=4442"&gt;Cloudcone&lt;/a&gt;是2017年成立于美国的一家主机供应商。继vultr变得“不靠谱”和低价vm资源经常“售尽”的情况下，我转而使用cloudcone提供的vps服务用于日常学习和开发。&lt;/p&gt;
+&lt;p&gt;除了支持按小时计费、提供更换IP服务及支持支付宝/paypal等灵活的支付方式外，我最看重的是，它的价格能做到真正的弹性，即在vm关机状态不计费CPU/内存等费用,比online费用大概减半。&lt;/p&gt;
+&lt;p&gt;类似于其他云供应商平台，cloudcone还提供了&lt;a href="https://api.cloudcone.com/"&gt;开放的API来管理云主机&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;这里为了方便使用和合理控制资源，自己便用go写了一个小程序&lt;/p&gt;
+&lt;h2 id="代码实现"&gt;代码实现&lt;/h2&gt;
+&lt;p&gt;主要逻辑如下，通过cloudcone 提供的API。每天晚上23左右关机，次日早晨7点左右启动
+如果调用失败的话，会再次重试一次。(如果依然不行的话，就当运气不好了:&amp;lt;）&lt;/p&gt;
+&lt;p&gt;以下是草稿版本代码&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;secret.go&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;package&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;main&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;var&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;(&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#09f;font-style:italic"&gt;// 配置相关信息,这里我填写的是假的啦&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;serverID&lt;span style="color:#bbb"&gt; &lt;/span&gt;=&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#f60"&gt;123456&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;appSecret&lt;span style="color:#bbb"&gt; &lt;/span&gt;=&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;Q2aQr9323QE233r2&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;hashCode&lt;span style="color:#bbb"&gt; &lt;/span&gt;=&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;zXqV22222222222222222222222222222222225bL&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;&lt;/span&gt;)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;code&gt;serverID&lt;/code&gt;可以在compute菜单控制面板下查看，或查看浏览器url里的参数。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;appSecret&lt;/code&gt;和&lt;code&gt;hashCode&lt;/code&gt;访问https://app.cloudcone.com/user/api创建即可。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;main.go&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;/*
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;* cloudcone api https://api.cloudcone.com/
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt; */&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;package&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;main&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;import&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;(&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;context&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;encoding/json&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;errors&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;fmt&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;io/ioutil&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;log&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;net/http&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;os&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;sync&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;time&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;github.com/robfig/cron&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;&lt;/span&gt;)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;&lt;/span&gt;&lt;span style="color:#09f;font-style:italic"&gt;// CloudconeResponse represents the API Response&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;type&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;CloudconeResponse&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;struct&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;Status&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#078;font-weight:bold"&gt;int&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;Message&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#078;font-weight:bold"&gt;string&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;Data&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;interface&lt;/span&gt;{}&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#c30"&gt;`json:&amp;#34;_data&amp;#34;`&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;&lt;/span&gt;}&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;const&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;(&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;baseAPIURL&lt;span style="color:#bbb"&gt; &lt;/span&gt;=&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;https://api.cloudcone.com/api/v1&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;&lt;/span&gt;)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;var&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;(&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;client&lt;span style="color:#bbb"&gt; &lt;/span&gt;=&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;&amp;amp;&lt;/span&gt;http.Client{}&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;&lt;/span&gt;)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;func&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#c0f"&gt;main&lt;/span&gt;()&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;f,&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;os.&lt;span style="color:#c0f"&gt;OpenFile&lt;/span&gt;(&lt;span style="color:#c30"&gt;&amp;#34;app.log&amp;#34;&lt;/span&gt;,&lt;span style="color:#bbb"&gt; &lt;/span&gt;os.O_RDWR|os.O_CREATE|os.O_APPEND|os.O_TRUNC,&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#f60"&gt;0644&lt;/span&gt;)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;if&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;!=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;nil&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;log.&lt;span style="color:#c0f"&gt;Fatalf&lt;/span&gt;(&lt;span style="color:#c30"&gt;&amp;#34;Error while opening file: %v\n&amp;#34;&lt;/span&gt;,&lt;span style="color:#bbb"&gt; &lt;/span&gt;err)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;}&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;defer&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;f.&lt;span style="color:#c0f"&gt;Close&lt;/span&gt;()&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;log.&lt;span style="color:#c0f"&gt;SetOutput&lt;/span&gt;(f)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;wg&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;sync.WaitGroup{}&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;_,&lt;span style="color:#bbb"&gt; &lt;/span&gt;cancel&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;context.&lt;span style="color:#c0f"&gt;WithCancel&lt;/span&gt;(context.&lt;span style="color:#c0f"&gt;Background&lt;/span&gt;())&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;c&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;cron.&lt;span style="color:#c0f"&gt;New&lt;/span&gt;()&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#09f;font-style:italic"&gt;// boot at 07:00&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;c.&lt;span style="color:#c0f"&gt;AddFunc&lt;/span&gt;(&lt;span style="color:#c30"&gt;&amp;#34;0 0 7 * * *&amp;#34;&lt;/span&gt;,&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;func&lt;/span&gt;()&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;log.&lt;span style="color:#c0f"&gt;Println&lt;/span&gt;(&lt;span style="color:#c30"&gt;&amp;#34;booting at time&amp;#34;&lt;/span&gt;,&lt;span style="color:#bbb"&gt; &lt;/span&gt;time.&lt;span style="color:#c0f"&gt;Now&lt;/span&gt;())&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;if&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#c0f"&gt;boot&lt;/span&gt;();&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;!=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;nil&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;			&lt;/span&gt;log.&lt;span style="color:#c0f"&gt;Println&lt;/span&gt;(err)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;			&lt;/span&gt;time.&lt;span style="color:#c0f"&gt;Sleep&lt;/span&gt;(&lt;span style="color:#f60"&gt;15&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;*&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;time.Second)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;			&lt;/span&gt;&lt;span style="color:#09f;font-style:italic"&gt;// try again&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;			&lt;/span&gt;&lt;span style="color:#c0f"&gt;boot&lt;/span&gt;()&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;}&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;})&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#09f;font-style:italic"&gt;// shutdown at 23:45&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;c.&lt;span style="color:#c0f"&gt;AddFunc&lt;/span&gt;(&lt;span style="color:#c30"&gt;&amp;#34;0 45 23 * * *&amp;#34;&lt;/span&gt;,&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;func&lt;/span&gt;()&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;log.&lt;span style="color:#c0f"&gt;Println&lt;/span&gt;(&lt;span style="color:#c30"&gt;&amp;#34;Shutdown at time&amp;#34;&lt;/span&gt;,&lt;span style="color:#bbb"&gt; &lt;/span&gt;time.&lt;span style="color:#c0f"&gt;Now&lt;/span&gt;())&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;if&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#c0f"&gt;shutdown&lt;/span&gt;();&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;!=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;nil&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;			&lt;/span&gt;log.&lt;span style="color:#c0f"&gt;Println&lt;/span&gt;(err)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;			&lt;/span&gt;time.&lt;span style="color:#c0f"&gt;Sleep&lt;/span&gt;(&lt;span style="color:#f60"&gt;15&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;*&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;time.Second)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;			&lt;/span&gt;&lt;span style="color:#09f;font-style:italic"&gt;// try again&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;			&lt;/span&gt;&lt;span style="color:#c0f"&gt;shutdown&lt;/span&gt;()&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;}&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;})&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;c.&lt;span style="color:#c0f"&gt;Start&lt;/span&gt;()&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;wg.&lt;span style="color:#c0f"&gt;Add&lt;/span&gt;(&lt;span style="color:#f60"&gt;1&lt;/span&gt;)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;go&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;func&lt;/span&gt;()&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;defer&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;wg.&lt;span style="color:#c0f"&gt;Done&lt;/span&gt;()&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;os.Stdin.&lt;span style="color:#c0f"&gt;Read&lt;/span&gt;(&lt;span style="color:#366"&gt;make&lt;/span&gt;([]&lt;span style="color:#078;font-weight:bold"&gt;byte&lt;/span&gt;,&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#f60"&gt;1&lt;/span&gt;))&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#09f;font-style:italic"&gt;// wait for Enter keystroke&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;c.&lt;span style="color:#c0f"&gt;Stop&lt;/span&gt;()&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;&lt;span style="color:#c0f"&gt;cancel&lt;/span&gt;()&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#09f;font-style:italic"&gt;// cancel the associated context&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;}()&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;log.&lt;span style="color:#c0f"&gt;Println&lt;/span&gt;(&lt;span style="color:#c30"&gt;&amp;#34;Running...&amp;#34;&lt;/span&gt;)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;wg.&lt;span style="color:#c0f"&gt;Wait&lt;/span&gt;()&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;&lt;/span&gt;}&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;func&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#c0f"&gt;boot&lt;/span&gt;()&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#078;font-weight:bold"&gt;error&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#09f;font-style:italic"&gt;// compute/:id/boot&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;endpoint&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;fmt.&lt;span style="color:#c0f"&gt;Sprintf&lt;/span&gt;(&lt;span style="color:#c30"&gt;&amp;#34;%s/compute/%d/%s&amp;#34;&lt;/span&gt;,&lt;span style="color:#bbb"&gt; &lt;/span&gt;baseAPIURL,&lt;span style="color:#bbb"&gt; &lt;/span&gt;serverID,&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;boot&amp;#34;&lt;/span&gt;)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;req,&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;http.&lt;span style="color:#c0f"&gt;NewRequest&lt;/span&gt;(&lt;span style="color:#c30"&gt;&amp;#34;GET&amp;#34;&lt;/span&gt;,&lt;span style="color:#bbb"&gt; &lt;/span&gt;endpoint,&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;nil&lt;/span&gt;)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;if&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;!=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;nil&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;return&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;}&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;req.Header.&lt;span style="color:#c0f"&gt;Set&lt;/span&gt;(&lt;span style="color:#c30"&gt;&amp;#34;App-Secret&amp;#34;&lt;/span&gt;,&lt;span style="color:#bbb"&gt; &lt;/span&gt;appSecret)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;req.Header.&lt;span style="color:#c0f"&gt;Set&lt;/span&gt;(&lt;span style="color:#c30"&gt;&amp;#34;Hash&amp;#34;&lt;/span&gt;,&lt;span style="color:#bbb"&gt; &lt;/span&gt;hashCode)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;resp,&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;client.&lt;span style="color:#c0f"&gt;Do&lt;/span&gt;(req)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;if&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;!=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;nil&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;return&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;}&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;defer&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;resp.Body.&lt;span style="color:#c0f"&gt;Close&lt;/span&gt;()&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;body,&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;ioutil.&lt;span style="color:#c0f"&gt;ReadAll&lt;/span&gt;(resp.Body)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;if&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;!=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;nil&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;return&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;}&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;fmt.&lt;span style="color:#c0f"&gt;Println&lt;/span&gt;(&lt;span style="color:#366"&gt;string&lt;/span&gt;(body))&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;var&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;dat&lt;span style="color:#bbb"&gt; &lt;/span&gt;CloudconeResponse&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;if&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;json.&lt;span style="color:#c0f"&gt;Unmarshal&lt;/span&gt;(body,&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;&amp;amp;&lt;/span&gt;dat);&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;!=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;nil&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;return&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;}&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;if&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;dat.Status&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;!=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#f60"&gt;1&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;return&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;errors.&lt;span style="color:#c0f"&gt;New&lt;/span&gt;(dat.Message)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;}&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;log.&lt;span style="color:#c0f"&gt;Println&lt;/span&gt;(dat.Message)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;return&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;nil&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;&lt;/span&gt;}&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;func&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#c0f"&gt;shutdown&lt;/span&gt;()&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#078;font-weight:bold"&gt;error&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#09f;font-style:italic"&gt;// compute/:id/shutdown&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;endpoint&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;fmt.&lt;span style="color:#c0f"&gt;Sprintf&lt;/span&gt;(&lt;span style="color:#c30"&gt;&amp;#34;%s/compute/%d/%s&amp;#34;&lt;/span&gt;,&lt;span style="color:#bbb"&gt; &lt;/span&gt;baseAPIURL,&lt;span style="color:#bbb"&gt; &lt;/span&gt;serverID,&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;shutdown&amp;#34;&lt;/span&gt;)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;req,&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;http.&lt;span style="color:#c0f"&gt;NewRequest&lt;/span&gt;(&lt;span style="color:#c30"&gt;&amp;#34;GET&amp;#34;&lt;/span&gt;,&lt;span style="color:#bbb"&gt; &lt;/span&gt;endpoint,&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;nil&lt;/span&gt;)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;if&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;!=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;nil&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;return&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;}&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;req.Header.&lt;span style="color:#c0f"&gt;Set&lt;/span&gt;(&lt;span style="color:#c30"&gt;&amp;#34;App-Secret&amp;#34;&lt;/span&gt;,&lt;span style="color:#bbb"&gt; &lt;/span&gt;appSecret)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;req.Header.&lt;span style="color:#c0f"&gt;Set&lt;/span&gt;(&lt;span style="color:#c30"&gt;&amp;#34;Hash&amp;#34;&lt;/span&gt;,&lt;span style="color:#bbb"&gt; &lt;/span&gt;hashCode)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;resp,&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;client.&lt;span style="color:#c0f"&gt;Do&lt;/span&gt;(req)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;if&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;!=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;nil&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;return&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;}&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;defer&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;resp.Body.&lt;span style="color:#c0f"&gt;Close&lt;/span&gt;()&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;body,&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;ioutil.&lt;span style="color:#c0f"&gt;ReadAll&lt;/span&gt;(resp.Body)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;if&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;!=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;nil&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;return&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;}&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;var&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;dat&lt;span style="color:#bbb"&gt; &lt;/span&gt;CloudconeResponse&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;if&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;json.&lt;span style="color:#c0f"&gt;Unmarshal&lt;/span&gt;(body,&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;&amp;amp;&lt;/span&gt;dat);&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;!=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;nil&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;return&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;}&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;if&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;dat.Status&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;!=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#f60"&gt;1&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;return&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;errors.&lt;span style="color:#c0f"&gt;New&lt;/span&gt;(dat.Message)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;}&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;log.&lt;span style="color:#c0f"&gt;Println&lt;/span&gt;(dat.Message)&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;return&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;nil&lt;/span&gt;&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;&lt;/span&gt;}&lt;span style="color:#bbb"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="参考"&gt;参考&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://www.vpsjxw.com/provider_intro/cloudcone_intro/"&gt;cloudcone中文介绍&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>vocore2播放音频-使用路由器听歌？</title><link>https://qtopie.github.io/notes/iot/vocore/vocore-network-audio/</link><pubDate>Fri, 26 Jul 2019 22:24:33 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/vocore/vocore-network-audio/</guid><description>&lt;h2 id="目标"&gt;目标&lt;/h2&gt;
+&lt;p&gt;构建一个可编程控制的流媒体播放服务器，类似于智能音箱，但是没有麦克风收集个人隐私数据。&lt;/p&gt;
+&lt;p&gt;整体架构如下&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-mermaid" data-lang="mermaid"&gt;graph LR
+ subgraph 树莓派 Raspberry Pi
+ A[cmus音乐播放器] --&amp;gt; B(PulseAudio Client)
+ end
+
+ subgraph VoCore
+ C(PulseAudio Server) --&amp;gt; D[音响 / 扬声器]
+ end
+
+ B --&amp;gt; C
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="vocore固件支持"&gt;Vocore固件支持&lt;/h2&gt;
+&lt;p&gt;Currently 2022/12/3, only openwrt 21.02 is supported. (patch is not working ins 22.03)&lt;/p&gt;
+&lt;p&gt;see &lt;a href="https://github.com/Vonger/vocore2"&gt;https://github.com/Vonger/vocore2&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Because audio is enabled by &lt;em&gt;kmod+&lt;/em&gt; packages, so I need to build the firmware myself.&lt;/p&gt;
+&lt;h2 id="alsa"&gt;Alsa&lt;/h2&gt;
+&lt;p&gt;install &lt;code&gt;alsa-utils&lt;/code&gt; packages, then add configuration to init sound card&lt;/p&gt;
+&lt;p&gt;in &lt;code&gt;/etc/rc.local&lt;/code&gt; file&lt;/p&gt;</description></item><item><title>树莓派4G模块</title><link>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</link><pubDate>Wed, 05 Dec 2018 22:36:06 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</guid><description>&lt;h2 id="准备环境"&gt;准备环境&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;树莓派3B&lt;/li&gt;
+&lt;li&gt;华为4G模块：HUAWEI ME909s-821&lt;/li&gt;
+&lt;li&gt;PCIE转USB开发板&lt;/li&gt;
+&lt;li&gt;5cm天线转接线，SMA公头外螺内孔&lt;/li&gt;
+&lt;li&gt;吸盘天线全向高增益天线，SMA公头外螺内孔&lt;/li&gt;
+&lt;li&gt;中国移动4G SIM卡&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="4g模块技术规格及文档"&gt;4G模块技术规格及文档&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;技术规格 &lt;a href="http://consumer.huawei.com/solutions/m2m-solutions/en/products/tech-specs/me909s_821_en.htm"&gt;连接&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;基于海思芯片, 同类比较 SIM7600CE (Qualcomm MDM9206)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;文档 &lt;a href="http://download-c1.huawei.com/download/downloadCenter?downloadId=60305&amp;amp;version=200311&amp;amp;siteCode=worldwide&amp;amp;view=true"&gt;连接&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;主天线M口&lt;/p&gt;
+&lt;h2 id="开始使用"&gt;开始使用&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;Windows上使用该4G模块需要手动安装驱动，驱动&lt;a href="https://techship.com/downloads/category/software-software-huawei-me909s-821-lga/"&gt;连接&lt;/a&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Ubuntu下可以使用&lt;code&gt;modemmanager&lt;/code&gt;管理4G模块&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;树莓派下使用教程如下。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;查看usb设备是否被识别&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;lsusb
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# output:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Bus &lt;span style="color:#f60"&gt;001&lt;/span&gt; Device 004: ID 12d1:15c1 Huawei Technologies Co., Ltd. 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Bus &lt;span style="color:#f60"&gt;001&lt;/span&gt; Device 003: ID 0424:ec00 Standard Microsystems Corp. SMSC9512/9514 Fast Ethernet Adapter
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Bus &lt;span style="color:#f60"&gt;001&lt;/span&gt; Device 002: ID 0424:9514 Standard Microsystems Corp. SMC9514 Hub
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Bus &lt;span style="color:#f60"&gt;001&lt;/span&gt; Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;安装拨号软件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt-get update
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt-get install ppp usb-modeswitch wvdial
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;初始化wvdial配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo wvdialconf /etc/wvdial.conf
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;修改&lt;code&gt;wvdial&lt;/code&gt;配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;[Dialer Defaults]
 Init1 = ATZ
 Init2 = ATQ0 V1 E1 S0=0
 Init3 = AT+CGDCONT=1,&amp;#34;IP&amp;#34;, &amp;#34;cmnet&amp;#34;
@@ -319,116 +333,116 @@ Phone = *99***1#
 Password = { }
 Username = { }
 Auto DNS = on
-&lt;/code>&lt;/pre>&lt;p>APN和拨号设置参考&lt;/p></description></item><item><title>怎样安全地Root你的安卓手机</title><link>https://qtopie.github.io/posts/diy/root-your-android-phone/</link><pubDate>Sun, 04 Nov 2018 20:29:38 +0800</pubDate><guid>https://qtopie.github.io/posts/diy/root-your-android-phone/</guid><description>&lt;p>出于各种原因，我们可能会对自己手机上的安卓系统并不满意，而Root是我们DIY自己的安卓机的一把钥匙。&lt;/p>
-&lt;p>注意手机Root后并不一定安全，本文仅仅说的是用安全（较为透明公开）的方式自己root你的手机。&lt;/p>
-&lt;p>但安全永远是相对的，如果你对手机ROOT后的安全性有较大顾虑，请不要进行该操作。&lt;/p>
-&lt;p>对ROOT后的设备，也请远离流氓软件和恶意网站，尽可能使用可信度高的应用与服务。&lt;/p>
-&lt;h2 id="预先准备">预先准备&lt;/h2>
-&lt;ul>
-&lt;li>&lt;a href="https://github.com/topjohnwu/Magisk/releases">MagiskManager&lt;/a>&lt;/li>
-&lt;li>&lt;a href="https://twrp.me/">Twrp&lt;/a> &lt;a href="https://play.google.com/store/apps/details?id=me.twrp.twrpapp">APK文件从谷歌商店下载&lt;/a>&lt;/li>
-&lt;li>sdk与fastboot工具 &lt;a href="https://dl.google.com/android/repository/platform-tools-latest-windows.zip">win&lt;/a> &lt;a href="https://dl.google.com/android/repository/platform-tools-latest-linux.zip">linux&lt;/a> &lt;a href="https://dl.google.com/android/repository/platform-tools-latest-darwin.zip">mac&lt;/a>&lt;/li>
-&lt;li>准备一台PC和数据线，能使用开发者模式调试安卓手机&lt;/li>
-&lt;/ul>
-&lt;h2 id="解锁你的手机">解锁你的手机&lt;/h2>
-&lt;ul>
-&lt;li>打开开发者模式&lt;/li>
-&lt;/ul>
-&lt;p>打开设置 -&amp;gt; 关于手机 -&amp;gt; 软件信息 -&amp;gt; 内部版本号 -&amp;gt; 一直点它&lt;/p>
-&lt;ul>
-&lt;li>启用OEM解锁&lt;/li>
-&lt;/ul>
-&lt;p>进入开发者选项，勾选允许OEM解锁。 注意OEM解锁会清空手机数据，如果要进行下去请备份号手机数据。&lt;/p>
-&lt;p>另外，解锁后，部分手机开机启动后会有一个源自安卓系统的安全警告画面，若不喜欢也建议不要继续。&lt;/p>
-&lt;h2 id="准备magisk文件">准备Magisk文件&lt;/h2>
-&lt;p>在Magisk的Github发布页面下载apk程序进行安装，按照应用提示，下载最新的Magisk文件&lt;/p>
-&lt;h2 id="oem-解锁">OEM 解锁&lt;/h2>
-&lt;ul>
-&lt;li>
-&lt;p>将adb和fastboot加入环境变量&lt;/p>
-&lt;p>对windows用户而言，解压缩&lt;code>platform-tools_rx.x.x-windows.zip&lt;/code>文件，进入解压缩后的文件夹，根目录后下会显示有&lt;code>adb.exe&lt;/code>和&lt;code>fastboot.exe&lt;/code>等文件。
-然后将光标移到文件夹空白处，同时按下Shift键和鼠标右键，点击弹出来的菜单选项，打开命令窗口（后续操作需要在此进行，请不要关闭）。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>检查能PC检测到连入的手机&lt;/p>
-&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>adb kill-server &lt;span style="color:#555">&amp;amp;&amp;amp;&lt;/span> adb start-server
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>adb devices
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>
-&lt;p>重启手机进入&lt;code>download&lt;/code>模式&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>adb reboot download
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;li>
-&lt;p>解锁bootloader&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>fastboot oem unlock
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fastboot flashing unlock
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;/ul>
-&lt;h2 id="刷入twrp到recovery">刷入twrp到Recovery&lt;/h2>
-&lt;ul>
-&lt;li>
-&lt;p>在&lt;code>download&lt;/code>模式中刷入recovery&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>fastboot flash recovery twrp.img
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>fastboot reboot recovery
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;/ul>
-&lt;h2 id="刷入magisk文件">刷入Magisk文件&lt;/h2>
-&lt;p>在上述步骤完成进入recovery后，可以看到twrp的一些管理菜单，选择安装我们刚才下载的magisk zip文件， 完成后重启手机。&lt;/p>
-&lt;h2 id="定制自己的rom极客需要熟悉一些计算机程序知识">定制自己的ROM（极客，需要熟悉一些计算机程序知识）&lt;/h2>
-&lt;p>推荐一个工具来完成 &lt;a href="https://github.com/artificerpi/android_system_extraction_and_repack_tool">https://github.com/artificerpi/android_system_extraction_and_repack_tool&lt;/a>&lt;/p>
-&lt;h2 id="参考">参考&lt;/h2>
-&lt;ul>
-&lt;li>&lt;a href="https://twrp.me/htc/htcu11.html">https://twrp.me/htc/htcu11.html&lt;/a>&lt;/li>
-&lt;/ul></description></item><item><title>我的DIY与vocore</title><link>https://qtopie.github.io/notes/iot/vocore/my-vocore-playground/</link><pubDate>Thu, 26 Jul 2018 22:24:33 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/vocore/my-vocore-playground/</guid><description>&lt;h2 id="vocore">&lt;a href="http://vocore.io/">VoCore&lt;/a>&lt;/h2>
-&lt;p>硬币大小的Linux计算机（或者可以DIY的mini路由器）&lt;/p>
-&lt;h2 id="技术参数">技术参数&lt;/h2>
-&lt;ul>
-&lt;li>Target: &lt;a href="https://openwrt.org/docs/techref/targets/ramips">ramips&lt;/a>&lt;/li>
-&lt;li>Subtarget: &lt;code>mt7628&lt;/code>&lt;/li>
-&lt;li>Package architecture: &lt;code>mipsel_24kc&lt;/code>&lt;/li>
-&lt;li>&lt;a href="https://openwrt.org/toh/hwdata/vocore/vocore_vocore2">OpenWRT techdata&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;p>具体参数请看官网介绍 &lt;a href="http://vocore.io/v2u.html">VoCore2 Ultimate&lt;/a> 和 &lt;a href="https://openwrt.org/toh/hwdata/vocore/vocore_vocore2">openwrt列出的技术数据&lt;/a>&lt;/p>
-&lt;h2 id="openwrt介绍">OpenWRT介绍&lt;/h2>
-&lt;p>OpenWRT(与&lt;a href="https://zh.wikipedia.org/wiki/LEDE">LEDE&lt;/a>合并后更名为OpenWrt)是一个适用于嵌入式设备的Linux发行版，最初&lt;a href="https://zh.wikipedia.org/wiki/OpenWrt">由Linksys公司推出的WRT-54G无线路由中使用的Linux系统开源而来&lt;/a>。相比于路由器原厂固件而言，OpenWRT提供了一个可添加软件包的可写文件系统，这样用户就能自己定制路由器的功能。基于开放的生态和良好的技术社区环境，OpenWRT十分适合喜好DIY的科技粉来定制自己的路由器。&lt;/p>
-&lt;p>OpenWRT主要使用opkg来管理软件包，默认使用LuCI作为web交互界面。下面简单列出它们的常用方式，具体使用方法请查阅文档。&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>opkg&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># 安装软件包&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>opkg install &amp;lt;PACKAGE-NAME&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># 卸载软件包&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>opkg remove &amp;lt;PACKAGE-NAME&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;li>
-&lt;p>uci&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># 设置option&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>uci &lt;span style="color:#366">set&lt;/span> &amp;lt;OPTION&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># 查看option&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>uci show &amp;lt;OPTION&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;/ul>
-&lt;h2 id="我的定制">我的定制&lt;/h2>
-&lt;h3 id="基本设置">基本设置&lt;/h3>
-&lt;ul>
-&lt;li>Change SSID Name&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>uci &lt;span style="color:#366">set&lt;/span> wireless.ap.ssid&lt;span style="color:#555">=&lt;/span>&lt;span style="color:#c30">&amp;#39;firefly&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>uci commit 
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># check result&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>uci show wireless.ap.ssid
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># restart networking service to make reload configuration&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/etc/init.d/network restart
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># check network in another machine&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo iw dev wlan0 scan | grep SSID
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="wget-ssl">wget ssl&lt;/h2>
-&lt;pre tabindex="0">&lt;code>opkg install libustream-openssl ca-bundle ca-certificates
-&lt;/code>&lt;/pre>&lt;h3 id="apsta模式-或者叫无线中继器">AP+STA模式 （或者叫无线中继器）&lt;/h3>
-&lt;ul>
-&lt;li>使用固件 &lt;a href="http://vonger.cn/misc/vocore2/20180723V.bin">vocore2-20180723V&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;p>配置信息(仅供参考)：&lt;/p></description></item></channel></rss>
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;APN和拨号设置参考&lt;/p&gt;</description></item><item><title>怎样安全地Root你的安卓手机</title><link>https://qtopie.github.io/posts/diy/root-your-android-phone/</link><pubDate>Sun, 04 Nov 2018 20:29:38 +0800</pubDate><guid>https://qtopie.github.io/posts/diy/root-your-android-phone/</guid><description>&lt;p&gt;出于各种原因，我们可能会对自己手机上的安卓系统并不满意，而Root是我们DIY自己的安卓机的一把钥匙。&lt;/p&gt;
+&lt;p&gt;注意手机Root后并不一定安全，本文仅仅说的是用安全（较为透明公开）的方式自己root你的手机。&lt;/p&gt;
+&lt;p&gt;但安全永远是相对的，如果你对手机ROOT后的安全性有较大顾虑，请不要进行该操作。&lt;/p&gt;
+&lt;p&gt;对ROOT后的设备，也请远离流氓软件和恶意网站，尽可能使用可信度高的应用与服务。&lt;/p&gt;
+&lt;h2 id="预先准备"&gt;预先准备&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/topjohnwu/Magisk/releases"&gt;MagiskManager&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://twrp.me/"&gt;Twrp&lt;/a&gt; &lt;a href="https://play.google.com/store/apps/details?id=me.twrp.twrpapp"&gt;APK文件从谷歌商店下载&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;sdk与fastboot工具 &lt;a href="https://dl.google.com/android/repository/platform-tools-latest-windows.zip"&gt;win&lt;/a&gt; &lt;a href="https://dl.google.com/android/repository/platform-tools-latest-linux.zip"&gt;linux&lt;/a&gt; &lt;a href="https://dl.google.com/android/repository/platform-tools-latest-darwin.zip"&gt;mac&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;准备一台PC和数据线，能使用开发者模式调试安卓手机&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="解锁你的手机"&gt;解锁你的手机&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;打开开发者模式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;打开设置 -&amp;gt; 关于手机 -&amp;gt; 软件信息 -&amp;gt; 内部版本号 -&amp;gt; 一直点它&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;启用OEM解锁&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;进入开发者选项，勾选允许OEM解锁。 注意OEM解锁会清空手机数据，如果要进行下去请备份号手机数据。&lt;/p&gt;
+&lt;p&gt;另外，解锁后，部分手机开机启动后会有一个源自安卓系统的安全警告画面，若不喜欢也建议不要继续。&lt;/p&gt;
+&lt;h2 id="准备magisk文件"&gt;准备Magisk文件&lt;/h2&gt;
+&lt;p&gt;在Magisk的Github发布页面下载apk程序进行安装，按照应用提示，下载最新的Magisk文件&lt;/p&gt;
+&lt;h2 id="oem-解锁"&gt;OEM 解锁&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;将adb和fastboot加入环境变量&lt;/p&gt;
+&lt;p&gt;对windows用户而言，解压缩&lt;code&gt;platform-tools_rx.x.x-windows.zip&lt;/code&gt;文件，进入解压缩后的文件夹，根目录后下会显示有&lt;code&gt;adb.exe&lt;/code&gt;和&lt;code&gt;fastboot.exe&lt;/code&gt;等文件。
+然后将光标移到文件夹空白处，同时按下Shift键和鼠标右键，点击弹出来的菜单选项，打开命令窗口（后续操作需要在此进行，请不要关闭）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;检查能PC检测到连入的手机&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;adb kill-server &lt;span style="color:#555"&gt;&amp;amp;&amp;amp;&lt;/span&gt; adb start-server
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;adb devices
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;重启手机进入&lt;code&gt;download&lt;/code&gt;模式&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;adb reboot download
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;解锁bootloader&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;fastboot oem unlock
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;fastboot flashing unlock
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="刷入twrp到recovery"&gt;刷入twrp到Recovery&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;在&lt;code&gt;download&lt;/code&gt;模式中刷入recovery&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;fastboot flash recovery twrp.img
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;fastboot reboot recovery
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="刷入magisk文件"&gt;刷入Magisk文件&lt;/h2&gt;
+&lt;p&gt;在上述步骤完成进入recovery后，可以看到twrp的一些管理菜单，选择安装我们刚才下载的magisk zip文件， 完成后重启手机。&lt;/p&gt;
+&lt;h2 id="定制自己的rom极客需要熟悉一些计算机程序知识"&gt;定制自己的ROM（极客，需要熟悉一些计算机程序知识）&lt;/h2&gt;
+&lt;p&gt;推荐一个工具来完成 &lt;a href="https://github.com/artificerpi/android_system_extraction_and_repack_tool"&gt;https://github.com/artificerpi/android_system_extraction_and_repack_tool&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="参考"&gt;参考&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://twrp.me/htc/htcu11.html"&gt;https://twrp.me/htc/htcu11.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>我的DIY与vocore</title><link>https://qtopie.github.io/notes/iot/vocore/my-vocore-playground/</link><pubDate>Thu, 26 Jul 2018 22:24:33 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/vocore/my-vocore-playground/</guid><description>&lt;h2 id="vocore"&gt;&lt;a href="http://vocore.io/"&gt;VoCore&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;硬币大小的Linux计算机（或者可以DIY的mini路由器）&lt;/p&gt;
+&lt;h2 id="技术参数"&gt;技术参数&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Target: &lt;a href="https://openwrt.org/docs/techref/targets/ramips"&gt;ramips&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Subtarget: &lt;code&gt;mt7628&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Package architecture: &lt;code&gt;mipsel_24kc&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://openwrt.org/toh/hwdata/vocore/vocore_vocore2"&gt;OpenWRT techdata&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;具体参数请看官网介绍 &lt;a href="http://vocore.io/v2u.html"&gt;VoCore2 Ultimate&lt;/a&gt; 和 &lt;a href="https://openwrt.org/toh/hwdata/vocore/vocore_vocore2"&gt;openwrt列出的技术数据&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="openwrt介绍"&gt;OpenWRT介绍&lt;/h2&gt;
+&lt;p&gt;OpenWRT(与&lt;a href="https://zh.wikipedia.org/wiki/LEDE"&gt;LEDE&lt;/a&gt;合并后更名为OpenWrt)是一个适用于嵌入式设备的Linux发行版，最初&lt;a href="https://zh.wikipedia.org/wiki/OpenWrt"&gt;由Linksys公司推出的WRT-54G无线路由中使用的Linux系统开源而来&lt;/a&gt;。相比于路由器原厂固件而言，OpenWRT提供了一个可添加软件包的可写文件系统，这样用户就能自己定制路由器的功能。基于开放的生态和良好的技术社区环境，OpenWRT十分适合喜好DIY的科技粉来定制自己的路由器。&lt;/p&gt;
+&lt;p&gt;OpenWRT主要使用opkg来管理软件包，默认使用LuCI作为web交互界面。下面简单列出它们的常用方式，具体使用方法请查阅文档。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;opkg&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# 安装软件包&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;opkg install &amp;lt;PACKAGE-NAME&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# 卸载软件包&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;opkg remove &amp;lt;PACKAGE-NAME&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;uci&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# 设置option&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;uci &lt;span style="color:#366"&gt;set&lt;/span&gt; &amp;lt;OPTION&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# 查看option&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;uci show &amp;lt;OPTION&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="我的定制"&gt;我的定制&lt;/h2&gt;
+&lt;h3 id="基本设置"&gt;基本设置&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Change SSID Name&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;uci &lt;span style="color:#366"&gt;set&lt;/span&gt; wireless.ap.ssid&lt;span style="color:#555"&gt;=&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#39;firefly&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;uci commit 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# check result&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;uci show wireless.ap.ssid
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# restart networking service to make reload configuration&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/etc/init.d/network restart
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# check network in another machine&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo iw dev wlan0 scan | grep SSID
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="wget-ssl"&gt;wget ssl&lt;/h2&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;opkg install libustream-openssl ca-bundle ca-certificates
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id="apsta模式-或者叫无线中继器"&gt;AP+STA模式 （或者叫无线中继器）&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;使用固件 &lt;a href="http://vonger.cn/misc/vocore2/20180723V.bin"&gt;vocore2-20180723V&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;配置信息(仅供参考)：&lt;/p&gt;</description></item></channel></rss>

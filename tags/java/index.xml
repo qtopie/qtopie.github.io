@@ -1,75 +1,76 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Java on Blog | Qtopie</title><link>https://qtopie.github.io/tags/java/</link><description>Recent content in Java on Blog | Qtopie</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Sat, 28 Dec 2019 18:07:28 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/java/index.xml" rel="self" type="application/rss+xml"/><item><title>Make Eclipse Great Again</title><link>https://qtopie.github.io/notes/dev/make-gradle-work-with-eclipse/</link><pubDate>Sat, 28 Dec 2019 18:07:28 +0800</pubDate><guid>https://qtopie.github.io/notes/dev/make-gradle-work-with-eclipse/</guid><description>&lt;h1 id="eclipse--gradle">Eclipse &amp;amp; Gradle&lt;/h1>
-&lt;p>还是从那句老话开始， “工欲善其事，必先利其器”。要想熟练地完成一件事，有个好的工具往往能事半功倍。&lt;/p>
-&lt;blockquote>
-&lt;p>&lt;em>但是很多时候，迷信教条最终会成了造轮子而造轮子的递归循环；选择合适的工具，并掌握它，解决好问题才是正确的方向。&lt;/em>&lt;/p>&lt;/blockquote>
-&lt;p>这里简单说说，我选择Eclispe和Gradle的原因。&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>Gradle (Gradle VS Maven or Ant); 选择gradle的原因很简单，简单而清晰的语法，强大的脚本语言，快速而稳定的构建。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Eclipse (主要对比Idea, VS Code)&lt;/p>
-&lt;ul>
-&lt;li>开源及活跃而广受欢迎的社区&lt;/li>
-&lt;li>相对于Idea来说，个人使用经验上来看，在大Project上使用（源码多，项目多）更稳定, 且有偏向支持开源社区的因素，故使用Eclipse；VS Code对于小的Project来说还好，功能比Eclipse弱，查看多个文件及源码也不是很方便，大项目会使系统卡顿，但是小项目一般可以使用gradle + vim。&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;h2 id="开发环境">开发环境&lt;/h2>
-&lt;p>当前开发环境&lt;/p>
-&lt;ul>
-&lt;li>Ubuntu 19.10 x86_64&lt;/li>
-&lt;li>Gradle 5.6.4&lt;/li>
-&lt;li>Eclipse (Snap版本)&lt;/li>
-&lt;/ul>
-&lt;pre tabindex="0">&lt;code>Eclipse Platform
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Java on Blog | qtopie</title><link>https://qtopie.github.io/tags/java/</link><description>Recent content in Java on Blog | qtopie</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Sat, 28 Dec 2019 18:07:28 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/java/index.xml" rel="self" type="application/rss+xml"/><item><title>Make Eclipse Great Again</title><link>https://qtopie.github.io/notes/dev/make-gradle-work-with-eclipse/</link><pubDate>Sat, 28 Dec 2019 18:07:28 +0800</pubDate><guid>https://qtopie.github.io/notes/dev/make-gradle-work-with-eclipse/</guid><description>&lt;h1 id="eclipse--gradle"&gt;Eclipse &amp;amp; Gradle&lt;/h1&gt;
+&lt;p&gt;还是从那句老话开始， “工欲善其事，必先利其器”。要想熟练地完成一件事，有个好的工具往往能事半功倍。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;但是很多时候，迷信教条最终会成了造轮子而造轮子的递归循环；选择合适的工具，并掌握它，解决好问题才是正确的方向。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这里简单说说，我选择Eclispe和Gradle的原因。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Gradle (Gradle VS Maven or Ant); 选择gradle的原因很简单，简单而清晰的语法，强大的脚本语言，快速而稳定的构建。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Eclipse (主要对比Idea, VS Code)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;开源及活跃而广受欢迎的社区&lt;/li&gt;
+&lt;li&gt;相对于Idea来说，个人使用经验上来看，在大Project上使用（源码多，项目多）更稳定, 且有偏向支持开源社区的因素，故使用Eclipse；VS Code对于小的Project来说还好，功能比Eclipse弱，查看多个文件及源码也不是很方便，大项目会使系统卡顿，但是小项目一般可以使用gradle + vim。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="开发环境"&gt;开发环境&lt;/h2&gt;
+&lt;p&gt;当前开发环境&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Ubuntu 19.10 x86_64&lt;/li&gt;
+&lt;li&gt;Gradle 5.6.4&lt;/li&gt;
+&lt;li&gt;Eclipse (Snap版本)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;Eclipse Platform
 Version: 2019-03 (4.11)
 Build id: I20190307-0500
 OS: Linux, v.5.3.0-24-generic, x86_64 / gtk 3.24.12
 Java version: 1.8.0_171
-&lt;/code>&lt;/pre>&lt;h2 id="eclipse项目配置及依赖管理">Eclipse项目配置及依赖管理&lt;/h2>
-&lt;h3 id="我的java项目管理方案">我的Java项目管理方案&lt;/h3>
-&lt;p>我不喜欢将IDE文件提交到git代码仓库，在我看来，IDE的作用就是一个文本编辑器，而且从协作角度来看，不同的开发者可能会选择不同的编辑器，所以不需要将IDE文件提交。 而Gradle脚本，不仅作为项目开发中一款重要的工具，而且包含了很多项目配置信息，因此需要提交到git仓库(有时候，如果开发人员和CI使用了统一的或兼容的gradle版本，甚至gradle wrapper都不需要提交)&lt;/p>
-&lt;ul>
-&lt;li>生成项目配置&lt;/li>
-&lt;/ul>
-&lt;p>默认Gradle eclipse编译输出目录为bin, 但是gradle构建输出目录为build， 因此需要改配置。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-groovy" data-lang="groovy">&lt;span style="display:flex;">&lt;span>plugins &lt;span style="color:#555">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> id &lt;span style="color:#c30">&amp;#39;java&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> id &lt;span style="color:#c30">&amp;#39;eclipse&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#555">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>eclipse &lt;span style="color:#555">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> project&lt;span style="color:#555">.&lt;/span>&lt;span style="color:#309">natures&lt;/span> &lt;span style="color:#c30">&amp;#39;org.eclipse.buildship.core.gradleprojectnature&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> classpath &lt;span style="color:#555">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> downloadJavadoc &lt;span style="color:#555">=&lt;/span> &lt;span style="color:#069;font-weight:bold">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> downloadSources &lt;span style="color:#555">=&lt;/span> &lt;span style="color:#069;font-weight:bold">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> defaultOutputDir &lt;span style="color:#555">=&lt;/span> file&lt;span style="color:#555">(&lt;/span>&lt;span style="color:#c30">&amp;#39;build/default&amp;#39;&lt;/span>&lt;span style="color:#555">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> file&lt;span style="color:#555">.&lt;/span>&lt;span style="color:#309">whenMerged&lt;/span> &lt;span style="color:#555">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> entries&lt;span style="color:#555">.&lt;/span>&lt;span style="color:#309">each&lt;/span> &lt;span style="color:#555">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> source &lt;span style="color:#555">-&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#09f;font-style:italic">// This seems kludgy. If the second test is omitted, it fails processing a &amp;#39;Project Dependency&amp;#39; entry
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span> &lt;span style="color:#069;font-weight:bold">if&lt;/span> &lt;span style="color:#555">(&lt;/span>source&lt;span style="color:#555">.&lt;/span>&lt;span style="color:#309">kind&lt;/span> &lt;span style="color:#555">==&lt;/span> &lt;span style="color:#c30">&amp;#39;src&amp;#39;&lt;/span> &lt;span style="color:#555">&amp;amp;&amp;amp;&lt;/span> source&lt;span style="color:#555">.&lt;/span>&lt;span style="color:#309">hasProperty&lt;/span>&lt;span style="color:#555">(&lt;/span>&lt;span style="color:#c30">&amp;#39;output&amp;#39;&lt;/span>&lt;span style="color:#555">))&lt;/span> &lt;span style="color:#555">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#078;font-weight:bold">def&lt;/span> outputPath &lt;span style="color:#555">=&lt;/span> source&lt;span style="color:#555">.&lt;/span>&lt;span style="color:#309">output&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">switch&lt;/span>&lt;span style="color:#555">(&lt;/span>source&lt;span style="color:#555">.&lt;/span>&lt;span style="color:#309">path&lt;/span>&lt;span style="color:#555">)&lt;/span> &lt;span style="color:#555">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">case&lt;/span> &lt;span style="color:#c30">&amp;#39;src/main/java&amp;#39;&lt;/span>&lt;span style="color:#555">:&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> source&lt;span style="color:#555">.&lt;/span>&lt;span style="color:#309">output&lt;/span> &lt;span style="color:#555">=&lt;/span> &lt;span style="color:#c30">&amp;#39;build/classes/java/main&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">break&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">case&lt;/span> &lt;span style="color:#c30">&amp;#39;src/main/resources&amp;#39;&lt;/span>&lt;span style="color:#555">:&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> source&lt;span style="color:#555">.&lt;/span>&lt;span style="color:#309">output&lt;/span> &lt;span style="color:#555">=&lt;/span> &lt;span style="color:#c30">&amp;#39;build/resources/main&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">break&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">case&lt;/span> &lt;span style="color:#c30">&amp;#39;src/test/java&amp;#39;&lt;/span>&lt;span style="color:#555">:&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> source&lt;span style="color:#555">.&lt;/span>&lt;span style="color:#309">output&lt;/span> &lt;span style="color:#555">=&lt;/span> &lt;span style="color:#c30">&amp;#39;build/classes/java/test&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">break&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">case&lt;/span> &lt;span style="color:#c30">&amp;#39;src/test/resources&amp;#39;&lt;/span>&lt;span style="color:#555">:&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> source&lt;span style="color:#555">.&lt;/span>&lt;span style="color:#309">output&lt;/span> &lt;span style="color:#555">=&lt;/span> &lt;span style="color:#c30">&amp;#39;build/resources/test&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">break&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#555">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#555">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#555">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#555">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#555">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#555">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>&lt;a href="https://github.com/gradle/gradle/issues/3839">https://github.com/gradle/gradle/issues/3839&lt;/a>&lt;/p></description></item></channel></rss>
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="eclipse项目配置及依赖管理"&gt;Eclipse项目配置及依赖管理&lt;/h2&gt;
+&lt;h3 id="我的java项目管理方案"&gt;我的Java项目管理方案&lt;/h3&gt;
+&lt;p&gt;我不喜欢将IDE文件提交到git代码仓库，在我看来，IDE的作用就是一个文本编辑器，而且从协作角度来看，不同的开发者可能会选择不同的编辑器，所以不需要将IDE文件提交。 而Gradle脚本，不仅作为项目开发中一款重要的工具，而且包含了很多项目配置信息，因此需要提交到git仓库(有时候，如果开发人员和CI使用了统一的或兼容的gradle版本，甚至gradle wrapper都不需要提交)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;生成项目配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;默认Gradle eclipse编译输出目录为bin, 但是gradle构建输出目录为build， 因此需要改配置。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-groovy" data-lang="groovy"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;plugins &lt;span style="color:#555"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; id &lt;span style="color:#c30"&gt;&amp;#39;java&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; id &lt;span style="color:#c30"&gt;&amp;#39;eclipse&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#555"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;eclipse &lt;span style="color:#555"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; project&lt;span style="color:#555"&gt;.&lt;/span&gt;&lt;span style="color:#309"&gt;natures&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#39;org.eclipse.buildship.core.gradleprojectnature&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; classpath &lt;span style="color:#555"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; downloadJavadoc &lt;span style="color:#555"&gt;=&lt;/span&gt; &lt;span style="color:#069;font-weight:bold"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; downloadSources &lt;span style="color:#555"&gt;=&lt;/span&gt; &lt;span style="color:#069;font-weight:bold"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; defaultOutputDir &lt;span style="color:#555"&gt;=&lt;/span&gt; file&lt;span style="color:#555"&gt;(&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#39;build/default&amp;#39;&lt;/span&gt;&lt;span style="color:#555"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; file&lt;span style="color:#555"&gt;.&lt;/span&gt;&lt;span style="color:#309"&gt;whenMerged&lt;/span&gt; &lt;span style="color:#555"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; entries&lt;span style="color:#555"&gt;.&lt;/span&gt;&lt;span style="color:#309"&gt;each&lt;/span&gt; &lt;span style="color:#555"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; source &lt;span style="color:#555"&gt;-&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#09f;font-style:italic"&gt;// This seems kludgy. If the second test is omitted, it fails processing a &amp;#39;Project Dependency&amp;#39; entry
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;&lt;/span&gt; &lt;span style="color:#069;font-weight:bold"&gt;if&lt;/span&gt; &lt;span style="color:#555"&gt;(&lt;/span&gt;source&lt;span style="color:#555"&gt;.&lt;/span&gt;&lt;span style="color:#309"&gt;kind&lt;/span&gt; &lt;span style="color:#555"&gt;==&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#39;src&amp;#39;&lt;/span&gt; &lt;span style="color:#555"&gt;&amp;amp;&amp;amp;&lt;/span&gt; source&lt;span style="color:#555"&gt;.&lt;/span&gt;&lt;span style="color:#309"&gt;hasProperty&lt;/span&gt;&lt;span style="color:#555"&gt;(&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#39;output&amp;#39;&lt;/span&gt;&lt;span style="color:#555"&gt;))&lt;/span&gt; &lt;span style="color:#555"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#078;font-weight:bold"&gt;def&lt;/span&gt; outputPath &lt;span style="color:#555"&gt;=&lt;/span&gt; source&lt;span style="color:#555"&gt;.&lt;/span&gt;&lt;span style="color:#309"&gt;output&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#069;font-weight:bold"&gt;switch&lt;/span&gt;&lt;span style="color:#555"&gt;(&lt;/span&gt;source&lt;span style="color:#555"&gt;.&lt;/span&gt;&lt;span style="color:#309"&gt;path&lt;/span&gt;&lt;span style="color:#555"&gt;)&lt;/span&gt; &lt;span style="color:#555"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#069;font-weight:bold"&gt;case&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#39;src/main/java&amp;#39;&lt;/span&gt;&lt;span style="color:#555"&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; source&lt;span style="color:#555"&gt;.&lt;/span&gt;&lt;span style="color:#309"&gt;output&lt;/span&gt; &lt;span style="color:#555"&gt;=&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#39;build/classes/java/main&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#069;font-weight:bold"&gt;break&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#069;font-weight:bold"&gt;case&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#39;src/main/resources&amp;#39;&lt;/span&gt;&lt;span style="color:#555"&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; source&lt;span style="color:#555"&gt;.&lt;/span&gt;&lt;span style="color:#309"&gt;output&lt;/span&gt; &lt;span style="color:#555"&gt;=&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#39;build/resources/main&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#069;font-weight:bold"&gt;break&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#069;font-weight:bold"&gt;case&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#39;src/test/java&amp;#39;&lt;/span&gt;&lt;span style="color:#555"&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; source&lt;span style="color:#555"&gt;.&lt;/span&gt;&lt;span style="color:#309"&gt;output&lt;/span&gt; &lt;span style="color:#555"&gt;=&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#39;build/classes/java/test&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#069;font-weight:bold"&gt;break&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#069;font-weight:bold"&gt;case&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#39;src/test/resources&amp;#39;&lt;/span&gt;&lt;span style="color:#555"&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; source&lt;span style="color:#555"&gt;.&lt;/span&gt;&lt;span style="color:#309"&gt;output&lt;/span&gt; &lt;span style="color:#555"&gt;=&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#39;build/resources/test&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#069;font-weight:bold"&gt;break&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#555"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#555"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#555"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#555"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#555"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#555"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;a href="https://github.com/gradle/gradle/issues/3839"&gt;https://github.com/gradle/gradle/issues/3839&lt;/a&gt;&lt;/p&gt;</description></item></channel></rss>

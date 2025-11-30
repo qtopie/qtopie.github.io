@@ -1,50 +1,69 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Vocore on Blog | Qtopie</title><link>https://qtopie.github.io/tags/vocore/</link><description>Recent content in Vocore on Blog | Qtopie</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Thu, 26 Jul 2018 22:24:33 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/vocore/index.xml" rel="self" type="application/rss+xml"/><item><title>我的DIY与vocore</title><link>https://qtopie.github.io/notes/iot/vocore/my-vocore-playground/</link><pubDate>Thu, 26 Jul 2018 22:24:33 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/vocore/my-vocore-playground/</guid><description>&lt;h2 id="vocore">&lt;a href="http://vocore.io/">VoCore&lt;/a>&lt;/h2>
-&lt;p>硬币大小的Linux计算机（或者可以DIY的mini路由器）&lt;/p>
-&lt;h2 id="技术参数">技术参数&lt;/h2>
-&lt;ul>
-&lt;li>Target: &lt;a href="https://openwrt.org/docs/techref/targets/ramips">ramips&lt;/a>&lt;/li>
-&lt;li>Subtarget: &lt;code>mt7628&lt;/code>&lt;/li>
-&lt;li>Package architecture: &lt;code>mipsel_24kc&lt;/code>&lt;/li>
-&lt;li>&lt;a href="https://openwrt.org/toh/hwdata/vocore/vocore_vocore2">OpenWRT techdata&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;p>具体参数请看官网介绍 &lt;a href="http://vocore.io/v2u.html">VoCore2 Ultimate&lt;/a> 和 &lt;a href="https://openwrt.org/toh/hwdata/vocore/vocore_vocore2">openwrt列出的技术数据&lt;/a>&lt;/p>
-&lt;h2 id="openwrt介绍">OpenWRT介绍&lt;/h2>
-&lt;p>OpenWRT(与&lt;a href="https://zh.wikipedia.org/wiki/LEDE">LEDE&lt;/a>合并后更名为OpenWrt)是一个适用于嵌入式设备的Linux发行版，最初&lt;a href="https://zh.wikipedia.org/wiki/OpenWrt">由Linksys公司推出的WRT-54G无线路由中使用的Linux系统开源而来&lt;/a>。相比于路由器原厂固件而言，OpenWRT提供了一个可添加软件包的可写文件系统，这样用户就能自己定制路由器的功能。基于开放的生态和良好的技术社区环境，OpenWRT十分适合喜好DIY的科技粉来定制自己的路由器。&lt;/p>
-&lt;p>OpenWRT主要使用opkg来管理软件包，默认使用LuCI作为web交互界面。下面简单列出它们的常用方式，具体使用方法请查阅文档。&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>opkg&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># 安装软件包&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>opkg install &amp;lt;PACKAGE-NAME&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># 卸载软件包&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>opkg remove &amp;lt;PACKAGE-NAME&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;li>
-&lt;p>uci&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># 设置option&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>uci &lt;span style="color:#366">set&lt;/span> &amp;lt;OPTION&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># 查看option&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>uci show &amp;lt;OPTION&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
-&lt;/ul>
-&lt;h2 id="我的定制">我的定制&lt;/h2>
-&lt;h3 id="基本设置">基本设置&lt;/h3>
-&lt;ul>
-&lt;li>Change SSID Name&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>uci &lt;span style="color:#366">set&lt;/span> wireless.ap.ssid&lt;span style="color:#555">=&lt;/span>&lt;span style="color:#c30">&amp;#39;firefly&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>uci commit 
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># check result&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>uci show wireless.ap.ssid
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># restart networking service to make reload configuration&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/etc/init.d/network restart
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># check network in another machine&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>sudo iw dev wlan0 scan | grep SSID
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="wget-ssl">wget ssl&lt;/h2>
-&lt;pre tabindex="0">&lt;code>opkg install libustream-openssl ca-bundle ca-certificates
-&lt;/code>&lt;/pre>&lt;h3 id="apsta模式-或者叫无线中继器">AP+STA模式 （或者叫无线中继器）&lt;/h3>
-&lt;ul>
-&lt;li>使用固件 &lt;a href="http://vonger.cn/misc/vocore2/20180723V.bin">vocore2-20180723V&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;p>配置信息(仅供参考)：&lt;/p></description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Vocore on Blog | qtopie</title><link>https://qtopie.github.io/tags/vocore/</link><description>Recent content in Vocore on Blog | qtopie</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Fri, 26 Jul 2019 22:24:33 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/vocore/index.xml" rel="self" type="application/rss+xml"/><item><title>vocore2播放音频-使用路由器听歌？</title><link>https://qtopie.github.io/notes/iot/vocore/vocore-network-audio/</link><pubDate>Fri, 26 Jul 2019 22:24:33 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/vocore/vocore-network-audio/</guid><description>&lt;h2 id="目标"&gt;目标&lt;/h2&gt;
+&lt;p&gt;构建一个可编程控制的流媒体播放服务器，类似于智能音箱，但是没有麦克风收集个人隐私数据。&lt;/p&gt;
+&lt;p&gt;整体架构如下&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-mermaid" data-lang="mermaid"&gt;graph LR
+ subgraph 树莓派 Raspberry Pi
+ A[cmus音乐播放器] --&amp;gt; B(PulseAudio Client)
+ end
+
+ subgraph VoCore
+ C(PulseAudio Server) --&amp;gt; D[音响 / 扬声器]
+ end
+
+ B --&amp;gt; C
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="vocore固件支持"&gt;Vocore固件支持&lt;/h2&gt;
+&lt;p&gt;Currently 2022/12/3, only openwrt 21.02 is supported. (patch is not working ins 22.03)&lt;/p&gt;
+&lt;p&gt;see &lt;a href="https://github.com/Vonger/vocore2"&gt;https://github.com/Vonger/vocore2&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Because audio is enabled by &lt;em&gt;kmod+&lt;/em&gt; packages, so I need to build the firmware myself.&lt;/p&gt;
+&lt;h2 id="alsa"&gt;Alsa&lt;/h2&gt;
+&lt;p&gt;install &lt;code&gt;alsa-utils&lt;/code&gt; packages, then add configuration to init sound card&lt;/p&gt;
+&lt;p&gt;in &lt;code&gt;/etc/rc.local&lt;/code&gt; file&lt;/p&gt;</description></item><item><title>我的DIY与vocore</title><link>https://qtopie.github.io/notes/iot/vocore/my-vocore-playground/</link><pubDate>Thu, 26 Jul 2018 22:24:33 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/vocore/my-vocore-playground/</guid><description>&lt;h2 id="vocore"&gt;&lt;a href="http://vocore.io/"&gt;VoCore&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;硬币大小的Linux计算机（或者可以DIY的mini路由器）&lt;/p&gt;
+&lt;h2 id="技术参数"&gt;技术参数&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Target: &lt;a href="https://openwrt.org/docs/techref/targets/ramips"&gt;ramips&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Subtarget: &lt;code&gt;mt7628&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Package architecture: &lt;code&gt;mipsel_24kc&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://openwrt.org/toh/hwdata/vocore/vocore_vocore2"&gt;OpenWRT techdata&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;具体参数请看官网介绍 &lt;a href="http://vocore.io/v2u.html"&gt;VoCore2 Ultimate&lt;/a&gt; 和 &lt;a href="https://openwrt.org/toh/hwdata/vocore/vocore_vocore2"&gt;openwrt列出的技术数据&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="openwrt介绍"&gt;OpenWRT介绍&lt;/h2&gt;
+&lt;p&gt;OpenWRT(与&lt;a href="https://zh.wikipedia.org/wiki/LEDE"&gt;LEDE&lt;/a&gt;合并后更名为OpenWrt)是一个适用于嵌入式设备的Linux发行版，最初&lt;a href="https://zh.wikipedia.org/wiki/OpenWrt"&gt;由Linksys公司推出的WRT-54G无线路由中使用的Linux系统开源而来&lt;/a&gt;。相比于路由器原厂固件而言，OpenWRT提供了一个可添加软件包的可写文件系统，这样用户就能自己定制路由器的功能。基于开放的生态和良好的技术社区环境，OpenWRT十分适合喜好DIY的科技粉来定制自己的路由器。&lt;/p&gt;
+&lt;p&gt;OpenWRT主要使用opkg来管理软件包，默认使用LuCI作为web交互界面。下面简单列出它们的常用方式，具体使用方法请查阅文档。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;opkg&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# 安装软件包&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;opkg install &amp;lt;PACKAGE-NAME&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# 卸载软件包&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;opkg remove &amp;lt;PACKAGE-NAME&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;uci&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# 设置option&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;uci &lt;span style="color:#366"&gt;set&lt;/span&gt; &amp;lt;OPTION&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# 查看option&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;uci show &amp;lt;OPTION&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="我的定制"&gt;我的定制&lt;/h2&gt;
+&lt;h3 id="基本设置"&gt;基本设置&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Change SSID Name&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;uci &lt;span style="color:#366"&gt;set&lt;/span&gt; wireless.ap.ssid&lt;span style="color:#555"&gt;=&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#39;firefly&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;uci commit 
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# check result&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;uci show wireless.ap.ssid
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# restart networking service to make reload configuration&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/etc/init.d/network restart
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# check network in another machine&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo iw dev wlan0 scan | grep SSID
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="wget-ssl"&gt;wget ssl&lt;/h2&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;opkg install libustream-openssl ca-bundle ca-certificates
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id="apsta模式-或者叫无线中继器"&gt;AP+STA模式 （或者叫无线中继器）&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;使用固件 &lt;a href="http://vonger.cn/misc/vocore2/20180723V.bin"&gt;vocore2-20180723V&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;配置信息(仅供参考)：&lt;/p&gt;</description></item></channel></rss>

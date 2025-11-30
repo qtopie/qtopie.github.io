@@ -1,128 +1,129 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Development on Blog | Qtopie</title><link>https://qtopie.github.io/categories/development/</link><description>Recent content in Development on Blog | Qtopie</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Wed, 18 Mar 2020 22:02:05 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/categories/development/index.xml" rel="self" type="application/rss+xml"/><item><title>Go安装</title><link>https://qtopie.github.io/notes/go/setup-go/</link><pubDate>Wed, 18 Mar 2020 22:02:05 +0800</pubDate><guid>https://qtopie.github.io/notes/go/setup-go/</guid><description>&lt;p>官方下载安装向导请参考这里https://golang.org/dl/&lt;/p>
-&lt;p>这篇文章主要分享加速访问go依赖和资源站点的问题。&lt;/p>
-&lt;h2 id="环境">环境&lt;/h2>
-&lt;ul>
-&lt;li>Ubuntu 19.10 x86_64&lt;/li>
-&lt;li>版本号 go1.14 linux/amd64&lt;/li>
-&lt;/ul>
-&lt;h2 id="下载安装">下载安装&lt;/h2>
-&lt;p>Go安装文件可以访问国内站点 &lt;a href="https://golang.google.cn/dl/">https://golang.google.cn/dl/&lt;/a>&lt;/p>
-&lt;p>解压后，移动到&lt;code>/usr/local/go&lt;/code>目录，然后在&lt;code>/etc/profile&lt;/code>里加入&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#366">export&lt;/span> &lt;span style="color:#033">GOROOT&lt;/span>&lt;span style="color:#555">=&lt;/span>/usr/local/go
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#366">export&lt;/span> &lt;span style="color:#033">PATH&lt;/span>&lt;span style="color:#555">=&lt;/span>&lt;span style="color:#033">$PATH&lt;/span>:&lt;span style="color:#033">$GOROOT&lt;/span>/bin
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="使用技巧">使用技巧&lt;/h2>
-&lt;h3 id="goproxy">goproxy&lt;/h3>
-&lt;p>使用goproxy加速&lt;code>go module&lt;/code>下载(解决&lt;code>go get&lt;/code>无法下载来自golang.org等站点的依赖包的问题）&lt;/p>
-&lt;p>参考https://goproxy.io/zh/, 在go 1.13+下，我们可以使用以下命令在go env设置goproxy&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>go env -w &lt;span style="color:#033">GO111MODULE&lt;/span>&lt;span style="color:#555">=&lt;/span>on
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>go env -w &lt;span style="color:#033">GOPROXY&lt;/span>&lt;span style="color:#555">=&lt;/span>https://goproxy.io,direct
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># 设置不走 proxy 的私有仓库，多个用逗号相隔（可选）&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>go env -w &lt;span style="color:#033">GOPRIVATE&lt;/span>&lt;span style="color:#555">=&lt;/span>*.corp.example.com
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>同样推荐使用国内站点https://goproxy.cn/&lt;/p>
-&lt;h3 id="文档查看">文档查看&lt;/h3>
-&lt;ul>
-&lt;li>使用&lt;code>go doc&lt;/code>命令可以在终端快速查阅文档, 例如&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>go doc net.Listen | vim -
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="参考">参考&lt;/h2></description></item><item><title>Make Eclipse Great Again</title><link>https://qtopie.github.io/notes/dev/make-gradle-work-with-eclipse/</link><pubDate>Sat, 28 Dec 2019 18:07:28 +0800</pubDate><guid>https://qtopie.github.io/notes/dev/make-gradle-work-with-eclipse/</guid><description>&lt;h1 id="eclipse--gradle">Eclipse &amp;amp; Gradle&lt;/h1>
-&lt;p>还是从那句老话开始， “工欲善其事，必先利其器”。要想熟练地完成一件事，有个好的工具往往能事半功倍。&lt;/p>
-&lt;blockquote>
-&lt;p>&lt;em>但是很多时候，迷信教条最终会成了造轮子而造轮子的递归循环；选择合适的工具，并掌握它，解决好问题才是正确的方向。&lt;/em>&lt;/p>&lt;/blockquote>
-&lt;p>这里简单说说，我选择Eclispe和Gradle的原因。&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>Gradle (Gradle VS Maven or Ant); 选择gradle的原因很简单，简单而清晰的语法，强大的脚本语言，快速而稳定的构建。&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>Eclipse (主要对比Idea, VS Code)&lt;/p>
-&lt;ul>
-&lt;li>开源及活跃而广受欢迎的社区&lt;/li>
-&lt;li>相对于Idea来说，个人使用经验上来看，在大Project上使用（源码多，项目多）更稳定, 且有偏向支持开源社区的因素，故使用Eclipse；VS Code对于小的Project来说还好，功能比Eclipse弱，查看多个文件及源码也不是很方便，大项目会使系统卡顿，但是小项目一般可以使用gradle + vim。&lt;/li>
-&lt;/ul>
-&lt;/li>
-&lt;/ul>
-&lt;h2 id="开发环境">开发环境&lt;/h2>
-&lt;p>当前开发环境&lt;/p>
-&lt;ul>
-&lt;li>Ubuntu 19.10 x86_64&lt;/li>
-&lt;li>Gradle 5.6.4&lt;/li>
-&lt;li>Eclipse (Snap版本)&lt;/li>
-&lt;/ul>
-&lt;pre tabindex="0">&lt;code>Eclipse Platform
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Development on Blog | qtopie</title><link>https://qtopie.github.io/categories/development/</link><description>Recent content in Development on Blog | qtopie</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Wed, 18 Mar 2020 22:02:05 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/categories/development/index.xml" rel="self" type="application/rss+xml"/><item><title>Go安装</title><link>https://qtopie.github.io/notes/go/setup-go/</link><pubDate>Wed, 18 Mar 2020 22:02:05 +0800</pubDate><guid>https://qtopie.github.io/notes/go/setup-go/</guid><description>&lt;p&gt;官方下载安装向导请参考这里https://golang.org/dl/&lt;/p&gt;
+&lt;p&gt;这篇文章主要分享加速访问go依赖和资源站点的问题。&lt;/p&gt;
+&lt;h2 id="环境"&gt;环境&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Ubuntu 19.10 x86_64&lt;/li&gt;
+&lt;li&gt;版本号 go1.14 linux/amd64&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="下载安装"&gt;下载安装&lt;/h2&gt;
+&lt;p&gt;Go安装文件可以访问国内站点 &lt;a href="https://golang.google.cn/dl/"&gt;https://golang.google.cn/dl/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;解压后，移动到&lt;code&gt;/usr/local/go&lt;/code&gt;目录，然后在&lt;code&gt;/etc/profile&lt;/code&gt;里加入&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#366"&gt;export&lt;/span&gt; &lt;span style="color:#033"&gt;GOROOT&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;/usr/local/go
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#366"&gt;export&lt;/span&gt; &lt;span style="color:#033"&gt;PATH&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;&lt;span style="color:#033"&gt;$PATH&lt;/span&gt;:&lt;span style="color:#033"&gt;$GOROOT&lt;/span&gt;/bin
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="使用技巧"&gt;使用技巧&lt;/h2&gt;
+&lt;h3 id="goproxy"&gt;goproxy&lt;/h3&gt;
+&lt;p&gt;使用goproxy加速&lt;code&gt;go module&lt;/code&gt;下载(解决&lt;code&gt;go get&lt;/code&gt;无法下载来自golang.org等站点的依赖包的问题）&lt;/p&gt;
+&lt;p&gt;参考https://goproxy.io/zh/, 在go 1.13+下，我们可以使用以下命令在go env设置goproxy&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;go env -w &lt;span style="color:#033"&gt;GO111MODULE&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;on
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;go env -w &lt;span style="color:#033"&gt;GOPROXY&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;https://goproxy.io,direct
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# 设置不走 proxy 的私有仓库，多个用逗号相隔（可选）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;go env -w &lt;span style="color:#033"&gt;GOPRIVATE&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;*.corp.example.com
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;同样推荐使用国内站点https://goproxy.cn/&lt;/p&gt;
+&lt;h3 id="文档查看"&gt;文档查看&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;使用&lt;code&gt;go doc&lt;/code&gt;命令可以在终端快速查阅文档, 例如&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;go doc net.Listen | vim -
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="参考"&gt;参考&lt;/h2&gt;</description></item><item><title>Make Eclipse Great Again</title><link>https://qtopie.github.io/notes/dev/make-gradle-work-with-eclipse/</link><pubDate>Sat, 28 Dec 2019 18:07:28 +0800</pubDate><guid>https://qtopie.github.io/notes/dev/make-gradle-work-with-eclipse/</guid><description>&lt;h1 id="eclipse--gradle"&gt;Eclipse &amp;amp; Gradle&lt;/h1&gt;
+&lt;p&gt;还是从那句老话开始， “工欲善其事，必先利其器”。要想熟练地完成一件事，有个好的工具往往能事半功倍。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;但是很多时候，迷信教条最终会成了造轮子而造轮子的递归循环；选择合适的工具，并掌握它，解决好问题才是正确的方向。&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这里简单说说，我选择Eclispe和Gradle的原因。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Gradle (Gradle VS Maven or Ant); 选择gradle的原因很简单，简单而清晰的语法，强大的脚本语言，快速而稳定的构建。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Eclipse (主要对比Idea, VS Code)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;开源及活跃而广受欢迎的社区&lt;/li&gt;
+&lt;li&gt;相对于Idea来说，个人使用经验上来看，在大Project上使用（源码多，项目多）更稳定, 且有偏向支持开源社区的因素，故使用Eclipse；VS Code对于小的Project来说还好，功能比Eclipse弱，查看多个文件及源码也不是很方便，大项目会使系统卡顿，但是小项目一般可以使用gradle + vim。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="开发环境"&gt;开发环境&lt;/h2&gt;
+&lt;p&gt;当前开发环境&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Ubuntu 19.10 x86_64&lt;/li&gt;
+&lt;li&gt;Gradle 5.6.4&lt;/li&gt;
+&lt;li&gt;Eclipse (Snap版本)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;Eclipse Platform
 Version: 2019-03 (4.11)
 Build id: I20190307-0500
 OS: Linux, v.5.3.0-24-generic, x86_64 / gtk 3.24.12
 Java version: 1.8.0_171
-&lt;/code>&lt;/pre>&lt;h2 id="eclipse项目配置及依赖管理">Eclipse项目配置及依赖管理&lt;/h2>
-&lt;h3 id="我的java项目管理方案">我的Java项目管理方案&lt;/h3>
-&lt;p>我不喜欢将IDE文件提交到git代码仓库，在我看来，IDE的作用就是一个文本编辑器，而且从协作角度来看，不同的开发者可能会选择不同的编辑器，所以不需要将IDE文件提交。 而Gradle脚本，不仅作为项目开发中一款重要的工具，而且包含了很多项目配置信息，因此需要提交到git仓库(有时候，如果开发人员和CI使用了统一的或兼容的gradle版本，甚至gradle wrapper都不需要提交)&lt;/p>
-&lt;ul>
-&lt;li>生成项目配置&lt;/li>
-&lt;/ul>
-&lt;p>默认Gradle eclipse编译输出目录为bin, 但是gradle构建输出目录为build， 因此需要改配置。&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-groovy" data-lang="groovy">&lt;span style="display:flex;">&lt;span>plugins &lt;span style="color:#555">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> id &lt;span style="color:#c30">&amp;#39;java&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> id &lt;span style="color:#c30">&amp;#39;eclipse&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#555">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>eclipse &lt;span style="color:#555">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> project&lt;span style="color:#555">.&lt;/span>&lt;span style="color:#309">natures&lt;/span> &lt;span style="color:#c30">&amp;#39;org.eclipse.buildship.core.gradleprojectnature&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> classpath &lt;span style="color:#555">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> downloadJavadoc &lt;span style="color:#555">=&lt;/span> &lt;span style="color:#069;font-weight:bold">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> downloadSources &lt;span style="color:#555">=&lt;/span> &lt;span style="color:#069;font-weight:bold">true&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> defaultOutputDir &lt;span style="color:#555">=&lt;/span> file&lt;span style="color:#555">(&lt;/span>&lt;span style="color:#c30">&amp;#39;build/default&amp;#39;&lt;/span>&lt;span style="color:#555">)&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> file&lt;span style="color:#555">.&lt;/span>&lt;span style="color:#309">whenMerged&lt;/span> &lt;span style="color:#555">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> entries&lt;span style="color:#555">.&lt;/span>&lt;span style="color:#309">each&lt;/span> &lt;span style="color:#555">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> source &lt;span style="color:#555">-&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#09f;font-style:italic">// This seems kludgy. If the second test is omitted, it fails processing a &amp;#39;Project Dependency&amp;#39; entry
-&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic">&lt;/span> &lt;span style="color:#069;font-weight:bold">if&lt;/span> &lt;span style="color:#555">(&lt;/span>source&lt;span style="color:#555">.&lt;/span>&lt;span style="color:#309">kind&lt;/span> &lt;span style="color:#555">==&lt;/span> &lt;span style="color:#c30">&amp;#39;src&amp;#39;&lt;/span> &lt;span style="color:#555">&amp;amp;&amp;amp;&lt;/span> source&lt;span style="color:#555">.&lt;/span>&lt;span style="color:#309">hasProperty&lt;/span>&lt;span style="color:#555">(&lt;/span>&lt;span style="color:#c30">&amp;#39;output&amp;#39;&lt;/span>&lt;span style="color:#555">))&lt;/span> &lt;span style="color:#555">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#078;font-weight:bold">def&lt;/span> outputPath &lt;span style="color:#555">=&lt;/span> source&lt;span style="color:#555">.&lt;/span>&lt;span style="color:#309">output&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">switch&lt;/span>&lt;span style="color:#555">(&lt;/span>source&lt;span style="color:#555">.&lt;/span>&lt;span style="color:#309">path&lt;/span>&lt;span style="color:#555">)&lt;/span> &lt;span style="color:#555">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">case&lt;/span> &lt;span style="color:#c30">&amp;#39;src/main/java&amp;#39;&lt;/span>&lt;span style="color:#555">:&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> source&lt;span style="color:#555">.&lt;/span>&lt;span style="color:#309">output&lt;/span> &lt;span style="color:#555">=&lt;/span> &lt;span style="color:#c30">&amp;#39;build/classes/java/main&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">break&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">case&lt;/span> &lt;span style="color:#c30">&amp;#39;src/main/resources&amp;#39;&lt;/span>&lt;span style="color:#555">:&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> source&lt;span style="color:#555">.&lt;/span>&lt;span style="color:#309">output&lt;/span> &lt;span style="color:#555">=&lt;/span> &lt;span style="color:#c30">&amp;#39;build/resources/main&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">break&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">case&lt;/span> &lt;span style="color:#c30">&amp;#39;src/test/java&amp;#39;&lt;/span>&lt;span style="color:#555">:&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> source&lt;span style="color:#555">.&lt;/span>&lt;span style="color:#309">output&lt;/span> &lt;span style="color:#555">=&lt;/span> &lt;span style="color:#c30">&amp;#39;build/classes/java/test&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">break&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">case&lt;/span> &lt;span style="color:#c30">&amp;#39;src/test/resources&amp;#39;&lt;/span>&lt;span style="color:#555">:&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> source&lt;span style="color:#555">.&lt;/span>&lt;span style="color:#309">output&lt;/span> &lt;span style="color:#555">=&lt;/span> &lt;span style="color:#c30">&amp;#39;build/resources/test&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#069;font-weight:bold">break&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#555">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#555">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#555">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#555">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#555">}&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#555">}&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;blockquote>
-&lt;p>&lt;a href="https://github.com/gradle/gradle/issues/3839">https://github.com/gradle/gradle/issues/3839&lt;/a>&lt;/p></description></item><item><title>Git快速手册</title><link>https://qtopie.github.io/notes/dev/git-quick-guide/</link><pubDate>Wed, 05 Jul 2017 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/dev/git-quick-guide/</guid><description>&lt;p>&lt;strong>WIP&lt;/strong>&lt;/p>
-&lt;h2 id="快速开始">快速开始&lt;/h2>
-&lt;ul>
-&lt;li>设置个人信息&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git config --global user.name &amp;lt;YOUR-NAME&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git config --global user.email &amp;lt;YOUR-EMAIL&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#09f;font-style:italic"># 查看个人配置&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git config --list
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>将默认主仓库设置为&lt;code>main&lt;/code> &lt;a href="https://github.com/github/renaming">BLM运动&lt;/a>&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>git config --global init.defaultbranch main
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;ul>
-&lt;li>初始化仓库&lt;/li>
-&lt;/ul>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mkdir /path/to/your/project
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#366">cd&lt;/span> /path/to/your/project
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git init 			&lt;span style="color:#09f;font-style:italic"># initialize an empty git repo&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git remote add origin git@repo-url.git
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="create-your-first-file-and-push-it-to-the-remote-repo">Create your first file and push it to the remote repo&lt;/h3>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#366">echo&lt;/span> &lt;span style="color:#c30">&amp;#34;qtopie.rw&amp;#34;&lt;/span> &amp;gt;&amp;gt; contributors.txt
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git add contributors.txt
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git commit -m &lt;span style="color:#c30">&amp;#39;Initial commit with contributors&amp;#39;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>git push -u origin master
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>总结下常用操作&lt;/p></description></item></channel></rss>
+&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="eclipse项目配置及依赖管理"&gt;Eclipse项目配置及依赖管理&lt;/h2&gt;
+&lt;h3 id="我的java项目管理方案"&gt;我的Java项目管理方案&lt;/h3&gt;
+&lt;p&gt;我不喜欢将IDE文件提交到git代码仓库，在我看来，IDE的作用就是一个文本编辑器，而且从协作角度来看，不同的开发者可能会选择不同的编辑器，所以不需要将IDE文件提交。 而Gradle脚本，不仅作为项目开发中一款重要的工具，而且包含了很多项目配置信息，因此需要提交到git仓库(有时候，如果开发人员和CI使用了统一的或兼容的gradle版本，甚至gradle wrapper都不需要提交)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;生成项目配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;默认Gradle eclipse编译输出目录为bin, 但是gradle构建输出目录为build， 因此需要改配置。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-groovy" data-lang="groovy"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;plugins &lt;span style="color:#555"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; id &lt;span style="color:#c30"&gt;&amp;#39;java&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; id &lt;span style="color:#c30"&gt;&amp;#39;eclipse&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#555"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;eclipse &lt;span style="color:#555"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; project&lt;span style="color:#555"&gt;.&lt;/span&gt;&lt;span style="color:#309"&gt;natures&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#39;org.eclipse.buildship.core.gradleprojectnature&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; classpath &lt;span style="color:#555"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; downloadJavadoc &lt;span style="color:#555"&gt;=&lt;/span&gt; &lt;span style="color:#069;font-weight:bold"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; downloadSources &lt;span style="color:#555"&gt;=&lt;/span&gt; &lt;span style="color:#069;font-weight:bold"&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; defaultOutputDir &lt;span style="color:#555"&gt;=&lt;/span&gt; file&lt;span style="color:#555"&gt;(&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#39;build/default&amp;#39;&lt;/span&gt;&lt;span style="color:#555"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; file&lt;span style="color:#555"&gt;.&lt;/span&gt;&lt;span style="color:#309"&gt;whenMerged&lt;/span&gt; &lt;span style="color:#555"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; entries&lt;span style="color:#555"&gt;.&lt;/span&gt;&lt;span style="color:#309"&gt;each&lt;/span&gt; &lt;span style="color:#555"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; source &lt;span style="color:#555"&gt;-&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#09f;font-style:italic"&gt;// This seems kludgy. If the second test is omitted, it fails processing a &amp;#39;Project Dependency&amp;#39; entry
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;&lt;/span&gt; &lt;span style="color:#069;font-weight:bold"&gt;if&lt;/span&gt; &lt;span style="color:#555"&gt;(&lt;/span&gt;source&lt;span style="color:#555"&gt;.&lt;/span&gt;&lt;span style="color:#309"&gt;kind&lt;/span&gt; &lt;span style="color:#555"&gt;==&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#39;src&amp;#39;&lt;/span&gt; &lt;span style="color:#555"&gt;&amp;amp;&amp;amp;&lt;/span&gt; source&lt;span style="color:#555"&gt;.&lt;/span&gt;&lt;span style="color:#309"&gt;hasProperty&lt;/span&gt;&lt;span style="color:#555"&gt;(&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#39;output&amp;#39;&lt;/span&gt;&lt;span style="color:#555"&gt;))&lt;/span&gt; &lt;span style="color:#555"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#078;font-weight:bold"&gt;def&lt;/span&gt; outputPath &lt;span style="color:#555"&gt;=&lt;/span&gt; source&lt;span style="color:#555"&gt;.&lt;/span&gt;&lt;span style="color:#309"&gt;output&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#069;font-weight:bold"&gt;switch&lt;/span&gt;&lt;span style="color:#555"&gt;(&lt;/span&gt;source&lt;span style="color:#555"&gt;.&lt;/span&gt;&lt;span style="color:#309"&gt;path&lt;/span&gt;&lt;span style="color:#555"&gt;)&lt;/span&gt; &lt;span style="color:#555"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#069;font-weight:bold"&gt;case&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#39;src/main/java&amp;#39;&lt;/span&gt;&lt;span style="color:#555"&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; source&lt;span style="color:#555"&gt;.&lt;/span&gt;&lt;span style="color:#309"&gt;output&lt;/span&gt; &lt;span style="color:#555"&gt;=&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#39;build/classes/java/main&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#069;font-weight:bold"&gt;break&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#069;font-weight:bold"&gt;case&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#39;src/main/resources&amp;#39;&lt;/span&gt;&lt;span style="color:#555"&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; source&lt;span style="color:#555"&gt;.&lt;/span&gt;&lt;span style="color:#309"&gt;output&lt;/span&gt; &lt;span style="color:#555"&gt;=&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#39;build/resources/main&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#069;font-weight:bold"&gt;break&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#069;font-weight:bold"&gt;case&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#39;src/test/java&amp;#39;&lt;/span&gt;&lt;span style="color:#555"&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; source&lt;span style="color:#555"&gt;.&lt;/span&gt;&lt;span style="color:#309"&gt;output&lt;/span&gt; &lt;span style="color:#555"&gt;=&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#39;build/classes/java/test&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#069;font-weight:bold"&gt;break&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#069;font-weight:bold"&gt;case&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#39;src/test/resources&amp;#39;&lt;/span&gt;&lt;span style="color:#555"&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; source&lt;span style="color:#555"&gt;.&lt;/span&gt;&lt;span style="color:#309"&gt;output&lt;/span&gt; &lt;span style="color:#555"&gt;=&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#39;build/resources/test&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#069;font-weight:bold"&gt;break&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#555"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#555"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#555"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#555"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#555"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#555"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;a href="https://github.com/gradle/gradle/issues/3839"&gt;https://github.com/gradle/gradle/issues/3839&lt;/a&gt;&lt;/p&gt;</description></item><item><title>Git快速手册</title><link>https://qtopie.github.io/notes/dev/git-quick-guide/</link><pubDate>Wed, 05 Jul 2017 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/dev/git-quick-guide/</guid><description>&lt;p&gt;&lt;strong&gt;WIP&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="快速开始"&gt;快速开始&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;设置个人信息&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git config --global user.name &amp;lt;YOUR-NAME&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git config --global user.email &amp;lt;YOUR-EMAIL&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# 查看个人配置&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git config --list
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;将默认主仓库设置为&lt;code&gt;main&lt;/code&gt; &lt;a href="https://github.com/github/renaming"&gt;BLM运动&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git config --global init.defaultbranch main
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;初始化仓库&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mkdir /path/to/your/project
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#366"&gt;cd&lt;/span&gt; /path/to/your/project
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git init 			&lt;span style="color:#09f;font-style:italic"&gt;# initialize an empty git repo&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git remote add origin git@repo-url.git
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="create-your-first-file-and-push-it-to-the-remote-repo"&gt;Create your first file and push it to the remote repo&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#366"&gt;echo&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#34;qtopie.rw&amp;#34;&lt;/span&gt; &amp;gt;&amp;gt; contributors.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git add contributors.txt
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git commit -m &lt;span style="color:#c30"&gt;&amp;#39;Initial commit with contributors&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git push -u origin master
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;总结下常用操作&lt;/p&gt;</description></item></channel></rss>

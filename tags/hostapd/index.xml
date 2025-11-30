@@ -1,16 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hostapd on Blog | Qtopie</title><link>https://qtopie.github.io/tags/hostapd/</link><description>Recent content in Hostapd on Blog | Qtopie</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Tue, 30 Aug 2016 19:06:18 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/hostapd/index.xml" rel="self" type="application/rss+xml"/><item><title>Wifi with hostapd</title><link>https://qtopie.github.io/notes/linux/hostapd-wifi/</link><pubDate>Tue, 30 Aug 2016 19:06:18 +0800</pubDate><guid>https://qtopie.github.io/notes/linux/hostapd-wifi/</guid><description>&lt;h2 id="hostapd">&lt;a href="https://w1.fi/hostapd/">Hostapd&lt;/a>&lt;/h2>
-&lt;p>hostapd is a user space daemon for access point and authentication server.&lt;/p>
-&lt;p>&lt;strong>Please follow the guide of &lt;a href="https://www.raspberrypi.org/documentation/configuration/wireless/access-point.md">Official documentation&lt;/a>&lt;/strong>&lt;/p>
-&lt;h2 id="installation-and-configuration">Installation and configuration&lt;/h2>
-&lt;p>&lt;em>Tested on raspbian with raspberry pi 3&lt;/em>&lt;/p>
-&lt;h3 id="install-hostapd-and-configure-it">Install hostapd and configure it&lt;/h3>
-&lt;p>&lt;code>sudo apt-get install hostapd -y --force-yes&lt;/code>,
-also &lt;code>sudo apt-get install haveged&lt;/code>&lt;/p>
-&lt;ul>
-&lt;li>Edit &lt;code>hostapd.conf&lt;/code>:&lt;/li>
-&lt;/ul>
-&lt;p>&lt;em>&lt;code>/etc/hostapd/hostapd.conf&lt;/code>&lt;/em>&lt;/p>
-&lt;pre tabindex="0">&lt;code>interface=wlan0
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Hostapd on Blog | qtopie</title><link>https://qtopie.github.io/tags/hostapd/</link><description>Recent content in Hostapd on Blog | qtopie</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Tue, 30 Aug 2016 19:06:18 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/hostapd/index.xml" rel="self" type="application/rss+xml"/><item><title>Wifi with hostapd</title><link>https://qtopie.github.io/notes/linux/hostapd-wifi/</link><pubDate>Tue, 30 Aug 2016 19:06:18 +0800</pubDate><guid>https://qtopie.github.io/notes/linux/hostapd-wifi/</guid><description>&lt;h2 id="hostapd"&gt;&lt;a href="https://w1.fi/hostapd/"&gt;Hostapd&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;hostapd is a user space daemon for access point and authentication server.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Please follow the guide of &lt;a href="https://www.raspberrypi.org/documentation/configuration/wireless/access-point.md"&gt;Official documentation&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="installation-and-configuration"&gt;Installation and configuration&lt;/h2&gt;
+&lt;p&gt;&lt;em&gt;Tested on raspbian with raspberry pi 3&lt;/em&gt;&lt;/p&gt;
+&lt;h3 id="install-hostapd-and-configure-it"&gt;Install hostapd and configure it&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;sudo apt-get install hostapd -y --force-yes&lt;/code&gt;,
+also &lt;code&gt;sudo apt-get install haveged&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Edit &lt;code&gt;hostapd.conf&lt;/code&gt;:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;&lt;code&gt;/etc/hostapd/hostapd.conf&lt;/code&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;interface=wlan0
 ssid=RPi
 wpa_passphrase=raspberrypi
 auth_algs=1
@@ -19,6 +19,6 @@ wpa_key_mgmt=WPA-PSK
 rsn_pairwise=CCMP
 channel=10
 hw_mode=g
-&lt;/code>&lt;/pre>&lt;p>&lt;strong>There should not be any whitespace at the end of each line&lt;/strong>&lt;/p>
-&lt;p>then modify file &lt;code>/etc/default/hostapd&lt;/code> to let the configuration work
-automatically.&lt;/p></description></item></channel></rss>
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;There should not be any whitespace at the end of each line&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;then modify file &lt;code&gt;/etc/default/hostapd&lt;/code&gt; to let the configuration work
+automatically.&lt;/p&gt;</description></item></channel></rss>

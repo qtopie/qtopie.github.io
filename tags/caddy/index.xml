@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Caddy on Blog | Qtopie</title><link>https://qtopie.github.io/tags/caddy/</link><description>Recent content in Caddy on Blog | Qtopie</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</copyright><lastBuildDate>Wed, 22 Apr 2020 00:03:52 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/caddy/index.xml" rel="self" type="application/rss+xml"/><item><title>Caddy与http3</title><link>https://qtopie.github.io/notes/web/caddy/</link><pubDate>Wed, 22 Apr 2020 00:03:52 +0800</pubDate><guid>https://qtopie.github.io/notes/web/caddy/</guid><description>&lt;h2 id="caddy-简单介绍">Caddy 简单介绍&lt;/h2>
-&lt;p>Caddy是现代化的web代理服务器，使用Go语言编写，不直接依赖系统底层库。
-另外，它很好地支持了https (也最先支持了http3), 而且它使用了现代化流行且安全的配置，几乎不需要额外配置。&lt;/p>
-&lt;h2 id="安装使用">安装使用&lt;/h2>
-&lt;p>我们可以去官网下载2.0版本 &lt;a href="https://caddyserver.com/">https://caddyserver.com/&lt;/a> 我们只需要拿到二进制文件即可。&lt;/p>
-&lt;p>下载后放到&lt;code>/usr/local/bin/caddy&lt;/code>, 然后编辑Caddyfile&lt;/p>
-&lt;p>/etc/Caddyfile&lt;/p>
-&lt;pre tabindex="0">&lt;code>{
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Caddy on Blog | qtopie</title><link>https://qtopie.github.io/tags/caddy/</link><description>Recent content in Caddy on Blog | qtopie</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Wed, 22 Apr 2020 00:03:52 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/caddy/index.xml" rel="self" type="application/rss+xml"/><item><title>Caddy与http3</title><link>https://qtopie.github.io/notes/web/caddy/</link><pubDate>Wed, 22 Apr 2020 00:03:52 +0800</pubDate><guid>https://qtopie.github.io/notes/web/caddy/</guid><description>&lt;h2 id="caddy-简单介绍"&gt;Caddy 简单介绍&lt;/h2&gt;
+&lt;p&gt;Caddy是现代化的web代理服务器，使用Go语言编写，不直接依赖系统底层库。
+另外，它很好地支持了https (也最先支持了http3), 而且它使用了现代化流行且安全的配置，几乎不需要额外配置。&lt;/p&gt;
+&lt;h2 id="安装使用"&gt;安装使用&lt;/h2&gt;
+&lt;p&gt;我们可以去官网下载2.0版本 &lt;a href="https://caddyserver.com/"&gt;https://caddyserver.com/&lt;/a&gt; 我们只需要拿到二进制文件即可。&lt;/p&gt;
+&lt;p&gt;下载后放到&lt;code&gt;/usr/local/bin/caddy&lt;/code&gt;, 然后编辑Caddyfile&lt;/p&gt;
+&lt;p&gt;/etc/Caddyfile&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;{
  # debug
  servers {
  protocol {
@@ -24,16 +24,18 @@ mwine.science {
 	file_server
 	encode zstd gzip 
 }
-&lt;/code>&lt;/pre>&lt;blockquote>
-&lt;p>配置参考 &lt;a href="https://caddyserver.com/docs/caddyfile/options">https://caddyserver.com/docs/caddyfile/options&lt;/a>&lt;/p>&lt;/blockquote>
-&lt;p>这里我将域名&lt;code>mwine.science&lt;/code>和&lt;code>www.mwine.science&lt;/code>绑定到了同一台服务器，并将&lt;code>www.mwine.science&lt;/code>重定向到&lt;code>mwine.science&lt;/code>&lt;/p>
-&lt;p>然后创建一个文件&lt;code>/var/www/html/mwine.science/index.html&lt;/code>&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-html" data-lang="html">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#099">&amp;lt;!DOCTYPE html&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;&lt;span style="color:#309;font-weight:bold">html&lt;/span>&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;&lt;span style="color:#309;font-weight:bold">body&lt;/span>&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> Hello World !
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;/&lt;span style="color:#309;font-weight:bold">body&lt;/span>&amp;gt;
-&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&amp;lt;/&lt;span style="color:#309;font-weight:bold">html&lt;/span>&amp;gt;
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>最后运行起来就可以了 （这里我加上了watch选项，启用根据文件配置动态更新）&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>/usr/local/bin/caddy run -config /etc/Caddyfile -watch
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>或者我们可以将它写成systemd服务，输入命令编辑&lt;code>sudo systemctl edit --force --full caddy.service&lt;/code>&lt;/p></description></item></channel></rss>
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt;配置参考 &lt;a href="https://caddyserver.com/docs/caddyfile/options"&gt;https://caddyserver.com/docs/caddyfile/options&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这里我将域名&lt;code&gt;mwine.science&lt;/code&gt;和&lt;code&gt;www.mwine.science&lt;/code&gt;绑定到了同一台服务器，并将&lt;code&gt;www.mwine.science&lt;/code&gt;重定向到&lt;code&gt;mwine.science&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;然后创建一个文件&lt;code&gt;/var/www/html/mwine.science/index.html&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#099"&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#309;font-weight:bold"&gt;html&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#309;font-weight:bold"&gt;body&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Hello World !
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;/&lt;span style="color:#309;font-weight:bold"&gt;body&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;/&lt;span style="color:#309;font-weight:bold"&gt;html&lt;/span&gt;&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;最后运行起来就可以了 （这里我加上了watch选项，启用根据文件配置动态更新）&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/usr/local/bin/caddy run -config /etc/Caddyfile -watch
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;或者我们可以将它写成systemd服务，输入命令编辑&lt;code&gt;sudo systemctl edit --force --full caddy.service&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;粘贴以下内容&lt;/p&gt;</description></item></channel></rss>
