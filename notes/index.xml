@@ -1,4 +1,58 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Notes on Blog | qtopie</title><link>https://qtopie.github.io/notes/</link><description>Recent content in Notes on Blog | qtopie</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Sun, 29 Jun 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/notes/index.xml" rel="self" type="application/rss+xml"/><item><title>G1 垃圾回收器（Garbage-First, G1 GC）</title><link>https://qtopie.github.io/notes/java/g1/</link><pubDate>Sun, 29 Jun 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/java/g1/</guid><description>&lt;p&gt;G1 是 Java HotSpot 虚拟机自 JDK7u4 起提供的服务器端垃圾回收器，目标是替代 CMS，适用于大堆内存、低延迟场景。G1 通过分区、并发和自适应等机制，实现高吞吐量和可预测的停顿时间。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Notes on 1001問</title><link>https://qtopie.github.io/notes/</link><description>Recent content in Notes on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Sun, 30 Nov 2025 21:23:16 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/notes/index.xml" rel="self" type="application/rss+xml"/><item><title>吉他基础</title><link>https://qtopie.github.io/notes/guitar/guitar-basic/</link><pubDate>Sun, 30 Nov 2025 21:23:16 +0800</pubDate><guid>https://qtopie.github.io/notes/guitar/guitar-basic/</guid><description>&lt;h2 id="常见吉他和弦"&gt;常见吉他和弦&lt;/h2&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-guitar" data-lang="guitar"&gt;stave [tuning=EADGBe] [time=4/4] 
+| C:0 | G:0 | Am:0 | Em:0 | F:0 | G:0 | C:0 | D:0 | end
+&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex="0"&gt;&lt;code class="language-guitar" data-lang="guitar"&gt;stave [tuning=EADGBe] [time=4/4] 
+| C:0 | G:0 | Am:0 | Em:0 | Dm:0 | G:0 | C:0 | end
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Tab + 指法标记示例&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-guitar" data-lang="guitar"&gt;Bm $3 4 4h5p3h4 5 $2 3 5 7 7h8p7 5/7 | A $4 7 9 $3 7 6 $5 9 $4 7h9 7 $5 9\7 5/7 ||
+&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex="0"&gt;&lt;code class="language-guitar" data-lang="guitar"&gt;stave [time=4/4] 
+| C:0 ^1-3 | G:0 v3 |
+$3 0 2 ^ 3 0 v |
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Smelly Cat&lt;/p&gt;</description></item><item><title>2025书单</title><link>https://qtopie.github.io/notes/book/2025-book-list/</link><pubDate>Sun, 30 Nov 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/book/2025-book-list/</guid><description>&lt;p&gt;[] 富爸爸穷爸爸 (二刷)
+[] 山海经密码 (三刷)
+[] 草房子&lt;/p&gt;
+&lt;p&gt;新华网做了一个人生必读100本书问卷
+&lt;a href="https://www.xinhuanet.com/book/zhuanti/rsbdbook/#"&gt;https://www.xinhuanet.com/book/zhuanti/rsbdbook/#&lt;/a&gt;&lt;/p&gt;</description></item><item><title>吉他扫弦</title><link>https://qtopie.github.io/notes/guitar/guitar-strum/</link><pubDate>Fri, 28 Nov 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/guitar/guitar-strum/</guid><description>&lt;p&gt;掌握吉他扫弦（刷的节奏）是初学者的一个重要里程碑。扫弦的节奏感很大程度上依赖于&lt;strong&gt;稳定的右手动作&lt;/strong&gt;和&lt;strong&gt;对节拍的理解&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;这里为您提供一套系统的学习步骤和技巧：&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="-初学者掌握扫弦节奏的五大步骤"&gt;🎸 初学者掌握扫弦节奏的五大步骤&lt;/h2&gt;
+&lt;h3 id="1-专注右手动作-无和弦练习"&gt;1. 专注右手动作 (无和弦练习)&lt;/h3&gt;
+&lt;p&gt;在开始担心和弦之前，先让您的右手独立稳定下来。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;⚡️ 静音练习（Muting）:&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;用您的&lt;strong&gt;左手&lt;/strong&gt;轻轻地搭在琴弦上，但不要按实，让所有琴弦发出“闷”或“沙”的声音（这被称为&lt;strong&gt;闷音&lt;/strong&gt;或&lt;strong&gt;制音&lt;/strong&gt;）。&lt;/li&gt;
+&lt;li&gt;只用您的&lt;strong&gt;右手&lt;/strong&gt;（拨片或手指）进行上下扫弦练习。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;目标：&lt;/strong&gt; 确保您的上下扫弦声音均匀、力度一致，并且动作非常放松。手腕应该是驱动力，而不是手臂。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;⏱️ 使用节拍器 (Metronome):&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;将节拍器设置为一个非常慢的速度（例如：每分钟 &lt;strong&gt;60-80 拍&lt;/strong&gt;）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;练习一：&lt;/strong&gt; 每一拍只扫一次（下扫 $\downarrow$）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;练习二：&lt;/strong&gt; 每一拍扫两次（下扫 $\downarrow$ 和上扫 $\uparrow$）。记住，$\downarrow$ 在拍子上，$\uparrow$ 在“and”上（即两拍之间）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="2-理解基本节奏型"&gt;2. 理解基本节奏型&lt;/h3&gt;
+&lt;p&gt;初学者最常用的节奏型是&lt;strong&gt;四分音符&lt;/strong&gt;和&lt;strong&gt;八分音符&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;四分音符（每拍一扫）：&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;数数方式：&lt;strong&gt;1&lt;/strong&gt; - 2 - 3 - 4&lt;/li&gt;
+&lt;li&gt;扫弦方向：$\downarrow$ - (停) - $\downarrow$ - (停) - $\downarrow$ - (停) - $\downarrow$ - (停)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;八分音符（每拍两扫）：&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;数数方式：&lt;strong&gt;1&lt;/strong&gt; &amp;amp; &lt;strong&gt;2&lt;/strong&gt; &amp;amp; &lt;strong&gt;3&lt;/strong&gt; &amp;amp; &lt;strong&gt;4&lt;/strong&gt; &amp;amp;&lt;/li&gt;
+&lt;li&gt;扫弦方向：$\downarrow$ $\uparrow$ $\downarrow$ $\uparrow$ $\downarrow$ $\uparrow$ $\downarrow$ $\uparrow$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;✍️ 建议：&lt;/strong&gt; 在练习时，&lt;strong&gt;务必&lt;/strong&gt;将数数（1 &amp;amp; 2 &amp;amp;&amp;hellip;）和您的扫弦声音同步说出来。这能帮助您将听觉、视觉和动作联系起来。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="3-掌握基础节奏型以八分音符为主"&gt;3. 掌握基础节奏型（以八分音符为主）&lt;/h3&gt;
+&lt;p&gt;一旦您能稳定地进行“$\downarrow$ $\uparrow$ $\downarrow$ $\uparrow$”的连贯扫弦，就可以开始学习初学最常用的、带&lt;strong&gt;休止&lt;/strong&gt;或&lt;strong&gt;省略&lt;/strong&gt;的节奏型了。&lt;/p&gt;</description></item><item><title>G1 垃圾回收器（Garbage-First, G1 GC）</title><link>https://qtopie.github.io/notes/java/g1/</link><pubDate>Sun, 29 Jun 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/java/g1/</guid><description>&lt;p&gt;G1 是 Java HotSpot 虚拟机自 JDK7u4 起提供的服务器端垃圾回收器，目标是替代 CMS，适用于大堆内存、低延迟场景。G1 通过分区、并发和自适应等机制，实现高吞吐量和可预测的停顿时间。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id="g1-的主要特点"&gt;G1 的主要特点&lt;/h2&gt;
 &lt;ul&gt;
@@ -1959,44 +2013,4 @@ swapfile&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;It&amp;rsquo;s recommended to use internal NAT network, so create a virtual network switch if necessary.&lt;/p&gt;</description></item><item><title>吉他扫弦</title><link>https://qtopie.github.io/notes/guitar/guitar-strum/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/guitar/guitar-strum/</guid><description>&lt;p&gt;掌握吉他扫弦（刷的节奏）是初学者的一个重要里程碑。扫弦的节奏感很大程度上依赖于&lt;strong&gt;稳定的右手动作&lt;/strong&gt;和&lt;strong&gt;对节拍的理解&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;这里为您提供一套系统的学习步骤和技巧：&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id="-初学者掌握扫弦节奏的五大步骤"&gt;🎸 初学者掌握扫弦节奏的五大步骤&lt;/h2&gt;
-&lt;h3 id="1-专注右手动作-无和弦练习"&gt;1. 专注右手动作 (无和弦练习)&lt;/h3&gt;
-&lt;p&gt;在开始担心和弦之前，先让您的右手独立稳定下来。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;⚡️ 静音练习（Muting）:&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;用您的&lt;strong&gt;左手&lt;/strong&gt;轻轻地搭在琴弦上，但不要按实，让所有琴弦发出“闷”或“沙”的声音（这被称为&lt;strong&gt;闷音&lt;/strong&gt;或&lt;strong&gt;制音&lt;/strong&gt;）。&lt;/li&gt;
-&lt;li&gt;只用您的&lt;strong&gt;右手&lt;/strong&gt;（拨片或手指）进行上下扫弦练习。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;目标：&lt;/strong&gt; 确保您的上下扫弦声音均匀、力度一致，并且动作非常放松。手腕应该是驱动力，而不是手臂。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;⏱️ 使用节拍器 (Metronome):&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;将节拍器设置为一个非常慢的速度（例如：每分钟 &lt;strong&gt;60-80 拍&lt;/strong&gt;）。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;练习一：&lt;/strong&gt; 每一拍只扫一次（下扫 $\downarrow$）。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;练习二：&lt;/strong&gt; 每一拍扫两次（下扫 $\downarrow$ 和上扫 $\uparrow$）。记住，$\downarrow$ 在拍子上，$\uparrow$ 在“and”上（即两拍之间）。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="2-理解基本节奏型"&gt;2. 理解基本节奏型&lt;/h3&gt;
-&lt;p&gt;初学者最常用的节奏型是&lt;strong&gt;四分音符&lt;/strong&gt;和&lt;strong&gt;八分音符&lt;/strong&gt;。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;四分音符（每拍一扫）：&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;数数方式：&lt;strong&gt;1&lt;/strong&gt; - 2 - 3 - 4&lt;/li&gt;
-&lt;li&gt;扫弦方向：$\downarrow$ - (停) - $\downarrow$ - (停) - $\downarrow$ - (停) - $\downarrow$ - (停)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;八分音符（每拍两扫）：&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;数数方式：&lt;strong&gt;1&lt;/strong&gt; &amp;amp; &lt;strong&gt;2&lt;/strong&gt; &amp;amp; &lt;strong&gt;3&lt;/strong&gt; &amp;amp; &lt;strong&gt;4&lt;/strong&gt; &amp;amp;&lt;/li&gt;
-&lt;li&gt;扫弦方向：$\downarrow$ $\uparrow$ $\downarrow$ $\uparrow$ $\downarrow$ $\uparrow$ $\downarrow$ $\uparrow$&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;✍️ 建议：&lt;/strong&gt; 在练习时，&lt;strong&gt;务必&lt;/strong&gt;将数数（1 &amp;amp; 2 &amp;amp;&amp;hellip;）和您的扫弦声音同步说出来。这能帮助您将听觉、视觉和动作联系起来。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="3-掌握基础节奏型以八分音符为主"&gt;3. 掌握基础节奏型（以八分音符为主）&lt;/h3&gt;
-&lt;p&gt;一旦您能稳定地进行“$\downarrow$ $\uparrow$ $\downarrow$ $\uparrow$”的连贯扫弦，就可以开始学习初学最常用的、带&lt;strong&gt;休止&lt;/strong&gt;或&lt;strong&gt;省略&lt;/strong&gt;的节奏型了。&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;It&amp;rsquo;s recommended to use internal NAT network, so create a virtual network switch if necessary.&lt;/p&gt;</description></item></channel></rss>

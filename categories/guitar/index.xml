@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Guitar on 1001問</title><link>https://qtopie.github.io/categories/guitar/</link><description>Recent content in Guitar on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Sun, 30 Nov 2025 21:23:16 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/categories/guitar/index.xml" rel="self" type="application/rss+xml"/><item><title>吉他基础</title><link>https://qtopie.github.io/notes/guitar/guitar-basic/</link><pubDate>Sun, 30 Nov 2025 21:23:16 +0800</pubDate><guid>https://qtopie.github.io/notes/guitar/guitar-basic/</guid><description>&lt;h2 id="常见吉他和弦"&gt;常见吉他和弦&lt;/h2&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-guitar" data-lang="guitar"&gt;stave [tuning=EADGBe] [time=4/4] 
+| C:0 | G:0 | Am:0 | Em:0 | F:0 | G:0 | C:0 | D:0 | end
+&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex="0"&gt;&lt;code class="language-guitar" data-lang="guitar"&gt;stave [tuning=EADGBe] [time=4/4] 
+| C:0 | G:0 | Am:0 | Em:0 | Dm:0 | G:0 | C:0 | end
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Tab + 指法标记示例&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-guitar" data-lang="guitar"&gt;Bm $3 4 4h5p3h4 5 $2 3 5 7 7h8p7 5/7 | A $4 7 9 $3 7 6 $5 9 $4 7h9 7 $5 9\7 5/7 ||
+&lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex="0"&gt;&lt;code class="language-guitar" data-lang="guitar"&gt;stave [time=4/4] 
+| C:0 ^1-3 | G:0 v3 |
+$3 0 2 ^ 3 0 v |
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Smelly Cat&lt;/p&gt;</description></item></channel></rss>
