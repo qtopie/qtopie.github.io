@@ -1,7 +1,7 @@
 baseURL: 'https://qtopie.github.io/'
 languageCode: 'en-us'
 defaultContentLanguage: en
-title: 'Blog | qtopie'
+title: '1001問'
 theme: 'drift-blog-theme'
 googleAnalytics: UA-209364110-1
 author: 
