@@ -1,4 +1,70 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Notes on 1001問</title><link>https://qtopie.github.io/notes/</link><description>Recent content in Notes on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Sun, 30 Nov 2025 21:23:16 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/notes/index.xml" rel="self" type="application/rss+xml"/><item><title>吉他基础</title><link>https://qtopie.github.io/notes/guitar/guitar-basic/</link><pubDate>Sun, 30 Nov 2025 21:23:16 +0800</pubDate><guid>https://qtopie.github.io/notes/guitar/guitar-basic/</guid><description>&lt;h2 id="常见吉他和弦"&gt;常见吉他和弦&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Notes on 1001問</title><link>https://qtopie.github.io/notes/</link><description>Recent content in Notes on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Thu, 01 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/notes/index.xml" rel="self" type="application/rss+xml"/><item><title>XS20摄影技巧</title><link>https://qtopie.github.io/notes/photography/xs20/</link><pubDate>Thu, 01 Jan 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/photography/xs20/</guid><description>&lt;h2 id="xs-20介绍"&gt;XS-20介绍&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;A 模式 (Aperture Priority) —— 光圈优先模式
+含义： 你手动控制光圈，相机自动帮你计算快门速度。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;为什么要用： 这是使用 35mm F1.4 的首选模式。因为这支镜头的精髓在于 F1.4 的大光圈。&lt;/p&gt;
+&lt;p&gt;操作建议： 想拍背景虚化的糖水片，就拧到 1.4；想拍风景锐利一点，就拧到 5.6 或 8。相机会确保照片亮度正常，你只需要关注“虚化程度”。&lt;/p&gt;
+&lt;ol start="2"&gt;
+&lt;li&gt;S 模式 (Shutter Priority) —— 快门优先模式
+含义： 你手动控制快门速度，相机自动帮你计算光圈。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;为什么要用： 当你要拍“动来动去”的东西时（比如宠物、跑动的小孩）。&lt;/p&gt;
+&lt;p&gt;操作建议： 如果想凝固瞬间，把快门定在 1/500s 以上；如果想拍出丝滑的流水，就定在 1/15s 甚至更慢。&lt;/p&gt;
+&lt;ol start="3"&gt;
+&lt;li&gt;P 模式 (Program AE) —— 程序自动模式
+含义： 相机自动决定光圈和快门，但允许你调整 ISO、白平衡、胶片模拟等。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;为什么要用： 比起完全傻瓜的 AUTO 模式，P 模式能让你保留对“色彩（胶片模拟）”和“亮度（曝光补偿）”的控制权。&lt;/p&gt;
+&lt;p&gt;操作建议： 当你只想随手抓拍，不想思考参数，但又想用富士的经典正片（Classic Chrome）色彩时，用 P 模式。&lt;/p&gt;
+&lt;h2 id="拍摄技巧"&gt;拍摄技巧&lt;/h2&gt;
+&lt;p&gt;既然你拿到了富士 X-S20 和 35mm F1.4 这样一套兼具性能与审美色彩的设备，理解它的原理能让你不再只是“按快门”，而是“创作”。&lt;/p&gt;
+&lt;h3 id="一-成像原理光的奇幻漂流"&gt;一、 成像原理：光的“奇幻漂流”&lt;/h3&gt;
+&lt;p&gt;相机的本质其实是一个&lt;strong&gt;高度精密的暗盒&lt;/strong&gt;。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;收集光线（镜头）：&lt;/strong&gt; 当你按下快门，光线穿过你的 35mm F1.4 镜头。镜头里的玻璃镜片会将发散的光线折射、汇聚。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;控制光量（光圈与快门）：&lt;/strong&gt; * &lt;strong&gt;光圈&lt;/strong&gt;（你镜头上的环）像眼球的瞳孔，开大（F1.4）进光多，缩小（F16）进光少。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;快门&lt;/strong&gt;像眼皮，开启时间长，进光就多。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start="3"&gt;
+&lt;li&gt;&lt;strong&gt;记录影像（感光元件）：&lt;/strong&gt; 光线最终打在 X-S20 内部的那个传感器（CMOS）上。传感器上有数千万个小光敏点，它们把光转换成电信号，最后由处理器转化成你在屏幕上看到的胶片感照片。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id="二-拍出好照片的四大要素"&gt;二、 拍出“好照片”的四大要素&lt;/h3&gt;
+&lt;p&gt;很多新手纠结于参数，但好的照片往往是以下四个维度的平衡：&lt;/p&gt;</description></item><item><title>晴天</title><link>https://qtopie.github.io/notes/guitar/sunny-day/</link><pubDate>Thu, 18 Dec 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/guitar/sunny-day/</guid><description>&lt;p&gt;吉他简谱练习&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-guitar" data-lang="guitar"&gt;stave [tuning=EADGBe] [time=4/4] 
+C9 $4 x $3 x $2 x $3 x | $5 x $4 0h2 $2 x $3 x | G $6 x $4 x $2 x $3 x | $6 x $2 x $6 2 $2 x |
+
+C9 $4 x $3 x $2 x $3 x | $5 x $4 0h2 $2 x $3 x | G $6 x $4 x $2 x $3 x | $6 x $4 x/8 $2 x/8 $6 2 $4 x/8 $2 x/8 ||
+
+stave | Em7:0 $3 v | v/16 ^/16 | C:0 v ^ v ^ | v v ^ | G:0 v v ^ | v ^ v ^ | D v v ^ |
+
+stave | Em7:0 $3 v v ^ | C:0 v ^ v ^ | v v ^ | G:0 v v ^ | v ^ v ^ | D v v ^ |
+&lt;/code&gt;&lt;/pre&gt;</description></item><item><title>第57次取消发送</title><link>https://qtopie.github.io/notes/guitar/57th-of-cancellation-send/</link><pubDate>Thu, 18 Dec 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/guitar/57th-of-cancellation-send/</guid><description>&lt;p&gt;吉他简谱练习&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code class="language-guitar" data-lang="guitar"&gt;stave [tuning=EADGBe] [time=4/4] 
+Em7 $4 x $3 x | $2 x x x x | Dsus2 $4 x $3 x $2 x | Csus2 $5 x $3 x $2 x | G $6 x $3 x $2 x |
+
+
+stave [tuning=EADGBe] [time=4/4] 
+Em7 $4 x $3 x | $2 x x x x | Dsus2 $4 x $3 x $2 x | Csus2 $5 x $3 x $2 x | G $6 x $3 x $2 x ||
+
+stave [tuning=EADGBe] [time=4/4] 
+Em7 $4 x $3 x $2 x | Dsus2 $4 x $3 x $2 x | Csus2 $5 x $3 x $2 x | G $6 x $3 x $2 x |
+
+stave [tuning=EADGBe] [time=4/4] 
+Em7 $4 x $3 x $2 x | Dsus2 $4 x $3 x $2 x | Csus2 $5 x $3 x $2 x | G $6 x $3 x $2 x ||
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;【《第57次取消发送》吉他教学】https://www.bilibili.com/video/BV1XfnAzwEnG?vd_source=3c404ae4349980e59af7e78f2d24ba86&lt;/p&gt;</description></item><item><title>2025书单</title><link>https://qtopie.github.io/notes/book/2025-book-list/</link><pubDate>Sun, 30 Nov 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/book/2025-book-list/</guid><description>&lt;ul&gt;
+&lt;li&gt;&lt;input checked="" disabled="" type="checkbox"&gt; 富爸爸穷爸爸 (二刷)&lt;/li&gt;
+&lt;li&gt;&lt;input checked="" disabled="" type="checkbox"&gt; 山海经密码 (三刷)&lt;/li&gt;
+&lt;li&gt;[] 草房子&lt;/li&gt;
+&lt;li&gt;[] 《一千零一夜》&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;新华网做了一个人生必读100本书问卷
+&lt;a href="https://www.xinhuanet.com/book/zhuanti/rsbdbook/#"&gt;https://www.xinhuanet.com/book/zhuanti/rsbdbook/#&lt;/a&gt;&lt;/p&gt;</description></item><item><title>吉他基础</title><link>https://qtopie.github.io/notes/guitar/guitar-basic/</link><pubDate>Sun, 30 Nov 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/guitar/guitar-basic/</guid><description>&lt;h2 id="吉他怎么调音"&gt;吉他怎么调音&lt;/h2&gt;
+&lt;p&gt;吉他调音顺序是将6、5、4、3、2、1六根琴弦的音高， 对应EADGBe。 校定为6弦—E低音E、5弦—A、4弦—D、3弦—G、2弦—B，1弦—E高音E。 从6到1弦分别是E-A-D-G-B-E，即低音3，低音6，中音2，中音5，中音7，高音3。 这是基本调弦标准音，特殊调弦除外，调音器夹到琴头从六弦开始调&lt;/p&gt;
+&lt;h2 id="常见吉他和弦"&gt;常见吉他和弦&lt;/h2&gt;
 &lt;pre tabindex="0"&gt;&lt;code class="language-guitar" data-lang="guitar"&gt;stave [tuning=EADGBe] [time=4/4] 
 | C:0 | G:0 | Am:0 | Em:0 | F:0 | G:0 | C:0 | D:0 | end
 &lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex="0"&gt;&lt;code class="language-guitar" data-lang="guitar"&gt;stave [tuning=EADGBe] [time=4/4] 
@@ -8,11 +74,7 @@
 &lt;/code&gt;&lt;/pre&gt;&lt;pre tabindex="0"&gt;&lt;code class="language-guitar" data-lang="guitar"&gt;stave [time=4/4] 
 | C:0 ^1-3 | G:0 v3 |
 $3 0 2 ^ 3 0 v |
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Smelly Cat&lt;/p&gt;</description></item><item><title>2025书单</title><link>https://qtopie.github.io/notes/book/2025-book-list/</link><pubDate>Sun, 30 Nov 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/book/2025-book-list/</guid><description>&lt;p&gt;[] 富爸爸穷爸爸 (二刷)
-[] 山海经密码 (三刷)
-[] 草房子&lt;/p&gt;
-&lt;p&gt;新华网做了一个人生必读100本书问卷
-&lt;a href="https://www.xinhuanet.com/book/zhuanti/rsbdbook/#"&gt;https://www.xinhuanet.com/book/zhuanti/rsbdbook/#&lt;/a&gt;&lt;/p&gt;</description></item><item><title>吉他扫弦</title><link>https://qtopie.github.io/notes/guitar/guitar-strum/</link><pubDate>Fri, 28 Nov 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/guitar/guitar-strum/</guid><description>&lt;p&gt;掌握吉他扫弦（刷的节奏）是初学者的一个重要里程碑。扫弦的节奏感很大程度上依赖于&lt;strong&gt;稳定的右手动作&lt;/strong&gt;和&lt;strong&gt;对节拍的理解&lt;/strong&gt;。&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Smelly Cat&lt;/p&gt;</description></item><item><title>吉他扫弦</title><link>https://qtopie.github.io/notes/guitar/guitar-strum/</link><pubDate>Fri, 28 Nov 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/guitar/guitar-strum/</guid><description>&lt;p&gt;掌握吉他扫弦（刷的节奏）是初学者的一个重要里程碑。扫弦的节奏感很大程度上依赖于&lt;strong&gt;稳定的右手动作&lt;/strong&gt;和&lt;strong&gt;对节拍的理解&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;这里为您提供一套系统的学习步骤和技巧：&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id="-初学者掌握扫弦节奏的五大步骤"&gt;🎸 初学者掌握扫弦节奏的五大步骤&lt;/h2&gt;
@@ -357,7 +419,96 @@ $3 0 2 ^ 3 0 v |
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;return&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;prev;&lt;span style="color:#bbb"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;&lt;/span&gt;}&lt;span style="color:#bbb"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="递归法"&gt;递归法&lt;/h4&gt;
-&lt;p&gt;递归法是一种更加优雅的实现方式。其核心思想是：&lt;/p&gt;</description></item><item><title>树莓派和HomeAssistant</title><link>https://qtopie.github.io/notes/iot/rpi/homeassistant/</link><pubDate>Tue, 28 Sep 2021 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/homeassistant/</guid><description>&lt;h2 id="目标"&gt;目标&lt;/h2&gt;
+&lt;p&gt;递归法是一种更加优雅的实现方式。其核心思想是：&lt;/p&gt;</description></item><item><title>深圳到中山旅游攻略 (基于小红书总结)</title><link>https://qtopie.github.io/notes/ai/rednote-crawler/</link><pubDate>Thu, 23 May 2024 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/ai/rednote-crawler/</guid><description>&lt;p&gt;我想通过小红书资料做一份旅游攻略，以下是操作步骤。&lt;/p&gt;
+&lt;p&gt;首先，使用chrome-devtools-mcp打开小红书，网页版https://www.xiaohongshu.com/explore&lt;/p&gt;
+&lt;p&gt;获取登录态, 等待小红书登录页面，等待用户扫码。&lt;/p&gt;
+&lt;p&gt;用户扫码登录成功后，页面会刷新&lt;/p&gt;
+&lt;p&gt;然后用解析网页内容，找到搜索框，输入关键字&amp;quot;深圳到中山旅游攻略&amp;quot;，点击搜索然后抓取结果。&lt;/p&gt;
+&lt;p&gt;最后使用LLM总结网页内容.&lt;/p&gt;
+&lt;p&gt;你可以使用chrome-devtools-mcp完成页面抓取&lt;/p&gt;</description></item><item><title>深圳到中山旅游攻略 (基于小红书总结)</title><link>https://qtopie.github.io/notes/ai/shenzhen-to-zhongshan-guide/</link><pubDate>Thu, 23 May 2024 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/ai/shenzhen-to-zhongshan-guide/</guid><description>&lt;h1 id="深圳到中山旅游攻略"&gt;深圳到中山旅游攻略&lt;/h1&gt;
+&lt;p&gt;基于小红书热门笔记总结的深圳到中山旅游攻略，涵盖交通、行程规划、美食及景点推荐。&lt;/p&gt;
+&lt;h2 id="-交通指南"&gt;🚗 交通指南&lt;/h2&gt;
+&lt;h3 id="1-深中跨市公交-高性价比"&gt;1. 深中跨市公交 (高性价比)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;路线&lt;/strong&gt;: 深圳前海湾站 ↔ 中山博览中心枢纽 / 中山国际人才港&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;车次&lt;/strong&gt;: T01A (博览中心方向), T01B (人才港方向)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;票价&lt;/strong&gt;: 15-18元/人&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;耗时&lt;/strong&gt;: 约1小时&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;服务时间&lt;/strong&gt;: 06:30 - 21:30&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;购票&lt;/strong&gt;: 微信搜索“深巴出行”小程序提前购票&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;市内交通&lt;/strong&gt;: 到达中山后，打车前往各景点非常便宜（通常15元以内）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="2-自驾-灵活便捷"&gt;2. 自驾 (灵活便捷)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;路线&lt;/strong&gt;: 深圳 → 深中通道 → 中山&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;耗时&lt;/strong&gt;: 1 - 1.5小时&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;费用&lt;/strong&gt;: 高速费约 80-90 元 (单程)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;停车&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;中山博物馆/纪念堂附近有停车场。&lt;/li&gt;
+&lt;li&gt;孙文西路步行街可停在中山公园区域。&lt;/li&gt;
+&lt;li&gt;兴中广场（摩天轮）停车方便。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-行程规划推荐"&gt;🗺️ 行程规划推荐&lt;/h2&gt;
+&lt;h3 id="方案一特种兵一日游-自驾早出晚归"&gt;方案一：特种兵一日游 (自驾/早出晚归)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;08:00&lt;/strong&gt; 深圳出发，经深中通道。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;09:30&lt;/strong&gt; &lt;strong&gt;中山市博物馆&lt;/strong&gt; (需预约，免费)：了解中山历史文化，停车方便。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;10:30&lt;/strong&gt; &lt;strong&gt;四喜咖啡 (Four Joy Coffee)&lt;/strong&gt;：博物馆附近，网红打卡点，推荐Dirty、拿铁。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;11:00&lt;/strong&gt; &lt;strong&gt;西山寺&lt;/strong&gt;：市区制高点，古建筑，清静。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;11:40&lt;/strong&gt; &lt;strong&gt;孙文西路步行街&lt;/strong&gt;：感受老中山骑楼风情。
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;伴手礼&lt;/em&gt;：咀香园旗舰店 (杏仁饼)。&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;甜品&lt;/em&gt;：众生堂 (双皮奶)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;12:30&lt;/strong&gt; &lt;strong&gt;午餐&lt;/strong&gt;：&lt;strong&gt;马喜鸽&lt;/strong&gt; (石岐乳鸽、白切鸡、猪杂粥)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;14:00&lt;/strong&gt; &lt;strong&gt;岐江公园&lt;/strong&gt;：工业风遗址公园，适合拍照。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;15:00&lt;/strong&gt; &lt;strong&gt;孙中山故居纪念馆&lt;/strong&gt; (5A景区)：必打卡，游览约1.5小时。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;17:00&lt;/strong&gt; &lt;strong&gt;詹园&lt;/strong&gt;：岭南园林，夕阳时分景色最佳 (门票约50元)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;18:30&lt;/strong&gt; &lt;strong&gt;幻彩摩天轮&lt;/strong&gt;：兴中广场，欣赏中山夜景 (门票30-50元)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;19:30&lt;/strong&gt; &lt;strong&gt;晚餐&lt;/strong&gt;：&lt;strong&gt;大墩荣记食店&lt;/strong&gt; (脆皮猪手、炒田螺、椒盐虾、咸骨粥)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;21:00&lt;/strong&gt; 返程深圳。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="方案二休闲两天一夜-city-walk--吃喝"&gt;方案二：休闲两天一夜 (City Walk + 吃喝)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Day 1&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;下午到达中山，入住老城区附近酒店。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;晚餐&lt;/strong&gt;：&lt;strong&gt;大墩荣记食店&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;夜游&lt;/strong&gt;：&lt;strong&gt;幻彩摩天轮&lt;/strong&gt; + &lt;strong&gt;岐江桥&lt;/strong&gt;漫步，吹晚风看夜景。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Day 2&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;早茶&lt;/strong&gt;：&lt;strong&gt;爱群食店&lt;/strong&gt; (老字号，性价比高，蒸笼堆成山)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;上午&lt;/strong&gt;：&lt;strong&gt;中山市博物馆&lt;/strong&gt; -&amp;gt; &lt;strong&gt;四喜咖啡&lt;/strong&gt; -&amp;gt; &lt;strong&gt;西山寺&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;下午&lt;/strong&gt;：前往&lt;strong&gt;孙中山故居&lt;/strong&gt; (推荐) 或 &lt;strong&gt;崖口村&lt;/strong&gt; (看稻田/海边，视季节而定)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;返程&lt;/strong&gt;：从中山国际人才港乘公交回深圳。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-美食推荐"&gt;🍲 美食推荐&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;石岐乳鸽&lt;/strong&gt;: 中山必吃，皮脆肉嫩。推荐：&lt;em&gt;马喜鸽&lt;/em&gt;、&lt;em&gt;石岐佬&lt;/em&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;脆皮猪手/咸骨粥&lt;/strong&gt;: 大排档风味。推荐：&lt;em&gt;大墩荣记食店&lt;/em&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;早茶&lt;/strong&gt;: 感受广东早茶文化。推荐：&lt;em&gt;爱群食店&lt;/em&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;甜品&lt;/strong&gt;: &lt;em&gt;众生堂&lt;/em&gt; (双皮奶、姜撞奶)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;伴手礼&lt;/strong&gt;: &lt;em&gt;咀香园&lt;/em&gt; (杏仁饼、鸡仔饼)。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="-小贴士"&gt;💡 小贴士&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;深中通道&lt;/strong&gt;体验很好，但周末可能会有拥堵，建议错峰出行。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;中山市内交通&lt;/strong&gt;打车很便宜，非自驾也很方便。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;孙文西路步行街&lt;/strong&gt;部分区域可能在装修，建议提前确认。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;崖口村&lt;/strong&gt;适合看稻浪，如果稻子收割了景色会打折，建议替换为孙中山故居。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;注：以上信息整理自小红书热门笔记，具体营业时间及票价请以实际为准。&lt;/em&gt;&lt;/p&gt;</description></item><item><title>树莓派和HomeAssistant</title><link>https://qtopie.github.io/notes/iot/rpi/homeassistant/</link><pubDate>Tue, 28 Sep 2021 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/homeassistant/</guid><description>&lt;h2 id="目标"&gt;目标&lt;/h2&gt;
 &lt;p&gt;使用开源软件和米家智能硬件，实现简单的智能家居系统&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;采用米家智能硬件的原因是, 小米智能家居做的比较早（也许是起初推广的更好，刚接触智能家居的时候就用的小米）,
@@ -1649,7 +1800,76 @@ automatically.&lt;/p&gt;</description></item><item><title>开始使用Ubuntu</ti
 &lt;h2 id="reference"&gt;Reference&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;link1&lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title/><link>https://qtopie.github.io/notes/algorithms/readme/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/algorithms/readme/</guid><description>&lt;p&gt;Algorithm and Data Structures&lt;/p&gt;</description></item><item><title/><link>https://qtopie.github.io/notes/algorithms/selection-algorithm/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/algorithms/selection-algorithm/</guid><description>&lt;h1 id="selection-algorithm"&gt;Selection Algorithm&lt;/h1&gt;
+&lt;/ul&gt;</description></item><item><title/><link>https://qtopie.github.io/notes/algorithms/readme/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/algorithms/readme/</guid><description>&lt;h1 id="常见计算机算法知识纲要"&gt;常见计算机算法知识纲要&lt;/h1&gt;
+&lt;p&gt;以下按主题分组梳理常见算法与必备知识，便于快速索引与系统复习。&lt;/p&gt;
+&lt;h2 id="核心概念"&gt;核心概念&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;复杂度分析: 时间/空间、摊还；渐进符号 O/Θ/Ω；常见 O(1)/O(log n)/O(n log n)。&lt;/li&gt;
+&lt;li&gt;递推与主定理: 分治类递归复杂度估计与解法选择。&lt;/li&gt;
+&lt;li&gt;正确性证明: 不变式、数学归纳、反证；贪心的交换论证/割性质。&lt;/li&gt;
+&lt;li&gt;随机化与概率: 随机快速选择/快速排序、哈希冲突的期望分析。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="数据结构"&gt;数据结构&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;线性结构: 数组、链表、栈、队列、双端队列。&lt;/li&gt;
+&lt;li&gt;哈希结构: 集合/映射、开放定址/拉链法、布隆过滤器。&lt;/li&gt;
+&lt;li&gt;堆与优先队列: 二叉堆、d 叉堆、斐波那契堆（理论）。&lt;/li&gt;
+&lt;li&gt;树结构: BST、AVL/红黑树、Trie、线段树、树状数组（Fenwick）。&lt;/li&gt;
+&lt;li&gt;并查集: 合并-查找，按秩合并 + 路径压缩。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="算法范式"&gt;算法范式&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;分治: 归并排序、快速排序、最近点对。&lt;/li&gt;
+&lt;li&gt;动态规划: 状态设计、转移、路径还原；子序列/背包/区间/树形/状压。&lt;/li&gt;
+&lt;li&gt;贪心: 区间调度、哈夫曼编码、活动选择；需可证的贪心选择性质。&lt;/li&gt;
+&lt;li&gt;回溯与剪枝: 组合/排列/子集、N 皇后、数独；分支限界。&lt;/li&gt;
+&lt;li&gt;双指针与滑动窗口: 最长子串、最短覆盖、和为定值子数组。&lt;/li&gt;
+&lt;li&gt;前缀与差分: 前缀和/积、二维前缀、差分与区间更新。&lt;/li&gt;
+&lt;li&gt;二分（答案/位置）: 单调性判定 + 检验函数。&lt;/li&gt;
+&lt;li&gt;Meet-in-the-middle: 折半搜索、子集和等。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="图论"&gt;图论&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;遍历与连通: BFS/DFS、拓展岛屿/环检测/割点桥。&lt;/li&gt;
+&lt;li&gt;最短路: Dijkstra、Bellman–Ford、SPFA、Floyd–Warshall。&lt;/li&gt;
+&lt;li&gt;最小生成树: Kruskal（并查集）、Prim。&lt;/li&gt;
+&lt;li&gt;拓扑与 DAG: 拓扑排序、DAG DP、关键路径。&lt;/li&gt;
+&lt;li&gt;流与匹配: 最大流（Edmonds–Karp/Dinic）、二分图匹配（Hungarian/Hopcroft–Karp）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="字符串"&gt;字符串&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;模式匹配: KMP、Z-algorithm、Boyer–Moore、Rabin–Karp（滚动哈希）。&lt;/li&gt;
+&lt;li&gt;字典结构: Trie、Aho–Corasick（多模式）。&lt;/li&gt;
+&lt;li&gt;后缀结构: 后缀数组/树、LCP、后缀自动机。&lt;/li&gt;
+&lt;li&gt;其他经典: Manacher（回文）、最小表示法。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="数论与计算几何"&gt;数论与计算几何&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;基础数论: GCD/扩展欧几里得、快速幂、模逆、CRT、筛法。&lt;/li&gt;
+&lt;li&gt;快速变换: FFT/NTT、多项式卷积、子集/莫比乌斯变换（进阶）。&lt;/li&gt;
+&lt;li&gt;计算几何: 叉积/方向判断、凸包（Graham/Andrew）、扫描线、线段相交、最近点对。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="dp-优化进阶"&gt;DP 优化（进阶）&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;单调队列优化、斜率优化（Convex Hull Trick）、分治优化、Knuth 优化、四边形不等式。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="实用模式与选型"&gt;实用模式与选型&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;建模与归约: 归约到图/匹配/流/区间/背包等标准模型。&lt;/li&gt;
+&lt;li&gt;不变式与单调性: 为二分/贪心/单调队列提供充分条件。&lt;/li&gt;
+&lt;li&gt;规模估算经验: n≤1e5 常用 O(n log n)；n≤1e3 可用 O(n^3)；指数/状压配合小规模。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="本仓库相关笔记"&gt;本仓库相关笔记&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="./sort.md"&gt;排序（sort）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="./heap.md"&gt;堆与优先队列（heap）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="./selection-algorithm.md"&gt;选择算法（selection-algorithm）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="./binary.md"&gt;二分查找（binary）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="./bitwise-operators.md"&gt;位运算技巧（bitwise-operators）&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="./combination-permutation.md"&gt;组合与排列（combination-permutation）&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如需学习路线与题单，我可以按 4 周进度给出实现清单与练习集，并补充链接到上述笔记。&lt;/p&gt;</description></item><item><title/><link>https://qtopie.github.io/notes/algorithms/selection-algorithm/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/algorithms/selection-algorithm/</guid><description>&lt;h1 id="selection-algorithm"&gt;Selection Algorithm&lt;/h1&gt;
 &lt;h2 id="median-of-medians"&gt;Median of medians&lt;/h2&gt;
 &lt;h3 id="bfprt"&gt;BFPRT&lt;/h3&gt;
 &lt;h2 id="reference"&gt;Reference&lt;/h2&gt;

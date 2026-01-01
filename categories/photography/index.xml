@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Photography on 1001問</title><link>https://qtopie.github.io/categories/photography/</link><description>Recent content in Photography on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Thu, 01 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/categories/photography/index.xml" rel="self" type="application/rss+xml"/><item><title>XS20摄影技巧</title><link>https://qtopie.github.io/notes/photography/xs20/</link><pubDate>Thu, 01 Jan 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/photography/xs20/</guid><description>&lt;h2 id="xs-20介绍"&gt;XS-20介绍&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;A 模式 (Aperture Priority) —— 光圈优先模式
+含义： 你手动控制光圈，相机自动帮你计算快门速度。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;为什么要用： 这是使用 35mm F1.4 的首选模式。因为这支镜头的精髓在于 F1.4 的大光圈。&lt;/p&gt;
+&lt;p&gt;操作建议： 想拍背景虚化的糖水片，就拧到 1.4；想拍风景锐利一点，就拧到 5.6 或 8。相机会确保照片亮度正常，你只需要关注“虚化程度”。&lt;/p&gt;
+&lt;ol start="2"&gt;
+&lt;li&gt;S 模式 (Shutter Priority) —— 快门优先模式
+含义： 你手动控制快门速度，相机自动帮你计算光圈。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;为什么要用： 当你要拍“动来动去”的东西时（比如宠物、跑动的小孩）。&lt;/p&gt;
+&lt;p&gt;操作建议： 如果想凝固瞬间，把快门定在 1/500s 以上；如果想拍出丝滑的流水，就定在 1/15s 甚至更慢。&lt;/p&gt;
+&lt;ol start="3"&gt;
+&lt;li&gt;P 模式 (Program AE) —— 程序自动模式
+含义： 相机自动决定光圈和快门，但允许你调整 ISO、白平衡、胶片模拟等。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;为什么要用： 比起完全傻瓜的 AUTO 模式，P 模式能让你保留对“色彩（胶片模拟）”和“亮度（曝光补偿）”的控制权。&lt;/p&gt;
+&lt;p&gt;操作建议： 当你只想随手抓拍，不想思考参数，但又想用富士的经典正片（Classic Chrome）色彩时，用 P 模式。&lt;/p&gt;
+&lt;h2 id="拍摄技巧"&gt;拍摄技巧&lt;/h2&gt;
+&lt;p&gt;既然你拿到了富士 X-S20 和 35mm F1.4 这样一套兼具性能与审美色彩的设备，理解它的原理能让你不再只是“按快门”，而是“创作”。&lt;/p&gt;
+&lt;h3 id="一-成像原理光的奇幻漂流"&gt;一、 成像原理：光的“奇幻漂流”&lt;/h3&gt;
+&lt;p&gt;相机的本质其实是一个&lt;strong&gt;高度精密的暗盒&lt;/strong&gt;。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;收集光线（镜头）：&lt;/strong&gt; 当你按下快门，光线穿过你的 35mm F1.4 镜头。镜头里的玻璃镜片会将发散的光线折射、汇聚。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;控制光量（光圈与快门）：&lt;/strong&gt; * &lt;strong&gt;光圈&lt;/strong&gt;（你镜头上的环）像眼球的瞳孔，开大（F1.4）进光多，缩小（F16）进光少。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;快门&lt;/strong&gt;像眼皮，开启时间长，进光就多。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start="3"&gt;
+&lt;li&gt;&lt;strong&gt;记录影像（感光元件）：&lt;/strong&gt; 光线最终打在 X-S20 内部的那个传感器（CMOS）上。传感器上有数千万个小光敏点，它们把光转换成电信号，最后由处理器转化成你在屏幕上看到的胶片感照片。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id="二-拍出好照片的四大要素"&gt;二、 拍出“好照片”的四大要素&lt;/h3&gt;
+&lt;p&gt;很多新手纠结于参数，但好的照片往往是以下四个维度的平衡：&lt;/p&gt;</description></item></channel></rss>
