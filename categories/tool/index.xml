@@ -24,13 +24,13 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;#make distclean # if you build Vim before&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;./configure --with-features&lt;span style="color:#555"&gt;=&lt;/span&gt;huge &lt;span style="color:#c30;font-weight:bold"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c30;font-weight:bold"&gt;&lt;/span&gt; --enable-multibyte &lt;span style="color:#c30;font-weight:bold"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c30;font-weight:bold"&gt;&lt;/span&gt; --enable-python3interp&lt;span style="color:#555"&gt;=&lt;/span&gt;yes &lt;span style="color:#c30;font-weight:bold"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c30;font-weight:bold"&gt;&lt;/span&gt; --with-python3-config-dir&lt;span style="color:#555"&gt;=&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;$(&lt;/span&gt;python3-config --configdir&lt;span style="color:#069;font-weight:bold"&gt;)&lt;/span&gt; &lt;span style="color:#c30;font-weight:bold"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c30;font-weight:bold"&gt;&lt;/span&gt; --enable-perlinterp&lt;span style="color:#555"&gt;=&lt;/span&gt;yes &lt;span style="color:#c30;font-weight:bold"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c30;font-weight:bold"&gt;&lt;/span&gt; --enable-luainterp&lt;span style="color:#555"&gt;=&lt;/span&gt;yes &lt;span style="color:#c30;font-weight:bold"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c30;font-weight:bold"&gt;&lt;/span&gt; --enable-cscope &lt;span style="color:#c30;font-weight:bold"&gt;\
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c30;font-weight:bold"&gt;&lt;/span&gt; --prefix&lt;span style="color:#555"&gt;=&lt;/span&gt;/usr/local
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --enable-multibyte &lt;span style="color:#c30;font-weight:bold"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --enable-python3interp&lt;span style="color:#555"&gt;=&lt;/span&gt;yes &lt;span style="color:#c30;font-weight:bold"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --with-python3-config-dir&lt;span style="color:#555"&gt;=&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;$(&lt;/span&gt;python3-config --configdir&lt;span style="color:#069;font-weight:bold"&gt;)&lt;/span&gt; &lt;span style="color:#c30;font-weight:bold"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --enable-perlinterp&lt;span style="color:#555"&gt;=&lt;/span&gt;yes &lt;span style="color:#c30;font-weight:bold"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --enable-luainterp&lt;span style="color:#555"&gt;=&lt;/span&gt;yes &lt;span style="color:#c30;font-weight:bold"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --enable-cscope &lt;span style="color:#c30;font-weight:bold"&gt;\
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; --prefix&lt;span style="color:#555"&gt;=&lt;/span&gt;/usr/local
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;make &lt;span style="color:#033"&gt;VIMRUNTIMEDIR&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;/usr/local/share/vim/vim82
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;

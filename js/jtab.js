@@ -436,39 +436,76 @@ function jtabChord (token) {
   }
 }
 
-// tweaked: draw strum up (^) and down (v) markers
-Raphael.fn.strum_up = function () {
-  var width = this.tab_char_width * 2;
-  if (this.has_tab) {
-    this.tab_extend(width);
-    // place marker around middle strings
-    this.text(this.current_offset + this.tab_char_width,
-              this.tab_top + this.tab_spacing * 3.5,
-              '↑').attr({stroke: this.tab_text_color, "font-size":"20px"});
-    this.increment_offset(width);
-  } else if (this.has_chord) {
-    // draw near chord area
+// strum arrows: up (^) and down (v), with optional span and duration
+// Usage tokens handled in render_token, which calls these with start/end strings (1..strings_drawn) and dur ('4'/'8'/'16')
+Raphael.fn.strum_up = function (startStr, endStr, dur) {
+  if (!this.has_tab) {
     this.text(this.current_offset + this.margin_left,
               this.margin_top + (this.fret_spacing * 0.5),
               '↑').attr({stroke: this.tab_text_color, "font-size":"20px"});
     this.increment_offset(this.margin_left + this.margin_right);
+    return;
   }
+
+  var s = (typeof startStr === 'number') ? startStr : 1;
+  var e = (typeof endStr === 'number') ? endStr : this.strings_drawn;
+  if (s > e) { var t = s; s = e; e = t; }
+  s = Math.max(1, Math.min(this.strings_drawn, s));
+  e = Math.max(1, Math.min(this.strings_drawn, e));
+
+  var durVal = dur || '4';
+  var factor = durVal === '8' ? 0.5 : durVal === '16' ? 0.25 : 1;
+  var baseWidth = this.tab_char_width * 2;
+  var width = Math.max(this.tab_char_width * 1.5 * factor, baseWidth * factor);
+
+  var yTop = this.tab_top + (s - 1) * this.tab_spacing;
+  var yBot = this.tab_top + (e - 1) * this.tab_spacing;
+  var xMid = this.current_offset + width * 0.5;
+
+  this.tab_extend(width);
+  var shaft = this.path(this.svg_params(xMid, yBot, 0, -(yBot - yTop)));
+  shaft.attr({ stroke: this.tab_text_color, "stroke-width": 2 });
+  var headLen = 6, headW = 4;
+  this.path(this.svg_params(xMid, yTop, -headW, headLen)).attr({ stroke: this.tab_text_color, "stroke-width": 2 });
+  this.path(this.svg_params(xMid, yTop,  headW, headLen)).attr({ stroke: this.tab_text_color, "stroke-width": 2 });
+
+  this.add_beam_note(xMid, yTop + (yBot - yTop) * 0.5, durVal);
+  this.increment_offset(width);
 }
 
-Raphael.fn.strum_down = function () {
-  var width = this.tab_char_width * 2;
-  if (this.has_tab) {
-    this.tab_extend(width);
-    this.text(this.current_offset + this.tab_char_width,
-              this.tab_top + this.tab_spacing * 3.5,
-              '↓').attr({stroke: this.tab_text_color, "font-size":"20px"});
-    this.increment_offset(width);
-  } else if (this.has_chord) {
+Raphael.fn.strum_down = function (startStr, endStr, dur) {
+  if (!this.has_tab) {
     this.text(this.current_offset + this.margin_left,
               this.margin_top + (this.fret_spacing * 0.5),
               '↓').attr({stroke: this.tab_text_color, "font-size":"20px"});
     this.increment_offset(this.margin_left + this.margin_right);
+    return;
   }
+
+  var s = (typeof startStr === 'number') ? startStr : 1;
+  var e = (typeof endStr === 'number') ? endStr : this.strings_drawn;
+  if (s > e) { var t = s; s = e; e = t; }
+  s = Math.max(1, Math.min(this.strings_drawn, s));
+  e = Math.max(1, Math.min(this.strings_drawn, e));
+
+  var durVal = dur || '4';
+  var factor = durVal === '8' ? 0.5 : durVal === '16' ? 0.25 : 1;
+  var baseWidth = this.tab_char_width * 2;
+  var width = Math.max(this.tab_char_width * 1.5 * factor, baseWidth * factor);
+
+  var yTop = this.tab_top + (s - 1) * this.tab_spacing;
+  var yBot = this.tab_top + (e - 1) * this.tab_spacing;
+  var xMid = this.current_offset + width * 0.5;
+
+  this.tab_extend(width);
+  var shaft = this.path(this.svg_params(xMid, yTop, 0, (yBot - yTop)));
+  shaft.attr({ stroke: this.tab_text_color, "stroke-width": 2 });
+  var headLen = 6, headW = 4;
+  this.path(this.svg_params(xMid, yBot, -headW, -headLen)).attr({ stroke: this.tab_text_color, "stroke-width": 2 });
+  this.path(this.svg_params(xMid, yBot,  headW, -headLen)).attr({ stroke: this.tab_text_color, "stroke-width": 2 });
+
+  this.add_beam_note(xMid, yTop + (yBot - yTop) * 0.5, durVal);
+  this.increment_offset(width);
 }
 
 jtabChord.prototype.setCustomChordArray = function(){
@@ -847,6 +884,87 @@ Raphael.fn.get_fullchord_notes = function (token) {
   return rc;
 }
 
+// state for beaming short durations (8th/16th)
+Raphael.fn.beam_group = [];
+// configurable beam styling
+Raphael.fn.beam_options = {
+  baselineOffset: 2, // vertical offset below lowest string line
+  baselineExtraLines: 1, // place beams below the staff by N extra line-spacings
+  gap: 4,            // gap between multiple beams (for 16th notes)
+  thickness: 2,      // stroke width of beam lines
+  drawEndStems: true,       // draw vertical stems at both ends of the beam
+  endStemLength: 8,         // additional length below the lowest beam
+  drawPerNoteStems: false,  // optionally draw stems at each note/strum position
+  perNoteStemLength: 6      // length below the lowest beam for per-note stems
+};
+// allow runtime override via global window.jtab_beam_options
+if (typeof window !== 'undefined' && window.jtab_beam_options) {
+  Raphael.fn.beam_options = window.jtab_beam_options;
+}
+Raphael.fn.add_beam_note = function(x, y, dur) {
+  if (dur === '8' || dur === '16') {
+    this.beam_group.push({ x: x, y: y, dur: dur });
+  } else {
+    this.flush_beam();
+  }
+}
+Raphael.fn.flush_beam = function() {
+  if (!this.beam_group || this.beam_group.length < 2) {
+    this.beam_group = [];
+    return;
+  }
+  var notes = this.beam_group;
+  var minX = notes.reduce(function(a,n){ return Math.min(a, n.x); }, notes[0].x);
+  var maxX = notes.reduce(function(a,n){ return Math.max(a, n.x); }, notes[0].x);
+  // Place beams at the tab's bottom baseline (lowest string) with configurable offset
+  var opts = this.beam_options || { baselineOffset: 2, gap: 4, thickness: 2 };
+  var baselineOffset = opts.baselineOffset;
+  var extraLines = (typeof opts.baselineExtraLines === 'number') ? opts.baselineExtraLines : 0;
+  // position beams below the staff: bottom line + extra line spacings + offset
+  var maxY = this.tab_top + this.tab_spacing * (this.strings_drawn - 1 + extraLines) + baselineOffset;
+  var beamCount = notes.some(function(n){ return n.dur === '16'; }) ? 2 : 1;
+  var thickness = opts.thickness;
+  var gap = opts.gap;
+  for (var b = 0; b < beamCount; b++) {
+    var y = maxY + b * gap;
+    this.path(this.svg_params(minX, y, (maxX - minX), 0)).attr({stroke: this.color, "stroke-width": thickness});
+  }
+  // draw end stems that connect upward from the beam baseline to the end notes
+  if (opts.drawEndStems) {
+    var leftNote = null, rightNote = null;
+    for (var i = 0; i < notes.length; i++) {
+      if (notes[i].x === minX && !leftNote) leftNote = notes[i];
+      if (notes[i].x === maxX && !rightNote) rightNote = notes[i];
+    }
+    if (leftNote) {
+      var leftUp = -(maxY - leftNote.y);
+      this.path(this.svg_params(minX, maxY, 0, leftUp)).attr({stroke: this.color, "stroke-width": thickness});
+    }
+    if (rightNote) {
+      var rightUp = -(maxY - rightNote.y);
+      this.path(this.svg_params(maxX, maxY, 0, rightUp)).attr({stroke: this.color, "stroke-width": thickness});
+    }
+  }
+  // optional per-note stems: connect each note upward to the beam baseline
+  if (opts.drawPerNoteStems) {
+    for (var j = 0; j < notes.length; j++) {
+      var ny = notes[j].y;
+      var upLen = -(maxY - ny);
+      this.path(this.svg_params(notes[j].x, maxY, 0, upLen)).attr({stroke: this.color, "stroke-width": thickness});
+    }
+  }
+  this.beam_group = [];
+}
+
+// parse optional duration suffix like 3/8 or 2/16; ignore if body already contains '/'
+Raphael.fn.parse_duration_token = function (token) {
+  var m = token.match(/^(.*)\/(4|8|16)$/);
+  if (m && m[1].indexOf('/') === -1) {
+    return { body: m[1], duration: m[2] };
+  }
+  return { body: token, duration: null };
+}
+
 
 // draw a token on the tab
 Raphael.fn.tab_note = function (token) {
@@ -885,10 +1003,18 @@ Raphael.fn.tab_note = function (token) {
         this.draw_tab_note( 6 - i, fullchord_notes[i], width * 0.5 );
       }
       this.increment_offset( width );
+      this.flush_beam();
     } else if ( this.tab_current_string > 0 ) { // else draw literal, but only if a current string selected
-      var width = this.tab_char_width * ( token.length + 2 );
+      var parsed = this.parse_duration_token(token);
+      var dur = parsed.duration || '4';
+      var factor = (dur === '8') ? 0.5 : (dur === '16') ? 0.25 : 1;
+      var baseWidth = this.tab_char_width * ( parsed.body.length + 2 );
+      var width = Math.max(this.tab_char_width * 1.5 * factor, baseWidth * factor);
       this.tab_extend( width );
-      this.draw_tab_note( this.tab_current_string, token, width * 0.5 );
+      var midX = this.current_offset + width * 0.5;
+      var midY = this.tab_top + this.tab_spacing * (this.tab_current_string - 1);
+      this.draw_tab_note( this.tab_current_string, parsed.body, width * 0.5 );
+      this.add_beam_note(midX, midY, dur);
       this.increment_offset( width );
     }
   }
@@ -916,12 +1042,45 @@ Raphael.fn.render_token = function (token) {
       this.bar();
     } else if (token == "||" ) {
       this.doublebar();
-    } else if (token == "^") {
-      this.strum_up();
-    } else if (token == "v") {
-      this.strum_down();
-    } else if ( this.has_tab ) {
-      this.tab_note( token );
+      this.flush_beam();
+    } else {
+      var parsedStrum = this.parse_duration_token(token);
+      var strumBody = parsedStrum.body;
+      var dur = parsedStrum.duration || '4';
+
+      if (/^[\^v](?:\d{1,2}(?:-\d{1,2})?)?$/.test(strumBody)) {
+        // strum with optional span and duration suffix (/4 /8 /16)
+        var dir = strumBody.charAt(0);
+        var spec = strumBody.slice(1);
+      var s, e;
+      if (!spec) {
+        // full span
+        s = 1; e = this.strings_drawn;
+      } else if (spec.indexOf('-') !== -1) {
+        // explicit range S-E
+        var parts = spec.split('-');
+        s = parseInt(parts[0], 10);
+        e = parseInt(parts[1], 10);
+        if (isNaN(s) || isNaN(e)) { s = 1; e = this.strings_drawn; }
+        if (s > e) { var t = s; s = e; e = t; }
+      } else {
+        // centered span of N strings
+        var n = parseInt(spec, 10);
+        if (isNaN(n) || n < 1) { n = this.strings_drawn; }
+        n = Math.min(this.strings_drawn, n);
+        var start = Math.floor((this.strings_drawn - n) / 2) + 1;
+        s = Math.max(1, start);
+        e = Math.min(this.strings_drawn, s + n - 1);
+        }
+
+        if (dir === '^') {
+          this.strum_up(s, e, dur);
+        } else {
+          this.strum_down(s, e, dur);
+        }
+      } else if ( this.has_tab ) {
+        this.tab_note( token );
+      }
     }
 
   }
@@ -1031,6 +1190,7 @@ jtab.render = function (element,notation_text) {
   for(var i = 0; i < tokens.length; i++) {
     canvas.render_token(tokens[i]);
   }
+  canvas.flush_beam();
   jQuery(element).addClass('rendered');
 }
 
