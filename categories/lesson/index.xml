@@ -36,7 +36,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c30"&gt;1001&lt;/span&gt;,&lt;span style="color:#c30"&gt;1&lt;/span&gt;,&lt;span style="color:#c30"&gt;250.00&lt;/span&gt;,&lt;span style="color:#c30"&gt;已支付&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c30"&gt;1002&lt;/span&gt;,&lt;span style="color:#c30"&gt;1&lt;/span&gt;,&lt;span style="color:#c30"&gt;88.50&lt;/span&gt;,&lt;span style="color:#c30"&gt;待付款&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c30"&gt;1003&lt;/span&gt;,&lt;span style="color:#c30"&gt;2&lt;/span&gt;,&lt;span style="color:#c30"&gt;1200.00&lt;/span&gt;,&lt;span style="color:#c30"&gt;已发货&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="sql基础语法"&gt;SQL基础语法&lt;/h2&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;用DuckDB导入这两个文件就可以查询了&lt;/p&gt;
+&lt;h2 id="sql基础语法"&gt;SQL基础语法&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;基础数据查询&lt;/li&gt;
 &lt;/ul&gt;
@@ -59,8 +60,4 @@
 &lt;/ul&gt;
 &lt;p&gt;求和&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;SELECT&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;SUM&lt;/span&gt;(amount)&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;FROM&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;orders;&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;分组统计&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;SELECT&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;user_id,&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;SUM&lt;/span&gt;(amount)&lt;span style="color:#bbb"&gt; 
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;FROM&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;orders&lt;span style="color:#bbb"&gt; 
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;GROUP&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;BY&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;user_id;&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;COUNT(): 统计行数（例如：总共有多少个订单）。&lt;/p&gt;</description></item></channel></rss>
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;分组统计&lt;/p&gt;</description></item></channel></rss>
