@@ -10,7 +10,7 @@ name: Deploy to Firebase Hosting on merge
     types: sub_commit
 jobs:
   build_and_deploy:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
@@ -24,7 +24,7 @@ jobs:
       - run: npm install --prefix themes/drift-blog-theme/react-app/
       - run: npm run build --prefix themes/drift-blog-theme/react-app/
       - name: generate sites
-        run: sudo snap install hugo && hugo --minify
+        run: sudo snap install hugo --edge && hugo --minify
       
       - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
