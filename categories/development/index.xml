@@ -8,13 +8,13 @@
 &lt;h2 id="下载安装"&gt;下载安装&lt;/h2&gt;
 &lt;p&gt;Go安装文件可以访问国内站点 &lt;a href="https://golang.google.cn/dl/"&gt;https://golang.google.cn/dl/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;解压后，移动到&lt;code&gt;/usr/local/go&lt;/code&gt;目录，然后在&lt;code&gt;/etc/profile&lt;/code&gt;里加入&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#366"&gt;export&lt;/span&gt; &lt;span style="color:#033"&gt;GOROOT&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;/usr/local/go
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#366"&gt;export&lt;/span&gt; &lt;span style="color:#033"&gt;GOROOT&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;/usr/local/go
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#366"&gt;export&lt;/span&gt; &lt;span style="color:#033"&gt;PATH&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;&lt;span style="color:#033"&gt;$PATH&lt;/span&gt;:&lt;span style="color:#033"&gt;$GOROOT&lt;/span&gt;/bin
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="使用技巧"&gt;使用技巧&lt;/h2&gt;
 &lt;h3 id="goproxy"&gt;goproxy&lt;/h3&gt;
 &lt;p&gt;使用goproxy加速&lt;code&gt;go module&lt;/code&gt;下载(解决&lt;code&gt;go get&lt;/code&gt;无法下载来自golang.org等站点的依赖包的问题）&lt;/p&gt;
 &lt;p&gt;参考https://goproxy.io/zh/, 在go 1.13+下，我们可以使用以下命令在go env设置goproxy&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;go env -w &lt;span style="color:#033"&gt;GO111MODULE&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;on
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;go env -w &lt;span style="color:#033"&gt;GO111MODULE&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;on
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;go env -w &lt;span style="color:#033"&gt;GOPROXY&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;https://goproxy.io,direct
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# 设置不走 proxy 的私有仓库，多个用逗号相隔（可选）&lt;/span&gt;
@@ -24,7 +24,7 @@
 &lt;ul&gt;
 &lt;li&gt;使用&lt;code&gt;go doc&lt;/code&gt;命令可以在终端快速查阅文档, 例如&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;go doc net.Listen | vim -
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;go doc net.Listen | vim -
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="参考"&gt;参考&lt;/h2&gt;</description></item><item><title>Make Eclipse Great Again</title><link>https://qtopie.github.io/notes/dev/make-gradle-work-with-eclipse/</link><pubDate>Sat, 28 Dec 2019 18:07:28 +0800</pubDate><guid>https://qtopie.github.io/notes/dev/make-gradle-work-with-eclipse/</guid><description>&lt;h1 id="eclipse--gradle"&gt;Eclipse &amp;amp; Gradle&lt;/h1&gt;
 &lt;p&gt;还是从那句老话开始， “工欲善其事，必先利其器”。要想熟练地完成一件事，有个好的工具往往能事半功倍。&lt;/p&gt;
 &lt;blockquote&gt;
@@ -62,7 +62,7 @@ Java version: 1.8.0_171
 &lt;li&gt;生成项目配置&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;默认Gradle eclipse编译输出目录为bin, 但是gradle构建输出目录为build， 因此需要改配置。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-groovy" data-lang="groovy"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;plugins &lt;span style="color:#555"&gt;{&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-groovy" data-lang="groovy"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;plugins &lt;span style="color:#555"&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; id &lt;span style="color:#c30"&gt;&amp;#39;java&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; id &lt;span style="color:#c30"&gt;&amp;#39;eclipse&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#555"&gt;}&lt;/span&gt;
@@ -105,7 +105,7 @@ Java version: 1.8.0_171
 &lt;ul&gt;
 &lt;li&gt;设置个人信息&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git config --global user.name &amp;lt;YOUR-NAME&amp;gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git config --global user.name &amp;lt;YOUR-NAME&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git config --global user.email &amp;lt;YOUR-EMAIL&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# 查看个人配置&lt;/span&gt;
@@ -113,16 +113,16 @@ Java version: 1.8.0_171
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;将默认主仓库设置为&lt;code&gt;main&lt;/code&gt; &lt;a href="https://github.com/github/renaming"&gt;BLM运动&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git config --global init.defaultbranch main
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git config --global init.defaultbranch main
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;初始化仓库&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mkdir /path/to/your/project
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mkdir /path/to/your/project
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#366"&gt;cd&lt;/span&gt; /path/to/your/project
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git init 			&lt;span style="color:#09f;font-style:italic"&gt;# initialize an empty git repo&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git remote add origin git@repo-url.git
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="create-your-first-file-and-push-it-to-the-remote-repo"&gt;Create your first file and push it to the remote repo&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#366"&gt;echo&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#34;qtopie.rw&amp;#34;&lt;/span&gt; &amp;gt;&amp;gt; contributors.txt
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#366"&gt;echo&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#34;qtopie.rw&amp;#34;&lt;/span&gt; &amp;gt;&amp;gt; contributors.txt
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git add contributors.txt
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git commit -m &lt;span style="color:#c30"&gt;&amp;#39;Initial commit with contributors&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git push -u origin master

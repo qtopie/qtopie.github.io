@@ -194,7 +194,7 @@ $3 0 2 ^ 3 0 v |
 &lt;p&gt;&lt;strong&gt;并发标记（Concurrent Mark）&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>JVM内存泄漏排查</title><link>https://qtopie.github.io/notes/java/jvm-memory-leaks/</link><pubDate>Sat, 23 Nov 2024 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/java/jvm-memory-leaks/</guid><description>&lt;h2 id="堆内存泄漏"&gt;堆内存泄漏&lt;/h2&gt;
 &lt;p&gt;长生命周期的对象，持有短生命周期对象的引用，导致后者无法被 GC 回收。&lt;/p&gt;
 &lt;p&gt;我们先来简单造一个典型的错误案例。我们有一个内存cache, 然后key是object类型&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-java" data-lang="java"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;import&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#0cf;font-weight:bold"&gt;java.util.HashSet&lt;/span&gt;;&lt;span style="color:#bbb"&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-java" data-lang="java"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;import&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#0cf;font-weight:bold"&gt;java.util.HashSet&lt;/span&gt;;&lt;span style="color:#bbb"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;import&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#0cf;font-weight:bold"&gt;java.util.Set&lt;/span&gt;;&lt;span style="color:#bbb"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;import&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#0cf;font-weight:bold"&gt;java.util.concurrent.TimeUnit&lt;/span&gt;;&lt;span style="color:#bbb"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
@@ -293,7 +293,7 @@ $3 0 2 ^ 3 0 v |
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如何避免这种泄漏？
 铁律： 放入 HashMap/HashSet 的 Key 类，其参与 hashCode 和 equals 计算的字段必须是不可变（Immutable）的（即用 final 修饰）。&lt;/p&gt;</description></item><item><title>JVM线程分析</title><link>https://qtopie.github.io/notes/java/thread/</link><pubDate>Wed, 11 Sep 2024 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/java/thread/</guid><description>&lt;h2 id="线程的状态"&gt;线程的状态&lt;/h2&gt;
 &lt;p&gt;参考定义 &lt;code&gt;java.lang.Thread.State&lt;/code&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-java" data-lang="java"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;public&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;enum&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;State&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-java" data-lang="java"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;public&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;enum&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;State&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#09f;font-style:italic"&gt;/**
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt; * Thread state for a thread which has not yet started.
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt; */&lt;/span&gt;&lt;span style="color:#bbb"&gt;
@@ -443,7 +443,7 @@ $3 0 2 ^ 3 0 v |
 &lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;返回新的头节点：&lt;/strong&gt; 遍历结束后，&lt;code&gt;curr&lt;/code&gt; 指向新的头节点&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;func&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#c0f"&gt;reverseList&lt;/span&gt;(head&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;*&lt;/span&gt;ListNode)&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;*&lt;/span&gt;ListNode&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;func&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#c0f"&gt;reverseList&lt;/span&gt;(head&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;*&lt;/span&gt;ListNode)&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;*&lt;/span&gt;ListNode&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#09f;font-style:italic"&gt;// 初始化第一个前驱指针指向null, 即为末端&lt;/span&gt;&lt;span style="color:#bbb"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;var&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;prev&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;*&lt;/span&gt;ListNode&lt;span style="color:#bbb"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
@@ -567,7 +567,7 @@ $3 0 2 ^ 3 0 v |
 &lt;p&gt;这里使用Ubuntu而不是Raspbian的一个原因是Ubuntu官方软件包更新更快（比如raspbian当前为3.7而hass需要3.8+版本)，
 且自己笔记本一直用Ubuntu，统一发行版使用起来更加方便&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo pip3 install homeassistant
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo pip3 install homeassistant
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果下载很慢，可以考虑使用pypi镜像源&lt;/p&gt;
 &lt;p&gt;编辑&lt;code&gt;/etc/pip.conf&lt;/code&gt; (使用豆瓣源）&lt;/p&gt;
 &lt;pre tabindex="0"&gt;&lt;code&gt;[global]
@@ -576,7 +576,7 @@ index-url = https://pypi.douban.com/simple
 &lt;ul&gt;
 &lt;li&gt;创建systemd service unit文件&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;systemctl --user edit --full --force homeassistant.service
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;systemctl --user edit --full --force homeassistant.service
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;加入以下内容&lt;/p&gt;
 &lt;pre tabindex="0"&gt;&lt;code&gt;[Unit]
 Description=Home Assistant
@@ -605,7 +605,7 @@ ExecStart=-/sbin/agetty --autologin ubuntu --noclear %I $TERM
 定高效、功能纯粹（极简主义）。研究了一番后，发现其可行性，便整理了一下。&lt;/p&gt;
 &lt;h2 id="主要插件"&gt;主要插件&lt;/h2&gt;
 &lt;p&gt;完整列表&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-vim" data-lang="vim"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Plug &lt;span style="color:#c30"&gt;&amp;#39;scrooloose/nerdtree&amp;#39;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-vim" data-lang="vim"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Plug &lt;span style="color:#c30"&gt;&amp;#39;scrooloose/nerdtree&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Plug &lt;span style="color:#c30"&gt;&amp;#39;preservim/tagbar&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Plug &lt;span style="color:#c30"&gt;&amp;#39;vim-airline/vim-airline&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Plug &lt;span style="color:#c30"&gt;&amp;#39;vim-airline/vim-airline-themes&amp;#39;&lt;/span&gt;
@@ -639,7 +639,7 @@ ExecStart=-/sbin/agetty --autologin ubuntu --noclear %I $TERM
 &lt;ul&gt;
 &lt;li&gt;配置&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-vim" data-lang="vim"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;&amp;#34;.vim/after/ftplugin/go.vim &lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-vim" data-lang="vim"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;&amp;#34;.vim/after/ftplugin/go.vim &lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;&amp;#34; shortcut like vscode&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;nnoremap &amp;lt;buffer&amp;gt; &amp;lt;silent&amp;gt; &amp;lt;F2&amp;gt; :hide GoRename&amp;lt;CR&amp;gt;
@@ -671,7 +671,7 @@ ExecStart=-/sbin/agetty --autologin ubuntu --noclear %I $TERM
 &lt;ul&gt;
 &lt;li&gt;set up proxy for apt&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo bash -c &lt;span style="color:#c30"&gt;&amp;#39;cat &amp;lt;&amp;lt; EOF &amp;gt; /etc/apt/apt.conf.d/proxy.conf
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo bash -c &lt;span style="color:#c30"&gt;&amp;#39;cat &amp;lt;&amp;lt; EOF &amp;gt; /etc/apt/apt.conf.d/proxy.conf
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c30"&gt;Acquire {
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c30"&gt; HTTP::proxy &amp;#34;http://127.0.0.1:8118&amp;#34;;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c30"&gt; HTTPS::proxy &amp;#34;http://127.0.0.1:8118&amp;#34;;
@@ -679,7 +679,7 @@ ExecStart=-/sbin/agetty --autologin ubuntu --noclear %I $TERM
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c30"&gt;EOF&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="system-monitoring"&gt;System Monitoring&lt;/h2&gt;
 &lt;h3 id="basic-info"&gt;Basic Info&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# memory&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# memory&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;free -m 
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# get process id&lt;/span&gt;
@@ -712,18 +712,18 @@ ExecStart=-/sbin/agetty --autologin ubuntu --noclear %I $TERM
 &lt;ol&gt;
 &lt;li&gt;安装构建工具链&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt update &lt;span style="color:#555"&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo apt install -y git build-essential
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt update &lt;span style="color:#555"&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo apt install -y git build-essential
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start="2"&gt;
 &lt;li&gt;拉取源码&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git clone https://github.com/vim/vim.git
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git clone https://github.com/vim/vim.git
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# 切换到你想构建的tag&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git checkout v8.2.0369
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start="3"&gt;
 &lt;li&gt;开始构建&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;#cd src&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;#cd src&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;#make distclean # if you build Vim before&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;./configure --with-features&lt;span style="color:#555"&gt;=&lt;/span&gt;huge &lt;span style="color:#c30;font-weight:bold"&gt;\
@@ -749,15 +749,15 @@ ExecStart=-/sbin/agetty --autologin ubuntu --noclear %I $TERM
 &lt;li&gt;获取GPU温度&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;a href="https://www.nicm.dev/vcgencmd/"&gt;vcgencmd&lt;/a&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;vcgencmd measure_temp
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;vcgencmd measure_temp
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;获取CPU温度&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#033"&gt;cpu&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;$(&lt;/span&gt;&amp;lt;/sys/class/thermal/thermal_zone0/temp&lt;span style="color:#069;font-weight:bold"&gt;)&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#033"&gt;cpu&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;$(&lt;/span&gt;&amp;lt;/sys/class/thermal/thermal_zone0/temp&lt;span style="color:#069;font-weight:bold"&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#366"&gt;echo&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;$((&lt;/span&gt;cpu/1000&lt;span style="color:#069;font-weight:bold"&gt;))&lt;/span&gt;&lt;span style="color:#c30"&gt; c&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="代码实现"&gt;代码实现&lt;/h2&gt;
 &lt;p&gt;网上已经有不少python版本的实现，但作为一个go粉，当然选择用go来实现了，正好练习一下gobot包的使用&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;package&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;main&lt;span style="color:#bbb"&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;package&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;main&lt;span style="color:#bbb"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;import&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;(&lt;span style="color:#bbb"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;time&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
@@ -822,25 +822,25 @@ ExecStart=-/sbin/agetty --autologin ubuntu --noclear %I $TERM
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}&lt;span style="color:#bbb"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;实现的效果是，当温度高于58度时，启动风扇；温度低于50度时关闭风扇。(风扇一直不停转，大概也只能到45度左右，可能深圳有点热）&lt;/p&gt;</description></item><item><title>Yarn</title><link>https://qtopie.github.io/notes/web/yarn/</link><pubDate>Sat, 20 Jun 2020 22:44:03 +0800</pubDate><guid>https://qtopie.github.io/notes/web/yarn/</guid><description>&lt;p&gt;&lt;a href="https://yarnpkg.com/"&gt;Yarn&lt;/a&gt;是Facebook、Google等主导开发的新的Javascript包管理器。（相对于npm)&lt;/p&gt;
 &lt;h2 id="安装"&gt;&lt;a href="https://yarnpkg.com/getting-started/install"&gt;安装&lt;/a&gt;&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo npm install -g yarn --registry https://registry.npm.taobao.org
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo npm install -g yarn --registry https://registry.npm.taobao.org
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这里使用了&lt;a href="https://developer.aliyun.com/mirror/NPM?from=tnpm"&gt;taobao npm镜像&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;配置Angular Cli使用yarn&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;使用ng命令设置全局使用yarn&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ng config -g cli.packageManager yarn
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ng config -g cli.packageManager yarn
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="使用"&gt;使用&lt;/h2&gt;
 &lt;p&gt;添加依赖&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;yarn add &amp;lt;DEP_NAME&amp;gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;yarn add &amp;lt;DEP_NAME&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# dev&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;yarn add -D &amp;lt;DEP_NAME&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;参考工具自带帮助文档&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;yarn --help
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;yarn --help
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="包下载缓存"&gt;&lt;a href="https://classic.yarnpkg.com/en/docs/cli/cache/"&gt;包下载缓存&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;可以通过设置环境变量&lt;code&gt;YARN_CACHE_FOLDER&lt;/code&gt;来指定缓存目录&lt;/p&gt;
 &lt;p&gt;Ubuntu下修改&lt;code&gt;~/.bashrc&lt;/code&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#366"&gt;echo&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#39;YARN_CACHE_FOLDER=$HOME/.yarn&amp;#39;&lt;/span&gt; &amp;gt;&amp;gt; ~/.bashrc
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#366"&gt;echo&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#39;YARN_CACHE_FOLDER=$HOME/.yarn&amp;#39;&lt;/span&gt; &amp;gt;&amp;gt; ~/.bashrc
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="构建速度简单比较"&gt;构建速度简单比较&lt;/h3&gt;
 &lt;p&gt;使用项目&lt;a href="https://github.com/artificerpi/tour-of-heroes"&gt;tour-of-heroes&lt;/a&gt;安装nodejs依赖。&lt;/p&gt;
 &lt;p&gt;镜像: &lt;a href="https://registry.npm.taobao.org"&gt;https://registry.npm.taobao.org&lt;/a&gt;&lt;/p&gt;
@@ -869,7 +869,7 @@ ExecStart=-/sbin/agetty --autologin ubuntu --noclear %I $TERM
 &lt;p&gt;可以看到yarn明显要快一些。
 类似于npm安装依赖时创建&lt;code&gt;package-lock.json&lt;/code&gt;文件，yarn也会创建&lt;code&gt;yarn.lock&lt;/code&gt;文件锁定依赖。（这时安装已有包换registry会不生效)&lt;/p&gt;
 &lt;h3 id="包下载镜像"&gt;包下载镜像&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#033"&gt;SASS_BINARY_SITE&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;https://npm.taobao.org/mirrors/node-sass/
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#033"&gt;SASS_BINARY_SITE&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;https://npm.taobao.org/mirrors/node-sass/
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#033"&gt;PHANTOMJS_CDNURL&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;https://npm.taobao.org/mirrors/phantomjs/
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#033"&gt;ELECTRON_MIRROR&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;https://npm.taobao.org/mirrors/electron/
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
@@ -878,7 +878,7 @@ ExecStart=-/sbin/agetty --autologin ubuntu --noclear %I $TERM
 &lt;ul&gt;
 &lt;li&gt;使用Caddy反向代理taobao镜像&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-Caddyfile" data-lang="Caddyfile"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#030;font-weight:bold"&gt;:8080&lt;/span&gt; {&lt;span style="color:#09f;font-style:italic"&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-Caddyfile" data-lang="Caddyfile"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#030;font-weight:bold"&gt;:8080&lt;/span&gt; {&lt;span style="color:#09f;font-style:italic"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt; # https://npm.taobao.org/mirrors/node-sass/
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#069;font-weight:bold"&gt;route&lt;/span&gt; &lt;span style="color:#99f"&gt;/dist/node-sass/*&lt;/span&gt; {
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#069;font-weight:bold"&gt;reverse_proxy&lt;/span&gt; &lt;span style="color:#c30"&gt;https://cdn.npm.taobao.org&lt;/span&gt; {
@@ -923,15 +923,15 @@ ExecStart=-/sbin/agetty --autologin ubuntu --noclear %I $TERM
 &lt;p&gt;与Windows命令窗口和文件系统无缝集成，开发起来十分方便。在当前窗口输入&lt;code&gt;bash&lt;/code&gt;就可以进入Linux下对应的目录；同时还有VSCode Remote WSL的支持。&lt;/p&gt;
 &lt;h3 id="安装配置"&gt;安装配置&lt;/h3&gt;
 &lt;p&gt;启用Hyper V和Linux子系统&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux -NoRestart
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux -NoRestart
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后重启&lt;/p&gt;</description></item><item><title>Helm</title><link>https://qtopie.github.io/notes/cloud-native/k8s/helm.zh/</link><pubDate>Wed, 20 May 2020 21:15:34 +0800</pubDate><guid>https://qtopie.github.io/notes/cloud-native/k8s/helm.zh/</guid><description>&lt;p&gt;这里我们使用helm 3.0+版本, 可以直接使用kube-server api, 不需要在集群安装tiler&lt;/p&gt;
 &lt;h2 id="安装"&gt;安装&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo snap install helm --classic
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo snap install helm --classic
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="chartmuseum"&gt;Chartmuseum&lt;/h2&gt;
 &lt;p&gt;repo: &lt;a href="https://github.com/helm/chartmuseum"&gt;https://github.com/helm/chartmuseum&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;本地安装&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl -LO https://s3.amazonaws.com/chartmuseum/release/latest/bin/linux/amd64/chartmuseum
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl -LO https://s3.amazonaws.com/chartmuseum/release/latest/bin/linux/amd64/chartmuseum
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;chmod +x chartmuseum
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mv chartmuseum /usr/bin/
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mkdir /opt/chart &lt;span style="color:#555"&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo chown &lt;span style="color:#033"&gt;$USER&lt;/span&gt; /opt/chart
@@ -940,7 +940,7 @@ ExecStart=-/sbin/agetty --autologin ubuntu --noclear %I $TERM
 &lt;h2 id="创建和使用chart"&gt;创建和使用chart&lt;/h2&gt;
 &lt;p&gt;我们以创建一个nginx chart为例。&lt;/p&gt;
 &lt;p&gt;使用helm创建初始化配。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mkdir app
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mkdir app
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;helm create chart
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;然后可以看到初始化的以下配置&lt;/p&gt;
 &lt;pre tabindex="0"&gt;&lt;code&gt;artificerpi@ky-laptop:~/build/app$ tree chart
@@ -973,7 +973,7 @@ chart
 &lt;h3 id="jxl-安装"&gt;jxl 安装&lt;/h3&gt;
 &lt;p&gt;从这个链接下载安装jxl工具 &lt;a href="https://github.com/jenkins-x-labs/jxl/releases"&gt;https://github.com/jenkins-x-labs/jxl/releases&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="创建仓库"&gt;创建仓库&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;jxl boot create
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;jxl boot create
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这里我们选择minikube，和microk8s应该差不多。(注意不要选择更新本地jx版本，至少这篇文章写的时候这一步还有bug)&lt;/p&gt;
 &lt;p&gt;按提示输入完毕就会初始化仓库，把jenkins bot的token记录下来, 我偷懒直接用这个访问github 私有仓库（开起了两步验证，直接使用密码没有办法直接推代码到github)&lt;/p&gt;
 &lt;ul&gt;
@@ -983,11 +983,11 @@ chart
 &lt;ul&gt;
 &lt;li&gt;拉取远程配置启动&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;jxl boot run --git-url https://github.com/artificerpi/environment-jx-dev --git-user artificerpi --git-token &amp;lt;TOKEN&amp;gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;jxl boot run --git-url https://github.com/artificerpi/environment-jx-dev --git-user artificerpi --git-token &amp;lt;TOKEN&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;本地启动 （只是一个测试）&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#366"&gt;cd&lt;/span&gt; environment-jx-dev &lt;span style="color:#555"&gt;&amp;amp;&amp;amp;&lt;/span&gt; jxl boot run -b
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#366"&gt;cd&lt;/span&gt; environment-jx-dev &lt;span style="color:#555"&gt;&amp;amp;&amp;amp;&lt;/span&gt; jxl boot run -b
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;目前无法运行起来，报错&lt;code&gt;/secrets/jx-boot/secrets.yaml&lt;/code&gt;无法找到，可能是个bug&lt;/p&gt;
 &lt;pre tabindex="0"&gt;&lt;code class="language-log" data-lang="log"&gt;error: failed to load secrets YAML /secrets/jx-boot/secrets.yaml: open /secrets/jx-boot/secrets.yaml: no such file or directory
 &lt;/code&gt;&lt;/pre&gt;</description></item><item><title>Caddy与http3</title><link>https://qtopie.github.io/notes/web/caddy/</link><pubDate>Wed, 22 Apr 2020 00:03:52 +0800</pubDate><guid>https://qtopie.github.io/notes/web/caddy/</guid><description>&lt;h2 id="caddy-简单介绍"&gt;Caddy 简单介绍&lt;/h2&gt;
@@ -1021,14 +1021,14 @@ mwine.science {
 &lt;/blockquote&gt;
 &lt;p&gt;这里我将域名&lt;code&gt;mwine.science&lt;/code&gt;和&lt;code&gt;www.mwine.science&lt;/code&gt;绑定到了同一台服务器，并将&lt;code&gt;www.mwine.science&lt;/code&gt;重定向到&lt;code&gt;mwine.science&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;然后创建一个文件&lt;code&gt;/var/www/html/mwine.science/index.html&lt;/code&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#099"&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-html" data-lang="html"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#099"&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#309;font-weight:bold"&gt;html&lt;/span&gt;&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;&lt;span style="color:#309;font-weight:bold"&gt;body&lt;/span&gt;&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; Hello World !
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;/&lt;span style="color:#309;font-weight:bold"&gt;body&lt;/span&gt;&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&amp;lt;/&lt;span style="color:#309;font-weight:bold"&gt;html&lt;/span&gt;&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;最后运行起来就可以了 （这里我加上了watch选项，启用根据文件配置动态更新）&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/usr/local/bin/caddy run -config /etc/Caddyfile -watch
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;/usr/local/bin/caddy run -config /etc/Caddyfile -watch
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;或者我们可以将它写成systemd服务，输入命令编辑&lt;code&gt;sudo systemctl edit --force --full caddy.service&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;粘贴以下内容&lt;/p&gt;</description></item><item><title>Go安装</title><link>https://qtopie.github.io/notes/go/setup-go/</link><pubDate>Wed, 18 Mar 2020 22:02:05 +0800</pubDate><guid>https://qtopie.github.io/notes/go/setup-go/</guid><description>&lt;p&gt;官方下载安装向导请参考这里https://golang.org/dl/&lt;/p&gt;
 &lt;p&gt;这篇文章主要分享加速访问go依赖和资源站点的问题。&lt;/p&gt;
@@ -1040,13 +1040,13 @@ mwine.science {
 &lt;h2 id="下载安装"&gt;下载安装&lt;/h2&gt;
 &lt;p&gt;Go安装文件可以访问国内站点 &lt;a href="https://golang.google.cn/dl/"&gt;https://golang.google.cn/dl/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;解压后，移动到&lt;code&gt;/usr/local/go&lt;/code&gt;目录，然后在&lt;code&gt;/etc/profile&lt;/code&gt;里加入&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#366"&gt;export&lt;/span&gt; &lt;span style="color:#033"&gt;GOROOT&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;/usr/local/go
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#366"&gt;export&lt;/span&gt; &lt;span style="color:#033"&gt;GOROOT&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;/usr/local/go
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#366"&gt;export&lt;/span&gt; &lt;span style="color:#033"&gt;PATH&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;&lt;span style="color:#033"&gt;$PATH&lt;/span&gt;:&lt;span style="color:#033"&gt;$GOROOT&lt;/span&gt;/bin
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="使用技巧"&gt;使用技巧&lt;/h2&gt;
 &lt;h3 id="goproxy"&gt;goproxy&lt;/h3&gt;
 &lt;p&gt;使用goproxy加速&lt;code&gt;go module&lt;/code&gt;下载(解决&lt;code&gt;go get&lt;/code&gt;无法下载来自golang.org等站点的依赖包的问题）&lt;/p&gt;
 &lt;p&gt;参考https://goproxy.io/zh/, 在go 1.13+下，我们可以使用以下命令在go env设置goproxy&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;go env -w &lt;span style="color:#033"&gt;GO111MODULE&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;on
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;go env -w &lt;span style="color:#033"&gt;GO111MODULE&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;on
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;go env -w &lt;span style="color:#033"&gt;GOPROXY&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;https://goproxy.io,direct
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# 设置不走 proxy 的私有仓库，多个用逗号相隔（可选）&lt;/span&gt;
@@ -1056,7 +1056,7 @@ mwine.science {
 &lt;ul&gt;
 &lt;li&gt;使用&lt;code&gt;go doc&lt;/code&gt;命令可以在终端快速查阅文档, 例如&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;go doc net.Listen | vim -
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;go doc net.Listen | vim -
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="参考"&gt;参考&lt;/h2&gt;</description></item><item><title>Kubernetes使用入门</title><link>https://qtopie.github.io/notes/cloud-native/k8s/k8s-get-started/</link><pubDate>Sat, 04 Jan 2020 00:03:52 +0800</pubDate><guid>https://qtopie.github.io/notes/cloud-native/k8s/k8s-get-started/</guid><description>&lt;h2 id="容器化-containerization"&gt;容器化 Containerization&lt;/h2&gt;
 &lt;p&gt;容器是标准化的软件单元。容器化将软件打包成标准化的单元，从而能够以此进行开发，装载和部署。简单地说，通过底层虚拟化，容器化实现应用Write once, run anywhere， 而且是快速地run anywhere，就像docker图标里被鲸鱼背着的集装箱一样。&lt;/p&gt;
 &lt;h3 id="容器与虚拟机的对比"&gt;容器与虚拟机的对比&lt;/h3&gt;
@@ -1122,7 +1122,7 @@ Java version: 1.8.0_171
 &lt;li&gt;生成项目配置&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;默认Gradle eclipse编译输出目录为bin, 但是gradle构建输出目录为build， 因此需要改配置。&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-groovy" data-lang="groovy"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;plugins &lt;span style="color:#555"&gt;{&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-groovy" data-lang="groovy"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;plugins &lt;span style="color:#555"&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; id &lt;span style="color:#c30"&gt;&amp;#39;java&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; id &lt;span style="color:#c30"&gt;&amp;#39;eclipse&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#555"&gt;}&lt;/span&gt;
@@ -1203,7 +1203,7 @@ Java version: 1.8.0_171
 &lt;li&gt;网卡识别为存储设备的问题&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;mt76还未对这款comfast网卡适配，所以默认会被系统识别为存储设备，可以手动切换过来：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo usb_modeswitch -KW -v 0e8d -p &lt;span style="color:#f60"&gt;2870&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo usb_modeswitch -KW -v 0e8d -p &lt;span style="color:#f60"&gt;2870&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;或者修改&lt;code&gt;/lib/udev/rules.d/40-usb_modeswitch.rules&lt;/code&gt;文件自动切换（目前未成功）&lt;/p&gt;
 &lt;pre tabindex="0"&gt;&lt;code&gt;# MT7612U 
 ATTR{idVendor}==&amp;#34;0e8d&amp;#34;, ATTR{idProduct}==&amp;#34;2870&amp;#34;, RUN+=&amp;#34;usb_modeswitch &amp;#39;%b/%k&amp;#39;&amp;#34;
@@ -1227,7 +1227,7 @@ pi@raspberrypi:~ $ sudo ifconfig wlan1 up
 &lt;p&gt;其主要功能类似于&lt;code&gt;git submodule&lt;/code&gt;, 但使用方式更加灵活，不需要对原git仓库的行为做任何修改，也可以不用在主仓库不断更新引用。&lt;/p&gt;
 &lt;h2 id="安装"&gt;安装&lt;/h2&gt;
 &lt;p&gt;推荐从源码编译安装 (需要安装最新版本Go语言构建工具）&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git clone https://fuchsia.googlesource.com/jiri
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git clone https://fuchsia.googlesource.com/jiri
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#366"&gt;cd&lt;/span&gt; jiri/cmd/jiri/jiri 
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;go build
@@ -1238,7 +1238,7 @@ pi@raspberrypi:~ $ sudo ifconfig wlan1 up
 &lt;ul&gt;
 &lt;li&gt;manifest (文件名称为foo)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-xml" data-lang="xml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#099"&gt;&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-xml" data-lang="xml"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#099"&gt;&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#309;font-weight:bold"&gt;&amp;lt;manifest&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#309;font-weight:bold"&gt;&amp;lt;projects&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#309;font-weight:bold"&gt;&amp;lt;project&lt;/span&gt; &lt;span style="color:#309"&gt;name=&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;spring-petclinic-mybatis&amp;#34;&lt;/span&gt;
@@ -1250,7 +1250,7 @@ pi@raspberrypi:~ $ sudo ifconfig wlan1 up
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; &lt;span style="color:#309;font-weight:bold"&gt;&amp;lt;/projects&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#309;font-weight:bold"&gt;&amp;lt;/manifest&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;将此文件放到git仓库根目录下，本地创建目录foo&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mkdir foo &lt;span style="color:#555"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style="color:#366"&gt;cd&lt;/span&gt; foo
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mkdir foo &lt;span style="color:#555"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style="color:#366"&gt;cd&lt;/span&gt; foo
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;jiri init
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# manifest repos&lt;/span&gt;
@@ -1285,7 +1285,7 @@ pi@raspberrypi:~ $ sudo ifconfig wlan1 up
 &lt;ul&gt;
 &lt;li&gt;查看usb设备是否被识别&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;lsusb
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;lsusb
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# output:&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Bus &lt;span style="color:#f60"&gt;001&lt;/span&gt; Device 004: ID 12d1:15c1 Huawei Technologies Co., Ltd. 
@@ -1295,12 +1295,12 @@ pi@raspberrypi:~ $ sudo ifconfig wlan1 up
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;安装拨号软件&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt-get update
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt-get update
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt-get install ppp usb-modeswitch wvdial
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;初始化wvdial配置&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo wvdialconf /etc/wvdial.conf
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo wvdialconf /etc/wvdial.conf
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;修改&lt;code&gt;wvdial&lt;/code&gt;配置&lt;/li&gt;
 &lt;/ul&gt;
@@ -1320,13 +1320,13 @@ Auto DNS = on
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;APN和拨号设置参考&lt;/p&gt;</description></item><item><title>Vbox Ubuntu Server</title><link>https://qtopie.github.io/notes/linux/vbox-ubuntu-server/</link><pubDate>Tue, 27 Nov 2018 22:32:33 +0800</pubDate><guid>https://qtopie.github.io/notes/linux/vbox-ubuntu-server/</guid><description>&lt;h1 id="virtualbox-with-ubuntu-server"&gt;Virtualbox with Ubuntu Server&lt;/h1&gt;
 &lt;p&gt;&lt;em&gt;Manage Virtualbox in command line&lt;/em&gt;&lt;/p&gt;
 &lt;h2 id="installation"&gt;Installation&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt install virtualbox
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt install virtualbox
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# or manually&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# wget https://download.virtualbox.org/virtualbox/5.2.22/virtualbox-5.2_5.2.22-126460~Ubuntu~bionic_amd64.deb&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# sudo dpkg -i virtualbox*.deb&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="install-extenstion-pack"&gt;Install extenstion pack&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt install virtualbox-ext-pack 
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt install virtualbox-ext-pack 
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# or manually&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# sudo VBoxManage extpack install Oracle_VM_VirtualBox_Extension_Pack-5.2.4-119785.vbox-extpack&lt;/span&gt;
@@ -1337,36 +1337,36 @@ Auto DNS = on
 &lt;ul&gt;
 &lt;li&gt;Create virtual disk&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;VBoxManage createmedium disk --filename ubuntu-server1.vdi --size &lt;span style="color:#f60"&gt;8192&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;VBoxManage createmedium disk --filename ubuntu-server1.vdi --size &lt;span style="color:#f60"&gt;8192&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;Create virtual machine&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;VBoxManage list ostypes | grep -B &lt;span style="color:#f60"&gt;1&lt;/span&gt; -A &lt;span style="color:#f60"&gt;2&lt;/span&gt; Ubuntu
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;VBoxManage list ostypes | grep -B &lt;span style="color:#f60"&gt;1&lt;/span&gt; -A &lt;span style="color:#f60"&gt;2&lt;/span&gt; Ubuntu
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;VBoxManage createvm --name ubuntu-server1 --ostype &lt;span style="color:#c30"&gt;&amp;#34;Ubuntu_64&amp;#34;&lt;/span&gt; --register
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;Configure virtual machine&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# add sata disk&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# add sata disk&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;VBoxManage storagectl ubuntu-server1 --name SATA --add sata --controller IntelAHCI
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;VBoxManage storageattach ubuntu-server1 --storagectl SATA --port &lt;span style="color:#f60"&gt;0&lt;/span&gt; --device &lt;span style="color:#f60"&gt;0&lt;/span&gt; --type hdd --medium ubuntu-server1.vdi
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# mount dvd bootable iso file&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;VBoxManage storagectl ubuntu-server1 --name IDE --add ide
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;VBoxManage storageattach ubuntu-server1 --storagectl IDE --port &lt;span style="color:#f60"&gt;0&lt;/span&gt; --device &lt;span style="color:#f60"&gt;0&lt;/span&gt; --type dvddrive --medium ~/Downloads/mini.iso
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;VBoxManage modifyvm ubuntu-server1 --ioapic on
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;VBoxManage modifyvm ubuntu-server1 --ioapic on
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;VBoxManage modifyvm ubuntu-server1 --boot1 dvd --boot2 disk --boot3 none --boot4 none
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;VBoxManage modifyvm ubuntu-server1 --memory &lt;span style="color:#f60"&gt;512&lt;/span&gt; --vram &lt;span style="color:#f60"&gt;8&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;VBoxManage modifyvm ubuntu-server1 --nic1 nat
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;Set for VRDE (optional)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;VBoxManage setproperty vrdeextpack &lt;span style="color:#c30"&gt;&amp;#34;Oracle VM VirtualBox Extension Pack&amp;#34;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;VBoxManage setproperty vrdeextpack &lt;span style="color:#c30"&gt;&amp;#34;Oracle VM VirtualBox Extension Pack&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# vrde port 5000, 5010, 5011 or 5012&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;VBoxManage modifyvm ubuntu-server1 --vrde on --vrdeport 5000,5010-5012 
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;Start vm&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;VBoxManage startvm ubuntu-server1 --type headless
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;VBoxManage startvm ubuntu-server1 --type headless
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;VBoxManage showvminfo ubuntu-server1
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Test it &lt;code&gt;rdesktop -a 16 -N &amp;lt;HOST-IP&amp;gt;:&amp;lt;PORT&amp;gt;&lt;/code&gt;&lt;/p&gt;</description></item><item><title>我的DIY与vocore</title><link>https://qtopie.github.io/notes/iot/vocore/my-vocore-playground/</link><pubDate>Thu, 26 Jul 2018 22:24:33 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/vocore/my-vocore-playground/</guid><description>&lt;h2 id="vocore"&gt;&lt;a href="http://vocore.io/"&gt;VoCore&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;硬币大小的Linux计算机（或者可以DIY的mini路由器）&lt;/p&gt;
@@ -1384,14 +1384,14 @@ Auto DNS = on
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;opkg&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# 安装软件包&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# 安装软件包&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;opkg install &amp;lt;PACKAGE-NAME&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# 卸载软件包&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;opkg remove &amp;lt;PACKAGE-NAME&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;uci&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# 设置option&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# 设置option&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;uci &lt;span style="color:#366"&gt;set&lt;/span&gt; &amp;lt;OPTION&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# 查看option&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;uci show &amp;lt;OPTION&amp;gt;
@@ -1402,7 +1402,7 @@ Auto DNS = on
 &lt;ul&gt;
 &lt;li&gt;Change SSID Name&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;uci &lt;span style="color:#366"&gt;set&lt;/span&gt; wireless.ap.ssid&lt;span style="color:#555"&gt;=&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#39;firefly&amp;#39;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;uci &lt;span style="color:#366"&gt;set&lt;/span&gt; wireless.ap.ssid&lt;span style="color:#555"&gt;=&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#39;firefly&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;uci commit 
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# check result&lt;/span&gt;
@@ -1444,7 +1444,7 @@ network={
 &lt;p&gt;Refer to &lt;a href="https://www.raspberrypi.org/documentation/remote-access/ssh/"&gt;https://www.raspberrypi.org/documentation/remote-access/ssh/&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id="get-ip-of-your-pi"&gt;Get IP of your pi&lt;/h3&gt;
 &lt;h4 id="with-computer"&gt;With Computer&lt;/h4&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo nmap -sP 192.168.21.*
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo nmap -sP 192.168.21.*
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# results &lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;MAC Address: B8:27:EB:40:A9:D7 &lt;span style="color:#555"&gt;(&lt;/span&gt;Raspberry Pi Foundation&lt;span style="color:#555"&gt;)&lt;/span&gt;
@@ -1460,7 +1460,7 @@ network={
 &lt;ul&gt;
 &lt;li&gt;设置个人信息&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git config --global user.name &amp;lt;YOUR-NAME&amp;gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git config --global user.name &amp;lt;YOUR-NAME&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git config --global user.email &amp;lt;YOUR-EMAIL&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# 查看个人配置&lt;/span&gt;
@@ -1468,16 +1468,16 @@ network={
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;将默认主仓库设置为&lt;code&gt;main&lt;/code&gt; &lt;a href="https://github.com/github/renaming"&gt;BLM运动&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git config --global init.defaultbranch main
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git config --global init.defaultbranch main
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;初始化仓库&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mkdir /path/to/your/project
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mkdir /path/to/your/project
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#366"&gt;cd&lt;/span&gt; /path/to/your/project
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git init 			&lt;span style="color:#09f;font-style:italic"&gt;# initialize an empty git repo&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git remote add origin git@repo-url.git
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="create-your-first-file-and-push-it-to-the-remote-repo"&gt;Create your first file and push it to the remote repo&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#366"&gt;echo&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#34;qtopie.rw&amp;#34;&lt;/span&gt; &amp;gt;&amp;gt; contributors.txt
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#366"&gt;echo&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#34;qtopie.rw&amp;#34;&lt;/span&gt; &amp;gt;&amp;gt; contributors.txt
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git add contributors.txt
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git commit -m &lt;span style="color:#c30"&gt;&amp;#39;Initial commit with contributors&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git push -u origin master
@@ -1672,13 +1672,13 @@ automatically.&lt;/p&gt;</description></item><item><title>开始使用Ubuntu</ti
 &lt;ul&gt;
 &lt;li&gt;将系统文件拷贝到新磁盘的分区(建议在&lt;a href="http://www.ubuntu.com/download/desktop/create-a-usb-stick-on-ubuntu"&gt;live usb&lt;/a&gt;上完成该操作)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# 旧的分区在/dev/sda5上， 新磁盘为/dev/sdb&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# 旧的分区在/dev/sda5上， 新磁盘为/dev/sdb&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;dd &lt;span style="color:#033"&gt;in&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;/dev/sda5 &lt;span style="color:#033"&gt;of&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;/dev/sdb1 &lt;span style="color:#033"&gt;bs&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;4M &lt;span style="color:#033"&gt;conv&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;noerror,sync &lt;span style="color:#033"&gt;status&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;progress
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;拷贝完后，mount新磁盘确认数据已经保存到新磁盘，就可以移走旧磁盘或删除旧系统文件。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;使用live usb安装grub到新磁盘的文件系统&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# mount新磁盘分区到 /mnt&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# mount新磁盘分区到 /mnt&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo mount /dev/sdb1 /mnt
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# mount当前操作系统文件必要目录&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;for&lt;/span&gt; i in sys proc run dev; &lt;span style="color:#069;font-weight:bold"&gt;do&lt;/span&gt; sudo mount --bind &lt;span style="color:#c30"&gt;&amp;#34;/&lt;/span&gt;&lt;span style="color:#033"&gt;$i&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#34;/mnt/&lt;/span&gt;&lt;span style="color:#033"&gt;$i&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;&lt;/span&gt;; &lt;span style="color:#069;font-weight:bold"&gt;done&lt;/span&gt;
@@ -1829,9 +1829,9 @@ automatically.&lt;/p&gt;</description></item><item><title>开始使用Ubuntu</ti
 &lt;p&gt;快慢双指针: 定义一个慢指针slow, 一个快指针fast, 慢指针走一次时快指针走两次.
 根据物理知识, 如果链表有环, 快指针一定会追上慢指针. 而且快指针走的步数一定是慢指针的两倍, 因为快指针每次只能追赶一步, 追上的时候也就在一起了.&lt;/p&gt;
 &lt;p&gt;如果fast和slow中间间隔一个,则本次追不上&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;fast -&amp;gt; node2 -&amp;gt; slow -&amp;gt; node4
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;fast -&amp;gt; node2 -&amp;gt; slow -&amp;gt; node4
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;fast和slow相邻的时候,下次追上&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;fast -&amp;gt; slow -&amp;gt; node5
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;fast -&amp;gt; slow -&amp;gt; node5
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;怎么找到环开始的点?&lt;/p&gt;
 &lt;p&gt;因为快指针走的路是慢指针的两倍, 慢指针走完一圈,恰好回到环开始的地方. 而当两个指针相遇的时候, (先假设快指针恰好多走一圈)&lt;/p&gt;
 &lt;p&gt;快慢指针同时走, 慢指针走完终点, 则快指针走完一圈再加上从开头到环入口的路才刚好走完链表的两次遍历.&lt;/p&gt;
@@ -1949,9 +1949,9 @@ automatically.&lt;/p&gt;</description></item><item><title>开始使用Ubuntu</ti
 &lt;h2 id="addons"&gt;addons&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;microk8s enable dns hostpath-storage ingress&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;pull images behind firewall&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#033"&gt;https_proxy&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;socks5://192.168.50.1:1080 microk8s.ctr image pull registry.k8s.io/ingress-nginx/controller:v1.5.1
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#033"&gt;https_proxy&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;socks5://192.168.50.1:1080 microk8s.ctr image pull registry.k8s.io/ingress-nginx/controller:v1.5.1
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;check resources&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# list crd&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# list crd&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mkctl get crd
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# list all resource names&lt;/span&gt;
@@ -2106,7 +2106,7 @@ service reboot
 &gt; set config: `nvram set &lt;config-key:config-value&gt;`
 &gt; query config: `nvram get &lt;config-key&gt;` --&gt;
 &lt;p&gt;&lt;code&gt;/jffs/scripts/post-mount&lt;/code&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#099"&gt;#!/bin/sh
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#099"&gt;#!/bin/sh
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;if&lt;/span&gt; &lt;span style="color:#555"&gt;[&lt;/span&gt; &lt;span style="color:#033"&gt;$1&lt;/span&gt; &lt;span style="color:#555"&gt;==&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#34;/tmp/mnt/usb&amp;#34;&lt;/span&gt; &lt;span style="color:#555"&gt;]&lt;/span&gt; &lt;span style="color:#555"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style="color:#555"&gt;[&lt;/span&gt; -e &lt;span style="color:#c30"&gt;&amp;#34;/mnt/usb/scripts/startup.sh&amp;#34;&lt;/span&gt; &lt;span style="color:#555"&gt;]&lt;/span&gt;; &lt;span style="color:#069;font-weight:bold"&gt;then&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt; bash -c &lt;span style="color:#c30"&gt;&amp;#34;/mnt/usb/scripts/startup.sh&amp;#34;&lt;/span&gt;
@@ -2171,7 +2171,7 @@ AQS极大地简化了Java并发工具的开发，是Java并发包的核心基础
 &lt;ul&gt;
 &lt;li&gt;Node&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-java" data-lang="java"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;abstract&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;static&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;class&lt;/span&gt; &lt;span style="color:#0a8;font-weight:bold"&gt;Node&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-java" data-lang="java"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;abstract&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;static&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;class&lt;/span&gt; &lt;span style="color:#0a8;font-weight:bold"&gt;Node&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;volatile&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;Node&lt;span style="color:#bbb"&gt; &lt;/span&gt;prev;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#09f;font-style:italic"&gt;// initially attached via casTail&lt;/span&gt;&lt;span style="color:#bbb"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;volatile&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;Node&lt;span style="color:#bbb"&gt; &lt;/span&gt;next;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#09f;font-style:italic"&gt;// visibly nonnull when signallable&lt;/span&gt;&lt;span style="color:#bbb"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;Thread&lt;span style="color:#bbb"&gt; &lt;/span&gt;waiter;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#09f;font-style:italic"&gt;// visibly nonnull when enqueued&lt;/span&gt;&lt;span style="color:#bbb"&gt;
@@ -2222,7 +2222,7 @@ swapfile&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;get tools&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mkdir fuchsia &lt;span style="color:#555"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style="color:#366"&gt;cd&lt;/span&gt; fuchsia
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mkdir fuchsia &lt;span style="color:#555"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style="color:#366"&gt;cd&lt;/span&gt; fuchsia
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl --location --create-dirs --output .jiri_root/bin/cipd https://fuchsia.fsf.org.cn/bootstrap/cipd-linux-amd64
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl --location --create-dirs --output .jiri_root/bin/jiri https://fuchsia.fsf.org.cn/bootstrap/jiri-linux-amd64
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;chmod +x .jiri_root/bin/jiri .jiri_root/bin/jiri
@@ -2230,7 +2230,7 @@ swapfile&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;Download from mirror&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mkdir -p build &lt;span style="color:#555"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style="color:#366"&gt;echo&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#34;internal_access = false&amp;#34;&lt;/span&gt; &amp;gt;build/cipd.gni
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;mkdir -p build &lt;span style="color:#555"&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style="color:#366"&gt;echo&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#34;internal_access = false&amp;#34;&lt;/span&gt; &amp;gt;build/cipd.gni
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;jiri init -keep-git-hooks&lt;span style="color:#555"&gt;=&lt;/span&gt;&lt;span style="color:#366"&gt;true&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;jiri import -name&lt;span style="color:#555"&gt;=&lt;/span&gt;integration flower https://fuchsia.fsf.org.cn/git/fuchsia-integration
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;jiri update -v
@@ -2238,7 +2238,7 @@ swapfile&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;Switch back to official repos&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;rm -rf integration jiri .jiri_manifest .jiri_root
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;rm -rf integration jiri .jiri_manifest .jiri_root
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;rm -rf integration jiri .jiri_manifest .jiri_root
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;curl -s https://fuchsia.googlesource.com/jiri/+/master/scripts/bootstrap_jiri?format&lt;span style="color:#555"&gt;=&lt;/span&gt;TEXT | base64 --decode | bash -s &lt;span style="color:#a00"&gt;${&lt;/span&gt;&lt;span style="color:#033"&gt;PWD&lt;/span&gt;&lt;span style="color:#a00"&gt;}&lt;/span&gt;
@@ -2246,7 +2246,7 @@ swapfile&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;jiri import -name&lt;span style="color:#555"&gt;=&lt;/span&gt;integration flower https://fuchsia.googlesource.com/integration
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;jiri update -v
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="proxy"&gt;proxy&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#366"&gt;export&lt;/span&gt; &lt;span style="color:#033"&gt;https_proxy&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;127.0.0.1:8118
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#366"&gt;export&lt;/span&gt; &lt;span style="color:#033"&gt;https_proxy&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;127.0.0.1:8118
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;use curl with socks5 proxy&lt;/p&gt;</description></item><item><title>Google IP地址范围</title><link>https://qtopie.github.io/notes/dev/google-ip-address/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/dev/google-ip-address/</guid><description>&lt;p&gt;google ip address range&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://www.gstatic.com/ipranges/goog.json"&gt;https://www.gstatic.com/ipranges/goog.json&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;github ip address range

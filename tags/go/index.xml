@@ -8,13 +8,13 @@
 &lt;h2 id="下载安装"&gt;下载安装&lt;/h2&gt;
 &lt;p&gt;Go安装文件可以访问国内站点 &lt;a href="https://golang.google.cn/dl/"&gt;https://golang.google.cn/dl/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;解压后，移动到&lt;code&gt;/usr/local/go&lt;/code&gt;目录，然后在&lt;code&gt;/etc/profile&lt;/code&gt;里加入&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#366"&gt;export&lt;/span&gt; &lt;span style="color:#033"&gt;GOROOT&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;/usr/local/go
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#366"&gt;export&lt;/span&gt; &lt;span style="color:#033"&gt;GOROOT&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;/usr/local/go
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#366"&gt;export&lt;/span&gt; &lt;span style="color:#033"&gt;PATH&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;&lt;span style="color:#033"&gt;$PATH&lt;/span&gt;:&lt;span style="color:#033"&gt;$GOROOT&lt;/span&gt;/bin
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="使用技巧"&gt;使用技巧&lt;/h2&gt;
 &lt;h3 id="goproxy"&gt;goproxy&lt;/h3&gt;
 &lt;p&gt;使用goproxy加速&lt;code&gt;go module&lt;/code&gt;下载(解决&lt;code&gt;go get&lt;/code&gt;无法下载来自golang.org等站点的依赖包的问题）&lt;/p&gt;
 &lt;p&gt;参考https://goproxy.io/zh/, 在go 1.13+下，我们可以使用以下命令在go env设置goproxy&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;go env -w &lt;span style="color:#033"&gt;GO111MODULE&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;on
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;go env -w &lt;span style="color:#033"&gt;GO111MODULE&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;on
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;go env -w &lt;span style="color:#033"&gt;GOPROXY&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;https://goproxy.io,direct
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# 设置不走 proxy 的私有仓库，多个用逗号相隔（可选）&lt;/span&gt;
@@ -24,5 +24,5 @@
 &lt;ul&gt;
 &lt;li&gt;使用&lt;code&gt;go doc&lt;/code&gt;命令可以在终端快速查阅文档, 例如&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;go doc net.Listen | vim -
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;go doc net.Listen | vim -
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="参考"&gt;参考&lt;/h2&gt;</description></item></channel></rss>

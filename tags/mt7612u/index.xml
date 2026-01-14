@@ -22,7 +22,7 @@
 &lt;li&gt;网卡识别为存储设备的问题&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;mt76还未对这款comfast网卡适配，所以默认会被系统识别为存储设备，可以手动切换过来：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo usb_modeswitch -KW -v 0e8d -p &lt;span style="color:#f60"&gt;2870&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo usb_modeswitch -KW -v 0e8d -p &lt;span style="color:#f60"&gt;2870&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;或者修改&lt;code&gt;/lib/udev/rules.d/40-usb_modeswitch.rules&lt;/code&gt;文件自动切换（目前未成功）&lt;/p&gt;
 &lt;pre tabindex="0"&gt;&lt;code&gt;# MT7612U 
 ATTR{idVendor}==&amp;#34;0e8d&amp;#34;, ATTR{idProduct}==&amp;#34;2870&amp;#34;, RUN+=&amp;#34;usb_modeswitch &amp;#39;%b/%k&amp;#39;&amp;#34;

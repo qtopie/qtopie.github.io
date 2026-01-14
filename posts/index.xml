@@ -38,14 +38,14 @@
 &lt;ul&gt;
 &lt;li&gt;users.csv (用户表文本)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-csv" data-lang="csv"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c30"&gt;user_id&lt;/span&gt;,&lt;span style="color:#c30"&gt;username&lt;/span&gt;,&lt;span style="color:#c30"&gt;phone&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-csv" data-lang="csv"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c30"&gt;user_id&lt;/span&gt;,&lt;span style="color:#c30"&gt;username&lt;/span&gt;,&lt;span style="color:#c30"&gt;phone&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c30"&gt;1&lt;/span&gt;,&lt;span style="color:#c30"&gt;张三&lt;/span&gt;,&lt;span style="color:#c30"&gt;13800138001&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c30"&gt;2&lt;/span&gt;,&lt;span style="color:#c30"&gt;李四&lt;/span&gt;,&lt;span style="color:#c30"&gt;13900139002&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c30"&gt;3&lt;/span&gt;,&lt;span style="color:#c30"&gt;王五&lt;/span&gt;,&lt;span style="color:#c30"&gt;13700137003&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;orders.csv (订单表文本)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-csv" data-lang="csv"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c30"&gt;order_id&lt;/span&gt;,&lt;span style="color:#c30"&gt;user_id&lt;/span&gt;,&lt;span style="color:#c30"&gt;amount&lt;/span&gt;,&lt;span style="color:#c30"&gt;status&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-csv" data-lang="csv"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c30"&gt;order_id&lt;/span&gt;,&lt;span style="color:#c30"&gt;user_id&lt;/span&gt;,&lt;span style="color:#c30"&gt;amount&lt;/span&gt;,&lt;span style="color:#c30"&gt;status&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c30"&gt;1001&lt;/span&gt;,&lt;span style="color:#c30"&gt;1&lt;/span&gt;,&lt;span style="color:#c30"&gt;250.00&lt;/span&gt;,&lt;span style="color:#c30"&gt;已支付&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c30"&gt;1002&lt;/span&gt;,&lt;span style="color:#c30"&gt;1&lt;/span&gt;,&lt;span style="color:#c30"&gt;88.50&lt;/span&gt;,&lt;span style="color:#c30"&gt;待付款&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#c30"&gt;1003&lt;/span&gt;,&lt;span style="color:#c30"&gt;2&lt;/span&gt;,&lt;span style="color:#c30"&gt;1200.00&lt;/span&gt;,&lt;span style="color:#c30"&gt;已发货&lt;/span&gt;
@@ -54,25 +54,25 @@
 &lt;ul&gt;
 &lt;li&gt;基础数据查询&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;SELECT&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;username,&lt;span style="color:#bbb"&gt; &lt;/span&gt;phone&lt;span style="color:#bbb"&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;SELECT&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;username,&lt;span style="color:#bbb"&gt; &lt;/span&gt;phone&lt;span style="color:#bbb"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;FROM&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;users&lt;span style="color:#bbb"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;WHERE&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;username&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#39;张三&amp;#39;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;排序&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;SELECT&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;*&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;FROM&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;orders&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;ORDER&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;BY&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;amount&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;DESC&lt;/span&gt;;&lt;span style="color:#bbb"&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;SELECT&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;*&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;FROM&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;orders&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;ORDER&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;BY&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;amount&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;DESC&lt;/span&gt;;&lt;span style="color:#bbb"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;关联查询(JOIN)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;因为用户信息和订单信息在不同的文件/表里，你需要把它们“拼”起来, 比如下面通过user_id拼起来&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;SELECT&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;orders.order_id,&lt;span style="color:#bbb"&gt; &lt;/span&gt;users.username,&lt;span style="color:#bbb"&gt; &lt;/span&gt;orders.amount&lt;span style="color:#bbb"&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;SELECT&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;orders.order_id,&lt;span style="color:#bbb"&gt; &lt;/span&gt;users.username,&lt;span style="color:#bbb"&gt; &lt;/span&gt;orders.amount&lt;span style="color:#bbb"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;FROM&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;orders&lt;span style="color:#bbb"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;LEFT&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;JOIN&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;users&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;ON&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;orders.user_id&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;users.user_id;&lt;span style="color:#bbb"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;统计&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;求和&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;SELECT&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;SUM&lt;/span&gt;(amount)&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;FROM&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;orders;&lt;span style="color:#bbb"&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-sql" data-lang="sql"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;SELECT&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;SUM&lt;/span&gt;(amount)&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;FROM&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;orders;&lt;span style="color:#bbb"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;分组统计&lt;/p&gt;</description></item><item><title>使用API管理cloudcone主机</title><link>https://qtopie.github.io/posts/diy/cloudcone-save-costs/</link><pubDate>Sat, 18 Jul 2020 22:02:05 +0800</pubDate><guid>https://qtopie.github.io/posts/diy/cloudcone-save-costs/</guid><description>&lt;p&gt;&lt;a href="https://app.cloudcone.com/?ref=4442"&gt;Cloudcone&lt;/a&gt;是2017年成立于美国的一家主机供应商。继vultr变得“不靠谱”和低价vm资源经常“售尽”的情况下，我转而使用cloudcone提供的vps服务用于日常学习和开发。&lt;/p&gt;
 &lt;p&gt;除了支持按小时计费、提供更换IP服务及支持支付宝/paypal等灵活的支付方式外，我最看重的是，它的价格能做到真正的弹性，即在vm关机状态不计费CPU/内存等费用,比online费用大概减半。&lt;/p&gt;
 &lt;p&gt;类似于其他云供应商平台，cloudcone还提供了&lt;a href="https://api.cloudcone.com/"&gt;开放的API来管理云主机&lt;/a&gt;。&lt;/p&gt;
@@ -84,7 +84,7 @@
 &lt;ul&gt;
 &lt;li&gt;secret.go&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;package&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;main&lt;span style="color:#bbb"&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;package&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;main&lt;span style="color:#bbb"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;var&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;(&lt;span style="color:#bbb"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#09f;font-style:italic"&gt;// 配置相关信息,这里我填写的是假的啦&lt;/span&gt;&lt;span style="color:#bbb"&gt;
@@ -97,7 +97,7 @@
 &lt;ul&gt;
 &lt;li&gt;main.go&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;/*
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;/*
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;* cloudcone api https://api.cloudcone.com/
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt; */&lt;/span&gt;&lt;span style="color:#bbb"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
@@ -303,16 +303,16 @@ For &lt;code&gt;mathJax&lt;/code&gt;, it&amp;rsquo;s provided in the default con
 &lt;p&gt;检查能PC检测到连入的手机&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;adb kill-server &lt;span style="color:#555"&gt;&amp;amp;&amp;amp;&lt;/span&gt; adb start-server
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;adb kill-server &lt;span style="color:#555"&gt;&amp;amp;&amp;amp;&lt;/span&gt; adb start-server
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;adb devices
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;重启手机进入&lt;code&gt;download&lt;/code&gt;模式&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;adb reboot download
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;adb reboot download
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;解锁bootloader&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;fastboot oem unlock
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;fastboot oem unlock
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;fastboot flashing unlock
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -320,7 +320,7 @@ For &lt;code&gt;mathJax&lt;/code&gt;, it&amp;rsquo;s provided in the default con
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;在&lt;code&gt;download&lt;/code&gt;模式中刷入recovery&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;fastboot flash recovery twrp.img
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;fastboot flash recovery twrp.img
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;fastboot reboot recovery
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
@@ -375,10 +375,10 @@ For &lt;code&gt;mathJax&lt;/code&gt;, it&amp;rsquo;s provided in the default con
 &lt;p&gt;&lt;em&gt;仓库创建过程省略&lt;/em&gt;&lt;/p&gt;
 &lt;h3 id="hugo安装"&gt;Hugo安装&lt;/h3&gt;
 &lt;p&gt;以在Ubuntu 20.04上为例&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo snap install hugo
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo snap install hugo
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="本地生成站点"&gt;本地生成站点&lt;/h3&gt;
 &lt;p&gt;初始化git各模块&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;// git clone ... ; &lt;span style="color:#366"&gt;cd&lt;/span&gt; &amp;lt;repo&amp;gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;// git clone ... ; &lt;span style="color:#366"&gt;cd&lt;/span&gt; &amp;lt;repo&amp;gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;hugo new site .
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git submodule add https://github.com/qtopierw/amp-blog-theme.git themes/amp-blog-theme
