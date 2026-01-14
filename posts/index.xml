@@ -253,23 +253,23 @@
 &lt;li&gt;&lt;a href="https://www.vpsjxw.com/provider_intro/cloudcone_intro/"&gt;cloudcone中文介绍&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title>Math in Markdown</title><link>https://qtopie.github.io/posts/hugo/math-in-markdown/</link><pubDate>Thu, 20 Dec 2018 16:21:55 +0800</pubDate><guid>https://qtopie.github.io/posts/hugo/math-in-markdown/</guid><description>&lt;h2 id="latex"&gt;LaTeX&lt;/h2&gt;
 &lt;h3 id="configuration"&gt;Configuration&lt;/h3&gt;
-&lt;p&gt;I prefer to configure formula delimiters with the way using brackets:&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;inline: \(...\)
-display: \[...\]
-display + equation number: \[...\] (1)
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;For &lt;code&gt;vscode&lt;/code&gt;, install extension &lt;code&gt;Markdown+Math&lt;/code&gt;, then change Configuration from &lt;code&gt;dollars&lt;/code&gt; into &lt;code&gt;brackets&lt;/code&gt;.
-For &lt;code&gt;mathJax&lt;/code&gt;, it&amp;rsquo;s provided in the default configuration.&lt;/p&gt;
+&lt;p&gt;This site uses &lt;strong&gt;KaTeX&lt;/strong&gt; for rendering mathematics. The configured delimiters are:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;Inline: $...$ or \(...\)
+Display: $$...$$ or \[...\]
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Additionally, you can use code blocks for block-level formulas:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;```math
+E = mc^2
+```
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For &lt;code&gt;vscode&lt;/code&gt;, you might want to ensure your preview settings match these delimiters.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Good memory is not as bad as a pen.&lt;/em&gt;&lt;/p&gt;
 &lt;h2 id="permutation"&gt;Permutation&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;A_n^n=n\times(n-1)\times(n-2)\times...\times2\times1&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;A_n^m=n\times(n-1)\times(n-2)\times...\times(n-m+1) = \frac{n!}{(n-m)!}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;$ A_n^n=n\times(n-1)\times(n-2)\times&amp;hellip;\times2\times1 $&lt;/p&gt;
+&lt;p&gt;$ A_n^m=n\times(n-1)\times(n-2)\times&amp;hellip;\times(n-m+1) = \frac{n!}{(n-m)!} $&lt;/p&gt;
 &lt;h2 id="combination"&gt;Combination&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;C_n^m=\frac{A_n^m}{A_m^m} = \frac{n!}{m!(n-m)!}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;$ C_n^m=\frac{A_n^m}{A_m^m} = \frac{n!}{m!(n-m)!} $&lt;/p&gt;
 &lt;pre tabindex="0"&gt;&lt;code class="language-math" data-lang="math"&gt;C_n^m=C_n^{n-m}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;C_{n+1}^{r+1} = C_n^r + C_n^{r+1}&lt;/code&gt;&lt;/p&gt;
-&lt;h3 id="binomial-theorem"&gt;Binomial theorem&lt;/h3&gt;
-&lt;pre tabindex="0"&gt;&lt;code class="language-math" data-lang="math"&gt;(a+b)^n = \sum_{i=0}^n{{C_n^i}a^{n-i}b^i} \tag 1
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;2^n =\sum_{i=0}^n{{C_n^i}} = C_n^0 + C_n^1 + C_n^2 + ... + C_n^n&lt;/code&gt;&lt;/p&gt;</description></item><item><title>怎样安全地Root你的安卓手机</title><link>https://qtopie.github.io/posts/diy/root-your-android-phone/</link><pubDate>Sun, 04 Nov 2018 20:29:38 +0800</pubDate><guid>https://qtopie.github.io/posts/diy/root-your-android-phone/</guid><description>&lt;p&gt;出于各种原因，我们可能会对自己手机上的安卓系统并不满意，而Root是我们DIY自己的安卓机的一把钥匙。&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;$ C_{n+1}^{r+1} = C_n^r + C_n^{r+1} $&lt;/p&gt;</description></item><item><title>怎样安全地Root你的安卓手机</title><link>https://qtopie.github.io/posts/diy/root-your-android-phone/</link><pubDate>Sun, 04 Nov 2018 20:29:38 +0800</pubDate><guid>https://qtopie.github.io/posts/diy/root-your-android-phone/</guid><description>&lt;p&gt;出于各种原因，我们可能会对自己手机上的安卓系统并不满意，而Root是我们DIY自己的安卓机的一把钥匙。&lt;/p&gt;
 &lt;p&gt;注意手机Root后并不一定安全，本文仅仅说的是用安全（较为透明公开）的方式自己root你的手机。&lt;/p&gt;
 &lt;p&gt;但安全永远是相对的，如果你对手机ROOT后的安全性有较大顾虑，请不要进行该操作。&lt;/p&gt;
 &lt;p&gt;对ROOT后的设备，也请远离流氓软件和恶意网站，尽可能使用可信度高的应用与服务。&lt;/p&gt;
@@ -301,11 +301,9 @@ For &lt;code&gt;mathJax&lt;/code&gt;, it&amp;rsquo;s provided in the default con
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;检查能PC检测到连入的手机&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;adb kill-server &lt;span style="color:#555"&gt;&amp;amp;&amp;amp;&lt;/span&gt; adb start-server
 &lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;adb devices
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;重启手机进入&lt;code&gt;download&lt;/code&gt;模式&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;adb reboot download

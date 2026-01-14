@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Latex on 1001問</title><link>https://qtopie.github.io/tags/latex/</link><description>Recent content in Latex on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Thu, 20 Dec 2018 16:21:55 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/latex/index.xml" rel="self" type="application/rss+xml"/><item><title>Math in Markdown</title><link>https://qtopie.github.io/posts/hugo/math-in-markdown/</link><pubDate>Thu, 20 Dec 2018 16:21:55 +0800</pubDate><guid>https://qtopie.github.io/posts/hugo/math-in-markdown/</guid><description>&lt;h2 id="latex"&gt;LaTeX&lt;/h2&gt;
 &lt;h3 id="configuration"&gt;Configuration&lt;/h3&gt;
-&lt;p&gt;I prefer to configure formula delimiters with the way using brackets:&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;inline: \(...\)
-display: \[...\]
-display + equation number: \[...\] (1)
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;For &lt;code&gt;vscode&lt;/code&gt;, install extension &lt;code&gt;Markdown+Math&lt;/code&gt;, then change Configuration from &lt;code&gt;dollars&lt;/code&gt; into &lt;code&gt;brackets&lt;/code&gt;.
-For &lt;code&gt;mathJax&lt;/code&gt;, it&amp;rsquo;s provided in the default configuration.&lt;/p&gt;
+&lt;p&gt;This site uses &lt;strong&gt;KaTeX&lt;/strong&gt; for rendering mathematics. The configured delimiters are:&lt;/p&gt;
+&lt;pre tabindex="0"&gt;&lt;code&gt;Inline: $...$ or \(...\)
+Display: $$...$$ or \[...\]
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Additionally, you can use code blocks for block-level formulas:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;```math
+E = mc^2
+```
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;For &lt;code&gt;vscode&lt;/code&gt;, you might want to ensure your preview settings match these delimiters.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Good memory is not as bad as a pen.&lt;/em&gt;&lt;/p&gt;
 &lt;h2 id="permutation"&gt;Permutation&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;A_n^n=n\times(n-1)\times(n-2)\times...\times2\times1&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;A_n^m=n\times(n-1)\times(n-2)\times...\times(n-m+1) = \frac{n!}{(n-m)!}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;$ A_n^n=n\times(n-1)\times(n-2)\times&amp;hellip;\times2\times1 $&lt;/p&gt;
+&lt;p&gt;$ A_n^m=n\times(n-1)\times(n-2)\times&amp;hellip;\times(n-m+1) = \frac{n!}{(n-m)!} $&lt;/p&gt;
 &lt;h2 id="combination"&gt;Combination&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;C_n^m=\frac{A_n^m}{A_m^m} = \frac{n!}{m!(n-m)!}&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;$ C_n^m=\frac{A_n^m}{A_m^m} = \frac{n!}{m!(n-m)!} $&lt;/p&gt;
 &lt;pre tabindex="0"&gt;&lt;code class="language-math" data-lang="math"&gt;C_n^m=C_n^{n-m}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;C_{n+1}^{r+1} = C_n^r + C_n^{r+1}&lt;/code&gt;&lt;/p&gt;
-&lt;h3 id="binomial-theorem"&gt;Binomial theorem&lt;/h3&gt;
-&lt;pre tabindex="0"&gt;&lt;code class="language-math" data-lang="math"&gt;(a+b)^n = \sum_{i=0}^n{{C_n^i}a^{n-i}b^i} \tag 1
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;code&gt;2^n =\sum_{i=0}^n{{C_n^i}} = C_n^0 + C_n^1 + C_n^2 + ... + C_n^n&lt;/code&gt;&lt;/p&gt;</description></item></channel></rss>
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;$ C_{n+1}^{r+1} = C_n^r + C_n^{r+1} $&lt;/p&gt;</description></item></channel></rss>
