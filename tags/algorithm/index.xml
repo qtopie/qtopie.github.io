@@ -3,16 +3,16 @@
 &lt;h2 id="独立重复性事件"&gt;独立重复性事件&lt;/h2&gt;
 &lt;h2 id="-nm"&gt;&lt;code&gt;\: n^m&lt;/code&gt;&lt;/h2&gt;
 &lt;p&gt;从n个不同物品中取一个物品，每次取一个，取m次的结果（考虑先后顺序）&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code class="language-math" data-lang="math"&gt;n^m = n \times n \times n ... \times n \tag 1
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="-a_nn"&gt;&lt;code&gt;\: A_n^n&lt;/code&gt;&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;n^m = n \times n \times n ... \times n \tag 1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="-a_nn"&gt;&lt;code&gt;\: A_n^n&lt;/code&gt;&lt;/h2&gt;
 &lt;p&gt;从n个不同物品中取一个物品，每次取一个, &lt;strong&gt;不放回&lt;/strong&gt;，取n次(完）的结果.（考虑先后顺序）&lt;/p&gt;
 &lt;p&gt;第一次有n个结果， 依据独立性事件，第二次有n-1中结果，以此类推&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code class="language-math" data-lang="math"&gt;A_n^n = n(n-1)(n-2)... \times 2 \times 1 \tag 2
-&lt;/code&gt;&lt;/pre&gt;&lt;h3 id="-a_nm"&gt;&lt;code&gt;\: A_n^m&lt;/code&gt;&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;A_n^n = n(n-1)(n-2)... \times 2 \times 1 \tag 2
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="-a_nm"&gt;&lt;code&gt;\: A_n^m&lt;/code&gt;&lt;/h3&gt;
 &lt;p&gt;从n个不同物品中取一个物品，每次取一个, &lt;strong&gt;不放回&lt;/strong&gt;，取m次(可能不取）的结果.（考虑先后顺序），未取到的结果有&lt;code&gt;\: A_{n-m}^{n-m}&lt;/code&gt;种&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code class="language-math" data-lang="math"&gt;A_n^m = \frac{A_n^n}{A_{n-m}^{n-m}} = n(n-1)(n-2)...(n-m+1) \tag 3
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="-c_nm"&gt;&lt;code&gt;\: C_n^m&lt;/code&gt;&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;A_n^m = \frac{A_n^n}{A_{n-m}^{n-m}} = n(n-1)(n-2)...(n-m+1) \tag 3
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="-c_nm"&gt;&lt;code&gt;\: C_n^m&lt;/code&gt;&lt;/h2&gt;
 &lt;p&gt;从n个不同物品中取一个物品，每次取一个, &lt;strong&gt;不放回&lt;/strong&gt;，取m次(可能不取）的结果.（不考虑先后顺序）&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code class="language-math" data-lang="math"&gt;C_n^m = \frac{A_n^m}{A_m^m} = \frac{n!}{m! \times (n-m)!} \tag 4
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="例子"&gt;例子&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;C_n^m = \frac{A_n^m}{A_m^m} = \frac{n!}{m! \times (n-m)!} \tag 4
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="例子"&gt;例子&lt;/h2&gt;
 &lt;p&gt;3 * 4 的格子, 从左上走到右下角，只能往下或者往右。&lt;/p&gt;</description></item></channel></rss>

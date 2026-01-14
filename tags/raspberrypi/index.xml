@@ -15,39 +15,35 @@
 &lt;p&gt;这里使用Ubuntu而不是Raspbian的一个原因是Ubuntu官方软件包更新更快（比如raspbian当前为3.7而hass需要3.8+版本)，
 且自己笔记本一直用Ubuntu，统一发行版使用起来更加方便&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo pip3 install homeassistant
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo pip3 install homeassistant
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果下载很慢，可以考虑使用pypi镜像源&lt;/p&gt;
 &lt;p&gt;编辑&lt;code&gt;/etc/pip.conf&lt;/code&gt; (使用豆瓣源）&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;[global]
-index-url = https://pypi.douban.com/simple
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id="设置开机自启动"&gt;设置开机自启动&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;[global]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;index-url = https://pypi.douban.com/simple
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="设置开机自启动"&gt;设置开机自启动&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;创建systemd service unit文件&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;systemctl --user edit --full --force homeassistant.service
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;systemctl --user edit --full --force homeassistant.service
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;加入以下内容&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;[Unit]
-Description=Home Assistant
-After=network.target
-
-[Service]
-Type=simple
-ExecStart=/home/ubuntu/.local/bin/hass
-Restart=on-failure
-RestartSec=5
-
-[Install]
-WantedBy=default.target
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;[Unit]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Description=Home Assistant
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;After=network.target
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;[Service]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Type=simple
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ExecStart=/home/ubuntu/.local/bin/hass
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Restart=on-failure
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;RestartSec=5
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;[Install]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;WantedBy=default.target
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;设置用户自动登录&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;a href="https://raspberrypi.stackexchange.com/questions/111728/how-to-get-raspi-config-on-ubuntu-20-04"&gt;安装&lt;code&gt;raspi-config&lt;/code&gt;&lt;/a&gt;,
 然后配置 &lt;code&gt;1. System Options&lt;/code&gt; -&amp;gt; &lt;code&gt;S5 Boot / Auto Login&lt;/code&gt; -&amp;gt; &lt;code&gt;B2 Console Autologin&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;会生成&lt;code&gt;/etc/systemd/system/getty@tty1.service.d/autologin.conf&lt;/code&gt;, 内容如下&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;[Service]
-ExecStart=
-ExecStart=-/sbin/agetty --autologin ubuntu --noclear %I $TERM
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;重启即可生效&lt;/p&gt;</description></item><item><title>自动控制风扇温度</title><link>https://qtopie.github.io/notes/iot/rpi/fan-and-tempature/</link><pubDate>Mon, 03 Aug 2020 23:33:04 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/fan-and-tempature/</guid><description>&lt;p&gt;最近购买了一个树莓派4B 4G内存版，替换了旧的Model3 (强迫症犯了，就为了换成type c口，但因为电源适配问题还是老老实实地又买了官方电源适配器）&lt;/p&gt;
+&lt;p&gt;会生成&lt;code&gt;/etc/systemd/system/getty@tty1.service.d/autologin.conf&lt;/code&gt;, 内容如下&lt;/p&gt;</description></item><item><title>自动控制风扇温度</title><link>https://qtopie.github.io/notes/iot/rpi/fan-and-tempature/</link><pubDate>Mon, 03 Aug 2020 23:33:04 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/fan-and-tempature/</guid><description>&lt;p&gt;最近购买了一个树莓派4B 4G内存版，替换了旧的Model3 (强迫症犯了，就为了换成type c口，但因为电源适配问题还是老老实实地又买了官方电源适配器）&lt;/p&gt;
 &lt;p&gt;树莓派4B相对3B性能提高不少，但是随之功耗和发热也上去了。 于是给它整了个金属外壳&lt;/p&gt;
 &lt;p&gt;&lt;img src="fan-and-tempature.assets/img-20211029155258.webp" alt=""&gt;&lt;/p&gt;
 &lt;p&gt;但是依旧烫得厉害，可能是我手动overlock了。开风扇的话，又有点吵，晚上影响睡觉。&lt;/p&gt;
@@ -57,77 +53,77 @@ ExecStart=-/sbin/agetty --autologin ubuntu --noclear %I $TERM
 &lt;li&gt;获取GPU温度&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;a href="https://www.nicm.dev/vcgencmd/"&gt;vcgencmd&lt;/a&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;vcgencmd measure_temp
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;vcgencmd measure_temp
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;获取CPU温度&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#033"&gt;cpu&lt;/span&gt;&lt;span style="color:#555"&gt;=&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;$(&lt;/span&gt;&amp;lt;/sys/class/thermal/thermal_zone0/temp&lt;span style="color:#069;font-weight:bold"&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#366"&gt;echo&lt;/span&gt; &lt;span style="color:#c30"&gt;&amp;#34;&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;$((&lt;/span&gt;cpu/1000&lt;span style="color:#069;font-weight:bold"&gt;))&lt;/span&gt;&lt;span style="color:#c30"&gt; c&amp;#34;&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;cpu&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;&amp;lt;/sys/class/thermal/thermal_zone0/temp&lt;span class="k"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="k"&gt;$((&lt;/span&gt;cpu/1000&lt;span class="k"&gt;))&lt;/span&gt;&lt;span class="s2"&gt; c&amp;#34;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="代码实现"&gt;代码实现&lt;/h2&gt;
 &lt;p&gt;网上已经有不少python版本的实现，但作为一个go粉，当然选择用go来实现了，正好练习一下gobot包的使用&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;package&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;main&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;import&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;(&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;time&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;gobot.io/x/gobot&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;gobot.io/x/gobot/drivers/gpio&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;gobot.io/x/gobot/platforms/raspi&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;io/ioutil&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;log&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;strconv&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;strings&amp;#34;&lt;/span&gt;&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;)&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;func&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#c0f"&gt;main&lt;/span&gt;()&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;low,&lt;span style="color:#bbb"&gt; &lt;/span&gt;high&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#f60"&gt;50&lt;/span&gt;,&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#f60"&gt;58&lt;/span&gt;&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;r&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;raspi.&lt;span style="color:#c0f"&gt;NewAdaptor&lt;/span&gt;()&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;sw&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;gpio.&lt;span style="color:#c0f"&gt;NewDirectPinDriver&lt;/span&gt;(r,&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;18&amp;#34;&lt;/span&gt;)&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;work&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;func&lt;/span&gt;()&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;gobot.&lt;span style="color:#c0f"&gt;Every&lt;/span&gt;(&lt;span style="color:#f60"&gt;5&lt;/span&gt;&lt;span style="color:#555"&gt;*&lt;/span&gt;time.Second,&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;func&lt;/span&gt;()&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;			&lt;/span&gt;t&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#c0f"&gt;readCpuTemp&lt;/span&gt;()&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;			&lt;/span&gt;log.&lt;span style="color:#c0f"&gt;Println&lt;/span&gt;(&lt;span style="color:#c30"&gt;&amp;#34;Temp&amp;#34;&lt;/span&gt;,&lt;span style="color:#bbb"&gt; &lt;/span&gt;t&lt;span style="color:#555"&gt;/&lt;/span&gt;&lt;span style="color:#f60"&gt;1000&lt;/span&gt;)&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;			&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;if&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;t&lt;span style="color:#bbb"&gt; &lt;/span&gt;&amp;lt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;low&lt;span style="color:#555"&gt;*&lt;/span&gt;&lt;span style="color:#f60"&gt;1000&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;				&lt;/span&gt;sw.&lt;span style="color:#c0f"&gt;Off&lt;/span&gt;()&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;			&lt;/span&gt;}&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;			&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;if&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;t&lt;span style="color:#bbb"&gt; &lt;/span&gt;&amp;gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;high&lt;span style="color:#555"&gt;*&lt;/span&gt;&lt;span style="color:#f60"&gt;1000&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#09f;font-style:italic"&gt;// turn on only ater 7 oclock&lt;/span&gt;&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;				&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;if&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;h,&lt;span style="color:#bbb"&gt; &lt;/span&gt;_,&lt;span style="color:#bbb"&gt; &lt;/span&gt;_&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;time.&lt;span style="color:#c0f"&gt;Now&lt;/span&gt;().&lt;span style="color:#c0f"&gt;Clock&lt;/span&gt;();&lt;span style="color:#bbb"&gt; &lt;/span&gt;h&lt;span style="color:#bbb"&gt; &lt;/span&gt;&amp;gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#f60"&gt;7&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;					&lt;/span&gt;sw.&lt;span style="color:#c0f"&gt;On&lt;/span&gt;()&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;				&lt;/span&gt;}&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;			&lt;/span&gt;}&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;})&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;}&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;robot&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;gobot.&lt;span style="color:#c0f"&gt;NewRobot&lt;/span&gt;(&lt;span style="color:#c30"&gt;&amp;#34;blinkBot&amp;#34;&lt;/span&gt;,&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;[]gobot.Connection{r},&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;[]gobot.Device{sw},&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;work,&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;)&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;robot.&lt;span style="color:#c0f"&gt;Start&lt;/span&gt;()&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#069;font-weight:bold"&gt;func&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#c0f"&gt;readCpuTemp&lt;/span&gt;()&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#078;font-weight:bold"&gt;int&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;var&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;na&lt;span style="color:#bbb"&gt; &lt;/span&gt;=&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;-&lt;/span&gt;&lt;span style="color:#f60"&gt;274150&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#09f;font-style:italic"&gt;// set not valid value to -274.15C&lt;/span&gt;&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;dat,&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;ioutil.&lt;span style="color:#c0f"&gt;ReadFile&lt;/span&gt;(&lt;span style="color:#c30"&gt;&amp;#34;/sys/class/thermal/thermal_zone0/temp&amp;#34;&lt;/span&gt;)&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;if&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;!=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;nil&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;log.&lt;span style="color:#c0f"&gt;Println&lt;/span&gt;(err)&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;return&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;na&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;}&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;s&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;strings.&lt;span style="color:#c0f"&gt;TrimSuffix&lt;/span&gt;(&lt;span style="color:#366"&gt;string&lt;/span&gt;(dat),&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#c30"&gt;&amp;#34;\n&amp;#34;&lt;/span&gt;)&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;t,&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;:=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;strconv.&lt;span style="color:#c0f"&gt;Atoi&lt;/span&gt;(s)&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;if&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;err&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#555"&gt;!=&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;nil&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;{&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;log.&lt;span style="color:#c0f"&gt;Println&lt;/span&gt;(err)&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;		&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;return&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;na&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;}&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#bbb"&gt;	&lt;/span&gt;&lt;span style="color:#069;font-weight:bold"&gt;return&lt;/span&gt;&lt;span style="color:#bbb"&gt; &lt;/span&gt;t&lt;span style="color:#bbb"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;}&lt;span style="color:#bbb"&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;package&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;main&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;time&amp;#34;&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;gobot.io/x/gobot&amp;#34;&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;gobot.io/x/gobot/drivers/gpio&amp;#34;&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;gobot.io/x/gobot/platforms/raspi&amp;#34;&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;io/ioutil&amp;#34;&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;log&amp;#34;&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;strconv&amp;#34;&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;strings&amp;#34;&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;func&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="nx"&gt;low&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;high&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;58&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="nx"&gt;r&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;raspi&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;NewAdaptor&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="nx"&gt;sw&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;gpio&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;NewDirectPinDriver&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;r&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;#34;18&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="nx"&gt;work&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kd"&gt;func&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;		&lt;/span&gt;&lt;span class="nx"&gt;gobot&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;Every&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="nx"&gt;time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Second&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kd"&gt;func&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;			&lt;/span&gt;&lt;span class="nx"&gt;t&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;readCpuTemp&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;			&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;Println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;Temp&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;t&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;			&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;t&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;low&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;				&lt;/span&gt;&lt;span class="nx"&gt;sw&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;Off&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;			&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;			&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;t&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;high&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;1000&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;// turn on only ater 7 oclock&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;				&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;h&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;_&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;_&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;Now&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="nf"&gt;Clock&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;h&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;					&lt;/span&gt;&lt;span class="nx"&gt;sw&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;On&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;				&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;			&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;		&lt;/span&gt;&lt;span class="p"&gt;})&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="nx"&gt;robot&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;gobot&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;NewRobot&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;blinkBot&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;		&lt;/span&gt;&lt;span class="p"&gt;[]&lt;/span&gt;&lt;span class="nx"&gt;gobot&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Connection&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nx"&gt;r&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;		&lt;/span&gt;&lt;span class="p"&gt;[]&lt;/span&gt;&lt;span class="nx"&gt;gobot&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Device&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="nx"&gt;sw&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;		&lt;/span&gt;&lt;span class="nx"&gt;work&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="nx"&gt;robot&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;Start&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;func&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;readCpuTemp&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="kd"&gt;var&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;na&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;274150&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;// set not valid value to -274.15C&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="nx"&gt;dat&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;err&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;ioutil&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;ReadFile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;/sys/class/thermal/thermal_zone0/temp&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;err&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;!=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;nil&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;		&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;Println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;err&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;		&lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;na&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;strings&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;TrimSuffix&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;string&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;dat&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;#34;\n&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="nx"&gt;t&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;err&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;strconv&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;Atoi&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;err&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;!=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kc"&gt;nil&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;		&lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;Println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;err&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;		&lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;na&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;t&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;实现的效果是，当温度高于58度时，启动风扇；温度低于50度时关闭风扇。(风扇一直不停转，大概也只能到45度左右，可能深圳有点热）&lt;/p&gt;</description></item><item><title>树莓派4G模块</title><link>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</link><pubDate>Wed, 05 Dec 2018 22:36:06 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</guid><description>&lt;h2 id="准备环境"&gt;准备环境&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;树莓派3B&lt;/li&gt;
@@ -153,36 +149,36 @@ ExecStart=-/sbin/agetty --autologin ubuntu --noclear %I $TERM
 &lt;ul&gt;
 &lt;li&gt;查看usb设备是否被识别&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;lsusb
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#09f;font-style:italic"&gt;# output:&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Bus &lt;span style="color:#f60"&gt;001&lt;/span&gt; Device 004: ID 12d1:15c1 Huawei Technologies Co., Ltd. 
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Bus &lt;span style="color:#f60"&gt;001&lt;/span&gt; Device 003: ID 0424:ec00 Standard Microsystems Corp. SMSC9512/9514 Fast Ethernet Adapter
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Bus &lt;span style="color:#f60"&gt;001&lt;/span&gt; Device 002: ID 0424:9514 Standard Microsystems Corp. SMC9514 Hub
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;Bus &lt;span style="color:#f60"&gt;001&lt;/span&gt; Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;lsusb
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# output:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Bus &lt;span class="m"&gt;001&lt;/span&gt; Device 004: ID 12d1:15c1 Huawei Technologies Co., Ltd. 
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Bus &lt;span class="m"&gt;001&lt;/span&gt; Device 003: ID 0424:ec00 Standard Microsystems Corp. SMSC9512/9514 Fast Ethernet Adapter
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Bus &lt;span class="m"&gt;001&lt;/span&gt; Device 002: ID 0424:9514 Standard Microsystems Corp. SMC9514 Hub
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Bus &lt;span class="m"&gt;001&lt;/span&gt; Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;安装拨号软件&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt-get update
-&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo apt-get install ppp usb-modeswitch wvdial
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt-get update
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt-get install ppp usb-modeswitch wvdial
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;初始化wvdial配置&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo wvdialconf /etc/wvdial.conf
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo wvdialconf /etc/wvdial.conf
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;修改&lt;code&gt;wvdial&lt;/code&gt;配置&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;[Dialer Defaults]
-Init1 = ATZ
-Init2 = ATQ0 V1 E1 S0=0
-Init3 = AT+CGDCONT=1,&amp;#34;IP&amp;#34;, &amp;#34;cmnet&amp;#34;
-Modem Type = Analog Modem
-Baud = 9600
-New PPPD = yes
-Modem = /dev/ttyUSB0
-ISDN = 0
-Phone = *99***1#
-Password = { }
-Username = { }
-Auto DNS = on
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;APN和拨号设置参考&lt;/p&gt;</description></item></channel></rss>
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;[Dialer Defaults]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Init1 = ATZ
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Init2 = ATQ0 V1 E1 S0=0
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Init3 = AT+CGDCONT=1,&amp;#34;IP&amp;#34;, &amp;#34;cmnet&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Modem Type = Analog Modem
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Baud = 9600
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;New PPPD = yes
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Modem = /dev/ttyUSB0
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ISDN = 0
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Phone = *99***1#
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Password = { }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Username = { }
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Auto DNS = on
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;APN和拨号设置参考&lt;/p&gt;</description></item></channel></rss>

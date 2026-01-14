@@ -15,36 +15,32 @@
 &lt;p&gt;这里使用Ubuntu而不是Raspbian的一个原因是Ubuntu官方软件包更新更快（比如raspbian当前为3.7而hass需要3.8+版本)，
 且自己笔记本一直用Ubuntu，统一发行版使用起来更加方便&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo pip3 install homeassistant
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo pip3 install homeassistant
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果下载很慢，可以考虑使用pypi镜像源&lt;/p&gt;
 &lt;p&gt;编辑&lt;code&gt;/etc/pip.conf&lt;/code&gt; (使用豆瓣源）&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;[global]
-index-url = https://pypi.douban.com/simple
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id="设置开机自启动"&gt;设置开机自启动&lt;/h4&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;[global]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;index-url = https://pypi.douban.com/simple
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="设置开机自启动"&gt;设置开机自启动&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;创建systemd service unit文件&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;systemctl --user edit --full --force homeassistant.service
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;systemctl --user edit --full --force homeassistant.service
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;加入以下内容&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;[Unit]
-Description=Home Assistant
-After=network.target
-
-[Service]
-Type=simple
-ExecStart=/home/ubuntu/.local/bin/hass
-Restart=on-failure
-RestartSec=5
-
-[Install]
-WantedBy=default.target
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;[Unit]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Description=Home Assistant
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;After=network.target
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;[Service]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Type=simple
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ExecStart=/home/ubuntu/.local/bin/hass
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Restart=on-failure
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;RestartSec=5
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;[Install]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;WantedBy=default.target
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;设置用户自动登录&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;a href="https://raspberrypi.stackexchange.com/questions/111728/how-to-get-raspi-config-on-ubuntu-20-04"&gt;安装&lt;code&gt;raspi-config&lt;/code&gt;&lt;/a&gt;,
 然后配置 &lt;code&gt;1. System Options&lt;/code&gt; -&amp;gt; &lt;code&gt;S5 Boot / Auto Login&lt;/code&gt; -&amp;gt; &lt;code&gt;B2 Console Autologin&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;会生成&lt;code&gt;/etc/systemd/system/getty@tty1.service.d/autologin.conf&lt;/code&gt;, 内容如下&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;[Service]
-ExecStart=
-ExecStart=-/sbin/agetty --autologin ubuntu --noclear %I $TERM
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;重启即可生效&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;会生成&lt;code&gt;/etc/systemd/system/getty@tty1.service.d/autologin.conf&lt;/code&gt;, 内容如下&lt;/p&gt;</description></item></channel></rss>

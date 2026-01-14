@@ -1,63 +1,63 @@
 <!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width"><title>Ubuntu下使用MT7612U | 1001問</title><link rel=stylesheet href=/css/main.min.dcb41abaa5ea2698ebf89f814bc6b8060470b6414061437dac2ee0e3ef5d3b45.css integrity="sha256-3LQauqXqJpjr+J+BS8a4BgRwtkFAYUN9rC7g4+9dO0U=" crossorigin=anonymous><link rel=stylesheet href=/css/page.min.81d92e4ce9b8dc4e8a2018a7aee70f76bd7fb6884d929d5fd74e3f959f06e2f5.css integrity="sha256-gdkuTOm43E6KIBinrucPdr1/tohNkp1f104/lZ8G4vU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.e114b8cc38f57d520f373580c935a518bc6afd6dec4f1d682365cdbcf5c8218a.css><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css crossorigin=anonymous referrerpolicy=no-referrer><script src=/js/toc.min.87636f25caf644980403a5c1ce8b0812cfd10d1e53c08f181547966799ceccdb.js integrity="sha256-h2NvJcr2RJgEA6XBzosIEs/RDR5TwI8YFUeWZ5nOzNs=" crossorigin=anonymous type=module defer></script><script src=/js/copy-code.min.3bea0de4cfe8670f94a5d75c177f07b58fc90178efdea7f2a21449798d75b2c9.js integrity="sha256-O+oN5M/oZw+UpddcF38HtY/JAXjv3qfyohRJeY11ssk=" crossorigin=anonymous defer></script><script defer src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js crossorigin=anonymous referrerpolicy=no-referrer></script><script defer src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js crossorigin=anonymous referrerpolicy=no-referrer onload='renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],throwOnError:!1})'></script><script src=/js/katex-block.min.2cf531bbcc318aadf5661baa2d0987ab5cb4daef473e108b1da714a37cff0b25.js integrity="sha256-LPUxu8wxiq31ZhuqLQmHq1y02u9HPhCLHacUo3z/CyU=" crossorigin=anonymous defer></script></head><body><header><nav><a href=/><h1>1001問</h1></a><div id=react-search class=search-root aria-label="Site Search"></div></nav></header><main><div class=sidebar><section class=toc><nav id=TableOfContents><ul><li><a href=#安装驱动>安装驱动</a></li><li><a href=#尝试在树梅派上编译驱动>尝试在树梅派上编译驱动</a></li><li><a href=#其他问题解决>其他问题解决</a></li></ul></nav></section></div><article id=content><div class=metadata><h1>Ubuntu下使用MT7612U</h1><time datetime=2019-03-09T11:29:38+08:00>March 9, 2019</time><div class=taxonomy><span id=post-tags><ul><li><strong>Tags</strong>:&nbsp;</li><li class=tag-item><a href=https://qtopie.github.io/tags/ubuntu><em>ubuntu</em></a></li><li class=tag-item><a href=https://qtopie.github.io/tags/mt7612u><em>mt7612u</em></a></li></ul></span></div></div><p>由于墙挡住了路由器WIFI信号，虽然5G频率的WIFI传输速率很快，但是信号衰减。WIFI无线通信是双方向的，就算路由信号能覆盖到，但考虑到手机或笔记本功率和天线的限制，难保证信号稳定。所以在淘宝上买了一个功能还算强大的无线网卡ComFast 926AC v2，双频WIFI外置双天线。没提前研究，“号称免驱动"，结果拿回来就懵了。</p><h2 id=安装驱动>安装驱动</h2><p>设备: Comfast 926AC v2
 系统： Ubuntu 18.04</p><p>因为是联发科的芯片，通常都是在同一份驱动代码上改改完成的。故从github上寻找了下面两个仓库的代码。</p><p><a href=https://github.com/ulli-kroll/mt7612u>ulli-kroll/mt7612u</a>, <a href=https://github.com/jurobystricky/Netgear-A6210>jurobystricky/Netgear-A6210</a>
-<a href=https://www.mediatek.com/products/broadbandWifi/mt7612u>官方驱动</a></p><p>上面两驱动实际是在官方源码上改写的，但编译后，三个都不能正常工作。</p><p>后来在<code>openwrt/linux</code>项目下发现该设备驱动的相关issue, 并已有大牛正在mt76驱动项目下加入该芯片的支持。故转用mt76的设备。查询linux主仓库代码发现，该驱动已随Linux内核5.0发布。因此直接下载linux 5.0内核包安装就行了。</p><pre tabindex=0><code>  # 5.0: https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.0/
-  linux-headers-5.0.0-050000_5.0.0-050000.201903032031_all.deb
-  linux-headers-5.0.0-050000-generic_5.0.0-050000.201903032031_amd64.deb
-  linux-image-unsigned-5.0.0-050000-generic_5.0.0-050000.201903032031_amd64.deb
-  linux-modules-5.0.0-050000-generic_5.0.0-050000.201903032031_amd64.deb
-</code></pre><p>手动升级内核后测试能使用, 并支持AP：</p><p>iwconfig</p><pre tabindex=0><code>wlx40a5eff2b655  IEEE 802.11  ESSID:off/any  
-          Mode:Managed  Access Point: Not-Associated   Tx-Power=19 dBm   
-          Retry short limit:7   RTS thr:off   Fragment thr:off
-          Power Management:off
-</code></pre><ul><li>网卡识别为存储设备的问题</li></ul><p>mt76还未对这款comfast网卡适配，所以默认会被系统识别为存储设备，可以手动切换过来：</p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>sudo usb_modeswitch -KW -v 0e8d -p <span style=color:#f60>2870</span>
-</span></span></code></pre></div><p>或者修改<code>/lib/udev/rules.d/40-usb_modeswitch.rules</code>文件自动切换（目前未成功）</p><pre tabindex=0><code># MT7612U 
-ATTR{idVendor}==&#34;0e8d&#34;, ATTR{idProduct}==&#34;2870&#34;, RUN+=&#34;usb_modeswitch &#39;%b/%k&#39;&#34;
-</code></pre><ul><li>USB底座接触不良的问题</li></ul><p>一起买的底座有点问题，开始还以为也要装什么驱动。检查后发现是接触不良的问题，因为USB口没有固定住，所以网卡很容易没有插入到底座中。解决办法比较简单，拆卸底座，然后填充底座中空部分，固定住USB接口。</p><ul><li>其他适配问题</li></ul><p>网卡的LED灯不能正常工作。</p><pre tabindex=0><code>pi@raspberrypi:~ $ sudo ifconfig wlan1 down
-pi@raspberrypi:~ $ sudo ifconfig wlan1 hw ether 00:28:C7:0A:42:A2
-pi@raspberrypi:~ $ sudo ifconfig wlan1 up
-</code></pre><h2 id=尝试在树梅派上编译驱动>尝试在树梅派上编译驱动</h2><p><del>4.19.y已经加入mt7612u的支持，但是经过测试，并不能使用。</del>[更新] 在5.1.y上编译可以正常使用（STA模式）, 注意默认缺失了<code>/lib/firmware/mt7662.bin /lib/firmware/mt7662_rom_patch.bin</code> 两个文件，可以从其它系统拷贝或网络下载到树梅派。</p><pre tabindex=0><code class=language-log data-lang=log>[  247.230807] usb 1-1.5: new high-speed USB device number 5 using dwc_otg
-[  247.362296] usb 1-1.5: New USB device found, idVendor=0e8d, idProduct=7612, bcdDevice= 1.00
-[  247.362311] usb 1-1.5: New USB device strings: Mfr=1, Product=2, SerialNumber=3
-[  247.362321] usb 1-1.5: Product: 802.11ac WLAN
-[  247.362331] usb 1-1.5: Manufacturer: MediaTek Inc.
-[  247.362342] usb 1-1.5: SerialNumber: 000000000
-[  247.620811] usb 1-1.5: reset high-speed USB device number 5 using dwc_otg
-[  247.752088] mt76x2u 1-1.5:1.0: ASIC revision: 76120044
-[  247.773734] mt76x2u: probe of 1-1.5:1.0 failed with error -22
-[  247.773857] usbcore: registered new interface driver mt76x2u
-</code></pre><p>安装过程：</p><ul><li>首先更新内核版本
-高版本内核可能要求4.15以上才可以直接升级，所以先使用rpi-update升级到最新版本内核(4.19.y)</li></ul><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#09f;font-style:italic># 这里也把rpi-update一起装了</span>
-</span></span><span style=display:flex><span>sudo apt-update <span style=color:#555>&amp;&amp;</span> sudo apt install -y rpi-update rpi-source
-</span></span><span style=display:flex><span><span style=color:#09f;font-style:italic># 执行升级</span>
-</span></span><span style=display:flex><span>sudo rpi-update
-</span></span><span style=display:flex><span><span style=color:#09f;font-style:italic># 如果使用rpi-update升级后又回退过，可能不能再次使用rpi-update升级回来</span>
-</span></span><span style=display:flex><span><span style=color:#09f;font-style:italic># Trick: 更改/boot/.firmware_revision然后，再次执行rpi-update</span>
-</span></span><span style=display:flex><span>sudo reboot
-</span></span></code></pre></div><ul><li>拉取源码</li></ul><pre tabindex=0><code>rpi-source
-# 链接到build
-sudo ln -s `pwd`/linux-789277d012f4a9ba1b032c298c3ebe2db5d91835 /lib/modules/$(uname -r)/build
-</code></pre><ul><li>安装工具</li></ul><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>sudo apt-get install git bison flex libssl-dev bc libncurses5-dev
-</span></span></code></pre></div><ul><li>生成编译配置</li></ul><pre tabindex=0><code>KERNEL=kernel7
-make bcm2709_defconfig
-
-# menuconfig来配置，默认disable了mt76x2, (先用斜杠搜索mt76菜单，再进入，可以上下翻页)
-make menuconfig
-</code></pre><ul><li>开始编译</li></ul><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#09f;font-style:italic>#-j4 分配到4个核来编译</span>
-</span></span><span style=display:flex><span>make -j4 zImage modules dtbs
-</span></span></code></pre></div><ul><li>安装</li></ul><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>sudo make modules_install
-</span></span><span style=display:flex><span>sudo cp arch/arm/boot/dts/*.dtb /boot/
-</span></span><span style=display:flex><span>sudo cp arch/arm/boot/dts/overlays/*.dtb* /boot/overlays/
-</span></span><span style=display:flex><span>sudo cp arch/arm/boot/dts/overlays/README /boot/overlays/
-</span></span><span style=display:flex><span>sudo cp arch/arm/boot/zImage /boot/<span style=color:#033>$KERNEL</span>.img
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#09f;font-style:italic># reboot</span>
-</span></span></code></pre></div><p>Tips： 编译来自三方源码的驱动：</p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#366>cd</span> &lt;PATH-TO-DRIVER-SRC&gt;
-</span></span><span style=display:flex><span>make -C /lib/modules/<span style=color:#069;font-weight:700>$(</span>uname -r<span style=color:#069;font-weight:700>)</span>/build <span style=color:#033>M</span><span style=color:#555>=</span><span style=color:#033>$pwd</span> modules
-</span></span></code></pre></div><h2 id=其他问题解决>其他问题解决</h2><p>dhcp， 使用时碰到了无法从路由器获取ipv4地址的情况，可以设置dhcp加入新的<code>wlan1</code>网络接口,并注意设置好DNS，否则会影响上网</p><ul><li>ip route</li></ul><p>默认的ip route可能会出错或者wlan1优先级低而不能正常接入网络作中继。参考以下可以工作的配置</p><pre tabindex=0><code>pi@raspberrypi:~ $ ip route show
-default via 192.168.0.1 dev wlan1 src 192.168.0.129 metric 305 
-192.168.0.0/24 dev wlan1 proto kernel scope link src 192.168.0.129 metric 305 
-192.168.21.0/24 dev wlan0 proto kernel scope link src 192.168.21.1 metric 303
-</code></pre><p>设置iptables</p><pre tabindex=0><code>sudo iptables -t nat -A  POSTROUTING -o wlan1 -j MASQUERADE
-</code></pre><p>这里我使用网络中继的主要原因是只将只能设备接入树梅派发射的局域网而不是直接接入到路由器上。</p><h1 id=参考>参考</h1><ul><li><a href=https://github.com/ulli-kroll/mt7612u/issues/27>https://github.com/ulli-kroll/mt7612u/issues/27</a></li><li><a href=https://github.com/torvalds/linux/commit/cac97ed681db9891c74be91b54e6b550dc6afb03>https://github.com/torvalds/linux/commit/cac97ed681db9891c74be91b54e6b550dc6afb03</a></li><li><a href=https://www.raspberrypi.org/documentation/linux/kernel/building.md>https://www.raspberrypi.org/documentation/linux/kernel/building.md</a></li></ul><div id=react-single-actions data-post-id=af28ab997dd012a6651a28414d96f561></div></article><button class=mobile-toc-trigger aria-controls=mobile-toc aria-expanded=false title=Index>☰</button><div class=mobile-toc-overlay hidden></div><div id=mobile-toc class=mobile-toc-drawer aria-hidden=true role=dialog aria-label=Index><div class=mobile-toc-header><button class=mobile-toc-close aria-label=close>×</button></div><nav class=mobile-toc-body><div class=mobile-toc-list></div></nav><div class=mobile-safe-area-spacer></div></div><script type=module src=/react/page.bundle.js></script></main><footer><div class=copyright><small>Made with <span style=color:#e25555>&#9829;</span> in Guangzhou by
+<a href=https://www.mediatek.com/products/broadbandWifi/mt7612u>官方驱动</a></p><p>上面两驱动实际是在官方源码上改写的，但编译后，三个都不能正常工作。</p><p>后来在<code>openwrt/linux</code>项目下发现该设备驱动的相关issue, 并已有大牛正在mt76驱动项目下加入该芯片的支持。故转用mt76的设备。查询linux主仓库代码发现，该驱动已随Linux内核5.0发布。因此直接下载linux 5.0内核包安装就行了。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>  # 5.0: https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.0/
+</span></span><span class=line><span class=cl>  linux-headers-5.0.0-050000_5.0.0-050000.201903032031_all.deb
+</span></span><span class=line><span class=cl>  linux-headers-5.0.0-050000-generic_5.0.0-050000.201903032031_amd64.deb
+</span></span><span class=line><span class=cl>  linux-image-unsigned-5.0.0-050000-generic_5.0.0-050000.201903032031_amd64.deb
+</span></span><span class=line><span class=cl>  linux-modules-5.0.0-050000-generic_5.0.0-050000.201903032031_amd64.deb
+</span></span></code></pre></div><p>手动升级内核后测试能使用, 并支持AP：</p><p>iwconfig</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>wlx40a5eff2b655  IEEE 802.11  ESSID:off/any  
+</span></span><span class=line><span class=cl>          Mode:Managed  Access Point: Not-Associated   Tx-Power=19 dBm   
+</span></span><span class=line><span class=cl>          Retry short limit:7   RTS thr:off   Fragment thr:off
+</span></span><span class=line><span class=cl>          Power Management:off
+</span></span></code></pre></div><ul><li>网卡识别为存储设备的问题</li></ul><p>mt76还未对这款comfast网卡适配，所以默认会被系统识别为存储设备，可以手动切换过来：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo usb_modeswitch -KW -v 0e8d -p <span class=m>2870</span>
+</span></span></code></pre></div><p>或者修改<code>/lib/udev/rules.d/40-usb_modeswitch.rules</code>文件自动切换（目前未成功）</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># MT7612U 
+</span></span><span class=line><span class=cl>ATTR{idVendor}==&#34;0e8d&#34;, ATTR{idProduct}==&#34;2870&#34;, RUN+=&#34;usb_modeswitch &#39;%b/%k&#39;&#34;
+</span></span></code></pre></div><ul><li>USB底座接触不良的问题</li></ul><p>一起买的底座有点问题，开始还以为也要装什么驱动。检查后发现是接触不良的问题，因为USB口没有固定住，所以网卡很容易没有插入到底座中。解决办法比较简单，拆卸底座，然后填充底座中空部分，固定住USB接口。</p><ul><li>其他适配问题</li></ul><p>网卡的LED灯不能正常工作。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>pi@raspberrypi:~ $ sudo ifconfig wlan1 down
+</span></span><span class=line><span class=cl>pi@raspberrypi:~ $ sudo ifconfig wlan1 hw ether 00:28:C7:0A:42:A2
+</span></span><span class=line><span class=cl>pi@raspberrypi:~ $ sudo ifconfig wlan1 up
+</span></span></code></pre></div><h2 id=尝试在树梅派上编译驱动>尝试在树梅派上编译驱动</h2><p><del>4.19.y已经加入mt7612u的支持，但是经过测试，并不能使用。</del>[更新] 在5.1.y上编译可以正常使用（STA模式）, 注意默认缺失了<code>/lib/firmware/mt7662.bin /lib/firmware/mt7662_rom_patch.bin</code> 两个文件，可以从其它系统拷贝或网络下载到树梅派。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>[  247.230807] usb 1-1.5: new high-speed USB device number 5 using dwc_otg
+</span></span><span class=line><span class=cl>[  247.362296] usb 1-1.5: New USB device found, idVendor=0e8d, idProduct=7612, bcdDevice= 1.00
+</span></span><span class=line><span class=cl>[  247.362311] usb 1-1.5: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+</span></span><span class=line><span class=cl>[  247.362321] usb 1-1.5: Product: 802.11ac WLAN
+</span></span><span class=line><span class=cl>[  247.362331] usb 1-1.5: Manufacturer: MediaTek Inc.
+</span></span><span class=line><span class=cl>[  247.362342] usb 1-1.5: SerialNumber: 000000000
+</span></span><span class=line><span class=cl>[  247.620811] usb 1-1.5: reset high-speed USB device number 5 using dwc_otg
+</span></span><span class=line><span class=cl>[  247.752088] mt76x2u 1-1.5:1.0: ASIC revision: 76120044
+</span></span><span class=line><span class=cl>[  247.773734] mt76x2u: probe of 1-1.5:1.0 failed with error -22
+</span></span><span class=line><span class=cl>[  247.773857] usbcore: registered new interface driver mt76x2u
+</span></span></code></pre></div><p>安装过程：</p><ul><li>首先更新内核版本
+高版本内核可能要求4.15以上才可以直接升级，所以先使用rpi-update升级到最新版本内核(4.19.y)</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 这里也把rpi-update一起装了</span>
+</span></span><span class=line><span class=cl>sudo apt-update <span class=o>&amp;&amp;</span> sudo apt install -y rpi-update rpi-source
+</span></span><span class=line><span class=cl><span class=c1># 执行升级</span>
+</span></span><span class=line><span class=cl>sudo rpi-update
+</span></span><span class=line><span class=cl><span class=c1># 如果使用rpi-update升级后又回退过，可能不能再次使用rpi-update升级回来</span>
+</span></span><span class=line><span class=cl><span class=c1># Trick: 更改/boot/.firmware_revision然后，再次执行rpi-update</span>
+</span></span><span class=line><span class=cl>sudo reboot
+</span></span></code></pre></div><ul><li>拉取源码</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-mysql data-lang=mysql><span class=line><span class=cl><span class=n>rpi</span><span class=o>-</span><span class=n>source</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=c1># 链接到build
+</span></span></span><span class=line><span class=cl><span class=n>sudo</span><span class=w> </span><span class=n>ln</span><span class=w> </span><span class=o>-</span><span class=n>s</span><span class=w> </span><span class=o>`</span><span class=n>pwd</span><span class=o>`/</span><span class=n>linux</span><span class=o>-</span><span class=mi>789277</span><span class=n>d012f4a9ba1b032c298c3ebe2db5d91835</span><span class=w> </span><span class=o>/</span><span class=n>lib</span><span class=o>/</span><span class=n>modules</span><span class=o>/</span><span class=err>$</span><span class=p>(</span><span class=n>uname</span><span class=w> </span><span class=o>-</span><span class=n>r</span><span class=p>)</span><span class=o>/</span><span class=n>build</span><span class=w>
+</span></span></span></code></pre></div><ul><li>安装工具</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt-get install git bison flex libssl-dev bc libncurses5-dev
+</span></span></code></pre></div><ul><li>生成编译配置</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>KERNEL=kernel7
+</span></span><span class=line><span class=cl>make bcm2709_defconfig
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># menuconfig来配置，默认disable了mt76x2, (先用斜杠搜索mt76菜单，再进入，可以上下翻页)
+</span></span><span class=line><span class=cl>make menuconfig
+</span></span></code></pre></div><ul><li>开始编译</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1>#-j4 分配到4个核来编译</span>
+</span></span><span class=line><span class=cl>make -j4 zImage modules dtbs
+</span></span></code></pre></div><ul><li>安装</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo make modules_install
+</span></span><span class=line><span class=cl>sudo cp arch/arm/boot/dts/*.dtb /boot/
+</span></span><span class=line><span class=cl>sudo cp arch/arm/boot/dts/overlays/*.dtb* /boot/overlays/
+</span></span><span class=line><span class=cl>sudo cp arch/arm/boot/dts/overlays/README /boot/overlays/
+</span></span><span class=line><span class=cl>sudo cp arch/arm/boot/zImage /boot/<span class=nv>$KERNEL</span>.img
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># reboot</span>
+</span></span></code></pre></div><p>Tips： 编译来自三方源码的驱动：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>cd</span> &lt;PATH-TO-DRIVER-SRC&gt;
+</span></span><span class=line><span class=cl>make -C /lib/modules/<span class=k>$(</span>uname -r<span class=k>)</span>/build <span class=nv>M</span><span class=o>=</span><span class=nv>$pwd</span> modules
+</span></span></code></pre></div><h2 id=其他问题解决>其他问题解决</h2><p>dhcp， 使用时碰到了无法从路由器获取ipv4地址的情况，可以设置dhcp加入新的<code>wlan1</code>网络接口,并注意设置好DNS，否则会影响上网</p><ul><li>ip route</li></ul><p>默认的ip route可能会出错或者wlan1优先级低而不能正常接入网络作中继。参考以下可以工作的配置</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>pi@raspberrypi:~ $ ip route show
+</span></span><span class=line><span class=cl>default via 192.168.0.1 dev wlan1 src 192.168.0.129 metric 305 
+</span></span><span class=line><span class=cl>192.168.0.0/24 dev wlan1 proto kernel scope link src 192.168.0.129 metric 305 
+</span></span><span class=line><span class=cl>192.168.21.0/24 dev wlan0 proto kernel scope link src 192.168.21.1 metric 303
+</span></span></code></pre></div><p>设置iptables</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>sudo iptables -t nat -A  POSTROUTING -o wlan1 -j MASQUERADE
+</span></span></code></pre></div><p>这里我使用网络中继的主要原因是只将只能设备接入树梅派发射的局域网而不是直接接入到路由器上。</p><h1 id=参考>参考</h1><ul><li><a href=https://github.com/ulli-kroll/mt7612u/issues/27>https://github.com/ulli-kroll/mt7612u/issues/27</a></li><li><a href=https://github.com/torvalds/linux/commit/cac97ed681db9891c74be91b54e6b550dc6afb03>https://github.com/torvalds/linux/commit/cac97ed681db9891c74be91b54e6b550dc6afb03</a></li><li><a href=https://www.raspberrypi.org/documentation/linux/kernel/building.md>https://www.raspberrypi.org/documentation/linux/kernel/building.md</a></li></ul><div id=react-single-actions data-post-id=af28ab997dd012a6651a28414d96f561></div></article><button class=mobile-toc-trigger aria-controls=mobile-toc aria-expanded=false title=Index>☰</button><div class=mobile-toc-overlay hidden></div><div id=mobile-toc class=mobile-toc-drawer aria-hidden=true role=dialog aria-label=Index><div class=mobile-toc-header><button class=mobile-toc-close aria-label=close>×</button></div><nav class=mobile-toc-body><div class=mobile-toc-list></div></nav><div class=mobile-safe-area-spacer></div></div><script type=module src=/react/page.bundle.js></script></main><footer><div class=copyright><small>Made with <span style=color:#e25555>&#9829;</span> in Guangzhou by
 ©<a href=https://github.com/qtopie>qtopie</a> 2026
 </small><small>Posts licensed under <a href=https://creativecommons.org/licenses/by/4.0/legalcode>CC BY 4.0</small></div><div><script type=module src=/react/base.bundle.js></script></div></footer></body></html>

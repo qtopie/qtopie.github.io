@@ -1,251 +1,251 @@
-<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width"><title>我的DIY与vocore | 1001問</title><link rel=stylesheet href=/css/main.min.dcb41abaa5ea2698ebf89f814bc6b8060470b6414061437dac2ee0e3ef5d3b45.css integrity="sha256-3LQauqXqJpjr+J+BS8a4BgRwtkFAYUN9rC7g4+9dO0U=" crossorigin=anonymous><link rel=stylesheet href=/css/page.min.81d92e4ce9b8dc4e8a2018a7aee70f76bd7fb6884d929d5fd74e3f959f06e2f5.css integrity="sha256-gdkuTOm43E6KIBinrucPdr1/tohNkp1f104/lZ8G4vU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.e114b8cc38f57d520f373580c935a518bc6afd6dec4f1d682365cdbcf5c8218a.css><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css crossorigin=anonymous referrerpolicy=no-referrer><script src=/js/toc.min.87636f25caf644980403a5c1ce8b0812cfd10d1e53c08f181547966799ceccdb.js integrity="sha256-h2NvJcr2RJgEA6XBzosIEs/RDR5TwI8YFUeWZ5nOzNs=" crossorigin=anonymous type=module defer></script><script src=/js/copy-code.min.3bea0de4cfe8670f94a5d75c177f07b58fc90178efdea7f2a21449798d75b2c9.js integrity="sha256-O+oN5M/oZw+UpddcF38HtY/JAXjv3qfyohRJeY11ssk=" crossorigin=anonymous defer></script><script defer src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js crossorigin=anonymous referrerpolicy=no-referrer></script><script defer src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js crossorigin=anonymous referrerpolicy=no-referrer onload='renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],throwOnError:!1})'></script><script src=/js/katex-block.min.2cf531bbcc318aadf5661baa2d0987ab5cb4daef473e108b1da714a37cff0b25.js integrity="sha256-LPUxu8wxiq31ZhuqLQmHq1y02u9HPhCLHacUo3z/CyU=" crossorigin=anonymous defer></script></head><body><header><nav><a href=/><h1>1001問</h1></a><div id=react-search class=search-root aria-label="Site Search"></div></nav></header><main><div class=sidebar><section class=toc><nav id=TableOfContents><ul><li><a href=#vocore>VoCore</a></li><li><a href=#技术参数>技术参数</a></li><li><a href=#openwrt介绍>OpenWRT介绍</a></li><li><a href=#我的定制>我的定制</a><ul><li><a href=#基本设置>基本设置</a></li></ul></li><li><a href=#wget-ssl>wget ssl</a><ul><li><a href=#apsta模式-或者叫无线中继器>AP+STA模式 （或者叫无线中继器）</a></li><li><a href=#代理与web过滤shadowsocks--privoxy>代理与Web过滤（Shadowsocks + Privoxy）</a></li><li><a href=#bbr>BBR</a></li><li><a href=#网络包分析>网络包分析</a></li><li><a href=#远程下载-aria2>远程下载 （aria2)</a></li><li><a href=#usb-20存储挂载>USB 2.0存储挂载</a></li><li><a href=#nas服务>NAS服务</a></li><li><a href=#声音播放与流媒体功能dlna>声音播放与流媒体功能（DLNA)</a></li><li><a href=#guest-wifi和wifidog>Guest WIFI和wifidog</a></li><li><a href=#web管理界面luci中文支持>Web管理界面luci中文支持</a></li></ul></li><li><a href=#变成假硬币怎么办>变成“假硬币”怎么办？</a><ul><li><a href=#使用串口连接vocore>使用串口连接vocore</a></li></ul></li><li><a href=#compile-openwrt-for-vocore2>Compile OpenWRT for VoCore2</a></li><li><a href=#openwrt-1806>OpenWRT 18.06</a></li><li><a href=#openwrt相关diy>OpenWRT相关DIY</a></li><li><a href=#dns配置>DNS配置</a></li><li><a href=#源镜像>源镜像</a></li><li><a href=#wan-口和-lan口互换>wan 口和 lan口互换</a></li><li><a href=#vlan>VLAN</a></li><li><a href=#4g-lte>4G LTE</a></li><li><a href=#参考链接>参考链接</a></li></ul></nav></section></div><article id=content><div class=metadata><h1>我的DIY与vocore</h1><time datetime=2018-07-26T22:24:33+08:00>July 26, 2018</time><div class=taxonomy><span id=post-categories><ul><li><strong>Categories</strong>:&nbsp;</li><li class=category-item><a href=https://qtopie.github.io/categories/diy>DIY</a></li></ul></span><span id=post-tags><ul><li><strong>Tags</strong>:&nbsp;</li><li class=tag-item><a href=https://qtopie.github.io/tags/vocore><em>vocore</em></a></li></ul></span></div></div><h2 id=vocore><a href=http://vocore.io/>VoCore</a></h2><p>硬币大小的Linux计算机（或者可以DIY的mini路由器）</p><h2 id=技术参数>技术参数</h2><ul><li>Target: <a href=https://openwrt.org/docs/techref/targets/ramips>ramips</a></li><li>Subtarget: <code>mt7628</code></li><li>Package architecture: <code>mipsel_24kc</code></li><li><a href=https://openwrt.org/toh/hwdata/vocore/vocore_vocore2>OpenWRT techdata</a></li></ul><p>具体参数请看官网介绍 <a href=http://vocore.io/v2u.html>VoCore2 Ultimate</a> 和 <a href=https://openwrt.org/toh/hwdata/vocore/vocore_vocore2>openwrt列出的技术数据</a></p><h2 id=openwrt介绍>OpenWRT介绍</h2><p>OpenWRT(与<a href=https://zh.wikipedia.org/wiki/LEDE>LEDE</a>合并后更名为OpenWrt)是一个适用于嵌入式设备的Linux发行版，最初<a href=https://zh.wikipedia.org/wiki/OpenWrt>由Linksys公司推出的WRT-54G无线路由中使用的Linux系统开源而来</a>。相比于路由器原厂固件而言，OpenWRT提供了一个可添加软件包的可写文件系统，这样用户就能自己定制路由器的功能。基于开放的生态和良好的技术社区环境，OpenWRT十分适合喜好DIY的科技粉来定制自己的路由器。</p><p>OpenWRT主要使用opkg来管理软件包，默认使用LuCI作为web交互界面。下面简单列出它们的常用方式，具体使用方法请查阅文档。</p><ul><li><p>opkg</p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-sh data-lang=sh><span style=display:flex><span><span style=color:#09f;font-style:italic># 安装软件包</span>
-</span></span><span style=display:flex><span>opkg install &lt;PACKAGE-NAME&gt;
-</span></span><span style=display:flex><span><span style=color:#09f;font-style:italic># 卸载软件包</span>
-</span></span><span style=display:flex><span>opkg remove &lt;PACKAGE-NAME&gt;
-</span></span></code></pre></div></li><li><p>uci</p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-sh data-lang=sh><span style=display:flex><span><span style=color:#09f;font-style:italic># 设置option</span>
-</span></span><span style=display:flex><span>uci <span style=color:#366>set</span> &lt;OPTION&gt;
-</span></span><span style=display:flex><span><span style=color:#09f;font-style:italic># 查看option</span>
-</span></span><span style=display:flex><span>uci show &lt;OPTION&gt;
-</span></span></code></pre></div></li></ul><h2 id=我的定制>我的定制</h2><h3 id=基本设置>基本设置</h3><ul><li>Change SSID Name</li></ul><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-sh data-lang=sh><span style=display:flex><span>uci <span style=color:#366>set</span> wireless.ap.ssid<span style=color:#555>=</span><span style=color:#c30>&#39;firefly&#39;</span>
-</span></span><span style=display:flex><span>uci commit 
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#09f;font-style:italic># check result</span>
-</span></span><span style=display:flex><span>uci show wireless.ap.ssid
-</span></span><span style=display:flex><span><span style=color:#09f;font-style:italic># restart networking service to make reload configuration</span>
-</span></span><span style=display:flex><span>/etc/init.d/network restart
-</span></span><span style=display:flex><span><span style=color:#09f;font-style:italic># check network in another machine</span>
-</span></span><span style=display:flex><span>sudo iw dev wlan0 scan | grep SSID
-</span></span></code></pre></div><h2 id=wget-ssl>wget ssl</h2><pre tabindex=0><code>opkg install libustream-openssl ca-bundle ca-certificates
-</code></pre><h3 id=apsta模式-或者叫无线中继器>AP+STA模式 （或者叫无线中继器）</h3><ul><li>使用固件 <a href=http://vonger.cn/misc/vocore2/20180723V.bin>vocore2-20180723V</a></li></ul><p>配置信息(仅供参考)：</p><p><code>uci show wireless</code></p><pre tabindex=0><code class=language-uci data-lang=uci>wireless.ra0=wifi-device
-wireless.ra0.type=&#39;ralink&#39;
-wireless.ra0.variant=&#39;mt7628&#39;
-wireless.ra0.country=&#39;CN&#39;
-wireless.ra0.channel=&#39;auto&#39;
-wireless.ra0.disabled=&#39;0&#39;
-wireless.ra0.hwmode=&#39;11g&#39;
-wireless.ap=wifi-iface
-wireless.ap.device=&#39;ra0&#39;
-wireless.ap.mode=&#39;ap&#39;
-wireless.ap.network=&#39;lan&#39;
-wireless.ap.ifname=&#39;ra0&#39;
-wireless.ap.ssid=&#39;“放大后”的WIFI-名称&#39;
-wireless.ap.key=&#39;密码不告诉你:)&#39;
-wireless.ap.encryption=&#39;psk2&#39;
-wireless.sta=wifi-iface
-wireless.sta.device=&#39;ra0&#39;
-wireless.sta.mode=&#39;sta&#39;
-wireless.sta.network=&#39;wwan&#39;
-wireless.sta.ifname=&#39;apcli0&#39;
-wireless.sta.key=&#39;密码不告诉你:)&#39;
-wireless.sta.disabled=&#39;0&#39;
-wireless.sta.encryption=&#39;psk2&#39;
-wireless.sta.ssid=&#39;所中继连接的源WIFI-名称&#39;
-</code></pre><p>网络信息 <code>uci show network</code>：</p><pre tabindex=0><code class=language-uci data-lang=uci>network.loopback=interface
-network.loopback.ifname=&#39;lo&#39;
-network.loopback.proto=&#39;static&#39;
-network.loopback.ipaddr=&#39;127.0.0.1&#39;
-network.loopback.netmask=&#39;255.0.0.0&#39;
-network.globals=globals
-network.globals.ula_prefix=&#39;fd15:39fa:4166::/48&#39;
-network.lan=interface
-network.lan.ifname=&#39;eth0.1&#39;
-network.lan.force_link=&#39;1&#39;
-network.lan.macaddr=&#39;b8:d8:12:67:01:71&#39;
-network.lan.type=&#39;bridge&#39;
-network.lan.proto=&#39;static&#39;
-network.lan.ipaddr=&#39;192.168.61.1&#39;
-network.lan.netmask=&#39;255.255.255.0&#39;
-network.lan.ip6assign=&#39;60&#39;
-network.wan=interface
-network.wan.ifname=&#39;eth0.2&#39;
-network.wan.force_link=&#39;1&#39;
-network.wan.macaddr=&#39;b8:d8:12:67:01:72&#39;
-network.wan.proto=&#39;dhcp&#39;
-network.wan6=interface
-network.wan6.ifname=&#39;eth0.2&#39;
-network.wan6.proto=&#39;dhcpv6&#39;
-network.@switch[0]=switch
-network.@switch[0].name=&#39;switch0&#39;
-network.@switch[0].reset=&#39;1&#39;
-network.@switch[0].enable_vlan=&#39;1&#39;
-network.@switch_vlan[0]=switch_vlan
-network.@switch_vlan[0].device=&#39;switch0&#39;
-network.@switch_vlan[0].vlan=&#39;1&#39;
-network.@switch_vlan[0].ports=&#39;1 2 3 4 6t&#39;
-network.@switch_vlan[1]=switch_vlan
-network.@switch_vlan[1].device=&#39;switch0&#39;
-network.@switch_vlan[1].vlan=&#39;2&#39;
-network.@switch_vlan[1].ports=&#39;0 6t&#39;
-</code></pre><p>注意此处没有lan_dev桥接网络，并且有固定的mac地址，所以能从以太网分配到IP（待确认，openwrt 18.06.1 默为桥接以太网https://unix.stackexchange.com/questions/493378/no-ethernet-ip-address-in-my-vocore2) 。</p><p>配置好后的无线网络信息截图如下：
-如果喜欢通过图形界面进行设置，请参考<a href="http://vonger.cn/?p=14525">vonger的博客</a>。不过个人偏好命令行配置（uci），更简单可靠。</p><h4 id=相关问题>相关问题</h4><ul><li><p>供电电压过低时STA模式不能正常工作</p><p>此时一般会提示<code>[ 826.460057] MlmeEnqueueForRecv(): un-recongnized mgmt->subtype=4, STA-xx:xx:xx:xx:xx:xx</code>的日志错误信息。</p><p>参考github上的这个<a href=https://github.com/Vonger/vocore2/issues/2>Issue</a></p></li></ul><h4 id=pppoeasdl拨号上网>pppoe(ASDL拨号上网)</h4><div style=position:relative;padding-bottom:56.25%;height:0;overflow:hidden><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading=eager referrerpolicy=strict-origin-when-cross-origin src="https://www.youtube.com/embed/81uRInFyuxI?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style=position:absolute;top:0;left:0;width:100%;height:100%;border:0 title="YouTube video"></iframe></div><ul><li>添加vlan端口</li><li>设置wan接口连接方式为pppoe和以上vlan端口</li></ul><h3 id=代理与web过滤shadowsocks--privoxy>代理与Web过滤（Shadowsocks + Privoxy）</h3><ul><li><p><strong>Shadowsocks</strong></p><p>考虑到<a href=https://github.com/golang/go/wiki/Linux>go此时对mipsel架构的支持还有限</a>, 而且openWRT版本的<a href=https://github.com/shadowsocks/openwrt-shadowsocks>shadowsocks-libev</a>具有体积小、轻量级、功能支持丰富的特点，就采用了<a href=https://github.com/shadowsocks/shadowsocks-libev>shadowsocks-libev</a>来作为Shadowsocks的客户端。</p><p>这里使用了<a href=http://openwrt-dist.sourceforge.net/>OpenWrt-dist</a>提供的源进行安装。可以通过命令从远程下载直接安装，也可以下载指定ipk安装包后进行安装。</p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-sh data-lang=sh><span style=display:flex><span>opkg install shadowsocks-libev-ss-local luci-app-shadowsocks-libev
-</span></span></code></pre></div><p>v2ray需要openwrt支持SSL， 我们可以启用luci的SSL顺便解决该问题</p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>opkg install luci-ssl-openssl ca-bundle luci-ssl-nginx
-</span></span></code></pre></div><p>注意这里我们使用luci-ssl-nginx替换原有的httpd，uhttpd目前会有性能问题导致https页面加载非常慢。</p></li><li><p><strong>Privoxy</strong></p></li></ul><p>当前所使用的OpenWRT版本已经支持从官方源中下载安装<code>privoxy</code>, 也可以去<a href=http://downloads.openwrt.org/>http://downloads.openwrt.org/</a>找到对应的<code>privoxy</code>安装包手动下载安装。</p><p>目前我所使用的<code>privoxy</code>版本信息为：<code>Privoxy version 3.0.26 (https://www.privoxy.org/)</code>，但是我在使用它的时候不太确定是否一个bug, 通过<code>uci</code>所配置的<code>list</code>项信息（如actionsfile和filterfile）无法生效，故修改了<code>/etc/init.d/privoxy</code>启动脚本并使用树莓派上<code>privoxy</code>的默认配置文件<code>/etc/privoxy/config</code>作为配置，<a href=https://wiki.openwrt.org/zh-cn/doc/howto/proxy.privoxy>回退到旧的配置方式</a>。</p><p>重要配置示例：</p><pre tabindex=0><code class=language-actionsfile data-lang=actionsfile># filename: pac.action
-# please add pac.action actionsfile into /etc/privoxy/config
-
-{{alias}}
-# http    = +forward-override{forward 127.0.0.1:8080}
-direct  = +forward-override{forward .}
-socks5  = +forward-override{forward-socks5 127.0.0.1:1080 .}
-default = direct
-
-# Default proxy
-{default}
-/
-
-{direct}
-.edu.cn
-.lan
-
-# Shadowsocks
-{socks5}
-.abc.xyz
-.google.com.hk
-</code></pre><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>uci add_list privoxy.privoxy.actionsfile<span style=color:#555>=</span>pac.action
-</span></span></code></pre></div><h3 id=bbr>BBR</h3><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>opkg install kmod-tcp-bbr
-</span></span></code></pre></div><h3 id=网络包分析>网络包分析</h3><p>安装以下软件包，以便进行网络数据包分析。vocore2性能有限，只适合抓包和处理少量的数据包。</p><ul><li>libpcap</li><li>reaver</li><li>aircrack-ng</li><li>airmon-ng</li><li>tcpdump</li></ul><h4 id=显示多个ssid>显示多个SSID</h4><p>修改<code>/etc/wireless/mt7628/mt7628.dat</code> (实际上为文本文件)：</p><pre tabindex=0><code># BSSID数量设为4 ra0, ra1, ra2, ra3
-BssidNum=4
-SSID1=VoCore2
-SSID2=VoCore2-GUEST
-SSID3=VoCore2-HOST
-SSID4=VoCore2-NAS
-</code></pre><p>参考： <a href="http://vonger.cn/?p=14496">http://vonger.cn/?p=14496</a></p><h4 id=启用网卡嗅探sniffer模式>启用网卡嗅探(Sniffer)模式</h4><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-sh data-lang=sh><span style=display:flex><span><span style=color:#09f;font-style:italic># Supposed libpcap.ipk and tcpdump.ipk have been installed.</span>
-</span></span><span style=display:flex><span><span style=color:#09f;font-style:italic># MonitorMode=2 is MONITOR_MODE_FULL, =1 is MONITOR_MODE_REGULAR_RX, =0 is OFF.</span>
-</span></span><span style=display:flex><span>ifconfig mon0 up
-</span></span><span style=display:flex><span>iwpriv ra0 <span style=color:#366>set</span> <span style=color:#033>MonitorMode</span><span style=color:#555>=</span><span style=color:#f60>2</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#09f;font-style:italic># capturing</span>
-</span></span><span style=display:flex><span>tcpdump -i mon0 -w /tmp/store.cap -vv
-</span></span></code></pre></div><ul><li><p>Packet capturing of raw 802.11 frames (use <code>tcpdump</code> alternative to <code>airodump-ng</code>)</p><ul><li>set channel to the same as AP (needed, otherwise you&rsquo;re not able to capture the handshake packets, check <a href="https://www.aircrack-ng.org/doku.php?id=cracking_wpa#aircrack-ng_says_0_handshakes">https://www.aircrack-ng.org/doku.php?id=cracking_wpa#aircrack-ng_says_0_handshakes</a>)</li></ul><p>以下方式在vocore中暂时不能使用</p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-sh data-lang=sh><span style=display:flex><span><span style=color:#09f;font-style:italic># check current channel of the interface</span>
-</span></span><span style=display:flex><span>iwlist mon0 channel
-</span></span><span style=display:flex><span><span style=color:#09f;font-style:italic># change channel</span>
-</span></span><span style=display:flex><span>iwconfig mon0 channel &lt;CHANNEL_NUM&gt;
-</span></span></code></pre></div></li><li><p>改变无线网卡的CHANNEL</p></li></ul><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-sh data-lang=sh><span style=display:flex><span>uci <span style=color:#366>set</span> wireless.@wifi-device<span style=color:#555>[</span>0<span style=color:#555>]</span>.channel<span style=color:#555>=</span><span style=color:#f60>6</span> 
-</span></span></code></pre></div><ul><li>Use <a href=https://hashcat.net/cap2hccapx/>cap2hccapx</a> to filter packets</li></ul><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-sh data-lang=sh><span style=display:flex><span>cap2hccapx.bin  /tmp/store.cap tmp.hccap
-</span></span></code></pre></div><ul><li>查看AP已经连接的CLIENT信息</li></ul><p><strong><code>airodump-ng</code> 同时可以用来过滤握手包，可以在<code>tcpdump</code>抓包的同时使用该工具查看数据包文件</strong></p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-sh data-lang=sh><span style=display:flex><span>airodump-ng -c &lt;TARGET-CH&gt; --bssid &lt;SSID&gt; -r /tmp/store.cap 
-</span></span></code></pre></div><ul><li>发送DEAUTH包强制断开已连接WIFI的客户端</li></ul><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-sh data-lang=sh><span style=display:flex><span>aireplay-ng -0 <span style=color:#f60>2</span> -a &lt;SSID&gt; -c &lt;CLIENT-MAC&gt; mon0
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width"><title>我的DIY与vocore | 1001問</title><link rel=stylesheet href=/css/main.min.dcb41abaa5ea2698ebf89f814bc6b8060470b6414061437dac2ee0e3ef5d3b45.css integrity="sha256-3LQauqXqJpjr+J+BS8a4BgRwtkFAYUN9rC7g4+9dO0U=" crossorigin=anonymous><link rel=stylesheet href=/css/page.min.81d92e4ce9b8dc4e8a2018a7aee70f76bd7fb6884d929d5fd74e3f959f06e2f5.css integrity="sha256-gdkuTOm43E6KIBinrucPdr1/tohNkp1f104/lZ8G4vU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.e114b8cc38f57d520f373580c935a518bc6afd6dec4f1d682365cdbcf5c8218a.css><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css crossorigin=anonymous referrerpolicy=no-referrer><script src=/js/toc.min.87636f25caf644980403a5c1ce8b0812cfd10d1e53c08f181547966799ceccdb.js integrity="sha256-h2NvJcr2RJgEA6XBzosIEs/RDR5TwI8YFUeWZ5nOzNs=" crossorigin=anonymous type=module defer></script><script src=/js/copy-code.min.3bea0de4cfe8670f94a5d75c177f07b58fc90178efdea7f2a21449798d75b2c9.js integrity="sha256-O+oN5M/oZw+UpddcF38HtY/JAXjv3qfyohRJeY11ssk=" crossorigin=anonymous defer></script><script defer src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js crossorigin=anonymous referrerpolicy=no-referrer></script><script defer src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js crossorigin=anonymous referrerpolicy=no-referrer onload='renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],throwOnError:!1})'></script><script src=/js/katex-block.min.2cf531bbcc318aadf5661baa2d0987ab5cb4daef473e108b1da714a37cff0b25.js integrity="sha256-LPUxu8wxiq31ZhuqLQmHq1y02u9HPhCLHacUo3z/CyU=" crossorigin=anonymous defer></script></head><body><header><nav><a href=/><h1>1001問</h1></a><div id=react-search class=search-root aria-label="Site Search"></div></nav></header><main><div class=sidebar><section class=toc><nav id=TableOfContents><ul><li><a href=#vocore>VoCore</a></li><li><a href=#技术参数>技术参数</a></li><li><a href=#openwrt介绍>OpenWRT介绍</a></li><li><a href=#我的定制>我的定制</a><ul><li><a href=#基本设置>基本设置</a></li></ul></li><li><a href=#wget-ssl>wget ssl</a><ul><li><a href=#apsta模式-或者叫无线中继器>AP+STA模式 （或者叫无线中继器）</a></li><li><a href=#代理与web过滤shadowsocks--privoxy>代理与Web过滤（Shadowsocks + Privoxy）</a></li><li><a href=#bbr>BBR</a></li><li><a href=#网络包分析>网络包分析</a></li><li><a href=#远程下载-aria2>远程下载 （aria2)</a></li><li><a href=#usb-20存储挂载>USB 2.0存储挂载</a></li><li><a href=#nas服务>NAS服务</a></li><li><a href=#声音播放与流媒体功能dlna>声音播放与流媒体功能（DLNA)</a></li><li><a href=#guest-wifi和wifidog>Guest WIFI和wifidog</a></li><li><a href=#web管理界面luci中文支持>Web管理界面luci中文支持</a></li></ul></li><li><a href=#变成假硬币怎么办>变成“假硬币”怎么办？</a><ul><li><a href=#使用串口连接vocore>使用串口连接vocore</a></li></ul></li><li><a href=#compile-openwrt-for-vocore2>Compile OpenWRT for VoCore2</a></li><li><a href=#openwrt-1806>OpenWRT 18.06</a></li><li><a href=#openwrt相关diy>OpenWRT相关DIY</a></li><li><a href=#dns配置>DNS配置</a></li><li><a href=#源镜像>源镜像</a></li><li><a href=#wan-口和-lan口互换>wan 口和 lan口互换</a></li><li><a href=#vlan>VLAN</a></li><li><a href=#4g-lte>4G LTE</a></li><li><a href=#参考链接>参考链接</a></li></ul></nav></section></div><article id=content><div class=metadata><h1>我的DIY与vocore</h1><time datetime=2018-07-26T22:24:33+08:00>July 26, 2018</time><div class=taxonomy><span id=post-categories><ul><li><strong>Categories</strong>:&nbsp;</li><li class=category-item><a href=https://qtopie.github.io/categories/diy>DIY</a></li></ul></span><span id=post-tags><ul><li><strong>Tags</strong>:&nbsp;</li><li class=tag-item><a href=https://qtopie.github.io/tags/vocore><em>vocore</em></a></li></ul></span></div></div><h2 id=vocore><a href=http://vocore.io/>VoCore</a></h2><p>硬币大小的Linux计算机（或者可以DIY的mini路由器）</p><h2 id=技术参数>技术参数</h2><ul><li>Target: <a href=https://openwrt.org/docs/techref/targets/ramips>ramips</a></li><li>Subtarget: <code>mt7628</code></li><li>Package architecture: <code>mipsel_24kc</code></li><li><a href=https://openwrt.org/toh/hwdata/vocore/vocore_vocore2>OpenWRT techdata</a></li></ul><p>具体参数请看官网介绍 <a href=http://vocore.io/v2u.html>VoCore2 Ultimate</a> 和 <a href=https://openwrt.org/toh/hwdata/vocore/vocore_vocore2>openwrt列出的技术数据</a></p><h2 id=openwrt介绍>OpenWRT介绍</h2><p>OpenWRT(与<a href=https://zh.wikipedia.org/wiki/LEDE>LEDE</a>合并后更名为OpenWrt)是一个适用于嵌入式设备的Linux发行版，最初<a href=https://zh.wikipedia.org/wiki/OpenWrt>由Linksys公司推出的WRT-54G无线路由中使用的Linux系统开源而来</a>。相比于路由器原厂固件而言，OpenWRT提供了一个可添加软件包的可写文件系统，这样用户就能自己定制路由器的功能。基于开放的生态和良好的技术社区环境，OpenWRT十分适合喜好DIY的科技粉来定制自己的路由器。</p><p>OpenWRT主要使用opkg来管理软件包，默认使用LuCI作为web交互界面。下面简单列出它们的常用方式，具体使用方法请查阅文档。</p><ul><li><p>opkg</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=c1># 安装软件包</span>
+</span></span><span class=line><span class=cl>opkg install &lt;PACKAGE-NAME&gt;
+</span></span><span class=line><span class=cl><span class=c1># 卸载软件包</span>
+</span></span><span class=line><span class=cl>opkg remove &lt;PACKAGE-NAME&gt;
+</span></span></code></pre></div></li><li><p>uci</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=c1># 设置option</span>
+</span></span><span class=line><span class=cl>uci <span class=nb>set</span> &lt;OPTION&gt;
+</span></span><span class=line><span class=cl><span class=c1># 查看option</span>
+</span></span><span class=line><span class=cl>uci show &lt;OPTION&gt;
+</span></span></code></pre></div></li></ul><h2 id=我的定制>我的定制</h2><h3 id=基本设置>基本设置</h3><ul><li>Change SSID Name</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>uci <span class=nb>set</span> wireless.ap.ssid<span class=o>=</span><span class=s1>&#39;firefly&#39;</span>
+</span></span><span class=line><span class=cl>uci commit 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># check result</span>
+</span></span><span class=line><span class=cl>uci show wireless.ap.ssid
+</span></span><span class=line><span class=cl><span class=c1># restart networking service to make reload configuration</span>
+</span></span><span class=line><span class=cl>/etc/init.d/network restart
+</span></span><span class=line><span class=cl><span class=c1># check network in another machine</span>
+</span></span><span class=line><span class=cl>sudo iw dev wlan0 scan <span class=p>|</span> grep SSID
+</span></span></code></pre></div><h2 id=wget-ssl>wget ssl</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>opkg install libustream-openssl ca-bundle ca-certificates
+</span></span></code></pre></div><h3 id=apsta模式-或者叫无线中继器>AP+STA模式 （或者叫无线中继器）</h3><ul><li>使用固件 <a href=http://vonger.cn/misc/vocore2/20180723V.bin>vocore2-20180723V</a></li></ul><p>配置信息(仅供参考)：</p><p><code>uci show wireless</code></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>wireless</span><span class=o>.</span><span class=n>ra0</span><span class=o>=</span><span class=n>wifi</span><span class=o>-</span><span class=n>device</span>
+</span></span><span class=line><span class=cl><span class=n>wireless</span><span class=o>.</span><span class=n>ra0</span><span class=o>.</span><span class=n>type</span><span class=o>=</span><span class=s1>&#39;ralink&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>wireless</span><span class=o>.</span><span class=n>ra0</span><span class=o>.</span><span class=n>variant</span><span class=o>=</span><span class=s1>&#39;mt7628&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>wireless</span><span class=o>.</span><span class=n>ra0</span><span class=o>.</span><span class=n>country</span><span class=o>=</span><span class=s1>&#39;CN&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>wireless</span><span class=o>.</span><span class=n>ra0</span><span class=o>.</span><span class=n>channel</span><span class=o>=</span><span class=s1>&#39;auto&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>wireless</span><span class=o>.</span><span class=n>ra0</span><span class=o>.</span><span class=n>disabled</span><span class=o>=</span><span class=s1>&#39;0&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>wireless</span><span class=o>.</span><span class=n>ra0</span><span class=o>.</span><span class=n>hwmode</span><span class=o>=</span><span class=s1>&#39;11g&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>wireless</span><span class=o>.</span><span class=n>ap</span><span class=o>=</span><span class=n>wifi</span><span class=o>-</span><span class=n>iface</span>
+</span></span><span class=line><span class=cl><span class=n>wireless</span><span class=o>.</span><span class=n>ap</span><span class=o>.</span><span class=n>device</span><span class=o>=</span><span class=s1>&#39;ra0&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>wireless</span><span class=o>.</span><span class=n>ap</span><span class=o>.</span><span class=n>mode</span><span class=o>=</span><span class=s1>&#39;ap&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>wireless</span><span class=o>.</span><span class=n>ap</span><span class=o>.</span><span class=n>network</span><span class=o>=</span><span class=s1>&#39;lan&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>wireless</span><span class=o>.</span><span class=n>ap</span><span class=o>.</span><span class=n>ifname</span><span class=o>=</span><span class=s1>&#39;ra0&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>wireless</span><span class=o>.</span><span class=n>ap</span><span class=o>.</span><span class=n>ssid</span><span class=o>=</span><span class=s1>&#39;“放大后”的WIFI-名称&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>wireless</span><span class=o>.</span><span class=n>ap</span><span class=o>.</span><span class=n>key</span><span class=o>=</span><span class=s1>&#39;密码不告诉你:)&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>wireless</span><span class=o>.</span><span class=n>ap</span><span class=o>.</span><span class=n>encryption</span><span class=o>=</span><span class=s1>&#39;psk2&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>wireless</span><span class=o>.</span><span class=n>sta</span><span class=o>=</span><span class=n>wifi</span><span class=o>-</span><span class=n>iface</span>
+</span></span><span class=line><span class=cl><span class=n>wireless</span><span class=o>.</span><span class=n>sta</span><span class=o>.</span><span class=n>device</span><span class=o>=</span><span class=s1>&#39;ra0&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>wireless</span><span class=o>.</span><span class=n>sta</span><span class=o>.</span><span class=n>mode</span><span class=o>=</span><span class=s1>&#39;sta&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>wireless</span><span class=o>.</span><span class=n>sta</span><span class=o>.</span><span class=n>network</span><span class=o>=</span><span class=s1>&#39;wwan&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>wireless</span><span class=o>.</span><span class=n>sta</span><span class=o>.</span><span class=n>ifname</span><span class=o>=</span><span class=s1>&#39;apcli0&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>wireless</span><span class=o>.</span><span class=n>sta</span><span class=o>.</span><span class=n>key</span><span class=o>=</span><span class=s1>&#39;密码不告诉你:)&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>wireless</span><span class=o>.</span><span class=n>sta</span><span class=o>.</span><span class=n>disabled</span><span class=o>=</span><span class=s1>&#39;0&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>wireless</span><span class=o>.</span><span class=n>sta</span><span class=o>.</span><span class=n>encryption</span><span class=o>=</span><span class=s1>&#39;psk2&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>wireless</span><span class=o>.</span><span class=n>sta</span><span class=o>.</span><span class=n>ssid</span><span class=o>=</span><span class=s1>&#39;所中继连接的源WIFI-名称&#39;</span>
+</span></span></code></pre></div><p>网络信息 <code>uci show network</code>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>network.loopback=interface
+</span></span><span class=line><span class=cl>network.loopback.ifname=&#39;lo&#39;
+</span></span><span class=line><span class=cl>network.loopback.proto=&#39;static&#39;
+</span></span><span class=line><span class=cl>network.loopback.ipaddr=&#39;127.0.0.1&#39;
+</span></span><span class=line><span class=cl>network.loopback.netmask=&#39;255.0.0.0&#39;
+</span></span><span class=line><span class=cl>network.globals=globals
+</span></span><span class=line><span class=cl>network.globals.ula_prefix=&#39;fd15:39fa:4166::/48&#39;
+</span></span><span class=line><span class=cl>network.lan=interface
+</span></span><span class=line><span class=cl>network.lan.ifname=&#39;eth0.1&#39;
+</span></span><span class=line><span class=cl>network.lan.force_link=&#39;1&#39;
+</span></span><span class=line><span class=cl>network.lan.macaddr=&#39;b8:d8:12:67:01:71&#39;
+</span></span><span class=line><span class=cl>network.lan.type=&#39;bridge&#39;
+</span></span><span class=line><span class=cl>network.lan.proto=&#39;static&#39;
+</span></span><span class=line><span class=cl>network.lan.ipaddr=&#39;192.168.61.1&#39;
+</span></span><span class=line><span class=cl>network.lan.netmask=&#39;255.255.255.0&#39;
+</span></span><span class=line><span class=cl>network.lan.ip6assign=&#39;60&#39;
+</span></span><span class=line><span class=cl>network.wan=interface
+</span></span><span class=line><span class=cl>network.wan.ifname=&#39;eth0.2&#39;
+</span></span><span class=line><span class=cl>network.wan.force_link=&#39;1&#39;
+</span></span><span class=line><span class=cl>network.wan.macaddr=&#39;b8:d8:12:67:01:72&#39;
+</span></span><span class=line><span class=cl>network.wan.proto=&#39;dhcp&#39;
+</span></span><span class=line><span class=cl>network.wan6=interface
+</span></span><span class=line><span class=cl>network.wan6.ifname=&#39;eth0.2&#39;
+</span></span><span class=line><span class=cl>network.wan6.proto=&#39;dhcpv6&#39;
+</span></span><span class=line><span class=cl>network.@switch[0]=switch
+</span></span><span class=line><span class=cl>network.@switch[0].name=&#39;switch0&#39;
+</span></span><span class=line><span class=cl>network.@switch[0].reset=&#39;1&#39;
+</span></span><span class=line><span class=cl>network.@switch[0].enable_vlan=&#39;1&#39;
+</span></span><span class=line><span class=cl>network.@switch_vlan[0]=switch_vlan
+</span></span><span class=line><span class=cl>network.@switch_vlan[0].device=&#39;switch0&#39;
+</span></span><span class=line><span class=cl>network.@switch_vlan[0].vlan=&#39;1&#39;
+</span></span><span class=line><span class=cl>network.@switch_vlan[0].ports=&#39;1 2 3 4 6t&#39;
+</span></span><span class=line><span class=cl>network.@switch_vlan[1]=switch_vlan
+</span></span><span class=line><span class=cl>network.@switch_vlan[1].device=&#39;switch0&#39;
+</span></span><span class=line><span class=cl>network.@switch_vlan[1].vlan=&#39;2&#39;
+</span></span><span class=line><span class=cl>network.@switch_vlan[1].ports=&#39;0 6t&#39;
+</span></span></code></pre></div><p>注意此处没有lan_dev桥接网络，并且有固定的mac地址，所以能从以太网分配到IP（待确认，openwrt 18.06.1 默为桥接以太网https://unix.stackexchange.com/questions/493378/no-ethernet-ip-address-in-my-vocore2) 。</p><p>配置好后的无线网络信息截图如下：
+如果喜欢通过图形界面进行设置，请参考<a href="http://vonger.cn/?p=14525">vonger的博客</a>。不过个人偏好命令行配置（uci），更简单可靠。</p><h4 id=相关问题>相关问题</h4><ul><li><p>供电电压过低时STA模式不能正常工作</p><p>此时一般会提示<code>[ 826.460057] MlmeEnqueueForRecv(): un-recongnized mgmt->subtype=4, STA-xx:xx:xx:xx:xx:xx</code>的日志错误信息。</p><p>参考github上的这个<a href=https://github.com/Vonger/vocore2/issues/2>Issue</a></p></li></ul><h4 id=pppoeasdl拨号上网>pppoe(ASDL拨号上网)</h4><div style=position:relative;padding-bottom:56.25%;height:0;overflow:hidden><iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" loading=eager referrerpolicy=strict-origin-when-cross-origin src="https://www.youtube.com/embed/81uRInFyuxI?autoplay=0&amp;controls=1&amp;end=0&amp;loop=0&amp;mute=0&amp;start=0" style=position:absolute;top:0;left:0;width:100%;height:100%;border:0 title="YouTube video"></iframe></div><ul><li>添加vlan端口</li><li>设置wan接口连接方式为pppoe和以上vlan端口</li></ul><h3 id=代理与web过滤shadowsocks--privoxy>代理与Web过滤（Shadowsocks + Privoxy）</h3><ul><li><p><strong>Shadowsocks</strong></p><p>考虑到<a href=https://github.com/golang/go/wiki/Linux>go此时对mipsel架构的支持还有限</a>, 而且openWRT版本的<a href=https://github.com/shadowsocks/openwrt-shadowsocks>shadowsocks-libev</a>具有体积小、轻量级、功能支持丰富的特点，就采用了<a href=https://github.com/shadowsocks/shadowsocks-libev>shadowsocks-libev</a>来作为Shadowsocks的客户端。</p><p>这里使用了<a href=http://openwrt-dist.sourceforge.net/>OpenWrt-dist</a>提供的源进行安装。可以通过命令从远程下载直接安装，也可以下载指定ipk安装包后进行安装。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>opkg install shadowsocks-libev-ss-local luci-app-shadowsocks-libev
+</span></span></code></pre></div><p>v2ray需要openwrt支持SSL， 我们可以启用luci的SSL顺便解决该问题</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>opkg install luci-ssl-openssl ca-bundle luci-ssl-nginx
+</span></span></code></pre></div><p>注意这里我们使用luci-ssl-nginx替换原有的httpd，uhttpd目前会有性能问题导致https页面加载非常慢。</p></li><li><p><strong>Privoxy</strong></p></li></ul><p>当前所使用的OpenWRT版本已经支持从官方源中下载安装<code>privoxy</code>, 也可以去<a href=http://downloads.openwrt.org/>http://downloads.openwrt.org/</a>找到对应的<code>privoxy</code>安装包手动下载安装。</p><p>目前我所使用的<code>privoxy</code>版本信息为：<code>Privoxy version 3.0.26 (https://www.privoxy.org/)</code>，但是我在使用它的时候不太确定是否一个bug, 通过<code>uci</code>所配置的<code>list</code>项信息（如actionsfile和filterfile）无法生效，故修改了<code>/etc/init.d/privoxy</code>启动脚本并使用树莓派上<code>privoxy</code>的默认配置文件<code>/etc/privoxy/config</code>作为配置，<a href=https://wiki.openwrt.org/zh-cn/doc/howto/proxy.privoxy>回退到旧的配置方式</a>。</p><p>重要配置示例：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># filename: pac.action
+</span></span><span class=line><span class=cl># please add pac.action actionsfile into /etc/privoxy/config
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>{{alias}}
+</span></span><span class=line><span class=cl># http    = +forward-override{forward 127.0.0.1:8080}
+</span></span><span class=line><span class=cl>direct  = +forward-override{forward .}
+</span></span><span class=line><span class=cl>socks5  = +forward-override{forward-socks5 127.0.0.1:1080 .}
+</span></span><span class=line><span class=cl>default = direct
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># Default proxy
+</span></span><span class=line><span class=cl>{default}
+</span></span><span class=line><span class=cl>/
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>{direct}
+</span></span><span class=line><span class=cl>.edu.cn
+</span></span><span class=line><span class=cl>.lan
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl># Shadowsocks
+</span></span><span class=line><span class=cl>{socks5}
+</span></span><span class=line><span class=cl>.abc.xyz
+</span></span><span class=line><span class=cl>.google.com.hk
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>uci add_list privoxy.privoxy.actionsfile<span class=o>=</span>pac.action
+</span></span></code></pre></div><h3 id=bbr>BBR</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>opkg install kmod-tcp-bbr
+</span></span></code></pre></div><h3 id=网络包分析>网络包分析</h3><p>安装以下软件包，以便进行网络数据包分析。vocore2性能有限，只适合抓包和处理少量的数据包。</p><ul><li>libpcap</li><li>reaver</li><li>aircrack-ng</li><li>airmon-ng</li><li>tcpdump</li></ul><h4 id=显示多个ssid>显示多个SSID</h4><p>修改<code>/etc/wireless/mt7628/mt7628.dat</code> (实际上为文本文件)：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl># BSSID数量设为4 ra0, ra1, ra2, ra3
+</span></span><span class=line><span class=cl>BssidNum=4
+</span></span><span class=line><span class=cl>SSID1=VoCore2
+</span></span><span class=line><span class=cl>SSID2=VoCore2-GUEST
+</span></span><span class=line><span class=cl>SSID3=VoCore2-HOST
+</span></span><span class=line><span class=cl>SSID4=VoCore2-NAS
+</span></span></code></pre></div><p>参考： <a href="http://vonger.cn/?p=14496">http://vonger.cn/?p=14496</a></p><h4 id=启用网卡嗅探sniffer模式>启用网卡嗅探(Sniffer)模式</h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=c1># Supposed libpcap.ipk and tcpdump.ipk have been installed.</span>
+</span></span><span class=line><span class=cl><span class=c1># MonitorMode=2 is MONITOR_MODE_FULL, =1 is MONITOR_MODE_REGULAR_RX, =0 is OFF.</span>
+</span></span><span class=line><span class=cl>ifconfig mon0 up
+</span></span><span class=line><span class=cl>iwpriv ra0 <span class=nb>set</span> <span class=nv>MonitorMode</span><span class=o>=</span><span class=m>2</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># capturing</span>
+</span></span><span class=line><span class=cl>tcpdump -i mon0 -w /tmp/store.cap -vv
+</span></span></code></pre></div><ul><li><p>Packet capturing of raw 802.11 frames (use <code>tcpdump</code> alternative to <code>airodump-ng</code>)</p><ul><li>set channel to the same as AP (needed, otherwise you&rsquo;re not able to capture the handshake packets, check <a href="https://www.aircrack-ng.org/doku.php?id=cracking_wpa#aircrack-ng_says_0_handshakes">https://www.aircrack-ng.org/doku.php?id=cracking_wpa#aircrack-ng_says_0_handshakes</a>)</li></ul><p>以下方式在vocore中暂时不能使用</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=c1># check current channel of the interface</span>
+</span></span><span class=line><span class=cl>iwlist mon0 channel
+</span></span><span class=line><span class=cl><span class=c1># change channel</span>
+</span></span><span class=line><span class=cl>iwconfig mon0 channel &lt;CHANNEL_NUM&gt;
+</span></span></code></pre></div></li><li><p>改变无线网卡的CHANNEL</p></li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>uci <span class=nb>set</span> wireless.@wifi-device<span class=o>[</span>0<span class=o>]</span>.channel<span class=o>=</span><span class=m>6</span> 
+</span></span></code></pre></div><ul><li>Use <a href=https://hashcat.net/cap2hccapx/>cap2hccapx</a> to filter packets</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>cap2hccapx.bin  /tmp/store.cap tmp.hccap
+</span></span></code></pre></div><ul><li>查看AP已经连接的CLIENT信息</li></ul><p><strong><code>airodump-ng</code> 同时可以用来过滤握手包，可以在<code>tcpdump</code>抓包的同时使用该工具查看数据包文件</strong></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>airodump-ng -c &lt;TARGET-CH&gt; --bssid &lt;SSID&gt; -r /tmp/store.cap 
+</span></span></code></pre></div><ul><li>发送DEAUTH包强制断开已连接WIFI的客户端</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>aireplay-ng -0 <span class=m>2</span> -a &lt;SSID&gt; -c &lt;CLIENT-MAC&gt; mon0
 </span></span></code></pre></div><p><em>参考</em></p><ul><li><a href="http://vonger.cn/?p=14501">http://vonger.cn/?p=14501</a></li><li><a href=https://wiki.openwrt.org/zh-cn/doc/uci/wireless>https://wiki.openwrt.org/zh-cn/doc/uci/wireless</a></li></ul><h3 id=远程下载-aria2>远程下载 （aria2)</h3><p>采用默认配置</p><ul><li>aria2</li><li><a href=https://github.com/openwrt/luci/tree/master/applications/luci-app-aria2>luci-app-aria2</a></li></ul><p>在界面上配置启用和下载目录，开放路由远程监听端口，可通过luci界面配置进行管理下载</p><h4 id=客户端>客户端</h4><ul><li>web: <a href=https://github.com/ziahamza/webui-aria2>https://github.com/ziahamza/webui-aria2</a></li><li>android: Aria2App <a href="https://play.google.com/store/apps/details?id=com.gianlu.aria2app&amp;hl=zh">https://play.google.com/store/apps/details?id=com.gianlu.aria2app&amp;hl=zh</a></li></ul><p>参考https://aria2.github.io/</p><h3 id=usb-20存储挂载>USB 2.0存储挂载</h3><p>可通过Web界面luci进行管理，手动挂载存储设备 (系统-> 挂载点)
-参考 <a href=https://openwrt.org/docs/guide-user/storage/fstab>https://openwrt.org/docs/guide-user/storage/fstab</a></p><ul><li>kmod-usb2</li><li>block-mount</li><li>kmod-usb-storage</li><li>kmod-usb-storage-uas</li></ul><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>opkg install kmod-fs-exfat kmod-fs-ext4 kmod-fs-ntfs kmod-fs-vfat
-</span></span></code></pre></div><p>手动mount存储介质到/mnt/sda1目录</p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#09f;font-style:italic># 假设移动存储设备为/dev/sda1</span>
-</span></span><span style=display:flex><span>mkdir /mnt/sda1
-</span></span><span style=display:flex><span>mount /dev/sda1 /mnt/sda1
-</span></span></code></pre></div><p>参考openWRT官方文档<a href=https://wiki.openwrt.org/doc/howto/usb.essentials>usb.essentials</a></p><h3 id=nas服务>NAS服务</h3><p>这里列出了许多NAS服务https://openwrt.org/docs/guide-user/services/nas/start 。</p><p>我主要考虑了两种：nfs和samba。推荐使用nfs, <a href=https://ferhatakgun.com/network-share-performance-differences-between-nfs-smb/>性能更好一点</a></p><p>安装可以参考官方文档https://openwrt.org/docs/guide-user/services/nas/cifs.server</p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash></code></pre></div><p>PS: http服务器可以使用uhttpd服务，默认根目录在<code>/www</code>, 可以新建一个shared文件夹，把文件丢过去就好了（只推荐存储小的配置文件); 参考https://openwrt.org/docs/guide-user/services/webserver/http.uhttpd</p><h3 id=声音播放与流媒体功能dlna>声音播放与流媒体功能（DLNA)</h3><p>采用默认配置</p><ul><li><a href=https://wiki.openwrt.org/doc/uci/minidlna>minidlna</a></li><li><a href=https://openwrt.org/docs/guide-user/services/media_server/dlna>luci-app-minidlna</a></li></ul><p>更改dlna根目录</p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>uci <span style=color:#366>set</span> minidlna.config.media_dir<span style=color:#555>=</span><span style=color:#c30>&#39;/mnt/usb&#39;</span>
-</span></span><span style=display:flex><span>uci <span style=color:#366>set</span> minidlna.config.user<span style=color:#555>=</span><span style=color:#c30>&#39;root&#39;</span>
-</span></span></code></pre></div><p>配置示例</p><pre tabindex=0><code>minidlna.config=minidlna
-minidlna.config.enabled=&#39;1&#39;
-minidlna.config.port=&#39;8200&#39;
-minidlna.config.interface=&#39;br-lan&#39;
-minidlna.config.friendly_name=&#39;OpenWrt DLNA Server&#39;
-minidlna.config.db_dir=&#39;/var/run/minidlna&#39;
-minidlna.config.log_dir=&#39;/var/log&#39;
-minidlna.config.inotify=&#39;1&#39;
-minidlna.config.enable_tivo=&#39;0&#39;
-minidlna.config.wide_links=&#39;0&#39;
-minidlna.config.strict_dlna=&#39;0&#39;
-minidlna.config.notify_interval=&#39;900&#39;
-minidlna.config.serial=&#39;12345678&#39;
-minidlna.config.model_number=&#39;1&#39;
-minidlna.config.root_container=&#39;.&#39;
-minidlna.config.album_art_names=&#39;Cover.jpg/cover.jpg/AlbumArtSmall.jpg/albumartsmall.jpg/AlbumArt.jpg/albumart.jpg/Album.jpg/album.jpg/Folder.jpg/folder.jpg/Thumb.jpg/thumb.jpg&#39;
-minidlna.config.media_dir=&#39;/mnt/sda1&#39;
-</code></pre><p>参考https://openwrt.org/docs/guide-user/services/media_server/minidlna</p><h3 id=guest-wifi和wifidog>Guest WIFI和wifidog</h3><ul><li>参考openwrt<a href=https://openwrt.org/docs/guide-user/network/wifi/guestwifi/guest-wlan>此官方文档</a>创建guest开放网络</li><li>安装nodogsplash,并设置用户名密码登录 <a href=https://nodogsplash.readthedocs.io/en/latest/binauth.html>https://nodogsplash.readthedocs.io/en/latest/binauth.html</a>
-设定需要portal登录的interface为br-guest</li><li>使用splash.html认证的方式密码是明文，建议偶尔使用，长期使用可改用FAS登录。</li></ul><h3 id=web管理界面luci中文支持>Web管理界面luci中文支持</h3><p>安装中文语言包 和 material界面</p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-sh data-lang=sh><span style=display:flex><span>opkg install luci-i18n-base-zh-cn luci-theme-material
-</span></span></code></pre></div><p>然后在luci界面上选择中文作为默认语言。</p><h2 id=变成假硬币怎么办>变成“假硬币”怎么办？</h2><p>一般情况下，如果设定了错误的配置导致vocore无法正常工作，可以尝试修复配置完成。这里只给出个人的方案，官网有更全面更安全的方式。</p><p>如果修复不了配置，直接恢复到默认设置：</p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-sh data-lang=sh><span style=display:flex><span>firstboot <span style=color:#555>&amp;&amp;</span> reboot
-</span></span></code></pre></div><p>如果是固件出现了问题，可尝试通过刷入新的固件来解决</p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-sh data-lang=sh><span style=display:flex><span>sysupgrade -v &lt;VOCORE-FIRMWARE.BIN&gt;
-</span></span></code></pre></div><p>如果无法通过网络连接vocore，那么只用尝试通过串口连接了。</p><h3 id=使用串口连接vocore>使用串口连接vocore</h3><p>设定好参数后可以通过USB串口连接到vocore2 <code>UART speed: 115200bps; 8bits; no even; 1 stop bit</code></p><ul><li>Windows下putty连接COM端口 (驱动<a href=http://vonger.cn/misc/vocore2/tools/usb2ttl.zip>usb2ttl</a>)</li><li>Ubuntu中使用minicom连接</li></ul><h4 id=使用串口刷入固件仅在sysupgrade方式不可用时推荐>使用串口刷入固件（仅在sysupgrade方式不可用时推荐)</h4><ul><li>安装ckermit</li></ul><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>sudo apt-get install ckermit
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#09f;font-style:italic># 旧版本ckermit在Ubuntu 20.04中已经废弃, The Kermit Project at Columbia University is cancelled effective 1 July 2011</span>
-</span></span><span style=display:flex><span><span style=color:#09f;font-style:italic># 从新网站下载源码编译 http://www.kermitproject.org/ck90.html</span>
-</span></span><span style=display:flex><span>make linux
-</span></span><span style=display:flex><span>sudo make install
-</span></span></code></pre></div><p>配置 <code>/etc/kermit/kermrc 或者</code>/root/.mykermrc`</p><pre tabindex=0><code>; 添加如下内容
-set line          /dev/ttyACM0 
-set speed         115200 
-set carrier-watch off 
-set handshake     none 
-set flow-control none 
-robust 
-set file type     bin 
-set file name     lit 
-set rec pack      1000 
-set send pack     1000 
-set window        5 
-</code></pre><ul><li>使用minicom连接vocore2并选择<code>0: Load system code then write to Flash via SERIAL.</code></li></ul><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#09f;font-style:italic># config Minicom</span>
-</span></span><span style=display:flex><span>sudo minicom -s
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#09f;font-style:italic># connect </span>
-</span></span><span style=display:flex><span>sudo minicom
+参考 <a href=https://openwrt.org/docs/guide-user/storage/fstab>https://openwrt.org/docs/guide-user/storage/fstab</a></p><ul><li>kmod-usb2</li><li>block-mount</li><li>kmod-usb-storage</li><li>kmod-usb-storage-uas</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>opkg install kmod-fs-exfat kmod-fs-ext4 kmod-fs-ntfs kmod-fs-vfat
+</span></span></code></pre></div><p>手动mount存储介质到/mnt/sda1目录</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 假设移动存储设备为/dev/sda1</span>
+</span></span><span class=line><span class=cl>mkdir /mnt/sda1
+</span></span><span class=line><span class=cl>mount /dev/sda1 /mnt/sda1
+</span></span></code></pre></div><p>参考openWRT官方文档<a href=https://wiki.openwrt.org/doc/howto/usb.essentials>usb.essentials</a></p><h3 id=nas服务>NAS服务</h3><p>这里列出了许多NAS服务https://openwrt.org/docs/guide-user/services/nas/start 。</p><p>我主要考虑了两种：nfs和samba。推荐使用nfs, <a href=https://ferhatakgun.com/network-share-performance-differences-between-nfs-smb/>性能更好一点</a></p><p>安装可以参考官方文档https://openwrt.org/docs/guide-user/services/nas/cifs.server</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash></code></pre></div><p>PS: http服务器可以使用uhttpd服务，默认根目录在<code>/www</code>, 可以新建一个shared文件夹，把文件丢过去就好了（只推荐存储小的配置文件); 参考https://openwrt.org/docs/guide-user/services/webserver/http.uhttpd</p><h3 id=声音播放与流媒体功能dlna>声音播放与流媒体功能（DLNA)</h3><p>采用默认配置</p><ul><li><a href=https://wiki.openwrt.org/doc/uci/minidlna>minidlna</a></li><li><a href=https://openwrt.org/docs/guide-user/services/media_server/dlna>luci-app-minidlna</a></li></ul><p>更改dlna根目录</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>uci <span class=nb>set</span> minidlna.config.media_dir<span class=o>=</span><span class=s1>&#39;/mnt/usb&#39;</span>
+</span></span><span class=line><span class=cl>uci <span class=nb>set</span> minidlna.config.user<span class=o>=</span><span class=s1>&#39;root&#39;</span>
+</span></span></code></pre></div><p>配置示例</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>minidlna</span><span class=o>.</span><span class=n>config</span><span class=o>=</span><span class=n>minidlna</span>
+</span></span><span class=line><span class=cl><span class=n>minidlna</span><span class=o>.</span><span class=n>config</span><span class=o>.</span><span class=n>enabled</span><span class=o>=</span><span class=s1>&#39;1&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>minidlna</span><span class=o>.</span><span class=n>config</span><span class=o>.</span><span class=n>port</span><span class=o>=</span><span class=s1>&#39;8200&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>minidlna</span><span class=o>.</span><span class=n>config</span><span class=o>.</span><span class=n>interface</span><span class=o>=</span><span class=s1>&#39;br-lan&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>minidlna</span><span class=o>.</span><span class=n>config</span><span class=o>.</span><span class=n>friendly_name</span><span class=o>=</span><span class=s1>&#39;OpenWrt DLNA Server&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>minidlna</span><span class=o>.</span><span class=n>config</span><span class=o>.</span><span class=n>db_dir</span><span class=o>=</span><span class=s1>&#39;/var/run/minidlna&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>minidlna</span><span class=o>.</span><span class=n>config</span><span class=o>.</span><span class=n>log_dir</span><span class=o>=</span><span class=s1>&#39;/var/log&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>minidlna</span><span class=o>.</span><span class=n>config</span><span class=o>.</span><span class=n>inotify</span><span class=o>=</span><span class=s1>&#39;1&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>minidlna</span><span class=o>.</span><span class=n>config</span><span class=o>.</span><span class=n>enable_tivo</span><span class=o>=</span><span class=s1>&#39;0&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>minidlna</span><span class=o>.</span><span class=n>config</span><span class=o>.</span><span class=n>wide_links</span><span class=o>=</span><span class=s1>&#39;0&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>minidlna</span><span class=o>.</span><span class=n>config</span><span class=o>.</span><span class=n>strict_dlna</span><span class=o>=</span><span class=s1>&#39;0&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>minidlna</span><span class=o>.</span><span class=n>config</span><span class=o>.</span><span class=n>notify_interval</span><span class=o>=</span><span class=s1>&#39;900&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>minidlna</span><span class=o>.</span><span class=n>config</span><span class=o>.</span><span class=n>serial</span><span class=o>=</span><span class=s1>&#39;12345678&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>minidlna</span><span class=o>.</span><span class=n>config</span><span class=o>.</span><span class=n>model_number</span><span class=o>=</span><span class=s1>&#39;1&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>minidlna</span><span class=o>.</span><span class=n>config</span><span class=o>.</span><span class=n>root_container</span><span class=o>=</span><span class=s1>&#39;.&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>minidlna</span><span class=o>.</span><span class=n>config</span><span class=o>.</span><span class=n>album_art_names</span><span class=o>=</span><span class=s1>&#39;Cover.jpg/cover.jpg/AlbumArtSmall.jpg/albumartsmall.jpg/AlbumArt.jpg/albumart.jpg/Album.jpg/album.jpg/Folder.jpg/folder.jpg/Thumb.jpg/thumb.jpg&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>minidlna</span><span class=o>.</span><span class=n>config</span><span class=o>.</span><span class=n>media_dir</span><span class=o>=</span><span class=s1>&#39;/mnt/sda1&#39;</span>
+</span></span></code></pre></div><p>参考https://openwrt.org/docs/guide-user/services/media_server/minidlna</p><h3 id=guest-wifi和wifidog>Guest WIFI和wifidog</h3><ul><li>参考openwrt<a href=https://openwrt.org/docs/guide-user/network/wifi/guestwifi/guest-wlan>此官方文档</a>创建guest开放网络</li><li>安装nodogsplash,并设置用户名密码登录 <a href=https://nodogsplash.readthedocs.io/en/latest/binauth.html>https://nodogsplash.readthedocs.io/en/latest/binauth.html</a>
+设定需要portal登录的interface为br-guest</li><li>使用splash.html认证的方式密码是明文，建议偶尔使用，长期使用可改用FAS登录。</li></ul><h3 id=web管理界面luci中文支持>Web管理界面luci中文支持</h3><p>安装中文语言包 和 material界面</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>opkg install luci-i18n-base-zh-cn luci-theme-material
+</span></span></code></pre></div><p>然后在luci界面上选择中文作为默认语言。</p><h2 id=变成假硬币怎么办>变成“假硬币”怎么办？</h2><p>一般情况下，如果设定了错误的配置导致vocore无法正常工作，可以尝试修复配置完成。这里只给出个人的方案，官网有更全面更安全的方式。</p><p>如果修复不了配置，直接恢复到默认设置：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>firstboot <span class=o>&amp;&amp;</span> reboot
+</span></span></code></pre></div><p>如果是固件出现了问题，可尝试通过刷入新的固件来解决</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>sysupgrade -v &lt;VOCORE-FIRMWARE.BIN&gt;
+</span></span></code></pre></div><p>如果无法通过网络连接vocore，那么只用尝试通过串口连接了。</p><h3 id=使用串口连接vocore>使用串口连接vocore</h3><p>设定好参数后可以通过USB串口连接到vocore2 <code>UART speed: 115200bps; 8bits; no even; 1 stop bit</code></p><ul><li>Windows下putty连接COM端口 (驱动<a href=http://vonger.cn/misc/vocore2/tools/usb2ttl.zip>usb2ttl</a>)</li><li>Ubuntu中使用minicom连接</li></ul><h4 id=使用串口刷入固件仅在sysupgrade方式不可用时推荐>使用串口刷入固件（仅在sysupgrade方式不可用时推荐)</h4><ul><li>安装ckermit</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt-get install ckermit
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 旧版本ckermit在Ubuntu 20.04中已经废弃, The Kermit Project at Columbia University is cancelled effective 1 July 2011</span>
+</span></span><span class=line><span class=cl><span class=c1># 从新网站下载源码编译 http://www.kermitproject.org/ck90.html</span>
+</span></span><span class=line><span class=cl>make linux
+</span></span><span class=line><span class=cl>sudo make install
+</span></span></code></pre></div><p>配置 <code>/etc/kermit/kermrc 或者</code>/root/.mykermrc`</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>; 添加如下内容
+</span></span><span class=line><span class=cl>set line          /dev/ttyACM0 
+</span></span><span class=line><span class=cl>set speed         115200 
+</span></span><span class=line><span class=cl>set carrier-watch off 
+</span></span><span class=line><span class=cl>set handshake     none 
+</span></span><span class=line><span class=cl>set flow-control none 
+</span></span><span class=line><span class=cl>robust 
+</span></span><span class=line><span class=cl>set file type     bin 
+</span></span><span class=line><span class=cl>set file name     lit 
+</span></span><span class=line><span class=cl>set rec pack      1000 
+</span></span><span class=line><span class=cl>set send pack     1000 
+</span></span><span class=line><span class=cl>set window        5 
+</span></span></code></pre></div><ul><li>使用minicom连接vocore2并选择<code>0: Load system code then write to Flash via SERIAL.</code></li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># config Minicom</span>
+</span></span><span class=line><span class=cl>sudo minicom -s
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># connect </span>
+</span></span><span class=line><span class=cl>sudo minicom
 </span></span></code></pre></div><p>接上电源启动vocore并快速按0，进入刷机模式</p><ul><li>使用minicom传输固件</li></ul><p>vocore2进入待刷机模式后，按下快捷键Ctrl+A+Z, 打开minicom菜单选择send files,并使用kermit协议，然后输入文件名回车开始发送文件，完成刷机。
-<img src=https://i.stack.imgur.com/ZRTtN.png alt=示例></p><h2 id=compile-openwrt-for-vocore2>Compile OpenWRT for VoCore2</h2><ol><li>Install packages to compile OpenWRT</li></ol><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>sudo apt-get install gcc g++ binutils patch bzip2 flex bison make autoconf gettext texinfo unzip sharutils subversion libncurses5-dev ncurses-term zlib1g-dev libssl-dev python
-</span></span></code></pre></div><ol start=2><li>Follow link <a href=https://github.com/Vonger/vocore2>https://github.com/Vonger/vocore2</a></li></ol><ul><li>指定内核版本</li></ul><p>include/kernel-version.mk</p><p><em>PS： 如果想购买一个玩一下，不必在官网上买，国内某宝上有卖，而且貌似是官方的，因为<a href=https://github.com/Vonger>它来自中国</a>。</em></p><h2 id=openwrt-1806>OpenWRT 18.06</h2><p>当前vocore2的官方固件基于openwrt 15.05, 该版本openwrt支持的软件包比较少，openwrt 18.06对vocore已有较好的支持。</p><p>推荐：刷入vonger提供的vocore2固件 <a href=http://vonger.cn/misc/vocore2/20180419.bin>http://vonger.cn/misc/vocore2/20180419.bin</a></p><p>注意默认配置下openwrt未启用AP模式,使用以下命令更改(使用vonger固件不需要执行该命令)</p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>uci <span style=color:#366>set</span> wireless.@wifi-device<span style=color:#555>[</span>0<span style=color:#555>]</span>.disabled<span style=color:#555>=</span>0; uci commit wireless; wifi
-</span></span></code></pre></div><h2 id=openwrt相关diy>OpenWRT相关DIY</h2><p>小米路由器3g (256MB内存版本, 2代貌似涨价了而且配置缩水了)</p><p>刷机等相关文档参考这个链接 <a href=https://forum.openwrt.org/t/xiaomi-wifi-router-3g/5377>https://forum.openwrt.org/t/xiaomi-wifi-router-3g/5377</a></p><p>提示：mt7621 v2ray版本选择mipsle_sf</p><h2 id=dns配置>DNS配置</h2><p>我们配置dns避免DNS污染和劫持</p><ul><li>设置上游DNS</li></ul><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#09f;font-style:italic># Configure DNS provider</span>
-</span></span><span style=display:flex><span>uci -q delete network.wan.dns
-</span></span><span style=display:flex><span>uci add_list network.wan.dns<span style=color:#555>=</span><span style=color:#c30>&#34;8.8.8.8&#34;</span>
-</span></span><span style=display:flex><span>uci add_list network.wan.dns<span style=color:#555>=</span><span style=color:#c30>&#34;8.8.4.4&#34;</span>
-</span></span><span style=display:flex><span> 
-</span></span><span style=display:flex><span><span style=color:#09f;font-style:italic># Configure DNS6 provider</span>
-</span></span><span style=display:flex><span>uci -q delete network.wan6.dns
-</span></span><span style=display:flex><span>uci add_list network.wan6.dns<span style=color:#555>=</span><span style=color:#c30>&#34;2001:4860:4860::8888&#34;</span>
-</span></span><span style=display:flex><span>uci add_list network.wan6.dns<span style=color:#555>=</span><span style=color:#c30>&#34;2001:4860:4860::8844&#34;</span>
-</span></span><span style=display:flex><span> 
-</span></span><span style=display:flex><span><span style=color:#09f;font-style:italic># Disable peer DNS</span>
-</span></span><span style=display:flex><span>uci <span style=color:#366>set</span> network.wan.peerdns<span style=color:#555>=</span><span style=color:#c30>&#34;0&#34;</span>
-</span></span><span style=display:flex><span>uci <span style=color:#366>set</span> network.wan6.peerdns<span style=color:#555>=</span><span style=color:#c30>&#34;0&#34;</span>
-</span></span><span style=display:flex><span> 
-</span></span><span style=display:flex><span><span style=color:#09f;font-style:italic># Save and apply</span>
-</span></span><span style=display:flex><span>uci commit network
-</span></span><span style=display:flex><span>/etc/init.d/network restart
-</span></span></code></pre></div><p>参考 <a href=https://openwrt.org/docs/guide-user/base-system/dhcp_configuration>https://openwrt.org/docs/guide-user/base-system/dhcp_configuration</a></p><ul><li>dns over https</li></ul><p>参考 <a href=https://openwrt.org/docs/guide-user/services/dns/doh_dnsmasq_https-dns-proxy>https://openwrt.org/docs/guide-user/services/dns/doh_dnsmasq_https-dns-proxy</a></p><h2 id=源镜像>源镜像</h2><p><a href=https://mirrors.tuna.tsinghua.edu.cn/openwrt>https://mirrors.tuna.tsinghua.edu.cn/openwrt</a></p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>sed -i <span style=color:#c30>&#39;s/http:\/\/downloads.openwrt.org/https:\/\/mirrors.tuna.tsinghua.edu.cn\/openwrt/g&#39;</span> distfeeds.conf
-</span></span></code></pre></div><p>推荐使用openwrt官网固件。 目前固件较稳定19.07，使用稳定发布版本可以找到完整的依赖包。保持与默认界面与设置统一。</p><h2 id=wan-口和-lan口互换>wan 口和 lan口互换</h2><p>默认以太网口为lan口，可以通过以太网共享vocore网络给其他设备。</p><p>切换为wan口，只需要将wan设备的物理接口换成eth0.1, 将lan设备的物理接口换成eth0.2</p><p>此链接仅供参考http://vonger.cn/?p=8127</p><h2 id=vlan>VLAN</h2><p><a href=https://x-nagi.com/2019/openwrt-and-switch.html>https://x-nagi.com/2019/openwrt-and-switch.html</a></p><p><a href=https://zhuanlan.zhihu.com/p/35616289>https://zhuanlan.zhihu.com/p/35616289</a></p><p>主机映射</p><h2 id=4g-lte>4G LTE</h2><ul><li>dial.sh script</li></ul><pre tabindex=0><code>#!/bin/bash
-
-if [ ! &#34;$(lsusb -d &#39;161c:f010&#39;)&#34; ]; then printf &#34;usb not plugged\n&#34; ; fi
-
-# switch from mass storage to modem devices
-#usb_modeswitch -v 161c -p f010 -W -M 55534243123456780000000000000606f50402527000000000000000000000
-usbmode -s -v -c usb-mode.json
-
-modprobe qmi_wwan
-echo &#34;161c f101&#34; &gt; /sys/bus/usb/drivers/qmi_wwan/new_id
-
-sleep 2
-
-echo 1-1:1.0 &gt; /sys/bus/usb/drivers/qmi_wwan/unbind
-echo 1-1:1.1 &gt; /sys/bus/usb/drivers/qmi_wwan/unbind
-
-sleep 1
-echo 1-1:1.1 &gt; /sys/bus/usb/drivers/qmi_wwan/bind
-
-sleep 1
-
-modprobe option
-echo &#39;161c f101&#39; &gt; /sys/bus/usb-serial/drivers/option1/new_id
-
-ifup wan
-
-# ip route add default dev 3g-wan metric 100
-</code></pre><ul><li>network config</li></ul><p>set metric to 100, so network traffic goes through this interface by default.</p><pre tabindex=0><code>config interface &#39;wan&#39;
-        option device &#39;/dev/ttyUSB0&#39;
-        option apn &#39;3gnet&#39;
-        option proto &#39;3g&#39;
-        option service &#39;umts&#39;
-        option ipv6 &#39;auto&#39;
-        option dialnumber &#39;*99#&#39;
-        option ifname &#39;ppp0&#39;
-        option metric &#39;100&#39;
-</code></pre><ul><li>usb-mode.json</li></ul><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-json data-lang=json><span style=display:flex><span>{
-</span></span><span style=display:flex><span>        <span style=color:#309;font-weight:700>&#34;messages&#34;</span> : [
-</span></span><span style=display:flex><span>                <span style=color:#c30>&#34;55534243123456780000000000000606f50402527000000000000000000000&#34;</span>,
-</span></span><span style=display:flex><span>],
-</span></span><span style=display:flex><span><span style=color:#309;font-weight:700>&#34;devices&#34;</span> : {
-</span></span><span style=display:flex><span>                <span style=color:#309;font-weight:700>&#34;161c:f010&#34;</span>: {
-</span></span><span style=display:flex><span>                        <span style=color:#309;font-weight:700>&#34;*&#34;</span>: {
-</span></span><span style=display:flex><span>                                <span style=color:#309;font-weight:700>&#34;t_vendor&#34;</span>: <span style=color:#f60>5660</span>,
-</span></span><span style=display:flex><span>                                <span style=color:#309;font-weight:700>&#34;t_product&#34;</span>: [ <span style=color:#f60>61697</span> ],
-</span></span><span style=display:flex><span>                                <span style=color:#309;font-weight:700>&#34;msg&#34;</span>: [ <span style=color:#f60>0</span> ],
-</span></span><span style=display:flex><span>                                <span style=color:#309;font-weight:700>&#34;response&#34;</span>: <span style=color:#069;font-weight:700>true</span>
-</span></span><span style=display:flex><span>                        }
-</span></span><span style=display:flex><span>                },
-</span></span><span style=display:flex><span>        }
-</span></span><span style=display:flex><span>}
+<img src=https://i.stack.imgur.com/ZRTtN.png alt=示例></p><h2 id=compile-openwrt-for-vocore2>Compile OpenWRT for VoCore2</h2><ol><li>Install packages to compile OpenWRT</li></ol><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt-get install gcc g++ binutils patch bzip2 flex bison make autoconf gettext texinfo unzip sharutils subversion libncurses5-dev ncurses-term zlib1g-dev libssl-dev python
+</span></span></code></pre></div><ol start=2><li>Follow link <a href=https://github.com/Vonger/vocore2>https://github.com/Vonger/vocore2</a></li></ol><ul><li>指定内核版本</li></ul><p>include/kernel-version.mk</p><p><em>PS： 如果想购买一个玩一下，不必在官网上买，国内某宝上有卖，而且貌似是官方的，因为<a href=https://github.com/Vonger>它来自中国</a>。</em></p><h2 id=openwrt-1806>OpenWRT 18.06</h2><p>当前vocore2的官方固件基于openwrt 15.05, 该版本openwrt支持的软件包比较少，openwrt 18.06对vocore已有较好的支持。</p><p>推荐：刷入vonger提供的vocore2固件 <a href=http://vonger.cn/misc/vocore2/20180419.bin>http://vonger.cn/misc/vocore2/20180419.bin</a></p><p>注意默认配置下openwrt未启用AP模式,使用以下命令更改(使用vonger固件不需要执行该命令)</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>uci <span class=nb>set</span> wireless.@wifi-device<span class=o>[</span>0<span class=o>]</span>.disabled<span class=o>=</span>0<span class=p>;</span> uci commit wireless<span class=p>;</span> wifi
+</span></span></code></pre></div><h2 id=openwrt相关diy>OpenWRT相关DIY</h2><p>小米路由器3g (256MB内存版本, 2代貌似涨价了而且配置缩水了)</p><p>刷机等相关文档参考这个链接 <a href=https://forum.openwrt.org/t/xiaomi-wifi-router-3g/5377>https://forum.openwrt.org/t/xiaomi-wifi-router-3g/5377</a></p><p>提示：mt7621 v2ray版本选择mipsle_sf</p><h2 id=dns配置>DNS配置</h2><p>我们配置dns避免DNS污染和劫持</p><ul><li>设置上游DNS</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># Configure DNS provider</span>
+</span></span><span class=line><span class=cl>uci -q delete network.wan.dns
+</span></span><span class=line><span class=cl>uci add_list network.wan.dns<span class=o>=</span><span class=s2>&#34;8.8.8.8&#34;</span>
+</span></span><span class=line><span class=cl>uci add_list network.wan.dns<span class=o>=</span><span class=s2>&#34;8.8.4.4&#34;</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl><span class=c1># Configure DNS6 provider</span>
+</span></span><span class=line><span class=cl>uci -q delete network.wan6.dns
+</span></span><span class=line><span class=cl>uci add_list network.wan6.dns<span class=o>=</span><span class=s2>&#34;2001:4860:4860::8888&#34;</span>
+</span></span><span class=line><span class=cl>uci add_list network.wan6.dns<span class=o>=</span><span class=s2>&#34;2001:4860:4860::8844&#34;</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl><span class=c1># Disable peer DNS</span>
+</span></span><span class=line><span class=cl>uci <span class=nb>set</span> network.wan.peerdns<span class=o>=</span><span class=s2>&#34;0&#34;</span>
+</span></span><span class=line><span class=cl>uci <span class=nb>set</span> network.wan6.peerdns<span class=o>=</span><span class=s2>&#34;0&#34;</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl><span class=c1># Save and apply</span>
+</span></span><span class=line><span class=cl>uci commit network
+</span></span><span class=line><span class=cl>/etc/init.d/network restart
+</span></span></code></pre></div><p>参考 <a href=https://openwrt.org/docs/guide-user/base-system/dhcp_configuration>https://openwrt.org/docs/guide-user/base-system/dhcp_configuration</a></p><ul><li>dns over https</li></ul><p>参考 <a href=https://openwrt.org/docs/guide-user/services/dns/doh_dnsmasq_https-dns-proxy>https://openwrt.org/docs/guide-user/services/dns/doh_dnsmasq_https-dns-proxy</a></p><h2 id=源镜像>源镜像</h2><p><a href=https://mirrors.tuna.tsinghua.edu.cn/openwrt>https://mirrors.tuna.tsinghua.edu.cn/openwrt</a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sed -i <span class=s1>&#39;s/http:\/\/downloads.openwrt.org/https:\/\/mirrors.tuna.tsinghua.edu.cn\/openwrt/g&#39;</span> distfeeds.conf
+</span></span></code></pre></div><p>推荐使用openwrt官网固件。 目前固件较稳定19.07，使用稳定发布版本可以找到完整的依赖包。保持与默认界面与设置统一。</p><h2 id=wan-口和-lan口互换>wan 口和 lan口互换</h2><p>默认以太网口为lan口，可以通过以太网共享vocore网络给其他设备。</p><p>切换为wan口，只需要将wan设备的物理接口换成eth0.1, 将lan设备的物理接口换成eth0.2</p><p>此链接仅供参考http://vonger.cn/?p=8127</p><h2 id=vlan>VLAN</h2><p><a href=https://x-nagi.com/2019/openwrt-and-switch.html>https://x-nagi.com/2019/openwrt-and-switch.html</a></p><p><a href=https://zhuanlan.zhihu.com/p/35616289>https://zhuanlan.zhihu.com/p/35616289</a></p><p>主机映射</p><h2 id=4g-lte>4G LTE</h2><ul><li>dial.sh script</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=cp>#!/bin/bash
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=o>[</span> ! <span class=s2>&#34;</span><span class=k>$(</span>lsusb -d <span class=s1>&#39;161c:f010&#39;</span><span class=k>)</span><span class=s2>&#34;</span> <span class=o>]</span><span class=p>;</span> <span class=k>then</span> <span class=nb>printf</span> <span class=s2>&#34;usb not plugged\n&#34;</span> <span class=p>;</span> <span class=k>fi</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># switch from mass storage to modem devices</span>
+</span></span><span class=line><span class=cl><span class=c1>#usb_modeswitch -v 161c -p f010 -W -M 55534243123456780000000000000606f50402527000000000000000000000</span>
+</span></span><span class=line><span class=cl>usbmode -s -v -c usb-mode.json
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>modprobe qmi_wwan
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;161c f101&#34;</span> &gt; /sys/bus/usb/drivers/qmi_wwan/new_id
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sleep <span class=m>2</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> 1-1:1.0 &gt; /sys/bus/usb/drivers/qmi_wwan/unbind
+</span></span><span class=line><span class=cl><span class=nb>echo</span> 1-1:1.1 &gt; /sys/bus/usb/drivers/qmi_wwan/unbind
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sleep <span class=m>1</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> 1-1:1.1 &gt; /sys/bus/usb/drivers/qmi_wwan/bind
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sleep <span class=m>1</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>modprobe option
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s1>&#39;161c f101&#39;</span> &gt; /sys/bus/usb-serial/drivers/option1/new_id
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>ifup wan
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># ip route add default dev 3g-wan metric 100</span>
+</span></span></code></pre></div><ul><li>network config</li></ul><p>set metric to 100, so network traffic goes through this interface by default.</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>config interface &#39;wan&#39;
+</span></span><span class=line><span class=cl>        option device &#39;/dev/ttyUSB0&#39;
+</span></span><span class=line><span class=cl>        option apn &#39;3gnet&#39;
+</span></span><span class=line><span class=cl>        option proto &#39;3g&#39;
+</span></span><span class=line><span class=cl>        option service &#39;umts&#39;
+</span></span><span class=line><span class=cl>        option ipv6 &#39;auto&#39;
+</span></span><span class=line><span class=cl>        option dialnumber &#39;*99#&#39;
+</span></span><span class=line><span class=cl>        option ifname &#39;ppp0&#39;
+</span></span><span class=line><span class=cl>        option metric &#39;100&#39;
+</span></span></code></pre></div><ul><li>usb-mode.json</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;messages&#34;</span> <span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>                <span class=s2>&#34;55534243123456780000000000000606f50402527000000000000000000000&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>],</span>
+</span></span><span class=line><span class=cl><span class=nt>&#34;devices&#34;</span> <span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                <span class=nt>&#34;161c:f010&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                        <span class=nt>&#34;*&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>                                <span class=nt>&#34;t_vendor&#34;</span><span class=p>:</span> <span class=mi>5660</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>                                <span class=nt>&#34;t_product&#34;</span><span class=p>:</span> <span class=p>[</span> <span class=mi>61697</span> <span class=p>],</span>
+</span></span><span class=line><span class=cl>                                <span class=nt>&#34;msg&#34;</span><span class=p>:</span> <span class=p>[</span> <span class=mi>0</span> <span class=p>],</span>
+</span></span><span class=line><span class=cl>                                <span class=nt>&#34;response&#34;</span><span class=p>:</span> <span class=kc>true</span>
+</span></span><span class=line><span class=cl>                        <span class=p>}</span>
+</span></span><span class=line><span class=cl>                <span class=p>},</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
 </span></span></code></pre></div><h2 id=参考链接>参考链接</h2><ul><li><a href=https://help.ubuntu.com/community/Minicom>https://help.ubuntu.com/community/Minicom</a></li><li><a href=http://vocore.io/v2.html>http://vocore.io/v2.html</a></li><li><a href=https://openwrt.org/docs/guide-user/network/wifi/relay_configuration>https://openwrt.org/docs/guide-user/network/wifi/relay_configuration</a></li><li><a href=http://downloads.openwrt.org/snapshots/targets/ramips/mt76x8/packages/>http://downloads.openwrt.org/snapshots/targets/ramips/mt76x8/packages/</a></li><li><a href=https://wiki.openwrt.org/zh-cn/doc/techref/opkg>https://wiki.openwrt.org/zh-cn/doc/techref/opkg</a></li><li><a href=https://oldwiki.archive.openwrt.org/doc/uci/wireless>https://oldwiki.archive.openwrt.org/doc/uci/wireless</a></li><li><a href=http://vonger.cn/misc/vocore2/>http://vonger.cn/misc/vocore2/</a></li><li><a href=https://openwrt.org/docs/guide-user/luci/start>https://openwrt.org/docs/guide-user/luci/start</a></li><li><a href=https://openwrt.org/docs/guide-developer/toolchain/use-buildsystem>https://openwrt.org/docs/guide-developer/toolchain/use-buildsystem</a></li></ul><div id=react-single-actions data-post-id=940119772fa9416dbe1ff32998cd576d></div></article><button class=mobile-toc-trigger aria-controls=mobile-toc aria-expanded=false title=Index>☰</button><div class=mobile-toc-overlay hidden></div><div id=mobile-toc class=mobile-toc-drawer aria-hidden=true role=dialog aria-label=Index><div class=mobile-toc-header><button class=mobile-toc-close aria-label=close>×</button></div><nav class=mobile-toc-body><div class=mobile-toc-list></div></nav><div class=mobile-safe-area-spacer></div></div><script type=module src=/react/page.bundle.js></script></main><footer><div class=copyright><small>Made with <span style=color:#e25555>&#9829;</span> in Guangzhou by
 ©<a href=https://github.com/qtopie>qtopie</a> 2026
 </small><small>Posts licensed under <a href=https://creativecommons.org/licenses/by/4.0/legalcode>CC BY 4.0</small></div><div><script type=module src=/react/base.bundle.js></script></div></footer></body></html>

@@ -26,15 +26,15 @@ also &lt;code&gt;sudo apt-get install haveged&lt;/code&gt;&lt;/p&gt;
 &lt;li&gt;Edit &lt;code&gt;hostapd.conf&lt;/code&gt;:&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;em&gt;&lt;code&gt;/etc/hostapd/hostapd.conf&lt;/code&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;interface=wlan0
-ssid=RPi
-wpa_passphrase=raspberrypi
-auth_algs=1
-wpa=2
-wpa_key_mgmt=WPA-PSK
-rsn_pairwise=CCMP
-channel=10
-hw_mode=g
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;There should not be any whitespace at the end of each line&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;interface=wlan0
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ssid=RPi
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;wpa_passphrase=raspberrypi
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;auth_algs=1
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;wpa=2
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;wpa_key_mgmt=WPA-PSK
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;rsn_pairwise=CCMP
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;channel=10
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;hw_mode=g
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;There should not be any whitespace at the end of each line&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;then modify file &lt;code&gt;/etc/default/hostapd&lt;/code&gt; to let the configuration work
 automatically.&lt;/p&gt;</description></item></channel></rss>

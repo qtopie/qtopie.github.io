@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Math on 1001問</title><link>https://qtopie.github.io/tags/math/</link><description>Recent content in Math on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Thu, 20 Dec 2018 16:21:55 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/math/index.xml" rel="self" type="application/rss+xml"/><item><title>Math in Markdown</title><link>https://qtopie.github.io/posts/hugo/math-in-markdown/</link><pubDate>Thu, 20 Dec 2018 16:21:55 +0800</pubDate><guid>https://qtopie.github.io/posts/hugo/math-in-markdown/</guid><description>&lt;h2 id="latex"&gt;LaTeX&lt;/h2&gt;
 &lt;h3 id="configuration"&gt;Configuration&lt;/h3&gt;
 &lt;p&gt;This site uses &lt;strong&gt;KaTeX&lt;/strong&gt; for rendering mathematics. The configured delimiters are:&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;Inline: $...$ or \(...\)
-Display: $$...$$ or \[...\]
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Additionally, you can use code blocks for block-level formulas:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Inline: $...$ or \(...\)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Display: $$...$$ or \[...\]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Additionally, you can use code blocks for block-level formulas:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;```math
 E = mc^2
 ```
@@ -14,6 +14,4 @@ E = mc^2
 &lt;p&gt;$ A_n^n=n\times(n-1)\times(n-2)\times&amp;hellip;\times2\times1 $&lt;/p&gt;
 &lt;p&gt;$ A_n^m=n\times(n-1)\times(n-2)\times&amp;hellip;\times(n-m+1) = \frac{n!}{(n-m)!} $&lt;/p&gt;
 &lt;h2 id="combination"&gt;Combination&lt;/h2&gt;
-&lt;p&gt;$ C_n^m=\frac{A_n^m}{A_m^m} = \frac{n!}{m!(n-m)!} $&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code class="language-math" data-lang="math"&gt;C_n^m=C_n^{n-m}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;$ C_{n+1}^{r+1} = C_n^r + C_n^{r+1} $&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;$ C_n^m=\frac{A_n^m}{A_m^m} = \frac{n!}{m!(n-m)!} $&lt;/p&gt;</description></item></channel></rss>

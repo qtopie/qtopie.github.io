@@ -7,38 +7,29 @@
 &lt;a href="https://www.mediatek.com/products/broadbandWifi/mt7612u"&gt;官方驱动&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;上面两驱动实际是在官方源码上改写的，但编译后，三个都不能正常工作。&lt;/p&gt;
 &lt;p&gt;后来在&lt;code&gt;openwrt/linux&lt;/code&gt;项目下发现该设备驱动的相关issue, 并已有大牛正在mt76驱动项目下加入该芯片的支持。故转用mt76的设备。查询linux主仓库代码发现，该驱动已随Linux内核5.0发布。因此直接下载linux 5.0内核包安装就行了。&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt; # 5.0: https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.0/
- linux-headers-5.0.0-050000_5.0.0-050000.201903032031_all.deb
- linux-headers-5.0.0-050000-generic_5.0.0-050000.201903032031_amd64.deb
- linux-image-unsigned-5.0.0-050000-generic_5.0.0-050000.201903032031_amd64.deb
- linux-modules-5.0.0-050000-generic_5.0.0-050000.201903032031_amd64.deb
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;手动升级内核后测试能使用, 并支持AP：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; # 5.0: https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.0/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; linux-headers-5.0.0-050000_5.0.0-050000.201903032031_all.deb
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; linux-headers-5.0.0-050000-generic_5.0.0-050000.201903032031_amd64.deb
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; linux-image-unsigned-5.0.0-050000-generic_5.0.0-050000.201903032031_amd64.deb
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; linux-modules-5.0.0-050000-generic_5.0.0-050000.201903032031_amd64.deb
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;手动升级内核后测试能使用, 并支持AP：&lt;/p&gt;
 &lt;p&gt;iwconfig&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;wlx40a5eff2b655 IEEE 802.11 ESSID:off/any 
- Mode:Managed Access Point: Not-Associated Tx-Power=19 dBm 
- Retry short limit:7 RTS thr:off Fragment thr:off
- Power Management:off
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;wlx40a5eff2b655 IEEE 802.11 ESSID:off/any 
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Mode:Managed Access Point: Not-Associated Tx-Power=19 dBm 
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Retry short limit:7 RTS thr:off Fragment thr:off
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Power Management:off
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;网卡识别为存储设备的问题&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;mt76还未对这款comfast网卡适配，所以默认会被系统识别为存储设备，可以手动切换过来：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;sudo usb_modeswitch -KW -v 0e8d -p &lt;span style="color:#f60"&gt;2870&lt;/span&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo usb_modeswitch -KW -v 0e8d -p &lt;span class="m"&gt;2870&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;或者修改&lt;code&gt;/lib/udev/rules.d/40-usb_modeswitch.rules&lt;/code&gt;文件自动切换（目前未成功）&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;# MT7612U 
-ATTR{idVendor}==&amp;#34;0e8d&amp;#34;, ATTR{idProduct}==&amp;#34;2870&amp;#34;, RUN+=&amp;#34;usb_modeswitch &amp;#39;%b/%k&amp;#39;&amp;#34;
-&lt;/code&gt;&lt;/pre&gt;&lt;ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;# MT7612U 
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ATTR{idVendor}==&amp;#34;0e8d&amp;#34;, ATTR{idProduct}==&amp;#34;2870&amp;#34;, RUN+=&amp;#34;usb_modeswitch &amp;#39;%b/%k&amp;#39;&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;USB底座接触不良的问题&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;一起买的底座有点问题，开始还以为也要装什么驱动。检查后发现是接触不良的问题，因为USB口没有固定住，所以网卡很容易没有插入到底座中。解决办法比较简单，拆卸底座，然后填充底座中空部分，固定住USB接口。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;其他适配问题&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;网卡的LED灯不能正常工作。&lt;/p&gt;
-&lt;pre tabindex="0"&gt;&lt;code&gt;pi@raspberrypi:~ $ sudo ifconfig wlan1 down
-pi@raspberrypi:~ $ sudo ifconfig wlan1 hw ether 00:28:C7:0A:42:A2
-pi@raspberrypi:~ $ sudo ifconfig wlan1 up
-&lt;/code&gt;&lt;/pre&gt;&lt;h2 id="尝试在树梅派上编译驱动"&gt;尝试在树梅派上编译驱动&lt;/h2&gt;
-&lt;p&gt;&lt;del&gt;4.19.y已经加入mt7612u的支持，但是经过测试，并不能使用。&lt;/del&gt;[更新] 在5.1.y上编译可以正常使用（STA模式）, 注意默认缺失了&lt;code&gt;/lib/firmware/mt7662.bin /lib/firmware/mt7662_rom_patch.bin&lt;/code&gt; 两个文件，可以从其它系统拷贝或网络下载到树梅派。&lt;/p&gt;</description></item><item><title>Ubuntu init process</title><link>https://qtopie.github.io/notes/linux/systemd-service-unit-file/</link><pubDate>Thu, 15 Sep 2016 14:20:15 +0800</pubDate><guid>https://qtopie.github.io/notes/linux/systemd-service-unit-file/</guid><description>&lt;h2 id="history"&gt;History&lt;/h2&gt;
+&lt;p&gt;一起买的底座有点问题，开始还以为也要装什么驱动。检查后发现是接触不良的问题，因为USB口没有固定住，所以网卡很容易没有插入到底座中。解决办法比较简单，拆卸底座，然后填充底座中空部分，固定住USB接口。&lt;/p&gt;</description></item><item><title>Ubuntu init process</title><link>https://qtopie.github.io/notes/linux/systemd-service-unit-file/</link><pubDate>Thu, 15 Sep 2016 14:20:15 +0800</pubDate><guid>https://qtopie.github.io/notes/linux/systemd-service-unit-file/</guid><description>&lt;h2 id="history"&gt;History&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;sysVinit&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://upstart.ubuntu.com/"&gt;upstart&lt;/a&gt;&lt;/li&gt;

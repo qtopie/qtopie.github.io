@@ -1,177 +1,177 @@
 <!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width"><title>树莓派和HomeAssistant | 1001問</title><link rel=stylesheet href=/css/main.min.dcb41abaa5ea2698ebf89f814bc6b8060470b6414061437dac2ee0e3ef5d3b45.css integrity="sha256-3LQauqXqJpjr+J+BS8a4BgRwtkFAYUN9rC7g4+9dO0U=" crossorigin=anonymous><link rel=stylesheet href=/css/page.min.81d92e4ce9b8dc4e8a2018a7aee70f76bd7fb6884d929d5fd74e3f959f06e2f5.css integrity="sha256-gdkuTOm43E6KIBinrucPdr1/tohNkp1f104/lZ8G4vU=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.e114b8cc38f57d520f373580c935a518bc6afd6dec4f1d682365cdbcf5c8218a.css><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css crossorigin=anonymous referrerpolicy=no-referrer><script src=/js/toc.min.87636f25caf644980403a5c1ce8b0812cfd10d1e53c08f181547966799ceccdb.js integrity="sha256-h2NvJcr2RJgEA6XBzosIEs/RDR5TwI8YFUeWZ5nOzNs=" crossorigin=anonymous type=module defer></script><script src=/js/copy-code.min.3bea0de4cfe8670f94a5d75c177f07b58fc90178efdea7f2a21449798d75b2c9.js integrity="sha256-O+oN5M/oZw+UpddcF38HtY/JAXjv3qfyohRJeY11ssk=" crossorigin=anonymous defer></script><script defer src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js crossorigin=anonymous referrerpolicy=no-referrer></script><script defer src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js crossorigin=anonymous referrerpolicy=no-referrer onload='renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],throwOnError:!1})'></script><script src=/js/katex-block.min.2cf531bbcc318aadf5661baa2d0987ab5cb4daef473e108b1da714a37cff0b25.js integrity="sha256-LPUxu8wxiq31ZhuqLQmHq1y02u9HPhCLHacUo3z/CyU=" crossorigin=anonymous defer></script></head><body><header><nav><a href=/><h1>1001問</h1></a><div id=react-search class=search-root aria-label="Site Search"></div></nav></header><main><div class=sidebar><section class=toc><nav id=TableOfContents><ul><li><a href=#目标>目标</a></li><li><a href=#环境和设备>环境和设备</a><ul><li><a href=#安装homeassistant>安装HomeAssistant</a></li></ul></li><li><a href=#常用设备接入>常用设备接入</a><ul><li><a href=#插座灯泡>插座/灯泡</a></li><li><a href=#网关>网关</a></li><li><a href=#红外遥控器>红外遥控器</a></li></ul></li><li><a href=#telegram通知>Telegram通知</a><ul><li><a href=#配置>配置</a></li></ul></li><li><a href=#接入语音助手>接入语音助手</a><ul><li><a href=#天猫精灵>天猫精灵</a></li><li><a href=#google-assistant>Google Assistant</a></li></ul></li><li><a href=#自定义>自定义</a><ul><li><a href=#ui-icons>UI Icons</a></li></ul></li><li><a href=#参考>参考</a></li></ul></nav></section></div><article id=content><div class=metadata><h1>树莓派和HomeAssistant</h1><time datetime=2021-09-28T00:00:00+00:00>September 28, 2021</time><div class=taxonomy><span id=post-categories><ul><li><strong>Categories</strong>:&nbsp;</li><li class=category-item><a href=https://qtopie.github.io/categories/iot>iot</a></li></ul></span><span id=post-tags><ul><li><strong>Tags</strong>:&nbsp;</li><li class=tag-item><a href=https://qtopie.github.io/tags/homeassistant><em>homeassistant</em></a></li><li class=tag-item><a href=https://qtopie.github.io/tags/raspberrypi><em>raspberrypi</em></a></li></ul></span></div></div><h2 id=目标>目标</h2><p>使用开源软件和米家智能硬件，实现简单的智能家居系统</p><blockquote><p>采用米家智能硬件的原因是, 小米智能家居做的比较早（也许是起初推广的更好，刚接触智能家居的时候就用的小米）,
 另外一点是小米智能硬件确实物美价廉，在国外也很受欢迎，Github上也有很多相关项目.</p></blockquote><p><img src=homeassistant.assets/img-2021-10-16-12-14-50.png alt></p><h2 id=环境和设备>环境和设备</h2><ul><li>RaspberryPi 4 (4GB版本)</li><li>Ubuntu arm64 树莓派版本</li></ul><h3 id=安装homeassistant>安装HomeAssistant</h3><blockquote><p>这里使用Ubuntu而不是Raspbian的一个原因是Ubuntu官方软件包更新更快（比如raspbian当前为3.7而hass需要3.8+版本)，
-且自己笔记本一直用Ubuntu，统一发行版使用起来更加方便</p></blockquote><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>sudo pip3 install homeassistant
-</span></span></code></pre></div><p>如果下载很慢，可以考虑使用pypi镜像源</p><p>编辑<code>/etc/pip.conf</code> (使用豆瓣源）</p><pre tabindex=0><code>[global]
-index-url = https://pypi.douban.com/simple
-</code></pre><h4 id=设置开机自启动>设置开机自启动</h4><ul><li>创建systemd service unit文件</li></ul><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>systemctl --user edit --full --force homeassistant.service
-</span></span></code></pre></div><p>加入以下内容</p><pre tabindex=0><code>[Unit]
-Description=Home Assistant
-After=network.target
-
-[Service]
-Type=simple
-ExecStart=/home/ubuntu/.local/bin/hass
-Restart=on-failure
-RestartSec=5
-
-[Install]
-WantedBy=default.target
-</code></pre><ul><li>设置用户自动登录</li></ul><p><a href=https://raspberrypi.stackexchange.com/questions/111728/how-to-get-raspi-config-on-ubuntu-20-04>安装<code>raspi-config</code></a>,
-然后配置 <code>1. System Options</code> -> <code>S5 Boot / Auto Login</code> -> <code>B2 Console Autologin</code></p><p>会生成<code>/etc/systemd/system/getty@tty1.service.d/autologin.conf</code>, 内容如下</p><pre tabindex=0><code>[Service]
-ExecStart=
-ExecStart=-/sbin/agetty --autologin ubuntu --noclear %I $TERM
-</code></pre><p>重启即可生效</p><h2 id=常用设备接入>常用设备接入</h2><p><img src=homeassistant.assets/img-2021-10-16-12-21-42.png alt></p><p>这里主要使用小米硬件设备，开始之前需要获取各个设备的token。参考<a href=https://www.home-assistant.io/integrations/xiaomi_miio/#retrieving-the-access-token>homeassistant获取miio token的教程</a></p><p>目前推荐使用云端获取的方式 <a href=https://github.com/PiotrMachowski/Xiaomi-cloud-tokens-extractor>https://github.com/PiotrMachowski/Xiaomi-cloud-tokens-extractor</a></p><p><img src=homeassistant.assets/img-2021-10-16-12-46-46.png alt></p><p>设备协议<a href=https://github.com/OpenMiHome/mihome-binary-protocol/blob/master/doc/PROTOCOL.md>mihome-binary-protocol</a></p><ul><li>homeassistant 参考配置</li></ul><p><em><code>.homeassistant/configuration.yaml</code></em></p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#09f;font-style:italic># Configure a default setup of Home Assistant (frontend, api, etc)</span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#309;font-weight:700>default_config</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#309;font-weight:700>homeassistant</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#309;font-weight:700>allowlist_external_dirs</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span>- <span style=color:#c30>&#34;/mnt/usb/media&#34;</span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#309;font-weight:700>media_dirs</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:#309;font-weight:700>local</span>:<span style=color:#bbb> </span>/mnt/usb/media<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#09f;font-style:italic># Text to speech</span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#309;font-weight:700>tts</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span>- <span style=color:#309;font-weight:700>platform</span>:<span style=color:#bbb> </span>google_translate<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#309;font-weight:700>rpi_camera</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#309;font-weight:700>image_quality</span>:<span style=color:#bbb> </span><span style=color:#f60>100</span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#309;font-weight:700>timelapse</span>:<span style=color:#bbb> </span><span style=color:#f60>5000</span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#309;font-weight:700>file_path</span>:<span style=color:#bbb> </span>/mnt/usb/media/camera/snapshot.jpg<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>  
-</span></span></span><span style=display:flex><span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#309;font-weight:700>group</span>:<span style=color:#bbb> </span>!include groups.yaml<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#309;font-weight:700>automation</span>:<span style=color:#bbb> </span>!include automations.yaml<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#309;font-weight:700>script</span>:<span style=color:#bbb> </span>!include scripts.yaml<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#309;font-weight:700>scene</span>:<span style=color:#bbb> </span>!include scenes.yaml<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#309;font-weight:700>light</span>:<span style=color:#bbb> </span>!include lights.yaml<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#309;font-weight:700>yeelight</span>:<span style=color:#bbb> </span>!include yeelight.yaml<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#309;font-weight:700>remote</span>:<span style=color:#bbb> </span>!include remote.yaml<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#309;font-weight:700>stream</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#309;font-weight:700>media_player</span>:<span style=color:#bbb> </span>!include media_player.yaml<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#309;font-weight:700>device_tracker</span>:<span style=color:#bbb> </span>!include device_tracker.yaml<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#309;font-weight:700>shell_command</span>:<span style=color:#bbb> </span>!include shell.yaml<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#309;font-weight:700>telegram_bot</span>:<span style=color:#bbb> </span>!include telegram.yaml<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#309;font-weight:700>notify</span>:<span style=color:#bbb> </span>!include notify.yaml<span style=color:#bbb>
-</span></span></span></code></pre></div><h3 id=插座灯泡>插座/灯泡</h3><p>小米插座<code>chuangmi.plug.m1</code>和灯泡（这里我用的是飞利浦灯泡), 使用[python miio]即可以控制。</p><p>可以在homeassistant管理界面添加<code>Xiaomi Miio</code>集成。</p><h3 id=网关>网关</h3><p>小米网关提供了ZigBee和蓝牙设备接入和管理的功能。</p><p>型号: <code>lumi.gateway.mgl03</code></p><p>升级官方新版本固件后，不能直接接入。可以刷入第三方固件，然后接入homeassistant。</p><ul><li>刷机</li></ul><p>telnet登录网关，按照GitHub上的<a href=https://github.com/zvldz/mgl03_fw/tree/main/firmware#the-easy-way>此教程执行刷机步骤</a></p><blockquote><p>如果访问不了Github下载链接，可以使用代理，例如设置环境变量 <code>https_proxy=socks5://192.168.50.60:1080</code></p></blockquote><h3 id=红外遥控器>红外遥控器</h3><p>红外遥控器也可以使用<code>xiaomi_miio</code>接入homeassistant。</p><p>型号: <code>chuangmi.remote.v2</code></p><p>配置示例<code>remote.yaml</code>(示例里的raw command我瞎填的, 根据自己的实际需要写）</p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-yaml data-lang=yaml><span style=display:flex><span>- <span style=color:#309;font-weight:700>platform</span>:<span style=color:#bbb> </span>xiaomi_miio<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#309;font-weight:700>name</span>:<span style=color:#bbb> </span><span style=color:#c30>&#39;chuangmi.remote.v2&#39;</span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#309;font-weight:700>host</span>:<span style=color:#bbb> </span><span style=color:#f60>192.168.50.72</span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#309;font-weight:700>token</span>:<span style=color:#bbb> </span>&lt;token&gt;<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#309;font-weight:700>slot</span>:<span style=color:#bbb> </span><span style=color:#f60>1</span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#309;font-weight:700>timeout</span>:<span style=color:#bbb> </span><span style=color:#f60>30</span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#309;font-weight:700>hidden</span>:<span style=color:#bbb> </span><span style=color:#069;font-weight:700>false</span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#309;font-weight:700>commands</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:#09f;font-style:italic># haier</span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:#309;font-weight:700>air_conditioner_turn_on</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>       </span><span style=color:#309;font-weight:700>command</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>         </span>- raw:mcwm84lgAkzSazOcSyazScSyYzacTYAhAA3AQ8BjwIfAZ8DfwIfAh8APwA:38400<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:#309;font-weight:700>air_conditioner_turn_off</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>       </span><span style=color:#309;font-weight:700>command</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>         </span>- raw:mcwm84lgAkzSazOcSyazScSyYzacTYAhAA3AQ8BjwIfAQ8BDwO/Bd8APwA/AD8APwA/AD8APwA/AD8AP:38400<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:#309;font-weight:700>air_conditioner_cool</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>       </span><span style=color:#309;font-weight:700>command</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>         </span>- raw:mcwm84lgAkzSazOcSyazScSyYzacTYAhAA3AQ8BjwIfAQ8BDwO/Bd:38400<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:#309;font-weight:700>magic_ball_turn_on</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span><span style=color:#309;font-weight:700>command</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span>- raw:nMxm8wlk0mk2mEsm0ymEsmsxAHKYADlMwB2mgB/ADmBP4B9TGbAYMAR4BFApoBmUxAEMAjwNPA0gJCwcHCI8A/wJ6BjoKrwCOCHuYQA=<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span><span style=color:#309;font-weight:700>magic_ball_turn_off</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span><span style=color:#309;font-weight:700>command</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span>- raw:nMxmswlk0mk4mEsm0ymEsmsxAHKYADlNAD+mYA9AL+APUxmwHDTGbAQsAjQAhAdwAhYBCgV2BFoR7g/+Ae01nID/g2cBAYLShH+AjQDXgEJMIAA=<span style=color:#bbb>
-</span></span></span></code></pre></div><p>然后我们可以在<code>scripts.yaml</code>里定义常用的操作（这些操作可以在安卓的设备控制器快捷方式找到)</p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#309;font-weight:700>&#39;air_conditioner_turn_on&#39;</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#309;font-weight:700>alias</span>:<span style=color:#bbb> </span><span style=color:#c30>&#39;打开空调(睡眠模式)&#39;</span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#309;font-weight:700>sequence</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span>- <span style=color:#309;font-weight:700>service</span>:<span style=color:#bbb> </span>remote.send_command<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span><span style=color:#309;font-weight:700>entity_id</span>:<span style=color:#bbb> </span><span style=color:#c30>&#39;remote.chuangmi_remote_v2&#39;</span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span><span style=color:#309;font-weight:700>data</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span><span style=color:#309;font-weight:700>command</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>          </span>- <span style=color:#c30>&#39;air_conditioner_turn_on&#39;</span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#309;font-weight:700>&#39;air_conditioner_turn_off&#39;</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#309;font-weight:700>alias</span>:<span style=color:#bbb> </span><span style=color:#c30>&#39;关闭空调&#39;</span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#309;font-weight:700>sequence</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span>- <span style=color:#309;font-weight:700>service</span>:<span style=color:#bbb> </span>remote.send_command<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span><span style=color:#309;font-weight:700>entity_id</span>:<span style=color:#bbb> </span><span style=color:#c30>&#39;remote.chuangmi_remote_v2&#39;</span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span><span style=color:#309;font-weight:700>data</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span><span style=color:#309;font-weight:700>command</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>          </span>- <span style=color:#c30>&#39;air_conditioner_turn_off&#39;</span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#309;font-weight:700>&#39;air_conditioner_cool&#39;</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#309;font-weight:700>alias</span>:<span style=color:#bbb> </span><span style=color:#c30>&#39;空调制冷&#39;</span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#309;font-weight:700>sequence</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span>- <span style=color:#309;font-weight:700>service</span>:<span style=color:#bbb> </span>remote.send_command<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span><span style=color:#309;font-weight:700>entity_id</span>:<span style=color:#bbb> </span><span style=color:#c30>&#39;remote.chuangmi_remote_v2&#39;</span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span><span style=color:#309;font-weight:700>data</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span><span style=color:#309;font-weight:700>command</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>          </span>- <span style=color:#c30>&#39;air_conditioner_cool&#39;</span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#309;font-weight:700>&#39;magic_ball_turn_on&#39;</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#309;font-weight:700>alias</span>:<span style=color:#bbb> </span><span style=color:#c30>&#39;打开小夜灯&#39;</span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#309;font-weight:700>sequence</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span>- <span style=color:#309;font-weight:700>service</span>:<span style=color:#bbb> </span>remote.send_command<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span><span style=color:#309;font-weight:700>entity_id</span>:<span style=color:#bbb> </span><span style=color:#c30>&#39;remote.chuangmi_remote_v2&#39;</span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span><span style=color:#309;font-weight:700>data</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span><span style=color:#309;font-weight:700>command</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>          </span>- <span style=color:#c30>&#39;magic_ball_turn_on&#39;</span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#309;font-weight:700>&#39;magic_ball_turn_off&#39;</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#309;font-weight:700>alias</span>:<span style=color:#bbb> </span><span style=color:#c30>&#39;关闭小夜晚灯&#39;</span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#309;font-weight:700>sequence</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span>- <span style=color:#309;font-weight:700>service</span>:<span style=color:#bbb> </span>remote.send_command<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span><span style=color:#309;font-weight:700>entity_id</span>:<span style=color:#bbb> </span><span style=color:#c30>&#39;remote.chuangmi_remote_v2&#39;</span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>      </span><span style=color:#309;font-weight:700>data</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>        </span><span style=color:#309;font-weight:700>command</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>          </span>- <span style=color:#c30>&#39;magic_ball_turn_off&#39;</span><span style=color:#bbb>
+且自己笔记本一直用Ubuntu，统一发行版使用起来更加方便</p></blockquote><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo pip3 install homeassistant
+</span></span></code></pre></div><p>如果下载很慢，可以考虑使用pypi镜像源</p><p>编辑<code>/etc/pip.conf</code> (使用豆瓣源）</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>[global]
+</span></span><span class=line><span class=cl>index-url = https://pypi.douban.com/simple
+</span></span></code></pre></div><h4 id=设置开机自启动>设置开机自启动</h4><ul><li>创建systemd service unit文件</li></ul><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>systemctl --user edit --full --force homeassistant.service
+</span></span></code></pre></div><p>加入以下内容</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>[Unit]
+</span></span><span class=line><span class=cl>Description=Home Assistant
+</span></span><span class=line><span class=cl>After=network.target
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>[Service]
+</span></span><span class=line><span class=cl>Type=simple
+</span></span><span class=line><span class=cl>ExecStart=/home/ubuntu/.local/bin/hass
+</span></span><span class=line><span class=cl>Restart=on-failure
+</span></span><span class=line><span class=cl>RestartSec=5
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>[Install]
+</span></span><span class=line><span class=cl>WantedBy=default.target
+</span></span></code></pre></div><ul><li>设置用户自动登录</li></ul><p><a href=https://raspberrypi.stackexchange.com/questions/111728/how-to-get-raspi-config-on-ubuntu-20-04>安装<code>raspi-config</code></a>,
+然后配置 <code>1. System Options</code> -> <code>S5 Boot / Auto Login</code> -> <code>B2 Console Autologin</code></p><p>会生成<code>/etc/systemd/system/getty@tty1.service.d/autologin.conf</code>, 内容如下</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>[Service]
+</span></span><span class=line><span class=cl>ExecStart=
+</span></span><span class=line><span class=cl>ExecStart=-/sbin/agetty --autologin ubuntu --noclear %I $TERM
+</span></span></code></pre></div><p>重启即可生效</p><h2 id=常用设备接入>常用设备接入</h2><p><img src=homeassistant.assets/img-2021-10-16-12-21-42.png alt></p><p>这里主要使用小米硬件设备，开始之前需要获取各个设备的token。参考<a href=https://www.home-assistant.io/integrations/xiaomi_miio/#retrieving-the-access-token>homeassistant获取miio token的教程</a></p><p>目前推荐使用云端获取的方式 <a href=https://github.com/PiotrMachowski/Xiaomi-cloud-tokens-extractor>https://github.com/PiotrMachowski/Xiaomi-cloud-tokens-extractor</a></p><p><img src=homeassistant.assets/img-2021-10-16-12-46-46.png alt></p><p>设备协议<a href=https://github.com/OpenMiHome/mihome-binary-protocol/blob/master/doc/PROTOCOL.md>mihome-binary-protocol</a></p><ul><li>homeassistant 参考配置</li></ul><p><em><code>.homeassistant/configuration.yaml</code></em></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=c># Configure a default setup of Home Assistant (frontend, api, etc)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>default_config</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>homeassistant</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>allowlist_external_dirs</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=s2>&#34;/mnt/usb/media&#34;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>media_dirs</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>local</span><span class=p>:</span><span class=w> </span><span class=l>/mnt/usb/media</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=c># Text to speech</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>tts</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span>- <span class=nt>platform</span><span class=p>:</span><span class=w> </span><span class=l>google_translate</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>rpi_camera</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>image_quality</span><span class=p>:</span><span class=w> </span><span class=m>100</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>timelapse</span><span class=p>:</span><span class=w> </span><span class=m>5000</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>file_path</span><span class=p>:</span><span class=w> </span><span class=l>/mnt/usb/media/camera/snapshot.jpg</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>group</span><span class=p>:</span><span class=w> </span>!<span class=l>include groups.yaml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>automation</span><span class=p>:</span><span class=w> </span>!<span class=l>include automations.yaml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>script</span><span class=p>:</span><span class=w> </span>!<span class=l>include scripts.yaml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>scene</span><span class=p>:</span><span class=w> </span>!<span class=l>include scenes.yaml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>light</span><span class=p>:</span><span class=w> </span>!<span class=l>include lights.yaml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>yeelight</span><span class=p>:</span><span class=w> </span>!<span class=l>include yeelight.yaml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>remote</span><span class=p>:</span><span class=w> </span>!<span class=l>include remote.yaml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>stream</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>media_player</span><span class=p>:</span><span class=w> </span>!<span class=l>include media_player.yaml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>device_tracker</span><span class=p>:</span><span class=w> </span>!<span class=l>include device_tracker.yaml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>shell_command</span><span class=p>:</span><span class=w> </span>!<span class=l>include shell.yaml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>telegram_bot</span><span class=p>:</span><span class=w> </span>!<span class=l>include telegram.yaml</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>notify</span><span class=p>:</span><span class=w> </span>!<span class=l>include notify.yaml</span><span class=w>
+</span></span></span></code></pre></div><h3 id=插座灯泡>插座/灯泡</h3><p>小米插座<code>chuangmi.plug.m1</code>和灯泡（这里我用的是飞利浦灯泡), 使用[python miio]即可以控制。</p><p>可以在homeassistant管理界面添加<code>Xiaomi Miio</code>集成。</p><h3 id=网关>网关</h3><p>小米网关提供了ZigBee和蓝牙设备接入和管理的功能。</p><p>型号: <code>lumi.gateway.mgl03</code></p><p>升级官方新版本固件后，不能直接接入。可以刷入第三方固件，然后接入homeassistant。</p><ul><li>刷机</li></ul><p>telnet登录网关，按照GitHub上的<a href=https://github.com/zvldz/mgl03_fw/tree/main/firmware#the-easy-way>此教程执行刷机步骤</a></p><blockquote><p>如果访问不了Github下载链接，可以使用代理，例如设置环境变量 <code>https_proxy=socks5://192.168.50.60:1080</code></p></blockquote><h3 id=红外遥控器>红外遥控器</h3><p>红外遥控器也可以使用<code>xiaomi_miio</code>接入homeassistant。</p><p>型号: <code>chuangmi.remote.v2</code></p><p>配置示例<code>remote.yaml</code>(示例里的raw command我瞎填的, 根据自己的实际需要写）</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl>- <span class=nt>platform</span><span class=p>:</span><span class=w> </span><span class=l>xiaomi_miio</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;chuangmi.remote.v2&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>host</span><span class=p>:</span><span class=w> </span><span class=m>192.168.50.72</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>token</span><span class=p>:</span><span class=w> </span><span class=l>&lt;token&gt;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>slot</span><span class=p>:</span><span class=w> </span><span class=m>1</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>timeout</span><span class=p>:</span><span class=w> </span><span class=m>30</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>hidden</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>commands</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c># haier</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>air_conditioner_turn_on</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>       </span><span class=nt>command</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>         </span>- <span class=l>raw:mcwm84lgAkzSazOcSyazScSyYzacTYAhAA3AQ8BjwIfAZ8DfwIfAh8APwA:38400</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>air_conditioner_turn_off</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>       </span><span class=nt>command</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>         </span>- <span class=l>raw:mcwm84lgAkzSazOcSyazScSyYzacTYAhAA3AQ8BjwIfAQ8BDwO/Bd8APwA/AD8APwA/AD8APwA/AD8AP:38400</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>air_conditioner_cool</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>       </span><span class=nt>command</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>         </span>- <span class=l>raw:mcwm84lgAkzSazOcSyazScSyYzacTYAhAA3AQ8BjwIfAQ8BDwO/Bd:38400</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>magic_ball_turn_on</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>command</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span>- <span class=l>raw:nMxm8wlk0mk2mEsm0ymEsmsxAHKYADlMwB2mgB/ADmBP4B9TGbAYMAR4BFApoBmUxAEMAjwNPA0gJCwcHCI8A/wJ6BjoKrwCOCHuYQA=</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>magic_ball_turn_off</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>command</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span>- <span class=l>raw:nMxmswlk0mk4mEsm0ymEsmsxAHKYADlNAD+mYA9AL+APUxmwHDTGbAQsAjQAhAdwAhYBCgV2BFoR7g/+Ae01nID/g2cBAYLShH+AjQDXgEJMIAA=</span><span class=w>
+</span></span></span></code></pre></div><p>然后我们可以在<code>scripts.yaml</code>里定义常用的操作（这些操作可以在安卓的设备控制器快捷方式找到)</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>&#39;air_conditioner_turn_on&#39;</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>alias</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;打开空调(睡眠模式)&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>sequence</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>service</span><span class=p>:</span><span class=w> </span><span class=l>remote.send_command</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>entity_id</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;remote.chuangmi_remote_v2&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>data</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>command</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span>- <span class=s1>&#39;air_conditioner_turn_on&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>&#39;air_conditioner_turn_off&#39;</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>alias</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;关闭空调&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>sequence</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>service</span><span class=p>:</span><span class=w> </span><span class=l>remote.send_command</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>entity_id</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;remote.chuangmi_remote_v2&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>data</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>command</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span>- <span class=s1>&#39;air_conditioner_turn_off&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>&#39;air_conditioner_cool&#39;</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>alias</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;空调制冷&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>sequence</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>service</span><span class=p>:</span><span class=w> </span><span class=l>remote.send_command</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>entity_id</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;remote.chuangmi_remote_v2&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>data</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>command</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span>- <span class=s1>&#39;air_conditioner_cool&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>&#39;magic_ball_turn_on&#39;</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>alias</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;打开小夜灯&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>sequence</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>service</span><span class=p>:</span><span class=w> </span><span class=l>remote.send_command</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>entity_id</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;remote.chuangmi_remote_v2&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>data</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>command</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span>- <span class=s1>&#39;magic_ball_turn_on&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>&#39;magic_ball_turn_off&#39;</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>alias</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;关闭小夜晚灯&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>sequence</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=nt>service</span><span class=p>:</span><span class=w> </span><span class=l>remote.send_command</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>entity_id</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;remote.chuangmi_remote_v2&#39;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>data</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>command</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>          </span>- <span class=s1>&#39;magic_ball_turn_off&#39;</span><span class=w>
 </span></span></span></code></pre></div><p>效果如下</p><p><img src=homeassistant.assets/img-2021-10-16-13-33-08.png alt></p><h4 id=学习红外码>学习红外码</h4><p>接入遥控器后，我们可以通过它学习红外码。进入开发者工具 -> 服务，选择<code>xiaomi_miio.remote_learn_command</code></p><p><img src=homeassistant.assets/img-2021-10-16-14-21-37.png alt></p><p>点击调用服务，然后把遥控器对准米家万能遥控器按下要学习的按键，就可以学习了。识别的红外码会出现在homeassistant
 的通知那里, 可以配置到上面yaml的<code>raw command</code>。（在使用前，可以用<code>remote.send_command</code>测以下）</p><p>刚好别人送我一个<a href="https://m.tb.cn/h.fVGue9v?sm=febd7a">小夜灯</a>，试了一下，可以智能地控制了。</p><p><img src=homeassistant.assets/img-2021-10-16-14-35-17.png alt></p><h4 id=hack红外码>Hack红外码</h4><p>使用<code>xiaomi_miio.remote_learn_command</code>方式只能学习简单的红外码。对于复杂的红外码，比如空调，遥控器学习识别的红外码不起作用
 （我傻乎乎地尝试了好久才发现这个知识）</p><p>解决方式之一是, 你知道空调的各个按键的raw command是什么，即使用红外码库。查了一下，国外有一些开源的红外码库，但没有国内的设备型号，
 而且设备类型比较少。</p><p>我使用的是海尔空调，只找到https://github.com/crankyoldgit/IRremoteESP8266库，可能有可以利用的信息（有测试代码），
 但是它使用的是pronto格式，支持的设备类型也有限。</p><p>后面发现了<a href=https://bbs.hassbian.com/thread-8226-1-1.html>硬核的hack方式</a>, 可以通过串口连上遥控器的控制台，从调试日志中获取红外码。</p><p>这里简单说一下步骤。</p><ul><li>焊接</li></ul><p>对于一个新手来说，焊接PCB板是一个比较麻烦的事情。基于大学时，曾焊接制作过一个完整收音机的经历，我开始动手了。</p><p><img src=homeassistant.assets/img-2021-10-16-14-59-33.png alt></p><p>如图，拆完后焊点是PCB板上的三个圆形金属接触点(TX, RX, GND)。可能不是设计用来焊接的（我猜测应该是有专门的金属探头压在上面，使电路接通），先要将
 导线镀焊，不然焊接会颇为麻烦, 不太容易焊上。</p><blockquote><p>PS, 虽然焊接这个成功了，但是<a href=https://github.com/fvollmer/open-desk-lamp-firmware>小米台灯</a>焊接后却没能连上，
-不过它可以接入到Google Home，作为一个桌面上的台灯也没必要太多的智能控制场景了</p></blockquote><ul><li>串口调试</li></ul><p>连接好USB串口线后，启动电源。</p><p>在笔记本上安装好<code>screen</code>软件, 执行以下命令</p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-bash data-lang=bash><span style=display:flex><span>screen -L /dev/ttyUSB0 <span style=color:#f60>115200</span>
-</span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span><span style=color:#09f;font-style:italic># Ctrl + A + : 打开screen菜单</span>
-</span></span></code></pre></div><p>日志将输出到<code>screenlog.0</code>, 随着你在米家App上按下空调键，可以从中看到有用的日志信息(token)。</p><p>这里给出部分日志(被我删除处理过敏感信息了)</p><pre tabindex=0><code>------Now net status:4------
-23:06:44.740 [D] otu: [192.168.50.32:51222] talking, len=32
-23:06:44.740 [W] otu: Token private!!. (otu_packet_handle,706)
-23:06:44.750 [D] otu: [192.168.50.32:51222] talking, len=32
-23:06:44.750 [W] otu: Token private!!. (otu_packet_handle,706)
-23:06:44.760 [D] otu: [192.168.50.32:51222] talking, len=32
-23:06:44.760 [W] otu: Token private!!. (otu_packet_handle,706)
-23:06:44.770 [D] otu: [192.168.50.32:57072] talking, len=304
-23:06:44.780 [D] otu: local rpc packet.
-23:06:44.780 [D] otu: {&#34;id&#34;: 43, &#34;method&#34;: &#34;miIO.ir_play&#34;, &#34;params&#34;: {&#34;freq&#34;: 38400, &#34;code&#34;: &#34;mcwm84lgAkzSazOcSyazScSyYzacTYAhAA3AQ8BjwIfAQ8CrwCPAr8APwA/AD8APwA/AD8APwA/AD8APwA/AD8APwA/AD8APwA/AD8APwA&#34;}}.
-23:06:44.810 [D] otu: down rpc_local = 7
-23:06:44.810 [D] ot: miIO.ir_play found
-------do_ir_play cmd:{&#34;id&#34;: 43, &#34;method&#34;: &#34;miIO.ir_play&#34;, &#34;params&#34;: {&#34;freq&#34;: 38400, &#34;code&#34;: &#34;mcwm84lgAkzSazOcSyazScSyYzacTYAhAA3AQ8BjwIfAQ8CrwCPAr8APwA/AD8APwA/AD8APwA/AD8KDwA/AD8APw6vAh8APwA&#34;}}------
-ir_play:Cannot found length
-Base64Decode------------&gt;len=143
-99,cc,26,f3,89,60,2,4c,d2,6b,33,9c,4b,26,b3,49,c4,b2,63,36,9c,4d,80,21,0,d,c0,43,c0,63,c0,87,c0,43,c0,ab,c0,23,c0,af,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,cf,c0,f,c0f,c0,f,c0,f,c0,f,c0,f,c2,27,c0,53,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,c5,63,c0,f,c0,a3,c0,a3,c8,93,c0,87,e6,33,9,84,c0,
-Base64Decode------------&gt;end
-tmp_ct=941
-23:06:44.880 [I] user_main: ----origin_code:3078,3078,3078,4,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,1686,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,1686,548,1686,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,1686,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,1686,548,548,548,548,548,548,548,548,548,1686,548,548,548,548,548,1686,548,1686,548,548,548,1000
-
-23:06:44.970 [I] splitnums=230
-
-23:06:44.970 [I] item nums=120
-
-last = 1000
-wave_data_len=115
-
------------------------------
-
------send_infrared_fro23:06:m_buf--
-len=115
-0~2456,1~2456||0~2456,1~3644.990 24||0~432,1~1344||0~432,1~432||0~432,1~1344||0~4[D] otu: {&#34;id&#34;:43,&#34;result&#34;:[&#34;ok&#34;]}
-32,1~432||0~432,1~432||0~432,1~1344||0~432,1~1344||0~432,1~432||23:06:45.010 [D] otu
-0~432,1~1344||0~432,1~432||0~432,1~1344||0~432,1~1344||0~432,1~1344||0~432,1~1344||0~
-</code></pre><p>日志中的<code>code</code>部分就是红外码了。</p><p>和来源的作者一样，我这里也告警一下，<strong>红外码库可能涉及到授权和购买, 不要用作商业用途和违法事情</strong></p><h2 id=telegram通知>Telegram通知</h2><p>完成了硬件设备的接入，我们还需要实现自动监控和远程控制。</p><p>除了将API托管到云端，还可以通过邮件或者IM工具实现。这里Telegram机器人就可以满足这个需求了。</p><h3 id=配置>配置</h3><p>telegram.yaml</p><div class=highlight><pre tabindex=0 style=background-color:#f0f3f3;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none><code class=language-yaml data-lang=yaml><span style=display:flex><span>- <span style=color:#309;font-weight:700>platform</span>:<span style=color:#bbb> </span>polling<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#309;font-weight:700>proxy_url</span>:<span style=color:#bbb> </span>http://127.0.0.1:8118<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#309;font-weight:700>api_key</span>:<span style=color:#bbb> </span>&lt;token数字：字符&gt;<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#309;font-weight:700>allowed_chat_ids</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span>- <span style=color:#f60>123456</span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>
-</span></span></span><span style=display:flex><span>- <span style=color:#309;font-weight:700>platform</span>:<span style=color:#bbb> </span>broadcast<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#309;font-weight:700>proxy_url</span>:<span style=color:#bbb> </span>http://127.0.0.1:8118<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#309;font-weight:700>api_key</span>:<span style=color:#bbb> </span>&lt;token数字：字符&gt;<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>  </span><span style=color:#309;font-weight:700>allowed_chat_ids</span>:<span style=color:#bbb>
-</span></span></span><span style=display:flex><span><span style=color:#bbb>    </span>- <span style=color:#f60>123456</span><span style=color:#bbb>
+不过它可以接入到Google Home，作为一个桌面上的台灯也没必要太多的智能控制场景了</p></blockquote><ul><li>串口调试</li></ul><p>连接好USB串口线后，启动电源。</p><p>在笔记本上安装好<code>screen</code>软件, 执行以下命令</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>screen -L /dev/ttyUSB0 <span class=m>115200</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Ctrl + A + : 打开screen菜单</span>
+</span></span></code></pre></div><p>日志将输出到<code>screenlog.0</code>, 随着你在米家App上按下空调键，可以从中看到有用的日志信息(token)。</p><p>这里给出部分日志(被我删除处理过敏感信息了)</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>------Now net status:4------
+</span></span><span class=line><span class=cl>23:06:44.740 [D] otu: [192.168.50.32:51222] talking, len=32
+</span></span><span class=line><span class=cl>23:06:44.740 [W] otu: Token private!!. (otu_packet_handle,706)
+</span></span><span class=line><span class=cl>23:06:44.750 [D] otu: [192.168.50.32:51222] talking, len=32
+</span></span><span class=line><span class=cl>23:06:44.750 [W] otu: Token private!!. (otu_packet_handle,706)
+</span></span><span class=line><span class=cl>23:06:44.760 [D] otu: [192.168.50.32:51222] talking, len=32
+</span></span><span class=line><span class=cl>23:06:44.760 [W] otu: Token private!!. (otu_packet_handle,706)
+</span></span><span class=line><span class=cl>23:06:44.770 [D] otu: [192.168.50.32:57072] talking, len=304
+</span></span><span class=line><span class=cl>23:06:44.780 [D] otu: local rpc packet.
+</span></span><span class=line><span class=cl>23:06:44.780 [D] otu: {&#34;id&#34;: 43, &#34;method&#34;: &#34;miIO.ir_play&#34;, &#34;params&#34;: {&#34;freq&#34;: 38400, &#34;code&#34;: &#34;mcwm84lgAkzSazOcSyazScSyYzacTYAhAA3AQ8BjwIfAQ8CrwCPAr8APwA/AD8APwA/AD8APwA/AD8APwA/AD8APwA/AD8APwA/AD8APwA&#34;}}.
+</span></span><span class=line><span class=cl>23:06:44.810 [D] otu: down rpc_local = 7
+</span></span><span class=line><span class=cl>23:06:44.810 [D] ot: miIO.ir_play found
+</span></span><span class=line><span class=cl>------do_ir_play cmd:{&#34;id&#34;: 43, &#34;method&#34;: &#34;miIO.ir_play&#34;, &#34;params&#34;: {&#34;freq&#34;: 38400, &#34;code&#34;: &#34;mcwm84lgAkzSazOcSyazScSyYzacTYAhAA3AQ8BjwIfAQ8CrwCPAr8APwA/AD8APwA/AD8APwA/AD8KDwA/AD8APw6vAh8APwA&#34;}}------
+</span></span><span class=line><span class=cl>ir_play:Cannot found length
+</span></span><span class=line><span class=cl>Base64Decode------------&gt;len=143
+</span></span><span class=line><span class=cl>99,cc,26,f3,89,60,2,4c,d2,6b,33,9c,4b,26,b3,49,c4,b2,63,36,9c,4d,80,21,0,d,c0,43,c0,63,c0,87,c0,43,c0,ab,c0,23,c0,af,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,cf,c0,f,c0f,c0,f,c0,f,c0,f,c0,f,c2,27,c0,53,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,c0,f,c5,63,c0,f,c0,a3,c0,a3,c8,93,c0,87,e6,33,9,84,c0,
+</span></span><span class=line><span class=cl>Base64Decode------------&gt;end
+</span></span><span class=line><span class=cl>tmp_ct=941
+</span></span><span class=line><span class=cl>23:06:44.880 [I] user_main: ----origin_code:3078,3078,3078,4,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,1686,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,1686,548,1686,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,1686,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,548,1686,548,548,548,548,548,548,548,548,548,1686,548,548,548,548,548,1686,548,1686,548,548,548,1000
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>23:06:44.970 [I] splitnums=230
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>23:06:44.970 [I] item nums=120
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>last = 1000
+</span></span><span class=line><span class=cl>wave_data_len=115
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>-----------------------------
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>-----send_infrared_fro23:06:m_buf--
+</span></span><span class=line><span class=cl>len=115
+</span></span><span class=line><span class=cl>0~2456,1~2456||0~2456,1~3644.990 24||0~432,1~1344||0~432,1~432||0~432,1~1344||0~4[D] otu: {&#34;id&#34;:43,&#34;result&#34;:[&#34;ok&#34;]}
+</span></span><span class=line><span class=cl>32,1~432||0~432,1~432||0~432,1~1344||0~432,1~1344||0~432,1~432||23:06:45.010 [D] otu
+</span></span><span class=line><span class=cl>0~432,1~1344||0~432,1~432||0~432,1~1344||0~432,1~1344||0~432,1~1344||0~432,1~1344||0~
+</span></span></code></pre></div><p>日志中的<code>code</code>部分就是红外码了。</p><p>和来源的作者一样，我这里也告警一下，<strong>红外码库可能涉及到授权和购买, 不要用作商业用途和违法事情</strong></p><h2 id=telegram通知>Telegram通知</h2><p>完成了硬件设备的接入，我们还需要实现自动监控和远程控制。</p><p>除了将API托管到云端，还可以通过邮件或者IM工具实现。这里Telegram机器人就可以满足这个需求了。</p><h3 id=配置>配置</h3><p>telegram.yaml</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl>- <span class=nt>platform</span><span class=p>:</span><span class=w> </span><span class=l>polling</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>proxy_url</span><span class=p>:</span><span class=w> </span><span class=l>http://127.0.0.1:8118</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>api_key</span><span class=p>:</span><span class=w> </span><span class=l>&lt;token数字：字符&gt;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>allowed_chat_ids</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=m>123456</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl>- <span class=nt>platform</span><span class=p>:</span><span class=w> </span><span class=l>broadcast</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>proxy_url</span><span class=p>:</span><span class=w> </span><span class=l>http://127.0.0.1:8118</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>api_key</span><span class=p>:</span><span class=w> </span><span class=l>&lt;token数字：字符&gt;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>allowed_chat_ids</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span>- <span class=m>123456</span><span class=w>
 </span></span></span></code></pre></div><blockquote><p>注意这里使用的是http代理，socks5代理貌似有bug</p></blockquote><h2 id=接入语音助手>接入语音助手</h2><h3 id=天猫精灵>天猫精灵</h3><h3 id=google-assistant>Google Assistant</h3><h2 id=自定义>自定义</h2><h3 id=ui-icons>UI Icons</h3><p><a href=https://materialdesignicons.com/icon/air-conditioner>https://materialdesignicons.com/icon/air-conditioner</a></p><p>usage: <code>mdi:air-conditioner</code></p><h2 id=参考>参考</h2><ul><li><a href=https://www.home-assistant.io/integrations/xiaomi_miio>HomeAssistant Xiaomi Miio</a></li></ul><div id=react-single-actions data-post-id=2d3ef7f544f22f6327470ee761ed7eef></div></article><button class=mobile-toc-trigger aria-controls=mobile-toc aria-expanded=false title=Index>☰</button><div class=mobile-toc-overlay hidden></div><div id=mobile-toc class=mobile-toc-drawer aria-hidden=true role=dialog aria-label=Index><div class=mobile-toc-header><button class=mobile-toc-close aria-label=close>×</button></div><nav class=mobile-toc-body><div class=mobile-toc-list></div></nav><div class=mobile-safe-area-spacer></div></div><script type=module src=/react/page.bundle.js></script></main><footer><div class=copyright><small>Made with <span style=color:#e25555>&#9829;</span> in Guangzhou by
 ©<a href=https://github.com/qtopie>qtopie</a> 2026
 </small><small>Posts licensed under <a href=https://creativecommons.org/licenses/by/4.0/legalcode>CC BY 4.0</small></div><div><script type=module src=/react/base.bundle.js></script></div></footer></body></html>
