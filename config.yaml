@@ -41,14 +41,14 @@ markup:
   highlight:
     anchorLineNos: false
     codeFences: true
-    guessSyntax: false
+    guessSyntax: true
     hl_Lines: ""
     lineAnchors: ""
     lineNoStart: 1
     lineNos: false
     lineNumbersInTable: true
-    noClasses: true
-    style: manni
+    noClasses: false
+    style: github
     tabWidth: 2
   tableOfContents:
     endLevel: 3
