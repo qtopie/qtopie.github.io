@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Linux on 1001問</title><link>https://qtopie.github.io/categories/linux/</link><description>Recent content in Linux on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Sun, 25 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/categories/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>eBPF</title><link>https://qtopie.github.io/notes/linux/ebpf/</link><pubDate>Sun, 25 Jan 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/linux/ebpf/</guid><description>&lt;h2 id="ebpf介绍"&gt;eBPF介绍&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>EBPF on 1001問</title><link>https://qtopie.github.io/tags/ebpf/</link><description>Recent content in EBPF on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Sun, 25 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/tags/ebpf/index.xml" rel="self" type="application/rss+xml"/><item><title>eBPF</title><link>https://qtopie.github.io/notes/linux/ebpf/</link><pubDate>Sun, 25 Jan 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/linux/ebpf/</guid><description>&lt;h2 id="ebpf介绍"&gt;eBPF介绍&lt;/h2&gt;
 &lt;p&gt;eBPF（Extended Berkeley Packet Filter）是一种革命性的内核技术，允许开发者在不修改内核源代码、不加载内核模块的情况下，在操作系统内核中安全、高效地运行自定义程序。
 它通过在内核中运行一个沙盒虚拟机，使内核变得可编程，广泛应用于网络、安全、可观测性等领域。&lt;/p&gt;
 &lt;p&gt;&lt;img src="ebpf.png" alt="What is eBPF"&gt;&lt;/p&gt;
@@ -76,43 +76,4 @@ eBPF 充当了内核级的“安全警卫”，能够实时识别并拦截恶意
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; style L fill:#fff4dd,stroke:#d4a017,stroke-width:2px
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="一个加速小例子"&gt;一个加速小例子&lt;/h3&gt;
 &lt;p&gt;现在假定一个业务场景，比如我们想实现给局域网里的部分设备如平板/手机游戏加速，其工作流程为
-当手机流量到达网关时，根据手机MAC地址和请求的域名/IP对应指定游戏的服务时，就转发到加速端口进行加速，否则就走直连。&lt;/p&gt;</description></item><item><title>Ubuntu init process</title><link>https://qtopie.github.io/notes/linux/systemd-service-unit-file/</link><pubDate>Thu, 15 Sep 2016 14:20:15 +0800</pubDate><guid>https://qtopie.github.io/notes/linux/systemd-service-unit-file/</guid><description>&lt;h2 id="history"&gt;History&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;sysVinit&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://upstart.ubuntu.com/"&gt;upstart&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;systemd&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;ubuntu: sysVinit &amp;ndash;&amp;gt; upstart(6.10+) &amp;ndash;&amp;gt; systemd (15.04+)&lt;/p&gt;
-&lt;h3 id="features-of-upstart"&gt;Features of Upstart&lt;/h3&gt;
-&lt;p&gt;&lt;em&gt;Event Based&lt;/em&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Start System faster (compare with previous method).&lt;/li&gt;
-&lt;li&gt;Dynamically start service when discovering new device&lt;/li&gt;
-&lt;li&gt;Dynamically stop service when device is removed&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="systemd"&gt;Systemd&lt;/h2&gt;
-&lt;p&gt;Systemd is a collection of system management daemons, utilities and libraries which serves as a replacement of System V init daemon. Systemd functions as
-central management and configuration platform for UNIX like system.&lt;/p&gt;</description></item><item><title>Wifi with hostapd</title><link>https://qtopie.github.io/notes/linux/hostapd-wifi/</link><pubDate>Tue, 30 Aug 2016 19:06:18 +0800</pubDate><guid>https://qtopie.github.io/notes/linux/hostapd-wifi/</guid><description>&lt;h2 id="hostapd"&gt;&lt;a href="https://w1.fi/hostapd/"&gt;Hostapd&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;hostapd is a user space daemon for access point and authentication server.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Please follow the guide of &lt;a href="https://www.raspberrypi.org/documentation/configuration/wireless/access-point.md"&gt;Official documentation&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-&lt;h2 id="installation-and-configuration"&gt;Installation and configuration&lt;/h2&gt;
-&lt;p&gt;&lt;em&gt;Tested on raspbian with raspberry pi 3&lt;/em&gt;&lt;/p&gt;
-&lt;h3 id="install-hostapd-and-configure-it"&gt;Install hostapd and configure it&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;sudo apt-get install hostapd -y --force-yes&lt;/code&gt;,
-also &lt;code&gt;sudo apt-get install haveged&lt;/code&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Edit &lt;code&gt;hostapd.conf&lt;/code&gt;:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;em&gt;&lt;code&gt;/etc/hostapd/hostapd.conf&lt;/code&gt;&lt;/em&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;interface=wlan0
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ssid=RPi
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;wpa_passphrase=raspberrypi
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;auth_algs=1
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;wpa=2
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;wpa_key_mgmt=WPA-PSK
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;rsn_pairwise=CCMP
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;channel=10
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;hw_mode=g
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;There should not be any whitespace at the end of each line&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;then modify file &lt;code&gt;/etc/default/hostapd&lt;/code&gt; to let the configuration work
-automatically.&lt;/p&gt;</description></item></channel></rss>
+当手机流量到达网关时，根据手机MAC地址和请求的域名/IP对应指定游戏的服务时，就转发到加速端口进行加速，否则就走直连。&lt;/p&gt;</description></item></channel></rss>

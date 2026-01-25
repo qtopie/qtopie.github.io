@@ -1,4 +1,82 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Notes on 1001問</title><link>https://qtopie.github.io/notes/</link><description>Recent content in Notes on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Thu, 01 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/notes/index.xml" rel="self" type="application/rss+xml"/><item><title>XS20摄影技巧</title><link>https://qtopie.github.io/notes/photography/xs20/</link><pubDate>Thu, 01 Jan 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/photography/xs20/</guid><description>&lt;h2 id="xs-20介绍"&gt;XS-20介绍&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Notes on 1001問</title><link>https://qtopie.github.io/notes/</link><description>Recent content in Notes on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Sun, 25 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/notes/index.xml" rel="self" type="application/rss+xml"/><item><title>eBPF</title><link>https://qtopie.github.io/notes/linux/ebpf/</link><pubDate>Sun, 25 Jan 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/linux/ebpf/</guid><description>&lt;h2 id="ebpf介绍"&gt;eBPF介绍&lt;/h2&gt;
+&lt;p&gt;eBPF（Extended Berkeley Packet Filter）是一种革命性的内核技术，允许开发者在不修改内核源代码、不加载内核模块的情况下，在操作系统内核中安全、高效地运行自定义程序。
+它通过在内核中运行一个沙盒虚拟机，使内核变得可编程，广泛应用于网络、安全、可观测性等领域。&lt;/p&gt;
+&lt;p&gt;&lt;img src="ebpf.png" alt="What is eBPF"&gt;&lt;/p&gt;
+&lt;h3 id="核心工作原理"&gt;核心工作原理&lt;/h3&gt;
+&lt;p&gt;事件驱动：eBPF 程序通常挂载在特定的“钩子”（Hook）上，如系统调用、网络包收发、内核跟踪点（Tracepoint）或动态探测点（kprobes/uprobes）。
+安全验证：程序加载前会经过内核验证器（Verifier）的严格检查，确保程序不会崩溃、不会陷入死循环，也不会非法访问内核内存。
+JIT 编译：经过验证的字节码通过即时编译（JIT）转换为原生的机器指令，其执行效率接近原生内核代码。
+数据交互：eBPF 程序通过 Maps（键值对存储）与用户空间进行数据共享，实现监控结果的实时传输或配置的动态更新。&lt;/p&gt;
+&lt;p&gt;主要应用场景
+网络加速与负载均衡：例如 Cilium 利用 eBPF 实现高性能的容器网络和安全路由。
+可观测性：在无需修改应用代码的情况下，实现极低开销的系统调用跟踪、性能剖析和链路监控。
+运行时安全：实时拦截异常的系统调用，实施细粒度的防火墙规则或安全策略。&lt;/p&gt;
+&lt;p&gt;优势对比
+特性 	eBPF 程序	内核模块 (Kernel Module)	修改内核源码
+安全性	内核验证器保证不崩溃	错误可能导致系统蓝屏/死机	风险最高
+灵活性	动态加载/卸载，无需重启	加载复杂，易引入依赖问题	需要编译并重启内核
+性能	高（JIT 编译后接近原生）	高	高
+如需开始开发，可以参考 ebpf.io 提供的文档，或使用 BCC (BPF Compiler Collection) 和 libbpf 等工具链&lt;/p&gt;
+&lt;h3 id="ebpf动态扩展了哪些内核能力"&gt;eBPF动态扩展了哪些内核能力&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;深度可观测性与性能剖析 (Observability &amp;amp; Profiling)
+eBPF 可以无死角地观察内核和应用的运行状态，且几乎没有性能损耗。
+函数与系统调用跟踪：通过挂载到 kprobes（内核函数）、uprobes（用户空间函数）或 tracepoints（静态跟踪点），实时监控每一次系统调用或函数执行。
+零侵入性能监控：无需修改应用代码（无须重新编译或注入代理），即可采集 CPU 指令周期、内存使用率及函数调用热点图。
+低开销数据聚合：在内核态直接对数据进行过滤和统计，只将最终结果传给用户态，避免了大量原始数据拷贝带来的开销。&lt;/li&gt;
+&lt;li&gt;高性能网络处理 (Networking)
+通过接管内核协议栈的关键路径，eBPF 极大地提升了网络吞吐量并降低了延迟。
+绕过标准协议栈 (XDP)：在网卡驱动层（XDP）直接处理数据包，实现极速的 DDoS 防护、负载均衡和防火墙过滤。
+容器网络与服务网格：在 Kubernetes 等云原生场景中，eBPF 可实现 Pod 间的高效路由，甚至直接绕过传统的 iptables 规则以优化网络路径。
+自定义协议解析：支持在内核态直接解析非标准或自定义的网络协议，无需将包传回用户空间处理。&lt;/li&gt;
+&lt;li&gt;动态安全控制 (Security)
+eBPF 充当了内核级的“安全警卫”，能够实时识别并拦截恶意行为。
+运行时行为审计：监控异常的进程行为（如异常读取 /etc/shadow 文件），并触发警报或直接终止该操作。
+细粒度权限管控：不仅能看（审计），还能干预。例如限制特定进程仅能访问特定的 IP 或文件目录。
+加密与脱敏：实时监控敏感数据流，在内核态自动执行 TLS 卸载或对传输中的敏感数据进行脱敏处理。&lt;/li&gt;
+&lt;li&gt;现代内核调度与扩展 (Kernel Evolution)
+到 2026 年，eBPF 的能力已进一步深入到内核的核心调度逻辑。
+自定义 CPU 调度：通过 sched_ext 等框架，开发者可以编写自定义的 CPU 调度策略，针对特定工作负载（如 AI 训练或实时音视频）优化计算资源的分配。
+热补丁与功能修复：在不重启系统的情况下，通过挂载 eBPF 程序动态修复已知的内核逻辑缺陷或漏洞。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="如何使用"&gt;如何使用&lt;/h2&gt;
+&lt;h3 id="ebpf工作流程"&gt;eBPF工作流程&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;graph TD
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; subgraph User_Space [&amp;#34;用户态 (User Space)&amp;#34;]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; A[&amp;#34;编写 eBPF 源代码&amp;lt;br/&amp;gt;(C / Rust)&amp;#34;] -- &amp;#34;LLVM / Clang&amp;#34; --&amp;gt; B[&amp;#34;eBPF 字节码&amp;lt;br/&amp;gt;(Bytecode)&amp;#34;]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; B -- &amp;#34;bpf 系统调用&amp;#34; --&amp;gt; C[&amp;#34;加载并注入内核&amp;#34;]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; L[&amp;#34;eBPF Maps&amp;lt;br/&amp;gt;共享存储/键值对&amp;#34;] --- M[&amp;#34;用户态控制程序&amp;lt;br/&amp;gt;Go / C++ / Rust&amp;#34;]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; M -- &amp;#34;分析数据&amp;#34; --&amp;gt; N[&amp;#34;可视化 / 控制面板&amp;#34;]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; end
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; subgraph Kernel_Space [&amp;#34;内核态 (Kernel Space)&amp;#34;]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; C --&amp;gt; D{&amp;#34;验证器 Verifier&amp;lt;br/&amp;gt;安全/权限检查&amp;#34;}
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; D -- &amp;#34;拒绝&amp;#34; --&amp;gt; E[&amp;#34;报错并停止加载&amp;#34;]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; D -- &amp;#34;通过&amp;#34; --&amp;gt; F[&amp;#34;JIT 即时编译器&amp;#34;]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; F --&amp;gt; G[&amp;#34;原生机器码&amp;lt;br/&amp;gt;Native Machine Code&amp;#34;]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; subgraph Hooks [&amp;#34;事件钩子 (Event Hooks)&amp;#34;]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; H[&amp;#34;网络包 XDP/TC&amp;#34;]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; I[&amp;#34;系统调用 Syscalls&amp;#34;]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; J[&amp;#34;内核函数 Kprobes&amp;#34;]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; K[&amp;#34;用户函数 Uprobes&amp;#34;]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; end
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; G -- &amp;#34;挂载执行&amp;#34; --&amp;gt; H
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; G -- &amp;#34;挂载执行&amp;#34; --&amp;gt; I
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; G -- &amp;#34;挂载执行&amp;#34; --&amp;gt; J
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; G -- &amp;#34;挂载执行&amp;#34; --&amp;gt; K
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; H &amp;amp; I &amp;amp; J &amp;amp; K -- &amp;#34;数据交互&amp;#34; --&amp;gt; L
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; end
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; style D fill:#f96,stroke:#333,stroke-width:2px
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; style G fill:#00d2ff,stroke:#333,stroke-width:2px
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; style L fill:#fff4dd,stroke:#d4a017,stroke-width:2px
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="一个加速小例子"&gt;一个加速小例子&lt;/h3&gt;
+&lt;p&gt;现在假定一个业务场景，比如我们想实现给局域网里的部分设备如平板/手机游戏加速，其工作流程为
+当手机流量到达网关时，根据手机MAC地址和请求的域名/IP对应指定游戏的服务时，就转发到加速端口进行加速，否则就走直连。&lt;/p&gt;</description></item><item><title>XS20摄影技巧</title><link>https://qtopie.github.io/notes/photography/xs20/</link><pubDate>Thu, 01 Jan 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/photography/xs20/</guid><description>&lt;h2 id="xs-20介绍"&gt;XS-20介绍&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;A 模式 (Aperture Priority) —— 光圈优先模式
 含义： 你手动控制光圈，相机自动帮你计算快门速度。&lt;/li&gt;
@@ -191,7 +269,59 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;并发标记（Concurrent Mark）&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>JVM内存泄漏排查</title><link>https://qtopie.github.io/notes/java/jvm-memory-leaks/</link><pubDate>Sat, 23 Nov 2024 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/java/jvm-memory-leaks/</guid><description>&lt;h2 id="堆内存泄漏"&gt;堆内存泄漏&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;并发标记（Concurrent Mark）&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>分布式事务</title><link>https://qtopie.github.io/notes/system-design/tcc/</link><pubDate>Sun, 29 Jun 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/system-design/tcc/</guid><description>&lt;h2 id="基础理论"&gt;基础理论&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;ACID&lt;/strong&gt;：原子性（Atomicity）、一致性（Consistency）、隔离性（Isolation）、持久性（Durability）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CAP&lt;/strong&gt;：一致性（Consistency）、可用性（Availability）、分区容忍性（Partition tolerance）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;BASE&lt;/strong&gt;：基本可用（Basically Available）、软状态（Soft State）、最终一致性（Eventually Consistent）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="2pc两阶段提交"&gt;2PC（两阶段提交）&lt;/h2&gt;
+&lt;p&gt;两阶段提交（Two-Phase Commit, 2PC）是一种经典的分布式事务协议，用于确保多个分布式系统中的操作要么全部成功，要么全部失败，保证数据一致性。&lt;/p&gt;
+&lt;h3 id="流程"&gt;流程&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;准备阶段（Prepare Phase）&lt;/strong&gt;&lt;br&gt;
+协调者（Coordinator）向所有参与者（Participant）发送准备提交请求（prepare）。&lt;br&gt;
+参与者执行本地事务操作，但不提交，只写入预提交日志，并锁定相关资源。&lt;br&gt;
+参与者将执行结果（可以提交/不能提交）反馈给协调者。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;提交阶段（Commit Phase）&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果所有参与者都反馈“可以提交”，协调者向所有参与者发送提交（commit）请求，参与者正式提交本地事务，释放资源。&lt;/li&gt;
+&lt;li&gt;如果有任何一个参与者反馈“不能提交”或超时未响应，协调者向所有参与者发送回滚（rollback）请求，参与者回滚本地事务，释放资源。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;flowchart TD
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; A[事务发起者发起TCC事务] --&amp;gt; B{各参与者Try阶段&amp;lt;br&amp;gt;预留资源}
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; B -- 所有Try成功 --&amp;gt; C[各参与者Confirm阶段&amp;lt;br&amp;gt;正式提交]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; C --&amp;gt; D[事务完成]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; B -- 有Try失败或超时 --&amp;gt; E[各参与者Cancel阶段&amp;lt;br&amp;gt;释放资源/回滚]
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; E --&amp;gt; D
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="优缺点"&gt;优缺点&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;优点&lt;/strong&gt;：实现简单，能保证强一致性。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;缺点&lt;/strong&gt;：同步阻塞，性能较低；协调者单点故障会导致参与者长时间锁定资源，存在阻塞和脑裂风险。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;2PC 常用于分布式数据库、消息队列等场景。实际生产环境中，通常会用 TCC、SAGA 等更灵活的方案来替代 2PC。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="3pc三阶段提交"&gt;3PC（三阶段提交）&lt;/h2&gt;
+&lt;p&gt;三阶段提交（Three-Phase Commit, 3PC）是在 2PC 基础上改进的一种分布式事务协议，主要目的是减少协调者单点故障导致的阻塞和脑裂风险。3PC 将提交过程分为三个阶段：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;CanCommit 阶段（询问阶段）&lt;/strong&gt;&lt;br&gt;
+协调者向所有参与者发送“是否可以提交”请求（canCommit）。&lt;br&gt;
+参与者收到后判断自己是否可以执行事务，并反馈“可以”或“不可以”。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;PreCommit 阶段（预提交阶段）&lt;/strong&gt;&lt;br&gt;
+如果所有参与者都同意可以提交，协调者发送“预提交”请求（preCommit）。&lt;br&gt;
+参与者收到后执行事务操作并写入预提交日志，但还未正式提交，并反馈“已预提交”。&lt;br&gt;
+此时参与者可以安全地提交事务，但如果出现故障也可以回滚。&lt;/p&gt;</description></item><item><title>JVM内存泄漏排查</title><link>https://qtopie.github.io/notes/java/jvm-memory-leaks/</link><pubDate>Sat, 23 Nov 2024 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/java/jvm-memory-leaks/</guid><description>&lt;h2 id="堆内存泄漏"&gt;堆内存泄漏&lt;/h2&gt;
 &lt;p&gt;长生命周期的对象，持有短生命周期对象的引用，导致后者无法被 GC 回收。&lt;/p&gt;
 &lt;p&gt;我们先来简单造一个典型的错误案例。我们有一个内存cache, 然后key是object类型&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-java" data-lang="java"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;java.util.HashSet&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;
@@ -291,7 +421,26 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如何避免这种泄漏？
-铁律： 放入 HashMap/HashSet 的 Key 类，其参与 hashCode 和 equals 计算的字段必须是不可变（Immutable）的（即用 final 修饰）。&lt;/p&gt;</description></item><item><title>JVM线程分析</title><link>https://qtopie.github.io/notes/java/thread/</link><pubDate>Wed, 11 Sep 2024 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/java/thread/</guid><description>&lt;h2 id="线程的状态"&gt;线程的状态&lt;/h2&gt;
+铁律： 放入 HashMap/HashSet 的 Key 类，其参与 hashCode 和 equals 计算的字段必须是不可变（Immutable）的（即用 final 修饰）。&lt;/p&gt;</description></item><item><title>OAuth</title><link>https://qtopie.github.io/notes/system-design/oauth/</link><pubDate>Mon, 23 Sep 2024 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/system-design/oauth/</guid><description>&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; +--------+ +---------------+
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | |--(A)- Authorization Request -&amp;gt;| Resource |
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | | | Owner |
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | |&amp;lt;-(B)-- Authorization Grant ---| |
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | | +---------------+
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | |
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | | +---------------+
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | |--(C)-- Authorization Grant --&amp;gt;| Authorization |
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | Client | | Server |
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | |&amp;lt;-(D)----- Access Token -------| |
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | | +---------------+
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | |
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | | +---------------+
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | |--(E)----- Access Token ------&amp;gt;| Resource |
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | | | Server |
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | |&amp;lt;-(F)--- Protected Resource ---| |
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; +--------+ +---------------+
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="相关安全问题"&gt;相关安全问题&lt;/h2&gt;
+&lt;h3 id="csrf-cross-site-request-forgery"&gt;CSRF (Cross Site Request Forgery)&lt;/h3&gt;
+&lt;p&gt;CSRF（Cross-site request forgery，跨站请求伪造），也被称为“One Click Attack”或Session Riding，通常缩写为CSRF或者XSRF，是基于客户端操作的请求伪造，是一种对网站的恶意利用。&lt;/p&gt;</description></item><item><title>JVM线程分析</title><link>https://qtopie.github.io/notes/java/thread/</link><pubDate>Wed, 11 Sep 2024 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/java/thread/</guid><description>&lt;h2 id="线程的状态"&gt;线程的状态&lt;/h2&gt;
 &lt;p&gt;参考定义 &lt;code&gt;java.lang.Thread.State&lt;/code&gt;&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-java" data-lang="java"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;public&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kd"&gt;enum&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;State&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="cm"&gt;/**
@@ -467,7 +616,8 @@
 &lt;p&gt;用户扫码登录成功后，页面会刷新&lt;/p&gt;
 &lt;p&gt;然后用解析网页内容，找到搜索框，输入关键字&amp;quot;深圳到中山旅游攻略&amp;quot;，点击搜索然后抓取结果。&lt;/p&gt;
 &lt;p&gt;最后使用LLM总结网页内容.&lt;/p&gt;
-&lt;p&gt;你可以使用chrome-devtools-mcp完成页面抓取&lt;/p&gt;</description></item><item><title>深圳到中山旅游攻略 (基于小红书总结)</title><link>https://qtopie.github.io/notes/ai/shenzhen-to-zhongshan-guide/</link><pubDate>Thu, 23 May 2024 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/ai/shenzhen-to-zhongshan-guide/</guid><description>&lt;h1 id="深圳到中山旅游攻略"&gt;深圳到中山旅游攻略&lt;/h1&gt;
+&lt;p&gt;你可以使用chrome-devtools-mcp完成页面抓取&lt;/p&gt;
+&lt;p&gt;&lt;img src="image.png" alt="alt text"&gt;&lt;/p&gt;</description></item><item><title>深圳到中山旅游攻略 (基于小红书总结)</title><link>https://qtopie.github.io/notes/ai/shenzhen-to-zhongshan-guide/</link><pubDate>Thu, 23 May 2024 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/ai/shenzhen-to-zhongshan-guide/</guid><description>&lt;h1 id="深圳到中山旅游攻略"&gt;深圳到中山旅游攻略&lt;/h1&gt;
 &lt;p&gt;基于小红书热门笔记总结的深圳到中山旅游攻略，涵盖交通、行程规划、美食及景点推荐。&lt;/p&gt;
 &lt;h2 id="-交通指南"&gt;🚗 交通指南&lt;/h2&gt;
 &lt;h3 id="1-深中跨市公交-高性价比"&gt;1. 深中跨市公交 (高性价比)&lt;/h3&gt;
@@ -1697,78 +1847,8 @@ automatically.&lt;/p&gt;</description></item><item><title>开始使用Ubuntu</ti
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;创建swapfile (可选，如果启动时提示无swapfile使用)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;首先确认swap文件是否存在 &lt;code&gt;sudo swapon -s&lt;/code&gt;&lt;/p&gt;</description></item><item><title>分布式事务</title><link>https://qtopie.github.io/notes/system-design/tcc/</link><pubDate>Sun, 23 Aug 1970 09:10:29 +0000</pubDate><guid>https://qtopie.github.io/notes/system-design/tcc/</guid><description>&lt;h2 id="基础理论"&gt;基础理论&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;ACID&lt;/strong&gt;：原子性（Atomicity）、一致性（Consistency）、隔离性（Isolation）、持久性（Durability）。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;CAP&lt;/strong&gt;：一致性（Consistency）、可用性（Availability）、分区容忍性（Partition tolerance）。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;BASE&lt;/strong&gt;：基本可用（Basically Available）、软状态（Soft State）、最终一致性（Eventually Consistent）。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="2pc两阶段提交"&gt;2PC（两阶段提交）&lt;/h2&gt;
-&lt;p&gt;两阶段提交（Two-Phase Commit, 2PC）是一种经典的分布式事务协议，用于确保多个分布式系统中的操作要么全部成功，要么全部失败，保证数据一致性。&lt;/p&gt;
-&lt;h3 id="流程"&gt;流程&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;准备阶段（Prepare Phase）&lt;/strong&gt;&lt;br&gt;
-协调者（Coordinator）向所有参与者（Participant）发送准备提交请求（prepare）。&lt;br&gt;
-参与者执行本地事务操作，但不提交，只写入预提交日志，并锁定相关资源。&lt;br&gt;
-参与者将执行结果（可以提交/不能提交）反馈给协调者。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;提交阶段（Commit Phase）&lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;如果所有参与者都反馈“可以提交”，协调者向所有参与者发送提交（commit）请求，参与者正式提交本地事务，释放资源。&lt;/li&gt;
-&lt;li&gt;如果有任何一个参与者反馈“不能提交”或超时未响应，协调者向所有参与者发送回滚（rollback）请求，参与者回滚本地事务，释放资源。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;flowchart TD
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; A[事务发起者发起TCC事务] --&amp;gt; B{各参与者Try阶段&amp;lt;br&amp;gt;预留资源}
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; B -- 所有Try成功 --&amp;gt; C[各参与者Confirm阶段&amp;lt;br&amp;gt;正式提交]
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; C --&amp;gt; D[事务完成]
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; B -- 有Try失败或超时 --&amp;gt; E[各参与者Cancel阶段&amp;lt;br&amp;gt;释放资源/回滚]
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; E --&amp;gt; D
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="优缺点"&gt;优缺点&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;优点&lt;/strong&gt;：实现简单，能保证强一致性。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;缺点&lt;/strong&gt;：同步阻塞，性能较低；协调者单点故障会导致参与者长时间锁定资源，存在阻塞和脑裂风险。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;2PC 常用于分布式数据库、消息队列等场景。实际生产环境中，通常会用 TCC、SAGA 等更灵活的方案来替代 2PC。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;hr&gt;
-&lt;h2 id="3pc三阶段提交"&gt;3PC（三阶段提交）&lt;/h2&gt;
-&lt;p&gt;三阶段提交（Three-Phase Commit, 3PC）是在 2PC 基础上改进的一种分布式事务协议，主要目的是减少协调者单点故障导致的阻塞和脑裂风险。3PC 将提交过程分为三个阶段：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;CanCommit 阶段（询问阶段）&lt;/strong&gt;&lt;br&gt;
-协调者向所有参与者发送“是否可以提交”请求（canCommit）。&lt;br&gt;
-参与者收到后判断自己是否可以执行事务，并反馈“可以”或“不可以”。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;PreCommit 阶段（预提交阶段）&lt;/strong&gt;&lt;br&gt;
-如果所有参与者都同意可以提交，协调者发送“预提交”请求（preCommit）。&lt;br&gt;
-参与者收到后执行事务操作并写入预提交日志，但还未正式提交，并反馈“已预提交”。&lt;br&gt;
-此时参与者可以安全地提交事务，但如果出现故障也可以回滚。&lt;/p&gt;</description></item><item><title>OAuth</title><link>https://qtopie.github.io/notes/system-design/oauth/</link><pubDate>Sun, 23 Aug 1970 06:28:43 +0000</pubDate><guid>https://qtopie.github.io/notes/system-design/oauth/</guid><description>&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; +--------+ +---------------+
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | |--(A)- Authorization Request -&amp;gt;| Resource |
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | | | Owner |
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | |&amp;lt;-(B)-- Authorization Grant ---| |
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | | +---------------+
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | |
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | | +---------------+
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | |--(C)-- Authorization Grant --&amp;gt;| Authorization |
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | Client | | Server |
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | |&amp;lt;-(D)----- Access Token -------| |
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | | +---------------+
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | |
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | | +---------------+
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | |--(E)----- Access Token ------&amp;gt;| Resource |
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | | | Server |
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; | |&amp;lt;-(F)--- Protected Resource ---| |
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; +--------+ +---------------+
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="相关安全问题"&gt;相关安全问题&lt;/h2&gt;
-&lt;h3 id="csrf-cross-site-request-forgery"&gt;CSRF (Cross Site Request Forgery)&lt;/h3&gt;
-&lt;p&gt;CSRF（Cross-site request forgery，跨站请求伪造），也被称为“One Click Attack”或Session Riding，通常缩写为CSRF或者XSRF，是基于客户端操作的请求伪造，是一种对网站的恶意利用。&lt;/p&gt;</description></item><item><title/><link>https://qtopie.github.io/notes/ai/mcp-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/ai/mcp-notes/</guid><description/></item><item><title/><link>https://qtopie.github.io/notes/algorithms/bitwise-operators/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/algorithms/bitwise-operators/</guid><description>&lt;h1 id="bitwise-operators"&gt;Bitwise Operators&lt;/h1&gt;
+&lt;p&gt;首先确认swap文件是否存在 &lt;code&gt;sudo swapon -s&lt;/code&gt;&lt;/p&gt;</description></item><item><title/><link>https://qtopie.github.io/notes/ai/gemini-cli/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/ai/gemini-cli/</guid><description>&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;gemini mcp add -s user chrome-devtools npx chrome-devtools-mcp@latest
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title/><link>https://qtopie.github.io/notes/ai/mcp-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/ai/mcp-notes/</guid><description/></item><item><title/><link>https://qtopie.github.io/notes/ai/svg/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/ai/svg/</guid><description/></item><item><title/><link>https://qtopie.github.io/notes/algorithms/bitwise-operators/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/algorithms/bitwise-operators/</guid><description>&lt;h1 id="bitwise-operators"&gt;Bitwise Operators&lt;/h1&gt;
 &lt;h2 id="list"&gt;List&lt;/h2&gt;
 &lt;table&gt;
  &lt;thead&gt;
