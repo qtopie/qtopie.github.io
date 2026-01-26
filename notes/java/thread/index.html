@@ -62,17 +62,26 @@
 </span></span></span><span class=line><span class=cl><span class=cm>     */</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w>    </span><span class=n>TERMINATED</span><span class=p>;</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
-</span></span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>stateDiagram</span>
-</span></span><span class=line><span class=cl>    <span class=p>[</span><span class=o>*</span><span class=p>]</span> <span class=o>--&gt;</span> <span class=n>New</span>
-</span></span><span class=line><span class=cl>    <span class=n>New</span> <span class=o>--&gt;</span> <span class=n>Runnable</span> <span class=p>:</span> <span class=n>start</span><span class=p>()</span>
-</span></span><span class=line><span class=cl>    <span class=n>Runnable</span> <span class=o>--&gt;</span> <span class=n>Blocked</span> <span class=p>:</span> <span class=n>acquire</span> <span class=n>monitor</span> <span class=n>lock</span>
-</span></span><span class=line><span class=cl>    <span class=n>Runnable</span> <span class=o>--&gt;</span> <span class=n>Waiting</span> <span class=p>:</span> <span class=n>wait</span><span class=p>(),</span> <span class=n>join</span><span class=p>(),</span> <span class=n>park</span><span class=p>()</span>
-</span></span><span class=line><span class=cl>    <span class=n>Runnable</span> <span class=o>--&gt;</span> <span class=n>Timed</span> <span class=n>Waiting</span> <span class=p>:</span> <span class=n>wait</span><span class=p>(</span><span class=n>timeout</span><span class=p>),</span> <span class=n>join</span><span class=p>(</span><span class=n>timeout</span><span class=p>),</span> <span class=n>parkNanos</span><span class=p>(</span><span class=n>timeout</span><span class=p>)</span>
-</span></span><span class=line><span class=cl>    <span class=n>Blocked</span> <span class=o>--&gt;</span> <span class=n>Runnable</span> <span class=p>:</span> <span class=n>obtain</span> <span class=n>monitor</span> <span class=n>lock</span>
-</span></span><span class=line><span class=cl>    <span class=n>Waiting</span> <span class=o>--&gt;</span> <span class=n>Runnable</span> <span class=p>:</span> <span class=n>signaled</span> <span class=ow>or</span> <span class=n>interrupted</span>
-</span></span><span class=line><span class=cl>    <span class=n>Timed</span> <span class=n>Waiting</span> <span class=o>--&gt;</span> <span class=n>Runnable</span> <span class=p>:</span> <span class=n>time</span> <span class=n>elapses</span>
-</span></span><span class=line><span class=cl>    <span class=n>Runnable</span> <span class=o>--&gt;</span> <span class=n>Terminated</span> <span class=p>:</span> <span class=n>run</span><span class=p>()</span> <span class=n>completes</span>
-</span></span></code></pre></div><h3 id=waiting-vs-blocked>waiting vs blocked</h3><p>blocked: 线程试图获取一个被其他线程持有的锁（monitor），但获取失败，导致线程被阻塞 被动进入 blocked 状态的</p><p>waiting: 线程主动调用了方法进入等待状态，等待其他线程的通知 (wait condition)</p><h2 id=线程池>线程池</h2><h2 id=查看线程的状态>查看线程的状态</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>jstack -l
-</span></span></code></pre></div><div id=react-single-actions data-post-id=a12707f024ba8d49abbd71b00e02aa88></div></article><button class=mobile-toc-trigger aria-controls=mobile-toc aria-expanded=false title=Index>☰</button><div class=mobile-toc-overlay hidden></div><div id=mobile-toc class=mobile-toc-drawer aria-hidden=true role=dialog aria-label=Index><div class=mobile-toc-header><button class=mobile-toc-close aria-label=close>×</button></div><nav class=mobile-toc-body><div class=mobile-toc-list></div></nav><div class=mobile-safe-area-spacer></div></div><script type=module src=/react/page.bundle.js></script></main><footer><div class=copyright><small>Made with <span style=color:#e25555>&#9829;</span> in Guangzhou by
+</span></span></span></code></pre></div><div class=mermaid>stateDiagram
+[*] --> New
+New --> Runnable : start()
+Runnable --> Blocked : acquire monitor lock
+Runnable --> Waiting : wait(), join(), park()
+Runnable --> Timed Waiting : wait(timeout), join(timeout), parkNanos(timeout)
+Blocked --> Runnable : obtain monitor lock
+Waiting --> Runnable : signaled or interrupted
+Timed Waiting --> Runnable : time elapses
+Runnable --> Terminated : run() completes</div><h3 id=waiting-vs-blocked>waiting vs blocked</h3><p>blocked: 线程试图获取一个被其他线程持有的锁（monitor），但获取失败，导致线程被阻塞 被动进入 blocked 状态的</p><p>waiting: 线程主动调用了方法进入等待状态，等待其他线程的通知 (wait condition)</p><h2 id=线程池>线程池</h2><h2 id=查看线程的状态>查看线程的状态</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>jstack -l
+</span></span></code></pre></div><div id=react-app-components data-post-id=a12707f024ba8d49abbd71b00e02aa88></div></article><button class=mobile-toc-trigger aria-controls=mobile-toc aria-expanded=false title=Index>☰</button><div class=mobile-toc-overlay hidden></div><div id=mobile-toc class=mobile-toc-drawer aria-hidden=true role=dialog aria-label=Index><div class=mobile-toc-header><button class=mobile-toc-close aria-label=close>×</button></div><nav class=mobile-toc-body><div class=mobile-toc-list></div></nav><div class=mobile-safe-area-spacer></div></div><script type=module src=/react/page.bundle.js></script></main><footer><div class=copyright><small>Made with <span style=color:#e25555>&#9829;</span> in Guangzhou by
 ©<a href=https://github.com/qtopie>qtopie</a> 2026
-</small><small>Posts licensed under <a href=https://creativecommons.org/licenses/by/4.0/legalcode>CC BY 4.0</small></div><div><script type=module src=/react/base.bundle.js></script></div></footer></body></html>
+</small><small>Posts licensed under <a href=https://creativecommons.org/licenses/by/4.0/legalcode>CC BY 4.0</small></div><div><script type=module src=/react/base.bundle.js></script><script type=module>
+      (async ()=>{
+        try {
+          const mod = await import('https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.mjs');
+          const mermaid = mod.default || mod;
+          const prefersDark = document.body.classList.contains('dark') || window.matchMedia('(prefers-color-scheme: dark)').matches;
+          mermaid.initialize({ startOnLoad: false, theme: prefersDark ? 'dark' : 'default' });
+          mermaid.init && mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+        } catch (e) { console.error('mermaid load error', e); }
+      })();
+    </script></div></footer></body></html>

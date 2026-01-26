@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>DIY on 1001問</title><link>https://qtopie.github.io/categories/diy/</link><description>Recent content in DIY on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Mon, 03 Aug 2020 23:33:04 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/categories/diy/index.xml" rel="self" type="application/rss+xml"/><item><title>自动控制风扇温度</title><link>https://qtopie.github.io/notes/iot/rpi/fan-and-tempature/</link><pubDate>Mon, 03 Aug 2020 23:33:04 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/fan-and-tempature/</guid><description>&lt;p&gt;最近购买了一个树莓派4B 4G内存版，替换了旧的Model3 (强迫症犯了，就为了换成type c口，但因为电源适配问题还是老老实实地又买了官方电源适配器）&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Diy on 1001問</title><link>https://qtopie.github.io/categories/diy/</link><description>Recent content in Diy on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Mon, 03 Aug 2020 23:33:04 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/categories/diy/index.xml" rel="self" type="application/rss+xml"/><item><title>自动控制风扇温度</title><link>https://qtopie.github.io/notes/iot/rpi/fan-and-tempature/</link><pubDate>Mon, 03 Aug 2020 23:33:04 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/fan-and-tempature/</guid><description>&lt;p&gt;最近购买了一个树莓派4B 4G内存版，替换了旧的Model3 (强迫症犯了，就为了换成type c口，但因为电源适配问题还是老老实实地又买了官方电源适配器）&lt;/p&gt;
 &lt;p&gt;树莓派4B相对3B性能提高不少，但是随之功耗和发热也上去了。 于是给它整了个金属外壳&lt;/p&gt;
 &lt;p&gt;&lt;img src="fan-and-tempature.assets/img-20211029155258.webp" alt=""&gt;&lt;/p&gt;
 &lt;p&gt;但是依旧烫得厉害，可能是我手动overlock了。开风扇的话，又有点吵，晚上影响睡觉。&lt;/p&gt;
@@ -260,22 +260,29 @@
 &lt;/ul&gt;</description></item><item><title>vocore2播放音频-使用路由器听歌？</title><link>https://qtopie.github.io/notes/iot/vocore/vocore-network-audio/</link><pubDate>Fri, 26 Jul 2019 22:24:33 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/vocore/vocore-network-audio/</guid><description>&lt;h2 id="目标"&gt;目标&lt;/h2&gt;
 &lt;p&gt;构建一个可编程控制的流媒体播放服务器，类似于智能音箱，但是没有麦克风收集个人隐私数据。&lt;/p&gt;
 &lt;p&gt;整体架构如下&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;graph LR
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; subgraph 树莓派 Raspberry Pi
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; A[cmus音乐播放器] --&amp;gt; B(PulseAudio Client)
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; end
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; subgraph VoCore
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; C(PulseAudio Server) --&amp;gt; D[音响 / 扬声器]
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; end
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; B --&amp;gt; C
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="vocore固件支持"&gt;Vocore固件支持&lt;/h2&gt;
+
+&lt;div class="mermaid"&gt;graph LR
+ subgraph 树莓派 Raspberry Pi
+ A[cmus音乐播放器] --&gt; B(PulseAudio Client)
+ end
+
+ subgraph VoCore
+ C(PulseAudio Server) --&gt; D[音响 / 扬声器]
+ end
+
+ B --&gt; C&lt;/div&gt;
+&lt;h2 id="vocore固件支持"&gt;Vocore固件支持&lt;/h2&gt;
 &lt;p&gt;Currently 2022/12/3, only openwrt 21.02 is supported. (patch is not working ins 22.03)&lt;/p&gt;
 &lt;p&gt;see &lt;a href="https://github.com/Vonger/vocore2"&gt;https://github.com/Vonger/vocore2&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Because audio is enabled by &lt;em&gt;kmod+&lt;/em&gt; packages, so I need to build the firmware myself.&lt;/p&gt;
 &lt;h2 id="alsa"&gt;Alsa&lt;/h2&gt;
-&lt;p&gt;install &lt;code&gt;alsa-utils&lt;/code&gt; packages, then add configuration to init sound card&lt;/p&gt;</description></item><item><title>树莓派4G模块</title><link>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</link><pubDate>Wed, 05 Dec 2018 22:36:06 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</guid><description>&lt;h2 id="准备环境"&gt;准备环境&lt;/h2&gt;
+&lt;p&gt;install &lt;code&gt;alsa-utils&lt;/code&gt; packages, then add configuration to init sound card&lt;/p&gt;
+&lt;p&gt;in &lt;code&gt;/etc/rc.local&lt;/code&gt; file&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;alsactl init
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="adjust-volume"&gt;Adjust volume&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;use &lt;code&gt;alsamixer&lt;/code&gt;&lt;/p&gt;</description></item><item><title>树莓派4G模块</title><link>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</link><pubDate>Wed, 05 Dec 2018 22:36:06 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/rpi-4g-lte-module/</guid><description>&lt;h2 id="准备环境"&gt;准备环境&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;树莓派3B&lt;/li&gt;
 &lt;li&gt;华为4G模块：HUAWEI ME909s-821&lt;/li&gt;

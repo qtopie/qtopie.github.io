@@ -41,40 +41,41 @@ eBPF 充当了内核级的“安全警卫”，能够实时识别并拦截恶意
 &lt;/ol&gt;
 &lt;h2 id="如何使用"&gt;如何使用&lt;/h2&gt;
 &lt;h3 id="ebpf工作流程"&gt;eBPF工作流程&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;graph TD
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; subgraph User_Space [&amp;#34;用户态 (User Space)&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; A[&amp;#34;编写 eBPF 源代码&amp;lt;br/&amp;gt;(C / Rust)&amp;#34;] -- &amp;#34;LLVM / Clang&amp;#34; --&amp;gt; B[&amp;#34;eBPF 字节码&amp;lt;br/&amp;gt;(Bytecode)&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; B -- &amp;#34;bpf 系统调用&amp;#34; --&amp;gt; C[&amp;#34;加载并注入内核&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; L[&amp;#34;eBPF Maps&amp;lt;br/&amp;gt;共享存储/键值对&amp;#34;] --- M[&amp;#34;用户态控制程序&amp;lt;br/&amp;gt;Go / C++ / Rust&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; M -- &amp;#34;分析数据&amp;#34; --&amp;gt; N[&amp;#34;可视化 / 控制面板&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; end
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; subgraph Kernel_Space [&amp;#34;内核态 (Kernel Space)&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; C --&amp;gt; D{&amp;#34;验证器 Verifier&amp;lt;br/&amp;gt;安全/权限检查&amp;#34;}
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; D -- &amp;#34;拒绝&amp;#34; --&amp;gt; E[&amp;#34;报错并停止加载&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; D -- &amp;#34;通过&amp;#34; --&amp;gt; F[&amp;#34;JIT 即时编译器&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; F --&amp;gt; G[&amp;#34;原生机器码&amp;lt;br/&amp;gt;Native Machine Code&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; subgraph Hooks [&amp;#34;事件钩子 (Event Hooks)&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; H[&amp;#34;网络包 XDP/TC&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; I[&amp;#34;系统调用 Syscalls&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; J[&amp;#34;内核函数 Kprobes&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; K[&amp;#34;用户函数 Uprobes&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; end
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; G -- &amp;#34;挂载执行&amp;#34; --&amp;gt; H
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; G -- &amp;#34;挂载执行&amp;#34; --&amp;gt; I
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; G -- &amp;#34;挂载执行&amp;#34; --&amp;gt; J
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; G -- &amp;#34;挂载执行&amp;#34; --&amp;gt; K
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; H &amp;amp; I &amp;amp; J &amp;amp; K -- &amp;#34;数据交互&amp;#34; --&amp;gt; L
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; end
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; style D fill:#f96,stroke:#333,stroke-width:2px
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; style G fill:#00d2ff,stroke:#333,stroke-width:2px
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; style L fill:#fff4dd,stroke:#d4a017,stroke-width:2px
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="一个加速小例子"&gt;一个加速小例子&lt;/h3&gt;
+
+&lt;div class="mermaid"&gt;graph TD
+ subgraph User_Space ["用户态 (User Space)"]
+ A["编写 eBPF 源代码&lt;br/&gt;(C / Rust)"] -- "LLVM / Clang" --&gt; B["eBPF 字节码&lt;br/&gt;(Bytecode)"]
+ B -- "bpf 系统调用" --&gt; C["加载并注入内核"]
+ 
+ L["eBPF Maps&lt;br/&gt;共享存储/键值对"] --- M["用户态控制程序&lt;br/&gt;Go / C++ / Rust"]
+ M -- "分析数据" --&gt; N["可视化 / 控制面板"]
+ end
+
+ subgraph Kernel_Space ["内核态 (Kernel Space)"]
+ C --&gt; D{"验证器 Verifier&lt;br/&gt;安全/权限检查"}
+ D -- "拒绝" --&gt; E["报错并停止加载"]
+ D -- "通过" --&gt; F["JIT 即时编译器"]
+ F --&gt; G["原生机器码&lt;br/&gt;Native Machine Code"]
+ 
+ subgraph Hooks ["事件钩子 (Event Hooks)"]
+ H["网络包 XDP/TC"]
+ I["系统调用 Syscalls"]
+ J["内核函数 Kprobes"]
+ K["用户函数 Uprobes"]
+ end
+
+ G -- "挂载执行" --&gt; H
+ G -- "挂载执行" --&gt; I
+ G -- "挂载执行" --&gt; J
+ G -- "挂载执行" --&gt; K
+ 
+ H &amp; I &amp; J &amp; K -- "数据交互" --&gt; L
+ end
+
+ style D fill:#f96,stroke:#333,stroke-width:2px
+ style G fill:#00d2ff,stroke:#333,stroke-width:2px
+ style L fill:#fff4dd,stroke:#d4a017,stroke-width:2px&lt;/div&gt;
+&lt;h3 id="一个加速小例子"&gt;一个加速小例子&lt;/h3&gt;
 &lt;p&gt;现在假定一个业务场景，比如我们想实现给局域网里的部分设备如平板/手机游戏加速，其工作流程为
 当手机流量到达网关时，根据手机MAC地址和请求的域名/IP对应指定游戏的服务时，就转发到加速端口进行加速，否则就走直连。&lt;/p&gt;</description></item><item><title>Ubuntu init process</title><link>https://qtopie.github.io/notes/linux/systemd-service-unit-file/</link><pubDate>Thu, 15 Sep 2016 14:20:15 +0800</pubDate><guid>https://qtopie.github.io/notes/linux/systemd-service-unit-file/</guid><description>&lt;h2 id="history"&gt;History&lt;/h2&gt;
 &lt;ul&gt;

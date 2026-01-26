@@ -25,40 +25,33 @@ eBPF 充当了内核级的“安全警卫”，能够实时识别并拦截恶意
 加密与脱敏：实时监控敏感数据流，在内核态自动执行 TLS 卸载或对传输中的敏感数据进行脱敏处理。</li><li>现代内核调度与扩展 (Kernel Evolution)
 到 2026 年，eBPF 的能力已进一步深入到内核的核心调度逻辑。
 自定义 CPU 调度：通过 sched_ext 等框架，开发者可以编写自定义的 CPU 调度策略，针对特定工作负载（如 AI 训练或实时音视频）优化计算资源的分配。
-热补丁与功能修复：在不重启系统的情况下，通过挂载 eBPF 程序动态修复已知的内核逻辑缺陷或漏洞。</li></ol><h2 id=如何使用>如何使用</h2><h3 id=ebpf工作流程>eBPF工作流程</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>graph TD
-</span></span><span class=line><span class=cl>    subgraph User_Space [&#34;用户态 (User Space)&#34;]
-</span></span><span class=line><span class=cl>        A[&#34;编写 eBPF 源代码&lt;br/&gt;(C / Rust)&#34;] -- &#34;LLVM / Clang&#34; --&gt; B[&#34;eBPF 字节码&lt;br/&gt;(Bytecode)&#34;]
-</span></span><span class=line><span class=cl>        B -- &#34;bpf 系统调用&#34; --&gt; C[&#34;加载并注入内核&#34;]
-</span></span><span class=line><span class=cl>        
-</span></span><span class=line><span class=cl>        L[&#34;eBPF Maps&lt;br/&gt;共享存储/键值对&#34;] --- M[&#34;用户态控制程序&lt;br/&gt;Go / C++ / Rust&#34;]
-</span></span><span class=line><span class=cl>        M -- &#34;分析数据&#34; --&gt; N[&#34;可视化 / 控制面板&#34;]
-</span></span><span class=line><span class=cl>    end
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    subgraph Kernel_Space [&#34;内核态 (Kernel Space)&#34;]
-</span></span><span class=line><span class=cl>        C --&gt; D{&#34;验证器 Verifier&lt;br/&gt;安全/权限检查&#34;}
-</span></span><span class=line><span class=cl>        D -- &#34;拒绝&#34; --&gt; E[&#34;报错并停止加载&#34;]
-</span></span><span class=line><span class=cl>        D -- &#34;通过&#34; --&gt; F[&#34;JIT 即时编译器&#34;]
-</span></span><span class=line><span class=cl>        F --&gt; G[&#34;原生机器码&lt;br/&gt;Native Machine Code&#34;]
-</span></span><span class=line><span class=cl>        
-</span></span><span class=line><span class=cl>        subgraph Hooks [&#34;事件钩子 (Event Hooks)&#34;]
-</span></span><span class=line><span class=cl>            H[&#34;网络包 XDP/TC&#34;]
-</span></span><span class=line><span class=cl>            I[&#34;系统调用 Syscalls&#34;]
-</span></span><span class=line><span class=cl>            J[&#34;内核函数 Kprobes&#34;]
-</span></span><span class=line><span class=cl>            K[&#34;用户函数 Uprobes&#34;]
-</span></span><span class=line><span class=cl>        end
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>        G -- &#34;挂载执行&#34; --&gt; H
-</span></span><span class=line><span class=cl>        G -- &#34;挂载执行&#34; --&gt; I
-</span></span><span class=line><span class=cl>        G -- &#34;挂载执行&#34; --&gt; J
-</span></span><span class=line><span class=cl>        G -- &#34;挂载执行&#34; --&gt; K
-</span></span><span class=line><span class=cl>        
-</span></span><span class=line><span class=cl>        H &amp; I &amp; J &amp; K -- &#34;数据交互&#34; --&gt; L
-</span></span><span class=line><span class=cl>    end
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    style D fill:#f96,stroke:#333,stroke-width:2px
-</span></span><span class=line><span class=cl>    style G fill:#00d2ff,stroke:#333,stroke-width:2px
-</span></span><span class=line><span class=cl>    style L fill:#fff4dd,stroke:#d4a017,stroke-width:2px
-</span></span></code></pre></div><h3 id=一个加速小例子>一个加速小例子</h3><p>现在假定一个业务场景，比如我们想实现给局域网里的部分设备如平板/手机游戏加速，其工作流程为
+热补丁与功能修复：在不重启系统的情况下，通过挂载 eBPF 程序动态修复已知的内核逻辑缺陷或漏洞。</li></ol><h2 id=如何使用>如何使用</h2><h3 id=ebpf工作流程>eBPF工作流程</h3><div class=mermaid>graph TD
+subgraph User_Space ["用户态 (User Space)"]
+A["编写 eBPF 源代码<br>(C / Rust)"] -- "LLVM / Clang" --> B["eBPF 字节码<br>(Bytecode)"]
+B -- "bpf 系统调用" --> C["加载并注入内核"]
+L["eBPF Maps<br>共享存储/键值对"] --- M["用户态控制程序<br>Go / C++ / Rust"]
+M -- "分析数据" --> N["可视化 / 控制面板"]
+end
+subgraph Kernel_Space ["内核态 (Kernel Space)"]
+C --> D{"验证器 Verifier<br>安全/权限检查"}
+D -- "拒绝" --> E["报错并停止加载"]
+D -- "通过" --> F["JIT 即时编译器"]
+F --> G["原生机器码<br>Native Machine Code"]
+subgraph Hooks ["事件钩子 (Event Hooks)"]
+H["网络包 XDP/TC"]
+I["系统调用 Syscalls"]
+J["内核函数 Kprobes"]
+K["用户函数 Uprobes"]
+end
+G -- "挂载执行" --> H
+G -- "挂载执行" --> I
+G -- "挂载执行" --> J
+G -- "挂载执行" --> K
+H & I & J & K -- "数据交互" --> L
+end
+style D fill:#f96,stroke:#333,stroke-width:2px
+style G fill:#00d2ff,stroke:#333,stroke-width:2px
+style L fill:#fff4dd,stroke:#d4a017,stroke-width:2px</div><h3 id=一个加速小例子>一个加速小例子</h3><p>现在假定一个业务场景，比如我们想实现给局域网里的部分设备如平板/手机游戏加速，其工作流程为
 当手机流量到达网关时，根据手机MAC地址和请求的域名/IP对应指定游戏的服务时，就转发到加速端口进行加速，否则就走直连。</p><p>假定我们接收加速流量的端口使用了sock5代理为1080</p><p>为了方便开发，我们可以使用GO版本的SDK来实现 <a href=https://github.com/cilium/ebpf>https://github.com/cilium/ebpf</a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=c1>// accelerator.c
 </span></span></span><span class=line><span class=cl><span class=c1>// +build ignore
 </span></span></span><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;linux/bpf.h&gt;</span><span class=cp>
@@ -198,6 +191,16 @@ eBPF 充当了内核级的“安全警卫”，能够实时识别并拦截恶意
 </span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
 </span></span></span></code></pre></div><p>假如我们在树莓派上运行，我们需要准备以下环境依赖</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt update
 </span></span><span class=line><span class=cl>sudo apt install clang llvm libelf-dev libbpf-dev golang -y
-</span></span></code></pre></div><p>为什么这是树莓派的最佳方案？</p><ul><li><p>CPU 负载极低：在网卡驱动刚收到包的时刻（Ingress）就完成了分流，数据包不需要经过复杂的 Netfilter 规则匹配。</p></li><li><p>内存占用极小：eBPF Map 的查询是常数级别的 (O(1)) 时间复杂度。</p></li><li><p>全透明：手机端完全无感，不需要安装任何 App，也不需要改 DNS。</p></li></ul><p>注意： 运行此程序需要 Linux 内核版本建议在 5.10 以上，若要使用最新的 TCX 钩子，建议树莓派系统升级至最新的 Debian 13 (Trixie) 预览版或定制的 6.6+ 内核。</p><h2 id=参考>参考</h2><ul><li><a href=https://ebpf.io/>eBPF</a></li><li><a href=https://ebpf-go.dev/guides/getting-started/>eBPF GO</a></li></ul><div id=react-single-actions data-post-id=274815576fbe4fea34a6e69a843716a1></div></article><button class=mobile-toc-trigger aria-controls=mobile-toc aria-expanded=false title=Index>☰</button><div class=mobile-toc-overlay hidden></div><div id=mobile-toc class=mobile-toc-drawer aria-hidden=true role=dialog aria-label=Index><div class=mobile-toc-header><button class=mobile-toc-close aria-label=close>×</button></div><nav class=mobile-toc-body><div class=mobile-toc-list></div></nav><div class=mobile-safe-area-spacer></div></div><script type=module src=/react/page.bundle.js></script></main><footer><div class=copyright><small>Made with <span style=color:#e25555>&#9829;</span> in Guangzhou by
+</span></span></code></pre></div><p>为什么这是树莓派的最佳方案？</p><ul><li><p>CPU 负载极低：在网卡驱动刚收到包的时刻（Ingress）就完成了分流，数据包不需要经过复杂的 Netfilter 规则匹配。</p></li><li><p>内存占用极小：eBPF Map 的查询是常数级别的 (O(1)) 时间复杂度。</p></li><li><p>全透明：手机端完全无感，不需要安装任何 App，也不需要改 DNS。</p></li></ul><p>注意： 运行此程序需要 Linux 内核版本建议在 5.10 以上，若要使用最新的 TCX 钩子，建议树莓派系统升级至最新的 Debian 13 (Trixie) 预览版或定制的 6.6+ 内核。</p><h2 id=参考>参考</h2><ul><li><a href=https://ebpf.io/>eBPF</a></li><li><a href=https://ebpf-go.dev/guides/getting-started/>eBPF GO</a></li></ul><div id=react-app-components data-post-id=274815576fbe4fea34a6e69a843716a1></div></article><button class=mobile-toc-trigger aria-controls=mobile-toc aria-expanded=false title=Index>☰</button><div class=mobile-toc-overlay hidden></div><div id=mobile-toc class=mobile-toc-drawer aria-hidden=true role=dialog aria-label=Index><div class=mobile-toc-header><button class=mobile-toc-close aria-label=close>×</button></div><nav class=mobile-toc-body><div class=mobile-toc-list></div></nav><div class=mobile-safe-area-spacer></div></div><script type=module src=/react/page.bundle.js></script></main><footer><div class=copyright><small>Made with <span style=color:#e25555>&#9829;</span> in Guangzhou by
 ©<a href=https://github.com/qtopie>qtopie</a> 2026
-</small><small>Posts licensed under <a href=https://creativecommons.org/licenses/by/4.0/legalcode>CC BY 4.0</small></div><div><script type=module src=/react/base.bundle.js></script></div></footer></body></html>
+</small><small>Posts licensed under <a href=https://creativecommons.org/licenses/by/4.0/legalcode>CC BY 4.0</small></div><div><script type=module src=/react/base.bundle.js></script><script type=module>
+      (async ()=>{
+        try {
+          const mod = await import('https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.mjs');
+          const mermaid = mod.default || mod;
+          const prefersDark = document.body.classList.contains('dark') || window.matchMedia('(prefers-color-scheme: dark)').matches;
+          mermaid.initialize({ startOnLoad: false, theme: prefersDark ? 'dark' : 'default' });
+          mermaid.init && mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+        } catch (e) { console.error('mermaid load error', e); }
+      })();
+    </script></div></footer></body></html>
