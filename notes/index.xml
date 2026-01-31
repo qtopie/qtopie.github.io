@@ -1,44 +1,83 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Notes on 1001問</title><link>https://qtopie.github.io/notes/</link><description>Recent content in Notes on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Sun, 25 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/notes/index.xml" rel="self" type="application/rss+xml"/><item><title>eBPF</title><link>https://qtopie.github.io/notes/linux/ebpf/</link><pubDate>Sun, 25 Jan 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/linux/ebpf/</guid><description>&lt;h2 id="ebpf介绍"&gt;eBPF介绍&lt;/h2&gt;
-&lt;p&gt;eBPF（Extended Berkeley Packet Filter）是一种革命性的内核技术，允许开发者在不修改内核源代码、不加载内核模块的情况下，在操作系统内核中安全、高效地运行自定义程序。
-它通过在内核中运行一个沙盒虚拟机，使内核变得可编程，广泛应用于网络、安全、可观测性等领域。&lt;/p&gt;
+&lt;p&gt;eBPF（Extended Berkeley Packet Filter）允许开发者在不修改内核源码、不加载内核模块的情况下，把小段受控程序安全地运行在内核里。它通过沙盒虚拟机让内核变得可编程，广泛用于网络、安全、可观测性等场景。&lt;/p&gt;
 &lt;p&gt;&lt;img src="ebpf.png" alt="What is eBPF"&gt;&lt;/p&gt;
-&lt;h3 id="核心工作原理"&gt;核心工作原理&lt;/h3&gt;
-&lt;p&gt;事件驱动：eBPF 程序通常挂载在特定的“钩子”（Hook）上，如系统调用、网络包收发、内核跟踪点（Tracepoint）或动态探测点（kprobes/uprobes）。
-安全验证：程序加载前会经过内核验证器（Verifier）的严格检查，确保程序不会崩溃、不会陷入死循环，也不会非法访问内核内存。
-JIT 编译：经过验证的字节码通过即时编译（JIT）转换为原生的机器指令，其执行效率接近原生内核代码。
-数据交互：eBPF 程序通过 Maps（键值对存储）与用户空间进行数据共享，实现监控结果的实时传输或配置的动态更新。&lt;/p&gt;
-&lt;p&gt;主要应用场景
-网络加速与负载均衡：例如 Cilium 利用 eBPF 实现高性能的容器网络和安全路由。
-可观测性：在无需修改应用代码的情况下，实现极低开销的系统调用跟踪、性能剖析和链路监控。
-运行时安全：实时拦截异常的系统调用，实施细粒度的防火墙规则或安全策略。&lt;/p&gt;
-&lt;p&gt;优势对比
-特性 	eBPF 程序	内核模块 (Kernel Module)	修改内核源码
-安全性	内核验证器保证不崩溃	错误可能导致系统蓝屏/死机	风险最高
-灵活性	动态加载/卸载，无需重启	加载复杂，易引入依赖问题	需要编译并重启内核
-性能	高（JIT 编译后接近原生）	高	高
-如需开始开发，可以参考 ebpf.io 提供的文档，或使用 BCC (BPF Compiler Collection) 和 libbpf 等工具链&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;核心工作原理&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;事件驱动：挂载在系统调用、网络包收发、Tracepoint 或 kprobe/uprobes 等钩子上。&lt;/li&gt;
+&lt;li&gt;安全验证：加载前先过 Verifier 检查，避免崩溃、死循环或越界访问。&lt;/li&gt;
+&lt;li&gt;JIT 编译：通过 JIT 将字节码转成原生指令，性能接近内核代码。&lt;/li&gt;
+&lt;li&gt;数据交互：通过 Map（键值存储）在内核态与用户态共享数据。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;主要应用场景&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;网络加速与负载均衡：例如 Cilium 用 eBPF 做高性能容器网络和安全路由。&lt;/li&gt;
+&lt;li&gt;可观测性：低开销系统调用跟踪、性能剖析、链路监控，无需改应用代码。&lt;/li&gt;
+&lt;li&gt;运行时安全：拦截异常系统调用，实现细粒度防火墙或策略控制。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;优势对比&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;特性&lt;/th&gt;
+ &lt;th&gt;eBPF 程序&lt;/th&gt;
+ &lt;th&gt;内核模块&lt;/th&gt;
+ &lt;th&gt;修改内核源码&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;安全性&lt;/td&gt;
+ &lt;td&gt;Verifier 保底，避免崩溃&lt;/td&gt;
+ &lt;td&gt;代码错误可能导致死机&lt;/td&gt;
+ &lt;td&gt;风险最高&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;灵活性&lt;/td&gt;
+ &lt;td&gt;动态加载/卸载，无需重启&lt;/td&gt;
+ &lt;td&gt;加载复杂，易引入依赖&lt;/td&gt;
+ &lt;td&gt;需要编译并重启&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;性能&lt;/td&gt;
+ &lt;td&gt;JIT 后接近原生&lt;/td&gt;
+ &lt;td&gt;高&lt;/td&gt;
+ &lt;td&gt;高&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;如需开始开发，可参考 &lt;a href="https://ebpf.io/"&gt;ebpf.io&lt;/a&gt; 文档，或使用 BCC、libbpf 等工具链。&lt;/p&gt;
 &lt;h3 id="ebpf动态扩展了哪些内核能力"&gt;eBPF动态扩展了哪些内核能力&lt;/h3&gt;
 &lt;ol&gt;
-&lt;li&gt;深度可观测性与性能剖析 (Observability &amp;amp; Profiling)
-eBPF 可以无死角地观察内核和应用的运行状态，且几乎没有性能损耗。
-函数与系统调用跟踪：通过挂载到 kprobes（内核函数）、uprobes（用户空间函数）或 tracepoints（静态跟踪点），实时监控每一次系统调用或函数执行。
-零侵入性能监控：无需修改应用代码（无须重新编译或注入代理），即可采集 CPU 指令周期、内存使用率及函数调用热点图。
-低开销数据聚合：在内核态直接对数据进行过滤和统计，只将最终结果传给用户态，避免了大量原始数据拷贝带来的开销。&lt;/li&gt;
-&lt;li&gt;高性能网络处理 (Networking)
-通过接管内核协议栈的关键路径，eBPF 极大地提升了网络吞吐量并降低了延迟。
-绕过标准协议栈 (XDP)：在网卡驱动层（XDP）直接处理数据包，实现极速的 DDoS 防护、负载均衡和防火墙过滤。
-容器网络与服务网格：在 Kubernetes 等云原生场景中，eBPF 可实现 Pod 间的高效路由，甚至直接绕过传统的 iptables 规则以优化网络路径。
-自定义协议解析：支持在内核态直接解析非标准或自定义的网络协议，无需将包传回用户空间处理。&lt;/li&gt;
-&lt;li&gt;动态安全控制 (Security)
-eBPF 充当了内核级的“安全警卫”，能够实时识别并拦截恶意行为。
-运行时行为审计：监控异常的进程行为（如异常读取 /etc/shadow 文件），并触发警报或直接终止该操作。
-细粒度权限管控：不仅能看（审计），还能干预。例如限制特定进程仅能访问特定的 IP 或文件目录。
-加密与脱敏：实时监控敏感数据流，在内核态自动执行 TLS 卸载或对传输中的敏感数据进行脱敏处理。&lt;/li&gt;
-&lt;li&gt;现代内核调度与扩展 (Kernel Evolution)
-到 2026 年，eBPF 的能力已进一步深入到内核的核心调度逻辑。
-自定义 CPU 调度：通过 sched_ext 等框架，开发者可以编写自定义的 CPU 调度策略，针对特定工作负载（如 AI 训练或实时音视频）优化计算资源的分配。
-热补丁与功能修复：在不重启系统的情况下，通过挂载 eBPF 程序动态修复已知的内核逻辑缺陷或漏洞。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;深度可观测性与性能剖析 (Observability &amp;amp; Profiling)&lt;/strong&gt;&lt;/li&gt;
 &lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;无侵入跟踪：挂载到 kprobes/uprobes/tracepoints，实时监控函数或系统调用。&lt;/li&gt;
+&lt;li&gt;低成本性能监控：采集指令周期、内存、热点函数，几乎零额外开销。&lt;/li&gt;
+&lt;li&gt;内核态聚合：先在内核过滤/统计，只把结果送到用户态，减少数据拷贝。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start="2"&gt;
+&lt;li&gt;&lt;strong&gt;高性能网络处理 (Networking)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;XDP 旁路：在网卡驱动层直接处理包，可做 DDoS 防护、负载均衡、防火墙。&lt;/li&gt;
+&lt;li&gt;容器网络：为 Kubernetes Pod 提供高效路由，绕过大量 iptables 规则。&lt;/li&gt;
+&lt;li&gt;自定义协议：在内核态解析非标准协议，无需回到用户态再处理。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start="3"&gt;
+&lt;li&gt;&lt;strong&gt;动态安全控制 (Security)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;行为审计：监控异常访问（如读取 /etc/shadow），触发告警或阻断。&lt;/li&gt;
+&lt;li&gt;细粒度策略：可限制特定进程只能访问某些 IP/目录。&lt;/li&gt;
+&lt;li&gt;流量脱敏：在内核态做 TLS 卸载或敏感字段脱敏。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start="4"&gt;
+&lt;li&gt;&lt;strong&gt;现代内核调度与扩展 (Kernel Evolution)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;自定义调度：借助 sched_ext，针对 AI 训练、音视频等场景写专用调度策略。&lt;/li&gt;
+&lt;li&gt;热补丁：无需重启即可挂载 eBPF 程序修补已知逻辑缺陷。&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id="如何使用"&gt;如何使用&lt;/h2&gt;
 &lt;h3 id="ebpf工作流程"&gt;eBPF工作流程&lt;/h3&gt;
 
@@ -76,8 +115,7 @@ eBPF 充当了内核级的“安全警卫”，能够实时识别并拦截恶意
  style G fill:#00d2ff,stroke:#333,stroke-width:2px
  style L fill:#fff4dd,stroke:#d4a017,stroke-width:2px&lt;/div&gt;
 &lt;h3 id="一个加速小例子"&gt;一个加速小例子&lt;/h3&gt;
-&lt;p&gt;现在假定一个业务场景，比如我们想实现给局域网里的部分设备如平板/手机游戏加速，其工作流程为
-当手机流量到达网关时，根据手机MAC地址和请求的域名/IP对应指定游戏的服务时，就转发到加速端口进行加速，否则就走直连。&lt;/p&gt;</description></item><item><title>XS20摄影技巧</title><link>https://qtopie.github.io/notes/photography/xs20/</link><pubDate>Thu, 01 Jan 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/photography/xs20/</guid><description>&lt;h2 id="xs-20介绍"&gt;XS-20介绍&lt;/h2&gt;
+&lt;p&gt;场景：为局域网内的平板/手机做游戏加速。思路是：数据包进入网关后，如果源 MAC 在“加速名单”且目标 IP 在“游戏服务器列表”，则把流量指派给本地代理端口（示例中用 1080），否则直连。&lt;/p&gt;</description></item><item><title>XS20摄影技巧</title><link>https://qtopie.github.io/notes/photography/xs20/</link><pubDate>Thu, 01 Jan 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/photography/xs20/</guid><description>&lt;h2 id="xs-20介绍"&gt;XS-20介绍&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;A 模式 (Aperture Priority) —— 光圈优先模式
 含义： 你手动控制光圈，相机自动帮你计算快门速度。&lt;/li&gt;
@@ -112,7 +150,90 @@ eBPF 充当了内核级的“安全警卫”，能够实时识别并拦截恶意
 &lt;/ol&gt;
 &lt;hr&gt;
 &lt;h3 id="二-拍出好照片的四大要素"&gt;二、 拍出“好照片”的四大要素&lt;/h3&gt;
-&lt;p&gt;很多新手纠结于参数，但好的照片往往是以下四个维度的平衡：&lt;/p&gt;</description></item><item><title>晴天</title><link>https://qtopie.github.io/notes/guitar/sunny-day/</link><pubDate>Thu, 18 Dec 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/guitar/sunny-day/</guid><description>&lt;p&gt;吉他简谱练习&lt;/p&gt;
+&lt;p&gt;很多新手纠结于参数，但好的照片往往是以下四个维度的平衡：&lt;/p&gt;</description></item><item><title>深圳到中山旅游攻略 (基于小红书总结)</title><link>https://qtopie.github.io/notes/ai/shenzhen-to-zhongshan-guide/</link><pubDate>Thu, 01 Jan 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/ai/shenzhen-to-zhongshan-guide/</guid><description>&lt;h1 id="深圳到中山旅游攻略"&gt;深圳到中山旅游攻略&lt;/h1&gt;
+&lt;p&gt;基于小红书热门笔记总结的深圳到中山旅游攻略，涵盖交通、行程规划、美食及景点推荐。&lt;/p&gt;
+&lt;h2 id="-交通指南"&gt;🚗 交通指南&lt;/h2&gt;
+&lt;h3 id="1-深中跨市公交-高性价比"&gt;1. 深中跨市公交 (高性价比)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;路线&lt;/strong&gt;: 深圳前海湾站 ↔ 中山博览中心枢纽 / 中山国际人才港&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;车次&lt;/strong&gt;: T01A (博览中心方向), T01B (人才港方向)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;票价&lt;/strong&gt;: 15-18元/人&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;耗时&lt;/strong&gt;: 约1小时&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;服务时间&lt;/strong&gt;: 06:30 - 21:30&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;购票&lt;/strong&gt;: 微信搜索“深巴出行”小程序提前购票&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;市内交通&lt;/strong&gt;: 到达中山后，打车前往各景点非常便宜（通常15元以内）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="2-自驾-灵活便捷"&gt;2. 自驾 (灵活便捷)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;路线&lt;/strong&gt;: 深圳 → 深中通道 → 中山&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;耗时&lt;/strong&gt;: 1 - 1.5小时&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;费用&lt;/strong&gt;: 高速费约 80-90 元 (单程)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;停车&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;中山博物馆/纪念堂附近有停车场。&lt;/li&gt;
+&lt;li&gt;孙文西路步行街可停在中山公园区域。&lt;/li&gt;
+&lt;li&gt;兴中广场（摩天轮）停车方便。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-行程规划推荐"&gt;🗺️ 行程规划推荐&lt;/h2&gt;
+&lt;h3 id="方案一特种兵一日游-自驾早出晚归"&gt;方案一：特种兵一日游 (自驾/早出晚归)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;08:00&lt;/strong&gt; 深圳出发，经深中通道。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;09:30&lt;/strong&gt; &lt;strong&gt;中山市博物馆&lt;/strong&gt; (需预约，免费)：了解中山历史文化，停车方便。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;10:30&lt;/strong&gt; &lt;strong&gt;四喜咖啡 (Four Joy Coffee)&lt;/strong&gt;：博物馆附近，网红打卡点，推荐Dirty、拿铁。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;11:00&lt;/strong&gt; &lt;strong&gt;西山寺&lt;/strong&gt;：市区制高点，古建筑，清静。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;11:40&lt;/strong&gt; &lt;strong&gt;孙文西路步行街&lt;/strong&gt;：感受老中山骑楼风情。
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;伴手礼&lt;/em&gt;：咀香园旗舰店 (杏仁饼)。&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;甜品&lt;/em&gt;：众生堂 (双皮奶)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;12:30&lt;/strong&gt; &lt;strong&gt;午餐&lt;/strong&gt;：&lt;strong&gt;马喜鸽&lt;/strong&gt; (石岐乳鸽、白切鸡、猪杂粥)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;14:00&lt;/strong&gt; &lt;strong&gt;岐江公园&lt;/strong&gt;：工业风遗址公园，适合拍照。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;15:00&lt;/strong&gt; &lt;strong&gt;孙中山故居纪念馆&lt;/strong&gt; (5A景区)：必打卡，游览约1.5小时。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;17:00&lt;/strong&gt; &lt;strong&gt;詹园&lt;/strong&gt;：岭南园林，夕阳时分景色最佳 (门票约50元)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;18:30&lt;/strong&gt; &lt;strong&gt;幻彩摩天轮&lt;/strong&gt;：兴中广场，欣赏中山夜景 (门票30-50元)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;19:30&lt;/strong&gt; &lt;strong&gt;晚餐&lt;/strong&gt;：&lt;strong&gt;大墩荣记食店&lt;/strong&gt; (脆皮猪手、炒田螺、椒盐虾、咸骨粥)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;21:00&lt;/strong&gt; 返程深圳。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="方案二休闲两天一夜-city-walk--吃喝"&gt;方案二：休闲两天一夜 (City Walk + 吃喝)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Day 1&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;下午到达中山，入住老城区附近酒店。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;晚餐&lt;/strong&gt;：&lt;strong&gt;大墩荣记食店&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;夜游&lt;/strong&gt;：&lt;strong&gt;幻彩摩天轮&lt;/strong&gt; + &lt;strong&gt;岐江桥&lt;/strong&gt;漫步，吹晚风看夜景。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Day 2&lt;/strong&gt;:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;早茶&lt;/strong&gt;：&lt;strong&gt;爱群食店&lt;/strong&gt; (老字号，性价比高，蒸笼堆成山)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;上午&lt;/strong&gt;：&lt;strong&gt;中山市博物馆&lt;/strong&gt; -&amp;gt; &lt;strong&gt;四喜咖啡&lt;/strong&gt; -&amp;gt; &lt;strong&gt;西山寺&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;下午&lt;/strong&gt;：前往&lt;strong&gt;孙中山故居&lt;/strong&gt; (推荐) 或 &lt;strong&gt;崖口村&lt;/strong&gt; (看稻田/海边，视季节而定)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;返程&lt;/strong&gt;：从中山国际人才港乘公交回深圳。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="-美食推荐"&gt;🍲 美食推荐&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;石岐乳鸽&lt;/strong&gt;: 中山必吃，皮脆肉嫩。推荐：&lt;em&gt;马喜鸽&lt;/em&gt;、&lt;em&gt;石岐佬&lt;/em&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;脆皮猪手/咸骨粥&lt;/strong&gt;: 大排档风味。推荐：&lt;em&gt;大墩荣记食店&lt;/em&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;早茶&lt;/strong&gt;: 感受广东早茶文化。推荐：&lt;em&gt;爱群食店&lt;/em&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;甜品&lt;/strong&gt;: &lt;em&gt;众生堂&lt;/em&gt; (双皮奶、姜撞奶)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;伴手礼&lt;/strong&gt;: &lt;em&gt;咀香园&lt;/em&gt; (杏仁饼、鸡仔饼)。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="-小贴士"&gt;💡 小贴士&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;深中通道&lt;/strong&gt;体验很好，但周末可能会有拥堵，建议错峰出行。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;中山市内交通&lt;/strong&gt;打车很便宜，非自驾也很方便。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;孙文西路步行街&lt;/strong&gt;部分区域可能在装修，建议提前确认。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;崖口村&lt;/strong&gt;适合看稻浪，如果稻子收割了景色会打折，建议替换为孙中山故居。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;em&gt;注：以上信息整理自小红书热门笔记，具体营业时间及票价请以实际为准。&lt;/em&gt;&lt;/p&gt;</description></item><item><title>晴天</title><link>https://qtopie.github.io/notes/guitar/sunny-day/</link><pubDate>Thu, 18 Dec 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/guitar/sunny-day/</guid><description>&lt;p&gt;吉他简谱练习&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;stave [tuning=EADGBe] [time=4/4] 
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;C9 $4 x $3 x $2 x $3 x | $5 x $4 0h2 $2 x $3 x | G $6 x $4 x $2 x $3 x | $6 x $2 x $6 2 $2 x |
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
@@ -625,90 +746,7 @@ eBPF 充当了内核级的“安全警卫”，能够实时识别并拦截恶意
 &lt;p&gt;然后用解析网页内容，找到搜索框，输入关键字&amp;quot;深圳到中山旅游攻略&amp;quot;，点击搜索然后抓取结果。&lt;/p&gt;
 &lt;p&gt;最后使用LLM总结网页内容.&lt;/p&gt;
 &lt;p&gt;你可以使用chrome-devtools-mcp完成页面抓取&lt;/p&gt;
-&lt;p&gt;&lt;img src="image.png" alt="alt text"&gt;&lt;/p&gt;</description></item><item><title>深圳到中山旅游攻略 (基于小红书总结)</title><link>https://qtopie.github.io/notes/ai/shenzhen-to-zhongshan-guide/</link><pubDate>Thu, 23 May 2024 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/ai/shenzhen-to-zhongshan-guide/</guid><description>&lt;h1 id="深圳到中山旅游攻略"&gt;深圳到中山旅游攻略&lt;/h1&gt;
-&lt;p&gt;基于小红书热门笔记总结的深圳到中山旅游攻略，涵盖交通、行程规划、美食及景点推荐。&lt;/p&gt;
-&lt;h2 id="-交通指南"&gt;🚗 交通指南&lt;/h2&gt;
-&lt;h3 id="1-深中跨市公交-高性价比"&gt;1. 深中跨市公交 (高性价比)&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;路线&lt;/strong&gt;: 深圳前海湾站 ↔ 中山博览中心枢纽 / 中山国际人才港&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;车次&lt;/strong&gt;: T01A (博览中心方向), T01B (人才港方向)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;票价&lt;/strong&gt;: 15-18元/人&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;耗时&lt;/strong&gt;: 约1小时&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;服务时间&lt;/strong&gt;: 06:30 - 21:30&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;购票&lt;/strong&gt;: 微信搜索“深巴出行”小程序提前购票&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;市内交通&lt;/strong&gt;: 到达中山后，打车前往各景点非常便宜（通常15元以内）。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="2-自驾-灵活便捷"&gt;2. 自驾 (灵活便捷)&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;路线&lt;/strong&gt;: 深圳 → 深中通道 → 中山&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;耗时&lt;/strong&gt;: 1 - 1.5小时&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;费用&lt;/strong&gt;: 高速费约 80-90 元 (单程)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;停车&lt;/strong&gt;:
-&lt;ul&gt;
-&lt;li&gt;中山博物馆/纪念堂附近有停车场。&lt;/li&gt;
-&lt;li&gt;孙文西路步行街可停在中山公园区域。&lt;/li&gt;
-&lt;li&gt;兴中广场（摩天轮）停车方便。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="-行程规划推荐"&gt;🗺️ 行程规划推荐&lt;/h2&gt;
-&lt;h3 id="方案一特种兵一日游-自驾早出晚归"&gt;方案一：特种兵一日游 (自驾/早出晚归)&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;08:00&lt;/strong&gt; 深圳出发，经深中通道。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;09:30&lt;/strong&gt; &lt;strong&gt;中山市博物馆&lt;/strong&gt; (需预约，免费)：了解中山历史文化，停车方便。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;10:30&lt;/strong&gt; &lt;strong&gt;四喜咖啡 (Four Joy Coffee)&lt;/strong&gt;：博物馆附近，网红打卡点，推荐Dirty、拿铁。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;11:00&lt;/strong&gt; &lt;strong&gt;西山寺&lt;/strong&gt;：市区制高点，古建筑，清静。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;11:40&lt;/strong&gt; &lt;strong&gt;孙文西路步行街&lt;/strong&gt;：感受老中山骑楼风情。
-&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;伴手礼&lt;/em&gt;：咀香园旗舰店 (杏仁饼)。&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;甜品&lt;/em&gt;：众生堂 (双皮奶)。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;12:30&lt;/strong&gt; &lt;strong&gt;午餐&lt;/strong&gt;：&lt;strong&gt;马喜鸽&lt;/strong&gt; (石岐乳鸽、白切鸡、猪杂粥)。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;14:00&lt;/strong&gt; &lt;strong&gt;岐江公园&lt;/strong&gt;：工业风遗址公园，适合拍照。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;15:00&lt;/strong&gt; &lt;strong&gt;孙中山故居纪念馆&lt;/strong&gt; (5A景区)：必打卡，游览约1.5小时。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;17:00&lt;/strong&gt; &lt;strong&gt;詹园&lt;/strong&gt;：岭南园林，夕阳时分景色最佳 (门票约50元)。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;18:30&lt;/strong&gt; &lt;strong&gt;幻彩摩天轮&lt;/strong&gt;：兴中广场，欣赏中山夜景 (门票30-50元)。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;19:30&lt;/strong&gt; &lt;strong&gt;晚餐&lt;/strong&gt;：&lt;strong&gt;大墩荣记食店&lt;/strong&gt; (脆皮猪手、炒田螺、椒盐虾、咸骨粥)。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;21:00&lt;/strong&gt; 返程深圳。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="方案二休闲两天一夜-city-walk--吃喝"&gt;方案二：休闲两天一夜 (City Walk + 吃喝)&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Day 1&lt;/strong&gt;:
-&lt;ul&gt;
-&lt;li&gt;下午到达中山，入住老城区附近酒店。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;晚餐&lt;/strong&gt;：&lt;strong&gt;大墩荣记食店&lt;/strong&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;夜游&lt;/strong&gt;：&lt;strong&gt;幻彩摩天轮&lt;/strong&gt; + &lt;strong&gt;岐江桥&lt;/strong&gt;漫步，吹晚风看夜景。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Day 2&lt;/strong&gt;:
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;早茶&lt;/strong&gt;：&lt;strong&gt;爱群食店&lt;/strong&gt; (老字号，性价比高，蒸笼堆成山)。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;上午&lt;/strong&gt;：&lt;strong&gt;中山市博物馆&lt;/strong&gt; -&amp;gt; &lt;strong&gt;四喜咖啡&lt;/strong&gt; -&amp;gt; &lt;strong&gt;西山寺&lt;/strong&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;下午&lt;/strong&gt;：前往&lt;strong&gt;孙中山故居&lt;/strong&gt; (推荐) 或 &lt;strong&gt;崖口村&lt;/strong&gt; (看稻田/海边，视季节而定)。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;返程&lt;/strong&gt;：从中山国际人才港乘公交回深圳。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="-美食推荐"&gt;🍲 美食推荐&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;石岐乳鸽&lt;/strong&gt;: 中山必吃，皮脆肉嫩。推荐：&lt;em&gt;马喜鸽&lt;/em&gt;、&lt;em&gt;石岐佬&lt;/em&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;脆皮猪手/咸骨粥&lt;/strong&gt;: 大排档风味。推荐：&lt;em&gt;大墩荣记食店&lt;/em&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;早茶&lt;/strong&gt;: 感受广东早茶文化。推荐：&lt;em&gt;爱群食店&lt;/em&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;甜品&lt;/strong&gt;: &lt;em&gt;众生堂&lt;/em&gt; (双皮奶、姜撞奶)。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;伴手礼&lt;/strong&gt;: &lt;em&gt;咀香园&lt;/em&gt; (杏仁饼、鸡仔饼)。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id="-小贴士"&gt;💡 小贴士&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;深中通道&lt;/strong&gt;体验很好，但周末可能会有拥堵，建议错峰出行。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;中山市内交通&lt;/strong&gt;打车很便宜，非自驾也很方便。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;孙文西路步行街&lt;/strong&gt;部分区域可能在装修，建议提前确认。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;崖口村&lt;/strong&gt;适合看稻浪，如果稻子收割了景色会打折，建议替换为孙中山故居。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;em&gt;注：以上信息整理自小红书热门笔记，具体营业时间及票价请以实际为准。&lt;/em&gt;&lt;/p&gt;</description></item><item><title>树莓派和HomeAssistant</title><link>https://qtopie.github.io/notes/iot/rpi/homeassistant/</link><pubDate>Tue, 28 Sep 2021 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/homeassistant/</guid><description>&lt;h2 id="目标"&gt;目标&lt;/h2&gt;
+&lt;p&gt;&lt;img src="image.png" alt="alt text"&gt;&lt;/p&gt;</description></item><item><title>树莓派和HomeAssistant</title><link>https://qtopie.github.io/notes/iot/rpi/homeassistant/</link><pubDate>Tue, 28 Sep 2021 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/homeassistant/</guid><description>&lt;h2 id="目标"&gt;目标&lt;/h2&gt;
 &lt;p&gt;使用开源软件和米家智能硬件，实现简单的智能家居系统&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;采用米家智能硬件的原因是, 小米智能家居做的比较早（也许是起初推广的更好，刚接触智能家居的时候就用的小米）,
@@ -1191,7 +1229,7 @@ eBPF 充当了内核级的“安全警卫”，能够实时识别并拦截恶意
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;After&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;network.target network-online.target multi-user.target 
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;[&lt;/span&gt;Service&lt;span class="o"&gt;]&lt;/span&gt; 
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;ExecStart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/usr/local/bin/caddy run -config /etc/Caddyfile -watch
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;ExecStart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/usr/local/bin/caddy run --config /etc/Caddyfile
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;Restart&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;on-failure 
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;RestartSec&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;30&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;TimeoutStopSec&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;30&lt;/span&gt;

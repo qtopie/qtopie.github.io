@@ -31,7 +31,7 @@
 </span></span><span class=line><span class=cl><span class=nv>After</span><span class=o>=</span>network.target network-online.target multi-user.target 
 </span></span><span class=line><span class=cl>                                                                                 
 </span></span><span class=line><span class=cl><span class=o>[</span>Service<span class=o>]</span>                                                                        
-</span></span><span class=line><span class=cl><span class=nv>ExecStart</span><span class=o>=</span>/usr/local/bin/caddy run -config /etc/Caddyfile -watch
+</span></span><span class=line><span class=cl><span class=nv>ExecStart</span><span class=o>=</span>/usr/local/bin/caddy run --config /etc/Caddyfile
 </span></span><span class=line><span class=cl><span class=nv>Restart</span><span class=o>=</span>on-failure                                                               
 </span></span><span class=line><span class=cl><span class=nv>RestartSec</span><span class=o>=</span><span class=m>30</span>
 </span></span><span class=line><span class=cl><span class=nv>TimeoutStopSec</span><span class=o>=</span><span class=m>30</span>

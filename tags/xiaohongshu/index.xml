@@ -1,11 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Xiaohongshu on 1001問</title><link>https://qtopie.github.io/tags/xiaohongshu/</link><description>Recent content in Xiaohongshu on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Thu, 23 May 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/tags/xiaohongshu/index.xml" rel="self" type="application/rss+xml"/><item><title>深圳到中山旅游攻略 (基于小红书总结)</title><link>https://qtopie.github.io/notes/ai/rednote-crawler/</link><pubDate>Thu, 23 May 2024 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/ai/rednote-crawler/</guid><description>&lt;p&gt;我想通过小红书资料做一份旅游攻略，以下是操作步骤。&lt;/p&gt;
-&lt;p&gt;首先，使用chrome-devtools-mcp打开小红书，网页版https://www.xiaohongshu.com/explore&lt;/p&gt;
-&lt;p&gt;获取登录态, 等待小红书登录页面，等待用户扫码。&lt;/p&gt;
-&lt;p&gt;用户扫码登录成功后，页面会刷新&lt;/p&gt;
-&lt;p&gt;然后用解析网页内容，找到搜索框，输入关键字&amp;quot;深圳到中山旅游攻略&amp;quot;，点击搜索然后抓取结果。&lt;/p&gt;
-&lt;p&gt;最后使用LLM总结网页内容.&lt;/p&gt;
-&lt;p&gt;你可以使用chrome-devtools-mcp完成页面抓取&lt;/p&gt;
-&lt;p&gt;&lt;img src="image.png" alt="alt text"&gt;&lt;/p&gt;</description></item><item><title>深圳到中山旅游攻略 (基于小红书总结)</title><link>https://qtopie.github.io/notes/ai/shenzhen-to-zhongshan-guide/</link><pubDate>Thu, 23 May 2024 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/ai/shenzhen-to-zhongshan-guide/</guid><description>&lt;h1 id="深圳到中山旅游攻略"&gt;深圳到中山旅游攻略&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Xiaohongshu on 1001問</title><link>https://qtopie.github.io/tags/xiaohongshu/</link><description>Recent content in Xiaohongshu on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Thu, 01 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/tags/xiaohongshu/index.xml" rel="self" type="application/rss+xml"/><item><title>深圳到中山旅游攻略 (基于小红书总结)</title><link>https://qtopie.github.io/notes/ai/shenzhen-to-zhongshan-guide/</link><pubDate>Thu, 01 Jan 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/ai/shenzhen-to-zhongshan-guide/</guid><description>&lt;h1 id="深圳到中山旅游攻略"&gt;深圳到中山旅游攻略&lt;/h1&gt;
 &lt;p&gt;基于小红书热门笔记总结的深圳到中山旅游攻略，涵盖交通、行程规划、美食及景点推荐。&lt;/p&gt;
 &lt;h2 id="-交通指南"&gt;🚗 交通指南&lt;/h2&gt;
 &lt;h3 id="1-深中跨市公交-高性价比"&gt;1. 深中跨市公交 (高性价比)&lt;/h3&gt;
@@ -88,4 +81,11 @@
 &lt;li&gt;&lt;strong&gt;崖口村&lt;/strong&gt;适合看稻浪，如果稻子收割了景色会打折，建议替换为孙中山故居。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;p&gt;&lt;em&gt;注：以上信息整理自小红书热门笔记，具体营业时间及票价请以实际为准。&lt;/em&gt;&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;&lt;em&gt;注：以上信息整理自小红书热门笔记，具体营业时间及票价请以实际为准。&lt;/em&gt;&lt;/p&gt;</description></item><item><title>深圳到中山旅游攻略 (基于小红书总结)</title><link>https://qtopie.github.io/notes/ai/rednote-crawler/</link><pubDate>Thu, 23 May 2024 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/ai/rednote-crawler/</guid><description>&lt;p&gt;我想通过小红书资料做一份旅游攻略，以下是操作步骤。&lt;/p&gt;
+&lt;p&gt;首先，使用chrome-devtools-mcp打开小红书，网页版https://www.xiaohongshu.com/explore&lt;/p&gt;
+&lt;p&gt;获取登录态, 等待小红书登录页面，等待用户扫码。&lt;/p&gt;
+&lt;p&gt;用户扫码登录成功后，页面会刷新&lt;/p&gt;
+&lt;p&gt;然后用解析网页内容，找到搜索框，输入关键字&amp;quot;深圳到中山旅游攻略&amp;quot;，点击搜索然后抓取结果。&lt;/p&gt;
+&lt;p&gt;最后使用LLM总结网页内容.&lt;/p&gt;
+&lt;p&gt;你可以使用chrome-devtools-mcp完成页面抓取&lt;/p&gt;
+&lt;p&gt;&lt;img src="image.png" alt="alt text"&gt;&lt;/p&gt;</description></item></channel></rss>
