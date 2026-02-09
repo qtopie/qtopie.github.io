@@ -2,7 +2,14 @@
 &lt;p&gt;构建一个可编程控制的流媒体播放服务器，类似于智能音箱，但是没有麦克风收集个人隐私数据。&lt;/p&gt;
 &lt;p&gt;整体架构如下&lt;/p&gt;
 
-&lt;div class="mermaid"&gt;graph LR
+&lt;div class="mermaid-block" data-mermaid-zoom="1"&gt;
+ &lt;div class="mermaid-toolbar"&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="zoom-in" aria-label="Zoom in"&gt;+&lt;/button&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="zoom-out" aria-label="Zoom out"&gt;-&lt;/button&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="reset" aria-label="Reset zoom"&gt;100%&lt;/button&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="fullscreen" aria-label="Toggle fullscreen"&gt;Full&lt;/button&gt;
+ &lt;/div&gt;
+ &lt;div class="mermaid mermaid-canvas"&gt;graph LR
  subgraph 树莓派 Raspberry Pi
  A[cmus音乐播放器] --&gt; B(PulseAudio Client)
  end
@@ -12,18 +19,13 @@
  end
 
  B --&gt; C&lt;/div&gt;
+&lt;/div&gt;
 &lt;h2 id="vocore固件支持"&gt;Vocore固件支持&lt;/h2&gt;
 &lt;p&gt;Currently 2022/12/3, only openwrt 21.02 is supported. (patch is not working ins 22.03)&lt;/p&gt;
 &lt;p&gt;see &lt;a href="https://github.com/Vonger/vocore2"&gt;https://github.com/Vonger/vocore2&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Because audio is enabled by &lt;em&gt;kmod+&lt;/em&gt; packages, so I need to build the firmware myself.&lt;/p&gt;
 &lt;h2 id="alsa"&gt;Alsa&lt;/h2&gt;
-&lt;p&gt;install &lt;code&gt;alsa-utils&lt;/code&gt; packages, then add configuration to init sound card&lt;/p&gt;
-&lt;p&gt;in &lt;code&gt;/etc/rc.local&lt;/code&gt; file&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;alsactl init
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="adjust-volume"&gt;Adjust volume&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;use &lt;code&gt;alsamixer&lt;/code&gt;&lt;/p&gt;</description></item><item><title>我的DIY与vocore</title><link>https://qtopie.github.io/notes/iot/vocore/my-vocore-playground/</link><pubDate>Thu, 26 Jul 2018 22:24:33 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/vocore/my-vocore-playground/</guid><description>&lt;h2 id="vocore"&gt;&lt;a href="http://vocore.io/"&gt;VoCore&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;install &lt;code&gt;alsa-utils&lt;/code&gt; packages, then add configuration to init sound card&lt;/p&gt;</description></item><item><title>我的DIY与vocore</title><link>https://qtopie.github.io/notes/iot/vocore/my-vocore-playground/</link><pubDate>Thu, 26 Jul 2018 22:24:33 +0800</pubDate><guid>https://qtopie.github.io/notes/iot/vocore/my-vocore-playground/</guid><description>&lt;h2 id="vocore"&gt;&lt;a href="http://vocore.io/"&gt;VoCore&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;硬币大小的Linux计算机（或者可以DIY的mini路由器）&lt;/p&gt;
 &lt;h2 id="技术参数"&gt;技术参数&lt;/h2&gt;
 &lt;ul&gt;

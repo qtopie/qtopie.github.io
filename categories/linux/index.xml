@@ -81,7 +81,14 @@
 &lt;h2 id="如何使用"&gt;如何使用&lt;/h2&gt;
 &lt;h3 id="ebpf工作流程"&gt;eBPF工作流程&lt;/h3&gt;
 
-&lt;div class="mermaid"&gt;graph TD
+&lt;div class="mermaid-block" data-mermaid-zoom="1"&gt;
+ &lt;div class="mermaid-toolbar"&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="zoom-in" aria-label="Zoom in"&gt;+&lt;/button&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="zoom-out" aria-label="Zoom out"&gt;-&lt;/button&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="reset" aria-label="Reset zoom"&gt;100%&lt;/button&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="fullscreen" aria-label="Toggle fullscreen"&gt;Full&lt;/button&gt;
+ &lt;/div&gt;
+ &lt;div class="mermaid mermaid-canvas"&gt;graph TD
  subgraph User_Space ["用户态 (User Space)"]
  A["编写 eBPF 源代码&lt;br/&gt;(C / Rust)"] -- "LLVM / Clang" --&gt; B["eBPF 字节码&lt;br/&gt;(Bytecode)"]
  B -- "bpf 系统调用" --&gt; C["加载并注入内核"]
@@ -114,6 +121,7 @@
  style D fill:#f96,stroke:#333,stroke-width:2px
  style G fill:#00d2ff,stroke:#333,stroke-width:2px
  style L fill:#fff4dd,stroke:#d4a017,stroke-width:2px&lt;/div&gt;
+&lt;/div&gt;
 &lt;h3 id="一个加速小例子"&gt;一个加速小例子&lt;/h3&gt;
 &lt;p&gt;场景：为局域网内的平板/手机做游戏加速。思路是：数据包进入网关后，如果源 MAC 在“加速名单”且目标 IP 在“游戏服务器列表”，则把流量指派给本地代理端口（示例中用 1080），否则直连。&lt;/p&gt;</description></item><item><title>Ubuntu init process</title><link>https://qtopie.github.io/notes/linux/systemd-service-unit-file/</link><pubDate>Thu, 15 Sep 2016 14:20:15 +0800</pubDate><guid>https://qtopie.github.io/notes/linux/systemd-service-unit-file/</guid><description>&lt;h2 id="history"&gt;History&lt;/h2&gt;
 &lt;ul&gt;

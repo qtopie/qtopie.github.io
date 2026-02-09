@@ -1,4 +1,15 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Notes on 1001問</title><link>https://qtopie.github.io/notes/</link><description>Recent content in Notes on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Sun, 08 Feb 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/notes/index.xml" rel="self" type="application/rss+xml"/><item><title>JVM总结</title><link>https://qtopie.github.io/notes/java/jvm/</link><pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/java/jvm/</guid><description>&lt;div class="mermaid"&gt;flowchart TD
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Notes on 1001問</title><link>https://qtopie.github.io/notes/</link><description>Recent content in Notes on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Sun, 08 Feb 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/notes/index.xml" rel="self" type="application/rss+xml"/><item><title>Java程序是怎么运行的?</title><link>https://qtopie.github.io/notes/java/java-app/</link><pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/java/java-app/</guid><description>&lt;h2 id="总览"&gt;总览&lt;/h2&gt;
+&lt;p&gt;从Java源码到JVM执行，大致分为“编译 -&amp;gt; 类加载 -&amp;gt; 字节码验证与链接 -&amp;gt; 解释/编译执行 -&amp;gt; 运行期优化”几个阶段。&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;.java -&amp;gt; javac -&amp;gt; .class -&amp;gt; 类加载/验证/链接/初始化 -&amp;gt; 解释执行 + JIT -&amp;gt; 运行期优化 + GC
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="mermaid-block" data-mermaid-zoom="1"&gt;
+ &lt;div class="mermaid-toolbar"&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="zoom-in" aria-label="Zoom in"&gt;+&lt;/button&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="zoom-out" aria-label="Zoom out"&gt;-&lt;/button&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="reset" aria-label="Reset zoom"&gt;100%&lt;/button&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="fullscreen" aria-label="Toggle fullscreen"&gt;Full&lt;/button&gt;
+ &lt;/div&gt;
+ &lt;div class="mermaid mermaid-canvas"&gt;flowchart LR
  A[Java Source .java] --&gt; B[javac Compile]
  B --&gt; C[Bytecode .class]
 
@@ -25,8 +36,16 @@
 
  C --&gt; D
  H --&gt; I&lt;/div&gt;
-&lt;h2 id="总览"&gt;总览&lt;/h2&gt;
-&lt;p&gt;从Java源码到JVM执行，大致分为“编译 -&amp;gt; 类加载 -&amp;gt; 字节码验证与链接 -&amp;gt; 解释/编译执行 -&amp;gt; 运行期优化”几个阶段。&lt;/p&gt;</description></item><item><title>eBPF</title><link>https://qtopie.github.io/notes/linux/ebpf/</link><pubDate>Sun, 25 Jan 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/linux/ebpf/</guid><description>&lt;h2 id="ebpf介绍"&gt;eBPF介绍&lt;/h2&gt;
+&lt;/div&gt;
+&lt;h2 id="主流程"&gt;主流程&lt;/h2&gt;
+&lt;h3 id="源码编译javac"&gt;源码编译（javac）&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;输入：&lt;code&gt;.java&lt;/code&gt;源码文件&lt;/li&gt;
+&lt;li&gt;输出：&lt;code&gt;.class&lt;/code&gt;字节码文件&lt;/li&gt;
+&lt;li&gt;编译内容：语法/类型检查、常量折叠、语法糖解 desugar、生成字节码与调试信息（如行号表）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这一步只是把源码转换为平台无关的字节码，不生成机器码。&lt;/p&gt;</description></item><item><title>eBPF</title><link>https://qtopie.github.io/notes/linux/ebpf/</link><pubDate>Sun, 25 Jan 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/linux/ebpf/</guid><description>&lt;h2 id="ebpf介绍"&gt;eBPF介绍&lt;/h2&gt;
 &lt;p&gt;eBPF（Extended Berkeley Packet Filter）允许开发者在不修改内核源码、不加载内核模块的情况下，把小段受控程序安全地运行在内核里。它通过沙盒虚拟机让内核变得可编程，广泛用于网络、安全、可观测性等场景。&lt;/p&gt;
 &lt;p&gt;&lt;img src="ebpf.png" alt="What is eBPF"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;核心工作原理&lt;/strong&gt;&lt;/p&gt;
@@ -109,7 +128,14 @@
 &lt;h2 id="如何使用"&gt;如何使用&lt;/h2&gt;
 &lt;h3 id="ebpf工作流程"&gt;eBPF工作流程&lt;/h3&gt;
 
-&lt;div class="mermaid"&gt;graph TD
+&lt;div class="mermaid-block" data-mermaid-zoom="1"&gt;
+ &lt;div class="mermaid-toolbar"&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="zoom-in" aria-label="Zoom in"&gt;+&lt;/button&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="zoom-out" aria-label="Zoom out"&gt;-&lt;/button&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="reset" aria-label="Reset zoom"&gt;100%&lt;/button&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="fullscreen" aria-label="Toggle fullscreen"&gt;Full&lt;/button&gt;
+ &lt;/div&gt;
+ &lt;div class="mermaid mermaid-canvas"&gt;graph TD
  subgraph User_Space ["用户态 (User Space)"]
  A["编写 eBPF 源代码&lt;br/&gt;(C / Rust)"] -- "LLVM / Clang" --&gt; B["eBPF 字节码&lt;br/&gt;(Bytecode)"]
  B -- "bpf 系统调用" --&gt; C["加载并注入内核"]
@@ -142,6 +168,7 @@
  style D fill:#f96,stroke:#333,stroke-width:2px
  style G fill:#00d2ff,stroke:#333,stroke-width:2px
  style L fill:#fff4dd,stroke:#d4a017,stroke-width:2px&lt;/div&gt;
+&lt;/div&gt;
 &lt;h3 id="一个加速小例子"&gt;一个加速小例子&lt;/h3&gt;
 &lt;p&gt;场景：为局域网内的平板/手机做游戏加速。思路是：数据包进入网关后，如果源 MAC 在“加速名单”且目标 IP 在“游戏服务器列表”，则把流量指派给本地代理端口（示例中用 1080），否则直连。&lt;/p&gt;</description></item><item><title>Go gRPC 项目Protobuf 组织与跨项目依赖规范指南</title><link>https://qtopie.github.io/notes/dev/grpc-proto-practices/</link><pubDate>Wed, 07 Jan 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/dev/grpc-proto-practices/</guid><description>&lt;h1 id="go-grpc-项目-protobuf-组织与跨项目依赖规范指南"&gt;Go gRPC 项目 Protobuf 组织与跨项目依赖规范指南&lt;/h1&gt;
 &lt;p&gt;在微服务架构中，Protobuf（proto）文件不仅是数据交换的协议，更是服务之间的&lt;strong&gt;契约&lt;/strong&gt;。优秀的组织方式能显著降低维护成本，避免“依赖地狱”。&lt;/p&gt;
@@ -494,12 +521,20 @@
 &lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;div class="mermaid"&gt;flowchart TD
+&lt;div class="mermaid-block" data-mermaid-zoom="1"&gt;
+ &lt;div class="mermaid-toolbar"&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="zoom-in" aria-label="Zoom in"&gt;+&lt;/button&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="zoom-out" aria-label="Zoom out"&gt;-&lt;/button&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="reset" aria-label="Reset zoom"&gt;100%&lt;/button&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="fullscreen" aria-label="Toggle fullscreen"&gt;Full&lt;/button&gt;
+ &lt;/div&gt;
+ &lt;div class="mermaid mermaid-canvas"&gt;flowchart TD
  A[事务发起者发起TCC事务] --&gt; B{各参与者Try阶段&lt;br&gt;预留资源}
  B -- 所有Try成功 --&gt; C[各参与者Confirm阶段&lt;br&gt;正式提交]
  C --&gt; D[事务完成]
  B -- 有Try失败或超时 --&gt; E[各参与者Cancel阶段&lt;br&gt;释放资源/回滚]
  E --&gt; D&lt;/div&gt;
+&lt;/div&gt;
 &lt;h3 id="优缺点"&gt;优缺点&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;优点&lt;/strong&gt;：实现简单，能保证强一致性。&lt;/li&gt;
@@ -510,23 +545,7 @@
 &lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id="3pc三阶段提交"&gt;3PC（三阶段提交）&lt;/h2&gt;
-&lt;p&gt;三阶段提交（Three-Phase Commit, 3PC）是在 2PC 基础上改进的一种分布式事务协议，主要目的是减少协调者单点故障导致的阻塞和脑裂风险。3PC 将提交过程分为三个阶段：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;CanCommit 阶段（询问阶段）&lt;/strong&gt;&lt;br&gt;
-协调者向所有参与者发送“是否可以提交”请求（canCommit）。&lt;br&gt;
-参与者收到后判断自己是否可以执行事务，并反馈“可以”或“不可以”。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;PreCommit 阶段（预提交阶段）&lt;/strong&gt;&lt;br&gt;
-如果所有参与者都同意可以提交，协调者发送“预提交”请求（preCommit）。&lt;br&gt;
-参与者收到后执行事务操作并写入预提交日志，但还未正式提交，并反馈“已预提交”。&lt;br&gt;
-此时参与者可以安全地提交事务，但如果出现故障也可以回滚。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;DoCommit 阶段（正式提交阶段）&lt;/strong&gt;&lt;br&gt;
-协调者收到所有参与者的“已预提交”反馈后，发送“正式提交”请求（doCommit）。&lt;br&gt;
-参与者收到后正式提交事务并释放资源。&lt;/p&gt;</description></item><item><title>JVM内存泄漏排查</title><link>https://qtopie.github.io/notes/java/jvm-memory-leaks/</link><pubDate>Sat, 23 Nov 2024 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/java/jvm-memory-leaks/</guid><description>&lt;h2 id="堆内存泄漏"&gt;堆内存泄漏&lt;/h2&gt;
+&lt;p&gt;三阶段提交（Three-Phase Commit, 3PC）是在 2PC 基础上改进的一种分布式事务协议，主要目的是减少协调者单点故障导致的阻塞和脑裂风险。3PC 将提交过程分为三个阶段：&lt;/p&gt;</description></item><item><title>JVM内存泄漏排查</title><link>https://qtopie.github.io/notes/java/jvm-memory-leaks/</link><pubDate>Sat, 23 Nov 2024 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/java/jvm-memory-leaks/</guid><description>&lt;h2 id="堆内存泄漏"&gt;堆内存泄漏&lt;/h2&gt;
 &lt;p&gt;长生命周期的对象，持有短生命周期对象的引用，导致后者无法被 GC 回收。&lt;/p&gt;
 &lt;p&gt;我们先来简单造一个典型的错误案例。我们有一个内存cache, 然后key是object类型&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-java" data-lang="java"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;java.util.HashSet&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;
@@ -712,7 +731,14 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;TERMINATED&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;div class="mermaid"&gt;stateDiagram
+&lt;div class="mermaid-block" data-mermaid-zoom="1"&gt;
+ &lt;div class="mermaid-toolbar"&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="zoom-in" aria-label="Zoom in"&gt;+&lt;/button&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="zoom-out" aria-label="Zoom out"&gt;-&lt;/button&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="reset" aria-label="Reset zoom"&gt;100%&lt;/button&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="fullscreen" aria-label="Toggle fullscreen"&gt;Full&lt;/button&gt;
+ &lt;/div&gt;
+ &lt;div class="mermaid mermaid-canvas"&gt;stateDiagram
  [*] --&gt; New
  New --&gt; Runnable : start()
  Runnable --&gt; Blocked : acquire monitor lock
@@ -722,6 +748,7 @@
  Waiting --&gt; Runnable : signaled or interrupted
  Timed Waiting --&gt; Runnable : time elapses
  Runnable --&gt; Terminated : run() completes&lt;/div&gt;
+&lt;/div&gt;
 &lt;h3 id="waiting-vs-blocked"&gt;waiting vs blocked&lt;/h3&gt;
 &lt;p&gt;blocked: 线程试图获取一个被其他线程持有的锁（monitor），但获取失败，导致线程被阻塞 被动进入 blocked 状态的&lt;/p&gt;</description></item><item><title>缓存过期</title><link>https://qtopie.github.io/notes/system-design/cache-expiration/</link><pubDate>Sat, 07 Sep 2024 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/system-design/cache-expiration/</guid><description>&lt;h2 id="缓存的模式"&gt;缓存的模式&lt;/h2&gt;
 &lt;table&gt;
@@ -1447,7 +1474,14 @@
 &lt;p&gt;构建一个可编程控制的流媒体播放服务器，类似于智能音箱，但是没有麦克风收集个人隐私数据。&lt;/p&gt;
 &lt;p&gt;整体架构如下&lt;/p&gt;
 
-&lt;div class="mermaid"&gt;graph LR
+&lt;div class="mermaid-block" data-mermaid-zoom="1"&gt;
+ &lt;div class="mermaid-toolbar"&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="zoom-in" aria-label="Zoom in"&gt;+&lt;/button&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="zoom-out" aria-label="Zoom out"&gt;-&lt;/button&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="reset" aria-label="Reset zoom"&gt;100%&lt;/button&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="fullscreen" aria-label="Toggle fullscreen"&gt;Full&lt;/button&gt;
+ &lt;/div&gt;
+ &lt;div class="mermaid mermaid-canvas"&gt;graph LR
  subgraph 树莓派 Raspberry Pi
  A[cmus音乐播放器] --&gt; B(PulseAudio Client)
  end
@@ -1457,18 +1491,13 @@
  end
 
  B --&gt; C&lt;/div&gt;
+&lt;/div&gt;
 &lt;h2 id="vocore固件支持"&gt;Vocore固件支持&lt;/h2&gt;
 &lt;p&gt;Currently 2022/12/3, only openwrt 21.02 is supported. (patch is not working ins 22.03)&lt;/p&gt;
 &lt;p&gt;see &lt;a href="https://github.com/Vonger/vocore2"&gt;https://github.com/Vonger/vocore2&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Because audio is enabled by &lt;em&gt;kmod+&lt;/em&gt; packages, so I need to build the firmware myself.&lt;/p&gt;
 &lt;h2 id="alsa"&gt;Alsa&lt;/h2&gt;
-&lt;p&gt;install &lt;code&gt;alsa-utils&lt;/code&gt; packages, then add configuration to init sound card&lt;/p&gt;
-&lt;p&gt;in &lt;code&gt;/etc/rc.local&lt;/code&gt; file&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;alsactl init
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="adjust-volume"&gt;Adjust volume&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;use &lt;code&gt;alsamixer&lt;/code&gt;&lt;/p&gt;</description></item><item><title>Ubuntu下使用MT7612U</title><link>https://qtopie.github.io/notes/linux/mt7612u-driver/</link><pubDate>Sat, 09 Mar 2019 11:29:38 +0800</pubDate><guid>https://qtopie.github.io/notes/linux/mt7612u-driver/</guid><description>&lt;p&gt;由于墙挡住了路由器WIFI信号，虽然5G频率的WIFI传输速率很快，但是信号衰减。WIFI无线通信是双方向的，就算路由信号能覆盖到，但考虑到手机或笔记本功率和天线的限制，难保证信号稳定。所以在淘宝上买了一个功能还算强大的无线网卡ComFast 926AC v2，双频WIFI外置双天线。没提前研究，“号称免驱动&amp;quot;，结果拿回来就懵了。&lt;/p&gt;
+&lt;p&gt;install &lt;code&gt;alsa-utils&lt;/code&gt; packages, then add configuration to init sound card&lt;/p&gt;</description></item><item><title>Ubuntu下使用MT7612U</title><link>https://qtopie.github.io/notes/linux/mt7612u-driver/</link><pubDate>Sat, 09 Mar 2019 11:29:38 +0800</pubDate><guid>https://qtopie.github.io/notes/linux/mt7612u-driver/</guid><description>&lt;p&gt;由于墙挡住了路由器WIFI信号，虽然5G频率的WIFI传输速率很快，但是信号衰减。WIFI无线通信是双方向的，就算路由信号能覆盖到，但考虑到手机或笔记本功率和天线的限制，难保证信号稳定。所以在淘宝上买了一个功能还算强大的无线网卡ComFast 926AC v2，双频WIFI外置双天线。没提前研究，“号称免驱动&amp;quot;，结果拿回来就懵了。&lt;/p&gt;
 &lt;h2 id="安装驱动"&gt;安装驱动&lt;/h2&gt;
 &lt;p&gt;设备: Comfast 926AC v2
 系统： Ubuntu 18.04&lt;/p&gt;
