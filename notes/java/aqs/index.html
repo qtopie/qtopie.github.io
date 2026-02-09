@@ -17,6 +17,10 @@ CLH队列的设计让AQS能够高效地管理大量线程的同步等待。</p><
 当线程获取锁失败时，会被封装成一个节点加入到AQS的同步队列（一个双向链表），并阻塞（通常通过LockSupport.park()实现）。只有队列头节点前面的线程被唤醒后，当前节点才有机会获取锁。</p><p>唤醒：
 当锁被释放时，AQS会调用unparkSuccessor(head)方法唤醒队列中的下一个节点（即头节点的下一个节点）。具体做法是通过LockSupport.unpark()唤醒等待线程，使其重新尝试获取锁。</p><p>总结：</p><p>头节点本身不代表实际线程，只是一个占位节点。
 唤醒操作总是针对头节点的下一个节点（即等待时间最长的线程）。
-通过这种方式，实现了线程的有序等待和唤醒，保证了同步的公平性和效率。</p><div id=react-app-components data-post-id=5a7bea9f2ab4aef1df69024d88323402></div></article><button class=mobile-toc-trigger aria-controls=mobile-toc aria-expanded=false title=Index>☰</button><div class=mobile-toc-overlay hidden></div><div id=mobile-toc class=mobile-toc-drawer aria-hidden=true role=dialog aria-label=Index><div class=mobile-toc-header><button class=mobile-toc-close aria-label=close>×</button></div><nav class=mobile-toc-body><div class=mobile-toc-list></div></nav><div class=mobile-safe-area-spacer></div></div><script type=module src=/react/page.bundle.js></script></main><footer><div class=copyright><small>Made with <span style=color:#e25555>&#9829;</span> in Guangzhou by
+通过这种方式，实现了线程的有序等待和唤醒，保证了同步的公平性和效率。</p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; Updated upstream<div id=react-app-components data-post-id=5a7bea9f2ab4aef1df69024d88323402></div>=======
+>>>>>>> Stashed changes</article><div id=react-single-actions data-post-id=5a7bea9f2ab4aef1df69024d88323402></div>&lt;&lt;&lt;&lt;&lt;&lt;&lt; Updated upstream
+<button class=mobile-toc-trigger aria-controls=mobile-toc aria-expanded=false title=Index>☰</button><div class=mobile-toc-overlay hidden></div><div id=mobile-toc class=mobile-toc-drawer aria-hidden=true role=dialog aria-label=Index><div class=mobile-toc-header><button class=mobile-toc-close aria-label=close>×</button></div><nav class=mobile-toc-body><div class=mobile-toc-list></div></nav><div class=mobile-safe-area-spacer></div></div>=======
+<link rel=stylesheet href=/react/alphatab/alphaTab.css>>>>>>>> Stashed changes
+<script type=module src=/react/page.bundle.js></script></main><footer><div class=copyright><small>Made with <span style=color:#e25555>&#9829;</span> in Guangzhou by
 ©<a href=https://github.com/qtopie>qtopie</a> 2026
 </small><small>Posts licensed under <a href=https://creativecommons.org/licenses/by/4.0/legalcode>CC BY 4.0</small></div><div><script type=module src=/react/base.bundle.js></script></div></footer></body></html>

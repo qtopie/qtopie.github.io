@@ -1,4 +1,32 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Notes on 1001問</title><link>https://qtopie.github.io/notes/</link><description>Recent content in Notes on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Sun, 25 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/notes/index.xml" rel="self" type="application/rss+xml"/><item><title>eBPF</title><link>https://qtopie.github.io/notes/linux/ebpf/</link><pubDate>Sun, 25 Jan 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/linux/ebpf/</guid><description>&lt;h2 id="ebpf介绍"&gt;eBPF介绍&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Notes on 1001問</title><link>https://qtopie.github.io/notes/</link><description>Recent content in Notes on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Sun, 08 Feb 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/notes/index.xml" rel="self" type="application/rss+xml"/><item><title>JVM总结</title><link>https://qtopie.github.io/notes/java/jvm/</link><pubDate>Sun, 08 Feb 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/java/jvm/</guid><description>&lt;div class="mermaid"&gt;flowchart TD
+ A[Java Source .java] --&gt; B[javac Compile]
+ B --&gt; C[Bytecode .class]
+
+ subgraph L[Class Loading]
+ D[Loading]
+ E[Verification]
+ F[Preparation]
+ G[Resolution]
+ H[Initialization]
+ D --&gt; E --&gt; F --&gt; G --&gt; H
+ end
+
+ subgraph R[Runtime Execution]
+ I[Interpreter Execute]
+ J{Hot Method?}
+ K[JIT Compile]
+ L2[Machine Code]
+ M[Runtime Optimization]
+ N[GC + Deoptimization]
+ I --&gt; J
+ J -- No --&gt; I
+ J -- Yes --&gt; K --&gt; L2 --&gt; M --&gt; N
+ end
+
+ C --&gt; D
+ H --&gt; I&lt;/div&gt;
+&lt;h2 id="总览"&gt;总览&lt;/h2&gt;
+&lt;p&gt;从Java源码到JVM执行，大致分为“编译 -&amp;gt; 类加载 -&amp;gt; 字节码验证与链接 -&amp;gt; 解释/编译执行 -&amp;gt; 运行期优化”几个阶段。&lt;/p&gt;</description></item><item><title>eBPF</title><link>https://qtopie.github.io/notes/linux/ebpf/</link><pubDate>Sun, 25 Jan 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/linux/ebpf/</guid><description>&lt;h2 id="ebpf介绍"&gt;eBPF介绍&lt;/h2&gt;
 &lt;p&gt;eBPF（Extended Berkeley Packet Filter）允许开发者在不修改内核源码、不加载内核模块的情况下，把小段受控程序安全地运行在内核里。它通过沙盒虚拟机让内核变得可编程，广泛用于网络、安全、可观测性等场景。&lt;/p&gt;
 &lt;p&gt;&lt;img src="ebpf.png" alt="What is eBPF"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;核心工作原理&lt;/strong&gt;&lt;/p&gt;
@@ -115,7 +143,35 @@
  style G fill:#00d2ff,stroke:#333,stroke-width:2px
  style L fill:#fff4dd,stroke:#d4a017,stroke-width:2px&lt;/div&gt;
 &lt;h3 id="一个加速小例子"&gt;一个加速小例子&lt;/h3&gt;
-&lt;p&gt;场景：为局域网内的平板/手机做游戏加速。思路是：数据包进入网关后，如果源 MAC 在“加速名单”且目标 IP 在“游戏服务器列表”，则把流量指派给本地代理端口（示例中用 1080），否则直连。&lt;/p&gt;</description></item><item><title>XS20摄影技巧</title><link>https://qtopie.github.io/notes/photography/xs20/</link><pubDate>Thu, 01 Jan 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/photography/xs20/</guid><description>&lt;h2 id="xs-20介绍"&gt;XS-20介绍&lt;/h2&gt;
+&lt;p&gt;场景：为局域网内的平板/手机做游戏加速。思路是：数据包进入网关后，如果源 MAC 在“加速名单”且目标 IP 在“游戏服务器列表”，则把流量指派给本地代理端口（示例中用 1080），否则直连。&lt;/p&gt;</description></item><item><title>Go gRPC 项目Protobuf 组织与跨项目依赖规范指南</title><link>https://qtopie.github.io/notes/dev/grpc-proto-practices/</link><pubDate>Wed, 07 Jan 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/dev/grpc-proto-practices/</guid><description>&lt;h1 id="go-grpc-项目-protobuf-组织与跨项目依赖规范指南"&gt;Go gRPC 项目 Protobuf 组织与跨项目依赖规范指南&lt;/h1&gt;
+&lt;p&gt;在微服务架构中，Protobuf（proto）文件不仅是数据交换的协议，更是服务之间的&lt;strong&gt;契约&lt;/strong&gt;。优秀的组织方式能显著降低维护成本，避免“依赖地狱”。&lt;/p&gt;
+&lt;h2 id="一-项目内部组织中心化与版本化"&gt;一、 项目内部组织：中心化与版本化&lt;/h2&gt;
+&lt;p&gt;不要将 &lt;code&gt;.proto&lt;/code&gt; 文件散落在业务逻辑目录中，建议在项目根目录采用以下结构：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-text" data-lang="text"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;my-project/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;├── api/ # 契约根目录
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ └── v1/ # 版本控制（极其重要）
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ ├── user.proto
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ └── order.proto
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;├── gen/ # 生成的代码（与定义物理隔离）
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ └── go/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ └── v1/
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ ├── user.pb.go
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ └── user_grpc.pb.go
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;├── buf.yaml # Buf 配置文件（可选，推荐）
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;├── go.mod
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└── Makefile # 自动化编译脚本
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="核心原则"&gt;核心原则&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;目录版本化&lt;/strong&gt;：始终使用 &lt;code&gt;v1&lt;/code&gt;, &lt;code&gt;v2&lt;/code&gt; 目录。这允许你在同一个项目中同时运行多个版本的 API。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;go_package 规范&lt;/strong&gt;：在 &lt;code&gt;.proto&lt;/code&gt; 中明确指定完整的导入路径：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-protobuf" data-lang="protobuf"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;option&lt;/span&gt; &lt;span class="n"&gt;go_package&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;github.com/org/repo/gen/go/v1;userv1&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="err"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start="3"&gt;
+&lt;li&gt;&lt;strong&gt;职责分离&lt;/strong&gt;：&lt;code&gt;api/&lt;/code&gt; 只存定义，&lt;code&gt;gen/&lt;/code&gt; 只存自动生成的代码，业务实现在 &lt;code&gt;internal/&lt;/code&gt; 或 &lt;code&gt;pkg/&lt;/code&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="二-跨项目依赖三种实战方案"&gt;二、 跨项目依赖：三种实战方案&lt;/h2&gt;
+&lt;p&gt;当项目 B 需要调用项目 A 的 gRPC 接口时，&lt;strong&gt;绝对不要手动复制 &lt;code&gt;.proto&lt;/code&gt; 文件&lt;/strong&gt;。&lt;/p&gt;</description></item><item><title>XS20摄影技巧</title><link>https://qtopie.github.io/notes/photography/xs20/</link><pubDate>Thu, 01 Jan 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/photography/xs20/</guid><description>&lt;h2 id="xs-20介绍"&gt;XS-20介绍&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;A 模式 (Aperture Priority) —— 光圈优先模式
 含义： 你手动控制光圈，相机自动帮你计算快门速度。&lt;/li&gt;
@@ -255,7 +311,24 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;stave [tuning=EADGBe] [time=4/4] 
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Em7 $4 x $3 x $2 x | Dsus2 $4 x $3 x $2 x | Csus2 $5 x $3 x $2 x | G $6 x $3 x $2 x ||
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;【《第57次取消发送》吉他教学】https://www.bilibili.com/video/BV1XfnAzwEnG?vd_source=3c404ae4349980e59af7e78f2d24ba86&lt;/p&gt;</description></item><item><title>2025书单</title><link>https://qtopie.github.io/notes/book/2025-book-list/</link><pubDate>Sun, 30 Nov 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/book/2025-book-list/</guid><description>&lt;ul&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;【《第57次取消发送》吉他教学】https://www.bilibili.com/video/BV1XfnAzwEnG?vd_source=3c404ae4349980e59af7e78f2d24ba86&lt;/p&gt;</description></item><item><title>AlphaTab 测试</title><link>https://qtopie.github.io/notes/guitar/guitar-tab/</link><pubDate>Mon, 01 Dec 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/guitar/guitar-tab/</guid><description>&lt;h3 id="方式-1-使用-shortcode"&gt;方式 1: 使用 Shortcode&lt;/h3&gt;
+
+
+
+ 
+ 
+ &lt;div class="alphatab-container"&gt;
+ 
+ &lt;script type="text/alphatex" class="alphatab-data"&gt;\title &amp;#34;Shortcode Tab&amp;#34;
+| 0 1 2 3 |&lt;/script&gt;
+ &lt;/div&gt;
+
+&lt;h3 id="方式-2-使用-markdown-代码块"&gt;方式 2: 使用 Markdown 代码块&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;\title &amp;#34;Code Block Tab&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;\artist &amp;#34;Test&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;. . .
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;| 0 1 2 3 |
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>2025书单</title><link>https://qtopie.github.io/notes/book/2025-book-list/</link><pubDate>Sun, 30 Nov 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/book/2025-book-list/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;input checked="" disabled="" type="checkbox"&gt; 富爸爸穷爸爸 (二刷)&lt;/li&gt;
 &lt;li&gt;&lt;input checked="" disabled="" type="checkbox"&gt; 山海经密码 (三刷)&lt;/li&gt;
 &lt;li&gt;[] 草房子&lt;/li&gt;
@@ -314,7 +387,11 @@
 &lt;li&gt;&lt;strong&gt;✍️ 建议：&lt;/strong&gt; 在练习时，&lt;strong&gt;务必&lt;/strong&gt;将数数（1 &amp;amp; 2 &amp;amp;&amp;hellip;）和您的扫弦声音同步说出来。这能帮助您将听觉、视觉和动作联系起来。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id="3-掌握基础节奏型以八分音符为主"&gt;3. 掌握基础节奏型（以八分音符为主）&lt;/h3&gt;
-&lt;p&gt;一旦您能稳定地进行“$\downarrow$ $\uparrow$ $\downarrow$ $\uparrow$”的连贯扫弦，就可以开始学习初学最常用的、带&lt;strong&gt;休止&lt;/strong&gt;或&lt;strong&gt;省略&lt;/strong&gt;的节奏型了。&lt;/p&gt;</description></item><item><title>G1 垃圾回收器（Garbage-First, G1 GC）</title><link>https://qtopie.github.io/notes/java/g1/</link><pubDate>Sun, 29 Jun 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/java/g1/</guid><description>&lt;p&gt;G1 是 Java HotSpot 虚拟机自 JDK7u4 起提供的服务器端垃圾回收器，目标是替代 CMS，适用于大堆内存、低延迟场景。G1 通过分区、并发和自适应等机制，实现高吞吐量和可预测的停顿时间。&lt;/p&gt;
+&lt;p&gt;一旦您能稳定地进行“$\downarrow$ $\uparrow$ $\downarrow$ $\uparrow$”的连贯扫弦，就可以开始学习初学最常用的、带&lt;strong&gt;休止&lt;/strong&gt;或&lt;strong&gt;省略&lt;/strong&gt;的节奏型了。&lt;/p&gt;</description></item><item><title>G1 垃圾回收器（Garbage-First, G1 GC）</title><link>https://qtopie.github.io/notes/java/g1/</link><pubDate>Sun, 29 Jun 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/java/g1/</guid><description>&lt;h2 id="g1"&gt;G1&lt;/h2&gt;
+&lt;p&gt;G1垃圾回收的过程&lt;/p&gt;
+&lt;p&gt;如何实现maxPauseTime&lt;/p&gt;
+&lt;p&gt;G1的特点, 优点和缺点&lt;/p&gt;
+&lt;p&gt;G1 是 Java HotSpot 虚拟机自 JDK7u4 起提供的服务器端垃圾回收器，目标是替代 CMS，适用于大堆内存、低延迟场景。G1 通过分区、并发和自适应等机制，实现高吞吐量和可预测的停顿时间。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id="g1-的主要特点"&gt;G1 的主要特点&lt;/h2&gt;
 &lt;ul&gt;
@@ -2317,10 +2394,7 @@ AQS极大地简化了Java并发工具的开发，是Java并发包的核心基础
 &lt;p&gt;AQS通过CLH队列实现线程的有序排队和唤醒。
 线程获取锁失败时，会被包装成一个Node节点加入队列尾部。
 只有队列头节点的下一个节点才有资格被唤醒尝试获取锁，保证了公平性。
-CLH队列的设计让AQS能够高效地管理大量线程的同步等待。&lt;/p&gt;</description></item><item><title/><link>https://qtopie.github.io/notes/java/jvm/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/java/jvm/</guid><description>&lt;h2 id="g1"&gt;G1&lt;/h2&gt;
-&lt;p&gt;G1垃圾回收的过程&lt;/p&gt;
-&lt;p&gt;如何实现maxPauseTime&lt;/p&gt;
-&lt;p&gt;G1的特点, 优点和缺点&lt;/p&gt;</description></item><item><title/><link>https://qtopie.github.io/notes/java/monitor/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/java/monitor/</guid><description>&lt;h2 id="参考"&gt;参考&lt;/h2&gt;
+CLH队列的设计让AQS能够高效地管理大量线程的同步等待。&lt;/p&gt;</description></item><item><title/><link>https://qtopie.github.io/notes/java/monitor/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/java/monitor/</guid><description>&lt;h2 id="参考"&gt;参考&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="https://stackoverflow.com/questions/49610644/in-java-what-is-the-difference-between-a-monitor-and-a-lock"&gt;Java Monitor&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title/><link>https://qtopie.github.io/notes/linux/the-little-linux-cmd-book/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/linux/the-little-linux-cmd-book/</guid><description>&lt;h1 id="the-little-linux-command-line-book"&gt;The Little Linux Command Line Book&lt;/h1&gt;
