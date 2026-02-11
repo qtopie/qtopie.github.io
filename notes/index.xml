@@ -338,7 +338,55 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;stave [tuning=EADGBe] [time=4/4] 
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Em7 $4 x $3 x $2 x | Dsus2 $4 x $3 x $2 x | Csus2 $5 x $3 x $2 x | G $6 x $3 x $2 x ||
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;【《第57次取消发送》吉他教学】https://www.bilibili.com/video/BV1XfnAzwEnG?vd_source=3c404ae4349980e59af7e78f2d24ba86&lt;/p&gt;</description></item><item><title>AlphaTab 测试</title><link>https://qtopie.github.io/notes/guitar/guitar-tab/</link><pubDate>Mon, 01 Dec 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/guitar/guitar-tab/</guid><description>&lt;h3 id="方式-1-使用-shortcode"&gt;方式 1: 使用 Shortcode&lt;/h3&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;【《第57次取消发送》吉他教学】https://www.bilibili.com/video/BV1XfnAzwEnG?vd_source=3c404ae4349980e59af7e78f2d24ba86&lt;/p&gt;</description></item><item><title>JDBC连接池</title><link>https://qtopie.github.io/notes/java/jdbc-conn-pool/</link><pubDate>Wed, 10 Dec 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/java/jdbc-conn-pool/</guid><description>&lt;h2 id="深入浅出-jdbc-连接池从原理到性能调优"&gt;深入浅出 JDBC 连接池：从原理到性能调优&lt;/h2&gt;
+&lt;p&gt;在高性能 Java 应用中，数据库连接池（Connection Pool）是优化系统响应速度、保障数据库稳定性的核心组件。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="1-核心原理为什么要用池化技术"&gt;1. 核心原理：为什么要用池化技术？&lt;/h2&gt;
+&lt;p&gt;传统的 JDBC 操作（&lt;code&gt;DriverManager.getConnection()&lt;/code&gt;）是&lt;strong&gt;重量级&lt;/strong&gt;的。每次请求都要经历：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;TCP 三次握手&lt;/strong&gt;：网络层建连。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;身份验证&lt;/strong&gt;：数据库层校验用户名密码。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;分配资源&lt;/strong&gt;：数据库为该会话分配内存和进程。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;SQL 执行与结果传输&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;四次挥手&lt;/strong&gt;：断开连接。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;strong&gt;连接池的价值：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;资源复用&lt;/strong&gt;：连接在池中常驻，消除建连和销毁的开销。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;流量削峰&lt;/strong&gt;：通过 &lt;code&gt;maxActive&lt;/code&gt; 限制并发数，保护数据库不被瞬时请求击垮。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;连接健康监测&lt;/strong&gt;：自动检测死连接并进行剔除或重连。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="2-主流连接池对比hikaricp-vs-druid"&gt;2. 主流连接池对比：HikariCP vs Druid&lt;/h2&gt;
+&lt;p&gt;目前生产环境下，基本只推荐这两款产品：&lt;/p&gt;
+&lt;h3 id="hikaricp-极致的快"&gt;HikariCP (极致的快)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;地位&lt;/strong&gt;：Spring Boot 2.x 默认内置。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;默认值&lt;/strong&gt;：最大连接数 &lt;strong&gt;10&lt;/strong&gt;，最小空闲 &lt;strong&gt;10&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;黑科技&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;字节码精简&lt;/strong&gt;：优化了代理对象的生成。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;FastList&lt;/strong&gt;：自定义集合，替代 ArrayList，减少数组边界检查。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;无锁编程&lt;/strong&gt;：大量使用 &lt;code&gt;ThreadLocal&lt;/code&gt; 缓存连接，减少锁竞争。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="druid-全能监控"&gt;Druid (全能监控)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;地位&lt;/strong&gt;：国产之光，阿里开源。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;默认值&lt;/strong&gt;：最大连接数 &lt;strong&gt;8&lt;/strong&gt;，最小空闲 &lt;strong&gt;0&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;核心优势&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;监控视图&lt;/strong&gt;：内置 &lt;code&gt;StatViewServlet&lt;/code&gt;，可直观查看 SQL 执行耗时、慢查询、并发峰值。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;防 SQL 注入&lt;/strong&gt;：内置 WallFilter 防火墙，从连接池层面对 SQL 风险进行过滤。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="3-关键参数与性能计算"&gt;3. 关键参数与性能计算&lt;/h2&gt;
+&lt;p&gt;连接池配置不是越大越好，而是要寻找**吞吐量（QPS）&lt;strong&gt;与&lt;/strong&gt;响应时间（RT）**的平衡点。&lt;/p&gt;
+&lt;h3 id="核心公式"&gt;核心公式&lt;/h3&gt;
+&lt;p&gt;理论单机 QPS 预估：&lt;/p&gt;</description></item><item><title>AlphaTab 测试</title><link>https://qtopie.github.io/notes/guitar/guitar-tab/</link><pubDate>Mon, 01 Dec 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/guitar/guitar-tab/</guid><description>&lt;h3 id="方式-1-使用-shortcode"&gt;方式 1: 使用 Shortcode&lt;/h3&gt;
 
 
 
