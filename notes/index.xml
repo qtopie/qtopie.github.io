@@ -612,7 +612,76 @@
 &lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id="3pc三阶段提交"&gt;3PC（三阶段提交）&lt;/h2&gt;
-&lt;p&gt;三阶段提交（Three-Phase Commit, 3PC）是在 2PC 基础上改进的一种分布式事务协议，主要目的是减少协调者单点故障导致的阻塞和脑裂风险。3PC 将提交过程分为三个阶段：&lt;/p&gt;</description></item><item><title>JVM内存泄漏排查</title><link>https://qtopie.github.io/notes/java/jvm-memory-leaks/</link><pubDate>Sat, 23 Nov 2024 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/java/jvm-memory-leaks/</guid><description>&lt;h2 id="堆内存泄漏"&gt;堆内存泄漏&lt;/h2&gt;
+&lt;p&gt;三阶段提交（Three-Phase Commit, 3PC）是在 2PC 基础上改进的一种分布式事务协议，主要目的是减少协调者单点故障导致的阻塞和脑裂风险。3PC 将提交过程分为三个阶段：&lt;/p&gt;</description></item><item><title>并发模型</title><link>https://qtopie.github.io/notes/web/concurrency-models/</link><pubDate>Tue, 21 Jan 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/web/concurrency-models/</guid><description>&lt;h2 id="总结对比"&gt;总结对比&lt;/h2&gt;
+&lt;table&gt;
+ &lt;thead&gt;
+ &lt;tr&gt;
+ &lt;th&gt;模型&lt;/th&gt;
+ &lt;th&gt;核心机制&lt;/th&gt;
+ &lt;th&gt;适合场景&lt;/th&gt;
+ &lt;th&gt;复杂度&lt;/th&gt;
+ &lt;/tr&gt;
+ &lt;/thead&gt;
+ &lt;tbody&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;多线程/线程池&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;OS 调度&lt;/td&gt;
+ &lt;td&gt;计算密集型、小规模并发&lt;/td&gt;
+ &lt;td&gt;中&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;协程 (Coroutines)&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;用户态调度&lt;/td&gt;
+ &lt;td&gt;高并发 Web 服务、I/O 密集型&lt;/td&gt;
+ &lt;td&gt;低 (开发体验好)&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;事件驱动 (NIO)&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;状态机/回调&lt;/td&gt;
+ &lt;td&gt;网关、长连接、代理服务&lt;/td&gt;
+ &lt;td&gt;高&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;Actor(Message Passing)&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;消息传递&lt;/td&gt;
+ &lt;td&gt;分布式、高可靠、无锁化设计&lt;/td&gt;
+ &lt;td&gt;中&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;tr&gt;
+ &lt;td&gt;&lt;strong&gt;Disruptor&lt;/strong&gt;&lt;/td&gt;
+ &lt;td&gt;无锁环形队列&lt;/td&gt;
+ &lt;td&gt;超高吞吐、极低延迟 (金融/日志)&lt;/td&gt;
+ &lt;td&gt;极高&lt;/td&gt;
+ &lt;/tr&gt;
+ &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id="基于多线程的任务并行-thread-based--preemptive-multitasking"&gt;基于多线程的任务并行 (Thread-based / Preemptive Multitasking)&lt;/h2&gt;
+&lt;p&gt;这是最传统、也是你提到的&lt;strong&gt;线程池&lt;/strong&gt;所属的范畴。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;核心逻辑：&lt;/strong&gt; 操作系统内核负责线程切换。每个线程有独立的栈空间。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;优点：&lt;/strong&gt; 能够充分利用多核 CPU。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;缺点：&lt;/strong&gt; 线程是很“重”的资源（通常 1MB 左右），上下文切换（Context Switch）开销大。当并发量达到万级时，内存会爆掉，CPU 也会忙于切换而不是干活。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class="mermaid-block" data-mermaid-zoom="1"&gt;
+ &lt;div class="mermaid-toolbar"&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="zoom-in" aria-label="Zoom in"&gt;+&lt;/button&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="zoom-out" aria-label="Zoom out"&gt;-&lt;/button&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="reset" aria-label="Reset zoom"&gt;100%&lt;/button&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="fullscreen" aria-label="Toggle fullscreen"&gt;Full&lt;/button&gt;
+ &lt;/div&gt;
+ &lt;div class="mermaid mermaid-canvas"&gt;flowchart LR
+	Client[Client Requests] --&gt; ES[ExecutorService]
+	ES --&gt; Queue[Blocking Queue]
+	ES --&gt; WT[Worker Threads]
+	Queue --&gt; WT
+	WT --&gt; Task[Run Task]
+	WT --&gt; Queue
+	OS[OS Scheduler] -. time slice .- WT&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 id="协作式多任务协程-coroutines--user-level-threads"&gt;协作式多任务：协程 (Coroutines / User-level Threads)&lt;/h2&gt;
+&lt;p&gt;这是你提到的第二种，也是目前高并发的主流。&lt;/p&gt;</description></item><item><title>JVM内存泄漏排查</title><link>https://qtopie.github.io/notes/java/jvm-memory-leaks/</link><pubDate>Sat, 23 Nov 2024 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/java/jvm-memory-leaks/</guid><description>&lt;h2 id="堆内存泄漏"&gt;堆内存泄漏&lt;/h2&gt;
 &lt;p&gt;长生命周期的对象，持有短生命周期对象的引用，导致后者无法被 GC 回收。&lt;/p&gt;
 &lt;p&gt;我们先来简单造一个典型的错误案例。我们有一个内存cache, 然后key是object类型&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-java" data-lang="java"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;import&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nn"&gt;java.util.HashSet&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt;
