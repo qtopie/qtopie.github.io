@@ -386,24 +386,7 @@
 &lt;h2 id="3-关键参数与性能计算"&gt;3. 关键参数与性能计算&lt;/h2&gt;
 &lt;p&gt;连接池配置不是越大越好，而是要寻找**吞吐量（QPS）&lt;strong&gt;与&lt;/strong&gt;响应时间（RT）**的平衡点。&lt;/p&gt;
 &lt;h3 id="核心公式"&gt;核心公式&lt;/h3&gt;
-&lt;p&gt;理论单机 QPS 预估：&lt;/p&gt;</description></item><item><title>AlphaTab 测试</title><link>https://qtopie.github.io/notes/guitar/guitar-tab/</link><pubDate>Mon, 01 Dec 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/guitar/guitar-tab/</guid><description>&lt;h3 id="方式-1-使用-shortcode"&gt;方式 1: 使用 Shortcode&lt;/h3&gt;
-
-
-
- 
- 
- &lt;div class="alphatab-container"&gt;
- 
- &lt;script type="text/alphatex" class="alphatab-data"&gt;\title &amp;#34;Shortcode Tab&amp;#34;
-| 0 1 2 3 |&lt;/script&gt;
- &lt;/div&gt;
-
-&lt;h3 id="方式-2-使用-markdown-代码块"&gt;方式 2: 使用 Markdown 代码块&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;\title &amp;#34;Code Block Tab&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;\artist &amp;#34;Test&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;. . .
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;| 0 1 2 3 |
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>2025书单</title><link>https://qtopie.github.io/notes/book/2025-book-list/</link><pubDate>Sun, 30 Nov 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/book/2025-book-list/</guid><description>&lt;ul&gt;
+&lt;p&gt;理论单机 QPS 预估：&lt;/p&gt;</description></item><item><title>2025书单</title><link>https://qtopie.github.io/notes/book/2025-book-list/</link><pubDate>Sun, 30 Nov 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/book/2025-book-list/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;input checked="" disabled="" type="checkbox"&gt; 富爸爸穷爸爸 (二刷)&lt;/li&gt;
 &lt;li&gt;&lt;input checked="" disabled="" type="checkbox"&gt; 山海经密码 (三刷)&lt;/li&gt;
 &lt;li&gt;[] 草房子&lt;/li&gt;
