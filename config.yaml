@@ -34,7 +34,7 @@ markup:
       typographer: true
     parser:
       attribute:
-        block: false
+        block: true
         title: true
       autoHeadingID: true
       autoHeadingIDType: github
@@ -71,3 +71,10 @@ module:
 # Enable JSON output for home page (search index)
 outputs:
   home: ["HTML", "JSON"]
+
+security:
+  exec:
+    allow:
+      - '^d2$'
+      - '^bash$'
+      - '^python$'

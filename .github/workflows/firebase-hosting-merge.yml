@@ -21,6 +21,11 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: 24
+      - name: Install D2 CLI
+        run: |
+          curl -fsSL https://d2lang.com/install.sh | sh -s --
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          "$HOME/.local/bin/d2" --version
       - run: npm install --prefix themes/drift-blog-theme/react-app/
       - run: npm run build --prefix themes/drift-blog-theme/react-app/
       - name: generate sites
