@@ -1,50 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Notes on 1001問</title><link>https://qtopie.github.io/notes/</link><description>Recent content in Notes on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Thu, 19 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/notes/index.xml" rel="self" type="application/rss+xml"/><item><title>如何写一个好的Agent Skill</title><link>https://qtopie.github.io/notes/ai/agent-skills/</link><pubDate>Thu, 19 Mar 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/ai/agent-skills/</guid><description>&lt;h2 id="agent-skills是什么"&gt;Agent Skills是什么?&lt;/h2&gt;
 &lt;p&gt;Agent Skill是随调随用的专业知识. 它封装了提示词(技能)和其依赖的工具, 能够模块化的给Agent加上某个问题解决能力.&lt;/p&gt;
-&lt;div class="d2-container" id="d2-2df04f9248b8d8620a23ceb735255d91" style="position: relative; border: 1px solid #f0f0f0; border-radius: 6px; background: #fff; overflow: hidden;"&gt;&lt;pre data-d2-missing="true" data-d2-target="diagrams/d2-2df04f9248b8d8620a23ceb735255d91.svg" data-d2-hash="2df04f9248b8d8620a23ceb735255d91" data-d2-theme="0" data-d2-len="1030"&gt;&lt;code class="language-d2"&gt;direction: down
-
-agent: &amp;amp;#34;Agent&amp;amp;#34;
-
-agent.style.fill: &amp;amp;#34;#111111&amp;amp;#34;
-agent.style.stroke: &amp;amp;#34;#000000&amp;amp;#34;
-agent.style.font-color: &amp;amp;#34;#FFFFFF&amp;amp;#34;
-
-native: {
-	label: &amp;amp;#34;Agent 本身能力(默认就有)&amp;amp;#34;
-	direction: right
-	llm: &amp;amp;#34;LLM\n理解与生成&amp;amp;#34;
-	planning: &amp;amp;#34;Planning\n任务分解与决策&amp;amp;#34;
-	memory: &amp;amp;#34;Memory\n上下文与经验&amp;amp;#34;
-	tools: &amp;amp;#34;Tools\n外部能力执行&amp;amp;#34;
-}
-
-llm.style.fill: &amp;amp;#34;#FDE68A&amp;amp;#34;
-planning.style.fill: &amp;amp;#34;#93C5FD&amp;amp;#34;
-memory.style.fill: &amp;amp;#34;#86EFAC&amp;amp;#34;
-tools.style.fill: &amp;amp;#34;#F9A8D4&amp;amp;#34;
-
-llm.style.stroke: &amp;amp;#34;#B45309&amp;amp;#34;
-planning.style.stroke: &amp;amp;#34;#1D4ED8&amp;amp;#34;
-memory.style.stroke: &amp;amp;#34;#15803D&amp;amp;#34;
-tools.style.stroke: &amp;amp;#34;#BE185D&amp;amp;#34;
-
-agent -&amp;amp;gt; llm
-agent -&amp;amp;gt; planning
-agent -&amp;amp;gt; memory
-agent -&amp;amp;gt; tools
-
-skillpack: {
-	label: &amp;amp;#34;Agent Skill 增强层(按需加载)&amp;amp;#34;
-	direction: right
-	skill_prompt: &amp;amp;#34;领域提示词&amp;amp;#34;
-	skill_flow: &amp;amp;#34;步骤模板&amp;amp;#34;
-	skill_knowledge: &amp;amp;#34;参考资料&amp;amp;#34;
-	skill_tooling: &amp;amp;#34;脚本与参数规范&amp;amp;#34;
-}
-
-skill_prompt -&amp;amp;gt; llm: &amp;amp;#34;增强&amp;amp;#34;
-skill_flow -&amp;amp;gt; planning: &amp;amp;#34;增强&amp;amp;#34;
-skill_knowledge -&amp;amp;gt; memory: &amp;amp;#34;增强&amp;amp;#34;
-skill_tooling -&amp;amp;gt; tools: &amp;amp;#34;增强&amp;amp;#34;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;这里需要特别区分: &lt;code&gt;LLM / Planning / Memory / Tools&lt;/code&gt; 是 Agent 本身就具备的基础能力; Agent Skill 的作用是按需增强这些能力, 而不是替代它们。&lt;/p&gt;</description></item><item><title>Backtracking</title><link>https://qtopie.github.io/notes/codejam/backtracking/</link><pubDate>Fri, 27 Feb 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/codejam/backtracking/</guid><description>&lt;p&gt;回溯算法（Backtracking）常被称为“通用的解题法”。如果把解决一个问题比作走迷宫，回溯算法就是那个&lt;strong&gt;不撞南墙不回头&lt;/strong&gt;的勇者。&lt;/p&gt;
+&lt;div class="d2-container" id="d2-2df04f9248b8d8620a23ceb735255d91" style="position: relative; border: 1px solid #f0f0f0; border-radius: 6px; background: #fff; overflow: hidden;"&gt;&lt;div class="d2-controls" style="position: absolute; top: 8px; right: 8px; z-index: 10; display: flex; gap: 4px; background: rgba(255,255,255,0.8); padding: 4px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);"&gt;
+ &lt;button class="d2-btn-zoom-in" title="Zoom In" style="border: 1px solid #ddd; background: #fff; cursor: pointer; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 3px; padding: 0;"&gt;+&lt;/button&gt;
+ &lt;button class="d2-btn-zoom-out" title="Zoom Out" style="border: 1px solid #ddd; background: #fff; cursor: pointer; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 3px; padding: 0;"&gt;-&lt;/button&gt;
+ &lt;button class="d2-btn-reset" title="Reset" style="border: 1px solid #ddd; background: #fff; cursor: pointer; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 3px; padding: 0;"&gt;R&lt;/button&gt;
+ &lt;/div&gt;
+ &lt;div class="d2-wrapper" style="width: 100%; height: auto; overflow: hidden; cursor: grab; display: flex; justify-content: center;"&gt;
+ &lt;img src="https://qtopie.github.io/diagrams/d2-2df04f9248b8d8620a23ceb735255d91.svg" alt="D2 Diagram" style="max-width: 100%; height: auto; transition: none;"&gt;
+ &lt;/div&gt;
+ &lt;div class="watermark-overlay" style="pointer-events: none; position: absolute; bottom: 5px; right: 5px; opacity: 0.5; font-size: 0.8em; color: #888;"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;&lt;p&gt;这里需要特别区分: &lt;code&gt;LLM / Planning / Memory / Tools&lt;/code&gt; 是 Agent 本身就具备的基础能力; Agent Skill 的作用是按需增强这些能力, 而不是替代它们。&lt;/p&gt;</description></item><item><title>Backtracking</title><link>https://qtopie.github.io/notes/codejam/backtracking/</link><pubDate>Fri, 27 Feb 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/codejam/backtracking/</guid><description>&lt;p&gt;回溯算法（Backtracking）常被称为“通用的解题法”。如果把解决一个问题比作走迷宫，回溯算法就是那个&lt;strong&gt;不撞南墙不回头&lt;/strong&gt;的勇者。&lt;/p&gt;
 &lt;h3 id="-什么是回溯算法"&gt;## 什么是回溯算法？&lt;/h3&gt;
 &lt;p&gt;从本质上讲，回溯是一种&lt;strong&gt;深度优先搜索（DFS）&lt;/strong&gt;。它的核心思想是：在搜索过程中，当发现当前的路径已经不能满足求解条件时，就“回退”到上一步，换一条路径继续试探。&lt;/p&gt;
 &lt;h4 id="-核心三个步骤回溯模板"&gt;### 核心三个步骤（回溯模板）：&lt;/h4&gt;
