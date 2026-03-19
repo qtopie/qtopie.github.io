@@ -1,0 +1,26 @@
+<svg width="720" height="430" viewBox="0 0 720 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CAP 三圆相交示意图">
+  <title>CAP 三圆相交示意图</title>
+
+  <circle cx="290" cy="165" r="120" fill="#60a5fa" fill-opacity="0.45" stroke="#3b82f6" stroke-width="2" />
+  <circle cx="430" cy="165" r="120" fill="#34d399" fill-opacity="0.45" stroke="#10b981" stroke-width="2" />
+  <circle cx="360" cy="265" r="120" fill="#fbbf24" fill-opacity="0.45" stroke="#f59e0b" stroke-width="2" />
+
+  <text x="230" y="115" font-size="20" font-weight="bold" fill="#1e3a8a">C</text>
+  <text x="190" y="140" font-size="14" fill="#1e3a8a">Consistency</text>
+  <text x="210" y="160" font-size="14" fill="#1e3a8a">一致性</text>
+
+  <text x="475" y="115" font-size="20" font-weight="bold" fill="#065f46">A</text>
+  <text x="470" y="140" font-size="14" fill="#065f46">Availability</text>
+  <text x="495" y="160" font-size="14" fill="#065f46">可用性</text>
+
+  <text x="350" y="355" font-size="20" font-weight="bold" fill="#92400e">P</text>
+  <text x="305" y="380" font-size="14" fill="#92400e">Partition Tolerance</text>
+  <text x="335" y="400" font-size="14" fill="#92400e">分区容忍性</text>
+
+  <text x="360" y="145" text-anchor="middle" font-size="13" font-weight="bold" fill="#111827">CA</text>
+  <text x="325" y="245" text-anchor="middle" font-size="13" font-weight="bold" fill="#111827">CP</text>
+  <text x="395" y="245" text-anchor="middle" font-size="13" font-weight="bold" fill="#111827">AP</text>
+  <text x="360" y="210" text-anchor="middle" font-size="13" font-weight="bold" fill="#111827">CAP</text>
+
+  <text x="540" y="300" font-size="13" fill="#374151">现实分布式系统常在 CP 与 AP 间取舍</text>
+</svg>
