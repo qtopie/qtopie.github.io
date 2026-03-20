@@ -4,6 +4,7 @@
  &lt;button class="d2-btn-zoom-in" title="Zoom In" style="border: 1px solid #ddd; background: #fff; cursor: pointer; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 3px; padding: 0;"&gt;+&lt;/button&gt;
  &lt;button class="d2-btn-zoom-out" title="Zoom Out" style="border: 1px solid #ddd; background: #fff; cursor: pointer; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 3px; padding: 0;"&gt;-&lt;/button&gt;
  &lt;button class="d2-btn-reset" title="Reset" style="border: 1px solid #ddd; background: #fff; cursor: pointer; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 3px; padding: 0;"&gt;R&lt;/button&gt;
+ &lt;button class="d2-btn-fullscreen" title="Fullscreen" style="border: 1px solid #ddd; background: #fff; cursor: pointer; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 3px; padding: 0;"&gt;⤢&lt;/button&gt;
  &lt;/div&gt;
  &lt;div class="d2-wrapper" style="width: 100%; height: auto; overflow: hidden; cursor: grab; display: flex; justify-content: center;"&gt;
  &lt;img src="https://qtopie.github.io/diagrams/d2-2df04f9248b8d8620a23ceb735255d91.svg" alt="D2 Diagram" style="max-width: 100%; height: auto; transition: none;"&gt;
