@@ -53,14 +53,14 @@
 &lt;li&gt;&lt;strong&gt;范围查询友好&lt;/strong&gt;：跳表本质上是有序链表，执行 &lt;code&gt;ZRANGE&lt;/code&gt; 等范围操作时，只需定位到起点后遍历即可。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id="结构示意图"&gt;结构示意图&lt;/h4&gt;
-&lt;div class="d2-container" id="d2-6232cf3407786475caa3c86d1333e53d"&gt;&lt;div class="d2-controls"&gt;
+&lt;div class="d2-container" id="d2-d97303acaa7e09ce3eb0834e7cffa371"&gt;&lt;div class="d2-controls"&gt;
  &lt;button class="d2-btn-zoom-in" title="Zoom In"&gt;+&lt;/button&gt;
  &lt;button class="d2-btn-zoom-out" title="Zoom Out"&gt;-&lt;/button&gt;
  &lt;button class="d2-btn-reset" title="Reset"&gt;R&lt;/button&gt;
  &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
  &lt;/div&gt;
  &lt;div class="d2-wrapper"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-6232cf3407786475caa3c86d1333e53d.svg" alt="D2 Diagram"&gt;
+ &lt;img src="https://qtopie.github.io/diagrams/d2-d97303acaa7e09ce3eb0834e7cffa371.svg" alt="D2 Diagram"&gt;
  &lt;/div&gt;
  &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
 &lt;hr&gt;
