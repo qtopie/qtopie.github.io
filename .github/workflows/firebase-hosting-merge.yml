@@ -29,7 +29,7 @@ jobs:
       - run: npm install --prefix themes/drift-blog-theme/react-app/
       - run: npm run build --prefix themes/drift-blog-theme/react-app/
       - name: generate sites
-        run: sudo snap install hugo --edge && hugo --minify
+        run: sudo snap install hugo --edge && ./scripts/hugo-with-d2.sh --minify
       
       - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0

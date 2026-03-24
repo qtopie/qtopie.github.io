@@ -38,6 +38,15 @@ brew install d2
 	- Hugo render hook `themes/drift-blog-theme/layouts/_markup/render-codeblock-d2.html` maps each `d2` code block to `static/diagrams/d2-<hash>.svg`.
 	- If the SVG exists, page renders it as `<img>`; if missing, it gracefully falls back to a normal `d2` code block (no build crash).
 	- Hash includes diagram source and `theme`, so you can pre-generate stable file names.
+	- Local auto-build entrypoint: `./scripts/hugo-with-d2.sh` regenerates D2 diagrams first, then runs `hugo` with the same arguments.
+
+- Recommended local commands:
+
+```bash
+./scripts/hugo-with-d2.sh
+./scripts/hugo-with-d2.sh --minify
+./scripts/hugo-with-d2.sh server
+```
 
 - Pre-generate diagram example:
 
@@ -46,4 +55,4 @@ echo 'x -> y: hello' | d2 --theme 200 - ./static/diagrams/d2-<hash>.svg
 ```
 
 - CI note:
-	- GitHub Actions workflow `/.github/workflows/firebase-hosting-merge.yml` installs D2 before running `hugo --minify`.
+	- GitHub Actions workflow `/.github/workflows/firebase-hosting-merge.yml` installs D2 before running `./scripts/hugo-with-d2.sh --minify`.
