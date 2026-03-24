@@ -1,52 +1,33 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Notes on 1001問</title><link>https://qtopie.github.io/notes/</link><description>Recent content in Notes on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Thu, 19 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/notes/index.xml" rel="self" type="application/rss+xml"/><item><title>如何写一个好的Agent Skill</title><link>https://qtopie.github.io/notes/ai/agent-skills/</link><pubDate>Thu, 19 Mar 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/ai/agent-skills/</guid><description>&lt;h2 id="agent-skills是什么"&gt;Agent Skills是什么?&lt;/h2&gt;
 &lt;p&gt;Agent Skill是随调随用的专业知识. 它封装了提示词(技能)和其依赖的工具, 能够模块化的给Agent加上某个问题解决能力.&lt;/p&gt;
-&lt;div class="d2-container" id="d2-2df04f9248b8d8620a23ceb735255d91"&gt;&lt;div class="d2-missing-hint"&gt;D2 SVG is missing (target: &lt;code&gt;diagrams/d2-2df04f9248b8d8620a23ceb735255d91.svg&lt;/code&gt;). Run &lt;code&gt;./scripts/generate-d2-diagrams.sh&lt;/code&gt; to regenerate diagrams.&lt;/div&gt;
- &lt;pre data-d2-missing="true" data-d2-target="diagrams/d2-2df04f9248b8d8620a23ceb735255d91.svg" data-d2-hash="2df04f9248b8d8620a23ceb735255d91" data-d2-theme="0" data-d2-len="1030"&gt;&lt;code class="language-d2"&gt;direction: down
-
-agent: &amp;amp;#34;Agent&amp;amp;#34;
-
-agent.style.fill: &amp;amp;#34;#111111&amp;amp;#34;
-agent.style.stroke: &amp;amp;#34;#000000&amp;amp;#34;
-agent.style.font-color: &amp;amp;#34;#FFFFFF&amp;amp;#34;
-
-native: {
-	label: &amp;amp;#34;Agent 本身能力(默认就有)&amp;amp;#34;
-	direction: right
-	llm: &amp;amp;#34;LLM\n理解与生成&amp;amp;#34;
-	planning: &amp;amp;#34;Planning\n任务分解与决策&amp;amp;#34;
-	memory: &amp;amp;#34;Memory\n上下文与经验&amp;amp;#34;
-	tools: &amp;amp;#34;Tools\n外部能力执行&amp;amp;#34;
-}
-
-llm.style.fill: &amp;amp;#34;#FDE68A&amp;amp;#34;
-planning.style.fill: &amp;amp;#34;#93C5FD&amp;amp;#34;
-memory.style.fill: &amp;amp;#34;#86EFAC&amp;amp;#34;
-tools.style.fill: &amp;amp;#34;#F9A8D4&amp;amp;#34;
-
-llm.style.stroke: &amp;amp;#34;#B45309&amp;amp;#34;
-planning.style.stroke: &amp;amp;#34;#1D4ED8&amp;amp;#34;
-memory.style.stroke: &amp;amp;#34;#15803D&amp;amp;#34;
-tools.style.stroke: &amp;amp;#34;#BE185D&amp;amp;#34;
-
-agent -&amp;amp;gt; llm
-agent -&amp;amp;gt; planning
-agent -&amp;amp;gt; memory
-agent -&amp;amp;gt; tools
-
-skillpack: {
-	label: &amp;amp;#34;Agent Skill 增强层(按需加载)&amp;amp;#34;
-	direction: right
-	skill_prompt: &amp;amp;#34;领域提示词&amp;amp;#34;
-	skill_flow: &amp;amp;#34;步骤模板&amp;amp;#34;
-	skill_knowledge: &amp;amp;#34;参考资料&amp;amp;#34;
-	skill_tooling: &amp;amp;#34;脚本与参数规范&amp;amp;#34;
-}
-
-skill_prompt -&amp;amp;gt; llm: &amp;amp;#34;增强&amp;amp;#34;
-skill_flow -&amp;amp;gt; planning: &amp;amp;#34;增强&amp;amp;#34;
-skill_knowledge -&amp;amp;gt; memory: &amp;amp;#34;增强&amp;amp;#34;
-skill_tooling -&amp;amp;gt; tools: &amp;amp;#34;增强&amp;amp;#34;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;这里需要特别区分: &lt;code&gt;LLM / Planning / Memory / Tools&lt;/code&gt; 是 Agent 本身就具备的基础能力; Agent Skill 的作用是按需增强这些能力, 而不是替代它们。&lt;/p&gt;</description></item><item><title>Backtracking</title><link>https://qtopie.github.io/notes/codejam/backtracking/</link><pubDate>Fri, 27 Feb 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/codejam/backtracking/</guid><description>&lt;p&gt;回溯算法（Backtracking）常被称为“通用的解题法”。如果把解决一个问题比作走迷宫，回溯算法就是那个&lt;strong&gt;不撞南墙不回头&lt;/strong&gt;的勇者。&lt;/p&gt;
+&lt;div class="d2-container" id="d2-2df04f9248b8d8620a23ceb735255d91"&gt;&lt;div class="d2-controls"&gt;
+ &lt;button class="d2-btn-zoom-in" title="Zoom In"&gt;+&lt;/button&gt;
+ &lt;button class="d2-btn-zoom-out" title="Zoom Out"&gt;-&lt;/button&gt;
+ &lt;button class="d2-btn-reset" title="Reset"&gt;R&lt;/button&gt;
+ &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
+ &lt;/div&gt;
+ &lt;div class="d2-wrapper"&gt;
+ &lt;img src="https://qtopie.github.io/diagrams/d2-2df04f9248b8d8620a23ceb735255d91.svg" alt="D2 Diagram"&gt;
+ &lt;/div&gt;
+ &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;这里需要特别区分: &lt;code&gt;LLM / Planning / Memory / Tools&lt;/code&gt; 是 Agent 本身就具备的基础能力; Agent Skill 的作用是按需增强这些能力, 而不是替代它们。&lt;/p&gt;
+&lt;p&gt;其中 Agent Skill 的作用是把某个领域的最佳实践打包成可复用模块, 在任务匹配时按需注入到 Agent 中:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对 &lt;code&gt;LLM&lt;/code&gt;: 补充术语、规则和输出要求, 让回答更专业。&lt;/li&gt;
+&lt;li&gt;对 &lt;code&gt;Planning&lt;/code&gt;: 给出可执行流程, 减少漏步骤和拍脑袋决策。&lt;/li&gt;
+&lt;li&gt;对 &lt;code&gt;Memory&lt;/code&gt;: 提供本技能专属知识与参考文档, 提升上下文质量。&lt;/li&gt;
+&lt;li&gt;对 &lt;code&gt;Tools&lt;/code&gt;: 明确可调用脚本和参数规范, 提高执行成功率。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="核心价值"&gt;核心价值&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;经验可复用: 把复杂流程(比如团队的 PR 审查流程)打包成一个文件夹, 谁都能直接用。&lt;/li&gt;
+&lt;li&gt;执行更稳定: 多步骤任务按同一套流程走, 结果更一致、不容易漏步骤。&lt;/li&gt;
+&lt;li&gt;资源放一起: 指令、脚本、模板、示例数据都放在同一个 Skill 里, Agent 拿来就能用。&lt;/li&gt;
+&lt;li&gt;按需加载更省上下文: 初始只加载技能&lt;code&gt;SKILL.md&lt;/code&gt;的名称和描述; 只有在模型真正激活技能后, 才加载详细说明和资源, 从而节省上下文 token。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="目录结构"&gt;目录结构&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;假如我们创建一个出门助手的SKILL, 叫做&lt;code&gt;Going-out assistant&lt;/code&gt;&lt;/p&gt;</description></item><item><title>Backtracking</title><link>https://qtopie.github.io/notes/codejam/backtracking/</link><pubDate>Fri, 27 Feb 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/codejam/backtracking/</guid><description>&lt;p&gt;回溯算法（Backtracking）常被称为“通用的解题法”。如果把解决一个问题比作走迷宫，回溯算法就是那个&lt;strong&gt;不撞南墙不回头&lt;/strong&gt;的勇者。&lt;/p&gt;
 &lt;h3 id="-什么是回溯算法"&gt;## 什么是回溯算法？&lt;/h3&gt;
 &lt;p&gt;从本质上讲，回溯是一种&lt;strong&gt;深度优先搜索（DFS）&lt;/strong&gt;。它的核心思想是：在搜索过程中，当发现当前的路径已经不能满足求解条件时，就“回退”到上一步，换一条路径继续试探。&lt;/p&gt;
 &lt;h4 id="-核心三个步骤回溯模板"&gt;### 核心三个步骤（回溯模板）：&lt;/h4&gt;
@@ -1455,57 +1436,30 @@ skill_tooling -&amp;amp;gt; tools: &amp;amp;#34;增强&amp;amp;#34;&lt;/code&gt;
 &lt;li&gt;&lt;strong&gt;范围查询友好&lt;/strong&gt;：跳表本质上是有序链表，执行 &lt;code&gt;ZRANGE&lt;/code&gt; 等范围操作时，只需定位到起点后遍历即可。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id="结构示意图"&gt;结构示意图&lt;/h4&gt;
-&lt;div class="d2-container" id="d2-6232cf3407786475caa3c86d1333e53d"&gt;&lt;div class="d2-missing-hint"&gt;D2 SVG is missing (target: &lt;code&gt;diagrams/d2-6232cf3407786475caa3c86d1333e53d.svg&lt;/code&gt;). Run &lt;code&gt;./scripts/generate-d2-diagrams.sh&lt;/code&gt; to regenerate diagrams.&lt;/div&gt;
- &lt;pre data-d2-missing="true" data-d2-target="diagrams/d2-6232cf3407786475caa3c86d1333e53d.svg" data-d2-hash="6232cf3407786475caa3c86d1333e53d" data-d2-theme="200" data-d2-len="546"&gt;&lt;code class="language-d2"&gt;direction: right
-vars: {
- d2-config: {
- layout-engine: dagre
- }
-}
-
-Legend: {
- shape: package
- L3: Level 3 (Express)
- L2: Level 2 (Mid)
- L1: Level 1 (Base)
-}
-
-Level3: {
- n1: 1
- n9: 9
- n1 -&amp;amp;gt; n9: &amp;amp;#34;skip 7 nodes&amp;amp;#34;
-}
-
-Level2: {
- n1: 1
- n4: 4
- n6: 6
- n9: 9
- n1 -&amp;amp;gt; n4 -&amp;amp;gt; n6 -&amp;amp;gt; n9
-}
-
-Level1: {
- n1: 1
- n2: 2
- n3: 3
- n4: 4
- n5: 5
- n6: 6
- n7: 7
- n8: 8
- n9: 9
- n1 -&amp;amp;gt; n2 -&amp;amp;gt; n3 -&amp;amp;gt; n4 -&amp;amp;gt; n5 -&amp;amp;gt; n6 -&amp;amp;gt; n7 -&amp;amp;gt; n8 -&amp;amp;gt; n9
-}
-
-Level3.n1 -&amp;amp;gt; Level2.n1 -&amp;amp;gt; Level1.n1
-Level2.n4 -&amp;amp;gt; Level1.n4
-Level2.n6 -&amp;amp;gt; Level1.n6
-Level3.n9 -&amp;amp;gt; Level2.n9 -&amp;amp;gt; Level1.n9&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="d2-container" id="d2-6232cf3407786475caa3c86d1333e53d"&gt;&lt;div class="d2-controls"&gt;
+ &lt;button class="d2-btn-zoom-in" title="Zoom In"&gt;+&lt;/button&gt;
+ &lt;button class="d2-btn-zoom-out" title="Zoom Out"&gt;-&lt;/button&gt;
+ &lt;button class="d2-btn-reset" title="Reset"&gt;R&lt;/button&gt;
+ &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
+ &lt;/div&gt;
+ &lt;div class="d2-wrapper"&gt;
+ &lt;img src="https://qtopie.github.io/diagrams/d2-6232cf3407786475caa3c86d1333e53d.svg" alt="D2 Diagram"&gt;
+ &lt;/div&gt;
+ &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
 &lt;hr&gt;
 &lt;h2 id="持久化机制aof-vs-rdb"&gt;持久化机制：AOF vs RDB&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;RDB (Redis Database)&lt;/strong&gt;：全量快照。&lt;/p&gt;</description></item><item><title>链表反转</title><link>https://qtopie.github.io/notes/codejam/reverse-list/</link><pubDate>Sat, 07 Sep 2024 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/codejam/reverse-list/</guid><description>&lt;h2 id="链表反转深入浅出"&gt;链表反转：深入浅出&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;RDB (Redis Database)&lt;/strong&gt;：全量快照。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;优点&lt;/strong&gt;：恢复快，文件小。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;缺点&lt;/strong&gt;：会丢数据（两次快照间的数据）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;AOF (Append Only File)&lt;/strong&gt;：增量日志。&lt;/p&gt;</description></item><item><title>链表反转</title><link>https://qtopie.github.io/notes/codejam/reverse-list/</link><pubDate>Sat, 07 Sep 2024 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/codejam/reverse-list/</guid><description>&lt;h2 id="链表反转深入浅出"&gt;链表反转：深入浅出&lt;/h2&gt;
 &lt;h3 id="链表反转是什么"&gt;链表反转是什么？&lt;/h3&gt;
 &lt;p&gt;链表反转，顾名思义，就是将一个链表的节点顺序颠倒过来。例如，原本的链表是1-&amp;gt;2-&amp;gt;3-&amp;gt;4，反转后就变成4-&amp;gt;3-&amp;gt;2-&amp;gt;1。&lt;/p&gt;
 &lt;h3 id="为什么需要链表反转"&gt;为什么需要链表反转？&lt;/h3&gt;

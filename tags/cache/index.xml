@@ -53,54 +53,27 @@
 &lt;li&gt;&lt;strong&gt;范围查询友好&lt;/strong&gt;：跳表本质上是有序链表，执行 &lt;code&gt;ZRANGE&lt;/code&gt; 等范围操作时，只需定位到起点后遍历即可。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id="结构示意图"&gt;结构示意图&lt;/h4&gt;
-&lt;div class="d2-container" id="d2-6232cf3407786475caa3c86d1333e53d"&gt;&lt;div class="d2-missing-hint"&gt;D2 SVG is missing (target: &lt;code&gt;diagrams/d2-6232cf3407786475caa3c86d1333e53d.svg&lt;/code&gt;). Run &lt;code&gt;./scripts/generate-d2-diagrams.sh&lt;/code&gt; to regenerate diagrams.&lt;/div&gt;
- &lt;pre data-d2-missing="true" data-d2-target="diagrams/d2-6232cf3407786475caa3c86d1333e53d.svg" data-d2-hash="6232cf3407786475caa3c86d1333e53d" data-d2-theme="200" data-d2-len="546"&gt;&lt;code class="language-d2"&gt;direction: right
-vars: {
- d2-config: {
- layout-engine: dagre
- }
-}
-
-Legend: {
- shape: package
- L3: Level 3 (Express)
- L2: Level 2 (Mid)
- L1: Level 1 (Base)
-}
-
-Level3: {
- n1: 1
- n9: 9
- n1 -&amp;amp;gt; n9: &amp;amp;#34;skip 7 nodes&amp;amp;#34;
-}
-
-Level2: {
- n1: 1
- n4: 4
- n6: 6
- n9: 9
- n1 -&amp;amp;gt; n4 -&amp;amp;gt; n6 -&amp;amp;gt; n9
-}
-
-Level1: {
- n1: 1
- n2: 2
- n3: 3
- n4: 4
- n5: 5
- n6: 6
- n7: 7
- n8: 8
- n9: 9
- n1 -&amp;amp;gt; n2 -&amp;amp;gt; n3 -&amp;amp;gt; n4 -&amp;amp;gt; n5 -&amp;amp;gt; n6 -&amp;amp;gt; n7 -&amp;amp;gt; n8 -&amp;amp;gt; n9
-}
-
-Level3.n1 -&amp;amp;gt; Level2.n1 -&amp;amp;gt; Level1.n1
-Level2.n4 -&amp;amp;gt; Level1.n4
-Level2.n6 -&amp;amp;gt; Level1.n6
-Level3.n9 -&amp;amp;gt; Level2.n9 -&amp;amp;gt; Level1.n9&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class="d2-container" id="d2-6232cf3407786475caa3c86d1333e53d"&gt;&lt;div class="d2-controls"&gt;
+ &lt;button class="d2-btn-zoom-in" title="Zoom In"&gt;+&lt;/button&gt;
+ &lt;button class="d2-btn-zoom-out" title="Zoom Out"&gt;-&lt;/button&gt;
+ &lt;button class="d2-btn-reset" title="Reset"&gt;R&lt;/button&gt;
+ &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
+ &lt;/div&gt;
+ &lt;div class="d2-wrapper"&gt;
+ &lt;img src="https://qtopie.github.io/diagrams/d2-6232cf3407786475caa3c86d1333e53d.svg" alt="D2 Diagram"&gt;
+ &lt;/div&gt;
+ &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
 &lt;hr&gt;
 &lt;h2 id="持久化机制aof-vs-rdb"&gt;持久化机制：AOF vs RDB&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;RDB (Redis Database)&lt;/strong&gt;：全量快照。&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;&lt;strong&gt;RDB (Redis Database)&lt;/strong&gt;：全量快照。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;优点&lt;/strong&gt;：恢复快，文件小。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;缺点&lt;/strong&gt;：会丢数据（两次快照间的数据）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;AOF (Append Only File)&lt;/strong&gt;：增量日志。&lt;/p&gt;</description></item></channel></rss>
