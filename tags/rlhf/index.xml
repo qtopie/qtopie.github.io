@@ -7,11 +7,11 @@
 &lt;li&gt;&lt;strong&gt;目标：预测下一个词&lt;/strong&gt;：在预训练阶段，模型的唯一任务是根据前面的词预测概率最高的一个词。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;算力与参数&lt;/strong&gt;：通过数千张 GPU 训练，模型学会了语法、逻辑、常识甚至编写代码的能力。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="d2-container" id="d2-fea6e95484e4846146c27cb6f1a7f109"&gt;&lt;div class="d2-controls"&gt;
+&lt;div class="d2-container" id="d2-9fab57c576dfc5ca627698f623f7aca3"&gt;&lt;div class="d2-controls"&gt;
  &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
  &lt;/div&gt;
  &lt;div class="d2-img-container"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-fea6e95484e4846146c27cb6f1a7f109.svg" alt="D2 Diagram"&gt;
+ &lt;img src="https://qtopie.github.io/diagrams/d2-9fab57c576dfc5ca627698f623f7aca3.svg" alt="D2 Diagram"&gt;
  &lt;/div&gt;
  &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
 &lt;h3 id="02-工作预测与生成-inference"&gt;0.2 工作：预测与生成 (Inference)&lt;/h3&gt;
@@ -21,11 +21,11 @@
 &lt;li&gt;&lt;strong&gt;处理 (Processing)&lt;/strong&gt;：模型将文字转化为向量，通过多层 Transformer 网络计算它们之间的关联（Attention）。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;输出 (Output)&lt;/strong&gt;：预测并生成下一个 Token，然后将其放回输入序列，循环往复直至生成结束。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="d2-container" id="d2-e91e5f1524d443d88bf090420e5e2a6c"&gt;&lt;div class="d2-controls"&gt;
+&lt;div class="d2-container" id="d2-aa1cdc653ea3ed710c7939cf1158f36e"&gt;&lt;div class="d2-controls"&gt;
  &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
  &lt;/div&gt;
  &lt;div class="d2-img-container"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-e91e5f1524d443d88bf090420e5e2a6c.svg" alt="D2 Diagram"&gt;
+ &lt;img src="https://qtopie.github.io/diagrams/d2-aa1cdc653ea3ed710c7939cf1158f36e.svg" alt="D2 Diagram"&gt;
  &lt;/div&gt;
  &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
 &lt;h3 id="03-llm-的核心组件-core-components"&gt;0.3 LLM 的核心组件 (Core Components)&lt;/h3&gt;
@@ -41,11 +41,11 @@
 &lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;输出头 (Output Head)&lt;/strong&gt;：将最终的向量映射回词表大小，通过 Softmax 函数输出每个词的概率。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="d2-container" id="d2-7753250c670a4ac16a38f8e058974119"&gt;&lt;div class="d2-controls"&gt;
+&lt;div class="d2-container" id="d2-0723d30a8fa91ccfe020f0864ae90e6c"&gt;&lt;div class="d2-controls"&gt;
  &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
  &lt;/div&gt;
  &lt;div class="d2-img-container"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-7753250c670a4ac16a38f8e058974119.svg" alt="D2 Diagram"&gt;
+ &lt;img src="https://qtopie.github.io/diagrams/d2-0723d30a8fa91ccfe020f0864ae90e6c.svg" alt="D2 Diagram"&gt;
  &lt;/div&gt;
  &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;本文将重点讨论后训练的核心技术流程。&lt;/p&gt;</description></item></channel></rss>
