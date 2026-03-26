@@ -28,28 +28,24 @@
  &lt;img src="https://qtopie.github.io/diagrams/d2-e91e5f1524d443d88bf090420e5e2a6c.svg" alt="D2 Diagram"&gt;
  &lt;/div&gt;
  &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;本文将重点讨论后训练的核心技术流程。&lt;/p&gt;
-&lt;h2 id="1-后训练概览-overview"&gt;1. 后训练概览 (Overview)&lt;/h2&gt;
-&lt;p&gt;后训练的目标是将基础模型（Base Model）转化为指令遵循模型（Instruct/Chat Model）。这个过程主要包含三个核心环节：&lt;strong&gt;SFT&lt;/strong&gt;、&lt;strong&gt;对齐 (Alignment)&lt;/strong&gt; 和 &lt;strong&gt;特定领域优化&lt;/strong&gt;。&lt;/p&gt;
-&lt;div class="d2-container" id="d2-e0a788616a91fc0e0e33e207e7c7e4ce"&gt;&lt;div class="d2-controls"&gt;
- &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
- &lt;/div&gt;
- &lt;div class="d2-img-container"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-e0a788616a91fc0e0e33e207e7c7e4ce.svg" alt="D2 Diagram"&gt;
- &lt;/div&gt;
- &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id="2-有监督微调-sft-supervised-fine-tuning"&gt;2. 有监督微调 (SFT: Supervised Fine-Tuning)&lt;/h2&gt;
-&lt;p&gt;这是后训练的第一步，也是最重要的一步。&lt;/p&gt;
+&lt;h3 id="03-llm-的核心组件-core-components"&gt;0.3 LLM 的核心组件 (Core Components)&lt;/h3&gt;
+&lt;p&gt;为了完成上述预测任务，LLM 内部由几个关键部分组成：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;分词器 (Tokenizer)&lt;/strong&gt;：将原始文本切分为最小单位（Tokens），并映射为数字 ID。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;嵌入层 (Embedding Layer)&lt;/strong&gt;：将数字 ID 转化为高维向量。在向量空间中，意思相近的词距离更近。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Transformer 块 (Transformer Blocks)&lt;/strong&gt;：
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;数据质量 &amp;gt; 数据数量&lt;/strong&gt;：与其使用 100 万条低质量数据，不如使用 1 万条经过人工审核的高质量 (Prompt, Response) 对。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;指令遵循&lt;/strong&gt;：教模型识别不同的指令格式（如 Q&amp;amp;A、总结、创意写作等）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;自注意力 (Self-Attention)&lt;/strong&gt;：让模型理解“它”指代的是前面的哪个名词，捕捉长距离依赖。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;前馈网络 (Feed-Forward)&lt;/strong&gt;：对捕捉到的特征进行非线性变换和存储知识。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="d2-container" id="d2-3459ce35d5dd9eab5392468ccd06f63a"&gt;&lt;div class="d2-controls"&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;输出头 (Output Head)&lt;/strong&gt;：将最终的向量映射回词表大小，通过 Softmax 函数输出每个词的概率。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="d2-container" id="d2-7753250c670a4ac16a38f8e058974119"&gt;&lt;div class="d2-controls"&gt;
  &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
  &lt;/div&gt;
  &lt;div class="d2-img-container"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-3459ce35d5dd9eab5392468ccd06f63a.svg" alt="D2 Diagram"&gt;
+ &lt;img src="https://qtopie.github.io/diagrams/d2-7753250c670a4ac16a38f8e058974119.svg" alt="D2 Diagram"&gt;
  &lt;/div&gt;
  &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id="3-人类偏好对齐-alignment"&gt;3. 人类偏好对齐 (Alignment)&lt;/h2&gt;
-&lt;p&gt;即使经过 SFT，模型仍可能产生幻觉或不符合人类价值观的输出。对齐技术通过引入“奖励”机制来优化模型。&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;本文将重点讨论后训练的核心技术流程。&lt;/p&gt;</description></item></channel></rss>
