@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Post-Training on 1001問</title><link>https://qtopie.github.io/tags/post-training/</link><description>Recent content in Post-Training on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Wed, 25 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/tags/post-training/index.xml" rel="self" type="application/rss+xml"/><item><title>大语言模型后训练 (LLM Post-training) 技术全指南</title><link>https://qtopie.github.io/notes/ai/llm-post-training/</link><pubDate>Wed, 25 Mar 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/ai/llm-post-training/</guid><description>&lt;p&gt;大语言模型（LLM）的生命周期通常分为两个阶段：&lt;strong&gt;预训练 (Pre-training)&lt;/strong&gt; 和 &lt;strong&gt;后训练 (Post-training)&lt;/strong&gt;。如果说预训练是让模型获得“世界知识”，那么后训练就是教模型如何“守规矩”以及“如何与人类沟通”。&lt;/p&gt;
-&lt;h2 id="0-llm-是如何构建与工作的-how-llms-are-built--work"&gt;0. LLM 是如何构建与工作的？ (How LLMs are Built &amp;amp; Work)&lt;/h2&gt;
-&lt;h3 id="01-构建从海量文本中学习-building"&gt;0.1 构建：从海量文本中学习 (Building)&lt;/h3&gt;
+&lt;h2 id="llm-是如何构建与工作的-how-llms-are-built--work"&gt;LLM 是如何构建与工作的？ (How LLMs are Built &amp;amp; Work)&lt;/h2&gt;
+&lt;h3 id="构建从海量文本中学习-building"&gt;构建：从海量文本中学习 (Building)&lt;/h3&gt;
 &lt;p&gt;LLM（如 GPT-4, Llama）的核心架构是 &lt;strong&gt;Transformer&lt;/strong&gt;。构建过程就像让模型阅读整个互联网。&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;数据收集&lt;/strong&gt;：抓取数万亿词汇（Tokens）的文本（维基百科、书籍、代码、网页）。&lt;/li&gt;
@@ -14,7 +14,7 @@
  &lt;img src="https://qtopie.github.io/diagrams/d2-9fab57c576dfc5ca627698f623f7aca3.svg" alt="D2 Diagram"&gt;
  &lt;/div&gt;
  &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
-&lt;h3 id="02-工作预测与生成-inference"&gt;0.2 工作：预测与生成 (Inference)&lt;/h3&gt;
+&lt;h3 id="工作预测与生成-inference"&gt;工作：预测与生成 (Inference)&lt;/h3&gt;
 &lt;p&gt;模型工作时，它并不是在“思考”，而是在不断地进行&lt;strong&gt;概率预测&lt;/strong&gt;。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;输入 (Input)&lt;/strong&gt;：你输入的 Prompt。&lt;/li&gt;
@@ -28,7 +28,7 @@
  &lt;img src="https://qtopie.github.io/diagrams/d2-aa1cdc653ea3ed710c7939cf1158f36e.svg" alt="D2 Diagram"&gt;
  &lt;/div&gt;
  &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
-&lt;h3 id="03-llm-的核心组件-core-components"&gt;0.3 LLM 的核心组件 (Core Components)&lt;/h3&gt;
+&lt;h3 id="llm-的核心组件-core-components"&gt;LLM 的核心组件 (Core Components)&lt;/h3&gt;
 &lt;p&gt;为了完成上述预测任务，LLM 内部由几个关键部分组成：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;分词器 (Tokenizer)&lt;/strong&gt;：将原始文本切分为最小单位（Tokens），并映射为数字 ID。&lt;/li&gt;
@@ -48,4 +48,6 @@
  &lt;img src="https://qtopie.github.io/diagrams/d2-0723d30a8fa91ccfe020f0864ae90e6c.svg" alt="D2 Diagram"&gt;
  &lt;/div&gt;
  &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;本文将重点讨论后训练的核心技术流程。&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;本文将重点讨论后训练的核心技术流程。&lt;/p&gt;
+&lt;h2 id="后训练概览-overview"&gt;后训练概览 (Overview)&lt;/h2&gt;
+&lt;p&gt;后训练的目标是将基础模型（Base Model）转化为指令遵循模型（Instruct/Chat Model）。这个过程主要包含三个核心环节：&lt;strong&gt;SFT&lt;/strong&gt;、&lt;strong&gt;对齐 (Alignment)&lt;/strong&gt; 和 &lt;strong&gt;特定领域优化&lt;/strong&gt;。&lt;/p&gt;</description></item></channel></rss>
