@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>English on 1001問</title><link>https://qtopie.github.io/tags/english/</link><description>Recent content in English on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Wed, 01 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/tags/english/index.xml" rel="self" type="application/rss+xml"/><item><title>日常英语</title><link>https://qtopie.github.io/notes/book/daily-tech-english/</link><pubDate>Wed, 01 Apr 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/book/daily-tech-english/</guid><description>&lt;h2 id="architecting-conversations-架构师日常专业英语进阶指南"&gt;Architecting Conversations: 架构师日常专业英语进阶指南&lt;/h2&gt;
+&lt;p&gt;在技术领域，架构师的角色往往是&lt;strong&gt;沟通的桥梁&lt;/strong&gt;。我们不仅要与编译器对话，更要与产品经理、研发工程师及高层决策者对话。在国际化的技术协作中，精准的英语表达能显著降低“沟通熵值”。&lt;/p&gt;
+&lt;p&gt;以下从五个核心维度，总结了架构师在日常工作中最高频的英语场景与地道表达，重点加入会议上可直接复用的口语模板，帮助你用最简单高效的方式向业务解释约束条件和实现方案。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="一-方案设计与评审-system-design--review"&gt;一、 方案设计与评审 (System Design &amp;amp; Review)&lt;/h2&gt;
+&lt;p&gt;在这个环节，我们的目标是描述系统组件、交互逻辑及其非功能性需求。&lt;/p&gt;
+&lt;h3 id="1-核心词汇"&gt;1. 核心词汇&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Decoupling (解耦)&lt;/strong&gt;: 降低组件间的依赖。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Scalability (伸缩性)&lt;/strong&gt;: 系统应对增长的能力。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;High Availability (HA, 高可用)&lt;/strong&gt;: 系统的持续运行能力。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Fault Tolerance (容错)&lt;/strong&gt;: 局部失效时不影响全局。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Bottleneck (瓶颈)&lt;/strong&gt;: 限制性能的关键点。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="2-常用句式"&gt;2. 常用句式&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;&amp;ldquo;To ensure &lt;strong&gt;high availability&lt;/strong&gt;, we should implement a multi-region deployment strategy.&amp;rdquo;&lt;/em&gt;
+（为了确保高可用，我们应当实施多地域部署策略。）&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&amp;ldquo;What is the &lt;strong&gt;trade-off&lt;/strong&gt; between data consistency and system latency in this design?&amp;rdquo;&lt;/em&gt;
+（在这个设计中，数据一致性与系统延迟之间的权衡是什么？）&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&amp;ldquo;We need to &lt;strong&gt;decouple&lt;/strong&gt; the notification service from the core logic using a message queue.&amp;rdquo;&lt;/em&gt;
+（我们需要使用消息队列将通知服务从核心逻辑中解耦。）&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;&amp;ldquo;The design goal is simple: keep the core flow stable, and move non-critical work to async processing.&amp;rdquo;&lt;/em&gt;
+（设计目标很简单：先保证主链路稳定，把非关键工作放到异步流程。）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="二-跨团队协同与对齐-technical-alignment"&gt;二、 跨团队协同与对齐 (Technical Alignment)&lt;/h2&gt;
+&lt;p&gt;架构师需要确保所有利益相关者在同一频道（On the same page）。&lt;/p&gt;</description></item></channel></rss>
