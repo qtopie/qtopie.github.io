@@ -2884,7 +2884,9 @@ also &lt;code&gt;sudo apt-get install haveged&lt;/code&gt;&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;hw_mode=g
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;There should not be any whitespace at the end of each line&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;then modify file &lt;code&gt;/etc/default/hostapd&lt;/code&gt; to let the configuration work
-automatically.&lt;/p&gt;</description></item><item><title>TimSort</title><link>https://qtopie.github.io/notes/codejam/sort/</link><pubDate>Sat, 07 May 2016 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/codejam/sort/</guid><description>&lt;h1 id="timsort--quicksortdual-pivot"&gt;TimSort &amp;amp; QuickSort(dual-pivot)&lt;/h1&gt;
+automatically.&lt;/p&gt;</description></item><item><title>排序</title><link>https://qtopie.github.io/notes/codejam/sort/</link><pubDate>Sat, 07 May 2016 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/codejam/sort/</guid><description>&lt;h2 id="经典排序算法"&gt;经典排序算法&lt;/h2&gt;
+&lt;p&gt;插入排序/快速排序/归并排序/堆排序&lt;/p&gt;
+&lt;h1 id="timsort--quicksortdual-pivot"&gt;TimSort &amp;amp; QuickSort(dual-pivot)&lt;/h1&gt;
 &lt;h2 id="timsort"&gt;TimSort&lt;/h2&gt;
 &lt;h3 id="reference"&gt;Reference&lt;/h3&gt;
 &lt;ul&gt;
@@ -2892,7 +2894,16 @@ automatically.&lt;/p&gt;</description></item><item><title>TimSort</title><link>h
 &lt;li&gt;&lt;a href="http://cr.openjdk.java.net/~martin/webrevs/openjdk7/timsort/raw_files/new/src/share/classes/java/util/TimSort.java"&gt;http://cr.openjdk.java.net/~martin/webrevs/openjdk7/timsort/raw_files/new/src/share/classes/java/util/TimSort.java&lt;/a&gt; (OpenJDK version)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="dual-pivot-quicksort"&gt;Dual pivot QuickSort&lt;/h2&gt;
-&lt;h3 id="reference-1"&gt;Reference&lt;/h3&gt;</description></item><item><title>二进制数</title><link>https://qtopie.github.io/notes/codejam/binary-numbers/</link><pubDate>Sat, 07 Nov 2015 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/codejam/binary-numbers/</guid><description>&lt;h2 id="了解cpu"&gt;了解CPU&lt;/h2&gt;
+&lt;h2 id="链表排序"&gt;链表排序&lt;/h2&gt;
+&lt;h3 id="reference-1"&gt;Reference&lt;/h3&gt;
+&lt;h1 id="selection-algorithm"&gt;Selection Algorithm&lt;/h1&gt;
+&lt;h2 id="median-of-medians"&gt;Median of medians&lt;/h2&gt;
+&lt;h3 id="bfprt"&gt;BFPRT&lt;/h3&gt;
+&lt;h2 id="reference-2"&gt;Reference&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://speople.csail.mit.edu/rivest/pubs/BFPRT73.pdf"&gt;http://speople.csail.mit.edu/rivest/pubs/BFPRT73.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://en.wikipedia.org/wiki/Median_of_medians"&gt;https://en.wikipedia.org/wiki/Median_of_medians&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item><item><title>二进制数</title><link>https://qtopie.github.io/notes/codejam/binary-numbers/</link><pubDate>Sat, 07 Nov 2015 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/codejam/binary-numbers/</guid><description>&lt;h2 id="了解cpu"&gt;了解CPU&lt;/h2&gt;
 &lt;p&gt;一个典型的 CPU 核心（Core）内部由许多协同工作的组件组成，主要可以分为 &lt;strong&gt;运算单元&lt;/strong&gt;、&lt;strong&gt;控制单元&lt;/strong&gt;、&lt;strong&gt;存储单元&lt;/strong&gt; 三大部分。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3 id="1-运算单元aluarithmetic-logic-unit"&gt;1. 运算单元：ALU（Arithmetic Logic Unit）&lt;/h3&gt;
@@ -3200,14 +3211,7 @@ l + (r - l + 1) / 2 靠右&lt;/p&gt;
 &lt;li&gt;&lt;a href="./combination-permutation.md"&gt;组合与排列（combination-permutation）&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;如需学习路线与题单，我可以按 4 周进度给出实现清单与练习集，并补充链接到上述笔记。&lt;/p&gt;</description></item><item><title/><link>https://qtopie.github.io/notes/codejam/selection-algorithm/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/codejam/selection-algorithm/</guid><description>&lt;h1 id="selection-algorithm"&gt;Selection Algorithm&lt;/h1&gt;
-&lt;h2 id="median-of-medians"&gt;Median of medians&lt;/h2&gt;
-&lt;h3 id="bfprt"&gt;BFPRT&lt;/h3&gt;
-&lt;h2 id="reference"&gt;Reference&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href="http://speople.csail.mit.edu/rivest/pubs/BFPRT73.pdf"&gt;http://speople.csail.mit.edu/rivest/pubs/BFPRT73.pdf&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://en.wikipedia.org/wiki/Median_of_medians"&gt;https://en.wikipedia.org/wiki/Median_of_medians&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</description></item><item><title/><link>https://qtopie.github.io/notes/design-patterns/design-principles/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/design-patterns/design-principles/</guid><description>&lt;h1 id="design-principles"&gt;Design Principles&lt;/h1&gt;
+&lt;p&gt;如需学习路线与题单，我可以按 4 周进度给出实现清单与练习集，并补充链接到上述笔记。&lt;/p&gt;</description></item><item><title/><link>https://qtopie.github.io/notes/design-patterns/design-principles/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/design-patterns/design-principles/</guid><description>&lt;h1 id="design-principles"&gt;Design Principles&lt;/h1&gt;
 &lt;h2 id="dependency-injection-di"&gt;Dependency Injection (DI)&lt;/h2&gt;
 &lt;p&gt;With dependency injection, objects accept dependencies in their constructors.
 The core principle is to separate behaviour from dependency resolution.&lt;/p&gt;
