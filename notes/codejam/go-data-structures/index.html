@@ -1,0 +1,185 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Go 语言里的 Data Structures | 1001問</title><link rel=stylesheet href=/css/main.min.cb77a0afefe7e79e7a22bb6b98472aa2bacac7337db8bdde57998ef8623ec9c5.css integrity="sha256-y3egr+/n5556IrtrmEcqorrKxzN9uL3eV5mO+GI+ycU=" crossorigin=anonymous><link rel=stylesheet href=/css/page.min.6aed8ce24257e1b53c29f19933effe0d60295a61983d51a256d1690f21245d8e.css integrity="sha256-au2M4kJX4bU8KfGZM+/+DWApWmGYPVGiVtFpDyEkXY4=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.e114b8cc38f57d520f373580c935a518bc6afd6dec4f1d682365cdbcf5c8218a.css><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css crossorigin=anonymous referrerpolicy=no-referrer><script src=/js/panzoom.min.d1dc01e4727734526981f6101210bf3b5e528e53d530affbaf74a153c6678cd5.js integrity="sha256-0dwB5HJ3NFJpgfYQEhC/O15SjlPVMK/7r3ShU8ZnjNU=" crossorigin=anonymous defer></script><script src=/js/toc.min.87636f25caf644980403a5c1ce8b0812cfd10d1e53c08f181547966799ceccdb.js integrity="sha256-h2NvJcr2RJgEA6XBzosIEs/RDR5TwI8YFUeWZ5nOzNs=" crossorigin=anonymous type=module defer></script><script src=/js/copy-code.min.3bea0de4cfe8670f94a5d75c177f07b58fc90178efdea7f2a21449798d75b2c9.js integrity="sha256-O+oN5M/oZw+UpddcF38HtY/JAXjv3qfyohRJeY11ssk=" crossorigin=anonymous defer></script><script defer src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js crossorigin=anonymous referrerpolicy=no-referrer></script><script defer src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js crossorigin=anonymous referrerpolicy=no-referrer onload='renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],throwOnError:!1})'></script><script src=/js/katex-block.min.2cf531bbcc318aadf5661baa2d0987ab5cb4daef473e108b1da714a37cff0b25.js integrity="sha256-LPUxu8wxiq31ZhuqLQmHq1y02u9HPhCLHacUo3z/CyU=" crossorigin=anonymous defer></script></head><body><header><nav><a href=/><h1>1001問</h1></a><div id=react-search class=search-root aria-label="Site Search"></div></nav></header><main><div class=sidebar><section class=toc><nav id=TableOfContents><ul><li><a href=#速览>速览</a></li><li><a href=#内建结构>内建结构</a><ul><li><a href=#array定长数组>Array：定长数组</a></li><li><a href=#slice最常用的动态序列>Slice：最常用的动态序列</a></li><li><a href=#map哈希表>Map：哈希表</a></li><li><a href=#struct业务建模核心>Struct：业务建模核心</a></li></ul></li><li><a href=#常见容器模式>常见容器模式</a><ul><li><a href=#stack-与-queue通常用-slice-就够了>Stack 与 Queue：通常用 Slice 就够了</a></li><li><a href=#set用-map-模拟>Set：用 Map 模拟</a></li><li><a href=#heap优先队列>Heap：优先队列</a></li><li><a href=#list双向链表>List：双向链表</a></li></ul></li><li><a href=#哈希冲突与-go-124-map>哈希冲突与 Go 1.24 <code>map</code></a><ul><li><a href=#open-hashing-vs-closed-hashing>Open Hashing vs Closed Hashing</a></li><li><a href=#为什么-go-124-转向-swiss-table-风格>为什么 Go 1.24 转向 Swiss Table 风格</a></li><li><a href=#对业务代码的影响>对业务代码的影响</a></li></ul></li><li><a href=#选型建议>选型建议</a></li><li><a href=#小结>小结</a></li></ul></nav></section></div><article id=content><div class=metadata><h1>Go 语言里的 Data Structures</h1><time datetime=2026-04-06T00:00:00+00:00>April 6, 2026</time><div class=taxonomy></div></div><p>Go 的设计很务实：内建的数据结构不算多，但组合能力很强。实际开发通常以内建类型（<code>array</code>、<code>slice</code>、<code>map</code>、<code>struct</code>）打底，再按场景配合 <code>container/*</code> 包和自定义结构。</p><h2 id=速览>速览</h2><table><thead><tr><th>结构</th><th>Go 里常见实现</th><th>核心特点</th><th>常见复杂度（平均）</th></tr></thead><tbody><tr><td>定长数组</td><td><code>[N]T</code></td><td>长度写在类型里，值语义</td><td>索引 O(1)</td></tr><tr><td>动态数组</td><td><code>[]T</code></td><td>最常用，自动扩容</td><td>末尾追加均摊 O(1)，索引 O(1)</td></tr><tr><td>哈希表</td><td><code>map[K]V</code></td><td>key 查找快，遍历无序</td><td>查找/插入/删除 O(1)</td></tr><tr><td>结构体</td><td><code>struct</code></td><td>聚合字段，可组合方法</td><td>字段访问 O(1)</td></tr><tr><td>栈</td><td><code>[]T</code></td><td>LIFO，最简单高效</td><td>push/pop 末尾 O(1)</td></tr><tr><td>队列</td><td><code>[]T</code> 或 <code>container/list</code></td><td>FIFO</td><td>入队/出队 O(1)（实现得当）</td></tr><tr><td>集合</td><td><code>map[T]struct{}</code></td><td>用 map 模拟 set</td><td>增删查 O(1)</td></tr><tr><td>堆</td><td><code>container/heap</code></td><td>优先队列</td><td>push/pop O(log n)</td></tr><tr><td>链表</td><td><code>container/list</code></td><td>插入删除灵活</td><td>已定位节点后插删 O(1)</td></tr></tbody></table><h2 id=内建结构>内建结构</h2><h3 id=array定长数组>Array：定长数组</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>var</span><span class=w> </span><span class=nx>a</span><span class=w> </span><span class=p>[</span><span class=mi>3</span><span class=p>]</span><span class=kt>int</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=p>[</span><span class=mi>3</span><span class=p>]</span><span class=kt>int</span><span class=p>{</span><span class=mi>10</span><span class=p>,</span><span class=w> </span><span class=mi>20</span><span class=p>,</span><span class=w> </span><span class=mi>30</span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>a</span><span class=p>[</span><span class=mi>1</span><span class=p>])</span><span class=w> </span><span class=c1>// 20</span><span class=w>
+</span></span></span></code></pre></div><ul><li>长度是类型的一部分，<code>[3]int</code> 和 <code>[4]int</code> 是不同类型。</li><li>数组赋值会拷贝整个数组（值语义）。</li><li>使用频率不如 <code>slice</code> 高，但固定长度场景表达清晰。</li></ul><h3 id=slice最常用的动态序列>Slice：最常用的动态序列</h3><p><code>slice</code> 本质是一个描述符（指向底层数组 + <code>len</code> + <code>cap</code>）。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>s</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=p>[]</span><span class=kt>int</span><span class=p>{</span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=mi>2</span><span class=p>,</span><span class=w> </span><span class=mi>3</span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nx>s</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nb>append</span><span class=p>(</span><span class=nx>s</span><span class=p>,</span><span class=w> </span><span class=mi>4</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nb>len</span><span class=p>(</span><span class=nx>s</span><span class=p>),</span><span class=w> </span><span class=nb>cap</span><span class=p>(</span><span class=nx>s</span><span class=p>),</span><span class=w> </span><span class=nx>s</span><span class=p>)</span><span class=w> </span><span class=c1>// 4 ... [1 2 3 4]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nx>t</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=nx>s</span><span class=p>[</span><span class=mi>1</span><span class=p>:</span><span class=mi>3</span><span class=p>]</span><span class=w> </span><span class=c1>// [2 3]</span><span class=w>
+</span></span></span></code></pre></div><ul><li><code>append</code> 可能触发扩容并更换底层数组，因此函数内修改时建议接收并返回新 <code>slice</code>。</li><li>切片共享底层数组，子切片可能“牵连”原数据。</li></ul><h3 id=map哈希表>Map：哈希表</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>scores</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=kd>map</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span><span class=kt>int</span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>	</span><span class=s>&#34;alice&#34;</span><span class=p>:</span><span class=w> </span><span class=mi>90</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>	</span><span class=s>&#34;bob&#34;</span><span class=p>:</span><span class=w>   </span><span class=mi>82</span><span class=p>,</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nx>scores</span><span class=p>[</span><span class=s>&#34;cathy&#34;</span><span class=p>]</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=mi>95</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nb>delete</span><span class=p>(</span><span class=nx>scores</span><span class=p>,</span><span class=w> </span><span class=s>&#34;bob&#34;</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nx>v</span><span class=p>,</span><span class=w> </span><span class=nx>ok</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=nx>scores</span><span class=p>[</span><span class=s>&#34;alice&#34;</span><span class=p>]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>v</span><span class=p>,</span><span class=w> </span><span class=nx>ok</span><span class=p>)</span><span class=w>
+</span></span></span></code></pre></div><ul><li>读取不存在的 key 会返回 value 类型零值。</li><li>用 <code>v, ok := m[k]</code> 判断是否存在。</li><li><code>map</code> 不是并发安全的；并发读写要加锁或使用 <code>sync.Map</code>。</li><li>遍历顺序不保证稳定。</li></ul><h3 id=struct业务建模核心>Struct：业务建模核心</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span><span class=w> </span><span class=nx>User</span><span class=w> </span><span class=kd>struct</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>	</span><span class=nx>ID</span><span class=w>    </span><span class=kt>int</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>	</span><span class=nx>Name</span><span class=w>  </span><span class=kt>string</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>	</span><span class=nx>Email</span><span class=w> </span><span class=kt>string</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nx>u</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=nx>User</span><span class=p>{</span><span class=nx>ID</span><span class=p>:</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=nx>Name</span><span class=p>:</span><span class=w> </span><span class=s>&#34;Calvin&#34;</span><span class=p>,</span><span class=w> </span><span class=nx>Email</span><span class=p>:</span><span class=w> </span><span class=s>&#34;a@b.com&#34;</span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>u</span><span class=p>.</span><span class=nx>Name</span><span class=p>)</span><span class=w>
+</span></span></span></code></pre></div><p><code>struct</code> 常与方法、接口配合使用，是 Go 建模的基础。通过组合（embedding）可以实现轻量复用。</p><h2 id=常见容器模式>常见容器模式</h2><h3 id=stack-与-queue通常用-slice-就够了>Stack 与 Queue：通常用 Slice 就够了</h3><p>栈（LIFO）：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>stack</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=p>[]</span><span class=kt>int</span><span class=p>{}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nx>stack</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nb>append</span><span class=p>(</span><span class=nx>stack</span><span class=p>,</span><span class=w> </span><span class=mi>10</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nx>stack</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nb>append</span><span class=p>(</span><span class=nx>stack</span><span class=p>,</span><span class=w> </span><span class=mi>20</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nx>top</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=nx>stack</span><span class=p>[</span><span class=nb>len</span><span class=p>(</span><span class=nx>stack</span><span class=p>)</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nx>stack</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nx>stack</span><span class=p>[:</span><span class=nb>len</span><span class=p>(</span><span class=nx>stack</span><span class=p>)</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>top</span><span class=p>)</span><span class=w> </span><span class=c1>// 20</span><span class=w>
+</span></span></span></code></pre></div><p>队列（FIFO，简单写法）：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>queue</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=p>[]</span><span class=kt>int</span><span class=p>{}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nx>queue</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nb>append</span><span class=p>(</span><span class=nx>queue</span><span class=p>,</span><span class=w> </span><span class=mi>1</span><span class=p>,</span><span class=w> </span><span class=mi>2</span><span class=p>,</span><span class=w> </span><span class=mi>3</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nx>head</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=nx>queue</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nx>queue</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nx>queue</span><span class=p>[</span><span class=mi>1</span><span class=p>:]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>head</span><span class=p>)</span><span class=w> </span><span class=c1>// 1</span><span class=w>
+</span></span></span></code></pre></div><p>注意：长期大量出队时，简单切片队列可能导致底层数组无法及时释放。高频队列建议实现环形缓冲区，或使用 <code>container/list</code>。</p><h3 id=set用-map-模拟>Set：用 Map 模拟</h3><p>Go 没有内建 <code>set</code>，最常见写法如下：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>set</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=kd>map</span><span class=p>[</span><span class=kt>string</span><span class=p>]</span><span class=kd>struct</span><span class=p>{}{}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nx>set</span><span class=p>[</span><span class=s>&#34;go&#34;</span><span class=p>]</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=kd>struct</span><span class=p>{}{}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nx>set</span><span class=p>[</span><span class=s>&#34;rust&#34;</span><span class=p>]</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=kd>struct</span><span class=p>{}{}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nx>_</span><span class=p>,</span><span class=w> </span><span class=nx>exists</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=nx>set</span><span class=p>[</span><span class=s>&#34;go&#34;</span><span class=p>]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nb>delete</span><span class=p>(</span><span class=nx>set</span><span class=p>,</span><span class=w> </span><span class=s>&#34;rust&#34;</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>exists</span><span class=p>)</span><span class=w>
+</span></span></span></code></pre></div><p>值用 <code>struct{}</code> 可以做到几乎零额外空间占用（相较 <code>bool</code>，常见于性能敏感场景）。</p><h3 id=heap优先队列>Heap：优先队列</h3><p>标准库提供 <code>container/heap</code>，实现一组接口即可使用。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kd>type</span><span class=w> </span><span class=nx>IntHeap</span><span class=w> </span><span class=p>[]</span><span class=kt>int</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kd>func</span><span class=w> </span><span class=p>(</span><span class=nx>h</span><span class=w> </span><span class=nx>IntHeap</span><span class=p>)</span><span class=w> </span><span class=nf>Len</span><span class=p>()</span><span class=w> </span><span class=kt>int</span><span class=w>           </span><span class=p>{</span><span class=w> </span><span class=k>return</span><span class=w> </span><span class=nb>len</span><span class=p>(</span><span class=nx>h</span><span class=p>)</span><span class=w> </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kd>func</span><span class=w> </span><span class=p>(</span><span class=nx>h</span><span class=w> </span><span class=nx>IntHeap</span><span class=p>)</span><span class=w> </span><span class=nf>Less</span><span class=p>(</span><span class=nx>i</span><span class=p>,</span><span class=w> </span><span class=nx>j</span><span class=w> </span><span class=kt>int</span><span class=p>)</span><span class=w> </span><span class=kt>bool</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=k>return</span><span class=w> </span><span class=nx>h</span><span class=p>[</span><span class=nx>i</span><span class=p>]</span><span class=w> </span><span class=p>&lt;</span><span class=w> </span><span class=nx>h</span><span class=p>[</span><span class=nx>j</span><span class=p>]</span><span class=w> </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kd>func</span><span class=w> </span><span class=p>(</span><span class=nx>h</span><span class=w> </span><span class=nx>IntHeap</span><span class=p>)</span><span class=w> </span><span class=nf>Swap</span><span class=p>(</span><span class=nx>i</span><span class=p>,</span><span class=w> </span><span class=nx>j</span><span class=w> </span><span class=kt>int</span><span class=p>)</span><span class=w>      </span><span class=p>{</span><span class=w> </span><span class=nx>h</span><span class=p>[</span><span class=nx>i</span><span class=p>],</span><span class=w> </span><span class=nx>h</span><span class=p>[</span><span class=nx>j</span><span class=p>]</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nx>h</span><span class=p>[</span><span class=nx>j</span><span class=p>],</span><span class=w> </span><span class=nx>h</span><span class=p>[</span><span class=nx>i</span><span class=p>]</span><span class=w> </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kd>func</span><span class=w> </span><span class=p>(</span><span class=nx>h</span><span class=w> </span><span class=o>*</span><span class=nx>IntHeap</span><span class=p>)</span><span class=w> </span><span class=nf>Push</span><span class=p>(</span><span class=nx>x</span><span class=w> </span><span class=kt>any</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w> </span><span class=o>*</span><span class=nx>h</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nb>append</span><span class=p>(</span><span class=o>*</span><span class=nx>h</span><span class=p>,</span><span class=w> </span><span class=nx>x</span><span class=p>.(</span><span class=kt>int</span><span class=p>))</span><span class=w> </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kd>func</span><span class=w> </span><span class=p>(</span><span class=nx>h</span><span class=w> </span><span class=o>*</span><span class=nx>IntHeap</span><span class=p>)</span><span class=w> </span><span class=nf>Pop</span><span class=p>()</span><span class=w> </span><span class=kt>any</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>	</span><span class=nx>old</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=o>*</span><span class=nx>h</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>	</span><span class=nx>n</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=nb>len</span><span class=p>(</span><span class=nx>old</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>	</span><span class=nx>x</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=nx>old</span><span class=p>[</span><span class=nx>n</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>	</span><span class=o>*</span><span class=nx>h</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nx>old</span><span class=p>[:</span><span class=nx>n</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>	</span><span class=k>return</span><span class=w> </span><span class=nx>x</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
+</span></span></span></code></pre></div><p>典型场景：Top K、任务调度、Dijkstra、合并多个有序流。</p><h3 id=list双向链表>List：双向链表</h3><p><code>container/list</code> 是双向链表，适合“已知节点位置时高频插删”。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=nx>l</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=nx>list</span><span class=p>.</span><span class=nf>New</span><span class=p>()</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nx>e1</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=nx>l</span><span class=p>.</span><span class=nf>PushBack</span><span class=p>(</span><span class=s>&#34;A&#34;</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nx>l</span><span class=p>.</span><span class=nf>PushBack</span><span class=p>(</span><span class=s>&#34;B&#34;</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nx>l</span><span class=p>.</span><span class=nf>InsertAfter</span><span class=p>(</span><span class=s>&#34;C&#34;</span><span class=p>,</span><span class=w> </span><span class=nx>e1</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=k>for</span><span class=w> </span><span class=nx>e</span><span class=w> </span><span class=o>:=</span><span class=w> </span><span class=nx>l</span><span class=p>.</span><span class=nf>Front</span><span class=p>();</span><span class=w> </span><span class=nx>e</span><span class=w> </span><span class=o>!=</span><span class=w> </span><span class=kc>nil</span><span class=p>;</span><span class=w> </span><span class=nx>e</span><span class=w> </span><span class=p>=</span><span class=w> </span><span class=nx>e</span><span class=p>.</span><span class=nf>Next</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>	</span><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=nx>e</span><span class=p>.</span><span class=nx>Value</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
+</span></span></span></code></pre></div><p>如果主要是顺序访问，<code>slice</code> 往往更快（缓存友好），优先考虑 <code>slice</code>。</p><h2 id=哈希冲突与-go-124-map>哈希冲突与 Go 1.24 <code>map</code></h2><h3 id=open-hashing-vs-closed-hashing>Open Hashing vs Closed Hashing</h3><p>术语容易混淆，先统一：</p><ul><li>Open Hashing：通常指 <code>separate chaining</code>（拉链法）</li><li>Closed Hashing：通常指 <code>open addressing</code>（开放寻址）</li></ul><p>也就是名字有点“反直觉”：<code>closed hashing</code> 反而是 <code>open addressing</code>。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>Open Hashing (拉链法 / Separate Chaining)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>index:   0        1        2        3
+</span></span><span class=line><span class=cl>			 [ ] ---&gt; [A]-&gt;[B]  [ ] ---&gt; [C]   [D]-&gt;[E]-&gt;[F]
+</span></span><span class=line><span class=cl>							(冲突后挂链表)         (冲突后继续挂在链上)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>特点：冲突元素在桶外（额外节点）通过指针连接。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Closed Hashing (开放寻址 / Open Addressing)
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>slots: [A] [ ] [B] [C] [ ] [D] [ ] [ ]
+</span></span><span class=line><span class=cl>hash(K) -&gt; 2
+</span></span><span class=line><span class=cl>若 2 被占用：探测 3、4、5... 直到找到空槽
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>特点：所有元素都放在主表里，通过探测序列解决冲突。
+</span></span></code></pre></div><p>如果 Hugo 环境支持 Mermaid，可用下图展示：</p><div class=mermaid-block data-mermaid-zoom=1><div class=mermaid-toolbar><button class=mermaid-btn type=button data-action=zoom-in aria-label="Zoom in">+</button>
+<button class=mermaid-btn type=button data-action=zoom-out aria-label="Zoom out">-</button>
+<button class=mermaid-btn type=button data-action=reset aria-label="Reset zoom">100%</button>
+<button class=mermaid-btn type=button data-action=fullscreen aria-label="Toggle fullscreen">Full</button></div><div class="mermaid mermaid-canvas">flowchart LR
+subgraph O[Open Hashing / Separate Chaining]
+b0[Bucket 0] --> n01[A]
+n01 --> n02[B]
+b1[Bucket 1] --> n11[C]
+b2[Bucket 2] --> n21[D]
+n21 --> n22[E]
+n22 --> n23[F]
+end
+subgraph C[Closed Hashing / Open Addressing]
+s0[slot0:A]
+s1[slot1: ]
+s2[slot2:B]
+s3[slot3:C]
+s4[slot4: ]
+s5[slot5:D]
+p[collision at slot2 → probe slot3/4/5]
+end</div></div><h3 id=为什么-go-124-转向-swiss-table-风格>为什么 Go 1.24 转向 Swiss Table 风格</h3><p>Go 1.24 重写了 <code>map</code> 底层实现，核心方向是从“桶 + 溢出桶链”转向“更紧凑的开放寻址探测”。</p><ul><li>减少指针跳跃，提升缓存命中：查找路径更连续，对现代 CPU 更友好。</li><li>利用元数据批量筛选候选槽位：支持 SIMD 时可并行化比对。</li><li>在更高装载因子下维持性能：减少溢出结构带来的额外开销。</li><li>扩容更平滑：降低单次大搬迁造成的长尾抖动。</li></ul><p>一句话总结：从“冲突后挂链表（指针追逐）”升级为“冲突后主表探测（连续访问 + 元数据筛选）”，在现代硬件上换取更高吞吐与更稳延迟。</p><h3 id=对业务代码的影响>对业务代码的影响</h3><ul><li>API 兼容：<code>map</code> 用法不变，业务代码通常无需调整。</li><li>性能收益：查找/插入在很多场景更快，尤其是大 map 或高冲突。</li><li>并发约束不变：<code>map</code> 仍非并发安全，读写并发仍需同步控制。</li></ul><h2 id=选型建议>选型建议</h2><ul><li>顺序存储、随机访问：优先 <code>slice</code></li><li>键值检索：<code>map</code></li><li>强业务建模：<code>struct</code> + 方法 + 接口</li><li>Top K / 动态最值：<code>heap</code></li><li>高频中间插删且持有节点引用：<code>list</code></li><li>并发 key-value：<code>map + sync.RWMutex</code> 或 <code>sync.Map</code></li></ul><h2 id=小结>小结</h2><p>Go 的数据结构哲学是“少而精”：</p><ul><li>内建类型承担大多数工作</li><li>标准库补齐少量通用容器</li><li>复杂场景通过组合实现</li></ul><p>把 <code>slice</code>、<code>map</code>、<code>struct</code> 用扎实，再掌握 <code>heap</code> 和 <code>list</code>，基本能覆盖大部分工程和算法题场景。</p></article><div id=react-app-components data-post-id=e9c8e3bb15be79d886ae9edf3d4dcf47></div><button class=mobile-toc-trigger aria-controls=mobile-toc aria-expanded=false title=Index>☰</button><div class=mobile-toc-overlay hidden></div><div id=mobile-toc class=mobile-toc-drawer aria-hidden=true role=dialog aria-label=Index><div class=mobile-toc-header><button class=mobile-toc-close aria-label=close>×</button></div><nav class=mobile-toc-body><div class=mobile-toc-list></div></nav><div class=mobile-safe-area-spacer></div></div><script type=module src=/react/page.bundle.js></script></main><footer><div class=copyright><small>Made with <span style=color:#e25555>&#9829;</span> in Guangzhou by
+©<a href=https://github.com/qtopie>qtopie</a> 2026
+</small><small>Posts licensed under <a href=https://creativecommons.org/licenses/by/4.0/legalcode>CC BY 4.0</small></div><div><script type=module src=/react/base.bundle.js></script><script type=module>
+      (async ()=>{
+        try {
+          const mod = await import('https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.mjs');
+          const mermaid = mod.default || mod;
+          const prefersDark = document.body.classList.contains('dark') || window.matchMedia('(prefers-color-scheme: dark)').matches;
+          mermaid.initialize({ startOnLoad: false, theme: prefersDark ? 'dark' : 'default' });
+          mermaid.init && mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+
+          const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+          const setupBlock = (block) => {
+            if (block.dataset.mermaidReady === 'true') return;
+            block.dataset.mermaidReady = 'true';
+            const canvas = block.querySelector('.mermaid-canvas');
+            const toolbar = block.querySelector('.mermaid-toolbar');
+            if (!canvas || !toolbar) return;
+
+            const ensureSvg = (callback) => {
+              const svg = canvas.querySelector('svg');
+              if (svg) { callback(svg); return; }
+              const observer = new MutationObserver(() => {
+                const svgNow = canvas.querySelector('svg');
+                if (svgNow) {
+                  observer.disconnect();
+                  callback(svgNow);
+                }
+              });
+              observer.observe(canvas, { childList: true, subtree: true });
+            };
+
+            const setZoom = (nextZoom) => {
+              const zoom = clamp(nextZoom, 0.5, 3);
+              block.dataset.mermaidZoom = String(zoom);
+              const resetBtn = toolbar.querySelector('[data-action="reset"]');
+              if (resetBtn) resetBtn.textContent = `${Math.round(zoom * 100)}%`;
+              ensureSvg((svg) => {
+                svg.style.transform = `scale(${zoom})`;
+              });
+            };
+
+            const onFullscreenChange = () => {
+              const isFullscreen = document.fullscreenElement === block;
+              block.classList.toggle('is-fullscreen', isFullscreen);
+              const fsBtn = toolbar.querySelector('[data-action="fullscreen"]');
+              if (fsBtn) {
+                fsBtn.textContent = isFullscreen ? 'Exit' : 'Full';
+                fsBtn.setAttribute('aria-label', isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen');
+              }
+            };
+
+            document.addEventListener('fullscreenchange', onFullscreenChange);
+
+            toolbar.addEventListener('click', (event) => {
+              const target = event.target;
+              if (!(target instanceof HTMLElement)) return;
+              const action = target.getAttribute('data-action');
+              if (!action) return;
+              const currentZoom = Number(block.dataset.mermaidZoom || '1');
+              if (action === 'zoom-in') return setZoom(currentZoom + 0.1);
+              if (action === 'zoom-out') return setZoom(currentZoom - 0.1);
+              if (action === 'reset') return setZoom(1);
+              if (action === 'fullscreen') {
+                if (document.fullscreenElement === block) {
+                  document.exitFullscreen && document.exitFullscreen();
+                } else if (block.requestFullscreen) {
+                  block.requestFullscreen();
+                } else {
+                  block.classList.toggle('is-fullscreen');
+                }
+              }
+            });
+
+            setZoom(Number(block.dataset.mermaidZoom || '1'));
+          };
+
+          document.querySelectorAll('.mermaid-block').forEach(setupBlock);
+        } catch (e) { console.error('mermaid load error', e); }
+      })();
+    </script></div></footer></body></html>
