@@ -1,4 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Concurrency on 1001問</title><link>https://qtopie.github.io/tags/concurrency/</link><description>Recent content in Concurrency on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Tue, 21 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/tags/concurrency/index.xml" rel="self" type="application/rss+xml"/><item><title>并发模型</title><link>https://qtopie.github.io/notes/web/concurrency-models/</link><pubDate>Tue, 21 Jan 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/web/concurrency-models/</guid><description>&lt;h2 id="总结对比"&gt;总结对比&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Concurrency on 1001問</title><link>https://qtopie.github.io/tags/concurrency/</link><description>Recent content in Concurrency on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Tue, 21 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/tags/concurrency/index.xml" rel="self" type="application/rss+xml"/><item><title>并发模型</title><link>https://qtopie.github.io/notes/web/concurrency-models/</link><pubDate>Tue, 21 Jan 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/web/concurrency-models/</guid><description>&lt;h2 id="目录"&gt;目录&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;总结对比&lt;/li&gt;
+&lt;li&gt;各模型原理简介&lt;/li&gt;
+&lt;li&gt;经典实现&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="1-总结对比"&gt;1. 总结对比&lt;/h2&gt;
 &lt;table&gt;
  &lt;thead&gt;
  &lt;tr&gt;
@@ -42,7 +49,8 @@
  &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;hr&gt;
-&lt;h2 id="基于多线程的任务并行-thread-based--preemptive-multitasking"&gt;基于多线程的任务并行 (Thread-based / Preemptive Multitasking)&lt;/h2&gt;
+&lt;h2 id="2-各模型原理简介"&gt;2. 各模型原理简介&lt;/h2&gt;
+&lt;h3 id="基于多线程的任务并行-thread-based--preemptive-multitasking"&gt;基于多线程的任务并行 (Thread-based / Preemptive Multitasking)&lt;/h3&gt;
 &lt;p&gt;这是最传统、也是你提到的&lt;strong&gt;线程池&lt;/strong&gt;所属的范畴。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;核心逻辑：&lt;/strong&gt; 操作系统内核负责线程切换。每个线程有独立的栈空间。&lt;/li&gt;
@@ -66,5 +74,5 @@
 	WT --&gt; Queue
 	OS[OS Scheduler] -. time slice .- WT&lt;/div&gt;
 &lt;/div&gt;
-&lt;h2 id="协作式多任务协程-coroutines--user-level-threads"&gt;协作式多任务：协程 (Coroutines / User-level Threads)&lt;/h2&gt;
+&lt;h3 id="协作式多任务协程-coroutines--user-level-threads"&gt;协作式多任务：协程 (Coroutines / User-level Threads)&lt;/h3&gt;
 &lt;p&gt;这是你提到的第二种，也是目前高并发的主流。&lt;/p&gt;</description></item></channel></rss>
