@@ -2,7 +2,7 @@
 &lt;p&gt;在处理大规模代码库或海量文本数据时，搜索效率往往是开发者最头疼的问题。&lt;code&gt;Sniphunt&lt;/code&gt; 是一个专为高性能而设计的 Go 语言搜索库，它不仅支持像 ripgrep 一样飞快的正则表达式搜索，还提供了基于相似度的代码片段匹配功能。&lt;/p&gt;
 &lt;h2 id="为什么选择-sniphunt"&gt;为什么选择 Sniphunt？&lt;/h2&gt;
 &lt;p&gt;市面上已经有很多搜索工具，但 &lt;code&gt;Sniphunt&lt;/code&gt; 的核心优势在于&lt;strong&gt;库化 (Library-first)&lt;/strong&gt; 和 &lt;strong&gt;极致的性能优化&lt;/strong&gt;。&lt;/p&gt;
-&lt;h3 id="1-极致的性能设计"&gt;1. 极致的性能设计&lt;/h3&gt;
+&lt;h3 id="极致的性能设计"&gt;极致的性能设计&lt;/h3&gt;
 &lt;p&gt;Sniphunt 采用了生产者-消费者模型，将文件遍历与内容匹配完全解耦：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;快速遍历&lt;/strong&gt;：集成 &lt;code&gt;godirwalk&lt;/code&gt;，比标准库的 &lt;code&gt;filepath.Walk&lt;/code&gt; 快数倍，显著减少系统调用。&lt;/li&gt;
@@ -10,7 +10,7 @@
 &lt;li&gt;&lt;strong&gt;零拷贝与缓冲区复用&lt;/strong&gt;：通过 &lt;code&gt;sync.Pool&lt;/code&gt; 复用读取缓冲区，极大降低了大规模搜索时的 GC (垃圾回收) 压力。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;字面量预过滤&lt;/strong&gt;：在执行复杂的正则匹配前，先进行高速的字符串字面量扫描，非匹配行直接跳过。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="2-双模搜索"&gt;2. 双模搜索&lt;/h3&gt;
+&lt;h3 id="双模搜索"&gt;双模搜索&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;正则搜索&lt;/strong&gt;：支持高性能的行匹配，适用于寻找特定代码模式、TODO 标记或 API 调用。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;相似度搜索&lt;/strong&gt;：利用 Levenshtein 距离算法，输入一段代码片段，快速在库中找到最相似的文件。&lt;/li&gt;
@@ -18,14 +18,14 @@
 &lt;hr&gt;
 &lt;h2 id="技术深挖sniphunt-为何如此之快"&gt;技术深挖：Sniphunt 为何如此之快？&lt;/h2&gt;
 &lt;p&gt;要达到接近 C/Rust 的搜索性能，Go 程序必须在 I/O 调度和内存管理上做精细化的手术。&lt;/p&gt;
-&lt;h3 id="1-三阶段异步流水线"&gt;1. 三阶段异步流水线&lt;/h3&gt;
+&lt;h3 id="三阶段异步流水线"&gt;三阶段异步流水线&lt;/h3&gt;
 &lt;p&gt;Sniphunt 将搜索任务拆分为三个独立阶段：&lt;/p&gt;
-&lt;ol&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Producer (Walk)&lt;/strong&gt;：使用 &lt;code&gt;godirwalk&lt;/code&gt;。标准库 &lt;code&gt;filepath.Walk&lt;/code&gt; 的瓶颈在于每次都要调用 &lt;code&gt;os.Lstat&lt;/code&gt;，这在文件众多的目录下会产生海量的系统调用开销。&lt;code&gt;godirwalk&lt;/code&gt; 直接通过目录项（Dirent）读取信息，性能提升了一个量级。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Worker Pool&lt;/strong&gt;：通过缓冲 Channel 分发文件路径。Worker 数量默认为 CPU 核心数，确保 CPU 计算资源被占满。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Collector&lt;/strong&gt;：结果通过结果通道流式返回，避免了在内存中堆积海量搜索结果。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id="2-避免-gc-噩梦syncpool-与-1mb-缓冲区"&gt;2. 避免 GC 噩梦：sync.Pool 与 1MB 缓冲区&lt;/h3&gt;
+&lt;/ul&gt;
+&lt;h3 id="避免-gc-噩梦syncpool-与-1mb-缓冲区"&gt;避免 GC 噩梦：sync.Pool 与 1MB 缓冲区&lt;/h3&gt;
 &lt;p&gt;在搜索 1GB 的日志文件时，如果简单的 &lt;code&gt;ioutil.ReadFile&lt;/code&gt;，会产生巨大的临时对象，导致 Go 的 GC 频繁触发，CPU 都在忙着回收内存。
 Sniphunt 使用了 &lt;code&gt;sync.Pool&lt;/code&gt; 维护了一个 &lt;strong&gt;1MB 大小的字节切片池&lt;/strong&gt;。每个 Worker 从池中借出缓冲区，处理完一个文件后再归还。这种方式实现了缓冲区的**零分配（Zero-allocation）**循环利用。&lt;/p&gt;</description></item><item><title>oget - 高性能现代化的并行网络下载器</title><link>https://qtopie.github.io/posts/oget/</link><pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/posts/oget/</guid><description>&lt;p&gt;项目地址: &lt;a href="https://github.com/qtopie/oget"&gt;github.com/qtopie/oget&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;我们以最广泛的http协议来讨论网络下载&lt;/p&gt;
