@@ -1,0 +1,39 @@
+version: '3'
+
+tasks:
+  default:
+    desc: Start all development services
+    cmds:
+      - task: dev
+
+  dev:
+    desc: Run all dev services in parallel (Hugo, D2, React)
+    deps:
+      - task: d2:watch
+      - task: react:watch
+      - task: hugo
+
+  hugo:
+    desc: Start Hugo server
+    cmds:
+      - ./scripts/hugo-with-d2.sh server --minify --disableFastRender --bind localhost
+
+  d2:watch:
+    desc: Watch Markdown files and generate D2 diagrams
+    watch: true
+    sources:
+      - content/**/*.md
+      - posts/**/*.md
+      - scripts/generate-d2-diagrams.sh
+    cmds:
+      - ./scripts/generate-d2-diagrams.sh
+
+  react:watch:
+    desc: Watch and build React app (Theme)
+    dir: themes/drift-blog-theme/react-app
+    sources:
+      - src/**/*
+      - vite.config.ts
+      - package.json
+    cmds:
+      - npm run watch
