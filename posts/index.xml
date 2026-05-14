@@ -18,7 +18,14 @@
 &lt;hr&gt;
 &lt;h2 id="技术深挖sniphunt-为何如此之快"&gt;技术深挖：Sniphunt 为何如此之快？&lt;/h2&gt;
 &lt;p&gt;要达到接近 C/Rust 的搜索性能，Go 程序必须在 I/O 调度和内存管理上做精细化的手术。&lt;/p&gt;
-&lt;h3 id="三阶段异步流水线"&gt;三阶段异步流水线&lt;/h3&gt;
+&lt;h3 id="核心架构三阶段异步流水线"&gt;核心架构：三阶段异步流水线&lt;/h3&gt;
+&lt;div class="d2-container" id="d2-5c65c02f35f09696702673469b193fbe"&gt;&lt;div class="d2-controls"&gt;
+ &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
+ &lt;/div&gt;
+ &lt;div class="d2-img-container"&gt;
+ &lt;img src="https://qtopie.github.io/diagrams/d2-5c65c02f35f09696702673469b193fbe.svg" alt="D2 Diagram"&gt;
+ &lt;/div&gt;
+ &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;Sniphunt 将搜索任务拆分为三个独立阶段：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Producer (Walk)&lt;/strong&gt;：使用 &lt;code&gt;godirwalk&lt;/code&gt;。标准库 &lt;code&gt;filepath.Walk&lt;/code&gt; 的瓶颈在于每次都要调用 &lt;code&gt;os.Lstat&lt;/code&gt;，这在文件众多的目录下会产生海量的系统调用开销。&lt;code&gt;godirwalk&lt;/code&gt; 直接通过目录项（Dirent）读取信息，性能提升了一个量级。&lt;/li&gt;
