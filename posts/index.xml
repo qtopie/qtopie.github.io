@@ -15,18 +15,19 @@
 &lt;li&gt;&lt;strong&gt;正则搜索&lt;/strong&gt;：支持高性能的行匹配，适用于寻找特定代码模式、TODO 标记或 API 调用。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;相似度搜索&lt;/strong&gt;：利用 Levenshtein 距离算法，输入一段代码片段，快速在库中找到最相似的文件。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="安装-sniphunt"&gt;安装 Sniphunt&lt;/h2&gt;
-&lt;h3 id="命令行工具安装"&gt;命令行工具安装&lt;/h3&gt;
-&lt;p&gt;如果你需要一个现成的工具来替换你的基础搜索命令：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go install github.com/qtopie/sniphunt/cmd/sniphunt@latest
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="作为库引入项目"&gt;作为库引入项目&lt;/h3&gt;
-&lt;p&gt;如果你想在你的 Go 应用中集成高性能搜索能力：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go get github.com/qtopie/sniphunt
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="经典用法示例"&gt;经典用法示例&lt;/h2&gt;
-&lt;h3 id="命令行用法"&gt;命令行用法&lt;/h3&gt;
-&lt;p&gt;&lt;strong&gt;在所有 Go 文件中搜索 main 函数：&lt;/strong&gt;&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sniphunt -pattern &lt;span class="s2"&gt;&amp;#34;func.*main&amp;#34;&lt;/span&gt; -dir . -ext .go
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;寻找最接近的代码片段：&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>oget - 高性能现代化的并行网络下载器</title><link>https://qtopie.github.io/posts/oget/</link><pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/posts/oget/</guid><description>&lt;p&gt;项目地址: &lt;a href="https://github.com/qtopie/oget"&gt;github.com/qtopie/oget&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="技术深挖sniphunt-为何如此之快"&gt;技术深挖：Sniphunt 为何如此之快？&lt;/h2&gt;
+&lt;p&gt;要达到接近 C/Rust 的搜索性能，Go 程序必须在 I/O 调度和内存管理上做精细化的手术。&lt;/p&gt;
+&lt;h3 id="1-三阶段异步流水线"&gt;1. 三阶段异步流水线&lt;/h3&gt;
+&lt;p&gt;Sniphunt 将搜索任务拆分为三个独立阶段：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Producer (Walk)&lt;/strong&gt;：使用 &lt;code&gt;godirwalk&lt;/code&gt;。标准库 &lt;code&gt;filepath.Walk&lt;/code&gt; 的瓶颈在于每次都要调用 &lt;code&gt;os.Lstat&lt;/code&gt;，这在文件众多的目录下会产生海量的系统调用开销。&lt;code&gt;godirwalk&lt;/code&gt; 直接通过目录项（Dirent）读取信息，性能提升了一个量级。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Worker Pool&lt;/strong&gt;：通过缓冲 Channel 分发文件路径。Worker 数量默认为 CPU 核心数，确保 CPU 计算资源被占满。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Collector&lt;/strong&gt;：结果通过结果通道流式返回，避免了在内存中堆积海量搜索结果。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="2-避免-gc-噩梦syncpool-与-1mb-缓冲区"&gt;2. 避免 GC 噩梦：sync.Pool 与 1MB 缓冲区&lt;/h3&gt;
+&lt;p&gt;在搜索 1GB 的日志文件时，如果简单的 &lt;code&gt;ioutil.ReadFile&lt;/code&gt;，会产生巨大的临时对象，导致 Go 的 GC 频繁触发，CPU 都在忙着回收内存。
+Sniphunt 使用了 &lt;code&gt;sync.Pool&lt;/code&gt; 维护了一个 &lt;strong&gt;1MB 大小的字节切片池&lt;/strong&gt;。每个 Worker 从池中借出缓冲区，处理完一个文件后再归还。这种方式实现了缓冲区的**零分配（Zero-allocation）**循环利用。&lt;/p&gt;</description></item><item><title>oget - 高性能现代化的并行网络下载器</title><link>https://qtopie.github.io/posts/oget/</link><pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/posts/oget/</guid><description>&lt;p&gt;项目地址: &lt;a href="https://github.com/qtopie/oget"&gt;github.com/qtopie/oget&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;我们以最广泛的http协议来讨论网络下载&lt;/p&gt;
 &lt;h2 id="安装-oget"&gt;安装 oget&lt;/h2&gt;
 &lt;h3 id="一键安装-go-用户"&gt;一键安装 (Go 用户)&lt;/h3&gt;
