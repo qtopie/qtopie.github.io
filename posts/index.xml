@@ -1,4 +1,32 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 1001問</title><link>https://qtopie.github.io/posts/</link><description>Recent content in Posts on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Thu, 23 Apr 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>oget - 高性能现代化的并行网络下载器</title><link>https://qtopie.github.io/posts/oget/</link><pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/posts/oget/</guid><description>&lt;p&gt;项目地址: &lt;a href="https://github.com/qtopie/oget"&gt;github.com/qtopie/oget&lt;/a&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 1001問</title><link>https://qtopie.github.io/posts/</link><description>Recent content in Posts on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Thu, 14 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Sniphunt - 高性能代码片段搜索与正则匹配库</title><link>https://qtopie.github.io/posts/sniphunt/</link><pubDate>Thu, 14 May 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/posts/sniphunt/</guid><description>&lt;p&gt;项目地址: &lt;a href="https://github.com/qtopie/sniphunt"&gt;github.com/qtopie/sniphunt&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;在处理大规模代码库或海量文本数据时，搜索效率往往是开发者最头疼的问题。&lt;code&gt;Sniphunt&lt;/code&gt; 是一个专为高性能而设计的 Go 语言搜索库，它不仅支持像 ripgrep 一样飞快的正则表达式搜索，还提供了基于相似度的代码片段匹配功能。&lt;/p&gt;
+&lt;h2 id="为什么选择-sniphunt"&gt;为什么选择 Sniphunt？&lt;/h2&gt;
+&lt;p&gt;市面上已经有很多搜索工具，但 &lt;code&gt;Sniphunt&lt;/code&gt; 的核心优势在于&lt;strong&gt;库化 (Library-first)&lt;/strong&gt; 和 &lt;strong&gt;极致的性能优化&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id="1-极致的性能设计"&gt;1. 极致的性能设计&lt;/h3&gt;
+&lt;p&gt;Sniphunt 采用了生产者-消费者模型，将文件遍历与内容匹配完全解耦：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;快速遍历&lt;/strong&gt;：集成 &lt;code&gt;godirwalk&lt;/code&gt;，比标准库的 &lt;code&gt;filepath.Walk&lt;/code&gt; 快数倍，显著减少系统调用。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;并发匹配&lt;/strong&gt;：利用 Go 的协程池 (Worker Pool)，自动适配 CPU 核心数，压榨每一分硬件性能。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;零拷贝与缓冲区复用&lt;/strong&gt;：通过 &lt;code&gt;sync.Pool&lt;/code&gt; 复用读取缓冲区，极大降低了大规模搜索时的 GC (垃圾回收) 压力。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;字面量预过滤&lt;/strong&gt;：在执行复杂的正则匹配前，先进行高速的字符串字面量扫描，非匹配行直接跳过。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="2-双模搜索"&gt;2. 双模搜索&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;正则搜索&lt;/strong&gt;：支持高性能的行匹配，适用于寻找特定代码模式、TODO 标记或 API 调用。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;相似度搜索&lt;/strong&gt;：利用 Levenshtein 距离算法，输入一段代码片段，快速在库中找到最相似的文件。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="安装-sniphunt"&gt;安装 Sniphunt&lt;/h2&gt;
+&lt;h3 id="命令行工具安装"&gt;命令行工具安装&lt;/h3&gt;
+&lt;p&gt;如果你需要一个现成的工具来替换你的基础搜索命令：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go install github.com/qtopie/sniphunt/cmd/sniphunt@latest
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="作为库引入项目"&gt;作为库引入项目&lt;/h3&gt;
+&lt;p&gt;如果你想在你的 Go 应用中集成高性能搜索能力：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;go get github.com/qtopie/sniphunt
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="经典用法示例"&gt;经典用法示例&lt;/h2&gt;
+&lt;h3 id="命令行用法"&gt;命令行用法&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;在所有 Go 文件中搜索 main 函数：&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sniphunt -pattern &lt;span class="s2"&gt;&amp;#34;func.*main&amp;#34;&lt;/span&gt; -dir . -ext .go
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;寻找最接近的代码片段：&lt;/strong&gt;&lt;/p&gt;</description></item><item><title>oget - 高性能现代化的并行网络下载器</title><link>https://qtopie.github.io/posts/oget/</link><pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/posts/oget/</guid><description>&lt;p&gt;项目地址: &lt;a href="https://github.com/qtopie/oget"&gt;github.com/qtopie/oget&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;我们以最广泛的http协议来讨论网络下载&lt;/p&gt;
 &lt;h2 id="安装-oget"&gt;安装 oget&lt;/h2&gt;
 &lt;h3 id="一键安装-go-用户"&gt;一键安装 (Go 用户)&lt;/h3&gt;
