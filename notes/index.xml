@@ -165,63 +165,36 @@
 &lt;/ul&gt;
 &lt;p&gt;这三者几乎定义了后续 Hadoop 生态（HDFS、MapReduce、HBase）和云原生数据平台的基础形态。&lt;/p&gt;
 &lt;h2 id="一图看懂三者关系"&gt;一图看懂三者关系&lt;/h2&gt;
-&lt;div class="d2-container" id="d2-5c64a570833f1cf343646c9166621b32"&gt;&lt;div class="d2-controls"&gt;
- &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
- &lt;/div&gt;
- &lt;div class="d2-img-container"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-5c64a570833f1cf343646c9166621b32.svg" alt="D2 Diagram"&gt;
- &lt;/div&gt;
- &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
+&lt;div class="d2-container" id="d2-5c64a570833f1cf343646c9166621b32"&gt;&lt;div class="d2-missing-hint"&gt;D2 SVG is missing (target: &lt;code&gt;diagrams/d2-5c64a570833f1cf343646c9166621b32.svg&lt;/code&gt;). Run &lt;code&gt;./scripts/generate-d2-diagrams.sh&lt;/code&gt; to regenerate diagrams.&lt;/div&gt;
+ &lt;pre data-d2-missing="true" data-d2-target="diagrams/d2-5c64a570833f1cf343646c9166621b32.svg" data-d2-hash="5c64a570833f1cf343646c9166621b32" data-d2-theme="0" data-d2-len="546"&gt;&lt;code class="language-d2"&gt;direction: right
+
+Producer: &amp;amp;#34;日志/爬虫/业务事件&amp;amp;#34;
+GFS: {
+	shape: package
+	master: &amp;amp;#34;Master\n元数据/租约&amp;amp;#34;
+	chunkservers: &amp;amp;#34;ChunkServers\n数据块副本&amp;amp;#34;
+}
+MR: {
+	shape: package
+	map: &amp;amp;#34;Map Tasks&amp;amp;#34;
+	shuffle: &amp;amp;#34;Shuffle/Sort&amp;amp;#34;
+	reduce: &amp;amp;#34;Reduce Tasks&amp;amp;#34;
+}
+BT: {
+	shape: package
+	tablet: &amp;amp;#34;Tablets&amp;amp;#34;
+	api: &amp;amp;#34;读写 API&amp;amp;#34;
+}
+Consumer: &amp;amp;#34;搜索/分析/推荐&amp;amp;#34;
+
+Producer -&amp;amp;gt; GFS: &amp;amp;#34;原始数据落盘&amp;amp;#34;
+GFS -&amp;amp;gt; MR: &amp;amp;#34;批处理输入&amp;amp;#34;
+MR -&amp;amp;gt; GFS: &amp;amp;#34;中间/结果文件&amp;amp;#34;
+MR -&amp;amp;gt; BT: &amp;amp;#34;聚合结果写入&amp;amp;#34;
+BT -&amp;amp;gt; Consumer: &amp;amp;#34;低延迟查询&amp;amp;#34;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id="gfs为廉价机器--大文件--高故障率设计的文件系统"&gt;GFS：为“廉价机器 + 大文件 + 高故障率”设计的文件系统&lt;/h2&gt;
 &lt;h3 id="解决了什么问题"&gt;解决了什么问题？&lt;/h3&gt;
-&lt;p&gt;传统文件系统假设硬件可靠、文件较小、写操作随机且频繁。Google 的现实恰好相反：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;文件极大（日志、网页快照、索引数据）。&lt;/li&gt;
-&lt;li&gt;顺序追加远多于随机改写。&lt;/li&gt;
-&lt;li&gt;节点经常坏，故障是常态而不是异常。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;GFS 的核心思路：&lt;strong&gt;接受故障，拥抱追加，靠副本保可用&lt;/strong&gt;。&lt;/p&gt;
-&lt;h3 id="核心设计"&gt;核心设计&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Master + ChunkServer&lt;/strong&gt;：Master 只管元数据；ChunkServer 管真实数据块。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;大块（Chunk）&lt;/strong&gt;：默认 &lt;code&gt;64MB&lt;/code&gt;，减少元数据规模和客户端寻址次数。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;多副本&lt;/strong&gt;：通常 &lt;code&gt;3&lt;/code&gt; 副本，跨机器/机架放置。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Lease 主副本机制&lt;/strong&gt;：Primary 负责给写入排序，避免并发写冲突。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Record Append&lt;/strong&gt;：提供“原子追加”语义，适合日志流。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="写入路径简化"&gt;写入路径（简化）&lt;/h3&gt;
-&lt;div class="d2-container" id="d2-772d6694da8935907bc8157b18d68c50"&gt;&lt;div class="d2-controls"&gt;
- &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
- &lt;/div&gt;
- &lt;div class="d2-img-container"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-772d6694da8935907bc8157b18d68c50.svg" alt="D2 Diagram"&gt;
- &lt;/div&gt;
- &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id="mapreduce把写复杂分布式程序变成写-mapreduce-函数"&gt;MapReduce：把“写复杂分布式程序”变成“写 map/reduce 函数”&lt;/h2&gt;
-&lt;h3 id="编程模型"&gt;编程模型&lt;/h3&gt;
-&lt;p&gt;你只需要定义两个函数：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;map(k1, v1) -&amp;gt; list(k2, v2)&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;reduce(k2, list(v2)) -&amp;gt; list(v3)&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;系统自动完成：任务切分、调度、失败重试、数据重分布（Shuffle）、结果落盘。&lt;/p&gt;
-&lt;h3 id="执行流程"&gt;执行流程&lt;/h3&gt;
-&lt;div class="d2-container" id="d2-b357729c91ba675057465e1738dbe7d0"&gt;&lt;div class="d2-controls"&gt;
- &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
- &lt;/div&gt;
- &lt;div class="d2-img-container"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-b357729c91ba675057465e1738dbe7d0.svg" alt="D2 Diagram"&gt;
- &lt;/div&gt;
- &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
-&lt;h3 id="为什么它改变了行业"&gt;为什么它改变了行业？&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;大幅降低分布式门槛&lt;/strong&gt;：业务侧只写函数，不再手搓容错框架。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;天然弹性&lt;/strong&gt;：慢节点、坏节点通过重试和推测执行被吸收。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;吞吐优先&lt;/strong&gt;：适合离线批处理（索引构建、日志统计、特征生成）。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="bigtable建立在-gfs-之上的分布式稀疏多维有序映射"&gt;Bigtable：建立在 GFS 之上的分布式稀疏多维有序映射&lt;/h2&gt;
-&lt;h3 id="数据模型直观理解"&gt;数据模型（直观理解）&lt;/h3&gt;
-&lt;p&gt;Bigtable 可以看成：&lt;/p&gt;</description></item><item><title>日常英语</title><link>https://qtopie.github.io/notes/book/daily-tech-english/</link><pubDate>Wed, 01 Apr 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/book/daily-tech-english/</guid><description>&lt;h2 id="architecting-conversations-架构师日常专业英语进阶指南"&gt;Architecting Conversations: 架构师日常专业英语进阶指南&lt;/h2&gt;
+&lt;p&gt;传统文件系统假设硬件可靠、文件较小、写操作随机且频繁。Google 的现实恰好相反：&lt;/p&gt;</description></item><item><title>日常英语</title><link>https://qtopie.github.io/notes/book/daily-tech-english/</link><pubDate>Wed, 01 Apr 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/book/daily-tech-english/</guid><description>&lt;h2 id="architecting-conversations-架构师日常专业英语进阶指南"&gt;Architecting Conversations: 架构师日常专业英语进阶指南&lt;/h2&gt;
 &lt;p&gt;在技术领域，架构师的角色往往是&lt;strong&gt;沟通的桥梁&lt;/strong&gt;。我们不仅要与编译器对话，更要与产品经理、研发工程师及高层决策者对话。在国际化的技术协作中，精准的英语表达能显著降低“沟通熵值”。&lt;/p&gt;
 &lt;p&gt;以下从五个核心维度，总结了架构师在日常工作中最高频的英语场景与地道表达，重点加入会议上可直接复用的口语模板，帮助你用最简单高效的方式向业务解释约束条件和实现方案。&lt;/p&gt;
 &lt;hr&gt;
@@ -257,141 +230,106 @@
 &lt;li&gt;&lt;strong&gt;目标：预测下一个词&lt;/strong&gt;：在预训练阶段，模型的唯一任务是根据前面的词预测概率最高的一个词。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;算力与参数&lt;/strong&gt;：通过数千张 GPU 训练，模型学会了语法、逻辑、常识甚至编写代码的能力。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="d2-container" id="d2-9fab57c576dfc5ca627698f623f7aca3"&gt;&lt;div class="d2-controls"&gt;
- &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
- &lt;/div&gt;
- &lt;div class="d2-img-container"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-9fab57c576dfc5ca627698f623f7aca3.svg" alt="D2 Diagram"&gt;
- &lt;/div&gt;
- &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
+&lt;div class="d2-container" id="d2-9fab57c576dfc5ca627698f623f7aca3"&gt;&lt;div class="d2-missing-hint"&gt;D2 SVG is missing (target: &lt;code&gt;diagrams/d2-9fab57c576dfc5ca627698f623f7aca3.svg&lt;/code&gt;). Run &lt;code&gt;./scripts/generate-d2-diagrams.sh&lt;/code&gt; to regenerate diagrams.&lt;/div&gt;
+ &lt;pre data-d2-missing="true" data-d2-target="diagrams/d2-9fab57c576dfc5ca627698f623f7aca3.svg" data-d2-hash="9fab57c576dfc5ca627698f623f7aca3" data-d2-theme="0" data-d2-len="364"&gt;&lt;code class="language-d2"&gt;direction: right
+&amp;amp;#34;海量语料库&amp;amp;#34; -&amp;amp;gt; &amp;amp;#34;Transformer 训练集群&amp;amp;#34;: &amp;amp;#34;文本序列&amp;amp;#34;
+&amp;amp;#34;Transformer 训练集群&amp;amp;#34; -&amp;amp;gt; &amp;amp;#34;Transformer 训练集群&amp;amp;#34;: &amp;amp;#34;计算自注意力\n与参数更新&amp;amp;#34;
+&amp;amp;#34;Transformer 训练集群&amp;amp;#34; -&amp;amp;gt; &amp;amp;#34;基础模型 (Base Model)&amp;amp;#34;: &amp;amp;#34;获得百亿/千亿参数&amp;amp;#34;
+
+&amp;amp;#34;Transformer 训练集群&amp;amp;#34;: {
+ shape: package
+}
+&amp;amp;#34;基础模型 (Base Model)&amp;amp;#34;: {
+ shape: cylinder
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id="工作预测与生成-inference"&gt;工作：预测与生成 (Inference)&lt;/h3&gt;
-&lt;p&gt;模型工作时，它并不是在“思考”，而是在不断地进行&lt;strong&gt;概率预测&lt;/strong&gt;。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;输入 (Input)&lt;/strong&gt;：你输入的 Prompt。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;处理 (Processing)&lt;/strong&gt;：模型将文字转化为向量，通过多层 Transformer 网络计算它们之间的关联（Attention）。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;输出 (Output)&lt;/strong&gt;：预测并生成下一个 Token，然后将其放回输入序列，循环往复直至生成结束。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="d2-container" id="d2-aa1cdc653ea3ed710c7939cf1158f36e"&gt;&lt;div class="d2-controls"&gt;
- &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
- &lt;/div&gt;
- &lt;div class="d2-img-container"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-aa1cdc653ea3ed710c7939cf1158f36e.svg" alt="D2 Diagram"&gt;
- &lt;/div&gt;
- &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
-&lt;h3 id="llm-的核心组件-core-components"&gt;LLM 的核心组件 (Core Components)&lt;/h3&gt;
-&lt;p&gt;为了完成上述预测任务，LLM 内部由几个关键部分组成：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;分词器 (Tokenizer)&lt;/strong&gt;：将原始文本切分为最小单位（Tokens），并映射为数字 ID。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;嵌入层 (Embedding Layer)&lt;/strong&gt;：将数字 ID 转化为高维向量。在向量空间中，意思相近的词距离更近。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Transformer 块 (Transformer Blocks)&lt;/strong&gt;：
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;自注意力 (Self-Attention)&lt;/strong&gt;：让模型理解“它”指代的是前面的哪个名词，捕捉长距离依赖。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;前馈网络 (Feed-Forward)&lt;/strong&gt;：对捕捉到的特征进行非线性变换和存储知识。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;输出头 (Output Head)&lt;/strong&gt;：将最终的向量映射回词表大小，通过 Softmax 函数输出每个词的概率。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class="d2-container" id="d2-0723d30a8fa91ccfe020f0864ae90e6c"&gt;&lt;div class="d2-controls"&gt;
- &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
- &lt;/div&gt;
- &lt;div class="d2-img-container"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-0723d30a8fa91ccfe020f0864ae90e6c.svg" alt="D2 Diagram"&gt;
- &lt;/div&gt;
- &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;本文将重点讨论后训练的核心技术流程。&lt;/p&gt;
-&lt;h2 id="后训练概览-overview"&gt;后训练概览 (Overview)&lt;/h2&gt;
-&lt;p&gt;后训练的目标是将基础模型（Base Model）转化为指令遵循模型（Instruct/Chat Model）。这个过程主要包含三个核心环节：&lt;strong&gt;SFT&lt;/strong&gt;、&lt;strong&gt;对齐 (Alignment)&lt;/strong&gt; 和 &lt;strong&gt;特定领域优化&lt;/strong&gt;。&lt;/p&gt;</description></item><item><title>AI 智能体设计模式 (Agentic Design Patterns) 总结</title><link>https://qtopie.github.io/notes/ai/agentic-design-patterns/</link><pubDate>Tue, 24 Mar 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/ai/agentic-design-patterns/</guid><description>&lt;p&gt;随着大语言模型（LLM）能力的不断提升，开发者们逐渐从“Prompt Engineering”转向了“Agentic Workflow”。Andrew Ng (吴恩达) 曾指出，基于 Agent 的工作流可能会比单纯依赖更强大的模型版本带来更大的性能提升。&lt;/p&gt;
+&lt;p&gt;模型工作时，它并不是在“思考”，而是在不断地进行&lt;strong&gt;概率预测&lt;/strong&gt;。&lt;/p&gt;</description></item><item><title>AI 智能体设计模式 (Agentic Design Patterns) 总结</title><link>https://qtopie.github.io/notes/ai/agentic-design-patterns/</link><pubDate>Tue, 24 Mar 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/ai/agentic-design-patterns/</guid><description>&lt;p&gt;随着大语言模型（LLM）能力的不断提升，开发者们逐渐从“Prompt Engineering”转向了“Agentic Workflow”。Andrew Ng (吴恩达) 曾指出，基于 Agent 的工作流可能会比单纯依赖更强大的模型版本带来更大的性能提升。&lt;/p&gt;
 &lt;p&gt;本文将总结几种核心的 AI 智能体设计模式，并结合 D2 流程图进行直观展示。&lt;/p&gt;
 &lt;h2 id="1-反思-reflection"&gt;1. 反思 (Reflection)&lt;/h2&gt;
 &lt;p&gt;反思模式是最基础的模式。它通过让模型检查自己的输出，发现错误并进行修正，从而提高任务的完成质量。&lt;/p&gt;
-&lt;div class="d2-container" id="d2-84567108c1b2e8c2ef60fa099714f287"&gt;&lt;div class="d2-controls"&gt;
- &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
- &lt;/div&gt;
- &lt;div class="d2-img-container"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-84567108c1b2e8c2ef60fa099714f287.svg" alt="D2 Diagram"&gt;
- &lt;/div&gt;
- &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
+&lt;div class="d2-container" id="d2-84567108c1b2e8c2ef60fa099714f287"&gt;&lt;div class="d2-missing-hint"&gt;D2 SVG is missing (target: &lt;code&gt;diagrams/d2-84567108c1b2e8c2ef60fa099714f287.svg&lt;/code&gt;). Run &lt;code&gt;./scripts/generate-d2-diagrams.sh&lt;/code&gt; to regenerate diagrams.&lt;/div&gt;
+ &lt;pre data-d2-missing="true" data-d2-target="diagrams/d2-84567108c1b2e8c2ef60fa099714f287.svg" data-d2-hash="84567108c1b2e8c2ef60fa099714f287" data-d2-theme="0" data-d2-len="282"&gt;&lt;code class="language-d2"&gt;direction: right
+User -&amp;amp;gt; Generator: 初始任务 (如：写一段 Python 代码)
+Generator -&amp;amp;gt; Draft: 生成初稿
+Draft -&amp;amp;gt; Critic: 检查与评估 (如：代码是否有 Bug？性能如何？)
+Critic -&amp;amp;gt; Generator: 反馈意见 (Feedback)
+Generator -&amp;amp;gt; Final: 改进后的最终版本&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id="2-工具使用-tool-use"&gt;2. 工具使用 (Tool Use)&lt;/h2&gt;
 &lt;p&gt;让 LLM 具备调用外部 API、搜索网页或执行本地代码的能力。这解决了 LLM 知识时效性差、无法处理复杂计算等问题。&lt;/p&gt;
-&lt;div class="d2-container" id="d2-7eafe87c29ccb9c4d9980aa2f4f9e926"&gt;&lt;div class="d2-controls"&gt;
- &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
- &lt;/div&gt;
- &lt;div class="d2-img-container"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-7eafe87c29ccb9c4d9980aa2f4f9e926.svg" alt="D2 Diagram"&gt;
- &lt;/div&gt;
- &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
+&lt;div class="d2-container" id="d2-7eafe87c29ccb9c4d9980aa2f4f9e926"&gt;&lt;div class="d2-missing-hint"&gt;D2 SVG is missing (target: &lt;code&gt;diagrams/d2-7eafe87c29ccb9c4d9980aa2f4f9e926.svg&lt;/code&gt;). Run &lt;code&gt;./scripts/generate-d2-diagrams.sh&lt;/code&gt; to regenerate diagrams.&lt;/div&gt;
+ &lt;pre data-d2-missing="true" data-d2-target="diagrams/d2-7eafe87c29ccb9c4d9980aa2f4f9e926.svg" data-d2-hash="7eafe87c29ccb9c4d9980aa2f4f9e926" data-d2-theme="0" data-d2-len="248"&gt;&lt;code class="language-d2"&gt;direction: right
+User -&amp;amp;gt; Agent: 查询今日天气
+Agent -&amp;amp;gt; Router: 理解意图并决定调用工具
+Router -&amp;amp;gt; WeatherAPI: 调用 API (city=&amp;amp;#34;Shanghai&amp;amp;#34;)
+WeatherAPI -&amp;amp;gt; Router: 返回数据
+Router -&amp;amp;gt; Agent: 整合上下文
+Agent -&amp;amp;gt; User: 最终回复&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id="3-规划-planning"&gt;3. 规划 (Planning)&lt;/h2&gt;
-&lt;p&gt;规划是将复杂任务拆解为子任务并有序执行的核心能力。主要分为以下两类：&lt;/p&gt;
-&lt;h3 id="31-react-reasoning-and-acting"&gt;3.1 ReAct (Reasoning and Acting)&lt;/h3&gt;
-&lt;p&gt;ReAct 模式将**推理 (Reasoning)&lt;strong&gt;与&lt;/strong&gt;行动 (Acting)**结合在一起。模型在每一步都会生成一个“Thought”（思考过程），然后决定执行什么“Action”，观察“Observation”后再进行下一步思考。&lt;/p&gt;
-&lt;div class="d2-container" id="d2-b9c6f642837e088b53f431175e433237"&gt;&lt;div class="d2-controls"&gt;
- &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
- &lt;/div&gt;
- &lt;div class="d2-img-container"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-b9c6f642837e088b53f431175e433237.svg" alt="D2 Diagram"&gt;
- &lt;/div&gt;
- &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
-&lt;h3 id="32-plan-and-execute-计划并执行"&gt;3.2 Plan-and-Execute (计划并执行)&lt;/h3&gt;
-&lt;p&gt;与 ReAct 的步步为营不同，这种模式先生成一个完整的&lt;strong&gt;计划 (Plan)&lt;/strong&gt;，然后交由&lt;strong&gt;执行器 (Executor)&lt;strong&gt;逐一执行。在执行过程中，可能会根据反馈进行&lt;/strong&gt;重新规划 (Re-planning)&lt;/strong&gt;。&lt;/p&gt;
-&lt;div class="d2-container" id="d2-4aa5943468372523f1b1eeded11e1cbd"&gt;&lt;div class="d2-controls"&gt;
- &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
- &lt;/div&gt;
- &lt;div class="d2-img-container"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-4aa5943468372523f1b1eeded11e1cbd.svg" alt="D2 Diagram"&gt;
- &lt;/div&gt;
- &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id="4-多智能体协作-multi-agent-collaboration"&gt;4. 多智能体协作 (Multi-agent Collaboration)&lt;/h2&gt;
-&lt;p&gt;将复杂系统拆分为多个垂直领域的 Agent（如：一个写代码，一个写测试，一个做运维），它们通过通信达成共识。&lt;/p&gt;
-&lt;div class="d2-container" id="d2-70d162eee2dbc67757071ada21db2e6a"&gt;&lt;div class="d2-controls"&gt;
- &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
- &lt;/div&gt;
- &lt;div class="d2-img-container"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-70d162eee2dbc67757071ada21db2e6a.svg" alt="D2 Diagram"&gt;
- &lt;/div&gt;
- &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id="总结"&gt;总结&lt;/h2&gt;
-&lt;p&gt;智能体设计模式的核心在于&lt;strong&gt;闭环控制&lt;/strong&gt;和&lt;strong&gt;分解逻辑&lt;/strong&gt;。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;ReAct&lt;/strong&gt; 适合需要实时决策的探索性任务。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Plan-and-Execute&lt;/strong&gt; 适合目标明确的长流程任务。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Reflection&lt;/strong&gt; 和 &lt;strong&gt;Tool Use&lt;/strong&gt; 是几乎所有 Agent 的基础组件。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;通过组合这些模式，我们可以构建出远比单一提示词更稳定、更强大的 AI 系统。&lt;/p&gt;</description></item><item><title>如何写一个好的Agent Skill</title><link>https://qtopie.github.io/notes/ai/agent-skills/</link><pubDate>Thu, 19 Mar 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/ai/agent-skills/</guid><description>&lt;h2 id="agent-skills是什么"&gt;Agent Skills是什么?&lt;/h2&gt;
+&lt;p&gt;规划是将复杂任务拆解为子任务并有序执行的核心能力。主要分为以下两类：&lt;/p&gt;</description></item><item><title>如何写一个好的Agent Skill</title><link>https://qtopie.github.io/notes/ai/agent-skills/</link><pubDate>Thu, 19 Mar 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/ai/agent-skills/</guid><description>&lt;h2 id="agent-skills是什么"&gt;Agent Skills是什么?&lt;/h2&gt;
 &lt;p&gt;Agent Skill是随调随用的专业知识. 它封装了提示词(技能)和其依赖的工具, 能够模块化的给Agent加上某个问题解决能力.&lt;/p&gt;
-&lt;div class="d2-container" id="d2-2df04f9248b8d8620a23ceb735255d91"&gt;&lt;div class="d2-controls"&gt;
- &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
- &lt;/div&gt;
- &lt;div class="d2-img-container"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-2df04f9248b8d8620a23ceb735255d91.svg" alt="D2 Diagram"&gt;
- &lt;/div&gt;
- &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;这里需要特别区分: &lt;code&gt;LLM / Planning / Memory / Tools&lt;/code&gt; 是 Agent 本身就具备的基础能力; Agent Skill 的作用是按需增强这些能力, 而不是替代它们。&lt;/p&gt;
-&lt;p&gt;其中 Agent Skill 的作用是把某个领域的最佳实践打包成可复用模块, 在任务匹配时按需注入到 Agent 中:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;对 &lt;code&gt;LLM&lt;/code&gt;: 补充术语、规则和输出要求, 让回答更专业。&lt;/li&gt;
-&lt;li&gt;对 &lt;code&gt;Planning&lt;/code&gt;: 给出可执行流程, 减少漏步骤和拍脑袋决策。&lt;/li&gt;
-&lt;li&gt;对 &lt;code&gt;Memory&lt;/code&gt;: 提供本技能专属知识与参考文档, 提升上下文质量。&lt;/li&gt;
-&lt;li&gt;对 &lt;code&gt;Tools&lt;/code&gt;: 明确可调用脚本和参数规范, 提高执行成功率。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="核心价值"&gt;核心价值&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;经验可复用: 把复杂流程(比如团队的 PR 审查流程)打包成一个文件夹, 谁都能直接用。&lt;/li&gt;
-&lt;li&gt;执行更稳定: 多步骤任务按同一套流程走, 结果更一致、不容易漏步骤。&lt;/li&gt;
-&lt;li&gt;资源放一起: 指令、脚本、模板、示例数据都放在同一个 Skill 里, Agent 拿来就能用。&lt;/li&gt;
-&lt;li&gt;按需加载更省上下文: 初始只加载技能&lt;code&gt;SKILL.md&lt;/code&gt;的名称和描述; 只有在模型真正激活技能后, 才加载详细说明和资源, 从而节省上下文 token。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="目录结构"&gt;目录结构&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;假如我们创建一个出门助手的SKILL, 叫做&lt;code&gt;Going-out assistant&lt;/code&gt;&lt;/p&gt;</description></item><item><title>Backtracking</title><link>https://qtopie.github.io/notes/codejam/backtracking/</link><pubDate>Fri, 27 Feb 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/codejam/backtracking/</guid><description>&lt;p&gt;回溯算法（Backtracking）常被称为“通用的解题法”。如果把解决一个问题比作走迷宫，回溯算法就是那个&lt;strong&gt;不撞南墙不回头&lt;/strong&gt;的勇者。&lt;/p&gt;
+&lt;div class="d2-container" id="d2-2df04f9248b8d8620a23ceb735255d91"&gt;&lt;div class="d2-missing-hint"&gt;D2 SVG is missing (target: &lt;code&gt;diagrams/d2-2df04f9248b8d8620a23ceb735255d91.svg&lt;/code&gt;). Run &lt;code&gt;./scripts/generate-d2-diagrams.sh&lt;/code&gt; to regenerate diagrams.&lt;/div&gt;
+ &lt;pre data-d2-missing="true" data-d2-target="diagrams/d2-2df04f9248b8d8620a23ceb735255d91.svg" data-d2-hash="2df04f9248b8d8620a23ceb735255d91" data-d2-theme="0" data-d2-len="1030"&gt;&lt;code class="language-d2"&gt;direction: down
+
+agent: &amp;amp;#34;Agent&amp;amp;#34;
+
+agent.style.fill: &amp;amp;#34;#111111&amp;amp;#34;
+agent.style.stroke: &amp;amp;#34;#000000&amp;amp;#34;
+agent.style.font-color: &amp;amp;#34;#FFFFFF&amp;amp;#34;
+
+native: {
+	label: &amp;amp;#34;Agent 本身能力(默认就有)&amp;amp;#34;
+	direction: right
+	llm: &amp;amp;#34;LLM\n理解与生成&amp;amp;#34;
+	planning: &amp;amp;#34;Planning\n任务分解与决策&amp;amp;#34;
+	memory: &amp;amp;#34;Memory\n上下文与经验&amp;amp;#34;
+	tools: &amp;amp;#34;Tools\n外部能力执行&amp;amp;#34;
+}
+
+llm.style.fill: &amp;amp;#34;#FDE68A&amp;amp;#34;
+planning.style.fill: &amp;amp;#34;#93C5FD&amp;amp;#34;
+memory.style.fill: &amp;amp;#34;#86EFAC&amp;amp;#34;
+tools.style.fill: &amp;amp;#34;#F9A8D4&amp;amp;#34;
+
+llm.style.stroke: &amp;amp;#34;#B45309&amp;amp;#34;
+planning.style.stroke: &amp;amp;#34;#1D4ED8&amp;amp;#34;
+memory.style.stroke: &amp;amp;#34;#15803D&amp;amp;#34;
+tools.style.stroke: &amp;amp;#34;#BE185D&amp;amp;#34;
+
+agent -&amp;amp;gt; llm
+agent -&amp;amp;gt; planning
+agent -&amp;amp;gt; memory
+agent -&amp;amp;gt; tools
+
+skillpack: {
+	label: &amp;amp;#34;Agent Skill 增强层(按需加载)&amp;amp;#34;
+	direction: right
+	skill_prompt: &amp;amp;#34;领域提示词&amp;amp;#34;
+	skill_flow: &amp;amp;#34;步骤模板&amp;amp;#34;
+	skill_knowledge: &amp;amp;#34;参考资料&amp;amp;#34;
+	skill_tooling: &amp;amp;#34;脚本与参数规范&amp;amp;#34;
+}
+
+skill_prompt -&amp;amp;gt; llm: &amp;amp;#34;增强&amp;amp;#34;
+skill_flow -&amp;amp;gt; planning: &amp;amp;#34;增强&amp;amp;#34;
+skill_knowledge -&amp;amp;gt; memory: &amp;amp;#34;增强&amp;amp;#34;
+skill_tooling -&amp;amp;gt; tools: &amp;amp;#34;增强&amp;amp;#34;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;这里需要特别区分: &lt;code&gt;LLM / Planning / Memory / Tools&lt;/code&gt; 是 Agent 本身就具备的基础能力; Agent Skill 的作用是按需增强这些能力, 而不是替代它们。&lt;/p&gt;</description></item><item><title>Backtracking</title><link>https://qtopie.github.io/notes/codejam/backtracking/</link><pubDate>Fri, 27 Feb 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/codejam/backtracking/</guid><description>&lt;p&gt;回溯算法（Backtracking）常被称为“通用的解题法”。如果把解决一个问题比作走迷宫，回溯算法就是那个&lt;strong&gt;不撞南墙不回头&lt;/strong&gt;的勇者。&lt;/p&gt;
 &lt;h2 id="什么是回溯算法"&gt;什么是回溯算法？&lt;/h2&gt;
 &lt;p&gt;从本质上讲，回溯是一种&lt;strong&gt;深度优先搜索（DFS）&lt;/strong&gt;。它的核心思想是：在搜索过程中，当发现当前的路径已经不能满足求解条件时，就“回退”到上一步，换一条路径继续试探。&lt;/p&gt;
-&lt;div class="d2-container" id="d2-6b3376b438893d917c11087f5803ad76"&gt;&lt;div class="d2-controls"&gt;
- &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
- &lt;/div&gt;
- &lt;div class="d2-img-container"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-6b3376b438893d917c11087f5803ad76.svg" alt="D2 Diagram"&gt;
- &lt;/div&gt;
- &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
+&lt;div class="d2-container" id="d2-6b3376b438893d917c11087f5803ad76"&gt;&lt;div class="d2-missing-hint"&gt;D2 SVG is missing (target: &lt;code&gt;diagrams/d2-6b3376b438893d917c11087f5803ad76.svg&lt;/code&gt;). Run &lt;code&gt;./scripts/generate-d2-diagrams.sh&lt;/code&gt; to regenerate diagrams.&lt;/div&gt;
+ &lt;pre data-d2-missing="true" data-d2-target="diagrams/d2-6b3376b438893d917c11087f5803ad76.svg" data-d2-hash="6b3376b438893d917c11087f5803ad76" data-d2-theme="0" data-d2-len="181"&gt;&lt;code class="language-d2"&gt;# 简单的 DFS 访问顺序示意图（节点内数字为访问顺序）
+A: &amp;amp;#34;A\n(1)&amp;amp;#34;
+B: &amp;amp;#34;B\n(2)&amp;amp;#34;
+D: &amp;amp;#34;D\n(3)&amp;amp;#34;
+F: &amp;amp;#34;F\n(5)&amp;amp;#34;
+C: &amp;amp;#34;C\n(4)&amp;amp;#34;
+E: &amp;amp;#34;E\n(6)&amp;amp;#34;
+
+A -&amp;amp;gt; B
+B -&amp;amp;gt; D
+B -&amp;amp;gt; E
+A -&amp;amp;gt; C
+C -&amp;amp;gt; F&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id="核心三个步骤回溯模板"&gt;核心三个步骤（回溯模板）：&lt;/h3&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;路径（Path）：&lt;/strong&gt; 已经做出的选择。&lt;/li&gt;
@@ -659,7 +597,7 @@
  A["编写 eBPF 源代码&lt;br/&gt;(C / Rust)"] -- "LLVM / Clang" --&gt; B["eBPF 字节码&lt;br/&gt;(Bytecode)"]
  B -- "bpf 系统调用" --&gt; C["加载并注入内核"]
  
- L["eBPF Maps&lt;br/&gt;共享存储/键值对"] --- M["用户态控制程序&lt;br/&gt;Go / C++ / Rust"]
+ M["用户态控制程序&lt;br/&gt;Go / C++ / Rust"]
  M -- "分析数据" --&gt; N["可视化 / 控制面板"]
  end
 
@@ -681,15 +619,18 @@
  G -- "挂载执行" --&gt; J
  G -- "挂载执行" --&gt; K
  
+ L["eBPF Maps&lt;br/&gt;共享存储/键值对"]
  H &amp; I &amp; J &amp; K -- "数据交互" --&gt; L
  end
+
+ L -- "bpf 系统调用&lt;br/&gt;(读写数据)" --- M
 
  style D fill:#f96,stroke:#333,stroke-width:2px
  style G fill:#00d2ff,stroke:#333,stroke-width:2px
  style L fill:#fff4dd,stroke:#d4a017,stroke-width:2px&lt;/div&gt;
 &lt;/div&gt;
 &lt;h3 id="一个加速小例子"&gt;一个加速小例子&lt;/h3&gt;
-&lt;p&gt;场景：为局域网内的平板/手机做游戏加速。思路是：数据包进入网关后，如果源 MAC 在“加速名单”且目标 IP 在“游戏服务器列表”，则把流量指派给本地代理端口（示例中用 1080），否则直连。&lt;/p&gt;</description></item><item><title>Go gRPC 项目Protobuf 组织与跨项目依赖规范指南</title><link>https://qtopie.github.io/notes/dev/grpc-proto-practices/</link><pubDate>Wed, 07 Jan 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/dev/grpc-proto-practices/</guid><description>&lt;h1 id="go-grpc-项目-protobuf-组织与跨项目依赖规范指南"&gt;Go gRPC 项目 Protobuf 组织与跨项目依赖规范指南&lt;/h1&gt;
+&lt;p&gt;场景：为局域网内的平板/手机做游戏加速。思路是：数据包进入网关后，如果源 MAC 在“加速名单”且目标 IP 在“游戏服务器列表”，则把流量指派给本地 TProxy 代理端口（示例中用 10080），否则直连。&lt;/p&gt;</description></item><item><title>Go gRPC 项目Protobuf 组织与跨项目依赖规范指南</title><link>https://qtopie.github.io/notes/dev/grpc-proto-practices/</link><pubDate>Wed, 07 Jan 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/dev/grpc-proto-practices/</guid><description>&lt;h1 id="go-grpc-项目-protobuf-组织与跨项目依赖规范指南"&gt;Go gRPC 项目 Protobuf 组织与跨项目依赖规范指南&lt;/h1&gt;
 &lt;p&gt;在微服务架构中，Protobuf（proto）文件不仅是数据交换的协议，更是服务之间的&lt;strong&gt;契约&lt;/strong&gt;。优秀的组织方式能显著降低维护成本，避免“依赖地狱”。&lt;/p&gt;
 &lt;h2 id="一-项目内部组织中心化与版本化"&gt;一、 项目内部组织：中心化与版本化&lt;/h2&gt;
 &lt;p&gt;不要将 &lt;code&gt;.proto&lt;/code&gt; 文件散落在业务逻辑目录中，建议在项目根目录采用以下结构：&lt;/p&gt;
@@ -1355,6 +1296,21 @@
 &lt;li&gt;在移动过程中，维护窗口状态（如和、计数、最大值）并更新答案。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;从暴力到滑窗的关键在于：相邻窗口高度重叠，只需要增量更新，而不需要每次重算整个区间。&lt;/p&gt;
+&lt;div class="d2-container" id="d2-0d7b6bb3c379b0e2da3d410f18f1f3aa"&gt;&lt;div class="d2-missing-hint"&gt;D2 SVG is missing (target: &lt;code&gt;diagrams/d2-0d7b6bb3c379b0e2da3d410f18f1f3aa.svg&lt;/code&gt;). Run &lt;code&gt;./scripts/generate-d2-diagrams.sh&lt;/code&gt; to regenerate diagrams.&lt;/div&gt;
+ &lt;pre data-d2-missing="true" data-d2-target="diagrams/d2-0d7b6bb3c379b0e2da3d410f18f1f3aa.svg" data-d2-hash="0d7b6bb3c379b0e2da3d410f18f1f3aa" data-d2-theme="0" data-d2-len="395"&gt;&lt;code class="language-d2"&gt;# 滑动窗口扩张与收缩示意图
+# 右指针扩张窗口，条件不满足时左指针收缩窗口
+
+start: &amp;amp;#34;初始窗口\n[left,right]&amp;amp;#34;
+expand: &amp;amp;#34;右移 right\n扩张窗口&amp;amp;#34;
+check: &amp;amp;#34;检查窗口条件&amp;amp;#34;
+shrink: &amp;amp;#34;左移 left\n收缩窗口&amp;amp;#34;
+accept: &amp;amp;#34;条件满足\n记录结果&amp;amp;#34;
+
+start -&amp;amp;gt; expand
+expand -&amp;amp;gt; check
+check -&amp;amp;gt; shrink: &amp;amp;#34;如果不满足&amp;amp;#34;
+check -&amp;amp;gt; accept: &amp;amp;#34;如果满足&amp;amp;#34;
+shrink -&amp;amp;gt; check&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id="2-适用场景"&gt;2. 适用场景&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;最长/最短满足条件的子数组或子串。&lt;/li&gt;
@@ -1364,44 +1320,7 @@
 &lt;/ul&gt;
 &lt;h2 id="3-两类窗口"&gt;3. 两类窗口&lt;/h2&gt;
 &lt;h3 id="固定窗口fixed-window"&gt;固定窗口（Fixed Window）&lt;/h3&gt;
-&lt;p&gt;窗口大小固定为 $k$，适合“每连续 $k$ 个元素”的问题。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;先计算前 $k$ 个元素的初始状态。&lt;/li&gt;
-&lt;li&gt;每次右移一格：加入新元素，移除旧元素。&lt;/li&gt;
-&lt;li&gt;持续更新答案。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id="可变窗口variable-window"&gt;可变窗口（Variable Window）&lt;/h3&gt;
-&lt;p&gt;窗口大小根据条件动态变化，常见于“最短/最长满足条件子串”。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;right&lt;/code&gt; 持续扩张窗口。&lt;/li&gt;
-&lt;li&gt;当窗口满足（或不满足）条件时，移动 &lt;code&gt;left&lt;/code&gt; 收缩。&lt;/li&gt;
-&lt;li&gt;在扩张和收缩过程中记录最优解。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id="4-常用模板"&gt;4. 常用模板&lt;/h2&gt;
-&lt;h3 id="go-模板可变窗口"&gt;Go 模板（可变窗口）&lt;/h3&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;func&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;slidingWindow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="nx"&gt;left&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;right&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="nx"&gt;window&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;make&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;map&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="kt"&gt;byte&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;right&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;		&lt;/span&gt;&lt;span class="nx"&gt;c&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;right&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;		&lt;/span&gt;&lt;span class="nx"&gt;right&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;		&lt;/span&gt;&lt;span class="nx"&gt;window&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;c&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;		&lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;windowNeedsShrink&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;			&lt;/span&gt;&lt;span class="nx"&gt;d&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;left&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;			&lt;/span&gt;&lt;span class="nx"&gt;left&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;			&lt;/span&gt;&lt;span class="nx"&gt;window&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;d&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;		&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;		&lt;/span&gt;&lt;span class="c1"&gt;// 根据题目更新 res&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="5-为什么通常是-on"&gt;5. 为什么通常是 $O(n)$&lt;/h2&gt;
-&lt;p&gt;设数组长度为 $n$：&lt;/p&gt;</description></item><item><title>并发模型</title><link>https://qtopie.github.io/notes/web/concurrency-models/</link><pubDate>Tue, 21 Jan 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/web/concurrency-models/</guid><description>&lt;h2 id="目录"&gt;目录&lt;/h2&gt;
+&lt;p&gt;窗口大小固定为 $k$，适合“每连续 $k$ 个元素”的问题。&lt;/p&gt;</description></item><item><title>并发模型</title><link>https://qtopie.github.io/notes/web/concurrency-models/</link><pubDate>Tue, 21 Jan 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/web/concurrency-models/</guid><description>&lt;h2 id="目录"&gt;目录&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;总结对比&lt;/li&gt;
 &lt;li&gt;各模型原理简介&lt;/li&gt;
@@ -1738,13 +1657,21 @@
 &lt;li&gt;&lt;strong&gt;为什么稳&lt;/strong&gt;：自动预分配和惰性空间回收，减少频繁内存分配。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;为什么安全&lt;/strong&gt;：支持二进制数据，不依赖 &lt;code&gt;\0&lt;/code&gt; 作为结束符。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="d2-container" id="d2-aaa0706c0f14473fa0397db3ee8b4727"&gt;&lt;div class="d2-controls"&gt;
- &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
- &lt;/div&gt;
- &lt;div class="d2-img-container"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-aaa0706c0f14473fa0397db3ee8b4727.svg" alt="D2 Diagram"&gt;
- &lt;/div&gt;
- &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
+&lt;div class="d2-container" id="d2-aaa0706c0f14473fa0397db3ee8b4727"&gt;&lt;div class="d2-missing-hint"&gt;D2 SVG is missing (target: &lt;code&gt;diagrams/d2-aaa0706c0f14473fa0397db3ee8b4727.svg&lt;/code&gt;). Run &lt;code&gt;./scripts/generate-d2-diagrams.sh&lt;/code&gt; to regenerate diagrams.&lt;/div&gt;
+ &lt;pre data-d2-missing="true" data-d2-target="diagrams/d2-aaa0706c0f14473fa0397db3ee8b4727.svg" data-d2-hash="aaa0706c0f14473fa0397db3ee8b4727" data-d2-theme="0" data-d2-len="200"&gt;&lt;code class="language-d2"&gt;direction: right
+
+SDS: {
+ shape: package
+ Header: {
+ len: &amp;amp;#34;len = 5&amp;amp;#34;
+ alloc: &amp;amp;#34;alloc = 16&amp;amp;#34;
+ flags: &amp;amp;#34;type flags&amp;amp;#34;
+ }
+ buf: &amp;amp;#34;h e l l o\\0&amp;amp;#34;
+}
+
+App: &amp;amp;#34;APPEND / GET / STRLEN&amp;amp;#34;
+App -&amp;amp;gt; SDS: &amp;amp;#34;operate&amp;amp;#34;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h5 id="dict--hashtable-hash"&gt;Dict / Hashtable (Hash)&lt;/h5&gt;
 &lt;p&gt;Hash、Set 在元素变多后会转为哈希表实现。Redis 通过&lt;strong&gt;渐进式 rehash&lt;/strong&gt;把扩容成本摊到多次请求中，避免一次性卡顿。&lt;/p&gt;</description></item><item><title>链表反转</title><link>https://qtopie.github.io/notes/codejam/reverse-list/</link><pubDate>Sat, 07 Sep 2024 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/codejam/reverse-list/</guid><description>&lt;h2 id="链表反转深入浅出"&gt;链表反转：深入浅出&lt;/h2&gt;
 &lt;h3 id="链表反转是什么"&gt;链表反转是什么？&lt;/h3&gt;

@@ -7,60 +7,33 @@
 &lt;/ul&gt;
 &lt;p&gt;这三者几乎定义了后续 Hadoop 生态（HDFS、MapReduce、HBase）和云原生数据平台的基础形态。&lt;/p&gt;
 &lt;h2 id="一图看懂三者关系"&gt;一图看懂三者关系&lt;/h2&gt;
-&lt;div class="d2-container" id="d2-5c64a570833f1cf343646c9166621b32"&gt;&lt;div class="d2-controls"&gt;
- &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
- &lt;/div&gt;
- &lt;div class="d2-img-container"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-5c64a570833f1cf343646c9166621b32.svg" alt="D2 Diagram"&gt;
- &lt;/div&gt;
- &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
+&lt;div class="d2-container" id="d2-5c64a570833f1cf343646c9166621b32"&gt;&lt;div class="d2-missing-hint"&gt;D2 SVG is missing (target: &lt;code&gt;diagrams/d2-5c64a570833f1cf343646c9166621b32.svg&lt;/code&gt;). Run &lt;code&gt;./scripts/generate-d2-diagrams.sh&lt;/code&gt; to regenerate diagrams.&lt;/div&gt;
+ &lt;pre data-d2-missing="true" data-d2-target="diagrams/d2-5c64a570833f1cf343646c9166621b32.svg" data-d2-hash="5c64a570833f1cf343646c9166621b32" data-d2-theme="0" data-d2-len="546"&gt;&lt;code class="language-d2"&gt;direction: right
+
+Producer: &amp;amp;#34;日志/爬虫/业务事件&amp;amp;#34;
+GFS: {
+	shape: package
+	master: &amp;amp;#34;Master\n元数据/租约&amp;amp;#34;
+	chunkservers: &amp;amp;#34;ChunkServers\n数据块副本&amp;amp;#34;
+}
+MR: {
+	shape: package
+	map: &amp;amp;#34;Map Tasks&amp;amp;#34;
+	shuffle: &amp;amp;#34;Shuffle/Sort&amp;amp;#34;
+	reduce: &amp;amp;#34;Reduce Tasks&amp;amp;#34;
+}
+BT: {
+	shape: package
+	tablet: &amp;amp;#34;Tablets&amp;amp;#34;
+	api: &amp;amp;#34;读写 API&amp;amp;#34;
+}
+Consumer: &amp;amp;#34;搜索/分析/推荐&amp;amp;#34;
+
+Producer -&amp;amp;gt; GFS: &amp;amp;#34;原始数据落盘&amp;amp;#34;
+GFS -&amp;amp;gt; MR: &amp;amp;#34;批处理输入&amp;amp;#34;
+MR -&amp;amp;gt; GFS: &amp;amp;#34;中间/结果文件&amp;amp;#34;
+MR -&amp;amp;gt; BT: &amp;amp;#34;聚合结果写入&amp;amp;#34;
+BT -&amp;amp;gt; Consumer: &amp;amp;#34;低延迟查询&amp;amp;#34;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2 id="gfs为廉价机器--大文件--高故障率设计的文件系统"&gt;GFS：为“廉价机器 + 大文件 + 高故障率”设计的文件系统&lt;/h2&gt;
 &lt;h3 id="解决了什么问题"&gt;解决了什么问题？&lt;/h3&gt;
-&lt;p&gt;传统文件系统假设硬件可靠、文件较小、写操作随机且频繁。Google 的现实恰好相反：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;文件极大（日志、网页快照、索引数据）。&lt;/li&gt;
-&lt;li&gt;顺序追加远多于随机改写。&lt;/li&gt;
-&lt;li&gt;节点经常坏，故障是常态而不是异常。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;GFS 的核心思路：&lt;strong&gt;接受故障，拥抱追加，靠副本保可用&lt;/strong&gt;。&lt;/p&gt;
-&lt;h3 id="核心设计"&gt;核心设计&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Master + ChunkServer&lt;/strong&gt;：Master 只管元数据；ChunkServer 管真实数据块。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;大块（Chunk）&lt;/strong&gt;：默认 &lt;code&gt;64MB&lt;/code&gt;，减少元数据规模和客户端寻址次数。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;多副本&lt;/strong&gt;：通常 &lt;code&gt;3&lt;/code&gt; 副本，跨机器/机架放置。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Lease 主副本机制&lt;/strong&gt;：Primary 负责给写入排序，避免并发写冲突。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Record Append&lt;/strong&gt;：提供“原子追加”语义，适合日志流。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="写入路径简化"&gt;写入路径（简化）&lt;/h3&gt;
-&lt;div class="d2-container" id="d2-772d6694da8935907bc8157b18d68c50"&gt;&lt;div class="d2-controls"&gt;
- &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
- &lt;/div&gt;
- &lt;div class="d2-img-container"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-772d6694da8935907bc8157b18d68c50.svg" alt="D2 Diagram"&gt;
- &lt;/div&gt;
- &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
-&lt;h2 id="mapreduce把写复杂分布式程序变成写-mapreduce-函数"&gt;MapReduce：把“写复杂分布式程序”变成“写 map/reduce 函数”&lt;/h2&gt;
-&lt;h3 id="编程模型"&gt;编程模型&lt;/h3&gt;
-&lt;p&gt;你只需要定义两个函数：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;map(k1, v1) -&amp;gt; list(k2, v2)&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;reduce(k2, list(v2)) -&amp;gt; list(v3)&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;系统自动完成：任务切分、调度、失败重试、数据重分布（Shuffle）、结果落盘。&lt;/p&gt;
-&lt;h3 id="执行流程"&gt;执行流程&lt;/h3&gt;
-&lt;div class="d2-container" id="d2-b357729c91ba675057465e1738dbe7d0"&gt;&lt;div class="d2-controls"&gt;
- &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
- &lt;/div&gt;
- &lt;div class="d2-img-container"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-b357729c91ba675057465e1738dbe7d0.svg" alt="D2 Diagram"&gt;
- &lt;/div&gt;
- &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
-&lt;h3 id="为什么它改变了行业"&gt;为什么它改变了行业？&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;大幅降低分布式门槛&lt;/strong&gt;：业务侧只写函数，不再手搓容错框架。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;天然弹性&lt;/strong&gt;：慢节点、坏节点通过重试和推测执行被吸收。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;吞吐优先&lt;/strong&gt;：适合离线批处理（索引构建、日志统计、特征生成）。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id="bigtable建立在-gfs-之上的分布式稀疏多维有序映射"&gt;Bigtable：建立在 GFS 之上的分布式稀疏多维有序映射&lt;/h2&gt;
-&lt;h3 id="数据模型直观理解"&gt;数据模型（直观理解）&lt;/h3&gt;
-&lt;p&gt;Bigtable 可以看成：&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;传统文件系统假设硬件可靠、文件较小、写操作随机且频繁。Google 的现实恰好相反：&lt;/p&gt;</description></item></channel></rss>

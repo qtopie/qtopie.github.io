@@ -64,14 +64,56 @@ P2[Producer 2] --> RB
 RB --> C1[Consumer 1]
 RB --> C2[Consumer 2]
 C1 -. sequence .- RB
-C2 -. gating .- RB</div></div><hr><h2 id=3-经典实现>3. 经典实现</h2><h3 id=线程池>线程池</h3><p><strong>Java ThreadPool</strong></p><p>原理：线程池通过预先创建一定数量的线程，复用这些线程来执行大量短生命周期的任务，避免频繁创建/销毁线程的开销。</p><p>核心架构 D2 图示：</p><div class=d2-container id=d2-1be2c77e7c3e542d3d96925c090a27ff><div class=d2-controls><button class=d2-btn-fullscreen title=Fullscreen>⤢</button></div><div class=d2-img-container><img src=/diagrams/d2-1be2c77e7c3e542d3d96925c090a27ff.svg alt="D2 Diagram"></div><div class=watermark-overlay>qtopie.github.io</div></div><p>优势：</p><ul><li>线程复用，减少资源消耗</li><li>支持任务队列、拒绝策略、灵活参数配置</li><li>适合服务器端、爬虫、批量处理等场景</li></ul><p>典型应用：Web 服务器、RPC 框架、异步任务调度</p><p>简单代码示例：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=n>ExecutorService</span><span class=w> </span><span class=n>pool</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>ThreadPoolExecutor</span><span class=p>(</span><span class=n>4</span><span class=p>,</span><span class=w> </span><span class=n>8</span><span class=p>,</span><span class=w> </span><span class=n>60</span><span class=p>,</span><span class=w> </span><span class=n>TimeUnit</span><span class=p>.</span><span class=na>SECONDS</span><span class=p>,</span><span class=w>
+C2 -. gating .- RB</div></div><hr><h2 id=3-经典实现>3. 经典实现</h2><h3 id=线程池>线程池</h3><p><strong>Java ThreadPool</strong></p><p>原理：线程池通过预先创建一定数量的线程，复用这些线程来执行大量短生命周期的任务，避免频繁创建/销毁线程的开销。</p><p>核心架构 D2 图示：</p><div class=d2-container id=d2-1be2c77e7c3e542d3d96925c090a27ff><div class=d2-missing-hint>D2 SVG is missing (target: <code>diagrams/d2-1be2c77e7c3e542d3d96925c090a27ff.svg</code>). Run <code>./scripts/generate-d2-diagrams.sh</code> to regenerate diagrams.</div><pre data-d2-missing=true data-d2-target=diagrams/d2-1be2c77e7c3e542d3d96925c090a27ff.svg data-d2-hash=1be2c77e7c3e542d3d96925c090a27ff data-d2-theme=0 data-d2-len=361><code class=language-d2>ThreadPool: ThreadPoolExecutor {
+	TaskQueue: BlockingQueue
+	Worker1: Thread
+	Worker2: Thread
+	WorkerN: Thread
+}
+Client -&amp;gt; ThreadPool: submit()
+ThreadPool -&amp;gt; TaskQueue: enqueue
+TaskQueue -&amp;gt; Worker1: dispatch
+TaskQueue -&amp;gt; Worker2: dispatch
+TaskQueue -&amp;gt; WorkerN: dispatch
+Worker1 -&amp;gt; TaskQueue: poll
+Worker2 -&amp;gt; TaskQueue: poll
+WorkerN -&amp;gt; TaskQueue: poll</code></pre></div><p>优势：</p><ul><li>线程复用，减少资源消耗</li><li>支持任务队列、拒绝策略、灵活参数配置</li><li>适合服务器端、爬虫、批量处理等场景</li></ul><p>典型应用：Web 服务器、RPC 框架、异步任务调度</p><p>简单代码示例：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=n>ExecutorService</span><span class=w> </span><span class=n>pool</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>ThreadPoolExecutor</span><span class=p>(</span><span class=n>4</span><span class=p>,</span><span class=w> </span><span class=n>8</span><span class=p>,</span><span class=w> </span><span class=n>60</span><span class=p>,</span><span class=w> </span><span class=n>TimeUnit</span><span class=p>.</span><span class=na>SECONDS</span><span class=p>,</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w>	</span><span class=k>new</span><span class=w> </span><span class=n>LinkedBlockingQueue</span><span class=o>&lt;&gt;</span><span class=p>());</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=n>pool</span><span class=p>.</span><span class=na>submit</span><span class=p>(()</span><span class=w> </span><span class=o>-&gt;</span><span class=w> </span><span class=n>System</span><span class=p>.</span><span class=na>out</span><span class=p>.</span><span class=na>println</span><span class=p>(</span><span class=s>&#34;Hello ThreadPool&#34;</span><span class=p>));</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=n>pool</span><span class=p>.</span><span class=na>shutdown</span><span class=p>();</span><span class=w>
-</span></span></span></code></pre></div><hr><h3 id=协程>协程</h3><p><strong>Go Routine</strong></p><p>原理：Goroutine 是 Go 运行时调度的用户态线程，创建和切换开销极小。通过 channel 实现 CSP 并发通信。</p><p>核心架构 D2 图示：</p><div class=d2-container id=d2-a519e97a8f84c141cd68f9e00f53d259><div class=d2-controls><button class=d2-btn-fullscreen title=Fullscreen>⤢</button></div><div class=d2-img-container><img src=/diagrams/d2-a519e97a8f84c141cd68f9e00f53d259.svg alt="D2 Diagram"></div><div class=watermark-overlay>qtopie.github.io</div></div><p>优势：</p><ul><li>单机可支持百万级 goroutine</li><li>语法简单，开发体验好</li><li>适合高并发、I/O 密集型场景</li></ul><p>典型应用：Web 服务、爬虫、分布式系统</p><p>简单代码示例：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=k>go</span><span class=w> </span><span class=kd>func</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span></code></pre></div><hr><h3 id=协程>协程</h3><p><strong>Go Routine</strong></p><p>原理：Goroutine 是 Go 运行时调度的用户态线程，创建和切换开销极小。通过 channel 实现 CSP 并发通信。</p><p>核心架构 D2 图示：</p><div class=d2-container id=d2-a519e97a8f84c141cd68f9e00f53d259><div class=d2-missing-hint>D2 SVG is missing (target: <code>diagrams/d2-a519e97a8f84c141cd68f9e00f53d259.svg</code>). Run <code>./scripts/generate-d2-diagrams.sh</code> to regenerate diagrams.</div><pre data-d2-missing=true data-d2-target=diagrams/d2-a519e97a8f84c141cd68f9e00f53d259.svg data-d2-hash=a519e97a8f84c141cd68f9e00f53d259 data-d2-theme=0 data-d2-len=373><code class=language-d2>App: GoApp {
+	Goroutine1
+	Goroutine2
+	GoroutineN
+	Scheduler
+	Channel
+}
+App -&amp;gt; Goroutine1: spawn
+App -&amp;gt; Goroutine2: spawn
+App -&amp;gt; GoroutineN: spawn
+Goroutine1 -&amp;gt; Scheduler: yield/block
+Goroutine2 -&amp;gt; Scheduler: yield/block
+GoroutineN -&amp;gt; Scheduler: yield/block
+Goroutine1 &amp;lt;-&amp;gt; Channel: send/recv
+Goroutine2 &amp;lt;-&amp;gt; Channel: send/recv
+GoroutineN &amp;lt;-&amp;gt; Channel: send/recv</code></pre></div><p>优势：</p><ul><li>单机可支持百万级 goroutine</li><li>语法简单，开发体验好</li><li>适合高并发、I/O 密集型场景</li></ul><p>典型应用：Web 服务、爬虫、分布式系统</p><p>简单代码示例：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=k>go</span><span class=w> </span><span class=kd>func</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w>	</span><span class=nx>fmt</span><span class=p>.</span><span class=nf>Println</span><span class=p>(</span><span class=s>&#34;Hello Goroutine&#34;</span><span class=p>)</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=p>}()</span><span class=w>
-</span></span></span></code></pre></div><hr><h3 id=事件驱动>事件驱动</h3><p><strong>Netty</strong></p><p>原理：基于 Java NIO，采用 Reactor 事件驱动模型，单线程可处理成千上万连接。</p><p>核心架构 D2 图示：</p><div class=d2-container id=d2-c7f73d1c0fb423d89776389e969fbc35><div class=d2-controls><button class=d2-btn-fullscreen title=Fullscreen>⤢</button></div><div class=d2-img-container><img src=/diagrams/d2-c7f73d1c0fb423d89776389e969fbc35.svg alt="D2 Diagram"></div><div class=watermark-overlay>qtopie.github.io</div></div><p>优势：</p><ul><li>高性能、低延迟</li><li>支持多种协议和自定义编解码</li><li>广泛用于 RPC、网关、IM 等</li></ul><p>典型应用：分布式系统通信、微服务网关</p><p>简单代码示例：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=n>EventLoopGroup</span><span class=w> </span><span class=n>boss</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>NioEventLoopGroup</span><span class=p>();</span><span class=w>
+</span></span></span></code></pre></div><hr><h3 id=事件驱动>事件驱动</h3><p><strong>Netty</strong></p><p>原理：基于 Java NIO，采用 Reactor 事件驱动模型，单线程可处理成千上万连接。</p><p>核心架构 D2 图示：</p><div class=d2-container id=d2-c7f73d1c0fb423d89776389e969fbc35><div class=d2-missing-hint>D2 SVG is missing (target: <code>diagrams/d2-c7f73d1c0fb423d89776389e969fbc35.svg</code>). Run <code>./scripts/generate-d2-diagrams.sh</code> to regenerate diagrams.</div><pre data-d2-missing=true data-d2-target=diagrams/d2-c7f73d1c0fb423d89776389e969fbc35.svg data-d2-hash=c7f73d1c0fb423d89776389e969fbc35 data-d2-theme=0 data-d2-len=355><code class=language-d2>Netty {
+	BossGroup: EventLoopGroup
+	WorkerGroup: EventLoopGroup
+	ChannelPipeline
+	NioSelector
+	Client1
+	ClientN
+}
+Client1 -&amp;gt; BossGroup: connect
+ClientN -&amp;gt; BossGroup: connect
+BossGroup -&amp;gt; WorkerGroup: assign
+WorkerGroup -&amp;gt; NioSelector: select
+WorkerGroup -&amp;gt; ChannelPipeline: process
+ChannelPipeline -&amp;gt; Handler1
+ChannelPipeline -&amp;gt; HandlerN</code></pre></div><p>优势：</p><ul><li>高性能、低延迟</li><li>支持多种协议和自定义编解码</li><li>广泛用于 RPC、网关、IM 等</li></ul><p>典型应用：分布式系统通信、微服务网关</p><p>简单代码示例：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=n>EventLoopGroup</span><span class=w> </span><span class=n>boss</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>NioEventLoopGroup</span><span class=p>();</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=n>ServerBootstrap</span><span class=w> </span><span class=n>b</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>ServerBootstrap</span><span class=p>();</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=n>b</span><span class=p>.</span><span class=na>group</span><span class=p>(</span><span class=n>boss</span><span class=p>,</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>NioEventLoopGroup</span><span class=p>())</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w> </span><span class=p>.</span><span class=na>channel</span><span class=p>(</span><span class=n>NioServerSocketChannel</span><span class=p>.</span><span class=na>class</span><span class=p>)</span><span class=w>
@@ -81,7 +123,23 @@ C2 -. gating .- RB</div></div><hr><h2 id=3-经典实现>3. 经典实现</h2><h3 
 </span></span></span><span class=line><span class=cl><span class=w>	 </span><span class=p>}</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w> </span><span class=p>});</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=n>b</span><span class=p>.</span><span class=na>bind</span><span class=p>(</span><span class=n>8080</span><span class=p>);</span><span class=w>
-</span></span></span></code></pre></div><p><strong>Redis 单线程事件循环</strong></p><p>原理：单线程事件循环，I/O 多路复用，极致优化命令处理路径。</p><p>优势：</p><ul><li>代码简单，易于维护</li><li>单线程避免锁竞争</li><li>支持高并发连接</li></ul><p>典型应用：缓存、消息队列、排行榜等</p><hr><h3 id=actor模型-1>Actor模型</h3><p><strong>Akka</strong></p><p>原理：基于 Actor 模型，每个 Actor 独立、无共享状态，通过消息传递通信。天然无锁，易于扩展。</p><p>核心架构 D2 图示：</p><div class=d2-container id=d2-e5d9e9309ebce220407a865326d2af46><div class=d2-controls><button class=d2-btn-fullscreen title=Fullscreen>⤢</button></div><div class=d2-img-container><img src=/diagrams/d2-e5d9e9309ebce220407a865326d2af46.svg alt="D2 Diagram"></div><div class=watermark-overlay>qtopie.github.io</div></div><p>优势：</p><ul><li>易于构建分布式、高可靠系统</li><li>支持容错、监督、远程通信</li><li>适合事件驱动、解耦场景</li></ul><p>典型应用：IM、分布式任务调度、金融风控</p><p>简单代码示例（Scala）：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-scala data-lang=scala><span class=line><span class=cl><span class=k>class</span> <span class=nc>HelloActor</span> <span class=k>extends</span> <span class=nc>Actor</span> <span class=o>{</span>
+</span></span></span></code></pre></div><p><strong>Redis 单线程事件循环</strong></p><p>原理：单线程事件循环，I/O 多路复用，极致优化命令处理路径。</p><p>优势：</p><ul><li>代码简单，易于维护</li><li>单线程避免锁竞争</li><li>支持高并发连接</li></ul><p>典型应用：缓存、消息队列、排行榜等</p><hr><h3 id=actor模型-1>Actor模型</h3><p><strong>Akka</strong></p><p>原理：基于 Actor 模型，每个 Actor 独立、无共享状态，通过消息传递通信。天然无锁，易于扩展。</p><p>核心架构 D2 图示：</p><div class=d2-container id=d2-e5d9e9309ebce220407a865326d2af46><div class=d2-missing-hint>D2 SVG is missing (target: <code>diagrams/d2-e5d9e9309ebce220407a865326d2af46.svg</code>). Run <code>./scripts/generate-d2-diagrams.sh</code> to regenerate diagrams.</div><pre data-d2-missing=true data-d2-target=diagrams/d2-e5d9e9309ebce220407a865326d2af46.svg data-d2-hash=e5d9e9309ebce220407a865326d2af46 data-d2-theme=0 data-d2-len=302><code class=language-d2>AkkaSystem {
+	ActorA
+	ActorB
+	ActorC
+	MailboxA
+	MailboxB
+	MailboxC
+}
+ActorA -&amp;gt; MailboxA
+ActorB -&amp;gt; MailboxB
+ActorC -&amp;gt; MailboxC
+ActorA -&amp;gt; MailboxB: send
+ActorB -&amp;gt; MailboxC: send
+ActorC -&amp;gt; MailboxA: send
+MailboxA -&amp;gt; ActorA: deliver
+MailboxB -&amp;gt; ActorB: deliver
+MailboxC -&amp;gt; ActorC: deliver</code></pre></div><p>优势：</p><ul><li>易于构建分布式、高可靠系统</li><li>支持容错、监督、远程通信</li><li>适合事件驱动、解耦场景</li></ul><p>典型应用：IM、分布式任务调度、金融风控</p><p>简单代码示例（Scala）：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-scala data-lang=scala><span class=line><span class=cl><span class=k>class</span> <span class=nc>HelloActor</span> <span class=k>extends</span> <span class=nc>Actor</span> <span class=o>{</span>
 </span></span><span class=line><span class=cl>	<span class=k>def</span> <span class=n>receive</span> <span class=k>=</span> <span class=o>{</span>
 </span></span><span class=line><span class=cl>		<span class=k>case</span> <span class=n>msg</span><span class=k>:</span> <span class=kt>String</span> <span class=o>=&gt;</span> <span class=n>println</span><span class=o>(</span><span class=s>s&#34;Hello </span><span class=si>$msg</span><span class=s>&#34;</span><span class=o>)</span>
 </span></span><span class=line><span class=cl>	<span class=o>}</span>
@@ -89,7 +147,19 @@ C2 -. gating .- RB</div></div><hr><h2 id=3-经典实现>3. 经典实现</h2><h3 
 </span></span><span class=line><span class=cl><span class=k>val</span> <span class=n>system</span> <span class=k>=</span> <span class=nc>ActorSystem</span><span class=o>(</span><span class=s>&#34;sys&#34;</span><span class=o>)</span>
 </span></span><span class=line><span class=cl><span class=k>val</span> <span class=n>actor</span> <span class=k>=</span> <span class=n>system</span><span class=o>.</span><span class=n>actorOf</span><span class=o>(</span><span class=nc>Props</span><span class=o>[</span><span class=kt>HelloActor</span><span class=o>])</span>
 </span></span><span class=line><span class=cl><span class=n>actor</span> <span class=o>!</span> <span class=s>&#34;Akka&#34;</span>
-</span></span></code></pre></div><hr><h3 id=disruptor>Disruptor</h3><p><strong>LMAX Disruptor</strong></p><p>原理：采用无锁环形缓冲区，利用 CAS 原子操作和缓存行填充，极大减少延迟和上下文切换。</p><p>核心架构 D2 图示：</p><div class=d2-container id=d2-1e8c09ee1ced7ec693536ebc5d50d70a><div class=d2-controls><button class=d2-btn-fullscreen title=Fullscreen>⤢</button></div><div class=d2-img-container><img src=/diagrams/d2-1e8c09ee1ced7ec693536ebc5d50d70a.svg alt="D2 Diagram"></div><div class=watermark-overlay>qtopie.github.io</div></div><p>优势：</p><ul><li>极致低延迟，超高吞吐</li><li>消除锁竞争，适合高频交易</li><li>适合单机极限性能场景</li></ul><p>典型应用：金融高频交易、日志系统、实时数据处理</p><p>无锁环形缓冲区，极致低延迟，常用于金融高频交易、日志系统等。</p></article><div id=react-app-components data-post-id=4378018793f82a3dd73a01c3303a1ca6></div><button class=mobile-toc-trigger aria-controls=mobile-toc aria-expanded=false title=Index>☰</button><div class=mobile-toc-overlay hidden></div><div id=mobile-toc class=mobile-toc-drawer aria-hidden=true role=dialog aria-label=Index><div class=mobile-toc-header><button class=mobile-toc-close aria-label=close>×</button></div><nav class=mobile-toc-body><div class=mobile-toc-list></div></nav><div class=mobile-safe-area-spacer></div></div><script type=module src=/react/page.bundle.js></script></main><footer><div class=copyright><small>Made with <span style=color:#e25555>&#9829;</span> in Guangzhou by
+</span></span></code></pre></div><hr><h3 id=disruptor>Disruptor</h3><p><strong>LMAX Disruptor</strong></p><p>原理：采用无锁环形缓冲区，利用 CAS 原子操作和缓存行填充，极大减少延迟和上下文切换。</p><p>核心架构 D2 图示：</p><div class=d2-container id=d2-1e8c09ee1ced7ec693536ebc5d50d70a><div class=d2-missing-hint>D2 SVG is missing (target: <code>diagrams/d2-1e8c09ee1ced7ec693536ebc5d50d70a.svg</code>). Run <code>./scripts/generate-d2-diagrams.sh</code> to regenerate diagrams.</div><pre data-d2-missing=true data-d2-target=diagrams/d2-1e8c09ee1ced7ec693536ebc5d50d70a.svg data-d2-hash=1e8c09ee1ced7ec693536ebc5d50d70a data-d2-theme=0 data-d2-len=284><code class=language-d2>Disruptor {
+	RingBuffer
+	Producer1
+	ProducerN
+	Consumer1
+	ConsumerN
+}
+Producer1 -&amp;gt; RingBuffer: publish
+ProducerN -&amp;gt; RingBuffer: publish
+RingBuffer -&amp;gt; Consumer1: consume
+RingBuffer -&amp;gt; ConsumerN: consume
+Consumer1 -&amp;gt; RingBuffer: sequence
+ConsumerN -&amp;gt; RingBuffer: sequence</code></pre></div><p>优势：</p><ul><li>极致低延迟，超高吞吐</li><li>消除锁竞争，适合高频交易</li><li>适合单机极限性能场景</li></ul><p>典型应用：金融高频交易、日志系统、实时数据处理</p><p>无锁环形缓冲区，极致低延迟，常用于金融高频交易、日志系统等。</p></article><div id=react-app-components data-post-id=4378018793f82a3dd73a01c3303a1ca6></div><button class=mobile-toc-trigger aria-controls=mobile-toc aria-expanded=false title=Index>☰</button><div class=mobile-toc-overlay hidden></div><div id=mobile-toc class=mobile-toc-drawer aria-hidden=true role=dialog aria-label=Index><div class=mobile-toc-header><button class=mobile-toc-close aria-label=close>×</button></div><nav class=mobile-toc-body><div class=mobile-toc-list></div></nav><div class=mobile-safe-area-spacer></div></div><script type=module src=/react/page.bundle.js></script></main><footer><div class=copyright><small>Made with <span style=color:#e25555>&#9829;</span> in Guangzhou by
 ©<a href=https://github.com/qtopie>qtopie</a> 2026
 </small><small>Posts licensed under <a href=https://creativecommons.org/licenses/by/4.0/legalcode>CC BY 4.0</small></div><div><script type=module src=/react/base.bundle.js></script><script type=module>
       (async ()=>{

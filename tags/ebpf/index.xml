@@ -93,7 +93,7 @@
  A["编写 eBPF 源代码&lt;br/&gt;(C / Rust)"] -- "LLVM / Clang" --&gt; B["eBPF 字节码&lt;br/&gt;(Bytecode)"]
  B -- "bpf 系统调用" --&gt; C["加载并注入内核"]
  
- L["eBPF Maps&lt;br/&gt;共享存储/键值对"] --- M["用户态控制程序&lt;br/&gt;Go / C++ / Rust"]
+ M["用户态控制程序&lt;br/&gt;Go / C++ / Rust"]
  M -- "分析数据" --&gt; N["可视化 / 控制面板"]
  end
 
@@ -115,12 +115,15 @@
  G -- "挂载执行" --&gt; J
  G -- "挂载执行" --&gt; K
  
+ L["eBPF Maps&lt;br/&gt;共享存储/键值对"]
  H &amp; I &amp; J &amp; K -- "数据交互" --&gt; L
  end
+
+ L -- "bpf 系统调用&lt;br/&gt;(读写数据)" --- M
 
  style D fill:#f96,stroke:#333,stroke-width:2px
  style G fill:#00d2ff,stroke:#333,stroke-width:2px
  style L fill:#fff4dd,stroke:#d4a017,stroke-width:2px&lt;/div&gt;
 &lt;/div&gt;
 &lt;h3 id="一个加速小例子"&gt;一个加速小例子&lt;/h3&gt;
-&lt;p&gt;场景：为局域网内的平板/手机做游戏加速。思路是：数据包进入网关后，如果源 MAC 在“加速名单”且目标 IP 在“游戏服务器列表”，则把流量指派给本地代理端口（示例中用 1080），否则直连。&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;场景：为局域网内的平板/手机做游戏加速。思路是：数据包进入网关后，如果源 MAC 在“加速名单”且目标 IP 在“游戏服务器列表”，则把流量指派给本地 TProxy 代理端口（示例中用 10080），否则直连。&lt;/p&gt;</description></item></channel></rss>

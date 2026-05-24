@@ -53,12 +53,20 @@
 &lt;li&gt;&lt;strong&gt;为什么稳&lt;/strong&gt;：自动预分配和惰性空间回收，减少频繁内存分配。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;为什么安全&lt;/strong&gt;：支持二进制数据，不依赖 &lt;code&gt;\0&lt;/code&gt; 作为结束符。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="d2-container" id="d2-aaa0706c0f14473fa0397db3ee8b4727"&gt;&lt;div class="d2-controls"&gt;
- &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
- &lt;/div&gt;
- &lt;div class="d2-img-container"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-aaa0706c0f14473fa0397db3ee8b4727.svg" alt="D2 Diagram"&gt;
- &lt;/div&gt;
- &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
+&lt;div class="d2-container" id="d2-aaa0706c0f14473fa0397db3ee8b4727"&gt;&lt;div class="d2-missing-hint"&gt;D2 SVG is missing (target: &lt;code&gt;diagrams/d2-aaa0706c0f14473fa0397db3ee8b4727.svg&lt;/code&gt;). Run &lt;code&gt;./scripts/generate-d2-diagrams.sh&lt;/code&gt; to regenerate diagrams.&lt;/div&gt;
+ &lt;pre data-d2-missing="true" data-d2-target="diagrams/d2-aaa0706c0f14473fa0397db3ee8b4727.svg" data-d2-hash="aaa0706c0f14473fa0397db3ee8b4727" data-d2-theme="0" data-d2-len="200"&gt;&lt;code class="language-d2"&gt;direction: right
+
+SDS: {
+ shape: package
+ Header: {
+ len: &amp;amp;#34;len = 5&amp;amp;#34;
+ alloc: &amp;amp;#34;alloc = 16&amp;amp;#34;
+ flags: &amp;amp;#34;type flags&amp;amp;#34;
+ }
+ buf: &amp;amp;#34;h e l l o\\0&amp;amp;#34;
+}
+
+App: &amp;amp;#34;APPEND / GET / STRLEN&amp;amp;#34;
+App -&amp;amp;gt; SDS: &amp;amp;#34;operate&amp;amp;#34;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h5 id="dict--hashtable-hash"&gt;Dict / Hashtable (Hash)&lt;/h5&gt;
 &lt;p&gt;Hash、Set 在元素变多后会转为哈希表实现。Redis 通过&lt;strong&gt;渐进式 rehash&lt;/strong&gt;把扩容成本摊到多次请求中，避免一次性卡顿。&lt;/p&gt;</description></item></channel></rss>
