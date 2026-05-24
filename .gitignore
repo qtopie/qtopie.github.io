@@ -3,4 +3,5 @@ public/
 *.lock
 .vscode/
 .task
- static/diagrams
+static/diagrams
+.task/checksum/d2-watch
