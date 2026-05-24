@@ -3,3 +3,4 @@ public/
 *.lock
 .vscode/
 .task
+ static/diagrams
