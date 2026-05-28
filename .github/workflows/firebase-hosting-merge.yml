@@ -26,15 +26,18 @@ jobs:
           curl -fsSL https://d2lang.com/install.sh | sh -s --
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
           "$HOME/.local/bin/d2" --version
-      - run: npm install --prefix themes/drift-blog-theme/react-app/
-      - run: npm run build --prefix themes/drift-blog-theme/react-app/
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v3
         with:
           hugo-version: 'latest'
           extended: true
-      - name: generate sites
-        run: ./scripts/hugo-with-d2.sh --minify
+      - name: Install Task
+        uses: arduino/setup-task@v2
+        with:
+          version: 3.x
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build
+        run: task build
       
       - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0

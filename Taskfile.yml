@@ -37,3 +37,22 @@ tasks:
       - package.json
     cmds:
       - npm run watch
+
+  build:
+    desc: Build the React app and Hugo site for production
+    cmds:
+      - task: build:react
+      - task: build:hugo
+
+  build:react:
+    desc: Build React app (Theme)
+    dir: themes/drift-blog-theme/react-app
+    cmds:
+      - npm install
+      - npm run build
+
+  build:hugo:
+    desc: Generate static Hugo site
+    cmds:
+      - ./scripts/hugo-with-d2.sh --minify
+

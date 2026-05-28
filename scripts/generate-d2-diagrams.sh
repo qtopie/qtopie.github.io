@@ -84,7 +84,7 @@ process_file_and_track() {
     ' "$block_file" > "$normalized_file"
 
     # Strip the trailing newline that awk (or the file system) added to match Hugo's TrimSpace/replaceRE logic.
-    hash="$( { printf "%s" "$(cat "$normalized_file")"; printf "|theme=%s" "$theme"; } | md5sum | awk '{print $1}' )"
+    hash="$( { printf "%s\n" "$(cat "$normalized_file")"; printf "|theme=%s" "$theme"; } | md5sum | awk '{print $1}' )"
     out_file="$OUT_DIR/d2-${hash}.svg"
 
     if [[ -f "$out_file" ]]; then
@@ -173,7 +173,7 @@ process_file_and_track() {
     ' "$block_file" > "$normalized_file"
 
     # Strip the trailing newline that awk (or the file system) added to match Hugo's TrimSpace/replaceRE logic.
-    hash="$( { printf "%s" "$(cat "$normalized_file")"; printf "|theme=%s" "$theme"; } | md5sum | awk '{print $1}' )"
+    hash="$( { printf "%s\n" "$(cat "$normalized_file")"; printf "|theme=%s" "$theme"; } | md5sum | awk '{print $1}' )"
     out_file="$OUT_DIR/d2-${hash}.svg"
     
     # Add to expected files list if variable is set
