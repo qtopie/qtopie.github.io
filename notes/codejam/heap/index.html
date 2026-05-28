@@ -56,51 +56,7 @@
 </span></span></span><span class=line><span class=cl><span class=w>		</span><span class=nf>siftDown</span><span class=p>(</span><span class=nx>nums</span><span class=p>,</span><span class=w> </span><span class=nx>smallest</span><span class=p>)</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w>	</span><span class=p>}</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
-</span></span></span></code></pre></div><h2 id=heap-building--sift-process>Heap Building & Sift Process</h2><p>堆的构建通常采用 <code>siftDown</code>（下沉）操作，从最后一个非叶子节点开始，自底向上进行堆化。其时间复杂度为 $O(n)$。</p><h3 id=siftdown-过程>SiftDown 过程</h3><ol><li>比较当前节点与左右子节点的值。</li><li>在三者中找到最小（小顶堆）或最大（大顶堆）的节点。</li><li>如果最小/最大节点不是当前节点，则交换它们，并对交换后的子节点递归执行 <code>siftDown</code>。</li></ol><h3 id=堆构建流程可视化-min-heap>堆构建流程可视化 (Min-Heap)</h3><p>以 <code>[7, 2, 5, 8, 1, 6, 4]</code> 为例，堆构建从最后一个非叶子节点（index = 2, value = 5）开始：</p><div class=d2-container id=d2-d7ba8449436e5dc4b3f78afd964f60af><div class=d2-missing-hint>D2 SVG is missing (target: <code>diagrams/d2-d7ba8449436e5dc4b3f78afd964f60af.svg</code>). Run <code>./scripts/generate-d2-diagrams.sh</code> to regenerate diagrams.</div><pre data-d2-missing=true data-d2-target=diagrams/d2-d7ba8449436e5dc4b3f78afd964f60af.svg data-d2-hash=d7ba8449436e5dc4b3f78afd964f60af data-d2-theme=0 data-d2-len=671><code class=language-d2>direction: down
-
-Initial: {
-  label: &amp;#34;Initial: [7, 2, 5, 8, 1, 6, 4]&amp;#34;
-  7 -&amp;gt; 2
-  7 -&amp;gt; 5
-  2 -&amp;gt; 8
-  2 -&amp;gt; 1
-  5 -&amp;gt; 6
-  5 -&amp;gt; 4
-}
-
-SiftDown2: {
-  label: &amp;#34;siftDown(2): 5 vs 6, 4 -&amp;gt; 4 is min&amp;#34;
-  7 -&amp;gt; 2
-  7 -&amp;gt; 4
-  2 -&amp;gt; 8
-  2 -&amp;gt; 1
-  4 -&amp;gt; 6
-  4 -&amp;gt; 5: {style.stroke: red}
-}
-
-SiftDown1: {
-  label: &amp;#34;siftDown(1): 2 vs 8, 1 -&amp;gt; 1 is min&amp;#34;
-  7 -&amp;gt; 1
-  7 -&amp;gt; 4
-  1 -&amp;gt; 8
-  1 -&amp;gt; 2: {style.stroke: red}
-  4 -&amp;gt; 6
-  4 -&amp;gt; 5
-}
-
-FinalHeap: {
-  label: &amp;#34;siftDown(0): 7 vs 1, 4 -&amp;gt; 1 min; then 7 vs 8, 2 -&amp;gt; 2 min&amp;#34;
-  1 -&amp;gt; 2
-  1 -&amp;gt; 4
-  2 -&amp;gt; 8
-  2 -&amp;gt; 7: {style.stroke: red}
-  4 -&amp;gt; 6
-  4 -&amp;gt; 5
-}
-
-Initial -&amp;gt; SiftDown2: &amp;#34;siftDown(2)&amp;#34;
-SiftDown2 -&amp;gt; SiftDown1: &amp;#34;siftDown(1)&amp;#34;
-SiftDown1 -&amp;gt; FinalHeap: &amp;#34;siftDown(0)&amp;#34;</code></pre></div><h2 id=go-heap-lib>Go Heap lib</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>import</span><span class=w> </span><span class=p>(</span><span class=w>
+</span></span></span></code></pre></div><h2 id=heap-building--sift-process>Heap Building & Sift Process</h2><p>堆的构建通常采用 <code>siftDown</code>（下沉）操作，从最后一个非叶子节点开始，自底向上进行堆化。其时间复杂度为 $O(n)$。</p><h3 id=siftdown-过程>SiftDown 过程</h3><ol><li>比较当前节点与左右子节点的值。</li><li>在三者中找到最小（小顶堆）或最大（大顶堆）的节点。</li><li>如果最小/最大节点不是当前节点，则交换它们，并对交换后的子节点递归执行 <code>siftDown</code>。</li></ol><h3 id=堆构建流程可视化-min-heap>堆构建流程可视化 (Min-Heap)</h3><p>以 <code>[7, 2, 5, 8, 1, 6, 4]</code> 为例，堆构建从最后一个非叶子节点（index = 2, value = 5）开始：</p><div class=d2-container id=d2-d7ba8449436e5dc4b3f78afd964f60af><div class=d2-controls><button class=d2-btn-fullscreen title=Fullscreen>⤢</button></div><div class=d2-img-container><img src=/diagrams/d2-d7ba8449436e5dc4b3f78afd964f60af.svg alt="D2 Diagram"></div><div class=watermark-overlay>qtopie.github.io</div></div><h2 id=go-heap-lib>Go Heap lib</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-go data-lang=go><span class=line><span class=cl><span class=kn>import</span><span class=w> </span><span class=p>(</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w>	</span><span class=s>&#34;container/heap&#34;</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=w>	</span><span class=s>&#34;fmt&#34;</span><span class=w>
 </span></span></span><span class=line><span class=cl><span class=p>)</span><span class=w>

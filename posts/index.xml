@@ -21,47 +21,22 @@
 &lt;h2 id="技术深挖sniphunt-为何如此之快"&gt;技术深挖：Sniphunt 为何如此之快？&lt;/h2&gt;
 &lt;p&gt;要达到接近 C/Rust 的搜索性能，Go 程序必须在 I/O 调度和内存管理上做精细化的手术。&lt;/p&gt;
 &lt;h3 id="核心架构三阶段异步流水线"&gt;核心架构：三阶段异步流水线&lt;/h3&gt;
-&lt;div class="d2-container" id="d2-5c65c02f35f09696702673469b193fbe"&gt;&lt;div class="d2-missing-hint"&gt;D2 SVG is missing (target: &lt;code&gt;diagrams/d2-5c65c02f35f09696702673469b193fbe.svg&lt;/code&gt;). Run &lt;code&gt;./scripts/generate-d2-diagrams.sh&lt;/code&gt; to regenerate diagrams.&lt;/div&gt;
- &lt;pre data-d2-missing="true" data-d2-target="diagrams/d2-5c65c02f35f09696702673469b193fbe.svg" data-d2-hash="5c65c02f35f09696702673469b193fbe" data-d2-theme="0" data-d2-len="752"&gt;&lt;code class="language-d2"&gt;direction: right
-File System: {
- shape: cylinder
-}
-
-Producer: {
- label: &amp;amp;#34;Producer (Walk)\ngodirwalk&amp;amp;#34;
- shape: package
-}
-
-TaskChannel: {
- label: &amp;amp;#34;Task Channel\n(Buffered)&amp;amp;#34;
- shape: queue
-}
-
-WorkerPool: {
- label: &amp;amp;#34;Worker Pool\n(NumCPU Workers)&amp;amp;#34;
- Worker 1: {shape: person}
- Worker N: {shape: person}
-}
-
-MatchChannel: {
- label: &amp;amp;#34;Match Channel\n(Buffered)&amp;amp;#34;
- shape: queue
-}
-
-Collector: {
- label: &amp;amp;#34;Collector\n(UI/Output)&amp;amp;#34;
- shape: circle
-}
-
-File System -&amp;amp;gt; Producer: &amp;amp;#34;Fast Scanning&amp;amp;#34;
-Producer -&amp;amp;gt; TaskChannel: &amp;amp;#34;File Paths&amp;amp;#34;
-TaskChannel -&amp;amp;gt; WorkerPool: &amp;amp;#34;Distribute&amp;amp;#34;
-WorkerPool -&amp;amp;gt; MatchChannel: &amp;amp;#34;Found Matches&amp;amp;#34;
-MatchChannel -&amp;amp;gt; Collector: &amp;amp;#34;Stream Results&amp;amp;#34;
-
-WorkerPool.Worker 1 -&amp;amp;gt; sync.Pool: &amp;amp;#34;Get/Put Buffer&amp;amp;#34;
-WorkerPool.Worker 1 -&amp;amp;gt; Regex: &amp;amp;#34;Literal Pre-filter&amp;amp;#34;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Sniphunt 将搜索任务拆分为三个独立阶段：&lt;/p&gt;</description></item><item><title>oget - 高性能现代化的并行网络下载器</title><link>https://qtopie.github.io/posts/oget/</link><pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/posts/oget/</guid><description>&lt;p&gt;项目地址: &lt;a href="https://github.com/qtopie/oget"&gt;github.com/qtopie/oget&lt;/a&gt;&lt;/p&gt;
+&lt;div class="d2-container" id="d2-5c65c02f35f09696702673469b193fbe"&gt;&lt;div class="d2-controls"&gt;
+ &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
+ &lt;/div&gt;
+ &lt;div class="d2-img-container"&gt;
+ &lt;img src="https://qtopie.github.io/diagrams/d2-5c65c02f35f09696702673469b193fbe.svg" alt="D2 Diagram"&gt;
+ &lt;/div&gt;
+ &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Sniphunt 将搜索任务拆分为三个独立阶段：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Producer (Walk)&lt;/strong&gt;：使用 &lt;code&gt;godirwalk&lt;/code&gt;。标准库 &lt;code&gt;filepath.Walk&lt;/code&gt; 的瓶颈在于每次都要调用 &lt;code&gt;os.Lstat&lt;/code&gt;，这在文件众多的目录下会产生海量的系统调用开销。&lt;code&gt;godirwalk&lt;/code&gt; 直接通过目录项（Dirent）读取信息，性能提升了一个量级。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Worker Pool&lt;/strong&gt;：通过缓冲 Channel 分发文件路径。Worker 数量默认为 CPU 核心数，确保 CPU 计算资源被占满。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Collector&lt;/strong&gt;：结果通过结果通道流式返回，避免了在内存中堆积海量搜索结果。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="避免-gc-噩梦syncpool-与-1mb-缓冲区"&gt;避免 GC 噩梦：sync.Pool 与 1MB 缓冲区&lt;/h3&gt;
+&lt;p&gt;在搜索 1GB 的日志文件时，如果简单的 &lt;code&gt;ioutil.ReadFile&lt;/code&gt;，会产生巨大的临时对象，导致 Go 的 GC 频繁触发，CPU 都在忙着回收内存。
+Sniphunt 使用了 &lt;code&gt;sync.Pool&lt;/code&gt; 维护了一个 &lt;strong&gt;1MB 大小的字节切片池&lt;/strong&gt;。每个 Worker 从池中借出缓冲区，处理完一个文件后再归还。这种方式实现了缓冲区的**零分配（Zero-allocation）**循环利用。&lt;/p&gt;</description></item><item><title>oget - 高性能现代化的并行网络下载器</title><link>https://qtopie.github.io/posts/oget/</link><pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/posts/oget/</guid><description>&lt;p&gt;项目地址: &lt;a href="https://github.com/qtopie/oget"&gt;github.com/qtopie/oget&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;我们以最广泛的http协议来讨论网络下载&lt;/p&gt;
 &lt;h2 id="安装-oget"&gt;安装 oget&lt;/h2&gt;
 &lt;h3 id="一键安装-go-用户"&gt;一键安装 (Go 用户)&lt;/h3&gt;
