@@ -88,11 +88,13 @@ process_file_and_track() {
     out_file="$OUT_DIR/d2-${hash}.svg"
 
     if [[ -f "$out_file" ]]; then
+      chmod 644 "$out_file"
       echo "skip: $file#$block_id (theme=$theme) -> $(basename "$out_file")"
       continue
     fi
 
     d2 --theme "$theme" "$normalized_file" "$out_file" >/dev/null
+    chmod 644 "$out_file"
     echo "gen:  $file#$block_id (theme=$theme) -> $(basename "$out_file")"
   done
 }
@@ -182,11 +184,13 @@ process_file_and_track() {
     fi
 
     if [[ -f "$out_file" ]]; then
+      chmod 644 "$out_file"
       echo "skip: $file#$block_id (theme=$theme) -> $(basename "$out_file")"
       continue
     fi
 
     d2 --theme "$theme" "$normalized_file" "$out_file" >/dev/null
+    chmod 644 "$out_file"
     echo "gen:  $file#$block_id (theme=$theme) -> $(basename "$out_file")"
   done
 }
