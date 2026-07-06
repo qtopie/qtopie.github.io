@@ -1,4 +1,263 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Notes on 1001問</title><link>https://qtopie.github.io/notes/</link><description>Recent content in Notes on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Fri, 29 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/notes/index.xml" rel="self" type="application/rss+xml"/><item><title>走进 P2P 网络：基于 libp2p 打造去中心化集群</title><link>https://qtopie.github.io/notes/distributed-computing/p2p/</link><pubDate>Fri, 29 May 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/distributed-computing/p2p/</guid><description>&lt;p&gt;在构建现代分布式系统、区块链或边缘计算平台时，去中心化网络拓扑通常是其核心支柱。从早期的 BitTorrent、IPFS 到如今的以太坊 2.0 (Ethereum 2.0)等知名项目，底层都依赖着强大的 P2P (Peer-to-Peer) 通信技术。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Notes on 1001問</title><link>https://qtopie.github.io/notes/</link><description>Recent content in Notes on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Mon, 06 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/notes/index.xml" rel="self" type="application/rss+xml"/><item><title>电商核心交易流程</title><link>https://qtopie.github.io/notes/system-design/ecommerce-trading/</link><pubDate>Mon, 06 Jul 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/system-design/ecommerce-trading/</guid><description>&lt;p&gt;这篇先统一我们对「电商核心交易链路」的认知。你列的范围非常准确，主干流程通常就是：导购 -&amp;gt; PDP -&amp;gt; 购物车 -&amp;gt; Checkout（风控/优惠/库存/订单）-&amp;gt; 支付 -&amp;gt; 履约 -&amp;gt; 逆向 -&amp;gt; 客服闭环。&lt;/p&gt;
+&lt;h2 id="全链路总览"&gt;全链路总览&lt;/h2&gt;
+
+&lt;div class="mermaid-block" data-mermaid-zoom="1"&gt;
+ &lt;div class="mermaid-toolbar"&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="zoom-in" aria-label="Zoom in"&gt;+&lt;/button&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="zoom-out" aria-label="Zoom out"&gt;-&lt;/button&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="reset" aria-label="Reset zoom"&gt;100%&lt;/button&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="fullscreen" aria-label="Toggle fullscreen"&gt;Full&lt;/button&gt;
+ &lt;/div&gt;
+ &lt;div class="mermaid mermaid-canvas"&gt;flowchart LR
+	A[导购/搜索/推荐] --&gt; B[PDP 商品详情]
+	B --&gt; C[加购/购物车]
+	C --&gt; D[Checkout]
+	D --&gt; D1[风控校验]
+	D --&gt; D2[优惠计算]
+	D --&gt; D3[库存预占/扣减]
+	D --&gt; D4[订单生成]
+	D4 --&gt; E[支付下单]
+	E --&gt; F{支付结果}
+	F --&gt;|成功| G[履约单生成]
+	G --&gt; H[仓配/发货/签收]
+	F --&gt;|失败或超时| I[关单/释放资源]
+	H --&gt; J[售后逆向]
+	J --&gt; K[退款/退货/换货]
+	H --&gt; L[客服触点]
+	J --&gt; L
+	L --&gt; M[体验与策略优化]
+	M --&gt; A&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 id="各环节目标和关键动作"&gt;各环节目标和关键动作&lt;/h2&gt;
+&lt;h3 id="导购"&gt;导购&lt;/h3&gt;
+&lt;p&gt;目标：让用户高效找到想买的商品并产生点击。&lt;/p&gt;</description></item><item><title>Dapr Agents</title><link>https://qtopie.github.io/notes/distributed-computing/dapr/agents/</link><pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/distributed-computing/dapr/agents/</guid><description>&lt;p&gt;&lt;strong&gt;Dapr（Distributed Application Runtime，分布式应用运行时）&lt;/strong&gt; 是由微软发起并开源、现属于 CNCF（云原生计算基金会）托管的孵化项目。它是一个可插拔的、事件驱动的运行时，旨在让开发人员能够轻松构建弹性、无状态和有状态的微服务应用程序。&lt;/p&gt;
+&lt;h2 id="为什么需要-dapr痛点与背景"&gt;为什么需要 Dapr？（痛点与背景）&lt;/h2&gt;
+&lt;p&gt;在传统的微服务架构开发中，开发人员通常会面临以下核心痛点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;分布式系统的复杂性（重复造轮子）：&lt;/strong&gt;
+构建微服务时，开发人员不得不处理许多共性问题，如服务间调用、状态管理、消息发布/订阅、配置管理、安全认证等。为了解决这些问题，通常需要引入各种 SDK 和第三方库（例如 Spring Cloud 组件、各种消息队列和数据库的特定 SDK）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;严重的厂商/技术栈绑定（Vendor Lock-in）：&lt;/strong&gt;
+如果代码中直接使用了 AWS DynamoDB 的 SDK 来管理状态，或者使用了 Azure Service Bus 来做消息队列，当企业决定将应用迁移到其他云平台（使用 Redis 或 RabbitMQ）时，需要重构大量的底层代码。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;多语言支持困难：&lt;/strong&gt;
+许多优秀的分布式框架（如 Spring Cloud）对 Java 支持极好，但如果团队想用 Go、Python 或 Node.js 编写部分微服务，就需要寻找对应语言的生态，或者面临底层基础设施无法复用的困境。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Dapr 的核心出发点是：&lt;strong&gt;让开发人员专注于业务逻辑，而将所有分布式的共性需求（如状态、消息、调用）抽离出来，交给运行时来处理。&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id="dapr-是什么核心架构与概念"&gt;Dapr 是什么？（核心架构与概念）&lt;/h2&gt;
+&lt;p&gt;Dapr 是一个面向开发人员的、具有自包含 API 的分布式应用运行时。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://v1-18.docs.dapr.io/images/overview.png" alt=""&gt;&lt;/p&gt;
+&lt;h3 id="核心设计模式sidecar"&gt;核心设计模式：Sidecar&lt;/h3&gt;
+&lt;p&gt;Dapr 采用 &lt;strong&gt;Sidecar 架构&lt;/strong&gt;。这意味着 Dapr 作为一个独立的进程（在 Kubernetes 中作为一个独立的容器）与应用程序并行运行。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;应用程序&lt;strong&gt;不需要&lt;/strong&gt;集成复杂的分布式 SDK，只需要通过轻量级的 &lt;strong&gt;HTTP&lt;/strong&gt; 或 &lt;strong&gt;gRPC&lt;/strong&gt; 标准协议与本地的 Dapr Sidecar 进行通信。&lt;/li&gt;
+&lt;li&gt;无论是 Java、Go、Python、.NET 还是 Rust，只要能发送 HTTP/gRPC 请求，就能直接使用 Dapr 的能力。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="d2-container" id="d2-e25c62dde6284fbbeb2d2128406cca96"&gt;&lt;div class="d2-controls"&gt;
+ &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
+ &lt;/div&gt;
+ &lt;div class="d2-img-container"&gt;
+ &lt;img src="https://qtopie.github.io/diagrams/d2-e25c62dde6284fbbeb2d2128406cca96.svg" alt="D2 Diagram"&gt;
+ &lt;/div&gt;
+ &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
+&lt;h3 id="核心概念building-blocks构建块与-components组件"&gt;核心概念：Building Blocks（构建块）与 Components（组件）&lt;/h3&gt;
+&lt;p&gt;Dapr 将分布式系统的能力抽象成了多个&lt;strong&gt;构建块（Building Blocks）&lt;/strong&gt;。每个构建块对外暴露统一、标准化的 API，而底层则由可插拔的组件（Components）来实现：&lt;/p&gt;</description></item><item><title>Milk-V Jupiter</title><link>https://qtopie.github.io/notes/iot/milkv-jupiter/</link><pubDate>Tue, 23 Jun 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/iot/milkv-jupiter/</guid><description>&lt;p&gt;本指南记录了在 Milk-V Jupiter（SpacemiT K1）开发板上，如何通过 sysfs 接口手动控制主板 FAN 接口的 PWM 风扇，包括硬件接线验证与手动送电测试。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="目录"&gt;目录&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="#1-%E8%83%8C%E6%99%AFbianbu-os-%E9%BB%98%E8%AE%A4%E4%BD%8E%E6%B8%A9%E4%B8%8D%E4%BE%9B%E7%94%B5"&gt;背景：Bianbu OS 默认低温不供电&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#2-%E7%A1%AE%E8%AE%A4%E9%A3%8E%E6%89%87%E5%AF%B9%E5%BA%94%E7%9A%84-hwmon-%E8%AE%BE%E5%A4%87%E8%8A%82%E7%82%B9"&gt;确认风扇对应的 hwmon 设备节点&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#3-%E6%89%8B%E5%8A%A8%E5%BC%BA%E9%80%81%E7%94%B5%E6%B5%8B%E8%AF%95"&gt;手动强送电测试&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#4-%E7%BB%93%E6%9E%9C%E6%8E%92%E6%9F%A5%E4%B8%8E%E4%B8%8B%E4%B8%80%E6%AD%A5%E5%8A%A8%E4%BD%9C"&gt;结果排查与下一步动作&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#5-%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"&gt;参考链接&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="1-背景bianbu-os-默认低温不供电"&gt;1. 背景：Bianbu OS 默认低温不供电&lt;/h2&gt;
+&lt;p&gt;Milk-V Jupiter 板载一个 FAN 接口（JST 1.25mm 4-Pin），默认由 SoC 的 PWM 控制器管理。Bianbu OS 的自动温控策略在 CPU/GPU 温度较低时（通常 &amp;lt; 50°C），&lt;strong&gt;不输出任何电压&lt;/strong&gt;，导致风扇完全静止。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[!WARNING]
+如果风扇完全不转，并不代表接线错误；&lt;strong&gt;请先进行手动送电测试以排除系统策略干扰&lt;/strong&gt;，再做结论。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id="2-确认风扇对应的-hwmon-设备节点"&gt;2. 确认风扇对应的 hwmon 设备节点&lt;/h2&gt;
+&lt;p&gt;通过遍历 udev hwmon 设备，可以快速确定哪个节点对应风扇：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;root@milkv-jupiter:~# &lt;span class="k"&gt;for&lt;/span&gt; i in /sys/class/hwmon/hwmon*&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;do&lt;/span&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; -n &lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$i&lt;/span&gt;&lt;span class="s2"&gt;: &amp;#34;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; cat &lt;span class="s2"&gt;&amp;#34;&lt;/span&gt;&lt;span class="nv"&gt;$i&lt;/span&gt;&lt;span class="s2"&gt;/name&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="k"&gt;done&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;/sys/class/hwmon/hwmon0: top_thermal
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;/sys/class/hwmon/hwmon1: gpu_thermal
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;/sys/class/hwmon/hwmon2: cluster0_thermal
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;/sys/class/hwmon/hwmon3: cluster1_thermal
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;/sys/class/hwmon/hwmon4: pwmfan
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th style="text-align: left"&gt;设备节点&lt;/th&gt;
+					&lt;th style="text-align: left"&gt;名称&lt;/th&gt;
+					&lt;th style="text-align: left"&gt;说明&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td style="text-align: left"&gt;&lt;code&gt;hwmon0&lt;/code&gt;&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;top_thermal&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;CPU 顶层温度传感器&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style="text-align: left"&gt;&lt;code&gt;hwmon1&lt;/code&gt;&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;gpu_thermal&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;GPU 温度传感器&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style="text-align: left"&gt;&lt;code&gt;hwmon2&lt;/code&gt;&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;cluster0_thermal&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;核心簇 0 温度传感器&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style="text-align: left"&gt;&lt;code&gt;hwmon3&lt;/code&gt;&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;cluster1_thermal&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;核心簇 1 温度传感器&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style="text-align: left"&gt;&lt;strong&gt;&lt;code&gt;hwmon4&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;&lt;strong&gt;pwmfan&lt;/strong&gt;&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;&lt;strong&gt;PWM 风扇控制器&lt;/strong&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;确认风扇的节点为 &lt;strong&gt;&lt;code&gt;/sys/class/hwmon/hwmon4&lt;/code&gt;&lt;/strong&gt;（名称是 &lt;code&gt;pwmfan&lt;/code&gt;）。&lt;/p&gt;</description></item><item><title>Milk-V Duo S 开发指南</title><link>https://qtopie.github.io/notes/iot/milkv-duo-s/</link><pubDate>Sat, 20 Jun 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/iot/milkv-duo-s/</guid><description>&lt;p&gt;本指南汇总了 Milk-V Duo S (基于 SG2000 主控芯片) 的硬件特性、系统烧录、基本配置及参考资源，帮助你快速上手开发。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="目录"&gt;目录&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="#1-%E4%BA%A7%E5%93%81%E6%A6%82%E8%BF%B0%E4%B8%8E%E7%A1%AC%E4%BB%B6%E5%AF%B9%E6%AF%94-overview"&gt;产品概述与硬件对比 (Overview)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#2-%E5%BC%80%E5%8F%91%E6%9D%BF%E6%8E%A5%E5%8F%A3%E4%B8%8E%E5%BC%95%E8%84%9A%E5%88%86%E9%85%8D-pinout"&gt;开发板接口与引脚分配 (Pinout)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#3-%E7%B3%BB%E7%BB%9F%E9%95%9C%E5%83%8F%E4%B8%8B%E8%BD%BD%E4%B8%8E%E7%83%A7%E5%BD%95-flashing-os"&gt;系统镜像下载与烧录 (Flashing OS)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#4-%E7%BD%91%E7%BB%9C%E8%BF%9E%E6%8E%A5%E4%B8%8E%E9%A6%96%E5%BC%80%E6%9C%BA%E9%85%8D%E7%BD%AE-initial-setup"&gt;网络连接与首开机配置 (Initial Setup)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#5-%E7%9B%B8%E5%85%B3%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5-references"&gt;相关参考链接 (References)&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="1-产品概述与硬件对比-overview"&gt;1. 产品概述与硬件对比 (Overview)&lt;/h2&gt;
+&lt;p&gt;Milk-V Duo S 是 Duo 系列的全面升级型号，升级了 &lt;strong&gt;SG2000&lt;/strong&gt; 主控芯片，拥有 &lt;strong&gt;512MB&lt;/strong&gt; 内存和更丰富的外部接口。其主要特性包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;双核/双架构启动&lt;/strong&gt;：支持 RISC-V 核心 (C906@1Ghz + C906@700MHz) 或 ARM 核心 (Cortex-A53@1GHz)（通过硬件拨码开关切换，不能同时运行）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;多媒体与视觉&lt;/strong&gt;：支持双路摄像头输入 (2x MIPI CSI 2-lane 5M@30fps) 以及 MIPI DSI 视频输出 (4-lane)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;网络与无线&lt;/strong&gt;：板载 100Mbps RJ45 以太网口（支持配合 PoE HAT 使用 PoE），可选板载 WI-FI 6 / BT 5。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;存储与接口&lt;/strong&gt;：板载 MicroSD 卡槽和 eMMC 贴片焊盘，配备 USB 2.0 Type-A HOST 接口与 Type-C 接口（可通过指令切换）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="duo-家族硬件规格对比"&gt;Duo 家族硬件规格对比&lt;/h3&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th style="text-align: left"&gt;规格&lt;/th&gt;
+					&lt;th style="text-align: left"&gt;Duo S&lt;/th&gt;
+					&lt;th style="text-align: left"&gt;Duo 256M&lt;/th&gt;
+					&lt;th style="text-align: left"&gt;Duo&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td style="text-align: left"&gt;&lt;strong&gt;主控 SoC&lt;/strong&gt;&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;&lt;strong&gt;SG2000&lt;/strong&gt;&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;SG2002&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;CVITEK CV1800B&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style="text-align: left"&gt;&lt;strong&gt;RISC-V 核心&lt;/strong&gt;&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;C906 @ 1GHz + C906 @ 700MHz&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;C906 @ 1GHz + C906 @ 700MHz&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;C906 @ 1GHz + C906 @ 700MHz&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style="text-align: left"&gt;&lt;strong&gt;ARM 核心&lt;/strong&gt;&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;&lt;strong&gt;Cortex-A53 @ 1GHz&lt;/strong&gt;&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;Cortex-A53 @ 1GHz&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;不支持 (N/A)&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style="text-align: left"&gt;&lt;strong&gt;MCU&lt;/strong&gt;&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;8051 @ 8KB SRAM&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;8051 @ 6KB SRAM&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;8051 @ 6KB SRAM&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style="text-align: left"&gt;&lt;strong&gt;内存 (SIP)&lt;/strong&gt;&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;&lt;strong&gt;512MB&lt;/strong&gt;&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;256MB&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;64MB&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style="text-align: left"&gt;&lt;strong&gt;算力 (TPU)&lt;/strong&gt;&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;0.5 TOPS @ INT8&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;&lt;strong&gt;1 TOPS @ INT8&lt;/strong&gt;&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;0.5 TOPS @ INT8&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style="text-align: left"&gt;&lt;strong&gt;存储扩展&lt;/strong&gt;&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;MicroSD / &lt;strong&gt;eMMC 焊盘&lt;/strong&gt;&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;MicroSD / 板载 SD NAND&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;MicroSD / 板载 SD NAND&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style="text-align: left"&gt;&lt;strong&gt;无线网络&lt;/strong&gt;&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;&lt;strong&gt;板载 WI-FI 6 / BT 5 (选配)&lt;/strong&gt;&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;不支持 (N/A)&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;不支持 (N/A)&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style="text-align: left"&gt;&lt;strong&gt;以太网&lt;/strong&gt;&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;&lt;strong&gt;板载 100M 网口 (RJ45)&lt;/strong&gt;&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;100M PHY (需外接板)&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;100M PHY (需外接板)&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style="text-align: left"&gt;&lt;strong&gt;USB 接口&lt;/strong&gt;&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;Type-C / &lt;strong&gt;USB 2.0 A口 HOST&lt;/strong&gt;&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;Type-C&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;Type-C&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style="text-align: left"&gt;&lt;strong&gt;摄像头接口&lt;/strong&gt;&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;&lt;strong&gt;2x MIPI CSI (2-lane)&lt;/strong&gt;&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;1x MIPI CSI (2-lane)&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;1x MIPI CSI (2-lane)&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style="text-align: left"&gt;&lt;strong&gt;显示输出&lt;/strong&gt;&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;&lt;strong&gt;MIPI DSI 4-lane (排针引出)&lt;/strong&gt;&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;不支持 (N/A)&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;不支持 (N/A)&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id="2-开发板接口与引脚分配-pinout"&gt;2. 开发板接口与引脚分配 (Pinout)&lt;/h2&gt;
+&lt;p&gt;Duo S 的 GPIO 逻辑电平在不同的排针上有所不同：&lt;/p&gt;</description></item><item><title>在 SpacemiT K1 开发板上烧录、安装与运行 Gemma 4 QAT 大模型</title><link>https://qtopie.github.io/notes/iot/run-gemma4-on-spacemit-k1/</link><pubDate>Sat, 20 Jun 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/iot/run-gemma4-on-spacemit-k1/</guid><description>&lt;p&gt;本指南总结了在进进时空（SpacemiT）K1 架构 RISC-V 芯片板卡（以 Milk-V Jupiter 16GB 版本为例）上，从系统烧录、硬件级加速交叉编译、网络优化，到最终跑通 Google Gemma 4 QAT 模型的完整全栈实战步骤。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="目录"&gt;目录&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="#1-%E7%B3%BB%E7%BB%9F%E7%83%A7%E5%BD%95-flashing-os"&gt;系统烧录 (Flashing OS)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#2-%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87%E4%B8%8E%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91-cross-compilation"&gt;环境准备与交叉编译 (Cross-Compilation)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#3-%E7%A1%AC%E4%BB%B6%E7%BA%A7%E5%8A%A0%E9%80%9F%E4%B8%8E%E7%B3%BB%E7%BB%9F%E4%BC%98%E5%8C%96-optimization"&gt;硬件级加速与系统优化 (Optimization)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#4-%E7%BD%91%E7%BB%9C%E4%BB%A3%E7%90%86%E4%B8%8E%E6%A8%A1%E5%9E%8B%E4%B8%8B%E8%BD%BD-model-download"&gt;网络代理与模型下载 (Model Download)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#5-%E6%A8%A1%E5%9E%8B%E8%BF%90%E8%A1%8C%E4%B8%8E%E5%8F%82%E6%95%B0%E8%B0%83%E4%BC%98-execution"&gt;模型运行与参数调优 (Execution)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#6-%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5-references"&gt;参考链接 (References)&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="1-系统烧录-flashing-os"&gt;1. 系统烧录 (Flashing OS)&lt;/h2&gt;
+&lt;p&gt;为了使 K1 芯片的向量（RVV 1.0）及矩阵扩展指令（IME）发挥最大功效，我们需要使用 Bianbu OS 官方提供的最新 minimal 镜像。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;下载官方系统包：&lt;/strong&gt;
+手动下载极简系统压缩包（例如 &lt;code&gt;milkv-jupiter-bianbu-24.04-minimal-k1-v2.1.1-release-2025-0305.zip&lt;/code&gt;）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;连接开发板：&lt;/strong&gt;
+使用 USB 转串口线或 DFU 连接电脑，使开发板进入刷机状态。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;启动烧录服务并写入镜像：&lt;/strong&gt;
+在 host 主机端运行官方刷机脚本 &lt;code&gt;./flashserver&lt;/code&gt;：
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;qtopierw@kylaptop:foo$ ./flashserver 
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 系统会列出当前可用的烧录端口：&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;--- Available ports:
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;--- 1: 3-8 &lt;span class="s1"&gt;&amp;#39;fastboot VID:PID=0x361c:0x1001 SER=dfu-device&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;--- Enter port index or full name: &lt;span class="m"&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;输入端口索引并确认，刷机程序会自动将 minimal bianbu 镜像烧录至开发板。完成后拔线重启，使用 &lt;code&gt;ssh root@spacemit-k1&lt;/code&gt; 连接至开发板（默认系统密码一般为 &lt;code&gt;gushijie&lt;/code&gt; 或配置项指定值）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="2-环境准备与交叉编译-cross-compilation"&gt;2. 环境准备与交叉编译 (Cross-Compilation)&lt;/h2&gt;
+&lt;p&gt;由于开发板本地的 GCC 编译器可能缺乏对 &lt;code&gt;zvfh&lt;/code&gt;（半精度浮点向量扩展）的完整编译支持，直接本地编译会导致硬件加速指令集丢失。因此，我们需要在 &lt;strong&gt;x86_64 主机&lt;/strong&gt; 上进行交叉编译。&lt;/p&gt;</description></item><item><title>走进 P2P 网络：基于 libp2p 打造去中心化集群</title><link>https://qtopie.github.io/notes/distributed-computing/p2p/</link><pubDate>Fri, 29 May 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/distributed-computing/p2p/</guid><description>&lt;p&gt;在构建现代分布式系统、区块链或边缘计算平台时，去中心化网络拓扑通常是其核心支柱。从早期的 BitTorrent、IPFS 到如今的以太坊 2.0 (Ethereum 2.0)等知名项目，底层都依赖着强大的 P2P (Peer-to-Peer) 通信技术。&lt;/p&gt;
 &lt;p&gt;本文将以 Go 语言生态中最主流的 P2P 框架 &lt;strong&gt;libp2p&lt;/strong&gt; 为主线，结合实际工程中的模块化实现，深入探讨 P2P 网络的底层原理、核心价值以及具体实践。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id="什么是-p2p-网络与-libp2p"&gt;什么是 P2P 网络与 libp2p&lt;/h2&gt;
@@ -1057,9 +1316,7 @@
 &lt;li&gt;&lt;strong&gt;监控工具&lt;/strong&gt;: &lt;code&gt;iostat&lt;/code&gt;, &lt;code&gt;iotop&lt;/code&gt;。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="pmap"&gt;pmap&lt;/h2&gt;
-&lt;p&gt;用于分析进程占用的内存详情。&lt;/p&gt;</description></item><item><title>Gemini CLI</title><link>https://qtopie.github.io/notes/ai/gemini-cli/</link><pubDate>Mon, 01 Dec 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/ai/gemini-cli/</guid><description>&lt;h2 id="怎么设置gemini-cli"&gt;怎么设置Gemini CLI?&lt;/h2&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;gemini mcp add -s user chrome-devtools npx chrome-devtools-mcp@latest
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>2025书单</title><link>https://qtopie.github.io/notes/book/2025-book-list/</link><pubDate>Sun, 30 Nov 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/book/2025-book-list/</guid><description>&lt;ul&gt;
+&lt;p&gt;用于分析进程占用的内存详情。&lt;/p&gt;</description></item><item><title>2025书单</title><link>https://qtopie.github.io/notes/book/2025-book-list/</link><pubDate>Sun, 30 Nov 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/book/2025-book-list/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;input checked="" disabled="" type="checkbox"&gt; 富爸爸穷爸爸 (二刷)&lt;/li&gt;
 &lt;li&gt;&lt;input checked="" disabled="" type="checkbox"&gt; 山海经密码 (三刷)&lt;/li&gt;
 &lt;li&gt;[] 草房子&lt;/li&gt;
@@ -3391,7 +3648,7 @@ CLH队列的设计让AQS能够高效地管理大量线程的同步等待。&lt;/
 &lt;p&gt;virtual memory
 swapfile&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;free&lt;/code&gt; command&lt;/p&gt;
-&lt;h2 id="io"&gt;I/O&lt;/h2&gt;</description></item><item><title/><link>https://qtopie.github.io/notes/system-design/http/fundamentals-of-distributed-systems/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/system-design/http/fundamentals-of-distributed-systems/</guid><description>&lt;p&gt;分布式系统（Distributed Systems）就像一个大型交响乐团：虽然乐手散布各处，但必须步调一致。为了让这些分散的机器能协同工作，计算机科学家们总结出了一套坚实的理论基础。&lt;/p&gt;
+&lt;h2 id="io"&gt;I/O&lt;/h2&gt;</description></item><item><title/><link>https://qtopie.github.io/notes/system-design/theorem/fundamentals-of-distributed-systems/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/system-design/theorem/fundamentals-of-distributed-systems/</guid><description>&lt;p&gt;分布式系统（Distributed Systems）就像一个大型交响乐团：虽然乐手散布各处，但必须步调一致。为了让这些分散的机器能协同工作，计算机科学家们总结出了一套坚实的理论基础。&lt;/p&gt;
 &lt;p&gt;以下是分布式系统中最重要的核心理论：&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3 id="1-cap-定理-cap-theorem"&gt;1. CAP 定理 (CAP Theorem)&lt;/h3&gt;
