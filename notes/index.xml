@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Notes on 1001問</title><link>https://qtopie.github.io/notes/</link><description>Recent content in Notes on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Mon, 06 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/notes/index.xml" rel="self" type="application/rss+xml"/><item><title>电商核心交易流程</title><link>https://qtopie.github.io/notes/system-design/ecommerce-trading/</link><pubDate>Mon, 06 Jul 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/system-design/ecommerce-trading/</guid><description>&lt;p&gt;这篇先统一我们对「电商核心交易链路」的认知。你列的范围非常准确，主干流程通常就是：导购 -&amp;gt; PDP -&amp;gt; 购物车 -&amp;gt; Checkout（风控/优惠/库存/订单）-&amp;gt; 支付 -&amp;gt; 履约 -&amp;gt; 逆向 -&amp;gt; 客服闭环。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Notes on 1001問</title><link>https://qtopie.github.io/notes/</link><description>Recent content in Notes on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Mon, 06 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/notes/index.xml" rel="self" type="application/rss+xml"/><item><title>电商核心交易流程</title><link>https://qtopie.github.io/notes/system-design/ecommerce-trading/</link><pubDate>Mon, 06 Jul 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/system-design/ecommerce-trading/</guid><description>&lt;p&gt;在电商业务中，核心交易链路（Trading Flow）是整个系统的骨干。它涵盖了用户从产生购买意向到最终完成交易、完成售后循环的端到端全生命周期。主干流程通常可以划分为：导购、商品详情页（PDP）、购物车、结算确认（Checkout）、支付、履约、逆向（售后）以及客服闭环。&lt;/p&gt;
 &lt;h2 id="全链路总览"&gt;全链路总览&lt;/h2&gt;
 
 &lt;div class="mermaid-block" data-mermaid-zoom="1"&gt;
@@ -8,29 +8,43 @@
  &lt;button class="mermaid-btn" type="button" data-action="reset" aria-label="Reset zoom"&gt;100%&lt;/button&gt;
  &lt;button class="mermaid-btn" type="button" data-action="fullscreen" aria-label="Toggle fullscreen"&gt;Full&lt;/button&gt;
  &lt;/div&gt;
- &lt;div class="mermaid mermaid-canvas"&gt;flowchart LR
-	A[导购/搜索/推荐] --&gt; B[PDP 商品详情]
-	B --&gt; C[加购/购物车]
-	C --&gt; D[Checkout]
-	D --&gt; D1[风控校验]
-	D --&gt; D2[优惠计算]
-	D --&gt; D3[库存预占/扣减]
-	D --&gt; D4[订单生成]
-	D4 --&gt; E[支付下单]
-	E --&gt; F{支付结果}
-	F --&gt;|成功| G[履约单生成]
-	G --&gt; H[仓配/发货/签收]
-	F --&gt;|失败或超时| I[关单/释放资源]
-	H --&gt; J[售后逆向]
-	J --&gt; K[退款/退货/换货]
-	H --&gt; L[客服触点]
-	J --&gt; L
-	L --&gt; M[体验与策略优化]
-	M --&gt; A&lt;/div&gt;
+ &lt;div class="mermaid mermaid-canvas"&gt;flowchart TB
+ subgraph 前台导购域 ["前台导购域"]
+ A[搜索/推荐/会场] --&gt; B[PDP 商品详情]
+ end
+
+ subgraph 核心交易域 ["核心交易与结算域"]
+ B --&gt; C[加购/购物车]
+ C --&gt; D[Checkout 结算中心]
+ 
+ subgraph Checkout 内部逻辑 ["Checkout 提单校验与生成"]
+ D --&gt; D1[风控合规校验]
+ D --&gt; D2[复杂优惠计算]
+ D --&gt; D3[库存预占/扣减]
+ D --&gt; D4[订单生成/快照固化]
+ end
+ 
+ D4 --&gt; E[收银台与支付]
+ end
+
+ subgraph 履约与售后域 ["履约与逆向履约域"]
+ E --&gt; F{支付结果判断}
+ F --&gt;|成功| G[履约路由与WMS下发]
+ G --&gt; H[仓配/发货/签收]
+ F --&gt;|失败或超时| I[关单/释放资源]
+ 
+ H --&gt; J[售后逆向流程]
+ J --&gt; K[退款/退货/换货]
+ H --&gt; L[客服与工单触点]
+ J --&gt; L
+ end
+
+ L -.-&gt;|数据回流与策略反哺| A&lt;/div&gt;
 &lt;/div&gt;
 &lt;h2 id="各环节目标和关键动作"&gt;各环节目标和关键动作&lt;/h2&gt;
 &lt;h3 id="导购"&gt;导购&lt;/h3&gt;
-&lt;p&gt;目标：让用户高效找到想买的商品并产生点击。&lt;/p&gt;</description></item><item><title>Dapr Agents</title><link>https://qtopie.github.io/notes/distributed-computing/dapr/agents/</link><pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/distributed-computing/dapr/agents/</guid><description>&lt;p&gt;&lt;strong&gt;Dapr（Distributed Application Runtime，分布式应用运行时）&lt;/strong&gt; 是由微软发起并开源、现属于 CNCF（云原生计算基金会）托管的孵化项目。它是一个可插拔的、事件驱动的运行时，旨在让开发人员能够轻松构建弹性、无状态和有状态的微服务应用程序。&lt;/p&gt;
+&lt;p&gt;目标：让用户高效找到想买的商品并产生点击。
+关键动作：&lt;/p&gt;</description></item><item><title>Dapr Agents</title><link>https://qtopie.github.io/notes/distributed-computing/dapr/agents/</link><pubDate>Sun, 28 Jun 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/distributed-computing/dapr/agents/</guid><description>&lt;p&gt;&lt;strong&gt;Dapr（Distributed Application Runtime，分布式应用运行时）&lt;/strong&gt; 是由微软发起并开源、现属于 CNCF（云原生计算基金会）托管的孵化项目。它是一个可插拔的、事件驱动的运行时，旨在让开发人员能够轻松构建弹性、无状态和有状态的微服务应用程序。&lt;/p&gt;
 &lt;h2 id="为什么需要-dapr痛点与背景"&gt;为什么需要 Dapr？（痛点与背景）&lt;/h2&gt;
 &lt;p&gt;在传统的微服务架构开发中，开发人员通常会面临以下核心痛点：&lt;/p&gt;
 &lt;ul&gt;
