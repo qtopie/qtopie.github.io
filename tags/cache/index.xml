@@ -57,8 +57,10 @@
  &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
  &lt;/div&gt;
  &lt;div class="d2-img-container"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-aaa0706c0f14473fa0397db3ee8b4727.svg" alt="D2 Diagram"&gt;
+ &lt;div style="position: relative; display: inline-flex; align-items: center; justify-content: center; max-width: 100%;"&gt;
+ &lt;img src="https://qtopie.github.io/diagrams/d2-aaa0706c0f14473fa0397db3ee8b4727.svg" alt="D2 Diagram" style="max-width: 100%; height: auto;"&gt;
+ &lt;div class="watermark-overlay" style="pointer-events: none; position: absolute; bottom: 5px; right: 5px; opacity: 0.4; font-size: 11px; color: #999;"&gt;qtopie.github.io&lt;/div&gt;
  &lt;/div&gt;
- &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
+ &lt;/div&gt;&lt;/div&gt;
 &lt;h5 id="dict--hashtable-hash"&gt;Dict / Hashtable (Hash)&lt;/h5&gt;
 &lt;p&gt;Hash、Set 在元素变多后会转为哈希表实现。Redis 通过&lt;strong&gt;渐进式 rehash&lt;/strong&gt;把扩容成本摊到多次请求中，避免一次性卡顿。&lt;/p&gt;</description></item></channel></rss>

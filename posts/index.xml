@@ -25,18 +25,12 @@
  &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
  &lt;/div&gt;
  &lt;div class="d2-img-container"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-5c65c02f35f09696702673469b193fbe.svg" alt="D2 Diagram"&gt;
+ &lt;div style="position: relative; display: inline-flex; align-items: center; justify-content: center; max-width: 100%;"&gt;
+ &lt;img src="https://qtopie.github.io/diagrams/d2-5c65c02f35f09696702673469b193fbe.svg" alt="D2 Diagram" style="max-width: 100%; height: auto;"&gt;
+ &lt;div class="watermark-overlay" style="pointer-events: none; position: absolute; bottom: 5px; right: 5px; opacity: 0.4; font-size: 11px; color: #999;"&gt;qtopie.github.io&lt;/div&gt;
  &lt;/div&gt;
- &lt;div class="watermark-overlay"&gt;qtopie.github.io&lt;/div&gt;&lt;/div&gt;
-&lt;p&gt;Sniphunt 将搜索任务拆分为三个独立阶段：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Producer (Walk)&lt;/strong&gt;：使用 &lt;code&gt;godirwalk&lt;/code&gt;。标准库 &lt;code&gt;filepath.Walk&lt;/code&gt; 的瓶颈在于每次都要调用 &lt;code&gt;os.Lstat&lt;/code&gt;，这在文件众多的目录下会产生海量的系统调用开销。&lt;code&gt;godirwalk&lt;/code&gt; 直接通过目录项（Dirent）读取信息，性能提升了一个量级。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Worker Pool&lt;/strong&gt;：通过缓冲 Channel 分发文件路径。Worker 数量默认为 CPU 核心数，确保 CPU 计算资源被占满。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Collector&lt;/strong&gt;：结果通过结果通道流式返回，避免了在内存中堆积海量搜索结果。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="避免-gc-噩梦syncpool-与-1mb-缓冲区"&gt;避免 GC 噩梦：sync.Pool 与 1MB 缓冲区&lt;/h3&gt;
-&lt;p&gt;在搜索 1GB 的日志文件时，如果简单的 &lt;code&gt;ioutil.ReadFile&lt;/code&gt;，会产生巨大的临时对象，导致 Go 的 GC 频繁触发，CPU 都在忙着回收内存。
-Sniphunt 使用了 &lt;code&gt;sync.Pool&lt;/code&gt; 维护了一个 &lt;strong&gt;1MB 大小的字节切片池&lt;/strong&gt;。每个 Worker 从池中借出缓冲区，处理完一个文件后再归还。这种方式实现了缓冲区的**零分配（Zero-allocation）**循环利用。&lt;/p&gt;</description></item><item><title>oget - 高性能现代化的并行网络下载器</title><link>https://qtopie.github.io/posts/oget/</link><pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/posts/oget/</guid><description>&lt;p&gt;项目地址: &lt;a href="https://github.com/qtopie/oget"&gt;github.com/qtopie/oget&lt;/a&gt;&lt;/p&gt;
+ &lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;Sniphunt 将搜索任务拆分为三个独立阶段：&lt;/p&gt;</description></item><item><title>oget - 高性能现代化的并行网络下载器</title><link>https://qtopie.github.io/posts/oget/</link><pubDate>Thu, 23 Apr 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/posts/oget/</guid><description>&lt;p&gt;项目地址: &lt;a href="https://github.com/qtopie/oget"&gt;github.com/qtopie/oget&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;我们以最广泛的http协议来讨论网络下载&lt;/p&gt;
 &lt;h2 id="安装-oget"&gt;安装 oget&lt;/h2&gt;
 &lt;h3 id="一键安装-go-用户"&gt;一键安装 (Go 用户)&lt;/h3&gt;

@@ -1,4 +1,4 @@
-<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Java程序是怎么运行的? | 1001問</title><link rel=stylesheet href=/css/main.min.bb622114f2d72e921fd1ed4b881eec07e0fbe5a004f0fb53ca73b0b77a1ce4f5.css integrity="sha256-u2IhFPLXLpIf0e1LiB7sB+D75aAE8PtTynOwt3oc5PU=" crossorigin=anonymous><link rel=stylesheet href=/css/page.min.02e217f99d7a89957b08ff7502af01836458f1a8a4cebc2708395d470878cbac.css integrity="sha256-AuIX+Z16iZV7CP91Aq8Bg2RY8aikzrwnCDldRwh4y6w=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.e114b8cc38f57d520f373580c935a518bc6afd6dec4f1d682365cdbcf5c8218a.css><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css crossorigin=anonymous referrerpolicy=no-referrer><script src=/js/panzoom.min.d1dc01e4727734526981f6101210bf3b5e528e53d530affbaf74a153c6678cd5.js integrity="sha256-0dwB5HJ3NFJpgfYQEhC/O15SjlPVMK/7r3ShU8ZnjNU=" crossorigin=anonymous defer></script><script src=/js/toc.min.87636f25caf644980403a5c1ce8b0812cfd10d1e53c08f181547966799ceccdb.js integrity="sha256-h2NvJcr2RJgEA6XBzosIEs/RDR5TwI8YFUeWZ5nOzNs=" crossorigin=anonymous type=module defer></script><script src=/js/copy-code.min.3bea0de4cfe8670f94a5d75c177f07b58fc90178efdea7f2a21449798d75b2c9.js integrity="sha256-O+oN5M/oZw+UpddcF38HtY/JAXjv3qfyohRJeY11ssk=" crossorigin=anonymous defer></script><script defer src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js crossorigin=anonymous referrerpolicy=no-referrer></script><script defer src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js crossorigin=anonymous referrerpolicy=no-referrer onload='renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],throwOnError:!1})'></script><script src=/js/katex-block.min.2cf531bbcc318aadf5661baa2d0987ab5cb4daef473e108b1da714a37cff0b25.js integrity="sha256-LPUxu8wxiq31ZhuqLQmHq1y02u9HPhCLHacUo3z/CyU=" crossorigin=anonymous defer></script></head><body><header><nav><a href=/><h1>1001問</h1></a><div id=react-search class=search-root aria-label="Site Search"></div></nav></header><main><div class=sidebar><section class=toc><nav id=TableOfContents><ul><li><a href=#总览>总览</a></li><li><a href=#主流程>主流程</a><ul><li><a href=#源码编译javac>源码编译（javac）</a></li><li><a href=#类加载class-loading>类加载（Class Loading）</a></li><li><a href=#解释执行与jit编译>解释执行与JIT编译</a></li><li><a href=#运行期优化jit优化>运行期优化（JIT优化）</a></li><li><a href=#执行时内存与gc>执行时内存与GC</a></li></ul></li><li><a href=#关键细节>关键细节</a><ul><li><a href=#类加载触发条件主动使用>类加载触发条件（主动使用）</a></li><li><a href=#字节码验证与链接细节>字节码验证与链接细节</a></li></ul></li><li><a href=#执行与优化>执行与优化</a><ul><li><a href=#c1c2与分层编译>C1/C2与分层编译</a></li><li><a href=#常见jit优化案例>常见JIT优化案例</a></li><li><a href=#反优化deoptimization>反优化（Deoptimization）</a></li></ul></li><li><a href=#cpu与调度视角>CPU与调度视角</a><ul><li><a href=#从cpu视角理解执行流程>从CPU视角理解执行流程</a></li><li><a href=#jvm层面的cpu调度视角>JVM层面的CPU调度视角</a></li></ul></li><li><a href=#运行期监控与排查建议>运行期监控与排查建议</a></li><li><a href=#相关知识>相关知识</a><ul><li><a href=#被动引用不会初始化与懒加载实现>被动引用不会初始化与懒加载实现</a></li><li><a href=#双亲委派parents-delegate>双亲委派(parents delegate)</a></li></ul></li></ul></nav></section></div><article id=content><div class=metadata><h1>Java程序是怎么运行的?</h1><time datetime=2026-02-08T00:00:00+00:00>February 8, 2026</time><div class=taxonomy></div></div><h2 id=总览>总览</h2><p>从Java源码到JVM执行，大致分为“编译 -> 类加载 -> 字节码验证与链接 -> 解释/编译执行 -> 运行期优化”几个阶段。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>.java -&gt; javac -&gt; .class -&gt; 类加载/验证/链接/初始化 -&gt; 解释执行 + JIT -&gt; 运行期优化 + GC
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>Java程序是怎么运行的? | 1001問</title><link rel=stylesheet href=/css/main.min.7d9434ce96b7b40755e79a518f8174eb8b77ee9590eec2dc8d7583f61cdef6de.css integrity="sha256-fZQ0zpa3tAdV55pRj4F064t37pWQ7sLcjXWD9hze9t4=" crossorigin=anonymous><link rel=stylesheet href=/css/page.min.71f90658007759f55af688b2b46b55268f52bf164c53c1606f8981472c325c53.css integrity="sha256-cfkGWAB3WfVa9oiytGtVJo9SvxZMU8Fgb4mBRywyXFM=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.e114b8cc38f57d520f373580c935a518bc6afd6dec4f1d682365cdbcf5c8218a.css><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css crossorigin=anonymous referrerpolicy=no-referrer><script src=/js/panzoom.min.d1dc01e4727734526981f6101210bf3b5e528e53d530affbaf74a153c6678cd5.js integrity="sha256-0dwB5HJ3NFJpgfYQEhC/O15SjlPVMK/7r3ShU8ZnjNU=" crossorigin=anonymous defer></script><script src=/js/toc.min.87636f25caf644980403a5c1ce8b0812cfd10d1e53c08f181547966799ceccdb.js integrity="sha256-h2NvJcr2RJgEA6XBzosIEs/RDR5TwI8YFUeWZ5nOzNs=" crossorigin=anonymous type=module defer></script><script src=/js/copy-code.min.3bea0de4cfe8670f94a5d75c177f07b58fc90178efdea7f2a21449798d75b2c9.js integrity="sha256-O+oN5M/oZw+UpddcF38HtY/JAXjv3qfyohRJeY11ssk=" crossorigin=anonymous defer></script><script defer src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js crossorigin=anonymous referrerpolicy=no-referrer></script><script defer src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js crossorigin=anonymous referrerpolicy=no-referrer onload='renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],throwOnError:!1})'></script><script src=/js/katex-block.min.2cf531bbcc318aadf5661baa2d0987ab5cb4daef473e108b1da714a37cff0b25.js integrity="sha256-LPUxu8wxiq31ZhuqLQmHq1y02u9HPhCLHacUo3z/CyU=" crossorigin=anonymous defer></script></head><body><header><nav><a href=/><h1>1001問</h1></a><div id=react-search class=search-root aria-label="Site Search"></div></nav></header><main><div class=sidebar><section class=toc><div class=toc-title>目录</div><nav id=TableOfContents><ul><li><a href=#总览>总览</a></li><li><a href=#主流程>主流程</a><ul><li><a href=#源码编译javac>源码编译（javac）</a></li><li><a href=#类加载class-loading>类加载（Class Loading）</a></li><li><a href=#解释执行与jit编译>解释执行与JIT编译</a></li><li><a href=#运行期优化jit优化>运行期优化（JIT优化）</a></li><li><a href=#执行时内存与gc>执行时内存与GC</a></li></ul></li><li><a href=#关键细节>关键细节</a><ul><li><a href=#类加载触发条件主动使用>类加载触发条件（主动使用）</a></li><li><a href=#字节码验证与链接细节>字节码验证与链接细节</a></li></ul></li><li><a href=#执行与优化>执行与优化</a><ul><li><a href=#c1c2与分层编译>C1/C2与分层编译</a></li><li><a href=#常见jit优化案例>常见JIT优化案例</a></li><li><a href=#反优化deoptimization>反优化（Deoptimization）</a></li></ul></li><li><a href=#cpu与调度视角>CPU与调度视角</a><ul><li><a href=#从cpu视角理解执行流程>从CPU视角理解执行流程</a></li><li><a href=#jvm层面的cpu调度视角>JVM层面的CPU调度视角</a></li></ul></li><li><a href=#运行期监控与排查建议>运行期监控与排查建议</a></li><li><a href=#相关知识>相关知识</a><ul><li><a href=#被动引用不会初始化与懒加载实现>被动引用不会初始化与懒加载实现</a></li><li><a href=#双亲委派parents-delegate>双亲委派(parents delegate)</a></li></ul></li></ul></nav></section></div><article id=content><div class=metadata><h1>Java程序是怎么运行的?</h1><time datetime=2026-02-08T00:00:00+00:00>February 8, 2026</time><div class=taxonomy></div></div><h2 id=总览>总览</h2><p>从Java源码到JVM执行，大致分为“编译 -> 类加载 -> 字节码验证与链接 -> 解释/编译执行 -> 运行期优化”几个阶段。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>.java -&gt; javac -&gt; .class -&gt; 类加载/验证/链接/初始化 -&gt; 解释执行 + JIT -&gt; 运行期优化 + GC
 </span></span></code></pre></div><div class=mermaid-block data-mermaid-zoom=1><div class=mermaid-toolbar><button class=mermaid-btn type=button data-action=zoom-in aria-label="Zoom in">+</button>
 <button class=mermaid-btn type=button data-action=zoom-out aria-label="Zoom out">-</button>
 <button class=mermaid-btn type=button data-action=reset aria-label="Reset zoom">100%</button>
@@ -204,7 +204,8 @@ else fall back
 App->>CP: findClass(name)
 CP-->>App: class bytes
 App-->>App: defineClass
-end</div></div><h4 id=解析与链接时机>解析与链接时机</h4><p>类加载包含：加载（Loading）-> 验证（Verification）-> 准备（Preparation）-> 解析（Resolution）-> 初始化（Initialization）。</p><ul><li><strong>解析可延迟</strong>：JVM 可能在首次使用时才解析符号引用（惰性解析）。</li><li><strong>初始化是按需触发</strong>：只有“主动使用”才会执行 <code>&lt;clinit></code>。</li></ul><h4 id=常见打破委派的场景>常见“打破委派”的场景</h4><ul><li><strong>SPI/ServiceLoader</strong>：由子加载器加载实现类，父加载器加载接口，通常依赖上下文类加载器（TCCL）。</li><li><strong>容器化环境</strong>：如应用服务器、插件系统，为隔离不同应用使用自定义类加载器。</li></ul><blockquote><p>参考 <a href=https://docs.osgi.org/javadoc/r4v43/core/org/osgi/framework/Bundle.html>https://docs.osgi.org/javadoc/r4v43/core/org/osgi/framework/Bundle.html</a></p></blockquote><ul><li><strong>热部署/隔离</strong>：通过不同 ClassLoader 实现版本隔离。</li></ul><h4 id=上下文类加载器tccl>上下文类加载器（TCCL）</h4><p>为了解决“父加载器看不到子加载器资源”的问题，Java 引入了线程上下文类加载器：</p><ul><li>默认是 <code>Application ClassLoader</code>。</li><li>框架（如 JDBC、JNDI、SPI）常用 TCCL 来加载实现类。</li></ul><h4 id=类卸载与元空间>类卸载与元空间</h4><ul><li>类卸载发生在对应的 <code>ClassLoader</code> 不可达且无存活类实例时。</li><li>元空间（Metaspace）存放类元数据，GC 可回收对应空间。</li></ul><h4 id=java-11-常见观察手段>Java 11 常见观察手段</h4><ul><li><code>-XX:+TraceClassLoading</code>：观察类加载</li><li><code>-XX:+TraceClassUnloading</code>：观察类卸载</li><li><code>-Xlog:class+load=info</code>：JDK 9+ 统一日志系统</li></ul></article><div id=react-app-components data-post-id=7967d6ad533d9bb6e95ccef98f268671></div><button class=mobile-toc-trigger aria-controls=mobile-toc aria-expanded=false title=Index>☰</button><div class=mobile-toc-overlay hidden></div><div id=mobile-toc class=mobile-toc-drawer aria-hidden=true role=dialog aria-label=Index><div class=mobile-toc-header><button class=mobile-toc-close aria-label=close>×</button></div><nav class=mobile-toc-body><div class=mobile-toc-list></div></nav><div class=mobile-safe-area-spacer></div></div><script type=module src=/react/page.bundle.js></script></main><footer><div class=copyright><small>Made with <span style=color:#e25555>&#9829;</span> in Guangzhou by
+end</div></div><h4 id=解析与链接时机>解析与链接时机</h4><p>类加载包含：加载（Loading）-> 验证（Verification）-> 准备（Preparation）-> 解析（Resolution）-> 初始化（Initialization）。</p><ul><li><strong>解析可延迟</strong>：JVM 可能在首次使用时才解析符号引用（惰性解析）。</li><li><strong>初始化是按需触发</strong>：只有“主动使用”才会执行 <code>&lt;clinit></code>。</li></ul><h4 id=常见打破委派的场景>常见“打破委派”的场景</h4><ul><li><strong>SPI/ServiceLoader</strong>：由子加载器加载实现类，父加载器加载接口，通常依赖上下文类加载器（TCCL）。</li><li><strong>容器化环境</strong>：如应用服务器、插件系统，为隔离不同应用使用自定义类加载器。</li></ul><blockquote><p>参考 <a href=https://docs.osgi.org/javadoc/r4v43/core/org/osgi/framework/Bundle.html>https://docs.osgi.org/javadoc/r4v43/core/org/osgi/framework/Bundle.html</a></p></blockquote><ul><li><strong>热部署/隔离</strong>：通过不同 ClassLoader 实现版本隔离。</li></ul><h4 id=上下文类加载器tccl>上下文类加载器（TCCL）</h4><p>为了解决“父加载器看不到子加载器资源”的问题，Java 引入了线程上下文类加载器：</p><ul><li>默认是 <code>Application ClassLoader</code>。</li><li>框架（如 JDBC、JNDI、SPI）常用 TCCL 来加载实现类。</li></ul><h4 id=类卸载与元空间>类卸载与元空间</h4><ul><li>类卸载发生在对应的 <code>ClassLoader</code> 不可达且无存活类实例时。</li><li>元空间（Metaspace）存放类元数据，GC 可回收对应空间。</li></ul><h4 id=java-11-常见观察手段>Java 11 常见观察手段</h4><ul><li><code>-XX:+TraceClassLoading</code>：观察类加载</li><li><code>-XX:+TraceClassUnloading</code>：观察类卸载</li><li><code>-Xlog:class+load=info</code>：JDK 9+ 统一日志系统</li></ul></article><div id=react-app-components data-post-id=7967d6ad533d9bb6e95ccef98f268671></div><button class=mobile-toc-trigger aria-controls=mobile-toc aria-expanded=false title=目录>☰</button><div class=mobile-toc-overlay hidden></div><div id=mobile-toc class=mobile-toc-drawer aria-hidden=true role=dialog aria-label=目录><div class=mobile-toc-header><span class=mobile-toc-title>目录</span>
+<button class=mobile-toc-close aria-label=关闭>×</button></div><nav class=mobile-toc-body><div class=mobile-toc-list></div></nav><div class=mobile-safe-area-spacer></div></div><script type=module src=/react/page.bundle.js></script></main><footer><div class=copyright><small>Made with <span style=color:#e25555>&#9829;</span> in Guangzhou by
 ©<a href=https://github.com/qtopie>qtopie</a> 2026
 </small><small>Posts licensed under <a href=https://creativecommons.org/licenses/by/4.0/legalcode>CC BY 4.0</small></div><div><script type=module src=/react/base.bundle.js></script><script type=module>
       (async ()=>{
@@ -246,14 +247,45 @@ end</div></div><h4 id=解析与链接时机>解析与链接时机</h4><p>类加�
               });
             };
 
+            let pz = null;
             const onFullscreenChange = () => {
-              const isFullscreen = document.fullscreenElement === block;
+              const isFullscreen = document.fullscreenElement === block || block.classList.contains('is-fullscreen');
               block.classList.toggle('is-fullscreen', isFullscreen);
               const fsBtn = toolbar.querySelector('[data-action="fullscreen"]');
               if (fsBtn) {
                 fsBtn.textContent = isFullscreen ? 'Exit' : 'Full';
                 fsBtn.setAttribute('aria-label', isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen');
               }
+
+              ensureSvg((svg) => {
+                if (isFullscreen) {
+                  if (window.panzoom && !pz) {
+                    svg.style.transformOrigin = '50% 50%';
+                    pz = window.panzoom(svg, {
+                      maxZoom: 3,
+                      minZoom: 0.5,
+                      initialZoom: 1,
+                      bounds: false,
+                      boundsPadding: 0.1
+                    });
+                    pz.on('transform', () => {
+                      const transform = pz.getTransform();
+                      const resetBtn = toolbar.querySelector('[data-action="reset"]');
+                      if (resetBtn) resetBtn.textContent = `${Math.round(transform.scale * 100)}%`;
+                    });
+                  }
+                } else {
+                  if (pz) {
+                    pz.dispose();
+                    pz = null;
+                  }
+                  svg.style.transform = '';
+                  svg.style.transformOrigin = '';
+                  const resetBtn = toolbar.querySelector('[data-action="reset"]');
+                  if (resetBtn) resetBtn.textContent = '100%';
+                  block.dataset.mermaidZoom = '1';
+                }
+              });
             };
 
             document.addEventListener('fullscreenchange', onFullscreenChange);
@@ -263,17 +295,39 @@ end</div></div><h4 id=解析与链接时机>解析与链接时机</h4><p>类加�
               if (!(target instanceof HTMLElement)) return;
               const action = target.getAttribute('data-action');
               if (!action) return;
-              const currentZoom = Number(block.dataset.mermaidZoom || '1');
-              if (action === 'zoom-in') return setZoom(currentZoom + 0.1);
-              if (action === 'zoom-out') return setZoom(currentZoom - 0.1);
-              if (action === 'reset') return setZoom(1);
-              if (action === 'fullscreen') {
-                if (document.fullscreenElement === block) {
-                  document.exitFullscreen && document.exitFullscreen();
-                } else if (block.requestFullscreen) {
-                  block.requestFullscreen();
-                } else {
-                  block.classList.toggle('is-fullscreen');
+
+              if (pz) {
+                const transform = pz.getTransform();
+                const rect = canvas.getBoundingClientRect();
+                const cx = rect.left + rect.width / 2;
+                const cy = rect.top + rect.height / 2;
+                if (action === 'zoom-in') {
+                  pz.smoothZoom(cx, cy, 1.25);
+                } else if (action === 'zoom-out') {
+                  pz.smoothZoom(cx, cy, 0.8);
+                } else if (action === 'reset') {
+                  pz.moveTo(0, 0);
+                  pz.zoomAbs(0, 0, 1);
+                } else if (action === 'fullscreen') {
+                  if (document.fullscreenElement === block) {
+                    document.exitFullscreen && document.exitFullscreen();
+                  } else {
+                    block.classList.remove('is-fullscreen');
+                    onFullscreenChange();
+                  }
+                }
+              } else {
+                const currentZoom = Number(block.dataset.mermaidZoom || '1');
+                if (action === 'zoom-in') return setZoom(currentZoom + 0.1);
+                if (action === 'zoom-out') return setZoom(currentZoom - 0.1);
+                if (action === 'reset') return setZoom(1);
+                if (action === 'fullscreen') {
+                  if (block.requestFullscreen) {
+                    block.requestFullscreen();
+                  } else {
+                    block.classList.add('is-fullscreen');
+                    onFullscreenChange();
+                  }
                 }
               }
             });
