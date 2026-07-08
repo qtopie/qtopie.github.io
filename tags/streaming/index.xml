@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>AI on 1001問</title><link>https://qtopie.github.io/tags/ai/</link><description>Recent content in AI on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Wed, 08 Jul 2026 12:59:00 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/ai/index.xml" rel="self" type="application/rss+xml"/><item><title>Go + Wails 3 打造极致流畅、高可靠的 AI 流式对话系统设计方案</title><link>https://qtopie.github.io/notes/ai/go-wails3-streaming-chat/</link><pubDate>Wed, 08 Jul 2026 12:59:00 +0800</pubDate><guid>https://qtopie.github.io/notes/ai/go-wails3-streaming-chat/</guid><description>&lt;p&gt;在构建桌面端 AI 助手时，实现流式对话（Streaming Chat）几乎是标配功能。然而，要在桌面应用（例如使用 &lt;strong&gt;Go + Wails 3 + React&lt;/strong&gt; 技术栈）中做到&lt;strong&gt;极致流畅（无卡顿、高帧率）&lt;strong&gt;与&lt;/strong&gt;数据 100% 准确（无字面残缺、无版本覆盖冲突、支持异步长尾更新）&lt;/strong&gt;，其实面临着不少工程挑战。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Streaming on 1001問</title><link>https://qtopie.github.io/tags/streaming/</link><description>Recent content in Streaming on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Wed, 08 Jul 2026 12:59:00 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/streaming/index.xml" rel="self" type="application/rss+xml"/><item><title>Go + Wails 3 打造极致流畅、高可靠的 AI 流式对话系统设计方案</title><link>https://qtopie.github.io/notes/ai/go-wails3-streaming-chat/</link><pubDate>Wed, 08 Jul 2026 12:59:00 +0800</pubDate><guid>https://qtopie.github.io/notes/ai/go-wails3-streaming-chat/</guid><description>&lt;p&gt;在构建桌面端 AI 助手时，实现流式对话（Streaming Chat）几乎是标配功能。然而，要在桌面应用（例如使用 &lt;strong&gt;Go + Wails 3 + React&lt;/strong&gt; 技术栈）中做到&lt;strong&gt;极致流畅（无卡顿、高帧率）&lt;strong&gt;与&lt;/strong&gt;数据 100% 准确（无字面残缺、无版本覆盖冲突、支持异步长尾更新）&lt;/strong&gt;，其实面临着不少工程挑战。&lt;/p&gt;
 &lt;p&gt;本文将单纯从系统设计的角度，探讨一套针对 Go + Wails 桌面的流式对话通用架构方案。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id="核心痛点与挑战"&gt;核心痛点与挑战&lt;/h2&gt;
@@ -57,29 +57,4 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└──────────────────────────────────────────────────────────────┘
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
 &lt;h2 id="流式多信道复用与-chunktype-设计"&gt;流式多信道复用与 ChunkType 设计&lt;/h2&gt;
-&lt;p&gt;传统的流式对话系统通常假设通道内传输的全部都是纯文本。但在 Agent（智能体）复杂的执行链路中，大模型在同一轮生成中可能会输出不同性质的内容：&lt;/p&gt;</description></item><item><title>AI 智能体设计模式 (Agentic Design Patterns) 总结</title><link>https://qtopie.github.io/notes/ai/agentic-design-patterns/</link><pubDate>Tue, 24 Mar 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/ai/agentic-design-patterns/</guid><description>&lt;p&gt;随着大语言模型（LLM）能力的不断提升，开发者们逐渐从“Prompt Engineering”转向了“Agentic Workflow”。Andrew Ng (吴恩达) 曾指出，基于 Agent 的工作流可能会比单纯依赖更强大的模型版本带来更大的性能提升。&lt;/p&gt;
-&lt;p&gt;本文将总结几种核心的 AI 智能体设计模式，并结合 D2 流程图进行直观展示。&lt;/p&gt;
-&lt;h2 id="1-反思-reflection"&gt;1. 反思 (Reflection)&lt;/h2&gt;
-&lt;p&gt;反思模式是最基础的模式。它通过让模型检查自己的输出，发现错误并进行修正，从而提高任务的完成质量。&lt;/p&gt;
-&lt;div class="d2-container" id="d2-84567108c1b2e8c2ef60fa099714f287"&gt;&lt;div class="d2-controls"&gt;
- &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
- &lt;/div&gt;
- &lt;div class="d2-img-container"&gt;
- &lt;div style="position: relative; display: inline-flex; align-items: center; justify-content: center; max-width: 100%;"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-84567108c1b2e8c2ef60fa099714f287.svg" alt="D2 Diagram" style="max-width: 100%; height: auto;"&gt;
- &lt;div class="watermark-overlay" style="pointer-events: none; position: absolute; bottom: 5px; right: 5px; opacity: 0.4; font-size: 11px; color: #999;"&gt;qtopie.github.io&lt;/div&gt;
- &lt;/div&gt;
- &lt;/div&gt;&lt;/div&gt;
-&lt;h2 id="2-工具使用-tool-use"&gt;2. 工具使用 (Tool Use)&lt;/h2&gt;
-&lt;p&gt;让 LLM 具备调用外部 API、搜索网页或执行本地代码的能力。这解决了 LLM 知识时效性差、无法处理复杂计算等问题。&lt;/p&gt;
-&lt;div class="d2-container" id="d2-7eafe87c29ccb9c4d9980aa2f4f9e926"&gt;&lt;div class="d2-controls"&gt;
- &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
- &lt;/div&gt;
- &lt;div class="d2-img-container"&gt;
- &lt;div style="position: relative; display: inline-flex; align-items: center; justify-content: center; max-width: 100%;"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-7eafe87c29ccb9c4d9980aa2f4f9e926.svg" alt="D2 Diagram" style="max-width: 100%; height: auto;"&gt;
- &lt;div class="watermark-overlay" style="pointer-events: none; position: absolute; bottom: 5px; right: 5px; opacity: 0.4; font-size: 11px; color: #999;"&gt;qtopie.github.io&lt;/div&gt;
- &lt;/div&gt;
- &lt;/div&gt;&lt;/div&gt;
-&lt;h2 id="3-规划-planning"&gt;3. 规划 (Planning)&lt;/h2&gt;
-&lt;p&gt;规划是将复杂任务拆解为子任务并有序执行的核心能力。主要分为以下两类：&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;传统的流式对话系统通常假设通道内传输的全部都是纯文本。但在 Agent（智能体）复杂的执行链路中，大模型在同一轮生成中可能会输出不同性质的内容：&lt;/p&gt;</description></item></channel></rss>

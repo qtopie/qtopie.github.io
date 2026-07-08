@@ -1,4 +1,63 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Notes on 1001問</title><link>https://qtopie.github.io/notes/</link><description>Recent content in Notes on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Mon, 06 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/notes/index.xml" rel="self" type="application/rss+xml"/><item><title>电商核心交易流程</title><link>https://qtopie.github.io/notes/system-design/ecommerce-trading/</link><pubDate>Mon, 06 Jul 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/system-design/ecommerce-trading/</guid><description>&lt;p&gt;在电商业务中，核心交易链路（Trading Flow）是整个系统的骨干。它涵盖了用户从产生购买意向到最终完成交易、完成售后循环的端到端全生命周期。主干流程通常可以划分为：导购、商品详情页（PDP）、购物车、结算确认（Checkout）、支付、履约、逆向（售后）以及客服闭环。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Notes on 1001問</title><link>https://qtopie.github.io/notes/</link><description>Recent content in Notes on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Wed, 08 Jul 2026 12:59:00 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/notes/index.xml" rel="self" type="application/rss+xml"/><item><title>Go + Wails 3 打造极致流畅、高可靠的 AI 流式对话系统设计方案</title><link>https://qtopie.github.io/notes/ai/go-wails3-streaming-chat/</link><pubDate>Wed, 08 Jul 2026 12:59:00 +0800</pubDate><guid>https://qtopie.github.io/notes/ai/go-wails3-streaming-chat/</guid><description>&lt;p&gt;在构建桌面端 AI 助手时，实现流式对话（Streaming Chat）几乎是标配功能。然而，要在桌面应用（例如使用 &lt;strong&gt;Go + Wails 3 + React&lt;/strong&gt; 技术栈）中做到&lt;strong&gt;极致流畅（无卡顿、高帧率）&lt;strong&gt;与&lt;/strong&gt;数据 100% 准确（无字面残缺、无版本覆盖冲突、支持异步长尾更新）&lt;/strong&gt;，其实面临着不少工程挑战。&lt;/p&gt;
+&lt;p&gt;本文将单纯从系统设计的角度，探讨一套针对 Go + Wails 桌面的流式对话通用架构方案。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="核心痛点与挑战"&gt;核心痛点与挑战&lt;/h2&gt;
+&lt;p&gt;在传统的 Web 或桌面应用中，流式消息的传递经常会面临以下性能与稳定性瓶颈：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;高频 IPC 通信开销&lt;/strong&gt;：大模型（LLM）吐出 Token 的速度极快，如果每一个 Token 都直接触发一次 Wails 事件传输，频繁的跨进程 IPC 管道调用会迅速榨干系统 CPU。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;React UI 线程阻塞（setState 灾难）&lt;/strong&gt;：如果前端每收到一个 Token 都立即触发一次 React 组件状态更新，高频的 VDOM 渲染会导致前端界面瞬间掉帧甚至冻结。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;网络/管道乱序与数据空洞&lt;/strong&gt;：在并发或多线程的异步消息传输中，Token 帧极易发生微小的时序颠倒或丢包，导致前端组装出来的 Markdown 文本出现“字面残缺”或结构性标签折断。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;重新生成与重新编辑下的覆盖竞态&lt;/strong&gt;：用户可能在 1 秒内连续点击“重新生成”，旧的生成线程与新的生成线程在后台并发运行，此时两者的缓存和前端渲染极其容易发生覆盖冲突。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;长耗时工具/异步状态的后置更新&lt;/strong&gt;：大模型流式输出完毕了，但其调用的后台任务（如异步编译、定点扫码等）仍在后台运行，如何在流生命周期之外，优雅且就地更新消息的局部字段？&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="整体设计架构图"&gt;整体设计架构图&lt;/h2&gt;
+&lt;p&gt;为了解决上述痛点，我们可以采用 &lt;strong&gt;平滑合批分发 + Attempt 级别隔离 + 滑动窗口重组 + 双阶段对齐 + 局部补丁更新&lt;/strong&gt; 的联合架构：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;┌──────────────────────────────────────────────────────────────┐
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ 大模型/后台服务 (LLM Provider / Backend Engine) │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ 高频、微秒级 Token 流 │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└──────────────────────┬───────────────────────────────────────┘
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;┌──────────────────────────────────────────────────────────────┐
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ Go Backend (Wails 服务端) │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ ┌─────────────────────────────────────────────────────────┐ │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ Attempt Caching (以 StreamID 为联合键的真理缓存) │ │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ · 为每次生成请求（包含重新生成）创建唯一的 StreamID (UUID) │ │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ · 全量 assembled 数据均以此 ID 隔离缓存，防止覆盖竞态 │ │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ └───────────────┬─────────────────────────────────────────┘ │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ ┌───────────────▼─────────────────────────────────────────┐ │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ StreamDispatcher (定时合批平滑分发器) │ │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ · 30ms 定时 Ticker + 50 帧容量阈值限制 │ │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ · 将高频 Token 帧打包成数组形式发送，极大缓解 IPC 压力 │ │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ └───────────────┬─────────────────────────────────────────┘ │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└──────────────────┼──────────────────────────────────────────┘
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; │ Wails IPC (Events.Emit)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ▼
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;┌──────────────────────────────────────────────────────────────┐
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ Frontend Client (Wails 网页前端) │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ ┌─────────────────────────────────────────────────────────┐ │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ Reassembly Buffer (滑动窗口重组缓冲区) │ │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ · 根据 chunkIndex 组装，自愈因异步并发带来的时序空洞 │ │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ └───────────────┬─────────────────────────────────────────┘ │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ ┌───────────────▼─────────────────────────────────────────┐ │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ requestAnimationFrame Scheduler (16ms 增量批量更新) │ │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ · 一帧内最多触发一次 setState，配合屏幕刷新率防抖 │ │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ └───────────────┬─────────────────────────────────────────┘ │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ ┌───────────────▼─────────────────────────────────────────┐ │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ Post-Stream Sync (后置对齐) &amp;amp; Active Patching (补丁通道) │ │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ · 流结束：同步清空缓冲区 -&amp;gt; 异步拉取 GetFullMessage() │ │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ · 补丁：监听 &amp;#39;chat-patch&amp;#39; 通道，跨周期就地更新指定消息 │ │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ └─────────────────────────────────────────────────────────┘ │
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└──────────────────────────────────────────────────────────────┘
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="流式多信道复用与-chunktype-设计"&gt;流式多信道复用与 ChunkType 设计&lt;/h2&gt;
+&lt;p&gt;传统的流式对话系统通常假设通道内传输的全部都是纯文本。但在 Agent（智能体）复杂的执行链路中，大模型在同一轮生成中可能会输出不同性质的内容：&lt;/p&gt;</description></item><item><title>电商核心交易流程</title><link>https://qtopie.github.io/notes/system-design/ecommerce-trading/</link><pubDate>Mon, 06 Jul 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/system-design/ecommerce-trading/</guid><description>&lt;p&gt;在电商业务中，核心交易链路（Trading Flow）是整个系统的骨干。它涵盖了用户从产生购买意向到最终完成交易、完成售后循环的端到端全生命周期。主干流程通常可以划分为：导购、商品详情页（PDP）、购物车、结算确认（Checkout）、支付、履约、逆向（售后）以及客服闭环。&lt;/p&gt;
 &lt;h2 id="全链路总览"&gt;全链路总览&lt;/h2&gt;
 
 &lt;div class="mermaid-block" data-mermaid-zoom="1"&gt;
@@ -940,8 +999,8 @@
 &lt;li&gt;&lt;strong&gt;目录版本化&lt;/strong&gt;：始终使用 &lt;code&gt;v1&lt;/code&gt;, &lt;code&gt;v2&lt;/code&gt; 目录。这允许你在同一个项目中同时运行多个版本的 API。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;go_package 规范&lt;/strong&gt;：在 &lt;code&gt;.proto&lt;/code&gt; 中明确指定完整的导入路径：&lt;/li&gt;
 &lt;/ol&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-protobuf" data-lang="protobuf"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;option&lt;/span&gt; &lt;span class="n"&gt;go_package&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;github.com/org/repo/gen/go/v1;userv1&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="err"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start="3"&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-protobuf" data-lang="protobuf"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;option&lt;/span&gt; &lt;span class="n"&gt;go_package&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;github.com/org/repo/gen/go/v1;userv1&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ol start="3"&gt;
 &lt;li&gt;&lt;strong&gt;职责分离&lt;/strong&gt;：&lt;code&gt;api/&lt;/code&gt; 只存定义，&lt;code&gt;gen/&lt;/code&gt; 只存自动生成的代码，业务实现在 &lt;code&gt;internal/&lt;/code&gt; 或 &lt;code&gt;pkg/&lt;/code&gt;。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;hr&gt;
@@ -981,90 +1040,7 @@
 &lt;/ol&gt;
 &lt;hr&gt;
 &lt;h3 id="二-拍出好照片的四大要素"&gt;二、 拍出“好照片”的四大要素&lt;/h3&gt;
-&lt;p&gt;很多新手纠结于参数，但好的照片往往是以下四个维度的平衡：&lt;/p&gt;</description></item><item><title>深圳到中山旅游攻略 (基于小红书总结)</title><link>https://qtopie.github.io/notes/ai/shenzhen-to-zhongshan-guide/</link><pubDate>Thu, 01 Jan 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/ai/shenzhen-to-zhongshan-guide/</guid><description>&lt;h1 id="深圳到中山旅游攻略"&gt;深圳到中山旅游攻略&lt;/h1&gt;
-&lt;p&gt;基于小红书热门笔记总结的深圳到中山旅游攻略，涵盖交通、行程规划、美食及景点推荐。&lt;/p&gt;
-&lt;h2 id="-交通指南"&gt;🚗 交通指南&lt;/h2&gt;
-&lt;h3 id="1-深中跨市公交-高性价比"&gt;1. 深中跨市公交 (高性价比)&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;路线&lt;/strong&gt;: 深圳前海湾站 ↔ 中山博览中心枢纽 / 中山国际人才港&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;车次&lt;/strong&gt;: T01A (博览中心方向), T01B (人才港方向)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;票价&lt;/strong&gt;: 15-18元/人&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;耗时&lt;/strong&gt;: 约1小时&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;服务时间&lt;/strong&gt;: 06:30 - 21:30&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;购票&lt;/strong&gt;: 微信搜索“深巴出行”小程序提前购票&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;市内交通&lt;/strong&gt;: 到达中山后，打车前往各景点非常便宜（通常15元以内）。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="2-自驾-灵活便捷"&gt;2. 自驾 (灵活便捷)&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;路线&lt;/strong&gt;: 深圳 → 深中通道 → 中山&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;耗时&lt;/strong&gt;: 1 - 1.5小时&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;费用&lt;/strong&gt;: 高速费约 80-90 元 (单程)&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;停车&lt;/strong&gt;:
-&lt;ul&gt;
-&lt;li&gt;中山博物馆/纪念堂附近有停车场。&lt;/li&gt;
-&lt;li&gt;孙文西路步行街可停在中山公园区域。&lt;/li&gt;
-&lt;li&gt;兴中广场（摩天轮）停车方便。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="-行程规划推荐"&gt;🗺️ 行程规划推荐&lt;/h2&gt;
-&lt;h3 id="方案一特种兵一日游-自驾早出晚归"&gt;方案一：特种兵一日游 (自驾/早出晚归)&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;08:00&lt;/strong&gt; 深圳出发，经深中通道。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;09:30&lt;/strong&gt; &lt;strong&gt;中山市博物馆&lt;/strong&gt; (需预约，免费)：了解中山历史文化，停车方便。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;10:30&lt;/strong&gt; &lt;strong&gt;四喜咖啡 (Four Joy Coffee)&lt;/strong&gt;：博物馆附近，网红打卡点，推荐Dirty、拿铁。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;11:00&lt;/strong&gt; &lt;strong&gt;西山寺&lt;/strong&gt;：市区制高点，古建筑，清静。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;11:40&lt;/strong&gt; &lt;strong&gt;孙文西路步行街&lt;/strong&gt;：感受老中山骑楼风情。
-&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;伴手礼&lt;/em&gt;：咀香园旗舰店 (杏仁饼)。&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;甜品&lt;/em&gt;：众生堂 (双皮奶)。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;12:30&lt;/strong&gt; &lt;strong&gt;午餐&lt;/strong&gt;：&lt;strong&gt;马喜鸽&lt;/strong&gt; (石岐乳鸽、白切鸡、猪杂粥)。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;14:00&lt;/strong&gt; &lt;strong&gt;岐江公园&lt;/strong&gt;：工业风遗址公园，适合拍照。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;15:00&lt;/strong&gt; &lt;strong&gt;孙中山故居纪念馆&lt;/strong&gt; (5A景区)：必打卡，游览约1.5小时。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;17:00&lt;/strong&gt; &lt;strong&gt;詹园&lt;/strong&gt;：岭南园林，夕阳时分景色最佳 (门票约50元)。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;18:30&lt;/strong&gt; &lt;strong&gt;幻彩摩天轮&lt;/strong&gt;：兴中广场，欣赏中山夜景 (门票30-50元)。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;19:30&lt;/strong&gt; &lt;strong&gt;晚餐&lt;/strong&gt;：&lt;strong&gt;大墩荣记食店&lt;/strong&gt; (脆皮猪手、炒田螺、椒盐虾、咸骨粥)。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;21:00&lt;/strong&gt; 返程深圳。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="方案二休闲两天一夜-city-walk--吃喝"&gt;方案二：休闲两天一夜 (City Walk + 吃喝)&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Day 1&lt;/strong&gt;:
-&lt;ul&gt;
-&lt;li&gt;下午到达中山，入住老城区附近酒店。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;晚餐&lt;/strong&gt;：&lt;strong&gt;大墩荣记食店&lt;/strong&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;夜游&lt;/strong&gt;：&lt;strong&gt;幻彩摩天轮&lt;/strong&gt; + &lt;strong&gt;岐江桥&lt;/strong&gt;漫步，吹晚风看夜景。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Day 2&lt;/strong&gt;:
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;早茶&lt;/strong&gt;：&lt;strong&gt;爱群食店&lt;/strong&gt; (老字号，性价比高，蒸笼堆成山)。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;上午&lt;/strong&gt;：&lt;strong&gt;中山市博物馆&lt;/strong&gt; -&amp;gt; &lt;strong&gt;四喜咖啡&lt;/strong&gt; -&amp;gt; &lt;strong&gt;西山寺&lt;/strong&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;下午&lt;/strong&gt;：前往&lt;strong&gt;孙中山故居&lt;/strong&gt; (推荐) 或 &lt;strong&gt;崖口村&lt;/strong&gt; (看稻田/海边，视季节而定)。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;返程&lt;/strong&gt;：从中山国际人才港乘公交回深圳。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="-美食推荐"&gt;🍲 美食推荐&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;石岐乳鸽&lt;/strong&gt;: 中山必吃，皮脆肉嫩。推荐：&lt;em&gt;马喜鸽&lt;/em&gt;、&lt;em&gt;石岐佬&lt;/em&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;脆皮猪手/咸骨粥&lt;/strong&gt;: 大排档风味。推荐：&lt;em&gt;大墩荣记食店&lt;/em&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;早茶&lt;/strong&gt;: 感受广东早茶文化。推荐：&lt;em&gt;爱群食店&lt;/em&gt;。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;甜品&lt;/strong&gt;: &lt;em&gt;众生堂&lt;/em&gt; (双皮奶、姜撞奶)。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;伴手礼&lt;/strong&gt;: &lt;em&gt;咀香园&lt;/em&gt; (杏仁饼、鸡仔饼)。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id="-小贴士"&gt;💡 小贴士&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;深中通道&lt;/strong&gt;体验很好，但周末可能会有拥堵，建议错峰出行。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;中山市内交通&lt;/strong&gt;打车很便宜，非自驾也很方便。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;孙文西路步行街&lt;/strong&gt;部分区域可能在装修，建议提前确认。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;崖口村&lt;/strong&gt;适合看稻浪，如果稻子收割了景色会打折，建议替换为孙中山故居。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;p&gt;&lt;em&gt;注：以上信息整理自小红书热门笔记，具体营业时间及票价请以实际为准。&lt;/em&gt;&lt;/p&gt;</description></item><item><title>晴天</title><link>https://qtopie.github.io/notes/guitar/sunny-day/</link><pubDate>Thu, 18 Dec 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/guitar/sunny-day/</guid><description>&lt;p&gt;吉他简谱练习&lt;/p&gt;
+&lt;p&gt;很多新手纠结于参数，但好的照片往往是以下四个维度的平衡：&lt;/p&gt;</description></item><item><title>晴天</title><link>https://qtopie.github.io/notes/guitar/sunny-day/</link><pubDate>Thu, 18 Dec 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/guitar/sunny-day/</guid><description>&lt;p&gt;吉他简谱练习&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;stave [tuning=EADGBe] [time=4/4] 
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;C9 $4 x $3 x $2 x $3 x | $5 x $4 0h2 $2 x $3 x | G $6 x $4 x $2 x $3 x | $6 x $2 x $6 2 $2 x |
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
@@ -1575,7 +1551,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="2-自动化工作流从题目-id-到代码模板"&gt;2. 自动化工作流：从题目 ID 到代码模板&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;脚本参考 &lt;a href="https://github.com/qtopie/leetcode/tree/main/scripts"&gt;https://github.com/qtopie/leetcode/tree/main/scripts&lt;/a&gt;&lt;/p&gt;</description></item><item><title>滑动窗口</title><link>https://qtopie.github.io/notes/codejam/sliding-window/</link><pubDate>Sun, 23 Feb 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/codejam/sliding-window/</guid><description>&lt;p&gt;**滑动窗口（Sliding Window）**是一种处理数组和字符串子区间问题的常用技巧。它通过维护一个由 &lt;code&gt;left&lt;/code&gt; 和 &lt;code&gt;right&lt;/code&gt; 定义的窗口，将很多 $O(n^2)$ 的双重遍历优化到 $O(n)$。&lt;/p&gt;
-&lt;h2 id="1-核心思想"&gt;1. 核心思想&lt;/h2&gt;
+&lt;h2 id="核心思想"&gt;核心思想&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;right&lt;/code&gt; 向右移动：把新元素纳入窗口。&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;left&lt;/code&gt; 向右移动：把不再需要的元素移出窗口。&lt;/li&gt;
@@ -1591,14 +1567,14 @@
  &lt;div class="watermark-overlay" style="pointer-events: none; position: absolute; bottom: 5px; right: 5px; opacity: 0.4; font-size: 11px; color: #999;"&gt;qtopie.github.io&lt;/div&gt;
  &lt;/div&gt;
  &lt;/div&gt;&lt;/div&gt;
-&lt;h2 id="2-适用场景"&gt;2. 适用场景&lt;/h2&gt;
+&lt;h2 id="适用场景"&gt;适用场景&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;最长/最短满足条件的子数组或子串。&lt;/li&gt;
 &lt;li&gt;判断一个字符串是否覆盖另一个字符串（如最小覆盖子串）。&lt;/li&gt;
 &lt;li&gt;统计满足条件的子数组/子串个数。&lt;/li&gt;
 &lt;li&gt;固定长度区间统计（和、平均值、最大值、最小值）。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id="3-两类窗口"&gt;3. 两类窗口&lt;/h2&gt;
+&lt;h2 id="两类窗口"&gt;两类窗口&lt;/h2&gt;
 &lt;h3 id="固定窗口fixed-window"&gt;固定窗口（Fixed Window）&lt;/h3&gt;
 &lt;p&gt;窗口大小固定为 $k$，适合“每连续 $k$ 个元素”的问题。&lt;/p&gt;
 &lt;ol&gt;
@@ -1613,7 +1589,7 @@
 &lt;li&gt;当窗口满足（或不满足）条件时，移动 &lt;code&gt;left&lt;/code&gt; 收缩。&lt;/li&gt;
 &lt;li&gt;在扩张和收缩过程中记录最优解。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id="4-常用模板"&gt;4. 常用模板&lt;/h2&gt;
+&lt;h2 id="常用模板"&gt;常用模板&lt;/h2&gt;
 &lt;h3 id="go-模板可变窗口"&gt;Go 模板（可变窗口）&lt;/h3&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kd"&gt;func&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;slidingWindow&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;s&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kt"&gt;int&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="nx"&gt;left&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;right&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="w"&gt;
@@ -1636,7 +1612,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;	&lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;res&lt;/span&gt;&lt;span class="w"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="5-为什么通常是-on"&gt;5. 为什么通常是 $O(n)$&lt;/h2&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id="为什么通常是-on"&gt;为什么通常是 $O(n)$&lt;/h2&gt;
 &lt;p&gt;设数组长度为 $n$：&lt;/p&gt;</description></item><item><title>并发模型</title><link>https://qtopie.github.io/notes/web/concurrency-models/</link><pubDate>Tue, 21 Jan 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/web/concurrency-models/</guid><description>&lt;h2 id="目录"&gt;目录&lt;/h2&gt;
 &lt;ol&gt;
 &lt;li&gt;总结对比&lt;/li&gt;
@@ -2065,14 +2041,7 @@
 &lt;li&gt;right child = &lt;code&gt;2k + 2&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;parent = &lt;code&gt;(k - 1) / 2&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;为什么会是这个公式？&lt;/p&gt;</description></item><item><title>深圳到中山旅游攻略 (基于小红书总结)</title><link>https://qtopie.github.io/notes/ai/rednote-crawler/</link><pubDate>Thu, 23 May 2024 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/ai/rednote-crawler/</guid><description>&lt;p&gt;我想通过小红书资料做一份旅游攻略，以下是操作步骤。&lt;/p&gt;
-&lt;p&gt;首先，使用chrome-devtools-mcp打开小红书，网页版https://www.xiaohongshu.com/explore&lt;/p&gt;
-&lt;p&gt;获取登录态, 等待小红书登录页面，等待用户扫码。&lt;/p&gt;
-&lt;p&gt;用户扫码登录成功后，页面会刷新&lt;/p&gt;
-&lt;p&gt;然后用解析网页内容，找到搜索框，输入关键字&amp;quot;深圳到中山旅游攻略&amp;quot;，点击搜索然后抓取结果。&lt;/p&gt;
-&lt;p&gt;最后使用LLM总结网页内容.&lt;/p&gt;
-&lt;p&gt;你可以使用chrome-devtools-mcp完成页面抓取&lt;/p&gt;
-&lt;p&gt;&lt;img src="image.png" alt="alt text"&gt;&lt;/p&gt;</description></item><item><title>树莓派和HomeAssistant</title><link>https://qtopie.github.io/notes/iot/rpi/homeassistant/</link><pubDate>Tue, 28 Sep 2021 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/homeassistant/</guid><description>&lt;h2 id="目标"&gt;目标&lt;/h2&gt;
+&lt;p&gt;为什么会是这个公式？&lt;/p&gt;</description></item><item><title>树莓派和HomeAssistant</title><link>https://qtopie.github.io/notes/iot/rpi/homeassistant/</link><pubDate>Tue, 28 Sep 2021 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/iot/rpi/homeassistant/</guid><description>&lt;h2 id="目标"&gt;目标&lt;/h2&gt;
 &lt;p&gt;使用开源软件和米家智能硬件，实现简单的智能家居系统&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;采用米家智能硬件的原因是, 小米智能家居做的比较早（也许是起初推广的更好，刚接触智能家居的时候就用的小米）,
@@ -3333,7 +3302,7 @@ l + (r - l + 1) / 2 靠右&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;创建swapfile (可选，如果启动时提示无swapfile使用)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;首先确认swap文件是否存在 &lt;code&gt;sudo swapon -s&lt;/code&gt;&lt;/p&gt;</description></item><item><title/><link>https://qtopie.github.io/notes/ai/mcp-notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/ai/mcp-notes/</guid><description/></item><item><title/><link>https://qtopie.github.io/notes/ai/svg/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/ai/svg/</guid><description/></item><item><title/><link>https://qtopie.github.io/notes/cloud-native/cicd/jenkins/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/cloud-native/cicd/jenkins/</guid><description>&lt;p&gt;&lt;a href="https://github.com/jenkinsci/kubernetes-plugin"&gt;https://github.com/jenkinsci/kubernetes-plugin&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;首先确认swap文件是否存在 &lt;code&gt;sudo swapon -s&lt;/code&gt;&lt;/p&gt;</description></item><item><title/><link>https://qtopie.github.io/notes/ai/svg/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/ai/svg/</guid><description/></item><item><title/><link>https://qtopie.github.io/notes/cloud-native/cicd/jenkins/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/cloud-native/cicd/jenkins/</guid><description>&lt;p&gt;&lt;a href="https://github.com/jenkinsci/kubernetes-plugin"&gt;https://github.com/jenkinsci/kubernetes-plugin&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;war file is uncompressed under /var/jenkins_home/war&lt;/p&gt;
 &lt;p&gt;Class files are random accessed. Not recommmend to mount with s3 (fuse), will make page slow.&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://github.com/jenkinsci/kubernetes-plugin/blob/master/src/main/kubernetes/service-account.yml"&gt;https://github.com/jenkinsci/kubernetes-plugin/blob/master/src/main/kubernetes/service-account.yml&lt;/a&gt;&lt;/p&gt;</description></item><item><title/><link>https://qtopie.github.io/notes/cloud-native/docker/readme/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/cloud-native/docker/readme/</guid><description>&lt;p&gt;Docker config&lt;/p&gt;
