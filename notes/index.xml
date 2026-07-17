@@ -1,4 +1,45 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Notes on 1001問</title><link>https://qtopie.github.io/notes/</link><description>Recent content in Notes on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Wed, 08 Jul 2026 12:59:00 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/notes/index.xml" rel="self" type="application/rss+xml"/><item><title>Go + Wails 3 打造极致流畅、高可靠的 AI 流式对话系统设计方案</title><link>https://qtopie.github.io/notes/ai/go-wails3-streaming-chat/</link><pubDate>Wed, 08 Jul 2026 12:59:00 +0800</pubDate><guid>https://qtopie.github.io/notes/ai/go-wails3-streaming-chat/</guid><description>&lt;p&gt;在构建桌面端 AI 助手时，实现流式对话（Streaming Chat）几乎是标配功能。然而，要在桌面应用（例如使用 &lt;strong&gt;Go + Wails 3 + React&lt;/strong&gt; 技术栈）中做到&lt;strong&gt;极致流畅（无卡顿、高帧率）&lt;strong&gt;与&lt;/strong&gt;数据 100% 准确（无字面残缺、无版本覆盖冲突、支持异步长尾更新）&lt;/strong&gt;，其实面临着不少工程挑战。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Notes on 1001問</title><link>https://qtopie.github.io/notes/</link><description>Recent content in Notes on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Fri, 17 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/notes/index.xml" rel="self" type="application/rss+xml"/><item><title>Kindle PW4 SpringBreak 本地越狱与自托管指南</title><link>https://qtopie.github.io/notes/books/jailbreak-kindle-pw4/</link><pubDate>Fri, 17 Jul 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/books/jailbreak-kindle-pw4/</guid><description>&lt;h1 id="kindle-springbreak-本地自托管越狱指南"&gt;Kindle SpringBreak 本地自托管越狱指南&lt;/h1&gt;
+&lt;p&gt;本指南详细记录了如何通过本地自托管服务（Go Web 服务器）彻底解决 Kindle 越狱过程中因网络超时或亚马逊域名拦截导致的“闪退回首页”问题。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="-背景与原理"&gt;🛠️ 背景与原理&lt;/h2&gt;
+&lt;p&gt;在进行 &lt;strong&gt;SpringBreak&lt;/strong&gt; 越狱时，Kindle 会尝试通过网络加载在线提权页面（&lt;code&gt;https://sb.penguins184.xyz/&lt;/code&gt;）并下载跑码脚本（&lt;code&gt;kindlemodding.org/jb.sh&lt;/code&gt;）。
+如果局域网无法稳定出海，或亚马逊服务器进行了网络拦截，Kindle 浏览器会因加载超时而直接闪退回首页，导致越狱失败。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;解决方案&lt;/strong&gt;：
+在本地电脑上利用 &lt;code&gt;goserve&lt;/code&gt; 启动静态 Web 服务，将越狱所需的全部文件托管在局域网内，让 Kindle 绕过公网直接秒加载提权网页，达成 100% 越狱成功率。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="-步骤一本地环境搭建与配置"&gt;📋 步骤一：本地环境搭建与配置&lt;/h2&gt;
+&lt;h3 id="1-修改-kindle-缓存文件"&gt;1. 修改 Kindle 缓存文件&lt;/h3&gt;
+&lt;p&gt;修改本地解压好的 &lt;code&gt;springbreak&lt;/code&gt; 目录中的 exploit 配置文件：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;目标文件&lt;/strong&gt;：&lt;code&gt;springbreak/.active_content_sandbox/store/resource/cachedResources/index.html&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;修改点&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;将 &lt;code&gt;kindlemodding.org/jb.sh&lt;/code&gt; 替换为：&lt;code&gt;http://192.168.50.240:7070/jb.sh&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;将 &lt;code&gt;https://sb.penguins184.xyz/&lt;/code&gt; 替换为：&lt;code&gt;http://192.168.50.240:7070/index.html&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="2-准备本地服务器根目录"&gt;2. 准备本地服务器根目录&lt;/h3&gt;
+&lt;p&gt;新建本地托管文件夹 &lt;code&gt;goserve_root&lt;/code&gt; 并放入：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;提权页面&lt;/strong&gt; (&lt;code&gt;index.html&lt;/code&gt;)：
+&lt;ul&gt;
+&lt;li&gt;包含 vibrancyMode 提权和返回主页指令。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;核心跑码脚本&lt;/strong&gt; (&lt;code&gt;jb.sh&lt;/code&gt;)：
+&lt;ul&gt;
+&lt;li&gt;大小约 5.1MB，已下载至本地。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="3-启动本地-http-服务"&gt;3. 启动本地 HTTP 服务&lt;/h3&gt;
+&lt;p&gt;进入 &lt;code&gt;goserve_root&lt;/code&gt; 所在目录，运行以下命令（默认监听 &lt;code&gt;7070&lt;/code&gt; 端口）：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;/home/qtopierw/workspace/go/bin/goserve -port &lt;span class="m"&gt;7070&lt;/span&gt; -dir ./goserve_root/
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;[!IMPORTANT]
+&lt;strong&gt;放行电脑防火墙&lt;/strong&gt;：
+如果你的电脑开启了 &lt;code&gt;ufw&lt;/code&gt; 防火墙，必须放行 &lt;code&gt;7070&lt;/code&gt; 端口，否则 Kindle 无法建立连接：&lt;/p&gt;</description></item><item><title>Go + Wails 3 打造极致流畅、高可靠的 AI 流式对话系统设计方案</title><link>https://qtopie.github.io/notes/ai/go-wails3-streaming-chat/</link><pubDate>Wed, 08 Jul 2026 12:59:00 +0800</pubDate><guid>https://qtopie.github.io/notes/ai/go-wails3-streaming-chat/</guid><description>&lt;p&gt;在构建桌面端 AI 助手时，实现流式对话（Streaming Chat）几乎是标配功能。然而，要在桌面应用（例如使用 &lt;strong&gt;Go + Wails 3 + React&lt;/strong&gt; 技术栈）中做到&lt;strong&gt;极致流畅（无卡顿、高帧率）&lt;strong&gt;与&lt;/strong&gt;数据 100% 准确（无字面残缺、无版本覆盖冲突、支持异步长尾更新）&lt;/strong&gt;，其实面临着不少工程挑战。&lt;/p&gt;
 &lt;p&gt;本文将单纯从系统设计的角度，探讨一套针对 Go + Wails 桌面的流式对话通用架构方案。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id="核心痛点与挑战"&gt;核心痛点与挑战&lt;/h2&gt;
@@ -556,7 +597,7 @@
  &lt;/div&gt;&lt;/div&gt;
 &lt;h2 id="mapreduce把写复杂分布式程序变成写-mapreduce-函数"&gt;MapReduce：把“写复杂分布式程序”变成“写 map/reduce 函数”&lt;/h2&gt;
 &lt;h3 id="编程模型"&gt;编程模型&lt;/h3&gt;
-&lt;p&gt;你只需要定义两个函数：&lt;/p&gt;</description></item><item><title>日常英语</title><link>https://qtopie.github.io/notes/book/daily-tech-english/</link><pubDate>Wed, 01 Apr 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/book/daily-tech-english/</guid><description>&lt;h2 id="architecting-conversations-架构师日常专业英语进阶指南"&gt;Architecting Conversations: 架构师日常专业英语进阶指南&lt;/h2&gt;
+&lt;p&gt;你只需要定义两个函数：&lt;/p&gt;</description></item><item><title>日常英语</title><link>https://qtopie.github.io/notes/books/daily-tech-english/</link><pubDate>Wed, 01 Apr 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/books/daily-tech-english/</guid><description>&lt;h2 id="architecting-conversations-架构师日常专业英语进阶指南"&gt;Architecting Conversations: 架构师日常专业英语进阶指南&lt;/h2&gt;
 &lt;p&gt;在技术领域，架构师的角色往往是&lt;strong&gt;沟通的桥梁&lt;/strong&gt;。我们不仅要与编译器对话，更要与产品经理、研发工程师及高层决策者对话。在国际化的技术协作中，精准的英语表达能显著降低“沟通熵值”。&lt;/p&gt;
 &lt;p&gt;以下从五个核心维度，总结了架构师在日常工作中最高频的英语场景与地道表达，重点加入会议上可直接复用的口语模板，帮助你用最简单高效的方式向业务解释约束条件和实现方案。&lt;/p&gt;
 &lt;hr&gt;
@@ -1246,14 +1287,14 @@
 &lt;li&gt;&lt;strong&gt;监控工具&lt;/strong&gt;: &lt;code&gt;iostat&lt;/code&gt;, &lt;code&gt;iotop&lt;/code&gt;。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="pmap"&gt;pmap&lt;/h2&gt;
-&lt;p&gt;用于分析进程占用的内存详情。&lt;/p&gt;</description></item><item><title>2025书单</title><link>https://qtopie.github.io/notes/book/2025-book-list/</link><pubDate>Sun, 30 Nov 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/book/2025-book-list/</guid><description>&lt;ul&gt;
+&lt;p&gt;用于分析进程占用的内存详情。&lt;/p&gt;</description></item><item><title>2025书单</title><link>https://qtopie.github.io/notes/books/2025-book-list/</link><pubDate>Sun, 30 Nov 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/books/2025-book-list/</guid><description>&lt;ul&gt;
 &lt;li&gt;&lt;input checked="" disabled="" type="checkbox"&gt; 富爸爸穷爸爸 (二刷)&lt;/li&gt;
 &lt;li&gt;&lt;input checked="" disabled="" type="checkbox"&gt; 山海经密码 (三刷)&lt;/li&gt;
 &lt;li&gt;[] 草房子&lt;/li&gt;
 &lt;li&gt;&lt;input checked="" disabled="" type="checkbox"&gt; 《一千零一夜》&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;新华网做了一个人生必读100本书问卷
-&lt;a href="https://www.xinhuanet.com/book/zhuanti/rsbdbook/#"&gt;https://www.xinhuanet.com/book/zhuanti/rsbdbook/#&lt;/a&gt;&lt;/p&gt;</description></item><item><title>2025书单</title><link>https://qtopie.github.io/notes/book/2026-book-list/</link><pubDate>Sun, 30 Nov 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/book/2026-book-list/</guid><description>&lt;h2 id="杂书"&gt;杂书&lt;/h2&gt;
+&lt;a href="https://www.xinhuanet.com/book/zhuanti/rsbdbook/#"&gt;https://www.xinhuanet.com/book/zhuanti/rsbdbook/#&lt;/a&gt;&lt;/p&gt;</description></item><item><title>2025书单</title><link>https://qtopie.github.io/notes/books/2026-book-list/</link><pubDate>Sun, 30 Nov 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/books/2026-book-list/</guid><description>&lt;h2 id="杂书"&gt;杂书&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;[] 草房子&lt;/li&gt;
 &lt;li&gt;[] 冰与火之歌&lt;/li&gt;
