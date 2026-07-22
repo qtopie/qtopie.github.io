@@ -1034,54 +1034,45 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;results&lt;/span&gt;&lt;span class="w"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="为什么我们要撤销选择"&gt;为什么我们要“撤销选择”？&lt;/h3&gt;
-&lt;p&gt;这是回溯算法的灵魂。因为我们是在同一套变量（比如一个数组）上进行操作，如果不撤销刚才的操作，当你退回到上一层节点去走另一条分支时，之前的脏数据会干扰新的搜索。&lt;/p&gt;</description></item><item><title>MQ</title><link>https://qtopie.github.io/notes/system-design/mq/</link><pubDate>Fri, 27 Feb 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/system-design/mq/</guid><description>&lt;p&gt;消息中间件（Message Middleware/MQ）是后端开发中的核心组件，也是面试中的“重灾区”。面试官通常不会只问你怎么用，更看重你对&lt;strong&gt;高并发、高可用、数据一致性&lt;/strong&gt;等问题的处理能力。&lt;/p&gt;
-&lt;p&gt;为了帮你系统梳理，我将知识点拆解为基础理论、核心挑战、以及主流组件对比三个维度。&lt;/p&gt;
+&lt;p&gt;这是回溯算法的灵魂。因为我们是在同一套变量（比如一个数组）上进行操作，如果不撤销刚才的操作，当你退回到上一层节点去走另一条分支时，之前的脏数据会干扰新的搜索。&lt;/p&gt;</description></item><item><title>消息中间件 (MQ) 核心原理与系统设计指南</title><link>https://qtopie.github.io/notes/system-design/mq/</link><pubDate>Fri, 27 Feb 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/system-design/mq/</guid><description>&lt;p&gt;消息中间件（Message Queue / MQ）是现代分布式与微服务架构中的核心基础设施，也是高并发系统设计与技术面试重点考察的领域。在系统设计中，引入 MQ 不仅可以提升系统的吞吐量与扩展性，同时也会带来数据一致性、消息可靠性、重复消费等一系列复杂的工程挑战。&lt;/p&gt;
+&lt;p&gt;本文系统梳理消息中间件的核心理论、常见硬核工程挑战与解决方案、主流 MQ 选型对比，并结合 RocketMQ 与 Kafka 的底层存储和读取架构进行深度解析。&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id="一-核心基础概念"&gt;一、 核心基础概念&lt;/h2&gt;
-&lt;p&gt;在深入细节前，必须掌握 MQ 的基本模型和应用场景：&lt;/p&gt;
+&lt;h2 id="核心基础概念"&gt;核心基础概念&lt;/h2&gt;
+&lt;p&gt;在深入分布式细节之前，需清晰掌握 MQ 的基本模型与核心价值：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;解耦、异步、削峰：&lt;/strong&gt; 这是 MQ 的三大核心价值。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;三大核心价值：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;解耦：&lt;/strong&gt; 生产者与消费者依赖接口规范而非硬编码调用，上下游解耦，降低系统间耦合度。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;异步：&lt;/strong&gt; 耗时非核心链路（如发送通知、日志统计）转为异步处理，大幅提升系统响应速度（RT）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;削峰填谷：&lt;/strong&gt; 面对突发流量高峰（如秒杀、大促），MQ 作为缓冲区承载流量冲击，保护下游弱后端服务。&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;两种模式：&lt;/strong&gt; * &lt;strong&gt;点对点 (P2P)：&lt;/strong&gt; 一个消息只能被一个消费者消费（Queue）。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;两种经典消费模式：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;点对点模式 (P2P / Queue)：&lt;/strong&gt; 消息存储在队列中，每条消息只能被一个消费者接收并处理（竞争消费）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;发布/订阅模式 (Pub/Sub / Topic)：&lt;/strong&gt; 消息发布到主题中，可以被多个订阅者（Consumer Group）独立同时消费。&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;strong&gt;发布/订阅 (Pub/Sub)：&lt;/strong&gt; 消息可以被多个订阅者同时消费（Topic）。&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;基本术语：&lt;/strong&gt; Producer（生产者）、Consumer（消费者）、Broker（代理服务器）、Topic（主题）、Partition/Queue（分区/队列）。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;基础核心术语：&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Producer（生产者）：&lt;/strong&gt; 消息发送端。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Consumer（消费者）：&lt;/strong&gt; 消息接收与处理端。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Broker（中转节点/代理服务器）：&lt;/strong&gt; MQ 服务节点，负责消息接收、存储和转发。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;NameServer / ZooKeeper（注册中心/元数据节点）：&lt;/strong&gt; 负责 MQ 集群的服务注册发现、Topic 路由元数据管理与心跳保活。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Topic（主题）：&lt;/strong&gt; 消息的逻辑分类。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Partition / Queue（分区 / 逻辑队列）：&lt;/strong&gt; Topic 内部的物理/逻辑分片，用于并行扩展与提高吞吐。&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;&lt;img src="mq-architecture.svg" alt="MQ 基础核心术语系统架构图"&gt;&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id="二-硬核技术挑战"&gt;二、 硬核技术挑战&lt;/h2&gt;
-&lt;p&gt;常见问题“引入 MQ 后带来的副作用”以及对应的解决方案。&lt;/p&gt;
-&lt;h3 id="1-消息丢失可靠性投递"&gt;1. 消息丢失（可靠性投递）&lt;/h3&gt;
-&lt;p&gt;如何保证消息从生产者到 MQ，再到消费者，一环都不丢？&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;生产阶段：&lt;/strong&gt; 确认机制（Confirm/ACK）、重试机制。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;存储阶段：&lt;/strong&gt; 持久化到磁盘、集群镜像备份（Replication）。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;消费阶段：&lt;/strong&gt; &lt;strong&gt;手动 ACK&lt;/strong&gt;（消费者处理完逻辑后再回复 MQ，而不是拿到消息就回复）。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="2-消息重复幂等性"&gt;2. 消息重复（幂等性）&lt;/h3&gt;
-&lt;p&gt;由于网络抖动，ACK 可能丢失导致 MQ 重复投递。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;解决方案：&lt;/strong&gt; 业务接口必须实现&lt;strong&gt;幂等性&lt;/strong&gt;。可以通过数据库唯一主键、布隆过滤器或 Redis 记录 &lt;code&gt;message_id&lt;/code&gt; 来防止重复处理。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="3-消息顺序性"&gt;3. 消息顺序性&lt;/h3&gt;
-&lt;p&gt;如何保证“先发的消息先被处理”？&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;关键点：&lt;/strong&gt; 保证消息在同一个 Topic 下进入同一个 &lt;strong&gt;Partition/Queue&lt;/strong&gt;，并且消费端只有一个线程在处理（或者通过内存队列分发）。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id="4-消息堆积"&gt;4. 消息堆积&lt;/h3&gt;
-&lt;p&gt;如果消费者挂了或者处理太慢，TB 级的消息堆积怎么办？&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;临时方案：&lt;/strong&gt; 增加消费者实例，或者新建一个 Topic 临时扩大分片倍数。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;根本方案：&lt;/strong&gt; 优化消费端业务逻辑，查出性能瓶颈（如慢 SQL）。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h2 id="三-主流-mq-对比"&gt;三、 主流 MQ 对比&lt;/h2&gt;
-&lt;p&gt;面试时常问：“你们为什么选 Kafka 而不是 RabbitMQ？”&lt;/p&gt;</description></item><item><title>myql</title><link>https://qtopie.github.io/notes/system-design/mysql/</link><pubDate>Thu, 26 Feb 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/system-design/mysql/</guid><description>&lt;h2 id="mysql-核心架构速览"&gt;MySQL 核心架构速览&lt;/h2&gt;
+&lt;h2 id="核心工程挑战与解决方案"&gt;核心工程挑战与解决方案&lt;/h2&gt;
+&lt;p&gt;引入 MQ 会增加系统复杂性，必须针对可能出现的异常场景设计完善的保障机制：&lt;/p&gt;
+&lt;h3 id="消息丢失可靠性投递"&gt;消息丢失（可靠性投递）&lt;/h3&gt;
+&lt;p&gt;如何保证消息从生产者到达 Broker，再到达消费者全链路“一环不丢”？&lt;/p&gt;</description></item><item><title>myql</title><link>https://qtopie.github.io/notes/system-design/mysql/</link><pubDate>Thu, 26 Feb 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/system-design/mysql/</guid><description>&lt;h2 id="mysql-核心架构速览"&gt;MySQL 核心架构速览&lt;/h2&gt;
 &lt;p&gt;理解 MySQL 的工作原理是所有优化的前提。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;连接器&lt;/strong&gt;：管理连接、权限验证。&lt;/li&gt;
@@ -2365,35 +2356,17 @@
 &lt;p&gt;这里使用Ubuntu而不是Raspbian的一个原因是Ubuntu官方软件包更新更快（比如raspbian当前为3.7而hass需要3.8+版本)，
 且自己笔记本一直用Ubuntu，统一发行版使用起来更加方便&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo pip3 install homeassistant
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;如果下载很慢，可以考虑使用pypi镜像源&lt;/p&gt;
-&lt;p&gt;编辑&lt;code&gt;/etc/pip.conf&lt;/code&gt; (使用豆瓣源）&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;[global]
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;index-url = https://pypi.douban.com/simple
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id="设置开机自启动"&gt;设置开机自启动&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;创建systemd service unit文件&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;systemctl --user edit --full --force homeassistant.service
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;加入以下内容&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;[Unit]
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Description=Home Assistant
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;After=network.target
+&lt;p&gt;在现代 Linux (如 Ubuntu 24.04 及 Python 3.12+) 环境下，推荐使用 Python 虚拟环境 (venv) 进行隔离安装：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 安装基础构建与 venv 依赖&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt update
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt install -y python3-dev python3-venv build-essential libssl-dev libffi-dev libjpeg-dev zlib1g-dev
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;[Service]
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Type=simple
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;ExecStart=/home/ubuntu/.local/bin/hass
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Restart=on-failure
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;RestartSec=5
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 创建虚拟环境&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;python3 -m venv ~/homeassistant-venv
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;[Install]
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;WantedBy=default.target
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;设置用户自动登录&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;a href="https://raspberrypi.stackexchange.com/questions/111728/how-to-get-raspi-config-on-ubuntu-20-04"&gt;安装&lt;code&gt;raspi-config&lt;/code&gt;&lt;/a&gt;,
-然后配置 &lt;code&gt;1. System Options&lt;/code&gt; -&amp;gt; &lt;code&gt;S5 Boot / Auto Login&lt;/code&gt; -&amp;gt; &lt;code&gt;B2 Console Autologin&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;会生成&lt;code&gt;/etc/systemd/system/getty@tty1.service.d/autologin.conf&lt;/code&gt;, 内容如下&lt;/p&gt;</description></item><item><title>vim-go</title><link>https://qtopie.github.io/notes/vim/vim-go/</link><pubDate>Sat, 28 Aug 2021 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/vim/vim-go/</guid><description>&lt;p&gt;&lt;em&gt;将VIM打造为Go开发利器&lt;/em&gt;&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 使用镜像源安装 homeassistant 及前端组件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;~/homeassistant-venv/bin/pip install -i https://pypi.tuna.tsinghua.edu.cn/simple homeassistant home-assistant-frontend
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;也可以通过编辑 &lt;code&gt;~/.config/pip/pip.conf&lt;/code&gt; 配置默认 PyPI 镜像源：&lt;/p&gt;</description></item><item><title>vim-go</title><link>https://qtopie.github.io/notes/vim/vim-go/</link><pubDate>Sat, 28 Aug 2021 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/vim/vim-go/</guid><description>&lt;p&gt;&lt;em&gt;将VIM打造为Go开发利器&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;平时一般使用VSCode编程，最近为了更好地刷leetcode，又换回了vim。发现笔记本小屏幕
 使用vscode zen-mode沉浸式看代码很爽以后，也喜欢上了使用vim写代码, 快捷键方便、稳
 定高效、功能纯粹（极简主义）。研究了一番后，发现其可行性，便整理了一下。&lt;/p&gt;

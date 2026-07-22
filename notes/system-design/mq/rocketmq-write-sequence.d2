@@ -1,0 +1,33 @@
+seq: "" {
+  shape: sequence_diagram
+
+  producer: "Producer\n(生产者)"
+  broker_smp: "SendMessageProcessor\n(Broker 请求处理)"
+  mmap_pc: "MappedByteBuffer / PageCache\n(内存映射区)"
+  disk: "CommitLog 物理磁盘\n(Disk)"
+  reput: "ReputMessageService\n(后台服务)"
+  cq: "ConsumeQueue\n(逻辑消费队列)"
+  consumer: "Consumer\n(消费者)"
+
+  # 0. 初始化
+  broker_smp -> mmap_pc: "0. FileChannel.map() 预映射 1GB 文件"
+
+  # 1. 消息追加
+  producer -> broker_smp: "1. 发送消息请求 sendMessage(msg)"
+  broker_smp -> mmap_pc: "2. MappedByteBuffer.put(bytes) 顺序写入 PageCache"
+
+  # 2. 刷盘与 ACK
+  mmap_pc -> disk: "3a. 同步刷盘：MappedByteBuffer.force() 强制落盘"
+  disk -> broker_smp: "3b. 磁盘落盘完成"
+  broker_smp -> producer: "4. 返回 ACK 确认 (若为异步刷盘，写入 PageCache 后立即返回 ACK)"
+
+  # 3. 异步索引分发
+  reput -> mmap_pc: "5. 轮询扫描最新 Page Cache 追加字节"
+  reput -> cq: "6. 构建 ConsumeQueue (写入 Offset + Size + Tag Hash)"
+
+  # 4. 消费端两阶段读取
+  consumer -> cq: "7. 拉取 ConsumeQueue (获取逻辑索引条目)"
+  cq -> consumer: "8. 返回物理 CommitLog Offset & Size"
+  consumer -> mmap_pc: "9. 按 Offset 零拷贝直读 CommitLog (PageCache/Disk)"
+  mmap_pc -> consumer: "10. 返回真实消息 Payload"
+}

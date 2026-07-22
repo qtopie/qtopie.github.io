@@ -1,0 +1,166 @@
+grid-rows: 3
+
+producer: "生产者 (Producer)" {
+  shape: rectangle
+  style: {
+    fill: "#EFF6FF"
+    stroke: "#3B82F6"
+    stroke-width: 2
+    bold: true
+  }
+}
+
+broker: "Broker 存储与索引分发架构" {
+  grid-rows: 3
+  style: {
+    fill: "#FFFBEB"
+    stroke: "#F59E0B"
+    stroke-width: 2
+    bold: true
+  }
+
+  write_stage: "第一阶段：mmap 映射与 Page Cache 顺序追加" {
+    grid-columns: 2
+    style: {
+      fill: "#FEF3C7"
+      stroke: "#D97706"
+    }
+
+    smp: "FileChannel.map()\n(预先映射 1GB MappedByteBuffer)" {
+      style: {
+        fill: "#FFFFFF"
+        stroke: "#D97706"
+      }
+    }
+
+    commitlog: "CommitLog (Page Cache 内存区)\nMappedByteBuffer.put(bytes)" {
+      shape: cylinder
+      style: {
+        fill: "#FDE68A"
+        stroke: "#B45309"
+        bold: true
+      }
+    }
+  }
+
+  flush_stage: "第二阶段：force() 物理刷盘持久化" {
+    grid-columns: 2
+    style: {
+      fill: "#FEF3C7"
+      stroke: "#D97706"
+    }
+
+    async_flush: "异步刷盘 (ASYNC_FLUSH)\nPage Cache 写毕即返 ACK，后台 force() 刷盘" {
+      style: {
+        fill: "#ECFDF5"
+        stroke: "#10B981"
+      }
+    }
+
+    sync_flush: "同步刷盘 (SYNC_FLUSH)\n显式 force() 阻塞等待脏页落盘后返 ACK" {
+      style: {
+        fill: "#FEF2F2"
+        stroke: "#EF4444"
+      }
+    }
+  }
+
+  dispatch_stage: "第三阶段：异步构建索引与消费" {
+    grid-columns: 3
+    style: {
+      fill: "#FEF3C7"
+      stroke: "#D97706"
+    }
+
+    reput: "ReputMessageService\n(常驻后台分发服务)" {
+      style: {
+        fill: "#FFFFFF"
+        stroke: "#D97706"
+      }
+    }
+
+    consume_queue: "ConsumeQueue 逻辑消费队列\n(CommitLog Offset + Size + Tag Hash)" {
+      shape: queue
+      style: {
+        fill: "#E0E7FF"
+        stroke: "#4338CA"
+      }
+    }
+
+    index_file: "IndexFile 哈希索引\n(Key / 时间戳索引表)" {
+      shape: document
+      style: {
+        fill: "#E0E7FF"
+        stroke: "#4338CA"
+      }
+    }
+  }
+}
+
+consumer: "消费者 (Consumer)" {
+  shape: rectangle
+  style: {
+    fill: "#ECFDF5"
+    stroke: "#10B981"
+    stroke-width: 2
+    bold: true
+  }
+}
+
+# 1. 生产者投递与 mmap 内存追加
+producer -> broker.write_stage.smp: "1. 发送消息请求" {
+  style.stroke: "#2563EB"
+}
+broker.write_stage.smp -> broker.write_stage.commitlog: "2. MappedByteBuffer.put(bytes)" {
+  style.stroke: "#2563EB"
+}
+
+# 2. force() 物理刷盘与 ACK 响应
+broker.write_stage.commitlog -> broker.flush_stage.async_flush: "3a. 内存写毕立即 ACK" {
+  style.stroke: "#10B981"
+}
+broker.write_stage.commitlog -> broker.flush_stage.sync_flush: "3b. MappedByteBuffer.force()" {
+  style.stroke: "#EF4444"
+}
+
+broker.flush_stage.async_flush -> producer: "ACK (异步)" {
+  style: {
+    stroke: "#10B981"
+    stroke-dash: 3
+  }
+}
+broker.flush_stage.sync_flush -> producer: "ACK (同步)" {
+  style: {
+    stroke: "#EF4444"
+    stroke-dash: 3
+  }
+}
+
+# 3. 异步分发索引
+broker.write_stage.commitlog -> broker.dispatch_stage.reput: "4. 扫描最新 Page Cache 数据" {
+  style: {
+    stroke: "#7C3AED"
+    stroke-dash: 3
+  }
+}
+
+broker.dispatch_stage.reput -> broker.dispatch_stage.consume_queue: "5a. 构建 ConsumeQueue" {
+  style: {
+    stroke: "#7C3AED"
+    stroke-dash: 3
+  }
+}
+broker.dispatch_stage.reput -> broker.dispatch_stage.index_file: "5b. 构建 IndexFile" {
+  style: {
+    stroke: "#7C3AED"
+    stroke-dash: 3
+  }
+}
+
+# 4. 消费端读取链路
+consumer -> broker.dispatch_stage.consume_queue: "6. 读取 ConsumeQueue (获取 CommitLog Offset)" {
+  style.stroke: "#059669"
+}
+consumer -> broker.write_stage.commitlog: "7. 按 Offset 读取 CommitLog 真实消息体" {
+  style.stroke: "#059669"
+}

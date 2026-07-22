@@ -1,0 +1,120 @@
+grid-rows: 2
+
+nameserver: "NameServer / 注册中心 (NameServer / ZooKeeper)" {
+  shape: cloud
+  style: {
+    fill: "#EDE9FE"
+    stroke: "#7C3AED"
+    stroke-width: 2
+    bold: true
+  }
+}
+
+data_plane: "" {
+  grid-columns: 3
+  style: {
+    stroke: transparent
+    fill: transparent
+  }
+
+  producer_group: "生产者集群 (Producer)" {
+    style: {
+      fill: "#F8FAFC"
+      stroke: "#CBD5E1"
+    }
+    p1: "Producer A\n(消息发送端)" {
+      shape: rectangle
+      style: {
+        fill: "#EFF6FF"
+        stroke: "#3B82F6"
+        stroke-width: 2
+        bold: true
+      }
+    }
+  }
+
+  broker: "MQ 代理服务器 (Broker)" {
+    style: {
+      fill: "#FFFBEB"
+      stroke: "#F59E0B"
+      stroke-width: 2
+      bold: true
+    }
+
+    topic_orders: "Topic: 订单消息 (逻辑分类)" {
+      style: {
+        fill: "#FEF3C7"
+        stroke: "#D97706"
+        stroke-dash: 4
+      }
+
+      part_0: "Partition 0 / Queue 0\n(物理分片)" {
+        shape: queue
+        style: {
+          fill: "#FDE68A"
+          stroke: "#B45309"
+        }
+      }
+
+      part_1: "Partition 1 / Queue 1\n(物理分片)" {
+        shape: queue
+        style: {
+          fill: "#FDE68A"
+          stroke: "#B45309"
+        }
+      }
+    }
+  }
+
+  consumer_group: "消费者组 (Consumer Group)" {
+    style: {
+      fill: "#F8FAFC"
+      stroke: "#CBD5E1"
+    }
+
+    c1: "Consumer 1\n(消息接收与处理端)" {
+      shape: rectangle
+      style: {
+        fill: "#ECFDF5"
+        stroke: "#10B981"
+        stroke-width: 2
+        bold: true
+      }
+    }
+  }
+}
+
+data_plane.producer_group.p1 -> data_plane.broker.topic_orders.part_0: "3. 投递消息" {
+  style: {
+    stroke: "#2563EB"
+    stroke-width: 2
+  }
+}
+
+data_plane.broker.topic_orders.part_0 -> data_plane.consumer_group.c1: "4. 拉取/推送消费" {
+  style: {
+    stroke: "#059669"
+    stroke-width: 2
+  }
+}
+
+data_plane.broker -> nameserver: "1. 注册服务与心跳保活" {
+  style: {
+    stroke: "#7C3AED"
+    stroke-dash: 3
+  }
+}
+
+data_plane.producer_group.p1 -> nameserver: "2. 查询 Topic 路由元数据" {
+  style: {
+    stroke: "#7C3AED"
+    stroke-dash: 3
+  }
+}
+
+data_plane.consumer_group.c1 -> nameserver: "2. 查询 Topic 路由元数据" {
+  style: {
+    stroke: "#7C3AED"
+    stroke-dash: 3
+  }
+}
