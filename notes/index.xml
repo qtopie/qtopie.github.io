@@ -4,12 +4,12 @@
 &lt;li&gt;&lt;strong&gt;有向图判环（Kahn 算法）&lt;/strong&gt;：基于&lt;strong&gt;入度（indegree）&lt;/strong&gt;。寻找入度为 0 的节点（前置依赖消清）并依次剥除。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;无向树找中心（剥洋葱算法）&lt;/strong&gt;：基于&lt;strong&gt;度（degree）&lt;/strong&gt;。寻找度为 1 的节点（最外层叶子）分层向内剥除。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class="d2-container" id="d2-5255d4c234365fa8f710ff6b3780bc88"&gt;&lt;div class="d2-controls"&gt;
+&lt;div class="d2-container" id="d2-aefc7401cc944ade054b36a6e27c3934"&gt;&lt;div class="d2-controls"&gt;
  &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
  &lt;/div&gt;
  &lt;div class="d2-img-container"&gt;
  &lt;div style="position: relative; display: inline-flex; align-items: center; justify-content: center; max-width: 100%;"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-5255d4c234365fa8f710ff6b3780bc88.svg" alt="D2 Diagram" style="max-width: 100%; height: auto;"&gt;
+ &lt;img src="https://qtopie.github.io/diagrams/d2-aefc7401cc944ade054b36a6e27c3934.svg" alt="D2 Diagram" style="max-width: 100%; height: auto;"&gt;
  &lt;div class="watermark-overlay" style="pointer-events: none; position: absolute; bottom: 5px; right: 5px; opacity: 0.4; font-size: 11px; color: #999;"&gt;qtopie.github.io&lt;/div&gt;
  &lt;/div&gt;
  &lt;/div&gt;&lt;/div&gt;
@@ -126,16 +126,16 @@
 &lt;p&gt;[!IMPORTANT]
 &lt;strong&gt;放行电脑防火墙&lt;/strong&gt;：
 如果你的电脑开启了 &lt;code&gt;ufw&lt;/code&gt; 防火墙，必须放行 &lt;code&gt;7070&lt;/code&gt; 端口，否则 Kindle 无法建立连接：&lt;/p&gt;</description></item><item><title>AI 智能体上下文工程与记忆系统设计：从理论到 Domour 架构实践</title><link>https://qtopie.github.io/notes/ai/agent-context/</link><pubDate>Sun, 12 Jul 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/ai/agent-context/</guid><description>&lt;p&gt;在大语言模型（LLM）驱动的 Agent（智能体）开发中，人们常说：“&lt;strong&gt;上下文即视野，记忆即灵魂&lt;/strong&gt;”。大语言模型本质上是无状态的（Stateless），它无法自动记住以往的对话与交互。因此，构建一个高效、安全、具备认知连续性的 Agent，必须依赖坚实的底层基础设施——&lt;strong&gt;上下文工程（Context Engineering）&lt;strong&gt;与&lt;/strong&gt;记忆系统（Memory System）&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;本文结合学术理论、业界大厂最佳实践（如 AWS Bedrock AgentCore Memory, Letta/MemGPT, Mem0, LangMem）以及具体开源项目 &lt;a href="file:///home/qtopierw/workspace/projects/domour"&gt;Domour&lt;/a&gt; 架构的设计细节，深入剖析 AI 智能体上下文与记忆的设计逻辑与工程落地路径。&lt;/p&gt;
+&lt;p&gt;本文结合学术理论、业界大厂最佳实践（如 AWS Bedrock AgentCore Memory, Letta/MemGPT, Mem0, LangMem）以及具体开源项目 Domour 架构的设计细节，深入剖析 AI 智能体上下文与记忆的设计逻辑与工程落地路径。&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id="一-上下文工程与记忆系统概述"&gt;一、 上下文工程与记忆系统概述&lt;/h2&gt;
+&lt;h2 id="上下文工程与记忆系统概述"&gt;上下文工程与记忆系统概述&lt;/h2&gt;
 &lt;p&gt;在工程上，我们可以对上下文工程做一个明确的定义：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;上下文工程&lt;/strong&gt;是将复杂的非结构化/半结构化信息重新概念化为一组动态、结构化的信息组件，通过来源获取、过滤、脱敏、压缩等管道处理，并在推理前进行编排，使其符合 LLM 输入规范的全部过程。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;简单来说：&lt;strong&gt;上下文工程 = 视野控制 + 通信协议 + Token 经济 + 持久化方案&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;而&lt;strong&gt;记忆系统&lt;/strong&gt;则作为上下文的“仓库”，负责跨会话、跨任务沉淀知识和经验。两者紧密共生：记忆系统是静态的“知识仓库”；上下文工程则是动态的“调度员”与“优化器”。&lt;/p&gt;
-&lt;h3 id="11-记忆的分类体系"&gt;1.1 记忆的分类体系&lt;/h3&gt;
+&lt;h3 id="记忆的分类体系"&gt;记忆的分类体系&lt;/h3&gt;
 &lt;p&gt;业界（如 LangMem、AWS 实践）通常借鉴人类心理学对记忆的分类，将 Agent 的记忆分为三大类：&lt;/p&gt;
 &lt;table&gt;
 	&lt;thead&gt;
@@ -174,7 +174,7 @@
 	&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;hr&gt;
-&lt;h2 id="二-行业前沿主流记忆框架分析"&gt;二、 行业前沿：主流记忆框架分析&lt;/h2&gt;
+&lt;h2 id="行业前沿主流记忆框架分析"&gt;行业前沿：主流记忆框架分析&lt;/h2&gt;
 &lt;p&gt;针对上述记忆模型，业界涌现出多种优秀的开源及商业实践：&lt;/p&gt;</description></item><item><title>Go + Wails 3 打造极致流畅、高可靠的 AI 流式对话系统设计方案</title><link>https://qtopie.github.io/notes/ai/go-wails3-streaming-chat/</link><pubDate>Wed, 08 Jul 2026 12:59:00 +0800</pubDate><guid>https://qtopie.github.io/notes/ai/go-wails3-streaming-chat/</guid><description>&lt;p&gt;在构建桌面端 AI 助手时，实现流式对话（Streaming Chat）几乎是标配功能。然而，要在桌面应用（例如使用 &lt;strong&gt;Go + Wails 3 + React&lt;/strong&gt; 技术栈）中做到&lt;strong&gt;极致流畅（无卡顿、高帧率）&lt;strong&gt;与&lt;/strong&gt;数据 100% 准确（无字面残缺、无版本覆盖冲突、支持异步长尾更新）&lt;/strong&gt;，其实面临着不少工程挑战。&lt;/p&gt;
 &lt;p&gt;本文将单纯从系统设计的角度，探讨一套针对 Go + Wails 桌面的流式对话通用架构方案。&lt;/p&gt;
 &lt;hr&gt;

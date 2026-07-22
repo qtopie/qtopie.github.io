@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Context on 1001問</title><link>https://qtopie.github.io/tags/context/</link><description>Recent content in Context on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Sun, 12 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/tags/context/index.xml" rel="self" type="application/rss+xml"/><item><title>AI 智能体上下文工程与记忆系统设计：从理论到 Domour 架构实践</title><link>https://qtopie.github.io/notes/ai/agent-context/</link><pubDate>Sun, 12 Jul 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/ai/agent-context/</guid><description>&lt;p&gt;在大语言模型（LLM）驱动的 Agent（智能体）开发中，人们常说：“&lt;strong&gt;上下文即视野，记忆即灵魂&lt;/strong&gt;”。大语言模型本质上是无状态的（Stateless），它无法自动记住以往的对话与交互。因此，构建一个高效、安全、具备认知连续性的 Agent，必须依赖坚实的底层基础设施——&lt;strong&gt;上下文工程（Context Engineering）&lt;strong&gt;与&lt;/strong&gt;记忆系统（Memory System）&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;本文结合学术理论、业界大厂最佳实践（如 AWS Bedrock AgentCore Memory, Letta/MemGPT, Mem0, LangMem）以及具体开源项目 &lt;a href="file:///home/qtopierw/workspace/projects/domour"&gt;Domour&lt;/a&gt; 架构的设计细节，深入剖析 AI 智能体上下文与记忆的设计逻辑与工程落地路径。&lt;/p&gt;
+&lt;p&gt;本文结合学术理论、业界大厂最佳实践（如 AWS Bedrock AgentCore Memory, Letta/MemGPT, Mem0, LangMem）以及具体开源项目 Domour 架构的设计细节，深入剖析 AI 智能体上下文与记忆的设计逻辑与工程落地路径。&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id="一-上下文工程与记忆系统概述"&gt;一、 上下文工程与记忆系统概述&lt;/h2&gt;
+&lt;h2 id="上下文工程与记忆系统概述"&gt;上下文工程与记忆系统概述&lt;/h2&gt;
 &lt;p&gt;在工程上，我们可以对上下文工程做一个明确的定义：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;上下文工程&lt;/strong&gt;是将复杂的非结构化/半结构化信息重新概念化为一组动态、结构化的信息组件，通过来源获取、过滤、脱敏、压缩等管道处理，并在推理前进行编排，使其符合 LLM 输入规范的全部过程。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;简单来说：&lt;strong&gt;上下文工程 = 视野控制 + 通信协议 + Token 经济 + 持久化方案&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;而&lt;strong&gt;记忆系统&lt;/strong&gt;则作为上下文的“仓库”，负责跨会话、跨任务沉淀知识和经验。两者紧密共生：记忆系统是静态的“知识仓库”；上下文工程则是动态的“调度员”与“优化器”。&lt;/p&gt;
-&lt;h3 id="11-记忆的分类体系"&gt;1.1 记忆的分类体系&lt;/h3&gt;
+&lt;h3 id="记忆的分类体系"&gt;记忆的分类体系&lt;/h3&gt;
 &lt;p&gt;业界（如 LangMem、AWS 实践）通常借鉴人类心理学对记忆的分类，将 Agent 的记忆分为三大类：&lt;/p&gt;
 &lt;table&gt;
 	&lt;thead&gt;
@@ -47,5 +47,5 @@
 	&lt;/tbody&gt;
 &lt;/table&gt;
 &lt;hr&gt;
-&lt;h2 id="二-行业前沿主流记忆框架分析"&gt;二、 行业前沿：主流记忆框架分析&lt;/h2&gt;
+&lt;h2 id="行业前沿主流记忆框架分析"&gt;行业前沿：主流记忆框架分析&lt;/h2&gt;
 &lt;p&gt;针对上述记忆模型，业界涌现出多种优秀的开源及商业实践：&lt;/p&gt;</description></item></channel></rss>
