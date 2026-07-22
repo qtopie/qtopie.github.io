@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Performance on 1001問</title><link>https://qtopie.github.io/tags/performance/</link><description>Recent content in Performance on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Wed, 22 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/tags/performance/index.xml" rel="self" type="application/rss+xml"/><item><title>Otter vs Badger：两个 Go 缓存/存储库的设计哲学与取舍</title><link>https://qtopie.github.io/notes/go/otter-vs-badger/</link><pubDate>Wed, 22 Jul 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/go/otter-vs-badger/</guid><description>&lt;p&gt;在 Go 生态中，&lt;a href="https://github.com/maypok86/otter"&gt;Otter&lt;/a&gt; 和 &lt;a href="https://github.com/dgraph-io/badger"&gt;Badger&lt;/a&gt; 是两个经常被同时提起的名字。它们都以高性能键值存取著称，但设计目标却截然不同：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Otter&lt;/strong&gt;：纯内存缓存库，追求极致的读写速度和低 GC 压力。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Badger&lt;/strong&gt;：持久化嵌入式键值存储，基于 LSM-Tree，兼顾写入吞吐与数据可靠性。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;乍看都是 &lt;code&gt;Set&lt;/code&gt;/&lt;code&gt;Get&lt;/code&gt;，但背后是完全不同的工程取舍。本文从设计目标、架构、性能、适用场景四个维度进行对比，帮助你为自己的项目做出正确选择。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="设计目标--缓存-vs-存储"&gt;设计目标 —— 缓存 vs 存储&lt;/h2&gt;
+&lt;p&gt;两个库最根本的区别在于对&amp;quot;数据生命周期&amp;quot;的假设：&lt;/p&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th style="text-align: left"&gt;维度&lt;/th&gt;
+					&lt;th style="text-align: left"&gt;Otter&lt;/th&gt;
+					&lt;th style="text-align: left"&gt;Badger&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td style="text-align: left"&gt;定位&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;进程内缓存（Cache）&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;嵌入式持久化 KV 存储（Database）&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style="text-align: left"&gt;数据持久性&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;不保证——进程退出即丢失&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;默认持久化到磁盘，可选纯内存模式&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style="text-align: left"&gt;驱逐策略&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;W-TinyLFU 自适应驱逐&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;无自动驱逐（除非设置 TTL）&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style="text-align: left"&gt;容量上限&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;固定最大条目数（驱逐触发边界）&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;磁盘容量&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style="text-align: left"&gt;核心场景&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;加速热点数据访问，降低外部延迟&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;替代传统数据库进行本地持久化存储&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Otter 的答案是&lt;/strong&gt;：&amp;ldquo;我很快，但我记不住东西。&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Badger 的答案是&lt;/strong&gt;：&amp;ldquo;我够快，而且我绝不会忘记。&amp;rdquo;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="otter无锁-w-tinylfu-缓存"&gt;Otter：无锁 W-TinyLFU 缓存&lt;/h2&gt;
+&lt;p&gt;Otter 是 Go 生态中第一个完整实现 &lt;strong&gt;无锁 W-TinyLFU&lt;/strong&gt; 驱逐策略的缓存库。它的设计哲学非常纯粹——用极致的工程优化做一件事：&lt;strong&gt;在给定内存预算下最大化缓存命中率&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id="核心架构"&gt;核心架构&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Shard 0 (无锁)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;├── Window Cache (LRU, 1% 空间)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;├── Main Cache (SLRU, 99% 空间)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ ├── Probation 段
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ └── Protected 段
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└── Count-Min Sketch (频率统计)
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Shard 1 ... Shard 15 (同上，共 16 个 Shard)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Window Cache&lt;/strong&gt;：新条目先进此处，给新热点&amp;quot;证明自己&amp;quot;的机会，防止冷启动阶段频繁误逐。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Main Cache&lt;/strong&gt;：经过 Window 筛选后的条目，根据访问频率自适应迁移到 Probation 或 Protected 段。Protected 段的条目不会被轻易逐出。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Count-Min Sketch + 布隆过滤器&lt;/strong&gt;：以极小的空间代价近似记录数千万条目的访问频率，同时通过布隆过滤器过滤掉低频噪音。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="关键设计亮点"&gt;关键设计亮点&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;无锁读取路径&lt;/strong&gt;：Get 操作完全无锁，仅依赖原子操作，跨核心扩展性极佳。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;零依赖&lt;/strong&gt;：仅依赖 Go 标准库——没有外部依赖，构建快速可靠。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;成本感知驱逐&lt;/strong&gt;：支持为每个条目指定&amp;quot;驱逐成本&amp;quot;，大对象优先被淘汰，避免一条大缓存冲垮整个池子。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;逐出回调&lt;/strong&gt;：&lt;code&gt;DeletionListener&lt;/code&gt; 在条目被逐出时通知，适合做资源清理或回写。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nx"&gt;cache&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;err&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;otter&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;MustBuilder&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;Response&lt;/span&gt;&lt;span class="p"&gt;](&lt;/span&gt;&lt;span class="mi"&gt;100_000&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;CollectStats&lt;/span&gt;&lt;span class="p"&gt;().&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;WithTTL&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;time&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Minute&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;WithCost&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;func&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;key&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;value&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;Response&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kt"&gt;uint32&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;return&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;uint32&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;len&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;value&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;Body&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;// 按大小计算成本&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;}).&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;DeletionListener&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kd"&gt;func&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;key&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="kt"&gt;string&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;value&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;Response&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;cause&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;otter&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nx"&gt;DeletionCause&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;log&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;Printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;#34;evicted: %s, cause: %v&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;key&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;cause&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;}).&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nf"&gt;Build&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id="badgerlsm-tree-持久化-kv-存储"&gt;Badger：LSM-Tree 持久化 KV 存储&lt;/h2&gt;
+&lt;p&gt;Badger 是 Dgraph 团队打造的嵌入式持久化 KV 存储。它受 RocksDB/LevelDB 启发，但用纯 Go 重写，并针对 SSD 和 Go 运行时做了深度优化。&lt;/p&gt;</description></item></channel></rss>
