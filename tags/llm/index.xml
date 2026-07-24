@@ -15,8 +15,8 @@
  &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
  &lt;/div&gt;
  &lt;div class="d2-img-container"&gt;
- &lt;div style="position: relative; display: inline-flex; align-items: center; justify-content: center; max-width: 100%;"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-0c0453c58e5a2e3b4de96c228827da86.svg" alt="D2 Diagram" style="max-width: 100%; height: auto;"&gt;
+ &lt;div style="position: relative; display: flex; align-items: center; justify-content: center; width: 100%; max-width: 100%;"&gt;
+ &lt;img src="https://qtopie.github.io/diagrams/d2-0c0453c58e5a2e3b4de96c228827da86.svg" alt="D2 Diagram" style="width: 100%; max-width: 100%; height: auto;"&gt;
  &lt;div class="watermark-overlay" style="pointer-events: none; position: absolute; bottom: 5px; right: 5px; opacity: 0.4; font-size: 11px; color: #999;"&gt;qtopie.github.io&lt;/div&gt;
  &lt;/div&gt;
  &lt;/div&gt;&lt;/div&gt;
@@ -51,8 +51,8 @@
  &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
  &lt;/div&gt;
  &lt;div class="d2-img-container"&gt;
- &lt;div style="position: relative; display: inline-flex; align-items: center; justify-content: center; max-width: 100%;"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-9fab57c576dfc5ca627698f623f7aca3.svg" alt="D2 Diagram" style="max-width: 100%; height: auto;"&gt;
+ &lt;div style="position: relative; display: flex; align-items: center; justify-content: center; width: 100%; max-width: 100%;"&gt;
+ &lt;img src="https://qtopie.github.io/diagrams/d2-9fab57c576dfc5ca627698f623f7aca3.svg" alt="D2 Diagram" style="width: 100%; max-width: 100%; height: auto;"&gt;
  &lt;div class="watermark-overlay" style="pointer-events: none; position: absolute; bottom: 5px; right: 5px; opacity: 0.4; font-size: 11px; color: #999;"&gt;qtopie.github.io&lt;/div&gt;
  &lt;/div&gt;
  &lt;/div&gt;&lt;/div&gt;
@@ -67,8 +67,8 @@
  &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
  &lt;/div&gt;
  &lt;div class="d2-img-container"&gt;
- &lt;div style="position: relative; display: inline-flex; align-items: center; justify-content: center; max-width: 100%;"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-aa1cdc653ea3ed710c7939cf1158f36e.svg" alt="D2 Diagram" style="max-width: 100%; height: auto;"&gt;
+ &lt;div style="position: relative; display: flex; align-items: center; justify-content: center; width: 100%; max-width: 100%;"&gt;
+ &lt;img src="https://qtopie.github.io/diagrams/d2-aa1cdc653ea3ed710c7939cf1158f36e.svg" alt="D2 Diagram" style="width: 100%; max-width: 100%; height: auto;"&gt;
  &lt;div class="watermark-overlay" style="pointer-events: none; position: absolute; bottom: 5px; right: 5px; opacity: 0.4; font-size: 11px; color: #999;"&gt;qtopie.github.io&lt;/div&gt;
  &lt;/div&gt;
  &lt;/div&gt;&lt;/div&gt;
@@ -81,8 +81,8 @@
  &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
  &lt;/div&gt;
  &lt;div class="d2-img-container"&gt;
- &lt;div style="position: relative; display: inline-flex; align-items: center; justify-content: center; max-width: 100%;"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-84567108c1b2e8c2ef60fa099714f287.svg" alt="D2 Diagram" style="max-width: 100%; height: auto;"&gt;
+ &lt;div style="position: relative; display: flex; align-items: center; justify-content: center; width: 100%; max-width: 100%;"&gt;
+ &lt;img src="https://qtopie.github.io/diagrams/d2-84567108c1b2e8c2ef60fa099714f287.svg" alt="D2 Diagram" style="width: 100%; max-width: 100%; height: auto;"&gt;
  &lt;div class="watermark-overlay" style="pointer-events: none; position: absolute; bottom: 5px; right: 5px; opacity: 0.4; font-size: 11px; color: #999;"&gt;qtopie.github.io&lt;/div&gt;
  &lt;/div&gt;
  &lt;/div&gt;&lt;/div&gt;
@@ -92,8 +92,8 @@
  &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
  &lt;/div&gt;
  &lt;div class="d2-img-container"&gt;
- &lt;div style="position: relative; display: inline-flex; align-items: center; justify-content: center; max-width: 100%;"&gt;
- &lt;img src="https://qtopie.github.io/diagrams/d2-7eafe87c29ccb9c4d9980aa2f4f9e926.svg" alt="D2 Diagram" style="max-width: 100%; height: auto;"&gt;
+ &lt;div style="position: relative; display: flex; align-items: center; justify-content: center; width: 100%; max-width: 100%;"&gt;
+ &lt;img src="https://qtopie.github.io/diagrams/d2-7eafe87c29ccb9c4d9980aa2f4f9e926.svg" alt="D2 Diagram" style="width: 100%; max-width: 100%; height: auto;"&gt;
  &lt;div class="watermark-overlay" style="pointer-events: none; position: absolute; bottom: 5px; right: 5px; opacity: 0.4; font-size: 11px; color: #999;"&gt;qtopie.github.io&lt;/div&gt;
  &lt;/div&gt;
  &lt;/div&gt;&lt;/div&gt;
