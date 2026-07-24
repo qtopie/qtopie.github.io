@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Distributed Systems on 1001問</title><link>https://qtopie.github.io/tags/distributed-systems/</link><description>Recent content in Distributed Systems on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Fri, 24 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/tags/distributed-systems/index.xml" rel="self" type="application/rss+xml"/><item><title>Dapr Durable Agents 简介</title><link>https://qtopie.github.io/notes/ai/dapr-durable-agents/</link><pubDate>Fri, 24 Jul 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/ai/dapr-durable-agents/</guid><description>&lt;p&gt;Dapr Durable Agents 是 Dapr 社区在 2025 年推出的 AI Agent 开发框架，它将 LLM 的推理与行动能力深度嵌入 Dapr Workflow 运行时，赋予 AI 智能体云原生的耐久性、状态持久化和容错能力。&lt;/p&gt;
+&lt;h2 id="核心问题传统-agent-框架的脆弱性"&gt;核心问题：传统 Agent 框架的脆弱性&lt;/h2&gt;
+&lt;p&gt;当前主流 AI Agent 框架（如 LangChain、CrewAI）在生产环境中普遍存在以下痛点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;执行状态脆弱&lt;/strong&gt;：Agent 的 ReAct 循环是多步过程，节点崩溃后所有上下文和执行进度丢失，从头重来既低效又浪费 Token&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;缺乏长周期支持&lt;/strong&gt;：企业级 Agent 经常需要等待数小时到数天（人工审批、定时触发），现有框架无法优雅挂起与恢复&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;状态一致性与可观测性缺失&lt;/strong&gt;：多 Agent 协作的通信与记忆持久化需手写大量胶水代码，缺少分布式追踪&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="为什么选择-dapr-agents"&gt;为什么选择 Dapr Agents？&lt;/h2&gt;
+&lt;h3 id="可扩展的工作流一等公民"&gt;可扩展的工作流（一等公民）&lt;/h3&gt;
+&lt;p&gt;Dapr Agents 使用&lt;strong&gt;持久化执行（Durable Execution）&lt;/strong&gt; 工作流引擎，保证每个 Agent 任务在网络故障、节点崩溃等破坏性故障面前都能执行到底。开发者无需理解工作流引擎的底层概念——只需编写执行任意数量任务的 Agent，这些任务会被自动分布到集群中。任何任务失败时，它将被重试并从断点恢复状态。&lt;/p&gt;
+&lt;h3 id="经济高效"&gt;经济高效&lt;/h3&gt;
+&lt;p&gt;Dapr Agents 构建于 Dapr Workflow API 之上，底层使用 &lt;strong&gt;Actor 模型&lt;/strong&gt;——一种线程安全且原生分布式的计算与状态单元，非常适配 Agent 的 &lt;strong&gt;Scale-To-Zero&lt;/strong&gt; 架构。这最大限度地降低了基础设施成本。底层虚拟 Actor 模型允许数千个 Agent 按需在单核机器上运行，从零扩展时延迟仅为双位数毫秒。当 Agent 空闲时，系统回收其资源但保留状态，直到下次被唤醒。这种设计在性能和资源效率之间无需权衡。&lt;/p&gt;
+&lt;div class="d2-container" id="d2-0c0453c58e5a2e3b4de96c228827da86"&gt;&lt;div class="d2-controls"&gt;
+ &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
+ &lt;/div&gt;
+ &lt;div class="d2-img-container"&gt;
+ &lt;div style="position: relative; display: inline-flex; align-items: center; justify-content: center; max-width: 100%;"&gt;
+ &lt;img src="https://qtopie.github.io/diagrams/d2-0c0453c58e5a2e3b4de96c228827da86.svg" alt="D2 Diagram" style="max-width: 100%; height: auto;"&gt;
+ &lt;div class="watermark-overlay" style="pointer-events: none; position: absolute; bottom: 5px; right: 5px; opacity: 0.4; font-size: 11px; color: #999;"&gt;qtopie.github.io&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;&lt;/div&gt;
+&lt;h3 id="数据中心的-ai-agent"&gt;数据中心的 AI Agent&lt;/h3&gt;
+&lt;p&gt;Dapr Agents 内置连接 &lt;strong&gt;50+ 企业级数据源&lt;/strong&gt;，高效处理结构化与非结构化数据。从 PDF 提取到大规模数据库交互，它都能以最少的代码变更实现数据驱动的 AI 工作流。Dapr 的 Bindings 和 State Stores 为 Agent 提供了丰富的数据摄取通道。&lt;/p&gt;</description></item></channel></rss>
