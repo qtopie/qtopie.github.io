@@ -10,97 +10,9 @@ if ! command -v d2 >/dev/null 2>&1; then
 fi
 
 mkdir -p "$OUT_DIR"
-TMP_DIR="$(mktemp -d)"
-trap 'rm -rf "$TMP_DIR"' EXIT
-
-process_file_and_track() {
-  local file="$1"
-  local escaped_file
-  escaped_file="${file//\//_}"
-
-  awk -v tmp_dir="$TMP_DIR" -v file_key="$escaped_file" '
-    function parse_theme(header, m, t) {
-      t = "0"
-      if (match(header, /theme[[:space:]]*=[[:space:]]*"[^"]+"/)) {
-        t = substr(header, RSTART, RLENGTH)
-        sub(/^[^=]*=[[:space:]]*"/, "", t)
-        sub(/"$/, "", t)
-      } else if (match(header, /theme[[:space:]]*=[[:space:]]*[0-9]+/)) {
-        t = substr(header, RSTART, RLENGTH)
-        sub(/^[^=]*=[[:space:]]*/, "", t)
-      }
-      return t
-    }
-
-    BEGIN {
-      in_block = 0
-      block_id = 0
-      theme = "0"
-      block_file = ""
-    }
-
-    !in_block && $0 ~ /^```d2([[:space:]]*\{[^}]*\})?[[:space:]]*$/ {
-      in_block = 1
-      block_id++
-      theme = parse_theme($0)
-      block_file = sprintf("%s/%s_block_%d.d2", tmp_dir, file_key, block_id)
-      next
-    }
-
-    in_block && $0 ~ /^```[[:space:]]*$/ {
-      printf("%s\t%s\t%s\n", block_file, theme, block_id)
-      in_block = 0
-      theme = "0"
-      block_file = ""
-      next
-    }
-
-    in_block {
-      print $0 >> block_file
-    }
-  ' "$file" | while IFS=$'\t' read -r block_file theme block_id; do
-    local hash
-    local out_file
-
-    # Keep hashing stable across editors by normalizing CRLF, tabs, and outer blank lines.
-    normalized_file="$TMP_DIR/normalized-${escaped_file}-${block_id}.d2"
-    awk '
-      {
-        sub(/\r$/, "")
-        gsub(/\t/, "    ")
-        if (started || $0 !~ /^[[:space:]]*$/) {
-          started = 1
-          lines[++n] = $0
-        }
-      }
-      END {
-        while (n > 0 && lines[n] ~ /^[[:space:]]*$/) {
-          n--
-        }
-        for (i = 1; i <= n; i++) {
-          print lines[i]
-        }
-      }
-    ' "$block_file" > "$normalized_file"
-
-    # Strip the trailing newline that awk (or the file system) added to match Hugo's TrimSpace/replaceRE logic.
-    hash="$( { printf "%s\n" "$(cat "$normalized_file")"; printf "|theme=%s" "$theme"; } | md5sum | awk '{print $1}' )"
-    out_file="$OUT_DIR/d2-${hash}.svg"
-
-    if [[ -f "$out_file" ]]; then
-      chmod 644 "$out_file"
-      echo "skip: $file#$block_id (theme=$theme) -> $(basename "$out_file")"
-      continue
-    fi
-
-    d2 --theme "$theme" "$normalized_file" "$out_file" >/dev/null
-    chmod 644 "$out_file"
-    echo "gen:  $file#$block_id (theme=$theme) -> $(basename "$out_file")"
-  done
-}
-
 # Collect all expected output files in a temporary file
 EXPECTED_FILES="$(mktemp)"
+TMP_DIR="$(mktemp -d)"
 trap 'rm -rf "$TMP_DIR" "$EXPECTED_FILES"' EXIT
 
 # Override process_file to append to EXPECTED_FILES
