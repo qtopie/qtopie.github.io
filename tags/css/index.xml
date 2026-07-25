@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>React on 1001問</title><link>https://qtopie.github.io/tags/react/</link><description>Recent content in React on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Sat, 25 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/tags/react/index.xml" rel="self" type="application/rss+xml"/><item><title>前端开发小册子</title><link>https://qtopie.github.io/posts/lesson/the-little-frontend-book/</link><pubDate>Sat, 25 Jul 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/posts/lesson/the-little-frontend-book/</guid><description>&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Css on 1001問</title><link>https://qtopie.github.io/tags/css/</link><description>Recent content in Css on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Sat, 25 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/tags/css/index.xml" rel="self" type="application/rss+xml"/><item><title>前端开发小册子</title><link>https://qtopie.github.io/posts/lesson/the-little-frontend-book/</link><pubDate>Sat, 25 Jul 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/posts/lesson/the-little-frontend-book/</guid><description>&lt;blockquote&gt;
 &lt;p&gt;这是一份面向前端初学者的极简通俗指南，旨在帮助你用最短的时间建立起对现代前端开发的全局认知与核心实战能力。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;模仿《The Little Go Book》等系列小册子的风格，本小册子不堆砌冗长的 API 文档，而是专注于：&lt;strong&gt;厘清核心概念、对比新旧演进、掌握现代 React + TypeScript 实战范式&lt;/strong&gt;。&lt;/p&gt;
@@ -71,63 +71,4 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;body&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;&amp;lt;/&lt;/span&gt;&lt;span class="nt"&gt;html&lt;/span&gt;&lt;span class="p"&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id="cs-架构与-http-协议"&gt;C/S 架构与 HTTP 协议&lt;/h3&gt;
-&lt;p&gt;在前端开发中，浏览器是客户端（Client），提供数据与逻辑处理的后端程序是服务端（Server）。两者通过 &lt;strong&gt;HTTP 协议&lt;/strong&gt; 进行通信。&lt;/p&gt;</description></item><item><title>Go + Wails 3 打造极致流畅、高可靠的 AI 流式对话系统设计方案</title><link>https://qtopie.github.io/notes/ai/go-wails3-streaming-chat/</link><pubDate>Wed, 08 Jul 2026 12:59:00 +0800</pubDate><guid>https://qtopie.github.io/notes/ai/go-wails3-streaming-chat/</guid><description>&lt;p&gt;在构建桌面端 AI 助手时，实现流式对话（Streaming Chat）几乎是标配功能。然而，要在桌面应用（例如使用 &lt;strong&gt;Go + Wails 3 + React&lt;/strong&gt; 技术栈）中做到&lt;strong&gt;极致流畅（无卡顿、高帧率）&lt;strong&gt;与&lt;/strong&gt;数据 100% 准确（无字面残缺、无版本覆盖冲突、支持异步长尾更新）&lt;/strong&gt;，其实面临着不少工程挑战。&lt;/p&gt;
-&lt;p&gt;本文将单纯从系统设计的角度，探讨一套针对 Go + Wails 桌面的流式对话通用架构方案。&lt;/p&gt;
-&lt;hr&gt;
-&lt;h2 id="核心痛点与挑战"&gt;核心痛点与挑战&lt;/h2&gt;
-&lt;p&gt;在传统的 Web 或桌面应用中，流式消息的传递经常会面临以下性能与稳定性瓶颈：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;高频 IPC 通信开销&lt;/strong&gt;：大模型（LLM）吐出 Token 的速度极快，如果每一个 Token 都直接触发一次 Wails 事件传输，频繁的跨进程 IPC 管道调用会迅速榨干系统 CPU。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;React UI 线程阻塞（setState 灾难）&lt;/strong&gt;：如果前端每收到一个 Token 都立即触发一次 React 组件状态更新，高频的 VDOM 渲染会导致前端界面瞬间掉帧甚至冻结。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;网络/管道乱序与数据空洞&lt;/strong&gt;：在并发或多线程的异步消息传输中，Token 帧极易发生微小的时序颠倒或丢包，导致前端组装出来的 Markdown 文本出现“字面残缺”或结构性标签折断。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;重新生成与重新编辑下的覆盖竞态&lt;/strong&gt;：用户可能在 1 秒内连续点击“重新生成”，旧的生成线程与新的生成线程在后台并发运行，此时两者的缓存和前端渲染极其容易发生覆盖冲突。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;长耗时工具/异步状态的后置更新&lt;/strong&gt;：大模型流式输出完毕了，但其调用的后台任务（如异步编译、定点扫码等）仍在后台运行，如何在流生命周期之外，优雅且就地更新消息的局部字段？&lt;/li&gt;
-&lt;/ol&gt;
-&lt;hr&gt;
-&lt;h2 id="整体设计架构图"&gt;整体设计架构图&lt;/h2&gt;
-&lt;p&gt;为了解决上述痛点，我们可以采用 &lt;strong&gt;平滑合批分发 + Attempt 级别隔离 + 滑动窗口重组 + 双阶段对齐 + 局部补丁更新&lt;/strong&gt; 的联合架构：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;┌──────────────────────────────────────────────────────────────┐
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ 大模型/后台服务 (LLM Provider / Backend Engine) │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ 高频、微秒级 Token 流 │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└──────────────────────┬───────────────────────────────────────┘
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ▼
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;┌──────────────────────────────────────────────────────────────┐
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ Go Backend (Wails 服务端) │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ ┌─────────────────────────────────────────────────────────┐ │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ Attempt Caching (以 StreamID 为联合键的真理缓存) │ │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ · 为每次生成请求（包含重新生成）创建唯一的 StreamID (UUID) │ │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ · 全量 assembled 数据均以此 ID 隔离缓存，防止覆盖竞态 │ │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ └───────────────┬─────────────────────────────────────────┘ │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ ┌───────────────▼─────────────────────────────────────────┐ │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ StreamDispatcher (定时合批平滑分发器) │ │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ · 30ms 定时 Ticker + 50 帧容量阈值限制 │ │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ · 将高频 Token 帧打包成数组形式发送，极大缓解 IPC 压力 │ │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ └───────────────┬─────────────────────────────────────────┘ │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└──────────────────┼──────────────────────────────────────────┘
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; │ Wails IPC (Events.Emit)
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; ▼
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;┌──────────────────────────────────────────────────────────────┐
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ Frontend Client (Wails 网页前端) │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ ┌─────────────────────────────────────────────────────────┐ │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ Reassembly Buffer (滑动窗口重组缓冲区) │ │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ · 根据 chunkIndex 组装，自愈因异步并发带来的时序空洞 │ │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ └───────────────┬─────────────────────────────────────────┘ │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ ┌───────────────▼─────────────────────────────────────────┐ │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ requestAnimationFrame Scheduler (16ms 增量批量更新) │ │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ · 一帧内最多触发一次 setState，配合屏幕刷新率防抖 │ │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ └───────────────┬─────────────────────────────────────────┘ │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ ┌───────────────▼─────────────────────────────────────────┐ │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ Post-Stream Sync (后置对齐) &amp;amp; Active Patching (补丁通道) │ │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ · 流结束：同步清空缓冲区 -&amp;gt; 异步拉取 GetFullMessage() │ │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ │ · 补丁：监听 &amp;#39;chat-patch&amp;#39; 通道，跨周期就地更新指定消息 │ │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;│ └─────────────────────────────────────────────────────────┘ │
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└──────────────────────────────────────────────────────────────┘
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
-&lt;h2 id="流式多信道复用与-chunktype-设计"&gt;流式多信道复用与 ChunkType 设计&lt;/h2&gt;
-&lt;p&gt;传统的流式对话系统通常假设通道内传输的全部都是纯文本。但在 Agent（智能体）复杂的执行链路中，大模型在同一轮生成中可能会输出不同性质的内容：&lt;/p&gt;</description></item></channel></rss>
+&lt;p&gt;在前端开发中，浏览器是客户端（Client），提供数据与逻辑处理的后端程序是服务端（Server）。两者通过 &lt;strong&gt;HTTP 协议&lt;/strong&gt; 进行通信。&lt;/p&gt;</description></item></channel></rss>
