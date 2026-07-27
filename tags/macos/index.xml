@@ -7,7 +7,8 @@
 &lt;/ul&gt;
 &lt;p&gt;最令人头疼的是，系统层面并没有给出任何明确的错误提示框来指明到底是什么服务出了问题。&lt;/p&gt;
 &lt;h2 id="排查过程"&gt;排查过程&lt;/h2&gt;
-&lt;p&gt;既然图形界面没有任何有用的提示，只能求助于命令行，通过系统日志来抓取底层错误。因为怀疑是账号或认证相关的问题，我使用了 &lt;code&gt;log stream&lt;/code&gt; 监听 &lt;code&gt;akd&lt;/code&gt; (AuthKit 守护进程) 的相关日志：&lt;/p&gt;
+&lt;p&gt;起初，结合网上的资料和过往经验，我高度怀疑是网络或者代理导致的问题。为此，我花了不少时间排查网络设置，但并没有发现任何异常。&lt;/p&gt;
+&lt;p&gt;既然排除了网络原因，且图形界面没有任何有用的提示，只能求助于命令行，通过系统日志来抓取底层错误。因为怀疑是账号或认证相关的问题，我使用了 &lt;code&gt;log stream&lt;/code&gt; 监听 &lt;code&gt;akd&lt;/code&gt; (AuthKit 守护进程) 的相关日志：&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;log stream --info --predicate &lt;span class="s1"&gt;&amp;#39;process == &amp;#34;akd&amp;#34; or message contains &amp;#34;AuthKit&amp;#34;&amp;#39;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;通过实时查看系统日志，终于抓到了蛛丝马迹：日志中大量抛出了与 Keychain（钥匙串）相关的解锁失败和授权错误。&lt;/p&gt;
 &lt;h2 id="根本原因"&gt;根本原因&lt;/h2&gt;
