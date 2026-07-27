@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Debug on 1001問</title><link>https://qtopie.github.io/tags/debug/</link><description>Recent content in Debug on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Fri, 24 Jul 2026 11:05:32 +0800</lastBuildDate><atom:link href="https://qtopie.github.io/tags/debug/index.xml" rel="self" type="application/rss+xml"/><item><title>记一次排查 macOS 认证（Keychain）引发的系统异常</title><link>https://qtopie.github.io/notes/dev/macos-login-issue/</link><pubDate>Fri, 24 Jul 2026 11:05:32 +0800</pubDate><guid>https://qtopie.github.io/notes/dev/macos-login-issue/</guid><description>&lt;h2 id="异常现象"&gt;异常现象&lt;/h2&gt;
+&lt;p&gt;最近在使用 macOS 时遇到了非常诡异的问题，具体表现如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;登录状态卡死&lt;/strong&gt;：既不能退出当前用户，也不能继续完成一些登录操作。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;系统弹窗异常&lt;/strong&gt;：系统只是泛泛地提示“部分服务需要继续登录”，但没有给出具体的解决方案。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;第三方及系统应用崩溃&lt;/strong&gt;：例如腾讯会议、系统相册等软件打开异常，完全无法正常使用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;最令人头疼的是，系统层面并没有给出任何明确的错误提示框来指明到底是什么服务出了问题。&lt;/p&gt;
+&lt;h2 id="排查过程"&gt;排查过程&lt;/h2&gt;
+&lt;p&gt;既然图形界面没有任何有用的提示，只能求助于命令行，通过系统日志来抓取底层错误。因为怀疑是账号或认证相关的问题，我使用了 &lt;code&gt;log stream&lt;/code&gt; 监听 &lt;code&gt;akd&lt;/code&gt; (AuthKit 守护进程) 的相关日志：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;log stream --info --predicate &lt;span class="s1"&gt;&amp;#39;process == &amp;#34;akd&amp;#34; or message contains &amp;#34;AuthKit&amp;#34;&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;通过实时查看系统日志，终于抓到了蛛丝马迹：日志中大量抛出了与 Keychain（钥匙串）相关的解锁失败和授权错误。&lt;/p&gt;
+&lt;h2 id="根本原因"&gt;根本原因&lt;/h2&gt;
+&lt;p&gt;结合日志分析，我回忆起之前&lt;strong&gt;修改过系统密码&lt;/strong&gt;。在正常情况下，修改系统密码会自动同步更新 Keychain 的密码。但这一次，系统可能卡在了某个同步环节，导致 Keychain 仍然在使用&lt;strong&gt;旧密码&lt;/strong&gt;加密。&lt;/p&gt;
+&lt;p&gt;由于 Keychain 被锁住，所有依赖它获取凭证的系统服务（如 iCloud 认证）和应用（如腾讯会议、相册）自然就崩溃或无法正常工作了。&lt;/p&gt;
+&lt;h2 id="解决方案"&gt;解决方案&lt;/h2&gt;
+&lt;p&gt;定位到问题后，解决起来就比较简单了：当系统或应用需要访问 Keychain 时，系统其实是在尝试用新密码解锁，由于密码不匹配导致静默失败。最终，在触发 Keychain 验证的地方手动输入了&lt;strong&gt;系统旧密码&lt;/strong&gt;，成功将 Keychain 解锁。&lt;/p&gt;
+&lt;p&gt;解锁后，所有异常的软件立刻恢复了正常，登录状态的问题也迎刃而解。&lt;/p&gt;
+&lt;p&gt;附上成功恢复后的截图：&lt;/p&gt;
+&lt;p&gt;&lt;img src="0f102af4c5e506adb5bf393d338dbacb.png" alt="成功结果"&gt;&lt;/p&gt;</description></item></channel></rss>
