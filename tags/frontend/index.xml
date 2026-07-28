@@ -2,6 +2,7 @@
 &lt;p&gt;这是一份面向前端初学者的极简通俗指南，旨在帮助你用最短的时间建立起对现代前端开发的全局认知与核心实战能力。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;模仿《The Little Go Book》等系列小册子的风格，本小册子不堆砌冗长的 API 文档，而是专注于：&lt;strong&gt;厘清核心概念、对比新旧演进、掌握现代 React + TypeScript 实战范式&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;代码参考: &lt;a href="https://github.com/qtopie/frontend-sample"&gt;https://github.com/qtopie/frontend-sample&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id="前端基础"&gt;前端基础&lt;/h2&gt;
 &lt;p&gt;网页的本质是运行在浏览器中的图形界面。现代前端开发虽然框架林立，但其基石始终没有改变。&lt;/p&gt;
 &lt;h3 id="三剑客的分工htmlcss-与-javascript"&gt;三剑客的分工：HTML、CSS 与 JavaScript&lt;/h3&gt;
