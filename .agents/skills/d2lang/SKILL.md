@@ -118,6 +118,7 @@ server: "Web 服务器" {
 
 ### 系统架构图模版
 
+```
 ```d2
 direction: right
 
@@ -154,11 +155,13 @@ client -> gateway: "HTTPS"
 gateway -> services.auth_service: "转发"
 services.user_service -> db_cluster.primary_db: "读写"
 ```
+```
 
 ### 时序图模版
 
 时序图的顶层通常需要设置 `shape: sequence-diagram`。
 
+```
 ```d2
 shape: sequence-diagram
 
@@ -170,6 +173,7 @@ alice -> bob: "你好，鲍勃！"
 bob -> server: "验证爱丽丝的身份"
 server -> bob: "身份合法"
 bob -> alice: "你好，爱丽丝，验证通过！"
+```
 ```
 ## 工具、编译与自我校验
 

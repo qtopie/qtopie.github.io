@@ -22,17 +22,17 @@ https://gohugo.io/content-management/mathematics/
 brew install d2
 ```
 
-- Write diagrams using fenced code blocks in Markdown:
+- Write diagrams using fenced code blocks in Markdown (e.g. ```` ```d2 ````):
 
-	```d2
-	x -> y: hello
-	```
+  ```text
+  x -> y: hello
+  ```
 
-- Optional theme attribute:
+- Optional theme attribute (e.g. ```` ```d2 {theme="200"} ````):
 
-	```d2 {theme="200"}
-	x -> y: hello
-	```
+  ```text
+  x -> y: hello
+  ```
 
 - Build-time behavior:
 	- Hugo render hook `themes/drift-blog-theme/layouts/_markup/render-codeblock-d2.html` maps each `d2` code block to `static/diagrams/d2-<hash>.svg`.

@@ -24,6 +24,8 @@ tasks:
     sources:
       - content/**/*.md
       - posts/**/*.md
+      - "**/content/**/*.md"
+      - "**/posts/**/*.md"
       - scripts/generate-d2-diagrams.sh
     cmds:
       - ./scripts/generate-d2-diagrams.sh
