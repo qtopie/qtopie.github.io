@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Synchronization on 1001問</title><link>https://qtopie.github.io/tags/synchronization/</link><description>Recent content in Synchronization on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Fri, 31 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/tags/synchronization/index.xml" rel="self" type="application/rss+xml"/><item><title>多线程并发与同步机制</title><link>https://qtopie.github.io/notes/linux/multithreading-concurrency-and-synchronization/</link><pubDate>Fri, 31 Jul 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/linux/multithreading-concurrency-and-synchronization/</guid><description>&lt;p&gt;在多核 CPU 时代，多线程编程已成为充分提升系统吞吐量与响应速度的必备手段。然而，多个线程并发访问同一块内存区域或修改共享状态时，极易触发&lt;strong&gt;数据竞态（Data Race）&lt;/strong&gt;，导致数据错乱或未定义行为。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;多线程并发同步机制&lt;/strong&gt;就是用来控制多个线程同时访问共享资源、或者协调它们执行顺序的工具。它的核心目的是&lt;strong&gt;保障数据一致性、防止竞态条件，并避免程序发生死锁（Deadlock）与饥饿（Starvation）&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;根据不同的应用场景与协调方式，并发同步机制主要划分为四大类：&lt;/p&gt;
+&lt;div class="d2-container" id="d2-e3d98547e6952c6b4ddec057f1981bea"&gt;&lt;div class="d2-controls"&gt;
+ &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
+ &lt;/div&gt;
+ &lt;div class="d2-img-container"&gt;
+ &lt;div style="position: relative; display: flex; align-items: center; justify-content: center; width: 100%; max-width: 100%;"&gt;
+ &lt;img src="https://qtopie.github.io/diagrams/d2-e3d98547e6952c6b4ddec057f1981bea.svg" alt="D2 Diagram" style="width: 100%; max-width: 100%; height: auto;"&gt;
+ &lt;div class="watermark-overlay" style="pointer-events: none; position: absolute; bottom: 5px; right: 5px; opacity: 0.4; font-size: 11px; color: #999;"&gt;qtopie.github.io&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;&lt;/div&gt;
+&lt;hr&gt;
+&lt;h2 id="锁机制保护共享资源"&gt;锁机制（保护共享资源）&lt;/h2&gt;
+&lt;p&gt;锁是最基础、最直接的同步机制，用于建立&lt;strong&gt;临界区（Critical Section）&lt;/strong&gt;，确保同一时刻只有一个（或特定数量的）线程能够操作某块代码或数据。&lt;/p&gt;
+&lt;h3 id="互斥锁mutex"&gt;互斥锁（Mutex）&lt;/h3&gt;
+&lt;p&gt;互斥锁（Mutual Exclusion Lock）是最常用的独占锁。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;原理&lt;/strong&gt;：互斥锁具有“排他性”。当一个线程成功加锁（Lock）后，其他试图获取该锁的线程会被内核挂起并放入等待队列（进入阻塞/休眠状态），直到持锁线程释放锁（Unlock）并唤醒等待线程。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;CPU 行为&lt;/strong&gt;：获取失败时会触发上下文切换（Context Switch），线程让出 CPU 执行权。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;适用场景&lt;/strong&gt;：临界区代码执行时间较长、涉及磁盘/网络 I/O 或复杂业务计算的通用并发保护。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;经典示例（POSIX pthread / C++）&lt;/strong&gt;：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-cpp" data-lang="cpp"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="cp"&gt;#include&lt;/span&gt; &lt;span class="cpf"&gt;&amp;lt;pthread.h&amp;gt;&lt;/span&gt;&lt;span class="cp"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;pthread_mutex_t&lt;/span&gt; &lt;span class="n"&gt;lock&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;PTHREAD_MUTEX_INITIALIZER&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;shared_counter&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kt"&gt;void&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="nf"&gt;increment&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;void&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;arg&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;pthread_mutex_lock&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lock&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;shared_counter&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="c1"&gt;// 临界区操作
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;pthread_mutex_unlock&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lock&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id="读写锁read-write-lock"&gt;读写锁（Read-Write Lock）&lt;/h3&gt;
+&lt;p&gt;读写锁（如 &lt;code&gt;pthread_rwlock_t&lt;/code&gt; / Java &lt;code&gt;ReentrantReadWriteLock&lt;/code&gt;）采用“读写分离”的策略来提升并发读吞吐。&lt;/p&gt;</description></item></channel></rss>

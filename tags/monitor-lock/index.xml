@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Monitor Lock on 1001問</title><link>https://qtopie.github.io/tags/monitor-lock/</link><description>Recent content in Monitor Lock on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Sat, 05 Jan 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/tags/monitor-lock/index.xml" rel="self" type="application/rss+xml"/><item><title>Java Monitor 同步机制</title><link>https://qtopie.github.io/notes/java/monitor/</link><pubDate>Sat, 05 Jan 2019 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/java/monitor/</guid><description>&lt;p&gt;Java 中的 &lt;code&gt;synchronized&lt;/code&gt; 关键字是实现线程安全与同步的核心手段，其底层依赖于 JVM 提供的 &lt;strong&gt;Monitor（管程 / 监视器锁）&lt;/strong&gt; 机制。&lt;/p&gt;
+&lt;p&gt;Monitor 不仅在语义层保证了并发访问的&lt;strong&gt;互斥性&lt;/strong&gt;与&lt;strong&gt;可见性&lt;/strong&gt;，更在底层的 Java 内存模型（JMM）与现代 CPU 硬件指令集上建立了严密的内存屏障与 Happens-Before 关联。&lt;/p&gt;
+&lt;div class="d2-container" id="d2-17ce333a1bf3b1c1ec214ae226b43a03"&gt;&lt;div class="d2-controls"&gt;
+ &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
+ &lt;/div&gt;
+ &lt;div class="d2-img-container"&gt;
+ &lt;div style="position: relative; display: flex; align-items: center; justify-content: center; width: 100%; max-width: 100%;"&gt;
+ &lt;img src="https://qtopie.github.io/diagrams/d2-17ce333a1bf3b1c1ec214ae226b43a03.svg" alt="D2 Diagram" style="width: 100%; max-width: 100%; height: auto;"&gt;
+ &lt;div class="watermark-overlay" style="pointer-events: none; position: absolute; bottom: 5px; right: 5px; opacity: 0.4; font-size: 11px; color: #999;"&gt;qtopie.github.io&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;&lt;/div&gt;
+&lt;hr&gt;
+&lt;h2 id="jmm-内存模型与-happens-before-规则"&gt;JMM 内存模型与 Happens-Before 规则&lt;/h2&gt;
+&lt;p&gt;Java 内存模型（JMM）通过 Happens-Before 原则定义了多线程环境下的内存可见性与有序性保障。Monitor 机制是 JMM Happens-Before 规则的核心载体之一。&lt;/p&gt;
+&lt;h3 id="监视器锁规则-monitor-lock-rule"&gt;监视器锁规则 (Monitor Lock Rule)&lt;/h3&gt;
+&lt;p&gt;JMM 明确规定：&lt;strong&gt;对一个监视器锁的解锁（Unlock）Happens-Before 于后续对同一个监视器锁的加锁（Lock）。&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="d2-container" id="d2-b3f1a959c0b29109ed18f8e973480050"&gt;&lt;div class="d2-controls"&gt;
+ &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
+ &lt;/div&gt;
+ &lt;div class="d2-img-container"&gt;
+ &lt;div style="position: relative; display: flex; align-items: center; justify-content: center; width: 100%; max-width: 100%;"&gt;
+ &lt;img src="https://qtopie.github.io/diagrams/d2-b3f1a959c0b29109ed18f8e973480050.svg" alt="D2 Diagram" style="width: 100%; max-width: 100%; height: auto;"&gt;
+ &lt;div class="watermark-overlay" style="pointer-events: none; position: absolute; bottom: 5px; right: 5px; opacity: 0.4; font-size: 11px; color: #999;"&gt;qtopie.github.io&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;&lt;/div&gt;
+&lt;h3 id="内存屏障与硬件级指令映射-memory-barriers"&gt;内存屏障与硬件级指令映射 (Memory Barriers)&lt;/h3&gt;
+&lt;p&gt;为了实现 Monitor 锁的 Happens-Before 语义，JVM 在编译与字节码执行时会在 Monitor 的临界区边界插入硬件级&lt;strong&gt;内存屏障 (Memory Barrier)&lt;/strong&gt;：&lt;/p&gt;</description></item></channel></rss>
