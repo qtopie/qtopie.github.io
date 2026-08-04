@@ -5,6 +5,8 @@ public/
 .task
 static/diagrams
 .task/checksum/d2-watch
+.claude/
+.playwright-cli/
 
 # SDD dynamic task board (agent-managed)
 .agents/TASK.md
