@@ -5,3 +5,6 @@ public/
 .task
 static/diagrams
 .task/checksum/d2-watch
+
+# SDD dynamic task board (agent-managed)
+.agents/TASK.md
