@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-d2-version="v0.7.1" preserveAspectRatio="xMinYMin meet" viewBox="0 0 1084 710"><svg class="d2-3382571737 d2-svg" width="1084" height="710" viewBox="-101 -101 1084 710"><rect x="-101.000000" y="-101.000000" width="1084.000000" height="710.000000" rx="0.000000" fill="#FFFFFF" class=" fill-N7" stroke-width="0" /><style type="text/css"><![CDATA[
+.d2-3382571737 .text-bold {
+	font-family: "d2-3382571737-font-bold";
+}
+@font-face {
+	font-family: d2-3382571737-font-bold;
+	src: url("data:application/font-woff;base64,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");
+}]]></style><style type="text/css"><![CDATA[.shape {
+  shape-rendering: geometricPrecision;
+  stroke-linejoin: round;
+}
+.connection {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.blend {
+  mix-blend-mode: multiply;
+  opacity: 0.5;
+}
+
+		.d2-3382571737 .fill-N1{fill:#0A0F25;}
+		.d2-3382571737 .fill-N2{fill:#676C7E;}
+		.d2-3382571737 .fill-N3{fill:#9499AB;}
+		.d2-3382571737 .fill-N4{fill:#CFD2DD;}
+		.d2-3382571737 .fill-N5{fill:#DEE1EB;}
+		.d2-3382571737 .fill-N6{fill:#EEF1F8;}
+		.d2-3382571737 .fill-N7{fill:#FFFFFF;}
+		.d2-3382571737 .fill-B1{fill:#0D32B2;}
+		.d2-3382571737 .fill-B2{fill:#0D32B2;}
+		.d2-3382571737 .fill-B3{fill:#E3E9FD;}
+		.d2-3382571737 .fill-B4{fill:#E3E9FD;}
+		.d2-3382571737 .fill-B5{fill:#EDF0FD;}
+		.d2-3382571737 .fill-B6{fill:#F7F8FE;}
+		.d2-3382571737 .fill-AA2{fill:#4A6FF3;}
+		.d2-3382571737 .fill-AA4{fill:#EDF0FD;}
+		.d2-3382571737 .fill-AA5{fill:#F7F8FE;}
+		.d2-3382571737 .fill-AB4{fill:#EDF0FD;}
+		.d2-3382571737 .fill-AB5{fill:#F7F8FE;}
+		.d2-3382571737 .stroke-N1{stroke:#0A0F25;}
+		.d2-3382571737 .stroke-N2{stroke:#676C7E;}
+		.d2-3382571737 .stroke-N3{stroke:#9499AB;}
+		.d2-3382571737 .stroke-N4{stroke:#CFD2DD;}
+		.d2-3382571737 .stroke-N5{stroke:#DEE1EB;}
+		.d2-3382571737 .stroke-N6{stroke:#EEF1F8;}
+		.d2-3382571737 .stroke-N7{stroke:#FFFFFF;}
+		.d2-3382571737 .stroke-B1{stroke:#0D32B2;}
+		.d2-3382571737 .stroke-B2{stroke:#0D32B2;}
+		.d2-3382571737 .stroke-B3{stroke:#E3E9FD;}
+		.d2-3382571737 .stroke-B4{stroke:#E3E9FD;}
+		.d2-3382571737 .stroke-B5{stroke:#EDF0FD;}
+		.d2-3382571737 .stroke-B6{stroke:#F7F8FE;}
+		.d2-3382571737 .stroke-AA2{stroke:#4A6FF3;}
+		.d2-3382571737 .stroke-AA4{stroke:#EDF0FD;}
+		.d2-3382571737 .stroke-AA5{stroke:#F7F8FE;}
+		.d2-3382571737 .stroke-AB4{stroke:#EDF0FD;}
+		.d2-3382571737 .stroke-AB5{stroke:#F7F8FE;}
+		.d2-3382571737 .background-color-N1{background-color:#0A0F25;}
+		.d2-3382571737 .background-color-N2{background-color:#676C7E;}
+		.d2-3382571737 .background-color-N3{background-color:#9499AB;}
+		.d2-3382571737 .background-color-N4{background-color:#CFD2DD;}
+		.d2-3382571737 .background-color-N5{background-color:#DEE1EB;}
+		.d2-3382571737 .background-color-N6{background-color:#EEF1F8;}
+		.d2-3382571737 .background-color-N7{background-color:#FFFFFF;}
+		.d2-3382571737 .background-color-B1{background-color:#0D32B2;}
+		.d2-3382571737 .background-color-B2{background-color:#0D32B2;}
+		.d2-3382571737 .background-color-B3{background-color:#E3E9FD;}
+		.d2-3382571737 .background-color-B4{background-color:#E3E9FD;}
+		.d2-3382571737 .background-color-B5{background-color:#EDF0FD;}
+		.d2-3382571737 .background-color-B6{background-color:#F7F8FE;}
+		.d2-3382571737 .background-color-AA2{background-color:#4A6FF3;}
+		.d2-3382571737 .background-color-AA4{background-color:#EDF0FD;}
+		.d2-3382571737 .background-color-AA5{background-color:#F7F8FE;}
+		.d2-3382571737 .background-color-AB4{background-color:#EDF0FD;}
+		.d2-3382571737 .background-color-AB5{background-color:#F7F8FE;}
+		.d2-3382571737 .color-N1{color:#0A0F25;}
+		.d2-3382571737 .color-N2{color:#676C7E;}
+		.d2-3382571737 .color-N3{color:#9499AB;}
+		.d2-3382571737 .color-N4{color:#CFD2DD;}
+		.d2-3382571737 .color-N5{color:#DEE1EB;}
+		.d2-3382571737 .color-N6{color:#EEF1F8;}
+		.d2-3382571737 .color-N7{color:#FFFFFF;}
+		.d2-3382571737 .color-B1{color:#0D32B2;}
+		.d2-3382571737 .color-B2{color:#0D32B2;}
+		.d2-3382571737 .color-B3{color:#E3E9FD;}
+		.d2-3382571737 .color-B4{color:#E3E9FD;}
+		.d2-3382571737 .color-B5{color:#EDF0FD;}
+		.d2-3382571737 .color-B6{color:#F7F8FE;}
+		.d2-3382571737 .color-AA2{color:#4A6FF3;}
+		.d2-3382571737 .color-AA4{color:#EDF0FD;}
+		.d2-3382571737 .color-AA5{color:#F7F8FE;}
+		.d2-3382571737 .color-AB4{color:#EDF0FD;}
+		.d2-3382571737 .color-AB5{color:#F7F8FE;}.appendix text.text{fill:#0A0F25}.md{--color-fg-default:#0A0F25;--color-fg-muted:#676C7E;--color-fg-subtle:#9499AB;--color-canvas-default:#FFFFFF;--color-canvas-subtle:#EEF1F8;--color-border-default:#0D32B2;--color-border-muted:#0D32B2;--color-neutral-muted:#EEF1F8;--color-accent-fg:#0D32B2;--color-accent-emphasis:#0D32B2;--color-attention-subtle:#676C7E;--color-danger-fg:red;}.sketch-overlay-B1{fill:url(#streaks-darker-d2-3382571737);mix-blend-mode:lighten}.sketch-overlay-B2{fill:url(#streaks-darker-d2-3382571737);mix-blend-mode:lighten}.sketch-overlay-B3{fill:url(#streaks-bright-d2-3382571737);mix-blend-mode:darken}.sketch-overlay-B4{fill:url(#streaks-bright-d2-3382571737);mix-blend-mode:darken}.sketch-overlay-B5{fill:url(#streaks-bright-d2-3382571737);mix-blend-mode:darken}.sketch-overlay-B6{fill:url(#streaks-bright-d2-3382571737);mix-blend-mode:darken}.sketch-overlay-AA2{fill:url(#streaks-dark-d2-3382571737);mix-blend-mode:overlay}.sketch-overlay-AA4{fill:url(#streaks-bright-d2-3382571737);mix-blend-mode:darken}.sketch-overlay-AA5{fill:url(#streaks-bright-d2-3382571737);mix-blend-mode:darken}.sketch-overlay-AB4{fill:url(#streaks-bright-d2-3382571737);mix-blend-mode:darken}.sketch-overlay-AB5{fill:url(#streaks-bright-d2-3382571737);mix-blend-mode:darken}.sketch-overlay-N1{fill:url(#streaks-darker-d2-3382571737);mix-blend-mode:lighten}.sketch-overlay-N2{fill:url(#streaks-dark-d2-3382571737);mix-blend-mode:overlay}.sketch-overlay-N3{fill:url(#streaks-normal-d2-3382571737);mix-blend-mode:color-burn}.sketch-overlay-N4{fill:url(#streaks-normal-d2-3382571737);mix-blend-mode:color-burn}.sketch-overlay-N5{fill:url(#streaks-bright-d2-3382571737);mix-blend-mode:darken}.sketch-overlay-N6{fill:url(#streaks-bright-d2-3382571737);mix-blend-mode:darken}.sketch-overlay-N7{fill:url(#streaks-bright-d2-3382571737);mix-blend-mode:darken}.light-code{display: block}.dark-code{display: none}]]></style><g class="bXlzcWw="><g class="shape" ><rect x="23.000000" y="71.000000" width="166.000000" height="82.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="106.000000" y="109.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="106.000000" dy="0.000000">B+ 树聚簇索引</tspan><tspan x="106.000000" dy="18.500000">(MySQL InnoDB)</tspan></text></g><g class="aW52"><g class="shape" ><rect x="0.000000" y="355.000000" width="211.000000" height="82.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="105.500000" y="393.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="105.500000" dy="0.000000">倒排索引</tspan><tspan x="105.500000" dy="18.500000">(Elasticsearch / Lucene)</tspan></text></g><g class="cTE="><g class="shape" ><rect x="356.000000" y="142.000000" width="177.000000" height="82.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="444.500000" y="180.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="444.500000" dy="0.000000">等值 / 范围查询</tspan><tspan x="444.500000" dy="18.500000">主键有序</tspan></text></g><g class="cTI="><g class="shape" ><rect x="350.000000" y="426.000000" width="189.000000" height="82.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="444.500000" y="464.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="444.500000" dy="0.000000">全文 / 前缀 / 模糊</tspan><tspan x="444.500000" dy="18.500000">任意词定位</tspan></text></g><g class="czE="><g class="shape" ><rect x="311.000000" y="0.000000" width="266.000000" height="82.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="444.000000" y="38.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="444.000000" dy="0.000000">叶子节点</tspan><tspan x="444.000000" dy="18.500000">按主键排序，存整行数据</tspan></text></g><g class="czI="><g class="shape" ><rect x="320.000000" y="284.000000" width="249.000000" height="82.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="444.500000" y="322.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="444.500000" dy="0.000000">Posting List</tspan><tspan x="444.500000" dy="18.500000">按 Term 组织，无序压缩</tspan></text></g><g class="cjE="><g class="shape" ><rect x="677.000000" y="0.000000" width="205.000000" height="82.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="779.500000" y="38.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="779.500000" dy="0.000000">范围查询极快</tspan><tspan x="779.500000" dy="18.500000">叶子链表顺序扫描</tspan></text></g><g class="cjI="><g class="shape" ><rect x="697.000000" y="284.000000" width="165.000000" height="82.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="779.500000" y="322.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="779.500000" dy="0.000000">全文检索极强</tspan><tspan x="779.500000" dy="18.500000">FST + 位图求交</tspan></text></g><g class="KG15c3FsIC0mZ3Q7IHMxKVswXQ=="><marker id="mk-d2-3382571737-3488378134" markerWidth="10.000000" markerHeight="12.000000" refX="7.000000" refY="6.000000" viewBox="0.000000 0.000000 10.000000 12.000000" orient="auto" markerUnits="userSpaceOnUse"> <polygon points="0.000000,0.000000 10.000000,6.000000 0.000000,12.000000" fill="#0D32B2" class="connection fill-B1" stroke-width="2" /> </marker><path d="M 191.314928 73.261737 C 246.699997 47.619999 271.000000 41.000000 307.000000 41.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3382571737-3488378134)" mask="url(#d2-3382571737)" /></g><g class="KHMxIC0mZ3Q7IHIxKVswXQ=="><path d="M 579.000000 41.000000 C 617.000000 41.000000 637.000000 41.000000 673.000000 41.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3382571737-3488378134)" mask="url(#d2-3382571737)" /></g><g class="KG15c3FsIC0mZ3Q7IHExKVswXQ=="><path d="M 191.314928 150.737264 C 246.699997 176.378998 279.899994 183.000000 351.500000 183.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3382571737-3488378134)" mask="url(#d2-3382571737)" /></g><g class="KGludiAtJmd0OyBzMilbMF0="><path d="M 196.820733 354.172394 C 247.800003 331.000000 272.700012 325.000000 315.500000 325.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3382571737-3488378134)" mask="url(#d2-3382571737)" /></g><g class="KHMyIC0mZ3Q7IHIyKVswXQ=="><path d="M 571.500000 325.000000 C 615.500000 325.000000 641.000000 325.000000 693.000000 325.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3382571737-3488378134)" mask="url(#d2-3382571737)" /></g><g class="KGludiAtJmd0OyBxMilbMF0="><path d="M 196.820733 437.827606 C 247.800003 461.000000 278.700012 467.000000 345.500000 467.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3382571737-3488378134)" mask="url(#d2-3382571737)" /></g><mask id="d2-3382571737" maskUnits="userSpaceOnUse" x="-101" y="-101" width="1084" height="710">
+<rect x="-101" y="-101" width="1084" height="710" fill="white"></rect>
+
+</mask></svg></svg>
