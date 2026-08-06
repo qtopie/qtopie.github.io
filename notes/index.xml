@@ -1,5 +1,136 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Notes on 1001問</title><link>https://qtopie.github.io/notes/</link><description>Recent content in Notes on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Wed, 05 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/notes/index.xml" rel="self" type="application/rss+xml"/><item><title>MPP 架构解析：以 Apache Doris 与 Hologres 为例</title><link>https://qtopie.github.io/notes/system-design/mpp/</link><pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/system-design/mpp/</guid><description>&lt;p&gt;MPP（Massively Parallel Processing，大规模并行处理）是目前大数据分析引擎最主流的架构形态。无论是开源的 Apache Doris，还是阿里云的 Hologres，底层走的都是&amp;quot;MPP + 列式存储 + 向量化执行&amp;quot;这套技术路线。&lt;/p&gt;
-&lt;p&gt;本文以 &lt;strong&gt;Apache Doris&lt;/strong&gt; 和 &lt;strong&gt;Hologres&lt;/strong&gt; 为例，系统梳理 MPP 架构的核心思想、主要特性，以及存储计算分离、向量化执行（SIMD / RVV）、行列存储这几个关键技术点。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Notes on 1001問</title><link>https://qtopie.github.io/notes/</link><description>Recent content in Notes on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Thu, 06 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/notes/index.xml" rel="self" type="application/rss+xml"/><item><title>最大化网络传输效率</title><link>https://qtopie.github.io/notes/linux/maximize-network-transmission-efficiency/</link><pubDate>Thu, 06 Aug 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/linux/maximize-network-transmission-efficiency/</guid><description>&lt;h2 id="网络传输的过程"&gt;网络传输的过程&lt;/h2&gt;
+&lt;p&gt;一次网络传输是数据从发送端应用进程到接收端应用进程的完整旅程，跨越网络协议栈的各个层次。以一次 HTTP 请求为例：&lt;/p&gt;
+
+&lt;div class="mermaid-block" data-mermaid-zoom="1"&gt;
+ &lt;div class="mermaid-toolbar"&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="zoom-in" aria-label="Zoom in"&gt;+&lt;/button&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="zoom-out" aria-label="Zoom out"&gt;-&lt;/button&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="reset" aria-label="Reset zoom"&gt;100%&lt;/button&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="fullscreen" aria-label="Toggle fullscreen"&gt;Full&lt;/button&gt;
+ &lt;/div&gt;
+ &lt;div class="mermaid mermaid-canvas"&gt;flowchart TD
+ APP["应用层: HTTP 请求\n(TLS 加密可选)"]
+ TRAN["传输层: TCP/UDP\n(端口寻址, 分段, 可靠性)"]
+ NET["网络层: IP\n(主机寻址, 路由)"]
+ LINK["链路层: 以太网/WiFi\n(帧封装, MAC 地址)"]
+ PHYS["物理层: 光纤/网线/电波"]
+ APP --&gt; TRAN --&gt; NET --&gt; LINK --&gt; PHYS&lt;/div&gt;
+&lt;/div&gt;
+&lt;h3 id="分层模型"&gt;分层模型&lt;/h3&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th style="text-align: left"&gt;层次&lt;/th&gt;
+					&lt;th style="text-align: left"&gt;代表协议&lt;/th&gt;
+					&lt;th style="text-align: left"&gt;职责&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td style="text-align: left"&gt;应用层&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;HTTP/HTTPS、DNS、SMTP&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;为应用提供网络服务&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style="text-align: left"&gt;传输层&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;TCP、UDP&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;端到端进程通信、端口管理、流量/拥塞控制、差错检测&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style="text-align: left"&gt;网络层&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;IP、ICMP&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;主机寻址、分组转发与路由&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style="text-align: left"&gt;链路层&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;以太网、Wi-Fi&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;帧封装、MAC 寻址&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style="text-align: left"&gt;物理层&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;—&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;比特级物理传输&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="一次-http-请求的完整过程"&gt;一次 HTTP 请求的完整过程&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;DNS 解析&lt;/strong&gt;：应用层发起域名解析，将域名转换为 IP 地址（走 UDP 53 端口查询）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;TCP 三次握手&lt;/strong&gt;：建立可靠的传输连接，同步双方的初始序列号。
+
+&lt;div class="mermaid-block" data-mermaid-zoom="1"&gt;
+ &lt;div class="mermaid-toolbar"&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="zoom-in" aria-label="Zoom in"&gt;+&lt;/button&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="zoom-out" aria-label="Zoom out"&gt;-&lt;/button&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="reset" aria-label="Reset zoom"&gt;100%&lt;/button&gt;
+ &lt;button class="mermaid-btn" type="button" data-action="fullscreen" aria-label="Toggle fullscreen"&gt;Full&lt;/button&gt;
+ &lt;/div&gt;
+ &lt;div class="mermaid mermaid-canvas"&gt;sequenceDiagram
+ participant C as Client
+ participant S as Server
+ C-&gt;&gt;S: SYN (seq=x)
+ S-&gt;&gt;C: SYN+ACK (seq=y, ack=x+1)
+ C-&gt;&gt;S: ACK (ack=y+1)&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;TLS 握手&lt;/strong&gt;（HTTPS）：协商密钥，建立加密通道。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;HTTP 请求发送&lt;/strong&gt;：应用数据被交给传输层。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;传输层处理&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;TCP 将数据流按 MSS 分段，加上序列号、校验和，交给网络层；通过确认与重传保证可靠性。&lt;/li&gt;
+&lt;li&gt;UDP 不加可靠性机制，只做简单封装，交由网络层尽力传输。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;网络层处理&lt;/strong&gt;：IP 加上源/目的 IP 地址，路由到目标网络。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;链路层封装&lt;/strong&gt;：以太网帧加上 MAC 地址，通过物理介质传输，沿途经过交换机（链路层转发）、路由器（网络层转发）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;接收端逐层解封装&lt;/strong&gt;，最终由应用层处理 HTTP 响应。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="tcp-vs-udp"&gt;TCP vs UDP&lt;/h3&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th style="text-align: left"&gt;特性&lt;/th&gt;
+					&lt;th style="text-align: left"&gt;TCP&lt;/th&gt;
+					&lt;th style="text-align: left"&gt;UDP&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td style="text-align: left"&gt;连接&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;面向连接（三次握手）&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;无连接&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style="text-align: left"&gt;可靠性&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;可靠：确认、重传、排序&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;尽力而为，不保证送达&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style="text-align: left"&gt;流量/拥塞控制&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;有&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;无&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style="text-align: left"&gt;传输单位&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;字节流（按 MSS 分段）&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;数据报（应用自己分片）&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style="text-align: left"&gt;首部开销&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;20~60 字节&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;8 字节&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td style="text-align: left"&gt;典型应用&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;HTTP、FTP、SSH、SMTP&lt;/td&gt;
+					&lt;td style="text-align: left"&gt;DNS、音视频通话、游戏、QUIC(基于UDP)&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id="mtu-与-mss"&gt;MTU 与 MSS&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;MTU（Maximum Transmission Unit）&lt;/strong&gt;：链路层一次能承载的最大数据单元，即 IP 报文的最大长度。常见值：以太网 1500 字节、PPP 1492、巨型帧（Jumbo Frame）9000 字节。&lt;/p&gt;</description></item><item><title>MPP 并行计算架构</title><link>https://qtopie.github.io/notes/system-design/mpp/</link><pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/system-design/mpp/</guid><description>&lt;p&gt;MPP（Massively Parallel Processing，大规模并行处理）是目前大数据分析引擎最主流的架构形态。&lt;/p&gt;
+&lt;p&gt;无论是开源的 Apache Doris，还是阿里云的 Hologres，底层走的都是&amp;quot;MPP + 列式存储 + 向量化执行&amp;quot;这套技术路线。&lt;/p&gt;
+&lt;p&gt;本文以 &lt;strong&gt;Apache Doris&lt;/strong&gt; 和 &lt;strong&gt;Hologres&lt;/strong&gt; 为例，系统梳理 MPP 架构的核心思想、主要特性，以及存储计算分离、向量化执行（SIMD）、行列存储这几个关键技术点。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id="什么是-mpp"&gt;什么是 MPP&lt;/h2&gt;
 &lt;p&gt;MPP 是一种 &lt;strong&gt;Shared-Nothing（无共享）&lt;/strong&gt; 的并行计算架构：&lt;/p&gt;
@@ -39,14 +170,20 @@
 			&lt;/tr&gt;
 	&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;MPP 的核心价值是**&amp;ldquo;分而治之&amp;rdquo;**：把一个大查询切碎成小任务并行执行，同时数据在本地读取，最大程度减少网络传输，从而实现&amp;quot;算得越多、加机器越快&amp;quot;的线性扩展能力。&lt;/p&gt;
-&lt;h2 id="mpp-的查询执行流程"&gt;MPP 的查询执行流程&lt;/h2&gt;
-&lt;p&gt;以 Apache Doris 为例，它的经典架构是 &lt;strong&gt;FE + BE 两层&lt;/strong&gt;：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;FE（Frontend）&lt;/strong&gt;：负责 SQL 解析、查询规划（Query Plan）、执行调度、元数据管理与查询优化。它是集群的&amp;quot;大脑&amp;quot;，无状态、可水平扩展。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;BE（Backend）&lt;/strong&gt;：负责数据存储与查询计划的实际执行。BE 之间采用 Shared-Nothing 架构，各自管理本地数据分片。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;一条 SQL 的执行路径大致是：客户端提交 SQL → FE 解析并生成分布式执行计划 → 将子计划分发到多个 BE → 各 BE 并行读取本地数据分区 → 通过 Exchange 节点做中间结果交换与聚合 → 最终结果返回客户端。&lt;/p&gt;</description></item><item><title>Dapr Durable Agents 简介</title><link>https://qtopie.github.io/notes/ai/dapr-durable-agents/</link><pubDate>Mon, 03 Aug 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/ai/dapr-durable-agents/</guid><description>&lt;p&gt;Dapr Durable Agents 是 Dapr 社区在 2025 年推出的 AI Agent 开发框架，它将 LLM 的推理与行动能力深度嵌入 Dapr Workflow 运行时，赋予 AI 智能体云原生的耐久性、状态持久化和容错能力。&lt;/p&gt;
+&lt;p&gt;三种架构的差异，本质上是**&amp;ldquo;共享什么、不共享什么&amp;rdquo;**的问题。下面用三张图分别示意它们的资源布局与扩展路径。&lt;/p&gt;
+&lt;h3 id="smp单机共享内存"&gt;SMP：单机共享内存&lt;/h3&gt;
+&lt;p&gt;所有 CPU 通过共享总线访问同一份内存与磁盘，多核之间天然数据一致，但内存带宽和总线是竞争瓶颈。&lt;/p&gt;
+&lt;div class="d2-container" id="d2-7aefba465e97d4446475d634292850eb"&gt;&lt;div class="d2-controls"&gt;
+ &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
+ &lt;/div&gt;
+ &lt;div class="d2-img-container"&gt;
+ &lt;div style="position: relative; display: flex; align-items: center; justify-content: center; width: 100%; max-width: 100%;"&gt;
+ &lt;img src="https://qtopie.github.io/diagrams/d2-7aefba465e97d4446475d634292850eb.svg" alt="D2 Diagram" style="width: 100%; max-width: 100%; height: auto;"&gt;
+ &lt;div class="watermark-overlay" style="pointer-events: none; position: absolute; bottom: 5px; right: 5px; opacity: 0.4; font-size: 11px; color: #999;"&gt;qtopie.github.io&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;&lt;/div&gt;
+&lt;h3 id="shared-disk共享存储集群"&gt;Shared-Disk：共享存储集群&lt;/h3&gt;
+&lt;p&gt;计算节点各自拥有 CPU 与内存，但访问&lt;strong&gt;同一份共享存储&lt;/strong&gt;。好处是数据只有一份、易做高可用，代价是节点间要频繁协调缓存一致性，存储 I/O 成为争抢点（典型如 Oracle RAC）。&lt;/p&gt;</description></item><item><title>Dapr Durable Agents 简介</title><link>https://qtopie.github.io/notes/ai/dapr-durable-agents/</link><pubDate>Mon, 03 Aug 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/ai/dapr-durable-agents/</guid><description>&lt;p&gt;Dapr Durable Agents 是 Dapr 社区在 2025 年推出的 AI Agent 开发框架，它将 LLM 的推理与行动能力深度嵌入 Dapr Workflow 运行时，赋予 AI 智能体云原生的耐久性、状态持久化和容错能力。&lt;/p&gt;
 &lt;h2 id="dapr-简介"&gt;Dapr 简介&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Dapr（Distributed Application Runtime，分布式应用运行时）&lt;/strong&gt; 是由微软发起并开源、现属于 CNCF（云原生计算基金会）托管的孵化项目。它是一个可插拔的、事件驱动的运行时，旨在让开发人员能够轻松构建弹性、无状态和有状态的微服务应用程序。&lt;/p&gt;
 &lt;h3 id="为什么需要-dapr痛点与背景"&gt;为什么需要 Dapr？（痛点与背景）&lt;/h3&gt;
@@ -2075,7 +2212,7 @@
 &lt;li&gt;业务层需要更强的幂等、去重、版本控制能力。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id="2pc-是不是强一致"&gt;2PC 是不是强一致？&lt;/h4&gt;
-&lt;p&gt;是，2PC 的目标是保证原子提交（要么都提交，要么都回滚），属于提交层面的强一致；但代价是可用性下降，故障时可能阻塞并长期占用资源。&lt;/p&gt;</description></item><item><title>Linux下网络开发</title><link>https://qtopie.github.io/notes/linux/network/</link><pubDate>Sun, 15 Jun 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/linux/network/</guid><description>&lt;h2 id="tcpip-网络模型"&gt;TCP/IP 网络模型&lt;/h2&gt;
+&lt;p&gt;是，2PC 的目标是保证原子提交（要么都提交，要么都回滚），属于提交层面的强一致；但代价是可用性下降，故障时可能阻塞并长期占用资源。&lt;/p&gt;</description></item><item><title>Linux下网络开发</title><link>https://qtopie.github.io/notes/linux/networking/</link><pubDate>Sun, 15 Jun 2025 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/linux/networking/</guid><description>&lt;h2 id="tcpip-网络模型"&gt;TCP/IP 网络模型&lt;/h2&gt;
 &lt;p&gt;TCP/IP 模型是因特网协议族的实际分层模型，强调端到端的数据传输与互联互通。常见的简化四层划分如下：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;应用层 (Application Layer)：为最终用户的应用提供网络服务，包含 HTTP、FTP、SMTP、DNS、SSH、TLS/SSL 等协议。应用层同时承担了 OSI 模型中的表示层和会话层功能（如数据表示、加密、会话管理）。&lt;/li&gt;
@@ -3944,24 +4081,21 @@ automatically.&lt;/p&gt;</description></item><item><title>排序</title><link>ht
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;h3 id="4-现代-cpu-的特种部队"&gt;4. 现代 CPU 的“特种部队”&lt;/h3&gt;
-&lt;p&gt;除了上述经典架构，现代 CPU 还有很多强大的辅助模块：&lt;/p&gt;</description></item><item><title>二分查找</title><link>https://qtopie.github.io/notes/codejam/binary-search/</link><pubDate>Fri, 08 May 2015 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/codejam/binary-search/</guid><description>&lt;p&gt;nums = [1, 2, 3, 4, 5]&lt;/p&gt;
-&lt;h1 id="如何求middle的位置正好二分"&gt;如何求middle的位置正好二分&lt;/h1&gt;
-&lt;p&gt;对于偶数: len(nums)/2 - 1 (+0.5)
+&lt;p&gt;除了上述经典架构，现代 CPU 还有很多强大的辅助模块：&lt;/p&gt;</description></item><item><title>二分查找</title><link>https://qtopie.github.io/notes/codejam/binary-search/</link><pubDate>Fri, 08 May 2015 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/codejam/binary-search/</guid><description>&lt;p&gt;给定数组nums = [1, 2, 3, 4, 5],&lt;/p&gt;
+&lt;h2 id="如何求middle的位置正好二分"&gt;如何求middle的位置正好二分&lt;/h2&gt;
+&lt;p&gt;以0为开始位置，
+对于偶数: len(nums)/2 - 1 (+0.5)
 对于奇数: len(nums)/2&lt;/p&gt;
 &lt;p&gt;因此中心点的位置为:
 l + (r - l) / 2 靠左
 l + (r - l + 1) / 2 靠右&lt;/p&gt;
-&lt;p&gt;现在加入我们要做数组倒序交换, 我们可以这么做&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-go" data-lang="go"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// Recommended&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;j&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;l&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;r&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;j&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;j&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;j&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;j&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;j&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;i&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;// 或者只有r,l之间有2个及以上元素的时候才需要偏移&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;k&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;:=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;k&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nx"&gt;r&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nx"&gt;l&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;k&lt;/span&gt;&lt;span class="o"&gt;++&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;l&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="nx"&gt;k&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;r&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nx"&gt;k&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;r&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nx"&gt;k&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nx"&gt;nums&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nx"&gt;l&lt;/span&gt;&lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="nx"&gt;k&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>开始使用Ubuntu</title><link>https://qtopie.github.io/notes/linux/getting-started-with-ubuntu/</link><pubDate>Mon, 17 Nov 2014 22:24:33 +0800</pubDate><guid>https://qtopie.github.io/notes/linux/getting-started-with-ubuntu/</guid><description>&lt;h2 id="介绍"&gt;介绍&lt;/h2&gt;
+&lt;h3 id="为什么除以-2-会出现靠左--靠右"&gt;为什么除以 2 会出现&amp;quot;靠左 / 靠右&amp;quot;&lt;/h3&gt;
+&lt;p&gt;因为计算机底层是二进制，整数除法 &lt;code&gt;/&lt;/code&gt; 会&lt;strong&gt;截断余数&lt;/strong&gt;（向下取整）。当区间长度 &lt;code&gt;r - l&lt;/code&gt; 是奇数时，除以 2 会丢掉的 &lt;code&gt;0.5&lt;/code&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;(r - l) / 2&lt;/code&gt;：奇数长度被截断 → 落在&lt;strong&gt;左边&lt;/strong&gt;（靠左中间位）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;(r - l + 1) / 2&lt;/code&gt;：奇数长度先补 1 再除 → 落在&lt;strong&gt;右边&lt;/strong&gt;（靠右中间位）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;区间长度为偶数时没有余数，两者结果相同。而二分时&amp;quot;靠左&amp;quot;配合 &lt;code&gt;l = m + 1&lt;/code&gt; / &lt;code&gt;r = m&lt;/code&gt; 更新区间，恰好保证不会死循环。&lt;/p&gt;</description></item><item><title>开始使用Ubuntu</title><link>https://qtopie.github.io/notes/linux/getting-started-with-ubuntu/</link><pubDate>Mon, 17 Nov 2014 22:24:33 +0800</pubDate><guid>https://qtopie.github.io/notes/linux/getting-started-with-ubuntu/</guid><description>&lt;h2 id="介绍"&gt;介绍&lt;/h2&gt;
 &lt;p&gt;Ubuntu是一个以桌面应用为主的Linux操作系统，基于Debian发行版和GNOME桌面环境(17.10又回到gnome)，与Debian的不同在于它每6个月会发布一个新版本。Ubuntu的目标在于为一般用户提供一个最新的、同时又相当稳定的主要由自由软件构建而成的操作系统。Ubuntu具有庞大的社区力量（如&lt;a href="https://askubuntu.com/"&gt;askubuntu&lt;/a&gt;)，用户可以方便地从社区获得帮助。对于我个人而言，最吸引的是Ubuntu的开放性及活跃的社区,在Ubuntu上做开发也更加得心应手。&lt;/p&gt;
 &lt;h2 id="系统安装"&gt;系统安装&lt;/h2&gt;
 &lt;p&gt;以Ubuntu桌面版(amd64)为例&lt;/p&gt;
