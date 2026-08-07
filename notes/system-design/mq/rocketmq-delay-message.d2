@@ -1,0 +1,151 @@
+grid-rows: 3
+
+producer: "生产者 (Producer)" {
+  shape: rectangle
+  style: {
+    fill: "#EFF6FF"
+    stroke: "#3B82F6"
+    stroke-width: 2
+    bold: true
+  }
+}
+
+broker: "Broker 延迟消息机制" {
+  grid-rows: 3
+  style: {
+    fill: "#FFFBEB"
+    stroke: "#F59E0B"
+    stroke-width: 2
+    bold: true
+  }
+
+  stage1: "第一阶段：写入延迟队列（消费者不可见）" {
+    grid-columns: 2
+    style: {
+      fill: "#FEF3C7"
+      stroke: "#D97706"
+    }
+
+    smp: "SendMessageProcessor\n改写 Topic → SCHEDULE_TOPIC_XXXX\nQueueId = 延迟等级 - 1\n(真实 Topic/QueueId 存入消息属性)" {
+      style: {
+        fill: "#FFFFFF"
+        stroke: "#D97706"
+      }
+    }
+
+    commitlog: "CommitLog 顺序追加\n(与普通消息同文件、同链路)" {
+      shape: cylinder
+      style: {
+        fill: "#FDE68A"
+        stroke: "#B45309"
+        bold: true
+      }
+    }
+  }
+
+  stage2: "第二阶段：到期投递（转为可消费）" {
+    grid-columns: 2
+    style: {
+      fill: "#FEF3C7"
+      stroke: "#D97706"
+    }
+
+    reput: "ReputMessageService\n(异步构建 ConsumeQueue)" {
+      style: {
+        fill: "#FFFFFF"
+        stroke: "#D97706"
+      }
+    }
+
+    schedule_svc: "ScheduleMessageService\nDeliverDelayedMessageTimerTask\n(每 1s 扫描延迟队列队首，校验到期)" {
+      style: {
+        fill: "#FEE2E2"
+        stroke: "#EF4444"
+      }
+    }
+  }
+
+  queues: "逻辑消费队列 (ConsumeQueue)" {
+    grid-columns: 2
+    style: {
+      fill: "#FEF3C7"
+      stroke: "#D97706"
+    }
+
+    schedule_cq: "SCHEDULE_TOPIC_XXXX\n延迟队列 (18 个队列 = 18 个等级)" {
+      shape: queue
+      style: {
+        fill: "#E0E7FF"
+        stroke: "#4338CA"
+      }
+    }
+
+    real_cq: "真实 Topic 队列\n(延迟到期后才写入索引)" {
+      shape: queue
+      style: {
+        fill: "#D1FAE5"
+        stroke: "#059669"
+      }
+    }
+  }
+}
+
+consumer: "消费者 (Consumer)" {
+  shape: rectangle
+  style: {
+    fill: "#ECFDF5"
+    stroke: "#10B981"
+    stroke-width: 2
+    bold: true
+  }
+}
+
+# 1. 生产者发送延迟消息
+producer -> broker.stage1.smp: "1. 发送消息 (delayTimeLevel=N)" {
+  style.stroke: "#2563EB"
+}
+
+# 2. 写入 CommitLog（两阶段都复用同一写链路）
+broker.stage1.smp -> broker.stage1.commitlog: "2. 追加写入 CommitLog" {
+  style.stroke: "#2563EB"
+}
+broker.stage1.commitlog -> broker.stage2.reput: "3. 异步扫描新追加数据" {
+  style: {
+    stroke: "#7C3AED"
+    stroke-dash: 3
+  }
+}
+broker.stage2.reput -> broker.queues.schedule_cq: "4. 构建延迟 ConsumeQueue" {
+  style: {
+    stroke: "#7C3AED"
+    stroke-dash: 3
+  }
+}
+
+# 3. 定时投递
+broker.stage2.schedule_svc -> broker.queues.schedule_cq: "5. 读取队首，校验到期" {
+  style: {
+    stroke: "#EF4444"
+    stroke-dash: 3
+  }
+}
+broker.stage2.schedule_svc -> broker.stage1.commitlog: "6. 到期后恢复真实 Topic，重新追加" {
+  style.stroke: "#EF4444"
+}
+broker.stage1.commitlog -> broker.stage2.reput: "7. 再次扫描到期重投消息" {
+  style: {
+    stroke: "#7C3AED"
+    stroke-dash: 3
+  }
+}
+broker.stage2.reput -> broker.queues.real_cq: "8. 构建真实 Topic ConsumeQueue" {
+  style: {
+    stroke: "#7C3AED"
+    stroke-dash: 3
+  }
+}
+
+# 4. 消费
+consumer -> broker.queues.real_cq: "9. 消费到期消息" {
+  style.stroke: "#059669"
+}

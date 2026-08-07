@@ -1,0 +1,97 @@
+grid-rows: 3
+
+producer: "生产者 (Producer)\n携带业务 Key (order_id) 发送" {
+  shape: rectangle
+  style: {
+    fill: "#EFF6FF"
+    stroke: "#3B82F6"
+    stroke-width: 2
+    bold: true
+  }
+}
+
+broker: "Broker 顺序消息机制" {
+  grid-rows: 2
+  style: {
+    fill: "#FFFBEB"
+    stroke: "#F59E0B"
+    stroke-width: 2
+    bold: true
+  }
+
+  selector: "MessageQueueSelector\nqueueId = hash(order_id) % N\n(同 Key 恒定落同一队列)" {
+    style: {
+      fill: "#FFFFFF"
+      stroke: "#D97706"
+    }
+  }
+
+  queues: "逻辑队列 (ConsumeQueue)" {
+    grid-columns: 3
+    style: {
+      fill: "#FEF3C7"
+      stroke: "#D97706"
+    }
+
+    q0: "Queue 0\n创建 → 支付 → 发货\n(按序存储与消费)" {
+      shape: queue
+      style: {
+        fill: "#E0E7FF"
+        stroke: "#4338CA"
+      }
+    }
+
+    q1: "Queue 1\n(其他订单消息)" {
+      shape: queue
+      style: {
+        fill: "#E0E7FF"
+        stroke: "#4338CA"
+      }
+    }
+
+    q2: "Queue 2\n(其他订单消息)" {
+      shape: queue
+      style: {
+        fill: "#E0E7FF"
+        stroke: "#4338CA"
+      }
+    }
+  }
+}
+
+consumer: "消费者 (Consumer)\nMessageListenerOrderly：同一队列加锁串行消费，失败阻塞重试" {
+  shape: rectangle
+  style: {
+    fill: "#ECFDF5"
+    stroke: "#10B981"
+    stroke-width: 2
+    bold: true
+  }
+}
+
+# 1. 发送端：携带 Key
+producer -> broker.selector: "1. 发送消息 (Key=order_id)" {
+  style.stroke: "#2563EB"
+}
+
+# 2. 路由：同 Key 恒落同一队列
+broker.selector -> broker.queues.q0: "2. hash(1001) % N = 0" {
+  style.stroke: "#2563EB"
+}
+broker.selector -> broker.queues.q1: "hash(1002) % N = 1" {
+  style.stroke: "#2563EB"
+}
+broker.selector -> broker.queues.q2: "hash(1003) % N = 2" {
+  style.stroke: "#2563EB"
+}
+
+# 3. 消费：队列内按序串行
+broker.queues.q0 -> consumer: "3. 队列内按序串行消费" {
+  style.stroke: "#059669"
+}
+broker.queues.q1 -> consumer: "按序串行消费" {
+  style.stroke: "#059669"
+}
+broker.queues.q2 -> consumer: "按序串行消费" {
+  style.stroke: "#059669"
+}

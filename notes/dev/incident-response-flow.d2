@@ -1,0 +1,113 @@
+# 线上应急响应全流程
+grid-columns: 4
+
+phase1: "发现与定级" {
+  direction: down
+  alert: "故障发现\n(监控/告警/用户反馈)" {
+    style: {
+      fill: "#FEF3C7"
+      stroke: "#D97706"
+    }
+  }
+  confirm: "确认故障影响面" {
+    style: {
+      fill: "#FEF3C7"
+      stroke: "#D97706"
+    }
+  }
+  grade: "故障定级 P0–P3" {
+    style: {
+      fill: "#FEF3C7"
+      stroke: "#D97706"
+    }
+  }
+  alert -> confirm -> grade
+  style: {
+    fill: "#FFFBEB"
+    stroke: "#F59E0B"
+    stroke-width: 2
+  }
+}
+
+phase2: "应急止损（止损优先）" {
+  direction: down
+  rollback: "快速回滚\n/ 禁止再发" {
+    style: {
+      fill: "#BFDBFE"
+      stroke: "#2563EB"
+    }
+  }
+  degrade: "功能降级" {
+    style: {
+      fill: "#BFDBFE"
+      stroke: "#2563EB"
+    }
+  }
+  throttle: "限流 / 熔断 / 隔离" {
+    style: {
+      fill: "#BFDBFE"
+      stroke: "#2563EB"
+    }
+  }
+  rollback -> degrade -> throttle
+  style: {
+    fill: "#EFF6FF"
+    stroke: "#3B82F6"
+    stroke-width: 2
+  }
+}
+
+phase3: "定位根因与恢复" {
+  direction: down
+  locate: "根因定位\n(日志/监控/链路/DB)" {
+    style: {
+      fill: "#D1FAE5"
+      stroke: "#059669"
+    }
+  }
+  fix: "修复问题" {
+    style: {
+      fill: "#D1FAE5"
+      stroke: "#059669"
+    }
+  }
+  verify: "灰度验证 / 恢复业务" {
+    style: {
+      fill: "#D1FAE5"
+      stroke: "#059669"
+    }
+  }
+  locate -> fix -> verify
+  style: {
+    fill: "#ECFDF5"
+    stroke: "#10B981"
+    stroke-width: 2
+  }
+}
+
+phase4: "事后复盘与闭环" {
+  direction: down
+  rca: "RCA 复盘\n(时间线/根因/责任)" {
+    style: {
+      fill: "#EDE9FE"
+      stroke: "#7C3AED"
+    }
+  }
+  action: "改进项跟进闭环" {
+    style: {
+      fill: "#EDE9FE"
+      stroke: "#7C3AED"
+    }
+  }
+  rca -> action
+  style: {
+    fill: "#F5F3FF"
+    stroke: "#8B5CF6"
+    stroke-width: 2
+  }
+}
+
+# 阶段间主链路
+phase1.grade -> phase2.rollback: "定级后立即止损"
+phase2.throttle -> phase3.locate: "止损后定位"
+phase3.verify -> phase4.rca: "恢复后复盘"
