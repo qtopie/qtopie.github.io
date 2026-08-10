@@ -72,6 +72,7 @@ server_layer: "Server 层" {
 }
 
 storage_layer: "存储引擎层" {
+  grid-columns: 2
   style: {
     fill: "#FFFBEB"
     stroke: "#F59E0B"
@@ -104,5 +105,6 @@ server_layer.components.parser -> server_layer.components.optimizer: "语法树"
 server_layer.components.optimizer -> server_layer.components.executor: "执行计划"
 server_layer.components.executor -> storage_layer.innodb: "读写数据"
 server_layer.components.executor -> storage_layer.myisam: "读写数据"
-storage_layer.innodb -> client: "结果集"
-storage_layer.myisam -> client: "结果集"
+storage_layer.innodb -> server_layer.components.executor: "结果集"
+server_layer.components.executor -> client: "结果集"
+storage_layer.myisam -> server_layer.components.executor: "结果集"
