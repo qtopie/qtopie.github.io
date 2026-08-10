@@ -1699,8 +1699,9 @@
 &lt;h2 id="核心工程挑战与解决方案"&gt;核心工程挑战与解决方案&lt;/h2&gt;
 &lt;p&gt;引入 MQ 会增加系统复杂性，必须针对可能出现的异常场景设计完善的保障机制：&lt;/p&gt;
 &lt;h3 id="消息丢失可靠性投递"&gt;消息丢失（可靠性投递）&lt;/h3&gt;
-&lt;p&gt;如何保证消息从生产者到达 Broker，再到达消费者全链路“一环不丢”？&lt;/p&gt;</description></item><item><title>myql</title><link>https://qtopie.github.io/notes/system-design/mysql/</link><pubDate>Thu, 26 Feb 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/system-design/mysql/</guid><description>&lt;h2 id="mysql-核心架构速览"&gt;MySQL 核心架构速览&lt;/h2&gt;
+&lt;p&gt;如何保证消息从生产者到达 Broker，再到达消费者全链路“一环不丢”？&lt;/p&gt;</description></item><item><title>MySQL常见知识整理</title><link>https://qtopie.github.io/notes/system-design/mysql/</link><pubDate>Thu, 26 Feb 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/system-design/mysql/</guid><description>&lt;h2 id="mysql-核心架构速览"&gt;MySQL 核心架构速览&lt;/h2&gt;
 &lt;p&gt;理解 MySQL 的工作原理是所有优化的前提。&lt;/p&gt;
+&lt;p&gt;&lt;img src="mysql-core-architecture.svg" alt="MySQL 核心架构图"&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;连接器&lt;/strong&gt;：管理连接、权限验证。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;查询缓存&lt;/strong&gt;（MySQL 8.0 已删除）：建议通过 Redis 实现。&lt;/li&gt;

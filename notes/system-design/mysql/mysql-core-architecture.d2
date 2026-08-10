@@ -1,0 +1,108 @@
+direction: right
+
+client: "客户端\n(SQL 请求)" {
+  shape: person
+  style: {
+    fill: "#EFF6FF"
+    stroke: "#3B82F6"
+    stroke-width: 2
+    bold: true
+  }
+}
+
+server_layer: "Server 层" {
+  grid-columns: 1
+  style: {
+    fill: "#F8FAFC"
+    stroke: "#CBD5E1"
+    stroke-width: 2
+  }
+
+  components: "" {
+    grid-columns: 5
+    style: {
+      stroke: transparent
+      fill: transparent
+    }
+
+    connector: "连接器 Connector\n(连接管理 / 权限验证)" {
+      style: {
+        fill: "#EDE9FE"
+        stroke: "#7C3AED"
+        stroke-width: 2
+        bold: true
+      }
+    }
+
+    query_cache: "查询缓存 Query Cache\n(MySQL 8.0 已删除)" {
+      style: {
+        fill: "#F1F5F9"
+        stroke: "#94A3B8"
+        stroke-dash: 4
+      }
+    }
+
+    parser: "分析器 Parser\n(词法分析 / 语法分析)" {
+      style: {
+        fill: "#EDE9FE"
+        stroke: "#7C3AED"
+        stroke-width: 2
+        bold: true
+      }
+    }
+
+    optimizer: "优化器 Optimizer\n(选择索引 / 执行路径)" {
+      style: {
+        fill: "#EDE9FE"
+        stroke: "#7C3AED"
+        stroke-width: 2
+        bold: true
+      }
+    }
+
+    executor: "执行器 Executor\n(操作存储引擎 / 返回结果)" {
+      style: {
+        fill: "#EDE9FE"
+        stroke: "#7C3AED"
+        stroke-width: 2
+        bold: true
+      }
+    }
+  }
+}
+
+storage_layer: "存储引擎层" {
+  style: {
+    fill: "#FFFBEB"
+    stroke: "#F59E0B"
+    stroke-width: 2
+  }
+
+  innodb: "InnoDB\n(事务 / 行级锁 / 主键索引)" {
+    shape: cylinder
+    style: {
+      fill: "#FEF3C7"
+      stroke: "#D97706"
+      stroke-width: 2
+      bold: true
+    }
+  }
+
+  myisam: "MyISAM\n(不支持事务 / 表级锁)" {
+    shape: cylinder
+    style: {
+      fill: "#FEF9C3"
+      stroke: "#CA8A04"
+    }
+  }
+}
+
+client -> server_layer.components.connector: "SQL / 连接"
+server_layer.components.connector -> server_layer.components.query_cache: "查询缓存命中则直接返回"
+server_layer.components.query_cache -> server_layer.components.parser: "未命中 / 8.0 后直接进入"
+server_layer.components.parser -> server_layer.components.optimizer: "语法树"
+server_layer.components.optimizer -> server_layer.components.executor: "执行计划"
+server_layer.components.executor -> storage_layer.innodb: "读写数据"
+server_layer.components.executor -> storage_layer.myisam: "读写数据"
+storage_layer.innodb -> client: "结果集"
+storage_layer.myisam -> client: "结果集"
