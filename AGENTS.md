@@ -12,6 +12,13 @@ This project contains three repos:
 Content notes:
 * Do not number headings manually — heading numbers are generated via TOC.
 
+## 1. D2 图表布局规则（防再犯）
+- 嵌套容器的子节点默认被 ELK 垂直堆叠，导致子布局与横向父级不协调（竖长条）。**必须**用 `grid-columns: N` 强制横向排列子节点，使各层横向对齐。
+- 同一逻辑行/层的节点宽度应大致一致；`direction: right` 时优先让各容器水平并排。
+- 长返回边（如存储层 → 客户端）会跨越整图造成交叉：应把数据回传路由到中间节点（如执行器）再返回，避免直接拉长边。
+- 编译后**必须**运行 `python3 .agents/skills/d2lang/scripts/verify_diagram.py output.svg` 校验宽高比（0.4–3.0）；失衡则调整 `grid-columns` / `direction` 后重新编译。
+- 交付前用低分辨率 PNG（`d2 --layout=elk --scale=0.3 ...` 或 `qlmanage -t`）做视觉检查，确认无重叠、无长边交叉。
+
 ## 1. Context Loading & Memory Rule
 - **Always Check `.agents/TASK.md` First:** Before taking any action, read `.agents/TASK.md` to restore context.
 - **Maintain `.agents/TASK.md`:** Update `.agents/TASK.md` checklist items as you progress. If interrupted, write the current status under `Current Context`.
