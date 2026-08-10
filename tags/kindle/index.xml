@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Kindle on 1001問</title><link>https://qtopie.github.io/tags/kindle/</link><description>Recent content in Kindle on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Fri, 17 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/tags/kindle/index.xml" rel="self" type="application/rss+xml"/><item><title>Kindle PW4 SpringBreak 本地越狱笔记</title><link>https://qtopie.github.io/notes/books/jailbreak-kindle-pw4/</link><pubDate>Fri, 17 Jul 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/books/jailbreak-kindle-pw4/</guid><description>&lt;p&gt;在 Kindle 上进行 &lt;strong&gt;SpringBreak&lt;/strong&gt; 越狱时，设备需要联网加载在线提权页面并下载跑码脚本。如果局域网无法稳定访问境外服务，或亚马逊对相关域名做了拦截，Kindle 浏览器会因加载超时而&lt;strong&gt;闪退回首页&lt;/strong&gt;，导致越狱失败。&lt;/p&gt;
+&lt;p&gt;本指南记录如何通过本地自托管 Web 服务器（&lt;code&gt;goserve&lt;/code&gt;）彻底解决这一问题：把所有越狱所需文件托管在局域网内，让 Kindle 绕过公网直接秒加载提权页面，实现稳定、可重复的越狱流程。&lt;/p&gt;
+&lt;h2 id="背景与原理"&gt;背景与原理&lt;/h2&gt;
+&lt;p&gt;SpringBreak 越狱的在线流程依赖两个资源：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;在线提权页面&lt;/strong&gt;：&lt;code&gt;https://sb.penguins184.xyz/&lt;/code&gt;——Kindle 浏览器打开后，页面内的漏洞利用代码会尝试在系统上执行命令。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;跑码脚本&lt;/strong&gt;：&lt;code&gt;kindlemodding.org/jb.sh&lt;/code&gt;——提权成功后由页面注入的命令下载并执行，完成真正的越狱安装。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;提权页的核心机制：向 &lt;code&gt;winmgr.vibrancyMode.pref.path&lt;/code&gt; 写入一段 SCFG 注入 payload，payload 内嵌命令 &lt;code&gt;curl -L &amp;lt;服务器&amp;gt;/jb.sh | RUN_MODE=1 sh&lt;/code&gt;，从而让 Kindle 下载并执行 jb.sh。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;自托管方案&lt;/strong&gt;：在本机用 &lt;code&gt;goserve&lt;/code&gt; 启动静态 Web 服务，将「提权页 + jb.sh」两个文件托管在局域网内，Kindle 直接访问本机 IP，无需出海，彻底避开超时与拦截问题。&lt;/p&gt;
+&lt;p&gt;整体原理与流程如下：&lt;/p&gt;
+&lt;div class="d2-container" id="d2-572266433cbc04e887386ced0172a11a"&gt;&lt;div class="d2-controls"&gt;
+ &lt;button class="d2-btn-fullscreen" title="Fullscreen"&gt;⤢&lt;/button&gt;
+ &lt;/div&gt;
+ &lt;div class="d2-img-container"&gt;
+ &lt;div style="position: relative; display: flex; align-items: center; justify-content: center; width: 100%; max-width: 100%;"&gt;
+ &lt;img src="https://qtopie.github.io/diagrams/d2-572266433cbc04e887386ced0172a11a.svg" alt="D2 Diagram" style="width: 100%; max-width: 100%; height: auto;"&gt;
+ &lt;div class="watermark-overlay" style="pointer-events: none; position: absolute; bottom: 5px; right: 5px; opacity: 0.4; font-size: 11px; color: #999;"&gt;qtopie.github.io&lt;/div&gt;
+ &lt;/div&gt;
+ &lt;/div&gt;&lt;/div&gt;
+&lt;h2 id="核心文件说明"&gt;核心文件说明&lt;/h2&gt;
+&lt;h3 id="jbsh自解压的-kmc-越狱脚本"&gt;jb.sh：自解压的 KMC 越狱脚本&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;jb.sh&lt;/code&gt; 从 &lt;code&gt;https://kindlemodding.org/jb.sh&lt;/code&gt; 下载，体积约 5.1MB。它本质上是 KMC（Kindle Modding Collection）的&lt;strong&gt;单体（monolithic）越狱脚本&lt;/strong&gt;（由 Hackerdude 维护，内部版本 &lt;code&gt;v1.3.1&lt;/code&gt;），是一个&lt;strong&gt;自解压 shell 脚本&lt;/strong&gt;：&lt;/p&gt;</description></item></channel></rss>
