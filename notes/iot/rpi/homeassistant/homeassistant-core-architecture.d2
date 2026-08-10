@@ -1,0 +1,230 @@
+direction: down
+
+# ============ 交互层 ============
+interact: "交互层" {
+  style: {
+    fill: "#F8FAFC"
+    stroke: "#CBD5E1"
+  }
+
+  frontend: "Web UI\n(Lovelace 前端)" {
+    shape: rectangle
+    style: {
+      fill: "#EFF6FF"
+      stroke: "#3B82F6"
+      stroke-width: 2
+      bold: true
+    }
+  }
+
+  api: "WebSocket / REST API\n(/api/websocket)" {
+    shape: rectangle
+    style: {
+      fill: "#EFF6FF"
+      stroke: "#3B82F6"
+      stroke-width: 2
+      bold: true
+    }
+  }
+}
+
+# ============ 核心层 ============
+core: "Home Assistant Core\n(hass 单例对象)" {
+  style: {
+    fill: "#FFFBEB"
+    stroke: "#F59E0B"
+    stroke-width: 2
+    bold: true
+  }
+
+  event_bus: "事件总线 Event Bus\n(hass.bus)" {
+    shape: rectangle
+    style: {
+      fill: "#FEF3C7"
+      stroke: "#D97706"
+      stroke-width: 2
+      bold: true
+    }
+  }
+
+  state_machine: "状态机 State Machine\n(hass.states)" {
+    shape: rectangle
+    style: {
+      fill: "#FEF3C7"
+      stroke: "#D97706"
+      stroke-width: 2
+      bold: true
+    }
+  }
+
+  service_registry: "服务注册表 Service Registry\n(hass.services)" {
+    shape: rectangle
+    style: {
+      fill: "#FEF3C7"
+      stroke: "#D97706"
+      stroke-width: 2
+      bold: true
+    }
+  }
+}
+
+# ============ 扩展系统 ============
+extension: "功能扩展系统 (Integration)" {
+  style: {
+    fill: "#ECFDF5"
+    stroke: "#10B981"
+    stroke-width: 2
+    bold: true
+  }
+
+  integration: "components/<domain>/\n(集成包)" {
+    shape: rectangle
+    style: {
+      fill: "#D1FAE5"
+      stroke: "#059669"
+      stroke-width: 2
+    }
+  }
+
+  manifest: "manifest.json\n(依赖 / 需求声明)" {
+    shape: document
+    style: {
+      fill: "#D1FAE5"
+      stroke: "#059669"
+    }
+  }
+
+  config_entry: "Config Entry\n(.storage/core.config_entries)" {
+    shape: cylinder
+    style: {
+      fill: "#D1FAE5"
+      stroke: "#059669"
+    }
+  }
+
+  config_flow: "Config Flow\n(config_flow.py UI 配置)" {
+    shape: rectangle
+    style: {
+      fill: "#D1FAE5"
+      stroke: "#059669"
+    }
+  }
+
+  platform: "Platform\n(light.py / sensor.py...)" {
+    shape: rectangle
+    style: {
+      fill: "#A7F3D0"
+      stroke: "#059669"
+      stroke-width: 2
+    }
+  }
+
+  integration -> manifest: "声明"
+  integration -> config_entry: "读取/写入"
+  integration -> config_flow: "UI 引导配置"
+  integration -> platform: "提供实体类"
+}
+
+# ============ 实体层 ============
+entity_zone: "实体层" {
+  style: {
+    fill: "#FFF7ED"
+    stroke: "#F59E0B"
+  }
+
+  entity: "Entity 实例\n(继承 LightEntity / SensorEntity...)" {
+    shape: rectangle
+    style: {
+      fill: "#FEF3C7"
+      stroke: "#D97706"
+      stroke-width: 2
+      bold: true
+    }
+  }
+
+  registry: "设备 / 实体注册中心\n(.storage/entity_registry)" {
+    shape: cylinder
+    style: {
+      fill: "#FEF3C7"
+      stroke: "#D97706"
+    }
+  }
+}
+
+# ============ 接入层 ============
+adapter_zone: "设备接入" {
+  style: {
+    fill: "#F5F3FF"
+    stroke: "#8B5CF6"
+  }
+
+  adapter: "集成适配器\n(xiaomi_miio / MQTT / Zigbee)" {
+    shape: rectangle
+    style: {
+      fill: "#EDE9FE"
+      stroke: "#7C3AED"
+      stroke-width: 2
+      bold: true
+    }
+  }
+
+  device: "物理设备\n(插座 / 灯泡 / 网关...)" {
+    shape: rectangle
+    style: {
+      fill: "#EDE9FE"
+      stroke: "#7C3AED"
+    }
+  }
+}
+
+# 状态变化监听者
+listener_zone: "事件监听者" {
+  style: {
+    fill: "#FDF2F8"
+    stroke: "#EC4899"
+  }
+
+  automation: "自动化 Automation\n(触发器)" {
+    shape: rectangle
+    style: {
+      fill: "#FCE7F3"
+      stroke: "#DB2777"
+    }
+  }
+
+  recorder: "Recorder\n(历史记录)" {
+    shape: cylinder
+    style: {
+      fill: "#FCE7F3"
+      stroke: "#DB2777"
+    }
+  }
+}
+
+# ============ 连接关系 ============
+frontend -> api: "订阅状态 / 发送指令"
+
+api -> core.event_bus: "WebSocket\nstate_changed 推送"
+api -> core.service_registry: "call_service 调用"
+
+# 核心内部联动
+core.event_bus -> core.state_machine: "state_changed 事件"
+core.state_machine -> core.event_bus: "状态变更\n触发事件"
+
+# 扩展系统接入核心
+core.service_registry -> extension.integration: "服务注册"
+extension.integration -> core.state_machine: "实体状态读写"
+extension.platform -> entity_zone.entity: "实例化实体"
+
+# 实体与注册中心
+entity_zone.entity -> entity_zone.registry: "unique_id 注册"
+
+# 实体状态上报: 设备 -> 适配器 -> 实体 -> 状态机 -> 事件总线
+adapter_zone.device -> adapter_zone.adapter: "协议数据"
+adapter_zone.adapter -> entity_zone.entity: "async_write_ha_state()"
+entity_zone.entity -> core.state_machine: "状态写入"
+core.event_bus -> listener_zone.automation: "订阅触发"
+core.event_bus -> listener_zone.recorder: "记录历史"
+
+# 指令下发: 服务 -> 实体 -> 适配器 -> 设备
+entity_zone.entity -> adapter_zone.adapter: "执行动作"

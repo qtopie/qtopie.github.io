@@ -1,0 +1,199 @@
+direction: right
+
+# 外部用户与语音入口
+user_zone: "" {
+  style: {
+    fill: "#F8FAFC"
+    stroke: "#CBD5E1"
+  }
+
+  app: "手机 / Web UI\n(前端 + API)" {
+    shape: rectangle
+    style: {
+      fill: "#EFF6FF"
+      stroke: "#3B82F6"
+      stroke-width: 2
+      bold: true
+    }
+  }
+
+  voice: "语音助手\n(天猫精灵 / Google Assistant)" {
+    shape: rectangle
+    style: {
+      fill: "#EFF6FF"
+      stroke: "#3B82F6"
+      stroke-width: 2
+      bold: true
+    }
+  }
+}
+
+# 核心：树莓派上的 Home Assistant
+ha_zone: "树莓派 4 (Ubuntu arm64)" {
+  style: {
+    fill: "#FFFBEB"
+    stroke: "#F59E0B"
+    stroke-width: 2
+    bold: true
+  }
+
+  core: "Home Assistant\n(Core + 前端)" {
+    style: {
+      fill: "#FEF3C7"
+      stroke: "#D97706"
+      stroke-width: 2
+      bold: true
+    }
+  }
+
+  configs: "配置\ngroups / automations / scripts\nscenes / lights / notify..." {
+    shape: document
+    style: {
+      fill: "#FDE68A"
+      stroke: "#B45309"
+    }
+  }
+
+  camera: "Raspberry Pi 相机\n(rpi_camera)" {
+    shape: rectangle
+    style: {
+      fill: "#FEF3C7"
+      stroke: "#D97706"
+    }
+  }
+
+  core -> configs: "加载 YAML"
+  core -> camera: "定时抓拍"
+}
+
+# 米家设备接入区：WiFi 直连 + 红外 + ZigBee 网关
+device_zone: "米家智能设备接入区" {
+  style: {
+    fill: "#F0FDF4"
+    stroke: "#22C55E"
+    stroke-width: 2
+    bold: true
+  }
+
+  wifi_zone: "米家 WiFi 设备 (Xiaomi Miio)" {
+    style: {
+      fill: "#ECFDF5"
+      stroke: "#10B981"
+    }
+
+    plug: "智能插座\n(chuangmi.plug.m1)" {
+      shape: rectangle
+      style: {
+        fill: "#D1FAE5"
+        stroke: "#059669"
+        stroke-width: 2
+      }
+    }
+
+    bulb: "飞利浦灯泡" {
+      shape: rectangle
+      style: {
+        fill: "#D1FAE5"
+        stroke: "#059669"
+        stroke-width: 2
+      }
+    }
+
+    ir_remote: "红外遥控器\n(chuangmi.remote.v2)" {
+      shape: rectangle
+      style: {
+        fill: "#D1FAE5"
+        stroke: "#059669"
+        stroke-width: 2
+      }
+    }
+  }
+
+  ir_targets: "红外控制设备" {
+    style: {
+      fill: "#FFF7ED"
+      stroke: "#F59E0B"
+    }
+
+    ac: "海尔空调" {
+      shape: rectangle
+      style: {
+        fill: "#FEF3C7"
+        stroke: "#D97706"
+      }
+    }
+
+    night_light: "小夜灯" {
+      shape: rectangle
+      style: {
+        fill: "#FEF3C7"
+        stroke: "#D97706"
+      }
+    }
+
+    ir_remote -> ac: "红外码"
+    ir_remote -> night_light: "红外码"
+  }
+
+  gateway_zone: "ZigBee / 蓝牙" {
+    style: {
+      fill: "#F5F3FF"
+      stroke: "#8B5CF6"
+    }
+
+    gateway: "小米网关\n(lumi.gateway.mgl03)\n第三方固件" {
+      shape: rectangle
+      style: {
+        fill: "#EDE9FE"
+        stroke: "#7C3AED"
+        stroke-width: 2
+      }
+    }
+
+    zigbee_devices: "ZigBee / 蓝牙\n子设备" {
+      shape: rectangle
+      style: {
+        fill: "#EDE9FE"
+        stroke: "#7C3AED"
+      }
+    }
+
+    gateway -> zigbee_devices: "接入管理"
+  }
+}
+
+# 云端服务
+cloud_zone: "云端服务" {
+  style: {
+    fill: "#FDF2F8"
+    stroke: "#EC4899"
+  }
+
+  mi_cloud: "米家云\n(获取设备 Token)" {
+    shape: cloud
+    style: {
+      fill: "#FCE7F3"
+      stroke: "#DB2777"
+    }
+  }
+
+  telegram: "Telegram Bot\n(通知 / 远程控制)" {
+    shape: cloud
+    style: {
+      fill: "#FCE7F3"
+      stroke: "#DB2777"
+    }
+  }
+}
+
+# 连接关系
+user_zone.app -> ha_zone.core: "Web / REST API"
+user_zone.voice -> ha_zone.core: "语音指令"
+
+ha_zone.core -> device_zone.wifi_zone.plug: "miio 控制"
+ha_zone.core -> device_zone.wifi_zone.bulb: "miio 控制"
+ha_zone.core -> device_zone.wifi_zone.ir_remote: "miio 控制"
+ha_zone.core -> device_zone.gateway_zone.gateway: "局域网协议"
+
+ha_zone.core -> cloud_zone.mi_cloud: "获取 Token"
+ha_zone.core -> cloud_zone.telegram: "状态推送 / 指令下发"

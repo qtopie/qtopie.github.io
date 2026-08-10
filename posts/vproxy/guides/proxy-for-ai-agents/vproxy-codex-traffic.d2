@@ -1,0 +1,36 @@
+direction: down
+
+app_zone: "目标应用" {
+  codex: "codex CLI\n(不支持代理设置)"
+  antigravity: "Antigravity\n(不支持代理设置)"
+}
+
+intercept_zone: "vproxy 强制代理" {
+  shape: package
+  capture: "网络拦截层\nmacOS: TUN 虚拟网卡 (gVisor)\nIP_BOUND_IF 防环路"
+  router: "规则引擎 Router\nDOMAIN / PROCESS / IP-CIDR / FINAL"
+  upstream: "上游选择 Server Manager\n(健康探测 / 故障切换)"
+}
+
+socks_zone: "用户已有代理" {
+  shape: package
+  socks5: "SOCKS5 代理\n(用户自备)"
+}
+
+internet: "AI 服务\n(OpenAI API 等)" {
+  shape: cloud
+}
+
+codex -> capture: "connect() 流量被劫持" {
+  style.stroke: "#2563eb"
+}
+antigravity -> capture: "connect() 流量被劫持" {
+  style.stroke: "#2563eb"
+}
+capture -> router: "还原目标域名/IP"
+router -> upstream: "命中 PROXY 规则"
+router -> router: "DIRECT 直连放行" {
+  style.stroke-dash: 3
+}
+upstream -> socks5: "走用户 SOCKS5 隧道"
+socks5 -> internet: "请求 AI 服务"

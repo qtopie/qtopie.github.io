@@ -2884,28 +2884,28 @@
 &lt;p&gt;采用米家智能硬件的原因是, 小米智能家居做的比较早（也许是起初推广的更好，刚接触智能家居的时候就用的小米）,
 另外一点是小米智能硬件确实物美价廉，在国外也很受欢迎，Github上也有很多相关项目.&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;img src="homeassistant.assets/img-2021-10-16-12-14-50.png" alt=""&gt;&lt;/p&gt;
-&lt;h2 id="环境和设备"&gt;环境和设备&lt;/h2&gt;
+&lt;h2 id="系统架构"&gt;系统架构&lt;/h2&gt;
+&lt;p&gt;&lt;img src="homeassistant-architecture.svg" alt="HomeAssistant 系统架构图"&gt;&lt;/p&gt;
+&lt;p&gt;整个系统以树莓派上的 Home Assistant 为核心：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;RaspberryPi 4 (4GB版本)&lt;/li&gt;
-&lt;li&gt;Ubuntu arm64 树莓派版本&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;接入层&lt;/strong&gt;：通过 &lt;code&gt;xiaomi_miio&lt;/code&gt; 直连米家 WiFi 设备（插座、灯泡、红外遥控器），红外遥控器再控制空调、小夜灯等传统电器；通过刷了第三方固件的小米网关接入 ZigBee / 蓝牙子设备。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;感知层&lt;/strong&gt;：树莓派相机用于定时抓拍。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;交互层&lt;/strong&gt;：手机 / Web 前端本地访问，通过 Telegram Bot 实现远程通知与控制，接入天猫精灵 / Google Assistant 实现语音控制。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;云端&lt;/strong&gt;：设备 Token 通过米家云获取。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id="安装homeassistant"&gt;安装HomeAssistant&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;这里使用Ubuntu而不是Raspbian的一个原因是Ubuntu官方软件包更新更快（比如raspbian当前为3.7而hass需要3.8+版本)，
-且自己笔记本一直用Ubuntu，统一发行版使用起来更加方便&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;在现代 Linux (如 Ubuntu 24.04 及 Python 3.12+) 环境下，推荐使用 Python 虚拟环境 (venv) 进行隔离安装：&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 安装基础构建与 venv 依赖&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt update
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt install -y python3-dev python3-venv build-essential libssl-dev libffi-dev libjpeg-dev zlib1g-dev
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 创建虚拟环境&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;python3 -m venv ~/homeassistant-venv
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 使用镜像源安装 homeassistant 及前端组件&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;~/homeassistant-venv/bin/pip install -i https://pypi.tuna.tsinghua.edu.cn/simple homeassistant home-assistant-frontend
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;也可以通过编辑 &lt;code&gt;~/.config/pip/pip.conf&lt;/code&gt; 配置默认 PyPI 镜像源：&lt;/p&gt;</description></item><item><title>vim-go</title><link>https://qtopie.github.io/notes/vim/vim-go/</link><pubDate>Sat, 28 Aug 2021 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/vim/vim-go/</guid><description>&lt;p&gt;&lt;em&gt;将VIM打造为Go开发利器&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="./assets/img-2021-10-16-12-14-50.png" alt=""&gt;&lt;/p&gt;
+&lt;h2 id="homeassistant-实现架构"&gt;HomeAssistant 实现架构&lt;/h2&gt;
+&lt;p&gt;上一节的系统架构展示的是&amp;quot;部署视图&amp;quot;，这一节从&amp;quot;实现视角&amp;quot;看 Home Assistant 这个软件本身是怎么工作的。它的核心是&lt;strong&gt;事件驱动&lt;/strong&gt;：一切状态变化都通过事件总线广播，各组件通过订阅事件解耦协作，而不是相互直接调用。&lt;/p&gt;
+&lt;p&gt;&lt;img src="homeassistant-core-architecture.svg" alt="HomeAssistant 核心实现架构图"&gt;&lt;/p&gt;
+&lt;h3 id="核心三件套"&gt;核心三件套&lt;/h3&gt;
+&lt;p&gt;Home Assistant 启动时创建唯一的 &lt;code&gt;hass&lt;/code&gt; 对象，作为所有组件的&amp;quot;中枢&amp;quot;。它内部承载三个最核心的子系统：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;事件总线 (Event Bus, &lt;code&gt;hass.bus&lt;/code&gt;)&lt;/strong&gt;：发布/订阅模型。任何状态变化都会触发 &lt;code&gt;state_changed&lt;/code&gt; 事件，组件也可以定义自定义事件。组件通过 &lt;code&gt;hass.bus.async_listen()&lt;/code&gt; 订阅，通过 &lt;code&gt;hass.bus.fire()&lt;/code&gt; 发布。所有组件之间的通信都走这里，实现完全解耦。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;状态机 (State Machine, &lt;code&gt;hass.states&lt;/code&gt;)&lt;/strong&gt;：保存所有实体的当前状态。实体通过 &lt;code&gt;hass.states.async_set()&lt;/code&gt; 写入状态（例如 &lt;code&gt;light.living_room&lt;/code&gt; 为 &lt;code&gt;on&lt;/code&gt;），通过 &lt;code&gt;hass.states.get()&lt;/code&gt; 读取。状态一旦变化，就触发 &lt;code&gt;state_changed&lt;/code&gt; 事件。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;服务注册表 (Service Registry, &lt;code&gt;hass.services&lt;/code&gt;)&lt;/strong&gt;：可调用的&amp;quot;动作&amp;quot;，例如 &lt;code&gt;light.turn_on&lt;/code&gt;、&lt;code&gt;xiaomi_miio.remote_learn_command&lt;/code&gt;。前端、自动化、脚本都通过 &lt;code&gt;hass.services.async_call()&lt;/code&gt; 调用服务，由注册表路由到对应组件处理。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="设备如何接入integration-体系"&gt;设备如何接入：Integration 体系&lt;/h3&gt;
+&lt;p&gt;功能扩展通过 &lt;strong&gt;Integration（集成）&lt;/strong&gt; 实现，每个集成是 &lt;code&gt;components/&amp;lt;domain&amp;gt;/&lt;/code&gt; 下的一个 Python 包：&lt;/p&gt;</description></item><item><title>vim-go</title><link>https://qtopie.github.io/notes/vim/vim-go/</link><pubDate>Sat, 28 Aug 2021 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/notes/vim/vim-go/</guid><description>&lt;p&gt;&lt;em&gt;将VIM打造为Go开发利器&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;平时一般使用VSCode编程，最近为了更好地刷leetcode，又换回了vim。发现笔记本小屏幕
 使用vscode zen-mode沉浸式看代码很爽以后，也喜欢上了使用vim写代码, 快捷键方便、稳
 定高效、功能纯粹（极简主义）。研究了一番后，发现其可行性，便整理了一下。&lt;/p&gt;
