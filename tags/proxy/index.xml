@@ -1,1 +1,29 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Proxy on 1001問</title><link>https://qtopie.github.io/tags/proxy/</link><description>Recent content in Proxy on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><atom:link href="https://qtopie.github.io/tags/proxy/index.xml" rel="self" type="application/rss+xml"/></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Proxy on 1001問</title><link>https://qtopie.github.io/tags/proxy/</link><description>Recent content in Proxy on 1001問</description><generator>Hugo</generator><language>en-us</language><copyright>Posts licensed under &lt;a href="https://creativecommons.org/licenses/by/4.0/legalcode"&gt;CC BY 4.0</copyright><lastBuildDate>Mon, 10 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qtopie.github.io/tags/proxy/index.xml" rel="self" type="application/rss+xml"/><item><title>使用 vproxy 强制代理 Codex 等 AI 工具</title><link>https://qtopie.github.io/posts/vproxy/vproxy-for-ai-agents/</link><pubDate>Mon, 10 Aug 2026 00:00:00 +0000</pubDate><guid>https://qtopie.github.io/posts/vproxy/vproxy-for-ai-agents/</guid><description>&lt;p&gt;项目地址: &lt;a href="https://github.com/qtopie/vproxy"&gt;github.com/qtopie/vproxy&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;首先需要明确：&lt;code&gt;vproxy&lt;/code&gt; 是一个&lt;strong&gt;网络拦截和转发&lt;/strong&gt;工具，它本身不提供任何网络穿透能力。也就是说，你依然需要自备一个可用的代理服务（本文假定你已经有一个 SOCKS5 代理）。&lt;code&gt;vproxy&lt;/code&gt; 做的事情是利用 TUN 模式和 eBPF 等高级网络技术，把那些&lt;strong&gt;不支持网络代理设置&lt;/strong&gt;的软件（例如 Antigravity、Codex）的网络流量&lt;strong&gt;强制&lt;/strong&gt;路由到你的代理上。它本质上是一个网络路由工具，设计思路启发自开源软件 &lt;code&gt;proxychains4&lt;/code&gt;。本文以 &lt;strong&gt;macOS&lt;/strong&gt; 平台为例。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="为什么需要强制代理"&gt;为什么需要强制代理&lt;/h2&gt;
+&lt;p&gt;绝大多数命令行工具都支持通过环境变量（&lt;code&gt;HTTP_PROXY&lt;/code&gt; / &lt;code&gt;HTTPS_PROXY&lt;/code&gt; / &lt;code&gt;ALL_PROXY&lt;/code&gt;）走代理，例如 &lt;code&gt;curl&lt;/code&gt;、&lt;code&gt;git&lt;/code&gt;、&lt;code&gt;wget&lt;/code&gt;。但像 &lt;strong&gt;Codex&lt;/strong&gt;、&lt;strong&gt;Antigravity&lt;/strong&gt; 这类 AI Agent 工具，往往并不读取这些环境变量，也没有内置的代理配置项。&lt;/p&gt;
+&lt;p&gt;它们的网络请求是直接用系统 socket 发出去的，传统的 &lt;code&gt;export https_proxy=...&lt;/code&gt; 对它们毫无效果。&lt;code&gt;vproxy&lt;/code&gt; 的思路与 &lt;code&gt;proxychains4&lt;/code&gt; 一脉相承：不指望目标程序自己支持代理，而是&lt;strong&gt;在系统网络层把它发出的连接劫持下来，转交给上游代理&lt;/strong&gt;。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;提示：Codex 桌面端是内嵌在 &lt;strong&gt;ChatGPT.app&lt;/strong&gt; 里运行的，ChatGPT 主进程会拉起 codex 及其渲染器子进程。所以除了 &lt;code&gt;PROCESS,codex,PROXY&lt;/code&gt;，还需要给 ChatGPT 主进程加上代理规则（见下文配置），否则只匹配 codex 子进程会漏掉一部分流量。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="工作原理"&gt;工作原理&lt;/h2&gt;
+&lt;p&gt;&lt;img src="vproxy-codex-traffic.svg" alt="vproxy 强制代理流量走向"&gt;&lt;/p&gt;
+&lt;p&gt;macOS 上 &lt;code&gt;vproxy&lt;/code&gt; 通过创建虚拟 TUN 网卡（&lt;code&gt;utun&lt;/code&gt;），把系统路由表里 &lt;code&gt;0.0.0.0/1&lt;/code&gt; 和 &lt;code&gt;128.0.0.0/1&lt;/code&gt; 两个网段的路由指向 TUN，再借助 gVisor 用户态协议栈把拦下来的流量还原成 Go 的 &lt;code&gt;net.Conn&lt;/code&gt;，交给规则引擎处理。整个过程的核心模式是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;把目标进程产生的 TCP/UDP 连接流量拦下来；&lt;/li&gt;
+&lt;li&gt;还原出它真正要访问的目标域名/IP；&lt;/li&gt;
+&lt;li&gt;交给规则引擎按域名、进程、IP 段分流；&lt;/li&gt;
+&lt;li&gt;命中 &lt;code&gt;PROXY&lt;/code&gt; 规则的流量，通过你自己的 SOCKS5 / HTTP 代理转发出去；&lt;/li&gt;
+&lt;li&gt;给 &lt;code&gt;vproxy&lt;/code&gt; 自己发出的出站 socket 绑定物理网卡（&lt;code&gt;IP_BOUND_IF&lt;/code&gt;），避免被 TUN 再次捕获形成环路。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="前置条件"&gt;前置条件&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;一台 macOS 主机（macOS 10.15+）&lt;/li&gt;
+&lt;li&gt;一个&lt;strong&gt;你自己已有的&lt;/strong&gt; SOCKS5 代理（例如 &lt;code&gt;socks5://127.0.0.1:1080&lt;/code&gt;，假设跑在本地）&lt;/li&gt;
+&lt;li&gt;Go 1.21+（如果从源码构建）&lt;/li&gt;
+&lt;li&gt;初始化需要 &lt;code&gt;sudo&lt;/code&gt; 权限（创建 TUN 接口、修改路由表）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="安装"&gt;安装&lt;/h2&gt;
+&lt;p&gt;从 &lt;a href="https://github.com/qtopie/vproxy/releases"&gt;Releases&lt;/a&gt; 下载对应平台的二进制，或从源码构建：&lt;/p&gt;</description></item></channel></rss>
