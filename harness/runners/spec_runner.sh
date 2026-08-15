@@ -46,6 +46,15 @@ else
   echo "[Harness Runner] SKIP: $WIDGET_TEST not found"
 fi
 
+# Run the TOC collapse (H3 默认折叠) spec test suite.
+TOC_TEST="$ROOT_DIR/testings/toc/toc_collapse_test.sh"
+if [[ -f "$TOC_TEST" ]]; then
+  echo "[Harness Runner] Running TOC collapse spec tests..."
+  bash "$TOC_TEST" || STATUS=$?
+else
+  echo "[Harness Runner] SKIP: $TOC_TEST not found"
+fi
+
 if [[ $STATUS -eq 0 ]]; then
   echo "[Harness Runner] All Spec BDD assertions completed successfully."
 else
