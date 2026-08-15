@@ -1,0 +1,258 @@
+direction: right
+
+client: "客户端\n(全球用户)" {
+  shape: person
+  style: {
+    fill: "#EFF6FF"
+    stroke: "#3B82F6"
+    stroke-width: 2
+    bold: true
+  }
+}
+
+global_layer: "全局层" {
+  grid-columns: 3
+  style: {
+    fill: "#F8FAFC"
+    stroke: "#CBD5E1"
+    stroke-width: 2
+  }
+
+  gateway: "API Gateway\n(识别 admin_unit_id\n租户识别 / 区域路由 / 限流)" {
+    style: {
+      fill: "#EDE9FE"
+      stroke: "#7C3AED"
+      stroke-width: 2
+      bold: true
+    }
+  }
+
+  admin_unit: "Admin Unit 元数据\n(REGION / COUNTRY / TENANT)" {
+    style: {
+      fill: "#DBEAFE"
+      stroke: "#2563EB"
+      stroke-width: 2
+      bold: true
+    }
+  }
+
+  config_center: "全局配置中心\n(默认 → Region → 租户)" {
+    style: {
+      fill: "#F1F5F9"
+      stroke: "#94A3B8"
+      stroke-width: 2
+    }
+  }
+}
+
+regions: "" {
+  grid-columns: 3
+  style: {
+    stroke: transparent
+    fill: transparent
+  }
+
+  ap_southeast: "Region: ap-southeast\n(东南亚 · 按国家运营)" {
+    grid-columns: 1
+    style: {
+      fill: "#ECFDF5"
+      stroke: "#10B981"
+      stroke-width: 2
+    }
+
+    countries: "" {
+      grid-columns: 3
+      style: {
+        stroke: transparent
+        fill: transparent
+      }
+
+      sg: "COUNTRY sg\n(SGD / 本地支付)" {
+        style: {
+          fill: "#D1FAE5"
+          stroke: "#059669"
+          stroke-width: 2
+          bold: true
+        }
+      }
+
+      id: "COUNTRY id\n(IDR / 数据本地化)" {
+        style: {
+          fill: "#D1FAE5"
+          stroke: "#059669"
+          stroke-width: 2
+          bold: true
+        }
+      }
+
+      th: "COUNTRY th\n(THB / 本地支付)" {
+        style: {
+          fill: "#D1FAE5"
+          stroke: "#059669"
+          stroke-width: 2
+          bold: true
+        }
+      }
+    }
+
+    infra_sa: "" {
+      grid-columns: 3
+      style: {
+        stroke: transparent
+        fill: transparent
+      }
+
+      db_sa: "MySQL\n(按租户分片)" {
+        shape: cylinder
+        style: {
+          fill: "#FEF3C7"
+          stroke: "#D97706"
+          stroke-width: 2
+        }
+      }
+
+      redis_sa: "Redis\n(租户前缀隔离)" {
+        shape: cylinder
+        style: {
+          fill: "#FEF3C7"
+          stroke: "#D97706"
+          stroke-width: 2
+        }
+      }
+
+      mq_sa: "MQ\n(异步 / 跨区复制)" {
+        shape: cylinder
+        style: {
+          fill: "#FEF3C7"
+          stroke: "#D97706"
+          stroke-width: 2
+        }
+      }
+    }
+  }
+
+  us_east: "Region: us-east\n(北美 · 按区域运营)" {
+    grid-columns: 1
+    style: {
+      fill: "#EFF6FF"
+      stroke: "#3B82F6"
+      stroke-width: 2
+    }
+
+    unit_us: "REGION 管理单元\n(US / CA / MX)" {
+      style: {
+        fill: "#DBEAFE"
+        stroke: "#2563EB"
+        stroke-width: 2
+        bold: true
+      }
+    }
+
+    infra_us: "" {
+      grid-columns: 3
+      style: {
+        stroke: transparent
+        fill: transparent
+      }
+
+      db_us: "MySQL\n(按租户分片)" {
+        shape: cylinder
+        style: {
+          fill: "#FEF3C7"
+          stroke: "#D97706"
+          stroke-width: 2
+        }
+      }
+
+      redis_us: "Redis\n(租户前缀隔离)" {
+        shape: cylinder
+        style: {
+          fill: "#FEF3C7"
+          stroke: "#D97706"
+          stroke-width: 2
+        }
+      }
+
+      mq_us: "MQ\n(异步 / 跨区复制)" {
+        shape: cylinder
+        style: {
+          fill: "#FEF3C7"
+          stroke: "#D97706"
+          stroke-width: 2
+        }
+      }
+    }
+  }
+
+  sa_east: "Region: sa-east\n(南美 · 按区域运营)" {
+    grid-columns: 1
+    style: {
+      fill: "#EFF6FF"
+      stroke: "#3B82F6"
+      stroke-width: 2
+    }
+
+    unit_sa: "REGION 管理单元\n(BR / AR / CL)" {
+      style: {
+        fill: "#DBEAFE"
+        stroke: "#2563EB"
+        stroke-width: 2
+        bold: true
+      }
+    }
+
+    infra_br: "" {
+      grid-columns: 3
+      style: {
+        stroke: transparent
+        fill: transparent
+      }
+
+      db_br: "MySQL\n(按租户分片)" {
+        shape: cylinder
+        style: {
+          fill: "#FEF3C7"
+          stroke: "#D97706"
+          stroke-width: 2
+        }
+      }
+
+      redis_br: "Redis\n(租户前缀隔离)" {
+        shape: cylinder
+        style: {
+          fill: "#FEF3C7"
+          stroke: "#D97706"
+          stroke-width: 2
+        }
+      }
+
+      mq_br: "MQ\n(异步 / 跨区复制)" {
+        shape: cylinder
+        style: {
+          fill: "#FEF3C7"
+          stroke: "#D97706"
+          stroke-width: 2
+        }
+      }
+    }
+  }
+}
+
+client -> global_layer.gateway: "请求 (Token)"
+global_layer.gateway -> global_layer.admin_unit: "解析 admin_unit_id"
+global_layer.admin_unit -> global_layer.gateway: "路由目标 (Region/Country)"
+global_layer.gateway -> regions.ap_southeast.countries.sg: "COUNTRY sg"
+global_layer.gateway -> regions.ap_southeast.countries.id: "COUNTRY id"
+global_layer.gateway -> regions.ap_southeast.countries.th: "COUNTRY th"
+global_layer.gateway -> regions.us_east.unit_us: "REGION us-east"
+global_layer.gateway -> regions.sa_east.unit_sa: "REGION sa-east"
+regions.ap_southeast.countries.sg -> regions.ap_southeast.infra_sa.db_sa: "读写"
+regions.ap_southeast.countries.id -> regions.ap_southeast.infra_sa.db_sa: "读写"
+regions.ap_southeast.countries.th -> regions.ap_southeast.infra_sa.db_sa: "读写"
+regions.us_east.unit_us -> regions.us_east.infra_us.db_us: "读写"
+regions.sa_east.unit_sa -> regions.sa_east.infra_br.db_br: "读写"
+regions.ap_southeast.infra_sa.mq_sa -> regions.us_east.infra_us.mq_us: "跨区数据同步"
+regions.ap_southeast.infra_sa.mq_sa -> regions.sa_east.infra_br.mq_br: "跨区数据同步"
+global_layer.config_center -> regions.ap_southeast: "配置下发"
+global_layer.config_center -> regions.us_east: "配置下发"
+global_layer.config_center -> regions.sa_east: "配置下发"
