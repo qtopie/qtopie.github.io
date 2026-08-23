@@ -7,7 +7,7 @@ googleAnalytics: UA-209364110-1
 author: 
   name: 'qtopie'
   email: qtopie.rw@gmail.com
-copyright: Posts licensed under <a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0
+copyright: 'Licensed under <a href="https://creativecommons.org/licenses/by/4.0/legalcode">CC BY 4.0</a>'
 
 params:
   googleAdSense: ca-pub-3338377104827119
