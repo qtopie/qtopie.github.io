@@ -23,7 +23,7 @@ jobs:
           node-version: 24
       - name: Install D2 CLI
         run: |
-          curl -fsSL https://d2lang.com/install.sh | sh -s --
+          curl -fsSL --retry 3 --retry-all-errors --connect-timeout 10 https://d2lang.com/install.sh | sh -s --
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
           "$HOME/.local/bin/d2" --version
       - name: Setup Hugo
