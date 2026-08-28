@@ -42,7 +42,7 @@ process_file_and_track() {
       block_file = ""
     }
 
-    !in_block && $0 ~ /^```d2([[:space:]]*\{[^}]*\})?[[:space:]]*$/ {
+    !in_block && $0 ~ /^[[:space:]>]*```d2([[:space:]]*\{[^}]*\})?[[:space:]]*$/ {
       in_block = 1
       block_id++
       theme = parse_theme($0)
@@ -50,7 +50,7 @@ process_file_and_track() {
       next
     }
 
-    in_block && $0 ~ /^```[[:space:]]*$/ {
+    in_block && $0 ~ /^[[:space:]>]*```[[:space:]]*$/ {
       printf("%s\t%s\t%s\n", block_file, theme, block_id)
       in_block = 0
       theme = "0"
@@ -59,7 +59,9 @@ process_file_and_track() {
     }
 
     in_block {
-      print $0 >> block_file
+      line = $0
+      sub(/^[[:space:]>]*[>][[:space:]]?/, "", line)
+      print line >> block_file
     }
   ' "$file" | while IFS=$'\t' read -r block_file theme block_id; do
     local hash
