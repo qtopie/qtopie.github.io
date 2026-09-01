@@ -3,4 +3,4 @@
 	url = git@github.com:qtopie/posts.git
 [submodule "themes/drift-blog-theme"]
 	path = themes/drift-blog-theme
-	url = https://github.com/qtopie/drift-blog-theme.git
+	url = git@github.com:qtopie/drift-blog-theme.git

@@ -7,28 +7,36 @@ tasks:
       - task: dev
 
   dev:
-    desc: Run all dev services in parallel (Hugo, D2, React)
+    desc: Run all dev services (Pre-renders D2 diagrams, then starts Hugo, D2 watcher, React watcher)
+    cmds:
+      - task: d2:gen
+      - task: dev:parallel
+
+  dev:parallel:
+    desc: Run dev services in parallel
     deps:
       - task: d2:watch
       - task: react:watch
       - task: hugo
 
-  hugo:
-    desc: Start Hugo server
+  d2:gen:
+    desc: Generate all missing D2 diagrams
     cmds:
-      - ./scripts/hugo-with-d2.sh server --minify --disableFastRender --bind localhost
+      - ./scripts/generate-d2-diagrams.sh
 
   d2:watch:
-    desc: Watch Markdown files and generate D2 diagrams
+    desc: Watch Markdown files and generate D2 diagrams automatically
     watch: true
     sources:
       - content/**/*.md
       - posts/**/*.md
-      - "**/content/**/*.md"
-      - "**/posts/**/*.md"
-      - scripts/generate-d2-diagrams.sh
     cmds:
       - ./scripts/generate-d2-diagrams.sh
+
+  hugo:
+    desc: Start Hugo server
+    cmds:
+      - hugo server --minify --disableFastRender --bind localhost
 
   react:watch:
     desc: Watch and build React app (Theme)
@@ -41,9 +49,10 @@ tasks:
       - npm run watch
 
   build:
-    desc: Build the React app and Hugo site for production
+    desc: Build the React app, D2 diagrams, and Hugo site for production
     cmds:
       - task: build:react
+      - task: d2:gen
       - task: build:hugo
 
   build:react:
@@ -56,5 +65,4 @@ tasks:
   build:hugo:
     desc: Generate static Hugo site
     cmds:
-      - ./scripts/hugo-with-d2.sh --minify
-
+      - hugo --minify
