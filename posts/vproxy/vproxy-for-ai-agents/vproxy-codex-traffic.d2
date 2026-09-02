@@ -1,36 +1,101 @@
 direction: down
 
-app_zone: "目标应用" {
-  codex: "codex CLI\n(不支持代理设置)"
-  antigravity: "Antigravity\n(不支持代理设置)"
+app_layer: "1. 目标应用 (AI Agent 客户端)" {
+  direction: right
+  style.fill: "#EFF6FF"
+  style.stroke: "#2563EB"
+
+  codex: "Codex CLI\n(忽略代理环境变量)" {
+    style.fill: "#DBEAFE"
+    style.stroke: "#3B82F6"
+    width: 220
+  }
+  antigravity: "Antigravity / ChatGPT\n(直连系统 Socket 流量)" {
+    style.fill: "#DBEAFE"
+    style.stroke: "#3B82F6"
+    width: 220
+  }
 }
 
-intercept_zone: "vproxy 强制代理" {
-  shape: package
-  capture: "网络拦截层\nmacOS: TUN 虚拟网卡 (gVisor)\nIP_BOUND_IF 防环路"
-  router: "规则引擎 Router\nDOMAIN / PROCESS / IP-CIDR / FINAL"
-  upstream: "上游选择 Server Manager\n(健康探测 / 故障切换)"
+intercept_layer: "2. 系统级透明拦截与防环路 (Interception & Anti-Loop)" {
+  direction: right
+  style.fill: "#E0F2FE"
+  style.stroke: "#0284C7"
+
+  tun: "虚拟 TUN 网卡 (utun) / eBPF\n• 捕获系统 0.0.0.0/1 默认路由\n• gVisor 协议栈还原 net.Conn" {
+    style.fill: "#BAE6FD"
+    style.stroke: "#0284C7"
+    width: 280
+  }
+
+  anti_loop: "防环路绑定 (Anti-Loop)\n• 拦截流量打标放行\n• vproxy 出站绑定物理网卡" {
+    style.fill: "#7DD3FC"
+    style.stroke: "#0284C7"
+    style.bold: true
+    width: 280
+  }
+
+  tun -> anti_loop: "打标放行"
 }
 
-socks_zone: "用户已有代理" {
-  shape: package
-  socks5: "SOCKS5 代理\n(用户自备)"
+routing_layer: "3. vproxy 规则分流与上游管理 (Routing & Upstream)" {
+  direction: right
+  style.fill: "#FEF3C7"
+  style.stroke: "#D97706"
+
+  router: "自适应分流引擎 (Rule Router)\n• DOMAIN / PROCESS / IP-CIDR / FINAL\n• 还原真实目标域名与原始目的 IP" {
+    style.fill: "#FDE68A"
+    style.stroke: "#D97706"
+    style.bold: true
+    width: 280
+  }
+
+  upstream_mgr: "上游管理器 (Server Manager)\n• 动态健康探测与故障切换 (Failover)\n• 快速失败与自动重试 (Dial Retries)" {
+    style.fill: "#DCFCE7"
+    style.stroke: "#16A34A"
+    style.bold: true
+    width: 280
+  }
+
+  router -> upstream_mgr: "命中 PROXY 规则"
 }
 
-internet: "AI 服务\n(OpenAI API 等)" {
-  shape: cloud
+outbound_layer: "4. 出站通道与 AI 目标服务 (Outbound & Internet)" {
+  direction: right
+  style.fill: "#F1F5F9"
+  style.stroke: "#64748B"
+
+  socks5: "用户自备代理服务\nSOCKS5 (127.0.0.1:1080)" {
+    shape: cylinder
+    style.fill: "#F3E8FF"
+    style.stroke: "#9333EA"
+    width: 200
+  }
+
+  direct_exit: "DIRECT 直连通道\n(物理网卡直出)" {
+    style.fill: "#FFFFFF"
+    style.stroke: "#64748B"
+    style.stroke-dash: 4
+    width: 180
+  }
+
+  ai_cloud: "目标 AI 云端端点\n• OpenAI API / ChatGPT\n• Claude / Gemini" {
+    shape: cloud
+    style.fill: "#D1FAE5"
+    style.stroke: "#059669"
+    style.bold: true
+    width: 220
+  }
+
+  socks5 -> ai_cloud: "隧道代理请求"
+  direct_exit -> ai_cloud: "直连请求" {
+    style.stroke-dash: 4
+  }
 }
 
-codex -> capture: "connect() 流量被劫持" {
-  style.stroke: "#2563eb"
+app_layer -> intercept_layer.tun: "系统 Socket 流量被强制劫持"
+intercept_layer.anti_loop -> routing_layer.router: "交付还原后的 net.Conn"
+routing_layer.router -> outbound_layer.direct_exit: "命中 DIRECT 规则" {
+  style.stroke-dash: 4
 }
-antigravity -> capture: "connect() 流量被劫持" {
-  style.stroke: "#2563eb"
-}
-capture -> router: "还原目标域名/IP"
-router -> upstream: "命中 PROXY 规则"
-router -> router: "DIRECT 直连放行" {
-  style.stroke-dash: 3
-}
-upstream -> socks5: "走用户 SOCKS5 隧道"
-socks5 -> internet: "请求 AI 服务"
+routing_layer.upstream_mgr -> outbound_layer.socks5: "转发至上游代理隧道"
