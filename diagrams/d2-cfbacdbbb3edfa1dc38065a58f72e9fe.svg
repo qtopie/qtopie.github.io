@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-d2-version="v0.8.2" preserveAspectRatio="xMinYMin meet" viewBox="0 0 2683 426"><svg class="d2-23770870 d2-svg" width="2683" height="426" viewBox="-101 -101 2683 426"><rect x="-101.000000" y="-101.000000" width="2683.000000" height="426.000000" rx="0.000000" fill="#FFFFFF" class=" fill-N7" stroke-width="0" /><style type="text/css"><![CDATA[
+<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-d2-version="v0.9.0" preserveAspectRatio="xMinYMin meet" viewBox="0 0 2683 426"><svg class="d2-23770870 d2-svg" width="2683" height="426" viewBox="-101 -101 2683 426"><rect x="-101" y="-101" width="2683" height="426" rx="0" fill="#FFFFFF" class=" fill-N7" stroke-width="0" /><style type="text/css"><![CDATA[
 .d2-23770870 .text-bold {
 	font-family: "d2-23770870-font-bold";
 }
@@ -27,80 +27,15 @@
 
 		.d2-23770870 .fill-N1{fill:#0A0F25;}
 		.d2-23770870 .fill-N2{fill:#676C7E;}
-		.d2-23770870 .fill-N3{fill:#9499AB;}
-		.d2-23770870 .fill-N4{fill:#CFD2DD;}
-		.d2-23770870 .fill-N5{fill:#DEE1EB;}
-		.d2-23770870 .fill-N6{fill:#EEF1F8;}
 		.d2-23770870 .fill-N7{fill:#FFFFFF;}
 		.d2-23770870 .fill-B1{fill:#0D32B2;}
-		.d2-23770870 .fill-B2{fill:#0D32B2;}
-		.d2-23770870 .fill-B3{fill:#E3E9FD;}
-		.d2-23770870 .fill-B4{fill:#E3E9FD;}
-		.d2-23770870 .fill-B5{fill:#EDF0FD;}
 		.d2-23770870 .fill-B6{fill:#F7F8FE;}
-		.d2-23770870 .fill-AA2{fill:#4A6FF3;}
-		.d2-23770870 .fill-AA4{fill:#EDF0FD;}
-		.d2-23770870 .fill-AA5{fill:#F7F8FE;}
-		.d2-23770870 .fill-AB4{fill:#EDF0FD;}
-		.d2-23770870 .fill-AB5{fill:#F7F8FE;}
-		.d2-23770870 .stroke-N1{stroke:#0A0F25;}
-		.d2-23770870 .stroke-N2{stroke:#676C7E;}
-		.d2-23770870 .stroke-N3{stroke:#9499AB;}
-		.d2-23770870 .stroke-N4{stroke:#CFD2DD;}
-		.d2-23770870 .stroke-N5{stroke:#DEE1EB;}
-		.d2-23770870 .stroke-N6{stroke:#EEF1F8;}
-		.d2-23770870 .stroke-N7{stroke:#FFFFFF;}
 		.d2-23770870 .stroke-B1{stroke:#0D32B2;}
-		.d2-23770870 .stroke-B2{stroke:#0D32B2;}
-		.d2-23770870 .stroke-B3{stroke:#E3E9FD;}
-		.d2-23770870 .stroke-B4{stroke:#E3E9FD;}
-		.d2-23770870 .stroke-B5{stroke:#EDF0FD;}
-		.d2-23770870 .stroke-B6{stroke:#F7F8FE;}
-		.d2-23770870 .stroke-AA2{stroke:#4A6FF3;}
-		.d2-23770870 .stroke-AA4{stroke:#EDF0FD;}
-		.d2-23770870 .stroke-AA5{stroke:#F7F8FE;}
-		.d2-23770870 .stroke-AB4{stroke:#EDF0FD;}
-		.d2-23770870 .stroke-AB5{stroke:#F7F8FE;}
-		.d2-23770870 .background-color-N1{background-color:#0A0F25;}
-		.d2-23770870 .background-color-N2{background-color:#676C7E;}
-		.d2-23770870 .background-color-N3{background-color:#9499AB;}
-		.d2-23770870 .background-color-N4{background-color:#CFD2DD;}
-		.d2-23770870 .background-color-N5{background-color:#DEE1EB;}
-		.d2-23770870 .background-color-N6{background-color:#EEF1F8;}
-		.d2-23770870 .background-color-N7{background-color:#FFFFFF;}
-		.d2-23770870 .background-color-B1{background-color:#0D32B2;}
-		.d2-23770870 .background-color-B2{background-color:#0D32B2;}
-		.d2-23770870 .background-color-B3{background-color:#E3E9FD;}
-		.d2-23770870 .background-color-B4{background-color:#E3E9FD;}
-		.d2-23770870 .background-color-B5{background-color:#EDF0FD;}
-		.d2-23770870 .background-color-B6{background-color:#F7F8FE;}
-		.d2-23770870 .background-color-AA2{background-color:#4A6FF3;}
-		.d2-23770870 .background-color-AA4{background-color:#EDF0FD;}
-		.d2-23770870 .background-color-AA5{background-color:#F7F8FE;}
-		.d2-23770870 .background-color-AB4{background-color:#EDF0FD;}
-		.d2-23770870 .background-color-AB5{background-color:#F7F8FE;}
-		.d2-23770870 .color-N1{color:#0A0F25;}
-		.d2-23770870 .color-N2{color:#676C7E;}
-		.d2-23770870 .color-N3{color:#9499AB;}
-		.d2-23770870 .color-N4{color:#CFD2DD;}
-		.d2-23770870 .color-N5{color:#DEE1EB;}
-		.d2-23770870 .color-N6{color:#EEF1F8;}
-		.d2-23770870 .color-N7{color:#FFFFFF;}
-		.d2-23770870 .color-B1{color:#0D32B2;}
-		.d2-23770870 .color-B2{color:#0D32B2;}
-		.d2-23770870 .color-B3{color:#E3E9FD;}
-		.d2-23770870 .color-B4{color:#E3E9FD;}
-		.d2-23770870 .color-B5{color:#EDF0FD;}
-		.d2-23770870 .color-B6{color:#F7F8FE;}
-		.d2-23770870 .color-AA2{color:#4A6FF3;}
-		.d2-23770870 .color-AA4{color:#EDF0FD;}
-		.d2-23770870 .color-AA5{color:#F7F8FE;}
-		.d2-23770870 .color-AB4{color:#EDF0FD;}
-		.d2-23770870 .color-AB5{color:#F7F8FE;}.appendix text.text{fill:#0A0F25}.md{--color-fg-default:#0A0F25;--color-fg-muted:#676C7E;--color-fg-subtle:#9499AB;--color-canvas-default:#FFFFFF;--color-canvas-subtle:#EEF1F8;--color-border-default:#0D32B2;--color-border-muted:#0D32B2;--color-neutral-muted:#EEF1F8;--color-accent-fg:#0D32B2;--color-accent-emphasis:#0D32B2;--color-attention-subtle:#676C7E;--color-danger-fg:red;}.sketch-overlay-B1{fill:url(#streaks-darker-d2-23770870);mix-blend-mode:lighten}.sketch-overlay-B2{fill:url(#streaks-darker-d2-23770870);mix-blend-mode:lighten}.sketch-overlay-B3{fill:url(#streaks-bright-d2-23770870);mix-blend-mode:darken}.sketch-overlay-B4{fill:url(#streaks-bright-d2-23770870);mix-blend-mode:darken}.sketch-overlay-B5{fill:url(#streaks-bright-d2-23770870);mix-blend-mode:darken}.sketch-overlay-B6{fill:url(#streaks-bright-d2-23770870);mix-blend-mode:darken}.sketch-overlay-AA2{fill:url(#streaks-dark-d2-23770870);mix-blend-mode:overlay}.sketch-overlay-AA4{fill:url(#streaks-bright-d2-23770870);mix-blend-mode:darken}.sketch-overlay-AA5{fill:url(#streaks-bright-d2-23770870);mix-blend-mode:darken}.sketch-overlay-AB4{fill:url(#streaks-bright-d2-23770870);mix-blend-mode:darken}.sketch-overlay-AB5{fill:url(#streaks-bright-d2-23770870);mix-blend-mode:darken}.sketch-overlay-N1{fill:url(#streaks-darker-d2-23770870);mix-blend-mode:lighten}.sketch-overlay-N2{fill:url(#streaks-dark-d2-23770870);mix-blend-mode:overlay}.sketch-overlay-N3{fill:url(#streaks-normal-d2-23770870);mix-blend-mode:color-burn}.sketch-overlay-N4{fill:url(#streaks-normal-d2-23770870);mix-blend-mode:color-burn}.sketch-overlay-N5{fill:url(#streaks-bright-d2-23770870);mix-blend-mode:darken}.sketch-overlay-N6{fill:url(#streaks-bright-d2-23770870);mix-blend-mode:darken}.sketch-overlay-N7{fill:url(#streaks-bright-d2-23770870);mix-blend-mode:darken}.light-code{display: block}.dark-code{display: none}]]></style><g class="ZGlzY292ZXJ5"><g class="shape" ><rect x="0.000000" y="71.000000" width="302.000000" height="82.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="151.000000" y="109.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="151.000000" dy="0.000000">Discovery</tspan><tspan x="151.000000" dy="18.500000">扫描已启用 skill 的名称与描述</tspan></text></g><g class="YWN0aXZhdGlvbg=="><g class="shape" ><rect x="593.000000" y="71.000000" width="285.000000" height="82.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="735.500000" y="109.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="735.500000" dy="0.000000">Activation</tspan><tspan x="735.500000" dy="18.500000">任务匹配时调用 activate_skill</tspan></text></g><g class="Y29uc2VudA=="><g class="shape" ><rect x="1169.000000" y="71.000000" width="184.000000" height="82.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="1261.000000" y="109.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="1261.000000" dy="0.000000">Consent</tspan><tspan x="1261.000000" dy="18.500000">UI 弹出授权确认</tspan></text></g><g class="aW5qZWN0aW9u"><g class="shape" ><rect x="1605.000000" y="142.000000" width="300.000000" height="82.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="1755.000000" y="180.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="1755.000000" dy="0.000000">Injection</tspan><tspan x="1755.000000" dy="18.500000">注入 SKILL.md 与目录访问权限</tspan></text></g><g class="ZXhlY3V0aW9u"><g class="shape" ><rect x="2215.000000" y="142.000000" width="266.000000" height="82.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="2348.000000" y="180.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="2348.000000" dy="0.000000">Execution</tspan><tspan x="2348.000000" dy="18.500000">按技能指引继续执行任务</tspan></text></g><g class="ZGVueQ=="><g class="shape" ><rect x="1693.000000" y="0.000000" width="124.000000" height="82.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="1755.000000" y="38.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="1755.000000" dy="0.000000">Denied</tspan><tspan x="1755.000000" dy="18.500000">用户拒绝</tspan></text></g><g class="KGRpc2NvdmVyeSAtJmd0OyBhY3RpdmF0aW9uKVswXQ=="><marker id="mk-d2-23770870-3488378134" markerWidth="10.000000" markerHeight="12.000000" refX="7.000000" refY="6.000000" viewBox="0.000000 0.000000 10.000000 12.000000" orient="auto" markerUnits="userSpaceOnUse"> <polygon points="0.000000,0.000000 10.000000,6.000000 0.000000,12.000000" fill="#0D32B2" class="connection fill-B1" stroke-width="2" /> </marker><path d="M 303.500000 112.000000 C 418.299988 112.000000 476.700012 112.000000 589.500000 112.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-23770870-3488378134)" mask="url(#d2-23770870)" /><text x="448.000000" y="118.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">任务语义匹配</text></g><g class="KGFjdGl2YXRpb24gLSZndDsgY29uc2VudClbMF0="><path d="M 879.500000 112.000000 C 994.299988 112.000000 1052.699951 112.000000 1165.500000 112.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-23770870-3488378134)" mask="url(#d2-23770870)" /><text x="1024.000000" y="118.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">请求启用技能</text></g><g class="KGNvbnNlbnQgLSZndDsgaW5qZWN0aW9uKVswXQ=="><path d="M 1354.901846 142.618854 C 1453.800049 174.800003 1504.199951 183.000000 1601.000000 183.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-23770870-3488378134)" mask="url(#d2-23770870)" /><text x="1476.500000" y="184.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">用户批准</text></g><g class="KGluamVjdGlvbiAtJmd0OyBleGVjdXRpb24pWzBd"><path d="M 1907.000000 183.000000 C 2029.000000 183.000000 2091.000000 183.000000 2211.000000 183.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-23770870-3488378134)" mask="url(#d2-23770870)" /><text x="2060.500000" y="189.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">加载后开始执行</text></g><g class="KGNvbnNlbnQgLSZndDsgZGVueSlbMF0="><path d="M 1354.901841 81.381129 C 1453.800049 49.199001 1521.800049 41.000000 1689.000000 41.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-23770870-3488378134)" mask="url(#d2-23770870)" /><text x="1520.500000" y="47.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">取消授权</text></g><mask id="d2-23770870" maskUnits="userSpaceOnUse" x="-101" y="-101" width="2683" height="426">
+		.d2-23770870 .stroke-B2{stroke:#0D32B2;}.appendix text.text{fill:#0A0F25}.md{--color-fg-default:#0A0F25;--color-fg-muted:#676C7E;--color-fg-subtle:#9499AB;--color-canvas-default:#FFFFFF;--color-canvas-subtle:#EEF1F8;--color-border-default:#0D32B2;--color-border-muted:#0D32B2;--color-neutral-muted:#EEF1F8;--color-accent-fg:#0D32B2;--color-accent-emphasis:#0D32B2;--color-attention-subtle:#676C7E;--color-danger-fg:red;}.light-code{display: block}.dark-code{display: none}]]></style><g class="ZGlzY292ZXJ5"><g class="shape" ><rect x="0" y="71" width="302" height="82" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="151" y="109.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="151" dy="0">Discovery</tspan><tspan x="151" dy="18.5">扫描已启用 skill 的名称与描述</tspan></text></g><g class="YWN0aXZhdGlvbg=="><g class="shape" ><rect x="593" y="71" width="285" height="82" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="735.5" y="109.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="735.5" dy="0">Activation</tspan><tspan x="735.5" dy="18.5">任务匹配时调用 activate_skill</tspan></text></g><g class="Y29uc2VudA=="><g class="shape" ><rect x="1169" y="71" width="184" height="82" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="1261" y="109.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="1261" dy="0">Consent</tspan><tspan x="1261" dy="18.5">UI 弹出授权确认</tspan></text></g><g class="aW5qZWN0aW9u"><g class="shape" ><rect x="1605" y="142" width="300" height="82" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="1755" y="180.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="1755" dy="0">Injection</tspan><tspan x="1755" dy="18.5">注入 SKILL.md 与目录访问权限</tspan></text></g><g class="ZXhlY3V0aW9u"><g class="shape" ><rect x="2215" y="142" width="266" height="82" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="2348" y="180.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="2348" dy="0">Execution</tspan><tspan x="2348" dy="18.5">按技能指引继续执行任务</tspan></text></g><g class="ZGVueQ=="><g class="shape" ><rect x="1693" y="0" width="124" height="82" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="1755" y="38.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="1755" dy="0">Denied</tspan><tspan x="1755" dy="18.5">用户拒绝</tspan></text></g><g class="KGRpc2NvdmVyeSAtJmd0OyBhY3RpdmF0aW9uKVswXQ=="><marker id="mk-d2-23770870-3488378134" markerWidth="10" markerHeight="12" refX="7" refY="6" viewBox="0 0 10 12" orient="auto" markerUnits="userSpaceOnUse"> <polygon points="0,0 10,6 0,12" fill="#0D32B2" class="connection fill-B1" stroke-width="2" /> </marker><path d="M 303.5 112 C 418.299988 112 476.700012 112 589.5 112" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-23770870-3488378134)" mask="url(#d2-23770870)" /><text x="448" y="118" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">任务语义匹配</text></g><g class="KGFjdGl2YXRpb24gLSZndDsgY29uc2VudClbMF0="><path d="M 879.5 112 C 994.299988 112 1052.699951 112 1165.5 112" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-23770870-3488378134)" mask="url(#d2-23770870)" /><text x="1024" y="118" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">请求启用技能</text></g><g class="KGNvbnNlbnQgLSZndDsgaW5qZWN0aW9uKVswXQ=="><path d="M 1354.901846 142.618854 C 1453.800049 174.800003 1504.199951 183 1601 183" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-23770870-3488378134)" mask="url(#d2-23770870)" /><text x="1476.5" y="184" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">用户批准</text></g><g class="KGluamVjdGlvbiAtJmd0OyBleGVjdXRpb24pWzBd"><path d="M 1907 183 C 2029 183 2091 183 2211 183" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-23770870-3488378134)" mask="url(#d2-23770870)" /><text x="2060.5" y="189" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">加载后开始执行</text></g><g class="KGNvbnNlbnQgLSZndDsgZGVueSlbMF0="><path d="M 1354.901841 81.381129 C 1453.800049 49.199001 1521.800049 41 1689 41" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-23770870-3488378134)" mask="url(#d2-23770870)" /><text x="1520.5" y="47" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">取消授权</text></g><mask id="d2-23770870" maskUnits="userSpaceOnUse" x="-101" y="-101" width="2683" height="426">
 <rect x="-101" y="-101" width="2683" height="426" fill="white"></rect>
-<rect x="388.000000" y="102.000000" width="120" height="21" fill="black"></rect>
-<rect x="964.000000" y="102.000000" width="120" height="21" fill="black"></rect>
-<rect x="1436.000000" y="168.000000" width="81" height="21" fill="black"></rect>
-<rect x="1991.000000" y="173.000000" width="139" height="21" fill="black"></rect>
-<rect x="1480.000000" y="31.000000" width="81" height="21" fill="black"></rect>
+<rect x="388" y="102" width="120" height="21" fill="black"></rect>
+<rect x="964" y="102" width="120" height="21" fill="black"></rect>
+<rect x="1436" y="168" width="81" height="21" fill="black"></rect>
+<rect x="1991" y="173" width="139" height="21" fill="black"></rect>
+<rect x="1480" y="31" width="81" height="21" fill="black"></rect>
 </mask></svg></svg>

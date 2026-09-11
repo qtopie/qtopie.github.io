@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-d2-version="v0.8.2" preserveAspectRatio="xMinYMin meet" viewBox="0 0 1374 746"><svg class="d2-4053130852 d2-svg" width="1374" height="746" viewBox="-14 -85 1374 746"><rect x="-14.000000" y="-85.000000" width="1374.000000" height="746.000000" rx="0.000000" fill="#FFFFFF" class=" fill-N7" stroke-width="0" /><style type="text/css"><![CDATA[
+<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-d2-version="v0.9.0" preserveAspectRatio="xMinYMin meet" viewBox="0 0 1374 746"><svg class="d2-4053130852 d2-svg" width="1374" height="746" viewBox="-14 -85 1374 746"><rect x="-14" y="-85" width="1374" height="746" rx="0" fill="#FFFFFF" class=" fill-N7" stroke-width="0" /><style type="text/css"><![CDATA[
 .d2-4053130852 .text {
 	font-family: "d2-4053130852-font-regular";
 }
@@ -34,77 +34,12 @@
 
 		.d2-4053130852 .fill-N1{fill:#0A0F25;}
 		.d2-4053130852 .fill-N2{fill:#676C7E;}
-		.d2-4053130852 .fill-N3{fill:#9499AB;}
-		.d2-4053130852 .fill-N4{fill:#CFD2DD;}
-		.d2-4053130852 .fill-N5{fill:#DEE1EB;}
-		.d2-4053130852 .fill-N6{fill:#EEF1F8;}
 		.d2-4053130852 .fill-N7{fill:#FFFFFF;}
 		.d2-4053130852 .fill-B1{fill:#0D32B2;}
-		.d2-4053130852 .fill-B2{fill:#0D32B2;}
-		.d2-4053130852 .fill-B3{fill:#E3E9FD;}
-		.d2-4053130852 .fill-B4{fill:#E3E9FD;}
 		.d2-4053130852 .fill-B5{fill:#EDF0FD;}
-		.d2-4053130852 .fill-B6{fill:#F7F8FE;}
-		.d2-4053130852 .fill-AA2{fill:#4A6FF3;}
-		.d2-4053130852 .fill-AA4{fill:#EDF0FD;}
-		.d2-4053130852 .fill-AA5{fill:#F7F8FE;}
-		.d2-4053130852 .fill-AB4{fill:#EDF0FD;}
-		.d2-4053130852 .fill-AB5{fill:#F7F8FE;}
-		.d2-4053130852 .stroke-N1{stroke:#0A0F25;}
-		.d2-4053130852 .stroke-N2{stroke:#676C7E;}
-		.d2-4053130852 .stroke-N3{stroke:#9499AB;}
-		.d2-4053130852 .stroke-N4{stroke:#CFD2DD;}
-		.d2-4053130852 .stroke-N5{stroke:#DEE1EB;}
-		.d2-4053130852 .stroke-N6{stroke:#EEF1F8;}
-		.d2-4053130852 .stroke-N7{stroke:#FFFFFF;}
 		.d2-4053130852 .stroke-B1{stroke:#0D32B2;}
-		.d2-4053130852 .stroke-B2{stroke:#0D32B2;}
-		.d2-4053130852 .stroke-B3{stroke:#E3E9FD;}
-		.d2-4053130852 .stroke-B4{stroke:#E3E9FD;}
-		.d2-4053130852 .stroke-B5{stroke:#EDF0FD;}
-		.d2-4053130852 .stroke-B6{stroke:#F7F8FE;}
-		.d2-4053130852 .stroke-AA2{stroke:#4A6FF3;}
-		.d2-4053130852 .stroke-AA4{stroke:#EDF0FD;}
-		.d2-4053130852 .stroke-AA5{stroke:#F7F8FE;}
-		.d2-4053130852 .stroke-AB4{stroke:#EDF0FD;}
-		.d2-4053130852 .stroke-AB5{stroke:#F7F8FE;}
-		.d2-4053130852 .background-color-N1{background-color:#0A0F25;}
-		.d2-4053130852 .background-color-N2{background-color:#676C7E;}
-		.d2-4053130852 .background-color-N3{background-color:#9499AB;}
-		.d2-4053130852 .background-color-N4{background-color:#CFD2DD;}
-		.d2-4053130852 .background-color-N5{background-color:#DEE1EB;}
-		.d2-4053130852 .background-color-N6{background-color:#EEF1F8;}
-		.d2-4053130852 .background-color-N7{background-color:#FFFFFF;}
-		.d2-4053130852 .background-color-B1{background-color:#0D32B2;}
-		.d2-4053130852 .background-color-B2{background-color:#0D32B2;}
-		.d2-4053130852 .background-color-B3{background-color:#E3E9FD;}
-		.d2-4053130852 .background-color-B4{background-color:#E3E9FD;}
-		.d2-4053130852 .background-color-B5{background-color:#EDF0FD;}
-		.d2-4053130852 .background-color-B6{background-color:#F7F8FE;}
-		.d2-4053130852 .background-color-AA2{background-color:#4A6FF3;}
-		.d2-4053130852 .background-color-AA4{background-color:#EDF0FD;}
-		.d2-4053130852 .background-color-AA5{background-color:#F7F8FE;}
-		.d2-4053130852 .background-color-AB4{background-color:#EDF0FD;}
-		.d2-4053130852 .background-color-AB5{background-color:#F7F8FE;}
-		.d2-4053130852 .color-N1{color:#0A0F25;}
-		.d2-4053130852 .color-N2{color:#676C7E;}
-		.d2-4053130852 .color-N3{color:#9499AB;}
-		.d2-4053130852 .color-N4{color:#CFD2DD;}
-		.d2-4053130852 .color-N5{color:#DEE1EB;}
-		.d2-4053130852 .color-N6{color:#EEF1F8;}
-		.d2-4053130852 .color-N7{color:#FFFFFF;}
-		.d2-4053130852 .color-B1{color:#0D32B2;}
-		.d2-4053130852 .color-B2{color:#0D32B2;}
-		.d2-4053130852 .color-B3{color:#E3E9FD;}
-		.d2-4053130852 .color-B4{color:#E3E9FD;}
-		.d2-4053130852 .color-B5{color:#EDF0FD;}
-		.d2-4053130852 .color-B6{color:#F7F8FE;}
-		.d2-4053130852 .color-AA2{color:#4A6FF3;}
-		.d2-4053130852 .color-AA4{color:#EDF0FD;}
-		.d2-4053130852 .color-AA5{color:#F7F8FE;}
-		.d2-4053130852 .color-AB4{color:#EDF0FD;}
-		.d2-4053130852 .color-AB5{color:#F7F8FE;}.appendix text.text{fill:#0A0F25}.md{--color-fg-default:#0A0F25;--color-fg-muted:#676C7E;--color-fg-subtle:#9499AB;--color-canvas-default:#FFFFFF;--color-canvas-subtle:#EEF1F8;--color-border-default:#0D32B2;--color-border-muted:#0D32B2;--color-neutral-muted:#EEF1F8;--color-accent-fg:#0D32B2;--color-accent-emphasis:#0D32B2;--color-attention-subtle:#676C7E;--color-danger-fg:red;}.sketch-overlay-B1{fill:url(#streaks-darker-d2-4053130852);mix-blend-mode:lighten}.sketch-overlay-B2{fill:url(#streaks-darker-d2-4053130852);mix-blend-mode:lighten}.sketch-overlay-B3{fill:url(#streaks-bright-d2-4053130852);mix-blend-mode:darken}.sketch-overlay-B4{fill:url(#streaks-bright-d2-4053130852);mix-blend-mode:darken}.sketch-overlay-B5{fill:url(#streaks-bright-d2-4053130852);mix-blend-mode:darken}.sketch-overlay-B6{fill:url(#streaks-bright-d2-4053130852);mix-blend-mode:darken}.sketch-overlay-AA2{fill:url(#streaks-dark-d2-4053130852);mix-blend-mode:overlay}.sketch-overlay-AA4{fill:url(#streaks-bright-d2-4053130852);mix-blend-mode:darken}.sketch-overlay-AA5{fill:url(#streaks-bright-d2-4053130852);mix-blend-mode:darken}.sketch-overlay-AB4{fill:url(#streaks-bright-d2-4053130852);mix-blend-mode:darken}.sketch-overlay-AB5{fill:url(#streaks-bright-d2-4053130852);mix-blend-mode:darken}.sketch-overlay-N1{fill:url(#streaks-darker-d2-4053130852);mix-blend-mode:lighten}.sketch-overlay-N2{fill:url(#streaks-dark-d2-4053130852);mix-blend-mode:overlay}.sketch-overlay-N3{fill:url(#streaks-normal-d2-4053130852);mix-blend-mode:color-burn}.sketch-overlay-N4{fill:url(#streaks-normal-d2-4053130852);mix-blend-mode:color-burn}.sketch-overlay-N5{fill:url(#streaks-bright-d2-4053130852);mix-blend-mode:darken}.sketch-overlay-N6{fill:url(#streaks-bright-d2-4053130852);mix-blend-mode:darken}.sketch-overlay-N7{fill:url(#streaks-bright-d2-4053130852);mix-blend-mode:darken}.light-code{display: block}.dark-code{display: none}]]></style><g class="RWlub0xheWVy"><g class="shape" ><rect x="87.000000" y="56.000000" width="272.000000" height="504.000000" stroke="#0D32B2" fill="#E8EAF6" class=" stroke-B1" style="stroke-width:2;" /></g><text x="223.000000" y="43.000000" fill="#0A0F25" class="text fill-N1" style="text-anchor:middle;font-size:28px">Eino（微观推理）</text></g><g class="RGFwckxheWVy"><g class="shape" ><rect x="958.000000" y="56.000000" width="265.000000" height="504.000000" stroke="#0D32B2" fill="#E8F5E9" class=" stroke-B1" style="stroke-width:2;" /></g><text x="1090.500000" y="43.000000" fill="#0A0F25" class="text fill-N1" style="text-anchor:middle;font-size:28px">Dapr（宏观基础设施）</text></g><g class="RWlub0xheWVyLkdyYXBo"><g class="shape" ><rect x="132.000000" y="86.000000" width="181.000000" height="66.000000" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="222.500000" y="124.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">类型安全 DAG 图</text></g><g class="RWlub0xheWVyLlJlQWN0"><g class="shape" ><rect x="117.000000" y="212.000000" width="212.000000" height="66.000000" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="223.000000" y="250.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">ReAct / Reflection 循环</text></g><g class="RWlub0xheWVyLlByb21wdA=="><g class="shape" ><rect x="122.000000" y="338.000000" width="202.000000" height="66.000000" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="223.000000" y="376.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">Prompt 组装与脱敏</text></g><g class="RWlub0xheWVyLlN0cmVhbQ=="><g class="shape" ><rect x="135.000000" y="464.000000" width="175.000000" height="66.000000" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="222.500000" y="502.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">流式 Token 输出</text></g><g class="RGFwckxheWVyLlN0YXRl"><g class="shape" ><rect x="988.000000" y="86.000000" width="205.000000" height="66.000000" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="1090.500000" y="124.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">分布式状态持久化</text></g><g class="RGFwckxheWVyLlJlY292ZXJ5"><g class="shape" ><rect x="998.000000" y="212.000000" width="185.000000" height="66.000000" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="1090.500000" y="250.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">工作流崩溃恢复</text></g><g class="RGFwckxheWVyLkRpc2NvdmVyeQ=="><g class="shape" ><rect x="998.000000" y="338.000000" width="185.000000" height="66.000000" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="1090.500000" y="376.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">服务发现与路由</text></g><g class="RGFwckxheWVyLlB1YlN1Yg=="><g class="shape" ><rect x="994.000000" y="464.000000" width="192.000000" height="66.000000" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="1090.000000" y="502.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">跨 Agent 事件通信</text></g><g class="KEVpbm9MYXllciAtJmd0OyBEYXByTGF5ZXIpWzBd"><marker id="mk-d2-4053130852-3488378134" markerWidth="10.000000" markerHeight="12.000000" refX="7.000000" refY="6.000000" viewBox="0.000000 0.000000 10.000000 12.000000" orient="auto" markerUnits="userSpaceOnUse"> <polygon points="0.000000,0.000000 10.000000,6.000000 0.000000,12.000000" fill="#0D32B2" class="connection fill-B1" stroke-width="2" /> </marker><path d="M 361.000000 228.500000 C 598.200012 228.500000 718.000000 228.500000 954.000000 228.500000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-4053130852-3488378134)" mask="url(#d2-4053130852)" /><text x="658.500000" y="234.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">部署在 Dapr 运行时之上</text></g><g class="KERhcHJMYXllciAtJmd0OyBFaW5vTGF5ZXIpWzBd"><path d="M 956.000000 460.500000 C 718.000000 460.500000 598.200012 460.500000 363.000000 460.500000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-4053130852-3488378134)" mask="url(#d2-4053130852)" /><text x="659.000000" y="466.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">服务发现、状态存储</text></g><mask id="d2-4053130852" maskUnits="userSpaceOnUse" x="-14" y="-85" width="1374" height="746">
+		.d2-4053130852 .stroke-B2{stroke:#0D32B2;}.appendix text.text{fill:#0A0F25}.md{--color-fg-default:#0A0F25;--color-fg-muted:#676C7E;--color-fg-subtle:#9499AB;--color-canvas-default:#FFFFFF;--color-canvas-subtle:#EEF1F8;--color-border-default:#0D32B2;--color-border-muted:#0D32B2;--color-neutral-muted:#EEF1F8;--color-accent-fg:#0D32B2;--color-accent-emphasis:#0D32B2;--color-attention-subtle:#676C7E;--color-danger-fg:red;}.light-code{display: block}.dark-code{display: none}]]></style><g class="RWlub0xheWVy"><g class="shape" ><rect x="87" y="56" width="272" height="504" stroke="#0D32B2" fill="#E8EAF6" class=" stroke-B1" style="stroke-width:2;" /></g><text x="223" y="43" fill="#0A0F25" class="text fill-N1" style="text-anchor:middle;font-size:28px">Eino（微观推理）</text></g><g class="RGFwckxheWVy"><g class="shape" ><rect x="958" y="56" width="265" height="504" stroke="#0D32B2" fill="#E8F5E9" class=" stroke-B1" style="stroke-width:2;" /></g><text x="1090.5" y="43" fill="#0A0F25" class="text fill-N1" style="text-anchor:middle;font-size:28px">Dapr（宏观基础设施）</text></g><g class="RWlub0xheWVyLkdyYXBo"><g class="shape" ><rect x="132" y="86" width="181" height="66" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="222.5" y="124.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">类型安全 DAG 图</text></g><g class="RWlub0xheWVyLlJlQWN0"><g class="shape" ><rect x="117" y="212" width="212" height="66" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="223" y="250.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">ReAct / Reflection 循环</text></g><g class="RWlub0xheWVyLlByb21wdA=="><g class="shape" ><rect x="122" y="338" width="202" height="66" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="223" y="376.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">Prompt 组装与脱敏</text></g><g class="RWlub0xheWVyLlN0cmVhbQ=="><g class="shape" ><rect x="135" y="464" width="175" height="66" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="222.5" y="502.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">流式 Token 输出</text></g><g class="RGFwckxheWVyLlN0YXRl"><g class="shape" ><rect x="988" y="86" width="205" height="66" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="1090.5" y="124.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">分布式状态持久化</text></g><g class="RGFwckxheWVyLlJlY292ZXJ5"><g class="shape" ><rect x="998" y="212" width="185" height="66" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="1090.5" y="250.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">工作流崩溃恢复</text></g><g class="RGFwckxheWVyLkRpc2NvdmVyeQ=="><g class="shape" ><rect x="998" y="338" width="185" height="66" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="1090.5" y="376.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">服务发现与路由</text></g><g class="RGFwckxheWVyLlB1YlN1Yg=="><g class="shape" ><rect x="994" y="464" width="192" height="66" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="1090" y="502.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">跨 Agent 事件通信</text></g><g class="KEVpbm9MYXllciAtJmd0OyBEYXByTGF5ZXIpWzBd"><marker id="mk-d2-4053130852-3488378134" markerWidth="10" markerHeight="12" refX="7" refY="6" viewBox="0 0 10 12" orient="auto" markerUnits="userSpaceOnUse"> <polygon points="0,0 10,6 0,12" fill="#0D32B2" class="connection fill-B1" stroke-width="2" /> </marker><path d="M 361 228.5 C 598.200012 228.5 718 228.5 954 228.5" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-4053130852-3488378134)" mask="url(#d2-4053130852)" /><text x="658.5" y="234" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">部署在 Dapr 运行时之上</text></g><g class="KERhcHJMYXllciAtJmd0OyBFaW5vTGF5ZXIpWzBd"><path d="M 956 460.5 C 718 460.5 598.200012 460.5 363 460.5" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-4053130852-3488378134)" mask="url(#d2-4053130852)" /><text x="659" y="466" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">服务发现、状态存储</text></g><mask id="d2-4053130852" maskUnits="userSpaceOnUse" x="-14" y="-85" width="1374" height="746">
 <rect x="-14" y="-85" width="1374" height="746" fill="white"></rect>
-<rect x="560.000000" y="218.000000" width="197" height="21" fill="black"></rect>
-<rect x="570.000000" y="450.000000" width="178" height="21" fill="black"></rect>
+<rect x="560" y="218" width="197" height="21" fill="black"></rect>
+<rect x="570" y="450" width="178" height="21" fill="black"></rect>
 </mask></svg></svg>

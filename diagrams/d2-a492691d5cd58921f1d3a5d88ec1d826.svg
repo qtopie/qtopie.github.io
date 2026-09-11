@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-d2-version="v0.8.2" preserveAspectRatio="xMinYMin meet" viewBox="0 0 2175 639"><svg class="d2-3522372370 d2-svg" width="2175" height="639" viewBox="-28 -85 2175 639"><rect x="-28.000000" y="-85.000000" width="2175.000000" height="639.000000" rx="0.000000" fill="#FFFFFF" class=" fill-N7" stroke-width="0" /><style type="text/css"><![CDATA[
+<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-d2-version="v0.9.0" preserveAspectRatio="xMinYMin meet" viewBox="0 0 2175 639"><svg class="d2-3522372370 d2-svg" width="2175" height="639" viewBox="-28 -85 2175 639"><rect x="-28" y="-85" width="2175" height="639" rx="0" fill="#FFFFFF" class=" fill-N7" stroke-width="0" /><style type="text/css"><![CDATA[
 .d2-3522372370 .text {
 	font-family: "d2-3522372370-font-regular";
 }
@@ -34,77 +34,15 @@
 
 		.d2-3522372370 .fill-N1{fill:#0A0F25;}
 		.d2-3522372370 .fill-N2{fill:#676C7E;}
-		.d2-3522372370 .fill-N3{fill:#9499AB;}
-		.d2-3522372370 .fill-N4{fill:#CFD2DD;}
-		.d2-3522372370 .fill-N5{fill:#DEE1EB;}
-		.d2-3522372370 .fill-N6{fill:#EEF1F8;}
 		.d2-3522372370 .fill-N7{fill:#FFFFFF;}
 		.d2-3522372370 .fill-B1{fill:#0D32B2;}
-		.d2-3522372370 .fill-B2{fill:#0D32B2;}
-		.d2-3522372370 .fill-B3{fill:#E3E9FD;}
 		.d2-3522372370 .fill-B4{fill:#E3E9FD;}
 		.d2-3522372370 .fill-B5{fill:#EDF0FD;}
 		.d2-3522372370 .fill-B6{fill:#F7F8FE;}
-		.d2-3522372370 .fill-AA2{fill:#4A6FF3;}
-		.d2-3522372370 .fill-AA4{fill:#EDF0FD;}
 		.d2-3522372370 .fill-AA5{fill:#F7F8FE;}
-		.d2-3522372370 .fill-AB4{fill:#EDF0FD;}
-		.d2-3522372370 .fill-AB5{fill:#F7F8FE;}
-		.d2-3522372370 .stroke-N1{stroke:#0A0F25;}
-		.d2-3522372370 .stroke-N2{stroke:#676C7E;}
-		.d2-3522372370 .stroke-N3{stroke:#9499AB;}
-		.d2-3522372370 .stroke-N4{stroke:#CFD2DD;}
-		.d2-3522372370 .stroke-N5{stroke:#DEE1EB;}
-		.d2-3522372370 .stroke-N6{stroke:#EEF1F8;}
-		.d2-3522372370 .stroke-N7{stroke:#FFFFFF;}
 		.d2-3522372370 .stroke-B1{stroke:#0D32B2;}
-		.d2-3522372370 .stroke-B2{stroke:#0D32B2;}
-		.d2-3522372370 .stroke-B3{stroke:#E3E9FD;}
-		.d2-3522372370 .stroke-B4{stroke:#E3E9FD;}
-		.d2-3522372370 .stroke-B5{stroke:#EDF0FD;}
-		.d2-3522372370 .stroke-B6{stroke:#F7F8FE;}
-		.d2-3522372370 .stroke-AA2{stroke:#4A6FF3;}
-		.d2-3522372370 .stroke-AA4{stroke:#EDF0FD;}
-		.d2-3522372370 .stroke-AA5{stroke:#F7F8FE;}
-		.d2-3522372370 .stroke-AB4{stroke:#EDF0FD;}
-		.d2-3522372370 .stroke-AB5{stroke:#F7F8FE;}
-		.d2-3522372370 .background-color-N1{background-color:#0A0F25;}
-		.d2-3522372370 .background-color-N2{background-color:#676C7E;}
-		.d2-3522372370 .background-color-N3{background-color:#9499AB;}
-		.d2-3522372370 .background-color-N4{background-color:#CFD2DD;}
-		.d2-3522372370 .background-color-N5{background-color:#DEE1EB;}
-		.d2-3522372370 .background-color-N6{background-color:#EEF1F8;}
-		.d2-3522372370 .background-color-N7{background-color:#FFFFFF;}
-		.d2-3522372370 .background-color-B1{background-color:#0D32B2;}
-		.d2-3522372370 .background-color-B2{background-color:#0D32B2;}
-		.d2-3522372370 .background-color-B3{background-color:#E3E9FD;}
-		.d2-3522372370 .background-color-B4{background-color:#E3E9FD;}
-		.d2-3522372370 .background-color-B5{background-color:#EDF0FD;}
-		.d2-3522372370 .background-color-B6{background-color:#F7F8FE;}
-		.d2-3522372370 .background-color-AA2{background-color:#4A6FF3;}
-		.d2-3522372370 .background-color-AA4{background-color:#EDF0FD;}
-		.d2-3522372370 .background-color-AA5{background-color:#F7F8FE;}
-		.d2-3522372370 .background-color-AB4{background-color:#EDF0FD;}
-		.d2-3522372370 .background-color-AB5{background-color:#F7F8FE;}
-		.d2-3522372370 .color-N1{color:#0A0F25;}
-		.d2-3522372370 .color-N2{color:#676C7E;}
-		.d2-3522372370 .color-N3{color:#9499AB;}
-		.d2-3522372370 .color-N4{color:#CFD2DD;}
-		.d2-3522372370 .color-N5{color:#DEE1EB;}
-		.d2-3522372370 .color-N6{color:#EEF1F8;}
-		.d2-3522372370 .color-N7{color:#FFFFFF;}
-		.d2-3522372370 .color-B1{color:#0D32B2;}
-		.d2-3522372370 .color-B2{color:#0D32B2;}
-		.d2-3522372370 .color-B3{color:#E3E9FD;}
-		.d2-3522372370 .color-B4{color:#E3E9FD;}
-		.d2-3522372370 .color-B5{color:#EDF0FD;}
-		.d2-3522372370 .color-B6{color:#F7F8FE;}
-		.d2-3522372370 .color-AA2{color:#4A6FF3;}
-		.d2-3522372370 .color-AA4{color:#EDF0FD;}
-		.d2-3522372370 .color-AA5{color:#F7F8FE;}
-		.d2-3522372370 .color-AB4{color:#EDF0FD;}
-		.d2-3522372370 .color-AB5{color:#F7F8FE;}.appendix text.text{fill:#0A0F25}.md{--color-fg-default:#0A0F25;--color-fg-muted:#676C7E;--color-fg-subtle:#9499AB;--color-canvas-default:#FFFFFF;--color-canvas-subtle:#EEF1F8;--color-border-default:#0D32B2;--color-border-muted:#0D32B2;--color-neutral-muted:#EEF1F8;--color-accent-fg:#0D32B2;--color-accent-emphasis:#0D32B2;--color-attention-subtle:#676C7E;--color-danger-fg:red;}.sketch-overlay-B1{fill:url(#streaks-darker-d2-3522372370);mix-blend-mode:lighten}.sketch-overlay-B2{fill:url(#streaks-darker-d2-3522372370);mix-blend-mode:lighten}.sketch-overlay-B3{fill:url(#streaks-bright-d2-3522372370);mix-blend-mode:darken}.sketch-overlay-B4{fill:url(#streaks-bright-d2-3522372370);mix-blend-mode:darken}.sketch-overlay-B5{fill:url(#streaks-bright-d2-3522372370);mix-blend-mode:darken}.sketch-overlay-B6{fill:url(#streaks-bright-d2-3522372370);mix-blend-mode:darken}.sketch-overlay-AA2{fill:url(#streaks-dark-d2-3522372370);mix-blend-mode:overlay}.sketch-overlay-AA4{fill:url(#streaks-bright-d2-3522372370);mix-blend-mode:darken}.sketch-overlay-AA5{fill:url(#streaks-bright-d2-3522372370);mix-blend-mode:darken}.sketch-overlay-AB4{fill:url(#streaks-bright-d2-3522372370);mix-blend-mode:darken}.sketch-overlay-AB5{fill:url(#streaks-bright-d2-3522372370);mix-blend-mode:darken}.sketch-overlay-N1{fill:url(#streaks-darker-d2-3522372370);mix-blend-mode:lighten}.sketch-overlay-N2{fill:url(#streaks-dark-d2-3522372370);mix-blend-mode:overlay}.sketch-overlay-N3{fill:url(#streaks-normal-d2-3522372370);mix-blend-mode:color-burn}.sketch-overlay-N4{fill:url(#streaks-normal-d2-3522372370);mix-blend-mode:color-burn}.sketch-overlay-N5{fill:url(#streaks-bright-d2-3522372370);mix-blend-mode:darken}.sketch-overlay-N6{fill:url(#streaks-bright-d2-3522372370);mix-blend-mode:darken}.sketch-overlay-N7{fill:url(#streaks-bright-d2-3522372370);mix-blend-mode:darken}.light-code{display: block}.dark-code{display: none}]]></style><g class="cmluZ19idWZmZXI="><g class="shape" ><rect x="73.000000" y="56.000000" width="1973.000000" height="397.000000" stroke="#0D32B2" fill="#E3E9FD" class=" stroke-B1 fill-B4" style="stroke-width:2;" /></g><text x="1059.500000" y="43.000000" fill="#0A0F25" class="text fill-N1" style="text-anchor:middle;font-size:28px">Ring Buffer 内存数组物理布局 (地址自左向右增长)</text></g><g class="cmluZ19idWZmZXIucHJvZHVjZXI="><g class="shape" ><rect x="1193.000000" y="86.000000" width="184.000000" height="66.000000" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="1285.000000" y="124.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">生产者 (Producer)</text></g><g class="cmluZ19idWZmZXIuYXJyYXlfbGF5b3V0"><g class="shape" ><rect x="728.000000" y="245.000000" width="1288.000000" height="178.000000" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="1372.000000" y="233.000000" fill="#0A0F25" class="text fill-N1" style="text-anchor:middle;font-size:24px">数组空间 [0 ... N-1]</text></g><g class="cmluZ19idWZmZXIuY29uc3VtZXI="><g class="shape" ><rect x="103.000000" y="301.000000" width="191.000000" height="66.000000" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="198.500000" y="339.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">消费者 (Consumer)</text></g><g class="cmluZ19idWZmZXIuYXJyYXlfbGF5b3V0LnRhaWw="><g class="shape" ><rect x="758.000000" y="301.000000" width="199.000000" height="66.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="857.500000" y="339.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">Tail (读指针 / 在左)</text></g><g class="cmluZ19idWZmZXIuYXJyYXlfbGF5b3V0LmRhdGFfYXJlYQ=="><g class="shape" ><path d="M 1163 299 C 1163 275 1272 275 1285 275 C 1297 275 1406 275 1406 299 V 369 C 1406 393 1297 393 1285 393 C 1272 393 1163 393 1163 369 V 299 Z" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-AA5" style="stroke-width:2;" /><path d="M 1163 299 C 1163 323 1272 323 1285 323 C 1297 323 1406 323 1406 299" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-AA5" style="stroke-width:2;" /></g><text x="1284.500000" y="351.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">有效数据区 [Tail ... Head)</text></g><g class="cmluZ19idWZmZXIuYXJyYXlfbGF5b3V0LmhlYWQ="><g class="shape" ><rect x="1778.000000" y="286.000000" width="208.000000" height="66.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="1882.000000" y="324.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">Head (写指针 / 在右)</text></g><g class="cmluZ19idWZmZXIuYXJyYXlfbGF5b3V0Lih0YWlsIC0mZ3Q7IGRhdGFfYXJlYSlbMF0="><marker id="mk-d2-3522372370-3488378134" markerWidth="10.000000" markerHeight="12.000000" refX="7.000000" refY="6.000000" viewBox="0.000000 0.000000 10.000000 12.000000" orient="auto" markerUnits="userSpaceOnUse"> <polygon points="0.000000,0.000000 10.000000,6.000000 0.000000,12.000000" fill="#0D32B2" class="connection fill-B1" stroke-width="2" /> </marker><path d="M 959.000000 334.250000 C 1039.400024 334.250000 1080.599976 334.200012 1159.000012 334.009709" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3522372370-3488378134)" mask="url(#d2-3522372370)" /></g><g class="cmluZ19idWZmZXIuYXJyYXlfbGF5b3V0LihkYXRhX2FyZWEgLSZndDsgaGVhZClbMF0="><path d="M 1407.999998 334.002688 C 1554.800049 334.200012 1629.199951 332.250000 1774.005769 324.464744" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3522372370-3488378134)" mask="url(#d2-3522372370)" /></g><g class="cmluZ19idWZmZXIuKGNvbnN1bWVyIC0mZ3Q7IGFycmF5X2xheW91dC50YWlsKVswXQ=="><path d="M 295.500000 334.250000 C 438.299988 334.250000 675.599976 334.250000 754.000000 334.250000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3522372370-3488378134)" mask="url(#d2-3522372370)" /><text x="525.500000" y="340.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">追赶读取 (推进 Tail)</text></g><g class="cmluZ19idWZmZXIuKHByb2R1Y2VyIC0mZ3Q7IGFycmF5X2xheW91dC5oZWFkKVswXQ=="><path d="M 1367.723677 152.764366 C 1546.800049 258.148987 1629.199951 289.149994 1774.027690 306.280157" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3522372370-3488378134)" mask="url(#d2-3522372370)" /><text x="1560.000000" y="269.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">前沿写入 (推进 Head)</text></g><mask id="d2-3522372370" maskUnits="userSpaceOnUse" x="-28" y="-85" width="2175" height="639">
+		.d2-3522372370 .stroke-B2{stroke:#0D32B2;}.appendix text.text{fill:#0A0F25}.md{--color-fg-default:#0A0F25;--color-fg-muted:#676C7E;--color-fg-subtle:#9499AB;--color-canvas-default:#FFFFFF;--color-canvas-subtle:#EEF1F8;--color-border-default:#0D32B2;--color-border-muted:#0D32B2;--color-neutral-muted:#EEF1F8;--color-accent-fg:#0D32B2;--color-accent-emphasis:#0D32B2;--color-attention-subtle:#676C7E;--color-danger-fg:red;}.light-code{display: block}.dark-code{display: none}]]></style><g class="cmluZ19idWZmZXI="><g class="shape" ><rect x="73" y="56" width="1973" height="397" stroke="#0D32B2" fill="#E3E9FD" class=" stroke-B1 fill-B4" style="stroke-width:2;" /></g><text x="1059.5" y="43" fill="#0A0F25" class="text fill-N1" style="text-anchor:middle;font-size:28px">Ring Buffer 内存数组物理布局 (地址自左向右增长)</text></g><g class="cmluZ19idWZmZXIucHJvZHVjZXI="><g class="shape" ><rect x="1193" y="86" width="184" height="66" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="1285" y="124.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">生产者 (Producer)</text></g><g class="cmluZ19idWZmZXIuYXJyYXlfbGF5b3V0"><g class="shape" ><rect x="728" y="245" width="1288" height="178" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="1372" y="233" fill="#0A0F25" class="text fill-N1" style="text-anchor:middle;font-size:24px">数组空间 [0 ... N-1]</text></g><g class="cmluZ19idWZmZXIuY29uc3VtZXI="><g class="shape" ><rect x="103" y="301" width="191" height="66" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="198.5" y="339.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">消费者 (Consumer)</text></g><g class="cmluZ19idWZmZXIuYXJyYXlfbGF5b3V0LnRhaWw="><g class="shape" ><rect x="758" y="301" width="199" height="66" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="857.5" y="339.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">Tail (读指针 / 在左)</text></g><g class="cmluZ19idWZmZXIuYXJyYXlfbGF5b3V0LmRhdGFfYXJlYQ=="><g class="shape" ><path d="M 1163 299 C 1163 275 1272 275 1285 275 C 1297 275 1406 275 1406 299 V 369 C 1406 393 1297 393 1285 393 C 1272 393 1163 393 1163 369 V 299 Z" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-AA5" style="stroke-width:2;" /><path d="M 1163 299 C 1163 323 1272 323 1285 323 C 1297 323 1406 323 1406 299" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-AA5" style="stroke-width:2;" /></g><text x="1284.5" y="351.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">有效数据区 [Tail ... Head)</text></g><g class="cmluZ19idWZmZXIuYXJyYXlfbGF5b3V0LmhlYWQ="><g class="shape" ><rect x="1778" y="286" width="208" height="66" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="1882" y="324.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">Head (写指针 / 在右)</text></g><g class="cmluZ19idWZmZXIuYXJyYXlfbGF5b3V0Lih0YWlsIC0mZ3Q7IGRhdGFfYXJlYSlbMF0="><marker id="mk-d2-3522372370-3488378134" markerWidth="10" markerHeight="12" refX="7" refY="6" viewBox="0 0 10 12" orient="auto" markerUnits="userSpaceOnUse"> <polygon points="0,0 10,6 0,12" fill="#0D32B2" class="connection fill-B1" stroke-width="2" /> </marker><path d="M 959 334.25 C 1039.400024 334.25 1080.599976 334.200012 1159.000012 334.009709" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3522372370-3488378134)" mask="url(#d2-3522372370)" /></g><g class="cmluZ19idWZmZXIuYXJyYXlfbGF5b3V0LihkYXRhX2FyZWEgLSZndDsgaGVhZClbMF0="><path d="M 1407.999998 334.002688 C 1554.800049 334.200012 1629.199951 332.25 1774.005769 324.464744" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3522372370-3488378134)" mask="url(#d2-3522372370)" /></g><g class="cmluZ19idWZmZXIuKGNvbnN1bWVyIC0mZ3Q7IGFycmF5X2xheW91dC50YWlsKVswXQ=="><path d="M 295.5 334.25 C 438.299988 334.25 675.599976 334.25 754 334.25" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3522372370-3488378134)" mask="url(#d2-3522372370)" /><text x="525.5" y="340" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">追赶读取 (推进 Tail)</text></g><g class="cmluZ19idWZmZXIuKHByb2R1Y2VyIC0mZ3Q7IGFycmF5X2xheW91dC5oZWFkKVswXQ=="><path d="M 1367.723677 152.764366 C 1546.800049 258.148987 1629.199951 289.149994 1774.02769 306.280157" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3522372370-3488378134)" mask="url(#d2-3522372370)" /><text x="1560" y="269" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">前沿写入 (推进 Head)</text></g><mask id="d2-3522372370" maskUnits="userSpaceOnUse" x="-28" y="-85" width="2175" height="639">
 <rect x="-28" y="-85" width="2175" height="639" fill="white"></rect>
-<rect x="446.000000" y="324.000000" width="159" height="21" fill="black"></rect>
-<rect x="1475.000000" y="253.000000" width="170" height="21" fill="black"></rect>
+<rect x="446" y="324" width="159" height="21" fill="black"></rect>
+<rect x="1475" y="253" width="170" height="21" fill="black"></rect>
 </mask></svg></svg>

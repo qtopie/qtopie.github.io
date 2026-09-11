@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-d2-version="v0.8.2" preserveAspectRatio="xMinYMin meet" viewBox="0 0 1198 426"><svg class="d2-753794774 d2-svg" width="1198" height="426" viewBox="-101 -101 1198 426"><rect x="-101.000000" y="-101.000000" width="1198.000000" height="426.000000" rx="0.000000" fill="#FFFFFF" class=" fill-N7" stroke-width="0" /><style type="text/css"><![CDATA[
+<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-d2-version="v0.9.0" preserveAspectRatio="xMinYMin meet" viewBox="0 0 1198 426"><svg class="d2-753794774 d2-svg" width="1198" height="426" viewBox="-101 -101 1198 426"><rect x="-101" y="-101" width="1198" height="426" rx="0" fill="#FFFFFF" class=" fill-N7" stroke-width="0" /><style type="text/css"><![CDATA[
 .d2-753794774 .text-bold {
 	font-family: "d2-753794774-font-bold";
 }
@@ -27,77 +27,12 @@
 
 		.d2-753794774 .fill-N1{fill:#0A0F25;}
 		.d2-753794774 .fill-N2{fill:#676C7E;}
-		.d2-753794774 .fill-N3{fill:#9499AB;}
-		.d2-753794774 .fill-N4{fill:#CFD2DD;}
-		.d2-753794774 .fill-N5{fill:#DEE1EB;}
-		.d2-753794774 .fill-N6{fill:#EEF1F8;}
 		.d2-753794774 .fill-N7{fill:#FFFFFF;}
 		.d2-753794774 .fill-B1{fill:#0D32B2;}
-		.d2-753794774 .fill-B2{fill:#0D32B2;}
-		.d2-753794774 .fill-B3{fill:#E3E9FD;}
-		.d2-753794774 .fill-B4{fill:#E3E9FD;}
-		.d2-753794774 .fill-B5{fill:#EDF0FD;}
 		.d2-753794774 .fill-B6{fill:#F7F8FE;}
-		.d2-753794774 .fill-AA2{fill:#4A6FF3;}
-		.d2-753794774 .fill-AA4{fill:#EDF0FD;}
-		.d2-753794774 .fill-AA5{fill:#F7F8FE;}
-		.d2-753794774 .fill-AB4{fill:#EDF0FD;}
-		.d2-753794774 .fill-AB5{fill:#F7F8FE;}
-		.d2-753794774 .stroke-N1{stroke:#0A0F25;}
-		.d2-753794774 .stroke-N2{stroke:#676C7E;}
-		.d2-753794774 .stroke-N3{stroke:#9499AB;}
-		.d2-753794774 .stroke-N4{stroke:#CFD2DD;}
-		.d2-753794774 .stroke-N5{stroke:#DEE1EB;}
-		.d2-753794774 .stroke-N6{stroke:#EEF1F8;}
-		.d2-753794774 .stroke-N7{stroke:#FFFFFF;}
 		.d2-753794774 .stroke-B1{stroke:#0D32B2;}
-		.d2-753794774 .stroke-B2{stroke:#0D32B2;}
-		.d2-753794774 .stroke-B3{stroke:#E3E9FD;}
-		.d2-753794774 .stroke-B4{stroke:#E3E9FD;}
-		.d2-753794774 .stroke-B5{stroke:#EDF0FD;}
-		.d2-753794774 .stroke-B6{stroke:#F7F8FE;}
-		.d2-753794774 .stroke-AA2{stroke:#4A6FF3;}
-		.d2-753794774 .stroke-AA4{stroke:#EDF0FD;}
-		.d2-753794774 .stroke-AA5{stroke:#F7F8FE;}
-		.d2-753794774 .stroke-AB4{stroke:#EDF0FD;}
-		.d2-753794774 .stroke-AB5{stroke:#F7F8FE;}
-		.d2-753794774 .background-color-N1{background-color:#0A0F25;}
-		.d2-753794774 .background-color-N2{background-color:#676C7E;}
-		.d2-753794774 .background-color-N3{background-color:#9499AB;}
-		.d2-753794774 .background-color-N4{background-color:#CFD2DD;}
-		.d2-753794774 .background-color-N5{background-color:#DEE1EB;}
-		.d2-753794774 .background-color-N6{background-color:#EEF1F8;}
-		.d2-753794774 .background-color-N7{background-color:#FFFFFF;}
-		.d2-753794774 .background-color-B1{background-color:#0D32B2;}
-		.d2-753794774 .background-color-B2{background-color:#0D32B2;}
-		.d2-753794774 .background-color-B3{background-color:#E3E9FD;}
-		.d2-753794774 .background-color-B4{background-color:#E3E9FD;}
-		.d2-753794774 .background-color-B5{background-color:#EDF0FD;}
-		.d2-753794774 .background-color-B6{background-color:#F7F8FE;}
-		.d2-753794774 .background-color-AA2{background-color:#4A6FF3;}
-		.d2-753794774 .background-color-AA4{background-color:#EDF0FD;}
-		.d2-753794774 .background-color-AA5{background-color:#F7F8FE;}
-		.d2-753794774 .background-color-AB4{background-color:#EDF0FD;}
-		.d2-753794774 .background-color-AB5{background-color:#F7F8FE;}
-		.d2-753794774 .color-N1{color:#0A0F25;}
-		.d2-753794774 .color-N2{color:#676C7E;}
-		.d2-753794774 .color-N3{color:#9499AB;}
-		.d2-753794774 .color-N4{color:#CFD2DD;}
-		.d2-753794774 .color-N5{color:#DEE1EB;}
-		.d2-753794774 .color-N6{color:#EEF1F8;}
-		.d2-753794774 .color-N7{color:#FFFFFF;}
-		.d2-753794774 .color-B1{color:#0D32B2;}
-		.d2-753794774 .color-B2{color:#0D32B2;}
-		.d2-753794774 .color-B3{color:#E3E9FD;}
-		.d2-753794774 .color-B4{color:#E3E9FD;}
-		.d2-753794774 .color-B5{color:#EDF0FD;}
-		.d2-753794774 .color-B6{color:#F7F8FE;}
-		.d2-753794774 .color-AA2{color:#4A6FF3;}
-		.d2-753794774 .color-AA4{color:#EDF0FD;}
-		.d2-753794774 .color-AA5{color:#F7F8FE;}
-		.d2-753794774 .color-AB4{color:#EDF0FD;}
-		.d2-753794774 .color-AB5{color:#F7F8FE;}.appendix text.text{fill:#0A0F25}.md{--color-fg-default:#0A0F25;--color-fg-muted:#676C7E;--color-fg-subtle:#9499AB;--color-canvas-default:#FFFFFF;--color-canvas-subtle:#EEF1F8;--color-border-default:#0D32B2;--color-border-muted:#0D32B2;--color-neutral-muted:#EEF1F8;--color-accent-fg:#0D32B2;--color-accent-emphasis:#0D32B2;--color-attention-subtle:#676C7E;--color-danger-fg:red;}.sketch-overlay-B1{fill:url(#streaks-darker-d2-753794774);mix-blend-mode:lighten}.sketch-overlay-B2{fill:url(#streaks-darker-d2-753794774);mix-blend-mode:lighten}.sketch-overlay-B3{fill:url(#streaks-bright-d2-753794774);mix-blend-mode:darken}.sketch-overlay-B4{fill:url(#streaks-bright-d2-753794774);mix-blend-mode:darken}.sketch-overlay-B5{fill:url(#streaks-bright-d2-753794774);mix-blend-mode:darken}.sketch-overlay-B6{fill:url(#streaks-bright-d2-753794774);mix-blend-mode:darken}.sketch-overlay-AA2{fill:url(#streaks-dark-d2-753794774);mix-blend-mode:overlay}.sketch-overlay-AA4{fill:url(#streaks-bright-d2-753794774);mix-blend-mode:darken}.sketch-overlay-AA5{fill:url(#streaks-bright-d2-753794774);mix-blend-mode:darken}.sketch-overlay-AB4{fill:url(#streaks-bright-d2-753794774);mix-blend-mode:darken}.sketch-overlay-AB5{fill:url(#streaks-bright-d2-753794774);mix-blend-mode:darken}.sketch-overlay-N1{fill:url(#streaks-darker-d2-753794774);mix-blend-mode:lighten}.sketch-overlay-N2{fill:url(#streaks-dark-d2-753794774);mix-blend-mode:overlay}.sketch-overlay-N3{fill:url(#streaks-normal-d2-753794774);mix-blend-mode:color-burn}.sketch-overlay-N4{fill:url(#streaks-normal-d2-753794774);mix-blend-mode:color-burn}.sketch-overlay-N5{fill:url(#streaks-bright-d2-753794774);mix-blend-mode:darken}.sketch-overlay-N6{fill:url(#streaks-bright-d2-753794774);mix-blend-mode:darken}.sketch-overlay-N7{fill:url(#streaks-bright-d2-753794774);mix-blend-mode:darken}.light-code{display: block}.dark-code{display: none}]]></style><g class="SGlnaExldmVs"><g class="shape" ><rect x="89.000000" y="142.000000" width="165.000000" height="82.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="171.500000" y="180.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="171.500000" dy="0.000000">高层业务模块</tspan><tspan x="171.500000" dy="18.500000">(OrderService)</tspan></text></g><g class="SW50ZXJmYWNl"><g class="shape" ><rect x="714.000000" y="71.000000" width="282.000000" height="82.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="855.000000" y="109.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="855.000000" dy="0.000000">抽象接口</tspan><tspan x="855.000000" dy="18.500000">(&lt;&lt;interface&gt;&gt; PaymentGateway)</tspan></text></g><g class="TG93TGV2ZWw="><g class="shape" ><rect x="0.000000" y="0.000000" width="342.000000" height="82.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="171.000000" y="38.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="171.000000" dy="0.000000">低层具体实现</tspan><tspan x="171.000000" dy="18.500000">(StripePaymentGateway / AlipayGateway)</tspan></text></g><g class="KEhpZ2hMZXZlbCAtJmd0OyBJbnRlcmZhY2UpWzBd"><marker id="mk-d2-753794774-3488378134" markerWidth="10.000000" markerHeight="12.000000" refX="7.000000" refY="6.000000" viewBox="0.000000 0.000000 10.000000 12.000000" orient="auto" markerUnits="userSpaceOnUse"> <polygon points="0.000000,0.000000 10.000000,6.000000 0.000000,12.000000" fill="#0D32B2" class="connection fill-B1" stroke-width="2" /> </marker><path d="M 256.500000 183.000000 C 473.299988 183.000000 565.200012 175.000000 710.089407 143.840988" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-753794774-3488378134)" mask="url(#d2-753794774)" /><text x="486.500000" y="187.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">调用依赖</text></g><g class="KExvd0xldmVsIC0mZ3Q7IEludGVyZmFjZSlbMF0="><path d="M 344.000000 41.000000 C 490.799988 41.000000 565.200012 49.000000 710.089407 80.159012" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-753794774-3488378134)" mask="url(#d2-753794774)" /><text x="530.000000" y="51.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">实现接口 (依赖倒置)</text></g><mask id="d2-753794774" maskUnits="userSpaceOnUse" x="-101" y="-101" width="1198" height="426">
+		.d2-753794774 .stroke-B2{stroke:#0D32B2;}.appendix text.text{fill:#0A0F25}.md{--color-fg-default:#0A0F25;--color-fg-muted:#676C7E;--color-fg-subtle:#9499AB;--color-canvas-default:#FFFFFF;--color-canvas-subtle:#EEF1F8;--color-border-default:#0D32B2;--color-border-muted:#0D32B2;--color-neutral-muted:#EEF1F8;--color-accent-fg:#0D32B2;--color-accent-emphasis:#0D32B2;--color-attention-subtle:#676C7E;--color-danger-fg:red;}.light-code{display: block}.dark-code{display: none}]]></style><g class="SGlnaExldmVs"><g class="shape" ><rect x="89" y="142" width="165" height="82" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="171.5" y="180.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="171.5" dy="0">高层业务模块</tspan><tspan x="171.5" dy="18.5">(OrderService)</tspan></text></g><g class="SW50ZXJmYWNl"><g class="shape" ><rect x="714" y="71" width="282" height="82" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="855" y="109.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="855" dy="0">抽象接口</tspan><tspan x="855" dy="18.5">(&lt;&lt;interface&gt;&gt; PaymentGateway)</tspan></text></g><g class="TG93TGV2ZWw="><g class="shape" ><rect x="0" y="0" width="342" height="82" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="171" y="38.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="171" dy="0">低层具体实现</tspan><tspan x="171" dy="18.5">(StripePaymentGateway / AlipayGateway)</tspan></text></g><g class="KEhpZ2hMZXZlbCAtJmd0OyBJbnRlcmZhY2UpWzBd"><marker id="mk-d2-753794774-3488378134" markerWidth="10" markerHeight="12" refX="7" refY="6" viewBox="0 0 10 12" orient="auto" markerUnits="userSpaceOnUse"> <polygon points="0,0 10,6 0,12" fill="#0D32B2" class="connection fill-B1" stroke-width="2" /> </marker><path d="M 256.5 183 C 473.299988 183 565.200012 175 710.089407 143.840988" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-753794774-3488378134)" mask="url(#d2-753794774)" /><text x="486.5" y="187" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">调用依赖</text></g><g class="KExvd0xldmVsIC0mZ3Q7IEludGVyZmFjZSlbMF0="><path d="M 344 41 C 490.799988 41 565.200012 49 710.089407 80.159012" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-753794774-3488378134)" mask="url(#d2-753794774)" /><text x="530" y="51" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">实现接口 (依赖倒置)</text></g><mask id="d2-753794774" maskUnits="userSpaceOnUse" x="-101" y="-101" width="1198" height="426">
 <rect x="-101" y="-101" width="1198" height="426" fill="white"></rect>
-<rect x="446.000000" y="171.000000" width="81" height="21" fill="black"></rect>
-<rect x="445.000000" y="35.000000" width="170" height="21" fill="black"></rect>
+<rect x="446" y="171" width="81" height="21" fill="black"></rect>
+<rect x="445" y="35" width="170" height="21" fill="black"></rect>
 </mask></svg></svg>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-d2-version="v0.8.2" preserveAspectRatio="xMinYMin meet" viewBox="0 0 574 808"><svg class="d2-2214928380 d2-svg" width="574" height="808" viewBox="-100 -101 574 808"><rect x="-100.000000" y="-101.000000" width="574.000000" height="808.000000" rx="0.000000" fill="#FFFFFF" class=" fill-N7" stroke-width="0" /><style type="text/css"><![CDATA[
+<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-d2-version="v0.9.0" preserveAspectRatio="xMinYMin meet" viewBox="0 0 574 808"><svg class="d2-2214928380 d2-svg" width="574" height="808" viewBox="-100 -101 574 808"><rect x="-100" y="-101" width="574" height="808" rx="0" fill="#FFFFFF" class=" fill-N7" stroke-width="0" /><style type="text/css"><![CDATA[
 .d2-2214928380 .text-bold {
 	font-family: "d2-2214928380-font-bold";
 }
@@ -27,78 +27,14 @@
 
 		.d2-2214928380 .fill-N1{fill:#0A0F25;}
 		.d2-2214928380 .fill-N2{fill:#676C7E;}
-		.d2-2214928380 .fill-N3{fill:#9499AB;}
-		.d2-2214928380 .fill-N4{fill:#CFD2DD;}
 		.d2-2214928380 .fill-N5{fill:#DEE1EB;}
-		.d2-2214928380 .fill-N6{fill:#EEF1F8;}
 		.d2-2214928380 .fill-N7{fill:#FFFFFF;}
 		.d2-2214928380 .fill-B1{fill:#0D32B2;}
-		.d2-2214928380 .fill-B2{fill:#0D32B2;}
-		.d2-2214928380 .fill-B3{fill:#E3E9FD;}
-		.d2-2214928380 .fill-B4{fill:#E3E9FD;}
-		.d2-2214928380 .fill-B5{fill:#EDF0FD;}
 		.d2-2214928380 .fill-B6{fill:#F7F8FE;}
-		.d2-2214928380 .fill-AA2{fill:#4A6FF3;}
-		.d2-2214928380 .fill-AA4{fill:#EDF0FD;}
-		.d2-2214928380 .fill-AA5{fill:#F7F8FE;}
-		.d2-2214928380 .fill-AB4{fill:#EDF0FD;}
-		.d2-2214928380 .fill-AB5{fill:#F7F8FE;}
-		.d2-2214928380 .stroke-N1{stroke:#0A0F25;}
-		.d2-2214928380 .stroke-N2{stroke:#676C7E;}
-		.d2-2214928380 .stroke-N3{stroke:#9499AB;}
-		.d2-2214928380 .stroke-N4{stroke:#CFD2DD;}
-		.d2-2214928380 .stroke-N5{stroke:#DEE1EB;}
-		.d2-2214928380 .stroke-N6{stroke:#EEF1F8;}
-		.d2-2214928380 .stroke-N7{stroke:#FFFFFF;}
 		.d2-2214928380 .stroke-B1{stroke:#0D32B2;}
-		.d2-2214928380 .stroke-B2{stroke:#0D32B2;}
-		.d2-2214928380 .stroke-B3{stroke:#E3E9FD;}
-		.d2-2214928380 .stroke-B4{stroke:#E3E9FD;}
-		.d2-2214928380 .stroke-B5{stroke:#EDF0FD;}
-		.d2-2214928380 .stroke-B6{stroke:#F7F8FE;}
-		.d2-2214928380 .stroke-AA2{stroke:#4A6FF3;}
-		.d2-2214928380 .stroke-AA4{stroke:#EDF0FD;}
-		.d2-2214928380 .stroke-AA5{stroke:#F7F8FE;}
-		.d2-2214928380 .stroke-AB4{stroke:#EDF0FD;}
-		.d2-2214928380 .stroke-AB5{stroke:#F7F8FE;}
-		.d2-2214928380 .background-color-N1{background-color:#0A0F25;}
-		.d2-2214928380 .background-color-N2{background-color:#676C7E;}
-		.d2-2214928380 .background-color-N3{background-color:#9499AB;}
-		.d2-2214928380 .background-color-N4{background-color:#CFD2DD;}
-		.d2-2214928380 .background-color-N5{background-color:#DEE1EB;}
-		.d2-2214928380 .background-color-N6{background-color:#EEF1F8;}
-		.d2-2214928380 .background-color-N7{background-color:#FFFFFF;}
-		.d2-2214928380 .background-color-B1{background-color:#0D32B2;}
-		.d2-2214928380 .background-color-B2{background-color:#0D32B2;}
-		.d2-2214928380 .background-color-B3{background-color:#E3E9FD;}
-		.d2-2214928380 .background-color-B4{background-color:#E3E9FD;}
-		.d2-2214928380 .background-color-B5{background-color:#EDF0FD;}
-		.d2-2214928380 .background-color-B6{background-color:#F7F8FE;}
-		.d2-2214928380 .background-color-AA2{background-color:#4A6FF3;}
-		.d2-2214928380 .background-color-AA4{background-color:#EDF0FD;}
-		.d2-2214928380 .background-color-AA5{background-color:#F7F8FE;}
-		.d2-2214928380 .background-color-AB4{background-color:#EDF0FD;}
-		.d2-2214928380 .background-color-AB5{background-color:#F7F8FE;}
-		.d2-2214928380 .color-N1{color:#0A0F25;}
-		.d2-2214928380 .color-N2{color:#676C7E;}
-		.d2-2214928380 .color-N3{color:#9499AB;}
-		.d2-2214928380 .color-N4{color:#CFD2DD;}
-		.d2-2214928380 .color-N5{color:#DEE1EB;}
-		.d2-2214928380 .color-N6{color:#EEF1F8;}
-		.d2-2214928380 .color-N7{color:#FFFFFF;}
-		.d2-2214928380 .color-B1{color:#0D32B2;}
-		.d2-2214928380 .color-B2{color:#0D32B2;}
-		.d2-2214928380 .color-B3{color:#E3E9FD;}
-		.d2-2214928380 .color-B4{color:#E3E9FD;}
-		.d2-2214928380 .color-B5{color:#EDF0FD;}
-		.d2-2214928380 .color-B6{color:#F7F8FE;}
-		.d2-2214928380 .color-AA2{color:#4A6FF3;}
-		.d2-2214928380 .color-AA4{color:#EDF0FD;}
-		.d2-2214928380 .color-AA5{color:#F7F8FE;}
-		.d2-2214928380 .color-AB4{color:#EDF0FD;}
-		.d2-2214928380 .color-AB5{color:#F7F8FE;}.appendix text.text{fill:#0A0F25}.md{--color-fg-default:#0A0F25;--color-fg-muted:#676C7E;--color-fg-subtle:#9499AB;--color-canvas-default:#FFFFFF;--color-canvas-subtle:#EEF1F8;--color-border-default:#0D32B2;--color-border-muted:#0D32B2;--color-neutral-muted:#EEF1F8;--color-accent-fg:#0D32B2;--color-accent-emphasis:#0D32B2;--color-attention-subtle:#676C7E;--color-danger-fg:red;}.sketch-overlay-B1{fill:url(#streaks-darker-d2-2214928380);mix-blend-mode:lighten}.sketch-overlay-B2{fill:url(#streaks-darker-d2-2214928380);mix-blend-mode:lighten}.sketch-overlay-B3{fill:url(#streaks-bright-d2-2214928380);mix-blend-mode:darken}.sketch-overlay-B4{fill:url(#streaks-bright-d2-2214928380);mix-blend-mode:darken}.sketch-overlay-B5{fill:url(#streaks-bright-d2-2214928380);mix-blend-mode:darken}.sketch-overlay-B6{fill:url(#streaks-bright-d2-2214928380);mix-blend-mode:darken}.sketch-overlay-AA2{fill:url(#streaks-dark-d2-2214928380);mix-blend-mode:overlay}.sketch-overlay-AA4{fill:url(#streaks-bright-d2-2214928380);mix-blend-mode:darken}.sketch-overlay-AA5{fill:url(#streaks-bright-d2-2214928380);mix-blend-mode:darken}.sketch-overlay-AB4{fill:url(#streaks-bright-d2-2214928380);mix-blend-mode:darken}.sketch-overlay-AB5{fill:url(#streaks-bright-d2-2214928380);mix-blend-mode:darken}.sketch-overlay-N1{fill:url(#streaks-darker-d2-2214928380);mix-blend-mode:lighten}.sketch-overlay-N2{fill:url(#streaks-dark-d2-2214928380);mix-blend-mode:overlay}.sketch-overlay-N3{fill:url(#streaks-normal-d2-2214928380);mix-blend-mode:color-burn}.sketch-overlay-N4{fill:url(#streaks-normal-d2-2214928380);mix-blend-mode:color-burn}.sketch-overlay-N5{fill:url(#streaks-bright-d2-2214928380);mix-blend-mode:darken}.sketch-overlay-N6{fill:url(#streaks-bright-d2-2214928380);mix-blend-mode:darken}.sketch-overlay-N7{fill:url(#streaks-bright-d2-2214928380);mix-blend-mode:darken}.light-code{display: block}.dark-code{display: none}]]></style><g class="UHJvbXB0IOi-k-WFpQ=="><g class="shape" ><rect x="116.000000" y="0.000000" width="141.000000" height="66.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="186.500000" y="38.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">Prompt 输入</text></g><g class="TExNIOWPguaVsOefqemYtQ=="><g class="shape" ><path d="M 191 166 L 373 166 L 347 232 L 165 232 L 165 232 Z" stroke="#0D32B2" fill="#DEE1EB" class=" stroke-B1 fill-N5" style="stroke-width:2;" /></g><text x="269.000000" y="204.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">LLM 参数矩阵</text></g><g class="6K-N6KGo5qaC546H5YiG5biD"><g class="shape" ><rect x="186.000000" y="353.000000" width="165.000000" height="66.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="268.500000" y="391.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">词表概率分布</text></g><g class="5qaC546H5pyA6auY55qE6K-N"><g class="shape" ><rect x="104.000000" y="540.000000" width="165.000000" height="66.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="186.500000" y="578.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">概率最高的词</text></g><g class="KFByb21wdCDovpPlhaUgLSZndDsgTExNIOWPguaVsOefqemYtSlbMF0="><marker id="mk-d2-2214928380-3488378134" markerWidth="10.000000" markerHeight="12.000000" refX="7.000000" refY="6.000000" viewBox="0.000000 0.000000 10.000000 12.000000" orient="auto" markerUnits="userSpaceOnUse"> <polygon points="0.000000,0.000000 10.000000,6.000000 0.000000,12.000000" fill="#0D32B2" class="connection fill-B1" stroke-width="2" /> </marker><path d="M 220.899857 67.428425 C 258.700012 106.000000 268.600006 126.000000 268.960003 162.000200" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-2214928380-3488378134)" mask="url(#d2-2214928380)" /></g><g class="KExMTSDlj4LmlbDnn6npmLUgLSZndDsg6K-N6KGo5qaC546H5YiG5biDKVswXQ=="><path d="M 268.016528 233.999932 C 268.399994 280.399994 268.500000 304.700012 268.500000 349.500000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-2214928380-3488378134)" mask="url(#d2-2214928380)" /><text x="268.500000" y="298.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">矩阵运算</text></g><g class="KOivjeihqOamgueOh-WIhuW4gyAtJmd0OyDmpoLnjofmnIDpq5jnmoTor40pWzBd"><path d="M 268.500000 420.500000 C 268.500000 467.299988 257.898987 491.700012 218.123454 537.480482" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-2214928380-3488378134)" mask="url(#d2-2214928380)" /><text x="260.000000" y="492.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">采样 (Sampling)</text></g><g class="KOamgueOh-acgOmrmOeahOivjSAtJmd0OyBQcm9tcHQg6L6T5YWlKVswXQ=="><path d="M 156.688255 538.990256 C 115.599998 491.700012 105.000000 460.799988 105.000000 432.750000 C 105.000000 404.700012 105.000000 367.299988 105.000000 339.250000 C 105.000000 311.200012 105.000000 273.799988 105.000000 245.750000 C 105.000000 217.699997 114.800003 106.000000 151.200286 68.856851" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-2214928380-3488378134)" mask="url(#d2-2214928380)" /><text x="105.000000" y="309.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">反馈并循环 (Auto-regressive)</text></g><mask id="d2-2214928380" maskUnits="userSpaceOnUse" x="-100" y="-101" width="574" height="808">
+		.d2-2214928380 .stroke-B2{stroke:#0D32B2;}.appendix text.text{fill:#0A0F25}.md{--color-fg-default:#0A0F25;--color-fg-muted:#676C7E;--color-fg-subtle:#9499AB;--color-canvas-default:#FFFFFF;--color-canvas-subtle:#EEF1F8;--color-border-default:#0D32B2;--color-border-muted:#0D32B2;--color-neutral-muted:#EEF1F8;--color-accent-fg:#0D32B2;--color-accent-emphasis:#0D32B2;--color-attention-subtle:#676C7E;--color-danger-fg:red;}.light-code{display: block}.dark-code{display: none}]]></style><g class="UHJvbXB0IOi-k-WFpQ=="><g class="shape" ><rect x="116" y="0" width="141" height="66" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="186.5" y="38.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">Prompt 输入</text></g><g class="TExNIOWPguaVsOefqemYtQ=="><g class="shape" ><path d="M 191 166 L 373 166 L 347 232 L 165 232 L 165 232 Z" stroke="#0D32B2" fill="#DEE1EB" class=" stroke-B1 fill-N5" style="stroke-width:2;" /></g><text x="269" y="204.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">LLM 参数矩阵</text></g><g class="6K-N6KGo5qaC546H5YiG5biD"><g class="shape" ><rect x="186" y="353" width="165" height="66" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="268.5" y="391.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">词表概率分布</text></g><g class="5qaC546H5pyA6auY55qE6K-N"><g class="shape" ><rect x="104" y="540" width="165" height="66" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="186.5" y="578.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">概率最高的词</text></g><g class="KFByb21wdCDovpPlhaUgLSZndDsgTExNIOWPguaVsOefqemYtSlbMF0="><marker id="mk-d2-2214928380-3488378134" markerWidth="10" markerHeight="12" refX="7" refY="6" viewBox="0 0 10 12" orient="auto" markerUnits="userSpaceOnUse"> <polygon points="0,0 10,6 0,12" fill="#0D32B2" class="connection fill-B1" stroke-width="2" /> </marker><path d="M 220.899857 67.428425 C 258.700012 106 268.600006 126 268.960003 162.0002" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-2214928380-3488378134)" mask="url(#d2-2214928380)" /></g><g class="KExMTSDlj4LmlbDnn6npmLUgLSZndDsg6K-N6KGo5qaC546H5YiG5biDKVswXQ=="><path d="M 268.016528 233.999932 C 268.399994 280.399994 268.5 304.700012 268.5 349.5" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-2214928380-3488378134)" mask="url(#d2-2214928380)" /><text x="268.5" y="298" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">矩阵运算</text></g><g class="KOivjeihqOamgueOh-WIhuW4gyAtJmd0OyDmpoLnjofmnIDpq5jnmoTor40pWzBd"><path d="M 268.5 420.5 C 268.5 467.299988 257.898987 491.700012 218.123454 537.480482" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-2214928380-3488378134)" mask="url(#d2-2214928380)" /><text x="260" y="492" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">采样 (Sampling)</text></g><g class="KOamgueOh-acgOmrmOeahOivjSAtJmd0OyBQcm9tcHQg6L6T5YWlKVswXQ=="><path d="M 156.688255 538.990256 C 115.599998 491.700012 105 460.799988 105 432.75 C 105 404.700012 105 367.299988 105 339.25 C 105 311.200012 105 273.799988 105 245.75 C 105 217.699997 114.800003 106 151.200286 68.856851" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-2214928380-3488378134)" mask="url(#d2-2214928380)" /><text x="105" y="309" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">反馈并循环 (Auto-regressive)</text></g><mask id="d2-2214928380" maskUnits="userSpaceOnUse" x="-100" y="-101" width="574" height="808">
 <rect x="-100" y="-101" width="574" height="808" fill="white"></rect>
-<rect x="228.000000" y="282.000000" width="81" height="21" fill="black"></rect>
-<rect x="201.000000" y="476.000000" width="118" height="21" fill="black"></rect>
-<rect x="-2.000000" y="293.000000" width="214" height="21" fill="black"></rect>
+<rect x="228" y="282" width="81" height="21" fill="black"></rect>
+<rect x="201" y="476" width="118" height="21" fill="black"></rect>
+<rect x="-2" y="293" width="214" height="21" fill="black"></rect>
 </mask></svg></svg>

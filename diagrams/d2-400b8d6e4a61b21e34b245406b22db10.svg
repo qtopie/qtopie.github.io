@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-d2-version="v0.8.2" preserveAspectRatio="xMinYMin meet" viewBox="0 0 798 768"><svg class="d2-4193910505 d2-svg" width="798" height="768" viewBox="-91 -121 798 768"><rect x="-91.000000" y="-121.000000" width="798.000000" height="768.000000" rx="0.000000" fill="#FFFFFF" class=" fill-N7" stroke-width="0" /><style type="text/css"><![CDATA[
+<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-d2-version="v0.9.0" preserveAspectRatio="xMinYMin meet" viewBox="0 0 798 768"><svg class="d2-4193910505 d2-svg" width="798" height="768" viewBox="-91 -121 798 768"><rect x="-91" y="-121" width="798" height="768" rx="0" fill="#FFFFFF" class=" fill-N7" stroke-width="0" /><style type="text/css"><![CDATA[
 .d2-4193910505 .text {
 	font-family: "d2-4193910505-font-regular";
 }
@@ -34,79 +34,16 @@
 
 		.d2-4193910505 .fill-N1{fill:#0A0F25;}
 		.d2-4193910505 .fill-N2{fill:#676C7E;}
-		.d2-4193910505 .fill-N3{fill:#9499AB;}
 		.d2-4193910505 .fill-N4{fill:#CFD2DD;}
-		.d2-4193910505 .fill-N5{fill:#DEE1EB;}
-		.d2-4193910505 .fill-N6{fill:#EEF1F8;}
 		.d2-4193910505 .fill-N7{fill:#FFFFFF;}
 		.d2-4193910505 .fill-B1{fill:#0D32B2;}
-		.d2-4193910505 .fill-B2{fill:#0D32B2;}
-		.d2-4193910505 .fill-B3{fill:#E3E9FD;}
 		.d2-4193910505 .fill-B4{fill:#E3E9FD;}
 		.d2-4193910505 .fill-B5{fill:#EDF0FD;}
-		.d2-4193910505 .fill-B6{fill:#F7F8FE;}
-		.d2-4193910505 .fill-AA2{fill:#4A6FF3;}
-		.d2-4193910505 .fill-AA4{fill:#EDF0FD;}
-		.d2-4193910505 .fill-AA5{fill:#F7F8FE;}
-		.d2-4193910505 .fill-AB4{fill:#EDF0FD;}
-		.d2-4193910505 .fill-AB5{fill:#F7F8FE;}
-		.d2-4193910505 .stroke-N1{stroke:#0A0F25;}
-		.d2-4193910505 .stroke-N2{stroke:#676C7E;}
-		.d2-4193910505 .stroke-N3{stroke:#9499AB;}
-		.d2-4193910505 .stroke-N4{stroke:#CFD2DD;}
-		.d2-4193910505 .stroke-N5{stroke:#DEE1EB;}
-		.d2-4193910505 .stroke-N6{stroke:#EEF1F8;}
-		.d2-4193910505 .stroke-N7{stroke:#FFFFFF;}
 		.d2-4193910505 .stroke-B1{stroke:#0D32B2;}
-		.d2-4193910505 .stroke-B2{stroke:#0D32B2;}
-		.d2-4193910505 .stroke-B3{stroke:#E3E9FD;}
-		.d2-4193910505 .stroke-B4{stroke:#E3E9FD;}
-		.d2-4193910505 .stroke-B5{stroke:#EDF0FD;}
-		.d2-4193910505 .stroke-B6{stroke:#F7F8FE;}
-		.d2-4193910505 .stroke-AA2{stroke:#4A6FF3;}
-		.d2-4193910505 .stroke-AA4{stroke:#EDF0FD;}
-		.d2-4193910505 .stroke-AA5{stroke:#F7F8FE;}
-		.d2-4193910505 .stroke-AB4{stroke:#EDF0FD;}
-		.d2-4193910505 .stroke-AB5{stroke:#F7F8FE;}
-		.d2-4193910505 .background-color-N1{background-color:#0A0F25;}
-		.d2-4193910505 .background-color-N2{background-color:#676C7E;}
-		.d2-4193910505 .background-color-N3{background-color:#9499AB;}
-		.d2-4193910505 .background-color-N4{background-color:#CFD2DD;}
-		.d2-4193910505 .background-color-N5{background-color:#DEE1EB;}
-		.d2-4193910505 .background-color-N6{background-color:#EEF1F8;}
-		.d2-4193910505 .background-color-N7{background-color:#FFFFFF;}
-		.d2-4193910505 .background-color-B1{background-color:#0D32B2;}
-		.d2-4193910505 .background-color-B2{background-color:#0D32B2;}
-		.d2-4193910505 .background-color-B3{background-color:#E3E9FD;}
-		.d2-4193910505 .background-color-B4{background-color:#E3E9FD;}
-		.d2-4193910505 .background-color-B5{background-color:#EDF0FD;}
-		.d2-4193910505 .background-color-B6{background-color:#F7F8FE;}
-		.d2-4193910505 .background-color-AA2{background-color:#4A6FF3;}
-		.d2-4193910505 .background-color-AA4{background-color:#EDF0FD;}
-		.d2-4193910505 .background-color-AA5{background-color:#F7F8FE;}
-		.d2-4193910505 .background-color-AB4{background-color:#EDF0FD;}
-		.d2-4193910505 .background-color-AB5{background-color:#F7F8FE;}
-		.d2-4193910505 .color-N1{color:#0A0F25;}
-		.d2-4193910505 .color-N2{color:#676C7E;}
-		.d2-4193910505 .color-N3{color:#9499AB;}
-		.d2-4193910505 .color-N4{color:#CFD2DD;}
-		.d2-4193910505 .color-N5{color:#DEE1EB;}
-		.d2-4193910505 .color-N6{color:#EEF1F8;}
-		.d2-4193910505 .color-N7{color:#FFFFFF;}
-		.d2-4193910505 .color-B1{color:#0D32B2;}
-		.d2-4193910505 .color-B2{color:#0D32B2;}
-		.d2-4193910505 .color-B3{color:#E3E9FD;}
-		.d2-4193910505 .color-B4{color:#E3E9FD;}
-		.d2-4193910505 .color-B5{color:#EDF0FD;}
-		.d2-4193910505 .color-B6{color:#F7F8FE;}
-		.d2-4193910505 .color-AA2{color:#4A6FF3;}
-		.d2-4193910505 .color-AA4{color:#EDF0FD;}
-		.d2-4193910505 .color-AA5{color:#F7F8FE;}
-		.d2-4193910505 .color-AB4{color:#EDF0FD;}
-		.d2-4193910505 .color-AB5{color:#F7F8FE;}.appendix text.text{fill:#0A0F25}.md{--color-fg-default:#0A0F25;--color-fg-muted:#676C7E;--color-fg-subtle:#9499AB;--color-canvas-default:#FFFFFF;--color-canvas-subtle:#EEF1F8;--color-border-default:#0D32B2;--color-border-muted:#0D32B2;--color-neutral-muted:#EEF1F8;--color-accent-fg:#0D32B2;--color-accent-emphasis:#0D32B2;--color-attention-subtle:#676C7E;--color-danger-fg:red;}.sketch-overlay-B1{fill:url(#streaks-darker-d2-4193910505);mix-blend-mode:lighten}.sketch-overlay-B2{fill:url(#streaks-darker-d2-4193910505);mix-blend-mode:lighten}.sketch-overlay-B3{fill:url(#streaks-bright-d2-4193910505);mix-blend-mode:darken}.sketch-overlay-B4{fill:url(#streaks-bright-d2-4193910505);mix-blend-mode:darken}.sketch-overlay-B5{fill:url(#streaks-bright-d2-4193910505);mix-blend-mode:darken}.sketch-overlay-B6{fill:url(#streaks-bright-d2-4193910505);mix-blend-mode:darken}.sketch-overlay-AA2{fill:url(#streaks-dark-d2-4193910505);mix-blend-mode:overlay}.sketch-overlay-AA4{fill:url(#streaks-bright-d2-4193910505);mix-blend-mode:darken}.sketch-overlay-AA5{fill:url(#streaks-bright-d2-4193910505);mix-blend-mode:darken}.sketch-overlay-AB4{fill:url(#streaks-bright-d2-4193910505);mix-blend-mode:darken}.sketch-overlay-AB5{fill:url(#streaks-bright-d2-4193910505);mix-blend-mode:darken}.sketch-overlay-N1{fill:url(#streaks-darker-d2-4193910505);mix-blend-mode:lighten}.sketch-overlay-N2{fill:url(#streaks-dark-d2-4193910505);mix-blend-mode:overlay}.sketch-overlay-N3{fill:url(#streaks-normal-d2-4193910505);mix-blend-mode:color-burn}.sketch-overlay-N4{fill:url(#streaks-normal-d2-4193910505);mix-blend-mode:color-burn}.sketch-overlay-N5{fill:url(#streaks-bright-d2-4193910505);mix-blend-mode:darken}.sketch-overlay-N6{fill:url(#streaks-bright-d2-4193910505);mix-blend-mode:darken}.sketch-overlay-N7{fill:url(#streaks-bright-d2-4193910505);mix-blend-mode:darken}.light-code{display: block}.dark-code{display: none}]]></style><g class="amF2YV9sb2Nr"><g class="shape" ><rect x="10.000000" y="20.000000" width="596.000000" height="526.000000" stroke="#0D32B2" fill="#E3E9FD" class=" stroke-B1 fill-B4" style="stroke-width:2;" /></g><text x="308.000000" y="7.000000" fill="#0A0F25" class="text fill-N1" style="text-anchor:middle;font-size:28px">Java ThreadPool: 独占互斥锁争抢</text></g><g class="amF2YV9sb2NrLnQx"><g class="shape" ><rect x="63.000000" y="50.000000" width="108.000000" height="66.000000" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="117.000000" y="88.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">Worker 1</text></g><g class="amF2YV9sb2NrLnQy"><g class="shape" ><rect x="254.000000" y="50.000000" width="108.000000" height="66.000000" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="308.000000" y="88.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">Worker 2</text></g><g class="amF2YV9sb2NrLnQz"><g class="shape" ><rect x="444.000000" y="50.000000" width="110.000000" height="66.000000" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="499.000000" y="88.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">Worker N</text></g><g class="amF2YV9sb2NrLmxvY2s="><g class="shape" ><path d="M 308 329 C 306 329 305 329 303 329 L 42 284 C 39 284 39 283 42 282 L 303 237 C 306 237 310 237 313 237 L 574 282 C 577 282 577 283 574 284 L 313 329 C 311 329 310 329 308 329 Z" stroke="#0D32B2" fill="#CFD2DD" class=" stroke-B1 fill-N4" style="stroke-width:2;" /></g><text x="308.000000" y="288.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">ReentrantLock (takeLock / putLock)</text></g><g class="amF2YV9sb2NrLmdfcXVldWU="><g class="shape" ><rect x="165.000000" y="450.000000" width="287.000000" height="66.000000" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="308.500000" y="488.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">共享阻塞队列 (BlockingQueue)</text></g><g class="amF2YV9sb2NrLih0MSAtJmd0OyBsb2NrKVswXQ=="><marker id="mk-d2-4193910505-3488378134" markerWidth="10.000000" markerHeight="12.000000" refX="7.000000" refY="6.000000" viewBox="0.000000 0.000000 10.000000 12.000000" orient="auto" markerUnits="userSpaceOnUse"> <polygon points="0.000000,0.000000 10.000000,6.000000 0.000000,12.000000" fill="#0D32B2" class="connection fill-B1" stroke-width="2" /> </marker><path d="M 117.000000 117.500000 C 117.000000 164.300003 142.199997 190.600006 239.509267 245.046852" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-4193910505-3488378134)" mask="url(#d2-4193910505)" /><text x="155.000000" y="203.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">take() 竞争互斥锁</text></g><g class="amF2YV9sb2NrLih0MiAtJmd0OyBsb2NrKVswXQ=="><path d="M 308.000000 117.500000 C 308.000000 164.300003 308.000000 188.600006 308.000000 233.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-4193910505-3488378134)" mask="url(#d2-4193910505)" /><text x="308.000000" y="182.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">take() 竞争互斥锁</text></g><g class="amF2YV9sb2NrLih0MyAtJmd0OyBsb2NrKVswXQ=="><path d="M 499.000000 117.500000 C 499.000000 164.300003 473.799988 190.600006 376.490732 245.046852" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-4193910505-3488378134)" mask="url(#d2-4193910505)" /><text x="461.000000" y="203.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">take() 竞争互斥锁</text></g><g class="amF2YV9sb2NrLihsb2NrIC0mZ3Q7IGdfcXVldWUpWzBd"><path d="M 308.000000 331.000000 C 308.000000 377.399994 308.000000 401.700012 308.000000 446.500000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-4193910505-3488378134)" mask="url(#d2-4193910505)" /><text x="308.000000" y="395.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">持有锁者出队任务</text></g><mask id="d2-4193910505" maskUnits="userSpaceOnUse" x="-91" y="-121" width="798" height="768">
+		.d2-4193910505 .stroke-B2{stroke:#0D32B2;}.appendix text.text{fill:#0A0F25}.md{--color-fg-default:#0A0F25;--color-fg-muted:#676C7E;--color-fg-subtle:#9499AB;--color-canvas-default:#FFFFFF;--color-canvas-subtle:#EEF1F8;--color-border-default:#0D32B2;--color-border-muted:#0D32B2;--color-neutral-muted:#EEF1F8;--color-accent-fg:#0D32B2;--color-accent-emphasis:#0D32B2;--color-attention-subtle:#676C7E;--color-danger-fg:red;}.light-code{display: block}.dark-code{display: none}]]></style><g class="amF2YV9sb2Nr"><g class="shape" ><rect x="10" y="20" width="596" height="526" stroke="#0D32B2" fill="#E3E9FD" class=" stroke-B1 fill-B4" style="stroke-width:2;" /></g><text x="308" y="7" fill="#0A0F25" class="text fill-N1" style="text-anchor:middle;font-size:28px">Java ThreadPool: 独占互斥锁争抢</text></g><g class="amF2YV9sb2NrLnQx"><g class="shape" ><rect x="63" y="50" width="108" height="66" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="117" y="88.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">Worker 1</text></g><g class="amF2YV9sb2NrLnQy"><g class="shape" ><rect x="254" y="50" width="108" height="66" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="308" y="88.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">Worker 2</text></g><g class="amF2YV9sb2NrLnQz"><g class="shape" ><rect x="444" y="50" width="110" height="66" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="499" y="88.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">Worker N</text></g><g class="amF2YV9sb2NrLmxvY2s="><g class="shape" ><path d="M 308 329 C 306 329 305 329 303 329 L 42 284 C 39 284 39 283 42 282 L 303 237 C 306 237 310 237 313 237 L 574 282 C 577 282 577 283 574 284 L 313 329 C 311 329 310 329 308 329 Z" stroke="#0D32B2" fill="#CFD2DD" class=" stroke-B1 fill-N4" style="stroke-width:2;" /></g><text x="308" y="288.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">ReentrantLock (takeLock / putLock)</text></g><g class="amF2YV9sb2NrLmdfcXVldWU="><g class="shape" ><rect x="165" y="450" width="287" height="66" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="308.5" y="488.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">共享阻塞队列 (BlockingQueue)</text></g><g class="amF2YV9sb2NrLih0MSAtJmd0OyBsb2NrKVswXQ=="><marker id="mk-d2-4193910505-3488378134" markerWidth="10" markerHeight="12" refX="7" refY="6" viewBox="0 0 10 12" orient="auto" markerUnits="userSpaceOnUse"> <polygon points="0,0 10,6 0,12" fill="#0D32B2" class="connection fill-B1" stroke-width="2" /> </marker><path d="M 117 117.5 C 117 164.300003 142.199997 190.600006 239.509267 245.046852" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-4193910505-3488378134)" mask="url(#d2-4193910505)" /><text x="155" y="203" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">take() 竞争互斥锁</text></g><g class="amF2YV9sb2NrLih0MiAtJmd0OyBsb2NrKVswXQ=="><path d="M 308 117.5 C 308 164.300003 308 188.600006 308 233" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-4193910505-3488378134)" mask="url(#d2-4193910505)" /><text x="308" y="182" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">take() 竞争互斥锁</text></g><g class="amF2YV9sb2NrLih0MyAtJmd0OyBsb2NrKVswXQ=="><path d="M 499 117.5 C 499 164.300003 473.799988 190.600006 376.490732 245.046852" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-4193910505-3488378134)" mask="url(#d2-4193910505)" /><text x="461" y="203" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">take() 竞争互斥锁</text></g><g class="amF2YV9sb2NrLihsb2NrIC0mZ3Q7IGdfcXVldWUpWzBd"><path d="M 308 331 C 308 377.399994 308 401.700012 308 446.5" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-4193910505-3488378134)" mask="url(#d2-4193910505)" /><text x="308" y="395" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">持有锁者出队任务</text></g><mask id="d2-4193910505" maskUnits="userSpaceOnUse" x="-91" y="-121" width="798" height="768">
 <rect x="-91" y="-121" width="798" height="768" fill="white"></rect>
-<rect x="84.000000" y="187.000000" width="142" height="21" fill="black"></rect>
-<rect x="237.000000" y="166.000000" width="142" height="21" fill="black"></rect>
-<rect x="390.000000" y="187.000000" width="142" height="21" fill="black"></rect>
-<rect x="229.000000" y="379.000000" width="158" height="21" fill="black"></rect>
+<rect x="84" y="187" width="142" height="21" fill="black"></rect>
+<rect x="237" y="166" width="142" height="21" fill="black"></rect>
+<rect x="390" y="187" width="142" height="21" fill="black"></rect>
+<rect x="229" y="379" width="158" height="21" fill="black"></rect>
 </mask></svg></svg>

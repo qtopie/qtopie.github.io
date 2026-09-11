@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-d2-version="v0.8.2" preserveAspectRatio="xMinYMin meet" viewBox="0 0 406 953"><svg class="d2-3394697499 d2-svg" width="406" height="953" viewBox="-100 -101 406 953"><rect x="-100.000000" y="-101.000000" width="406.000000" height="953.000000" rx="0.000000" fill="#FFFFFF" class=" fill-N7" stroke-width="0" /><style type="text/css"><![CDATA[
+<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-d2-version="v0.9.0" preserveAspectRatio="xMinYMin meet" viewBox="0 0 406 953"><svg class="d2-3394697499 d2-svg" width="406" height="953" viewBox="-100 -101 406 953"><rect x="-100" y="-101" width="406" height="953" rx="0" fill="#FFFFFF" class=" fill-N7" stroke-width="0" /><style type="text/css"><![CDATA[
 .d2-3394697499 .text-bold {
 	font-family: "d2-3394697499-font-bold";
 }
@@ -27,76 +27,11 @@
 
 		.d2-3394697499 .fill-N1{fill:#0A0F25;}
 		.d2-3394697499 .fill-N2{fill:#676C7E;}
-		.d2-3394697499 .fill-N3{fill:#9499AB;}
-		.d2-3394697499 .fill-N4{fill:#CFD2DD;}
-		.d2-3394697499 .fill-N5{fill:#DEE1EB;}
-		.d2-3394697499 .fill-N6{fill:#EEF1F8;}
 		.d2-3394697499 .fill-N7{fill:#FFFFFF;}
 		.d2-3394697499 .fill-B1{fill:#0D32B2;}
-		.d2-3394697499 .fill-B2{fill:#0D32B2;}
-		.d2-3394697499 .fill-B3{fill:#E3E9FD;}
-		.d2-3394697499 .fill-B4{fill:#E3E9FD;}
-		.d2-3394697499 .fill-B5{fill:#EDF0FD;}
 		.d2-3394697499 .fill-B6{fill:#F7F8FE;}
-		.d2-3394697499 .fill-AA2{fill:#4A6FF3;}
-		.d2-3394697499 .fill-AA4{fill:#EDF0FD;}
-		.d2-3394697499 .fill-AA5{fill:#F7F8FE;}
-		.d2-3394697499 .fill-AB4{fill:#EDF0FD;}
-		.d2-3394697499 .fill-AB5{fill:#F7F8FE;}
-		.d2-3394697499 .stroke-N1{stroke:#0A0F25;}
-		.d2-3394697499 .stroke-N2{stroke:#676C7E;}
-		.d2-3394697499 .stroke-N3{stroke:#9499AB;}
-		.d2-3394697499 .stroke-N4{stroke:#CFD2DD;}
-		.d2-3394697499 .stroke-N5{stroke:#DEE1EB;}
-		.d2-3394697499 .stroke-N6{stroke:#EEF1F8;}
-		.d2-3394697499 .stroke-N7{stroke:#FFFFFF;}
 		.d2-3394697499 .stroke-B1{stroke:#0D32B2;}
-		.d2-3394697499 .stroke-B2{stroke:#0D32B2;}
-		.d2-3394697499 .stroke-B3{stroke:#E3E9FD;}
-		.d2-3394697499 .stroke-B4{stroke:#E3E9FD;}
-		.d2-3394697499 .stroke-B5{stroke:#EDF0FD;}
-		.d2-3394697499 .stroke-B6{stroke:#F7F8FE;}
-		.d2-3394697499 .stroke-AA2{stroke:#4A6FF3;}
-		.d2-3394697499 .stroke-AA4{stroke:#EDF0FD;}
-		.d2-3394697499 .stroke-AA5{stroke:#F7F8FE;}
-		.d2-3394697499 .stroke-AB4{stroke:#EDF0FD;}
-		.d2-3394697499 .stroke-AB5{stroke:#F7F8FE;}
-		.d2-3394697499 .background-color-N1{background-color:#0A0F25;}
-		.d2-3394697499 .background-color-N2{background-color:#676C7E;}
-		.d2-3394697499 .background-color-N3{background-color:#9499AB;}
-		.d2-3394697499 .background-color-N4{background-color:#CFD2DD;}
-		.d2-3394697499 .background-color-N5{background-color:#DEE1EB;}
-		.d2-3394697499 .background-color-N6{background-color:#EEF1F8;}
-		.d2-3394697499 .background-color-N7{background-color:#FFFFFF;}
-		.d2-3394697499 .background-color-B1{background-color:#0D32B2;}
-		.d2-3394697499 .background-color-B2{background-color:#0D32B2;}
-		.d2-3394697499 .background-color-B3{background-color:#E3E9FD;}
-		.d2-3394697499 .background-color-B4{background-color:#E3E9FD;}
-		.d2-3394697499 .background-color-B5{background-color:#EDF0FD;}
-		.d2-3394697499 .background-color-B6{background-color:#F7F8FE;}
-		.d2-3394697499 .background-color-AA2{background-color:#4A6FF3;}
-		.d2-3394697499 .background-color-AA4{background-color:#EDF0FD;}
-		.d2-3394697499 .background-color-AA5{background-color:#F7F8FE;}
-		.d2-3394697499 .background-color-AB4{background-color:#EDF0FD;}
-		.d2-3394697499 .background-color-AB5{background-color:#F7F8FE;}
-		.d2-3394697499 .color-N1{color:#0A0F25;}
-		.d2-3394697499 .color-N2{color:#676C7E;}
-		.d2-3394697499 .color-N3{color:#9499AB;}
-		.d2-3394697499 .color-N4{color:#CFD2DD;}
-		.d2-3394697499 .color-N5{color:#DEE1EB;}
-		.d2-3394697499 .color-N6{color:#EEF1F8;}
-		.d2-3394697499 .color-N7{color:#FFFFFF;}
-		.d2-3394697499 .color-B1{color:#0D32B2;}
-		.d2-3394697499 .color-B2{color:#0D32B2;}
-		.d2-3394697499 .color-B3{color:#E3E9FD;}
-		.d2-3394697499 .color-B4{color:#E3E9FD;}
-		.d2-3394697499 .color-B5{color:#EDF0FD;}
-		.d2-3394697499 .color-B6{color:#F7F8FE;}
-		.d2-3394697499 .color-AA2{color:#4A6FF3;}
-		.d2-3394697499 .color-AA4{color:#EDF0FD;}
-		.d2-3394697499 .color-AA5{color:#F7F8FE;}
-		.d2-3394697499 .color-AB4{color:#EDF0FD;}
-		.d2-3394697499 .color-AB5{color:#F7F8FE;}.appendix text.text{fill:#0A0F25}.md{--color-fg-default:#0A0F25;--color-fg-muted:#676C7E;--color-fg-subtle:#9499AB;--color-canvas-default:#FFFFFF;--color-canvas-subtle:#EEF1F8;--color-border-default:#0D32B2;--color-border-muted:#0D32B2;--color-neutral-muted:#EEF1F8;--color-accent-fg:#0D32B2;--color-accent-emphasis:#0D32B2;--color-attention-subtle:#676C7E;--color-danger-fg:red;}.sketch-overlay-B1{fill:url(#streaks-darker-d2-3394697499);mix-blend-mode:lighten}.sketch-overlay-B2{fill:url(#streaks-darker-d2-3394697499);mix-blend-mode:lighten}.sketch-overlay-B3{fill:url(#streaks-bright-d2-3394697499);mix-blend-mode:darken}.sketch-overlay-B4{fill:url(#streaks-bright-d2-3394697499);mix-blend-mode:darken}.sketch-overlay-B5{fill:url(#streaks-bright-d2-3394697499);mix-blend-mode:darken}.sketch-overlay-B6{fill:url(#streaks-bright-d2-3394697499);mix-blend-mode:darken}.sketch-overlay-AA2{fill:url(#streaks-dark-d2-3394697499);mix-blend-mode:overlay}.sketch-overlay-AA4{fill:url(#streaks-bright-d2-3394697499);mix-blend-mode:darken}.sketch-overlay-AA5{fill:url(#streaks-bright-d2-3394697499);mix-blend-mode:darken}.sketch-overlay-AB4{fill:url(#streaks-bright-d2-3394697499);mix-blend-mode:darken}.sketch-overlay-AB5{fill:url(#streaks-bright-d2-3394697499);mix-blend-mode:darken}.sketch-overlay-N1{fill:url(#streaks-darker-d2-3394697499);mix-blend-mode:lighten}.sketch-overlay-N2{fill:url(#streaks-dark-d2-3394697499);mix-blend-mode:overlay}.sketch-overlay-N3{fill:url(#streaks-normal-d2-3394697499);mix-blend-mode:color-burn}.sketch-overlay-N4{fill:url(#streaks-normal-d2-3394697499);mix-blend-mode:color-burn}.sketch-overlay-N5{fill:url(#streaks-bright-d2-3394697499);mix-blend-mode:darken}.sketch-overlay-N6{fill:url(#streaks-bright-d2-3394697499);mix-blend-mode:darken}.sketch-overlay-N7{fill:url(#streaks-bright-d2-3394697499);mix-blend-mode:darken}.light-code{display: block}.dark-code{display: none}]]></style><g class="5Y6f5aeL5paH5pysL-WvueivnQ=="><g class="shape" ><rect x="18.000000" y="0.000000" width="170.000000" height="66.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="103.000000" y="38.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">原始文本/对话</text></g><g class="5pWw5o2u5riF5rSX5LiO5Y676YeN"><g class="shape" ><rect x="11.000000" y="166.000000" width="185.000000" height="66.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="103.500000" y="204.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">数据清洗与去重</text></g><g class="6auY6LSo6YeP5Zue562U6YeN5YaZ"><g class="shape" ><rect x="11.000000" y="332.000000" width="185.000000" height="66.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="103.500000" y="370.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">高质量回答重写</text></g><g class="U0ZUIOiuree7g-mbhg=="><g class="shape" ><rect x="36.000000" y="498.000000" width="135.000000" height="66.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="103.500000" y="536.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">SFT 训练集</text></g><g class="TW9kZWw="><g class="shape" ><rect x="59.000000" y="685.000000" width="88.000000" height="66.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="103.000000" y="723.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">Model</text></g><g class="KOWOn-Wni-aWh-acrC_lr7nor50gLSZndDsg5pWw5o2u5riF5rSX5LiO5Y676YeNKVswXQ=="><marker id="mk-d2-3394697499-3488378134" markerWidth="10.000000" markerHeight="12.000000" refX="7.000000" refY="6.000000" viewBox="0.000000 0.000000 10.000000 12.000000" orient="auto" markerUnits="userSpaceOnUse"> <polygon points="0.000000,0.000000 10.000000,6.000000 0.000000,12.000000" fill="#0D32B2" class="connection fill-B1" stroke-width="2" /> </marker><path d="M 103.000000 68.000000 C 103.000000 106.000000 103.000000 126.000000 103.000000 162.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3394697499-3488378134)" mask="url(#d2-3394697499)" /></g><g class="KOaVsOaNrua4hea0l-S4juWOu-mHjSAtJmd0OyDpq5jotKjph4_lm57nrZTph43lhpkpWzBd"><path d="M 103.000000 234.000000 C 103.000000 272.000000 103.000000 292.000000 103.000000 328.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3394697499-3488378134)" mask="url(#d2-3394697499)" /></g><g class="KOmrmOi0qOmHj-WbnuetlOmHjeWGmSAtJmd0OyBTRlQg6K6t57uD6ZuGKVswXQ=="><path d="M 103.000000 400.000000 C 103.000000 438.000000 103.000000 458.000000 103.000000 494.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3394697499-3488378134)" mask="url(#d2-3394697499)" /></g><g class="KFNGVCDorq3nu4Ppm4YgLSZndDsgTW9kZWwpWzBd"><path d="M 103.000000 565.500000 C 103.000000 612.299988 103.000000 636.700012 103.000000 681.500000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3394697499-3488378134)" mask="url(#d2-3394697499)" /><text x="103.000000" y="630.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">Next Token Prediction (Masked)</text></g><mask id="d2-3394697499" maskUnits="userSpaceOnUse" x="-100" y="-101" width="406" height="953">
+		.d2-3394697499 .stroke-B2{stroke:#0D32B2;}.appendix text.text{fill:#0A0F25}.md{--color-fg-default:#0A0F25;--color-fg-muted:#676C7E;--color-fg-subtle:#9499AB;--color-canvas-default:#FFFFFF;--color-canvas-subtle:#EEF1F8;--color-border-default:#0D32B2;--color-border-muted:#0D32B2;--color-neutral-muted:#EEF1F8;--color-accent-fg:#0D32B2;--color-accent-emphasis:#0D32B2;--color-attention-subtle:#676C7E;--color-danger-fg:red;}.light-code{display: block}.dark-code{display: none}]]></style><g class="5Y6f5aeL5paH5pysL-WvueivnQ=="><g class="shape" ><rect x="18" y="0" width="170" height="66" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="103" y="38.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">原始文本/对话</text></g><g class="5pWw5o2u5riF5rSX5LiO5Y676YeN"><g class="shape" ><rect x="11" y="166" width="185" height="66" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="103.5" y="204.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">数据清洗与去重</text></g><g class="6auY6LSo6YeP5Zue562U6YeN5YaZ"><g class="shape" ><rect x="11" y="332" width="185" height="66" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="103.5" y="370.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">高质量回答重写</text></g><g class="U0ZUIOiuree7g-mbhg=="><g class="shape" ><rect x="36" y="498" width="135" height="66" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="103.5" y="536.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">SFT 训练集</text></g><g class="TW9kZWw="><g class="shape" ><rect x="59" y="685" width="88" height="66" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="103" y="723.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">Model</text></g><g class="KOWOn-Wni-aWh-acrC_lr7nor50gLSZndDsg5pWw5o2u5riF5rSX5LiO5Y676YeNKVswXQ=="><marker id="mk-d2-3394697499-3488378134" markerWidth="10" markerHeight="12" refX="7" refY="6" viewBox="0 0 10 12" orient="auto" markerUnits="userSpaceOnUse"> <polygon points="0,0 10,6 0,12" fill="#0D32B2" class="connection fill-B1" stroke-width="2" /> </marker><path d="M 103 68 C 103 106 103 126 103 162" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3394697499-3488378134)" mask="url(#d2-3394697499)" /></g><g class="KOaVsOaNrua4hea0l-S4juWOu-mHjSAtJmd0OyDpq5jotKjph4_lm57nrZTph43lhpkpWzBd"><path d="M 103 234 C 103 272 103 292 103 328" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3394697499-3488378134)" mask="url(#d2-3394697499)" /></g><g class="KOmrmOi0qOmHj-WbnuetlOmHjeWGmSAtJmd0OyBTRlQg6K6t57uD6ZuGKVswXQ=="><path d="M 103 400 C 103 438 103 458 103 494" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3394697499-3488378134)" mask="url(#d2-3394697499)" /></g><g class="KFNGVCDorq3nu4Ppm4YgLSZndDsgTW9kZWwpWzBd"><path d="M 103 565.5 C 103 612.299988 103 636.700012 103 681.5" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3394697499-3488378134)" mask="url(#d2-3394697499)" /><text x="103" y="630" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">Next Token Prediction (Masked)</text></g><mask id="d2-3394697499" maskUnits="userSpaceOnUse" x="-100" y="-101" width="406" height="953">
 <rect x="-100" y="-101" width="406" height="953" fill="white"></rect>
-<rect x="-2.000000" y="614.000000" width="210" height="21" fill="black"></rect>
+<rect x="-2" y="614" width="210" height="21" fill="black"></rect>
 </mask></svg></svg>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-d2-version="v0.8.2" preserveAspectRatio="xMinYMin meet" viewBox="0 0 872 791"><svg class="d2-177433755 d2-svg" width="872" height="791" viewBox="-69 -121 872 791"><rect x="-69.000000" y="-121.000000" width="872.000000" height="791.000000" rx="0.000000" fill="#FFFFFF" class=" fill-N7" stroke-width="0" /><style type="text/css"><![CDATA[
+<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-d2-version="v0.9.0" preserveAspectRatio="xMinYMin meet" viewBox="0 0 872 791"><svg class="d2-177433755 d2-svg" width="872" height="791" viewBox="-69 -121 872 791"><rect x="-69" y="-121" width="872" height="791" rx="0" fill="#FFFFFF" class=" fill-N7" stroke-width="0" /><style type="text/css"><![CDATA[
 .d2-177433755 .text {
 	font-family: "d2-177433755-font-regular";
 }
@@ -34,77 +34,14 @@
 
 		.d2-177433755 .fill-N1{fill:#0A0F25;}
 		.d2-177433755 .fill-N2{fill:#676C7E;}
-		.d2-177433755 .fill-N3{fill:#9499AB;}
 		.d2-177433755 .fill-N4{fill:#CFD2DD;}
-		.d2-177433755 .fill-N5{fill:#DEE1EB;}
-		.d2-177433755 .fill-N6{fill:#EEF1F8;}
 		.d2-177433755 .fill-N7{fill:#FFFFFF;}
 		.d2-177433755 .fill-B1{fill:#0D32B2;}
-		.d2-177433755 .fill-B2{fill:#0D32B2;}
-		.d2-177433755 .fill-B3{fill:#E3E9FD;}
 		.d2-177433755 .fill-B4{fill:#E3E9FD;}
 		.d2-177433755 .fill-B5{fill:#EDF0FD;}
-		.d2-177433755 .fill-B6{fill:#F7F8FE;}
-		.d2-177433755 .fill-AA2{fill:#4A6FF3;}
-		.d2-177433755 .fill-AA4{fill:#EDF0FD;}
-		.d2-177433755 .fill-AA5{fill:#F7F8FE;}
-		.d2-177433755 .fill-AB4{fill:#EDF0FD;}
-		.d2-177433755 .fill-AB5{fill:#F7F8FE;}
-		.d2-177433755 .stroke-N1{stroke:#0A0F25;}
-		.d2-177433755 .stroke-N2{stroke:#676C7E;}
-		.d2-177433755 .stroke-N3{stroke:#9499AB;}
-		.d2-177433755 .stroke-N4{stroke:#CFD2DD;}
-		.d2-177433755 .stroke-N5{stroke:#DEE1EB;}
-		.d2-177433755 .stroke-N6{stroke:#EEF1F8;}
-		.d2-177433755 .stroke-N7{stroke:#FFFFFF;}
 		.d2-177433755 .stroke-B1{stroke:#0D32B2;}
-		.d2-177433755 .stroke-B2{stroke:#0D32B2;}
-		.d2-177433755 .stroke-B3{stroke:#E3E9FD;}
-		.d2-177433755 .stroke-B4{stroke:#E3E9FD;}
-		.d2-177433755 .stroke-B5{stroke:#EDF0FD;}
-		.d2-177433755 .stroke-B6{stroke:#F7F8FE;}
-		.d2-177433755 .stroke-AA2{stroke:#4A6FF3;}
-		.d2-177433755 .stroke-AA4{stroke:#EDF0FD;}
-		.d2-177433755 .stroke-AA5{stroke:#F7F8FE;}
-		.d2-177433755 .stroke-AB4{stroke:#EDF0FD;}
-		.d2-177433755 .stroke-AB5{stroke:#F7F8FE;}
-		.d2-177433755 .background-color-N1{background-color:#0A0F25;}
-		.d2-177433755 .background-color-N2{background-color:#676C7E;}
-		.d2-177433755 .background-color-N3{background-color:#9499AB;}
-		.d2-177433755 .background-color-N4{background-color:#CFD2DD;}
-		.d2-177433755 .background-color-N5{background-color:#DEE1EB;}
-		.d2-177433755 .background-color-N6{background-color:#EEF1F8;}
-		.d2-177433755 .background-color-N7{background-color:#FFFFFF;}
-		.d2-177433755 .background-color-B1{background-color:#0D32B2;}
-		.d2-177433755 .background-color-B2{background-color:#0D32B2;}
-		.d2-177433755 .background-color-B3{background-color:#E3E9FD;}
-		.d2-177433755 .background-color-B4{background-color:#E3E9FD;}
-		.d2-177433755 .background-color-B5{background-color:#EDF0FD;}
-		.d2-177433755 .background-color-B6{background-color:#F7F8FE;}
-		.d2-177433755 .background-color-AA2{background-color:#4A6FF3;}
-		.d2-177433755 .background-color-AA4{background-color:#EDF0FD;}
-		.d2-177433755 .background-color-AA5{background-color:#F7F8FE;}
-		.d2-177433755 .background-color-AB4{background-color:#EDF0FD;}
-		.d2-177433755 .background-color-AB5{background-color:#F7F8FE;}
-		.d2-177433755 .color-N1{color:#0A0F25;}
-		.d2-177433755 .color-N2{color:#676C7E;}
-		.d2-177433755 .color-N3{color:#9499AB;}
-		.d2-177433755 .color-N4{color:#CFD2DD;}
-		.d2-177433755 .color-N5{color:#DEE1EB;}
-		.d2-177433755 .color-N6{color:#EEF1F8;}
-		.d2-177433755 .color-N7{color:#FFFFFF;}
-		.d2-177433755 .color-B1{color:#0D32B2;}
-		.d2-177433755 .color-B2{color:#0D32B2;}
-		.d2-177433755 .color-B3{color:#E3E9FD;}
-		.d2-177433755 .color-B4{color:#E3E9FD;}
-		.d2-177433755 .color-B5{color:#EDF0FD;}
-		.d2-177433755 .color-B6{color:#F7F8FE;}
-		.d2-177433755 .color-AA2{color:#4A6FF3;}
-		.d2-177433755 .color-AA4{color:#EDF0FD;}
-		.d2-177433755 .color-AA5{color:#F7F8FE;}
-		.d2-177433755 .color-AB4{color:#EDF0FD;}
-		.d2-177433755 .color-AB5{color:#F7F8FE;}.appendix text.text{fill:#0A0F25}.md{--color-fg-default:#0A0F25;--color-fg-muted:#676C7E;--color-fg-subtle:#9499AB;--color-canvas-default:#FFFFFF;--color-canvas-subtle:#EEF1F8;--color-border-default:#0D32B2;--color-border-muted:#0D32B2;--color-neutral-muted:#EEF1F8;--color-accent-fg:#0D32B2;--color-accent-emphasis:#0D32B2;--color-attention-subtle:#676C7E;--color-danger-fg:red;}.sketch-overlay-B1{fill:url(#streaks-darker-d2-177433755);mix-blend-mode:lighten}.sketch-overlay-B2{fill:url(#streaks-darker-d2-177433755);mix-blend-mode:lighten}.sketch-overlay-B3{fill:url(#streaks-bright-d2-177433755);mix-blend-mode:darken}.sketch-overlay-B4{fill:url(#streaks-bright-d2-177433755);mix-blend-mode:darken}.sketch-overlay-B5{fill:url(#streaks-bright-d2-177433755);mix-blend-mode:darken}.sketch-overlay-B6{fill:url(#streaks-bright-d2-177433755);mix-blend-mode:darken}.sketch-overlay-AA2{fill:url(#streaks-dark-d2-177433755);mix-blend-mode:overlay}.sketch-overlay-AA4{fill:url(#streaks-bright-d2-177433755);mix-blend-mode:darken}.sketch-overlay-AA5{fill:url(#streaks-bright-d2-177433755);mix-blend-mode:darken}.sketch-overlay-AB4{fill:url(#streaks-bright-d2-177433755);mix-blend-mode:darken}.sketch-overlay-AB5{fill:url(#streaks-bright-d2-177433755);mix-blend-mode:darken}.sketch-overlay-N1{fill:url(#streaks-darker-d2-177433755);mix-blend-mode:lighten}.sketch-overlay-N2{fill:url(#streaks-dark-d2-177433755);mix-blend-mode:overlay}.sketch-overlay-N3{fill:url(#streaks-normal-d2-177433755);mix-blend-mode:color-burn}.sketch-overlay-N4{fill:url(#streaks-normal-d2-177433755);mix-blend-mode:color-burn}.sketch-overlay-N5{fill:url(#streaks-bright-d2-177433755);mix-blend-mode:darken}.sketch-overlay-N6{fill:url(#streaks-bright-d2-177433755);mix-blend-mode:darken}.sketch-overlay-N7{fill:url(#streaks-bright-d2-177433755);mix-blend-mode:darken}.light-code{display: block}.dark-code{display: none}]]></style><g class="c2VtYXBob3JlX2Zsb3c="><g class="shape" ><rect x="32.000000" y="20.000000" width="670.000000" height="549.000000" stroke="#0D32B2" fill="#E3E9FD" class=" stroke-B1 fill-B4" style="stroke-width:2;" /></g><text x="367.000000" y="7.000000" fill="#0A0F25" class="text fill-N1" style="text-anchor:middle;font-size:28px">信号量 Semaphore 控制流</text></g><g class="c2VtYXBob3JlX2Zsb3cucmVx"><g class="shape" ><ellipse rx="165.000000" ry="55.000000" cx="362.000000" cy="105.000000" stroke="#0D32B2" fill="#EDF0FD" class="shape stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="362.000000" y="110.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">并发请求申请 acquire()</text></g><g class="c2VtYXBob3JlX2Zsb3cuY2hlY2s="><g class="shape" ><path d="M 362 352 C 361 352 360 352 359 352 L 187 307 C 185 307 185 306 187 305 L 359 260 C 361 260 364 260 365 260 L 536 305 C 538 305 538 306 536 307 L 365 352 C 364 352 363 352 362 352 Z" stroke="#0D32B2" fill="#CFD2DD" class=" stroke-B1 fill-N4" style="stroke-width:2;" /></g><text x="362.000000" y="311.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">Semaphore Count &gt; 0 ?</text></g><g class="c2VtYXBob3JlX2Zsb3cuZ3JhbnQ="><g class="shape" ><rect x="388.000000" y="473.000000" width="284.000000" height="66.000000" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="530.000000" y="511.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">Count 减 1，允许进入资源区</text></g><g class="c2VtYXBob3JlX2Zsb3cuYmxvY2s="><g class="shape" ><rect x="62.000000" y="473.000000" width="266.000000" height="66.000000" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="195.000000" y="511.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">加入等待队列，挂起线程</text></g><g class="c2VtYXBob3JlX2Zsb3cuKHJlcSAtJmd0OyBjaGVjaylbMF0="><marker id="mk-d2-177433755-3488378134" markerWidth="10.000000" markerHeight="12.000000" refX="7.000000" refY="6.000000" viewBox="0.000000 0.000000 10.000000 12.000000" orient="auto" markerUnits="userSpaceOnUse"> <polygon points="0.000000,0.000000 10.000000,6.000000 0.000000,12.000000" fill="#0D32B2" class="connection fill-B1" stroke-width="2" /> </marker><path d="M 362.000000 162.000000 C 362.000000 200.000000 362.000000 220.000000 362.000000 256.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-177433755-3488378134)" mask="url(#d2-177433755)" /></g><g class="c2VtYXBob3JlX2Zsb3cuKGNoZWNrIC0mZ3Q7IGdyYW50KVswXQ=="><path d="M 416.683073 340.080400 C 506.600006 397.799988 529.500000 424.700012 529.500000 469.500000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-177433755-3488378134)" mask="url(#d2-177433755)" /><text x="496.000000" y="397.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">是</text></g><g class="c2VtYXBob3JlX2Zsb3cuKGNoZWNrIC0mZ3Q7IGJsb2NrKVswXQ=="><path d="M 307.316922 340.080392 C 217.399002 397.799988 194.500000 424.700012 194.500000 469.500000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-177433755-3488378134)" mask="url(#d2-177433755)" /><text x="227.500000" y="397.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">否 (资源已满)</text></g><mask id="d2-177433755" maskUnits="userSpaceOnUse" x="-69" y="-121" width="872" height="791">
+		.d2-177433755 .stroke-B2{stroke:#0D32B2;}.appendix text.text{fill:#0A0F25}.md{--color-fg-default:#0A0F25;--color-fg-muted:#676C7E;--color-fg-subtle:#9499AB;--color-canvas-default:#FFFFFF;--color-canvas-subtle:#EEF1F8;--color-border-default:#0D32B2;--color-border-muted:#0D32B2;--color-neutral-muted:#EEF1F8;--color-accent-fg:#0D32B2;--color-accent-emphasis:#0D32B2;--color-attention-subtle:#676C7E;--color-danger-fg:red;}.light-code{display: block}.dark-code{display: none}]]></style><g class="c2VtYXBob3JlX2Zsb3c="><g class="shape" ><rect x="32" y="20" width="670" height="549" stroke="#0D32B2" fill="#E3E9FD" class=" stroke-B1 fill-B4" style="stroke-width:2;" /></g><text x="367" y="7" fill="#0A0F25" class="text fill-N1" style="text-anchor:middle;font-size:28px">信号量 Semaphore 控制流</text></g><g class="c2VtYXBob3JlX2Zsb3cucmVx"><g class="shape" ><ellipse rx="165" ry="55" cx="362" cy="105" stroke="#0D32B2" fill="#EDF0FD" class="shape stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="362" y="110.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">并发请求申请 acquire()</text></g><g class="c2VtYXBob3JlX2Zsb3cuY2hlY2s="><g class="shape" ><path d="M 362 352 C 361 352 360 352 359 352 L 187 307 C 185 307 185 306 187 305 L 359 260 C 361 260 364 260 365 260 L 536 305 C 538 305 538 306 536 307 L 365 352 C 364 352 363 352 362 352 Z" stroke="#0D32B2" fill="#CFD2DD" class=" stroke-B1 fill-N4" style="stroke-width:2;" /></g><text x="362" y="311.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">Semaphore Count &gt; 0 ?</text></g><g class="c2VtYXBob3JlX2Zsb3cuZ3JhbnQ="><g class="shape" ><rect x="388" y="473" width="284" height="66" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="530" y="511.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">Count 减 1，允许进入资源区</text></g><g class="c2VtYXBob3JlX2Zsb3cuYmxvY2s="><g class="shape" ><rect x="62" y="473" width="266" height="66" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="195" y="511.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">加入等待队列，挂起线程</text></g><g class="c2VtYXBob3JlX2Zsb3cuKHJlcSAtJmd0OyBjaGVjaylbMF0="><marker id="mk-d2-177433755-3488378134" markerWidth="10" markerHeight="12" refX="7" refY="6" viewBox="0 0 10 12" orient="auto" markerUnits="userSpaceOnUse"> <polygon points="0,0 10,6 0,12" fill="#0D32B2" class="connection fill-B1" stroke-width="2" /> </marker><path d="M 362 162 C 362 200 362 220 362 256" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-177433755-3488378134)" mask="url(#d2-177433755)" /></g><g class="c2VtYXBob3JlX2Zsb3cuKGNoZWNrIC0mZ3Q7IGdyYW50KVswXQ=="><path d="M 416.683073 340.0804 C 506.600006 397.799988 529.5 424.700012 529.5 469.5" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-177433755-3488378134)" mask="url(#d2-177433755)" /><text x="496" y="397" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">是</text></g><g class="c2VtYXBob3JlX2Zsb3cuKGNoZWNrIC0mZ3Q7IGJsb2NrKVswXQ=="><path d="M 307.316922 340.080392 C 217.399002 397.799988 194.5 424.700012 194.5 469.5" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-177433755-3488378134)" mask="url(#d2-177433755)" /><text x="227.5" y="397" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">否 (资源已满)</text></g><mask id="d2-177433755" maskUnits="userSpaceOnUse" x="-69" y="-121" width="872" height="791">
 <rect x="-69" y="-121" width="872" height="791" fill="white"></rect>
-<rect x="484.000000" y="381.000000" width="24" height="21" fill="black"></rect>
-<rect x="171.000000" y="381.000000" width="113" height="21" fill="black"></rect>
+<rect x="484" y="381" width="24" height="21" fill="black"></rect>
+<rect x="171" y="381" width="113" height="21" fill="black"></rect>
 </mask></svg></svg>

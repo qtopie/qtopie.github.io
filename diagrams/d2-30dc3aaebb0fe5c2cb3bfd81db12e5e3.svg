@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-d2-version="v0.8.2" preserveAspectRatio="xMinYMin meet" viewBox="0 0 602 1153"><svg class="d2-1606578106 d2-svg" width="602" height="1153" viewBox="-101 -101 602 1153"><rect x="-101.000000" y="-101.000000" width="602.000000" height="1153.000000" rx="0.000000" fill="#FFFFFF" class=" fill-N7" stroke-width="0" /><style type="text/css"><![CDATA[
+<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-d2-version="v0.9.0" preserveAspectRatio="xMinYMin meet" viewBox="0 0 602 1153"><svg class="d2-1606578106 d2-svg" width="602" height="1153" viewBox="-101 -101 602 1153"><rect x="-101" y="-101" width="602" height="1153" rx="0" fill="#FFFFFF" class=" fill-N7" stroke-width="0" /><style type="text/css"><![CDATA[
 .d2-1606578106 .text-bold {
 	font-family: "d2-1606578106-font-bold";
 }
@@ -27,79 +27,13 @@
 
 		.d2-1606578106 .fill-N1{fill:#0A0F25;}
 		.d2-1606578106 .fill-N2{fill:#676C7E;}
-		.d2-1606578106 .fill-N3{fill:#9499AB;}
-		.d2-1606578106 .fill-N4{fill:#CFD2DD;}
-		.d2-1606578106 .fill-N5{fill:#DEE1EB;}
-		.d2-1606578106 .fill-N6{fill:#EEF1F8;}
 		.d2-1606578106 .fill-N7{fill:#FFFFFF;}
 		.d2-1606578106 .fill-B1{fill:#0D32B2;}
-		.d2-1606578106 .fill-B2{fill:#0D32B2;}
-		.d2-1606578106 .fill-B3{fill:#E3E9FD;}
-		.d2-1606578106 .fill-B4{fill:#E3E9FD;}
-		.d2-1606578106 .fill-B5{fill:#EDF0FD;}
-		.d2-1606578106 .fill-B6{fill:#F7F8FE;}
-		.d2-1606578106 .fill-AA2{fill:#4A6FF3;}
-		.d2-1606578106 .fill-AA4{fill:#EDF0FD;}
-		.d2-1606578106 .fill-AA5{fill:#F7F8FE;}
-		.d2-1606578106 .fill-AB4{fill:#EDF0FD;}
-		.d2-1606578106 .fill-AB5{fill:#F7F8FE;}
-		.d2-1606578106 .stroke-N1{stroke:#0A0F25;}
-		.d2-1606578106 .stroke-N2{stroke:#676C7E;}
-		.d2-1606578106 .stroke-N3{stroke:#9499AB;}
-		.d2-1606578106 .stroke-N4{stroke:#CFD2DD;}
-		.d2-1606578106 .stroke-N5{stroke:#DEE1EB;}
-		.d2-1606578106 .stroke-N6{stroke:#EEF1F8;}
-		.d2-1606578106 .stroke-N7{stroke:#FFFFFF;}
 		.d2-1606578106 .stroke-B1{stroke:#0D32B2;}
-		.d2-1606578106 .stroke-B2{stroke:#0D32B2;}
-		.d2-1606578106 .stroke-B3{stroke:#E3E9FD;}
-		.d2-1606578106 .stroke-B4{stroke:#E3E9FD;}
-		.d2-1606578106 .stroke-B5{stroke:#EDF0FD;}
-		.d2-1606578106 .stroke-B6{stroke:#F7F8FE;}
-		.d2-1606578106 .stroke-AA2{stroke:#4A6FF3;}
-		.d2-1606578106 .stroke-AA4{stroke:#EDF0FD;}
-		.d2-1606578106 .stroke-AA5{stroke:#F7F8FE;}
-		.d2-1606578106 .stroke-AB4{stroke:#EDF0FD;}
-		.d2-1606578106 .stroke-AB5{stroke:#F7F8FE;}
-		.d2-1606578106 .background-color-N1{background-color:#0A0F25;}
-		.d2-1606578106 .background-color-N2{background-color:#676C7E;}
-		.d2-1606578106 .background-color-N3{background-color:#9499AB;}
-		.d2-1606578106 .background-color-N4{background-color:#CFD2DD;}
-		.d2-1606578106 .background-color-N5{background-color:#DEE1EB;}
-		.d2-1606578106 .background-color-N6{background-color:#EEF1F8;}
-		.d2-1606578106 .background-color-N7{background-color:#FFFFFF;}
-		.d2-1606578106 .background-color-B1{background-color:#0D32B2;}
-		.d2-1606578106 .background-color-B2{background-color:#0D32B2;}
-		.d2-1606578106 .background-color-B3{background-color:#E3E9FD;}
-		.d2-1606578106 .background-color-B4{background-color:#E3E9FD;}
-		.d2-1606578106 .background-color-B5{background-color:#EDF0FD;}
-		.d2-1606578106 .background-color-B6{background-color:#F7F8FE;}
-		.d2-1606578106 .background-color-AA2{background-color:#4A6FF3;}
-		.d2-1606578106 .background-color-AA4{background-color:#EDF0FD;}
-		.d2-1606578106 .background-color-AA5{background-color:#F7F8FE;}
-		.d2-1606578106 .background-color-AB4{background-color:#EDF0FD;}
-		.d2-1606578106 .background-color-AB5{background-color:#F7F8FE;}
-		.d2-1606578106 .color-N1{color:#0A0F25;}
-		.d2-1606578106 .color-N2{color:#676C7E;}
-		.d2-1606578106 .color-N3{color:#9499AB;}
-		.d2-1606578106 .color-N4{color:#CFD2DD;}
-		.d2-1606578106 .color-N5{color:#DEE1EB;}
-		.d2-1606578106 .color-N6{color:#EEF1F8;}
-		.d2-1606578106 .color-N7{color:#FFFFFF;}
-		.d2-1606578106 .color-B1{color:#0D32B2;}
-		.d2-1606578106 .color-B2{color:#0D32B2;}
-		.d2-1606578106 .color-B3{color:#E3E9FD;}
-		.d2-1606578106 .color-B4{color:#E3E9FD;}
-		.d2-1606578106 .color-B5{color:#EDF0FD;}
-		.d2-1606578106 .color-B6{color:#F7F8FE;}
-		.d2-1606578106 .color-AA2{color:#4A6FF3;}
-		.d2-1606578106 .color-AA4{color:#EDF0FD;}
-		.d2-1606578106 .color-AA5{color:#F7F8FE;}
-		.d2-1606578106 .color-AB4{color:#EDF0FD;}
-		.d2-1606578106 .color-AB5{color:#F7F8FE;}.appendix text.text{fill:#0A0F25}.md{--color-fg-default:#0A0F25;--color-fg-muted:#676C7E;--color-fg-subtle:#9499AB;--color-canvas-default:#FFFFFF;--color-canvas-subtle:#EEF1F8;--color-border-default:#0D32B2;--color-border-muted:#0D32B2;--color-neutral-muted:#EEF1F8;--color-accent-fg:#0D32B2;--color-accent-emphasis:#0D32B2;--color-attention-subtle:#676C7E;--color-danger-fg:red;}.sketch-overlay-B1{fill:url(#streaks-darker-d2-1606578106);mix-blend-mode:lighten}.sketch-overlay-B2{fill:url(#streaks-darker-d2-1606578106);mix-blend-mode:lighten}.sketch-overlay-B3{fill:url(#streaks-bright-d2-1606578106);mix-blend-mode:darken}.sketch-overlay-B4{fill:url(#streaks-bright-d2-1606578106);mix-blend-mode:darken}.sketch-overlay-B5{fill:url(#streaks-bright-d2-1606578106);mix-blend-mode:darken}.sketch-overlay-B6{fill:url(#streaks-bright-d2-1606578106);mix-blend-mode:darken}.sketch-overlay-AA2{fill:url(#streaks-dark-d2-1606578106);mix-blend-mode:overlay}.sketch-overlay-AA4{fill:url(#streaks-bright-d2-1606578106);mix-blend-mode:darken}.sketch-overlay-AA5{fill:url(#streaks-bright-d2-1606578106);mix-blend-mode:darken}.sketch-overlay-AB4{fill:url(#streaks-bright-d2-1606578106);mix-blend-mode:darken}.sketch-overlay-AB5{fill:url(#streaks-bright-d2-1606578106);mix-blend-mode:darken}.sketch-overlay-N1{fill:url(#streaks-darker-d2-1606578106);mix-blend-mode:lighten}.sketch-overlay-N2{fill:url(#streaks-dark-d2-1606578106);mix-blend-mode:overlay}.sketch-overlay-N3{fill:url(#streaks-normal-d2-1606578106);mix-blend-mode:color-burn}.sketch-overlay-N4{fill:url(#streaks-normal-d2-1606578106);mix-blend-mode:color-burn}.sketch-overlay-N5{fill:url(#streaks-bright-d2-1606578106);mix-blend-mode:darken}.sketch-overlay-N6{fill:url(#streaks-bright-d2-1606578106);mix-blend-mode:darken}.sketch-overlay-N7{fill:url(#streaks-bright-d2-1606578106);mix-blend-mode:darken}.light-code{display: block}.dark-code{display: none}]]></style><g class="Y2xpZW50"><g class="shape" ><rect x="109.000000" y="0.000000" width="182.000000" height="82.000000" stroke="#475569" fill="#F8FAFC" style="stroke-width:2;" /></g><text x="200.000000" y="38.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="200.000000" dy="0.000000">客户端 / BI 工具</tspan><tspan x="200.000000" dy="18.500000">(PostgreSQL 协议)</tspan></text></g><g class="bGI="><g class="shape" ><rect x="123.000000" y="203.000000" width="154.000000" height="66.000000" stroke="#D97706" fill="#FEF3C7" style="stroke-width:2;" /></g><text x="200.000000" y="241.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">LBS 负载均衡</text></g><g class="ZnJvbnRlbmQ="><g class="shape" ><path d="M 70 390 L 200 390 L 200 413 L 330 413 L 330 503 L 70 503 Z" stroke="#3B82F6" fill="#EFF6FF" style="stroke-width:2;" /></g><text x="200.000000" y="447.300000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="200.000000" dy="0.000000">Frontend 接入层</tspan><tspan x="200.000000" dy="17.666667">SQL 解析 · 优化器 · 元数据</tspan><tspan x="200.000000" dy="17.666667">PQE / SQE 引擎</tspan></text></g><g class="YmFja2VuZA=="><g class="shape" ><path d="M 0 624 L 150 624 L 150 647 L 400 647 L 400 737 L 0 737 Z" stroke="#DB2777" fill="#FDF2F8" style="stroke-width:2;" /></g><text x="200.000000" y="681.300000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="200.000000" dy="0.000000">Backend 计算节点</tspan><tspan x="200.000000" dy="17.666667">执行引擎（异步 DAG）+ 存储引擎（LSM）</tspan><tspan x="200.000000" dy="17.666667">行存 / 列存 · 索引 · Block Cache</tspan></text></g><g class="ZGZz"><g class="shape" ><path d="M 42 858 L 192 858 L 192 877 L 358 877 L 358 951 L 42 951 Z" stroke="#16A34A" fill="#F0FDF4" style="stroke-width:2;" /></g><text x="200.000000" y="911.300000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="200.000000" dy="0.000000">分布式文件系统（盘古 / HDFS）</tspan><tspan x="200.000000" dy="18.500000">WAL 日志 · 数据文件</tspan></text></g><g class="KGNsaWVudCAtJmd0OyBsYilbMF0="><marker id="mk-d2-1606578106-3488378134" markerWidth="10.000000" markerHeight="12.000000" refX="7.000000" refY="6.000000" viewBox="0.000000 0.000000 10.000000 12.000000" orient="auto" markerUnits="userSpaceOnUse"> <polygon points="0.000000,0.000000 10.000000,6.000000 0.000000,12.000000" fill="#0D32B2" class="connection fill-B1" stroke-width="2" /> </marker><path d="M 200.000000 83.500000 C 200.000000 130.300003 200.000000 154.699997 200.000000 199.500000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1606578106-3488378134)" mask="url(#d2-1606578106)" /><text x="200.000000" y="148.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">SQL</text></g><g class="KGxiIC0mZ3Q7IGZyb250ZW5kKVswXQ=="><path d="M 200.000000 270.500000 C 200.000000 317.299988 200.000000 341.600006 200.000000 386.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1606578106-3488378134)" mask="url(#d2-1606578106)" /><text x="200.500000" y="335.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">路由分发</text></g><g class="KGZyb250ZW5kIC0mZ3Q7IGJhY2tlbmQpWzBd"><path d="M 200.000000 505.000000 C 200.000000 551.400024 200.000000 580.200012 200.000000 643.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1606578106-3488378134)" mask="url(#d2-1606578106)" /><text x="200.500000" y="581.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">分布式执行计划</text></g><g class="KGJhY2tlbmQgLSZndDsgZGZzKVswXQ=="><path d="M 200.000000 739.000000 C 200.000000 785.400024 200.000000 813.400024 200.000000 873.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1606578106-3488378134)" mask="url(#d2-1606578106)" /><text x="200.000000" y="813.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">Flush / Compaction / WAL</text></g><mask id="d2-1606578106" maskUnits="userSpaceOnUse" x="-101" y="-101" width="602" height="1153">
+		.d2-1606578106 .stroke-B2{stroke:#0D32B2;}.appendix text.text{fill:#0A0F25}.md{--color-fg-default:#0A0F25;--color-fg-muted:#676C7E;--color-fg-subtle:#9499AB;--color-canvas-default:#FFFFFF;--color-canvas-subtle:#EEF1F8;--color-border-default:#0D32B2;--color-border-muted:#0D32B2;--color-neutral-muted:#EEF1F8;--color-accent-fg:#0D32B2;--color-accent-emphasis:#0D32B2;--color-attention-subtle:#676C7E;--color-danger-fg:red;}.light-code{display: block}.dark-code{display: none}]]></style><g class="Y2xpZW50"><g class="shape" ><rect x="109" y="0" width="182" height="82" stroke="#475569" fill="#F8FAFC" style="stroke-width:2;" /></g><text x="200" y="38.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="200" dy="0">客户端 / BI 工具</tspan><tspan x="200" dy="18.5">(PostgreSQL 协议)</tspan></text></g><g class="bGI="><g class="shape" ><rect x="123" y="203" width="154" height="66" stroke="#D97706" fill="#FEF3C7" style="stroke-width:2;" /></g><text x="200" y="241.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">LBS 负载均衡</text></g><g class="ZnJvbnRlbmQ="><g class="shape" ><path d="M 70 390 L 200 390 L 200 413 L 330 413 L 330 503 L 70 503 Z" stroke="#3B82F6" fill="#EFF6FF" style="stroke-width:2;" /></g><text x="200" y="447.3" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="200" dy="0">Frontend 接入层</tspan><tspan x="200" dy="17.666667">SQL 解析 · 优化器 · 元数据</tspan><tspan x="200" dy="17.666667">PQE / SQE 引擎</tspan></text></g><g class="YmFja2VuZA=="><g class="shape" ><path d="M 0 624 L 150 624 L 150 647 L 400 647 L 400 737 L 0 737 Z" stroke="#DB2777" fill="#FDF2F8" style="stroke-width:2;" /></g><text x="200" y="681.3" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="200" dy="0">Backend 计算节点</tspan><tspan x="200" dy="17.666667">执行引擎（异步 DAG）+ 存储引擎（LSM）</tspan><tspan x="200" dy="17.666667">行存 / 列存 · 索引 · Block Cache</tspan></text></g><g class="ZGZz"><g class="shape" ><path d="M 42 858 L 192 858 L 192 877 L 358 877 L 358 951 L 42 951 Z" stroke="#16A34A" fill="#F0FDF4" style="stroke-width:2;" /></g><text x="200" y="911.3" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="200" dy="0">分布式文件系统（盘古 / HDFS）</tspan><tspan x="200" dy="18.5">WAL 日志 · 数据文件</tspan></text></g><g class="KGNsaWVudCAtJmd0OyBsYilbMF0="><marker id="mk-d2-1606578106-3488378134" markerWidth="10" markerHeight="12" refX="7" refY="6" viewBox="0 0 10 12" orient="auto" markerUnits="userSpaceOnUse"> <polygon points="0,0 10,6 0,12" fill="#0D32B2" class="connection fill-B1" stroke-width="2" /> </marker><path d="M 200 83.5 C 200 130.300003 200 154.699997 200 199.5" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1606578106-3488378134)" mask="url(#d2-1606578106)" /><text x="200" y="148" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">SQL</text></g><g class="KGxiIC0mZ3Q7IGZyb250ZW5kKVswXQ=="><path d="M 200 270.5 C 200 317.299988 200 341.600006 200 386" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1606578106-3488378134)" mask="url(#d2-1606578106)" /><text x="200.5" y="335" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">路由分发</text></g><g class="KGZyb250ZW5kIC0mZ3Q7IGJhY2tlbmQpWzBd"><path d="M 200 505 C 200 551.400024 200 580.200012 200 643" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1606578106-3488378134)" mask="url(#d2-1606578106)" /><text x="200.5" y="581" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">分布式执行计划</text></g><g class="KGJhY2tlbmQgLSZndDsgZGZzKVswXQ=="><path d="M 200 739 C 200 785.400024 200 813.400024 200 873" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1606578106-3488378134)" mask="url(#d2-1606578106)" /><text x="200" y="813" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">Flush / Compaction / WAL</text></g><mask id="d2-1606578106" maskUnits="userSpaceOnUse" x="-101" y="-101" width="602" height="1153">
 <rect x="-101" y="-101" width="602" height="1153" fill="white"></rect>
-<rect x="185.000000" y="132.000000" width="30" height="21" fill="black"></rect>
-<rect x="160.000000" y="319.000000" width="81" height="21" fill="black"></rect>
-<rect x="131.000000" y="565.000000" width="139" height="21" fill="black"></rect>
-<rect x="115.000000" y="797.000000" width="170" height="21" fill="black"></rect>
+<rect x="185" y="132" width="30" height="21" fill="black"></rect>
+<rect x="160" y="319" width="81" height="21" fill="black"></rect>
+<rect x="131" y="565" width="139" height="21" fill="black"></rect>
+<rect x="115" y="797" width="170" height="21" fill="black"></rect>
 </mask></svg></svg>

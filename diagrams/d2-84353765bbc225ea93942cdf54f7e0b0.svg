@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-d2-version="v0.8.2" preserveAspectRatio="xMinYMin meet" viewBox="0 0 4012 334"><svg class="d2-1747580838 d2-svg" width="4012" height="334" viewBox="-101 -100 4012 334"><rect x="-101.000000" y="-100.000000" width="4012.000000" height="334.000000" rx="0.000000" fill="#FFFFFF" class=" fill-N7" stroke-width="0" /><style type="text/css"><![CDATA[
+<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-d2-version="v0.9.0" preserveAspectRatio="xMinYMin meet" viewBox="0 0 4012 334"><svg class="d2-1747580838 d2-svg" width="4012" height="334" viewBox="-101 -100 4012 334"><rect x="-101" y="-100" width="4012" height="334" rx="0" fill="#FFFFFF" class=" fill-N7" stroke-width="0" /><style type="text/css"><![CDATA[
 .d2-1747580838 .text-bold {
 	font-family: "d2-1747580838-font-bold";
 }
@@ -27,80 +27,15 @@
 
 		.d2-1747580838 .fill-N1{fill:#0A0F25;}
 		.d2-1747580838 .fill-N2{fill:#676C7E;}
-		.d2-1747580838 .fill-N3{fill:#9499AB;}
-		.d2-1747580838 .fill-N4{fill:#CFD2DD;}
-		.d2-1747580838 .fill-N5{fill:#DEE1EB;}
-		.d2-1747580838 .fill-N6{fill:#EEF1F8;}
 		.d2-1747580838 .fill-N7{fill:#FFFFFF;}
 		.d2-1747580838 .fill-B1{fill:#0D32B2;}
-		.d2-1747580838 .fill-B2{fill:#0D32B2;}
-		.d2-1747580838 .fill-B3{fill:#E3E9FD;}
-		.d2-1747580838 .fill-B4{fill:#E3E9FD;}
-		.d2-1747580838 .fill-B5{fill:#EDF0FD;}
 		.d2-1747580838 .fill-B6{fill:#F7F8FE;}
-		.d2-1747580838 .fill-AA2{fill:#4A6FF3;}
-		.d2-1747580838 .fill-AA4{fill:#EDF0FD;}
-		.d2-1747580838 .fill-AA5{fill:#F7F8FE;}
-		.d2-1747580838 .fill-AB4{fill:#EDF0FD;}
-		.d2-1747580838 .fill-AB5{fill:#F7F8FE;}
-		.d2-1747580838 .stroke-N1{stroke:#0A0F25;}
-		.d2-1747580838 .stroke-N2{stroke:#676C7E;}
-		.d2-1747580838 .stroke-N3{stroke:#9499AB;}
-		.d2-1747580838 .stroke-N4{stroke:#CFD2DD;}
-		.d2-1747580838 .stroke-N5{stroke:#DEE1EB;}
-		.d2-1747580838 .stroke-N6{stroke:#EEF1F8;}
-		.d2-1747580838 .stroke-N7{stroke:#FFFFFF;}
 		.d2-1747580838 .stroke-B1{stroke:#0D32B2;}
-		.d2-1747580838 .stroke-B2{stroke:#0D32B2;}
-		.d2-1747580838 .stroke-B3{stroke:#E3E9FD;}
-		.d2-1747580838 .stroke-B4{stroke:#E3E9FD;}
-		.d2-1747580838 .stroke-B5{stroke:#EDF0FD;}
-		.d2-1747580838 .stroke-B6{stroke:#F7F8FE;}
-		.d2-1747580838 .stroke-AA2{stroke:#4A6FF3;}
-		.d2-1747580838 .stroke-AA4{stroke:#EDF0FD;}
-		.d2-1747580838 .stroke-AA5{stroke:#F7F8FE;}
-		.d2-1747580838 .stroke-AB4{stroke:#EDF0FD;}
-		.d2-1747580838 .stroke-AB5{stroke:#F7F8FE;}
-		.d2-1747580838 .background-color-N1{background-color:#0A0F25;}
-		.d2-1747580838 .background-color-N2{background-color:#676C7E;}
-		.d2-1747580838 .background-color-N3{background-color:#9499AB;}
-		.d2-1747580838 .background-color-N4{background-color:#CFD2DD;}
-		.d2-1747580838 .background-color-N5{background-color:#DEE1EB;}
-		.d2-1747580838 .background-color-N6{background-color:#EEF1F8;}
-		.d2-1747580838 .background-color-N7{background-color:#FFFFFF;}
-		.d2-1747580838 .background-color-B1{background-color:#0D32B2;}
-		.d2-1747580838 .background-color-B2{background-color:#0D32B2;}
-		.d2-1747580838 .background-color-B3{background-color:#E3E9FD;}
-		.d2-1747580838 .background-color-B4{background-color:#E3E9FD;}
-		.d2-1747580838 .background-color-B5{background-color:#EDF0FD;}
-		.d2-1747580838 .background-color-B6{background-color:#F7F8FE;}
-		.d2-1747580838 .background-color-AA2{background-color:#4A6FF3;}
-		.d2-1747580838 .background-color-AA4{background-color:#EDF0FD;}
-		.d2-1747580838 .background-color-AA5{background-color:#F7F8FE;}
-		.d2-1747580838 .background-color-AB4{background-color:#EDF0FD;}
-		.d2-1747580838 .background-color-AB5{background-color:#F7F8FE;}
-		.d2-1747580838 .color-N1{color:#0A0F25;}
-		.d2-1747580838 .color-N2{color:#676C7E;}
-		.d2-1747580838 .color-N3{color:#9499AB;}
-		.d2-1747580838 .color-N4{color:#CFD2DD;}
-		.d2-1747580838 .color-N5{color:#DEE1EB;}
-		.d2-1747580838 .color-N6{color:#EEF1F8;}
-		.d2-1747580838 .color-N7{color:#FFFFFF;}
-		.d2-1747580838 .color-B1{color:#0D32B2;}
-		.d2-1747580838 .color-B2{color:#0D32B2;}
-		.d2-1747580838 .color-B3{color:#E3E9FD;}
-		.d2-1747580838 .color-B4{color:#E3E9FD;}
-		.d2-1747580838 .color-B5{color:#EDF0FD;}
-		.d2-1747580838 .color-B6{color:#F7F8FE;}
-		.d2-1747580838 .color-AA2{color:#4A6FF3;}
-		.d2-1747580838 .color-AA4{color:#EDF0FD;}
-		.d2-1747580838 .color-AA5{color:#F7F8FE;}
-		.d2-1747580838 .color-AB4{color:#EDF0FD;}
-		.d2-1747580838 .color-AB5{color:#F7F8FE;}.appendix text.text{fill:#0A0F25}.md{--color-fg-default:#0A0F25;--color-fg-muted:#676C7E;--color-fg-subtle:#9499AB;--color-canvas-default:#FFFFFF;--color-canvas-subtle:#EEF1F8;--color-border-default:#0D32B2;--color-border-muted:#0D32B2;--color-neutral-muted:#EEF1F8;--color-accent-fg:#0D32B2;--color-accent-emphasis:#0D32B2;--color-attention-subtle:#676C7E;--color-danger-fg:red;}.sketch-overlay-B1{fill:url(#streaks-darker-d2-1747580838);mix-blend-mode:lighten}.sketch-overlay-B2{fill:url(#streaks-darker-d2-1747580838);mix-blend-mode:lighten}.sketch-overlay-B3{fill:url(#streaks-bright-d2-1747580838);mix-blend-mode:darken}.sketch-overlay-B4{fill:url(#streaks-bright-d2-1747580838);mix-blend-mode:darken}.sketch-overlay-B5{fill:url(#streaks-bright-d2-1747580838);mix-blend-mode:darken}.sketch-overlay-B6{fill:url(#streaks-bright-d2-1747580838);mix-blend-mode:darken}.sketch-overlay-AA2{fill:url(#streaks-dark-d2-1747580838);mix-blend-mode:overlay}.sketch-overlay-AA4{fill:url(#streaks-bright-d2-1747580838);mix-blend-mode:darken}.sketch-overlay-AA5{fill:url(#streaks-bright-d2-1747580838);mix-blend-mode:darken}.sketch-overlay-AB4{fill:url(#streaks-bright-d2-1747580838);mix-blend-mode:darken}.sketch-overlay-AB5{fill:url(#streaks-bright-d2-1747580838);mix-blend-mode:darken}.sketch-overlay-N1{fill:url(#streaks-darker-d2-1747580838);mix-blend-mode:lighten}.sketch-overlay-N2{fill:url(#streaks-dark-d2-1747580838);mix-blend-mode:overlay}.sketch-overlay-N3{fill:url(#streaks-normal-d2-1747580838);mix-blend-mode:color-burn}.sketch-overlay-N4{fill:url(#streaks-normal-d2-1747580838);mix-blend-mode:color-burn}.sketch-overlay-N5{fill:url(#streaks-bright-d2-1747580838);mix-blend-mode:darken}.sketch-overlay-N6{fill:url(#streaks-bright-d2-1747580838);mix-blend-mode:darken}.sketch-overlay-N7{fill:url(#streaks-bright-d2-1747580838);mix-blend-mode:darken}.light-code{display: block}.dark-code{display: none}]]></style><g class="VXNlckNvZGU="><g class="shape" ><rect x="0.000000" y="18.000000" width="372.000000" height="66.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="186.000000" y="56.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">业务代码: DriverManager.getConnection(...)</text></g><g class="RHJpdmVyTWFuYWdlcg=="><g class="shape" ><rect x="820.000000" y="10.000000" width="238.000000" height="82.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="939.000000" y="48.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="939.000000" dy="0.000000">JDK 核心: DriverManager</tspan><tspan x="939.000000" dy="18.500000">(Bootstrap/Platform 加载)</tspan></text></g><g class="VENDTF9Cb3g="><g class="shape" ><rect x="1603.000000" y="51.000000" width="522.000000" height="82.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="1864.000000" y="89.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="1864.000000" dy="0.000000">获取线程 TCCL: Thread.currentThread().getContextClassLoader()</tspan><tspan x="1864.000000" dy="18.500000">(实质为 AppClassLoader)</tspan></text></g><g class="U2VydmljZUxvYWRlcg=="><g class="shape" ><rect x="2667.000000" y="51.000000" width="287.000000" height="82.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="2810.500000" y="89.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="2810.500000" dy="0.000000">ServiceLoader 扫描</tspan><tspan x="2810.500000" dy="18.500000">META-INF/services/java.sql.Driver</tspan></text></g><g class="TXlTUUxKYXI="><g class="shape" ><rect x="3510.000000" y="10.000000" width="300.000000" height="82.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="3660.000000" y="48.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="3660.000000" dy="0.000000">第三方库: mysql-connector-j.jar</tspan><tspan x="3660.000000" dy="18.500000">(AppClassLoader 成功加载 Driver)</tspan></text></g><g class="KFVzZXJDb2RlIC0mZ3Q7IERyaXZlck1hbmFnZXIpWzBd"><marker id="mk-d2-1747580838-3488378134" markerWidth="10.000000" markerHeight="12.000000" refX="7.000000" refY="6.000000" viewBox="0.000000 0.000000 10.000000 12.000000" orient="auto" markerUnits="userSpaceOnUse"> <polygon points="0.000000,0.000000 10.000000,6.000000 0.000000,12.000000" fill="#0D32B2" class="connection fill-B1" stroke-width="2" /> </marker><path d="M 374.000000 51.000000 C 551.200012 51.000000 640.799988 51.000000 816.000000 51.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1747580838-3488378134)" mask="url(#d2-1747580838)" /><text x="596.000000" y="57.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">1. 发起数据库连接</text></g><g class="KERyaXZlck1hbmFnZXIgLSZndDsgVENDTF9Cb3gpWzBd"><path d="M 1059.489563 63.704058 C 1275.900024 85.900002 1385.099976 91.500000 1599.500000 91.500000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1747580838-3488378134)" mask="url(#d2-1747580838)" /><text x="1329.500000" y="94.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">2. 获取当前线程上下文加载器</text></g><g class="KFRDQ0xfQm94IC0mZ3Q7IFNlcnZpY2VMb2FkZXIpWzBd"><path d="M 2127.000000 91.500000 C 2341.800049 91.500000 2450.199951 91.500000 2663.000000 91.500000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1747580838-3488378134)" mask="url(#d2-1747580838)" /><text x="2396.000000" y="97.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">3. 传入 TCCL 作为加载器</text></g><g class="KFNlcnZpY2VMb2FkZXIgLSZndDsgTXlTUUxKYXIpWzBd"><path d="M 2956.000000 91.500000 C 3176.399902 91.500000 3287.600098 86.300003 3506.017380 65.872475" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1747580838-3488378134)" mask="url(#d2-1747580838)" /><text x="3232.000000" y="94.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">4. 读取 SPI 配置并 Class.forName(...)</text></g><g class="KE15U1FMSmFyIC0mZ3Q7IERyaXZlck1hbmFnZXIpWzBd"><path d="M 3508.008690 36.313762 C 3287.600098 15.700000 3147.699951 10.500000 3021.250000 10.500000 C 2894.800049 10.500000 2727.600098 10.500000 2603.250000 10.500000 C 2478.899902 10.500000 2289.600098 10.500000 2130.000000 10.500000 C 1970.400024 10.500000 1275.900024 16.100000 1061.479126 38.091885" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1747580838-3488378134)" mask="url(#d2-1747580838)" /><text x="2284.000000" y="16.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">5. 静态块自注册 registerDriver(...)</text></g><mask id="d2-1747580838" maskUnits="userSpaceOnUse" x="-101" y="-100" width="4012" height="334">
+		.d2-1747580838 .stroke-B2{stroke:#0D32B2;}.appendix text.text{fill:#0A0F25}.md{--color-fg-default:#0A0F25;--color-fg-muted:#676C7E;--color-fg-subtle:#9499AB;--color-canvas-default:#FFFFFF;--color-canvas-subtle:#EEF1F8;--color-border-default:#0D32B2;--color-border-muted:#0D32B2;--color-neutral-muted:#EEF1F8;--color-accent-fg:#0D32B2;--color-accent-emphasis:#0D32B2;--color-attention-subtle:#676C7E;--color-danger-fg:red;}.light-code{display: block}.dark-code{display: none}]]></style><g class="VXNlckNvZGU="><g class="shape" ><rect x="0" y="18" width="372" height="66" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="186" y="56.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">业务代码: DriverManager.getConnection(...)</text></g><g class="RHJpdmVyTWFuYWdlcg=="><g class="shape" ><rect x="820" y="10" width="238" height="82" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="939" y="48.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="939" dy="0">JDK 核心: DriverManager</tspan><tspan x="939" dy="18.5">(Bootstrap/Platform 加载)</tspan></text></g><g class="VENDTF9Cb3g="><g class="shape" ><rect x="1603" y="51" width="522" height="82" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="1864" y="89.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="1864" dy="0">获取线程 TCCL: Thread.currentThread().getContextClassLoader()</tspan><tspan x="1864" dy="18.5">(实质为 AppClassLoader)</tspan></text></g><g class="U2VydmljZUxvYWRlcg=="><g class="shape" ><rect x="2667" y="51" width="287" height="82" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="2810.5" y="89.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="2810.5" dy="0">ServiceLoader 扫描</tspan><tspan x="2810.5" dy="18.5">META-INF/services/java.sql.Driver</tspan></text></g><g class="TXlTUUxKYXI="><g class="shape" ><rect x="3510" y="10" width="300" height="82" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="3660" y="48.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="3660" dy="0">第三方库: mysql-connector-j.jar</tspan><tspan x="3660" dy="18.5">(AppClassLoader 成功加载 Driver)</tspan></text></g><g class="KFVzZXJDb2RlIC0mZ3Q7IERyaXZlck1hbmFnZXIpWzBd"><marker id="mk-d2-1747580838-3488378134" markerWidth="10" markerHeight="12" refX="7" refY="6" viewBox="0 0 10 12" orient="auto" markerUnits="userSpaceOnUse"> <polygon points="0,0 10,6 0,12" fill="#0D32B2" class="connection fill-B1" stroke-width="2" /> </marker><path d="M 374 51 C 551.200012 51 640.799988 51 816 51" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1747580838-3488378134)" mask="url(#d2-1747580838)" /><text x="596" y="57" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">1. 发起数据库连接</text></g><g class="KERyaXZlck1hbmFnZXIgLSZndDsgVENDTF9Cb3gpWzBd"><path d="M 1059.489563 63.704058 C 1275.900024 85.900002 1385.099976 91.5 1599.5 91.5" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1747580838-3488378134)" mask="url(#d2-1747580838)" /><text x="1329.5" y="94" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">2. 获取当前线程上下文加载器</text></g><g class="KFRDQ0xfQm94IC0mZ3Q7IFNlcnZpY2VMb2FkZXIpWzBd"><path d="M 2127 91.5 C 2341.800049 91.5 2450.199951 91.5 2663 91.5" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1747580838-3488378134)" mask="url(#d2-1747580838)" /><text x="2396" y="97" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">3. 传入 TCCL 作为加载器</text></g><g class="KFNlcnZpY2VMb2FkZXIgLSZndDsgTXlTUUxKYXIpWzBd"><path d="M 2956 91.5 C 3176.399902 91.5 3287.600098 86.300003 3506.01738 65.872475" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1747580838-3488378134)" mask="url(#d2-1747580838)" /><text x="3232" y="94" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">4. 读取 SPI 配置并 Class.forName(...)</text></g><g class="KE15U1FMSmFyIC0mZ3Q7IERyaXZlck1hbmFnZXIpWzBd"><path d="M 3508.00869 36.313762 C 3287.600098 15.7 3147.699951 10.5 3021.25 10.5 C 2894.800049 10.5 2727.600098 10.5 2603.25 10.5 C 2478.899902 10.5 2289.600098 10.5 2130 10.5 C 1970.400024 10.5 1275.900024 16.1 1061.479126 38.091885" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1747580838-3488378134)" mask="url(#d2-1747580838)" /><text x="2284" y="16" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">5. 静态块自注册 registerDriver(...)</text></g><mask id="d2-1747580838" maskUnits="userSpaceOnUse" x="-101" y="-100" width="4012" height="334">
 <rect x="-101" y="-100" width="4012" height="334" fill="white"></rect>
-<rect x="519.000000" y="41.000000" width="154" height="21" fill="black"></rect>
-<rect x="1204.000000" y="78.000000" width="251" height="21" fill="black"></rect>
-<rect x="2299.000000" y="81.000000" width="194" height="21" fill="black"></rect>
-<rect x="3101.000000" y="78.000000" width="262" height="21" fill="black"></rect>
-<rect x="2160.000000" y="0.000000" width="248" height="21" fill="black"></rect>
+<rect x="519" y="41" width="154" height="21" fill="black"></rect>
+<rect x="1204" y="78" width="251" height="21" fill="black"></rect>
+<rect x="2299" y="81" width="194" height="21" fill="black"></rect>
+<rect x="3101" y="78" width="262" height="21" fill="black"></rect>
+<rect x="2160" y="0" width="248" height="21" fill="black"></rect>
 </mask></svg></svg>

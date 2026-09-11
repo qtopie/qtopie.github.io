@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-d2-version="v0.8.2" preserveAspectRatio="xMinYMin meet" viewBox="0 0 793 1069"><svg class="d2-3340037146 d2-svg" width="793" height="1069" viewBox="-91 -121 793 1069"><rect x="-91.000000" y="-121.000000" width="793.000000" height="1069.000000" rx="0.000000" fill="#FFFFFF" class=" fill-N7" stroke-width="0" /><style type="text/css"><![CDATA[
+<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-d2-version="v0.9.0" preserveAspectRatio="xMinYMin meet" viewBox="0 0 793 1069"><svg class="d2-3340037146 d2-svg" width="793" height="1069" viewBox="-91 -121 793 1069"><rect x="-91" y="-121" width="793" height="1069" rx="0" fill="#FFFFFF" class=" fill-N7" stroke-width="0" /><style type="text/css"><![CDATA[
 .d2-3340037146 .text {
 	font-family: "d2-3340037146-font-regular";
 }
@@ -34,78 +34,13 @@
 
 		.d2-3340037146 .fill-N1{fill:#0A0F25;}
 		.d2-3340037146 .fill-N2{fill:#676C7E;}
-		.d2-3340037146 .fill-N3{fill:#9499AB;}
-		.d2-3340037146 .fill-N4{fill:#CFD2DD;}
-		.d2-3340037146 .fill-N5{fill:#DEE1EB;}
-		.d2-3340037146 .fill-N6{fill:#EEF1F8;}
 		.d2-3340037146 .fill-N7{fill:#FFFFFF;}
 		.d2-3340037146 .fill-B1{fill:#0D32B2;}
-		.d2-3340037146 .fill-B2{fill:#0D32B2;}
-		.d2-3340037146 .fill-B3{fill:#E3E9FD;}
-		.d2-3340037146 .fill-B4{fill:#E3E9FD;}
 		.d2-3340037146 .fill-B5{fill:#EDF0FD;}
-		.d2-3340037146 .fill-B6{fill:#F7F8FE;}
-		.d2-3340037146 .fill-AA2{fill:#4A6FF3;}
-		.d2-3340037146 .fill-AA4{fill:#EDF0FD;}
-		.d2-3340037146 .fill-AA5{fill:#F7F8FE;}
-		.d2-3340037146 .fill-AB4{fill:#EDF0FD;}
-		.d2-3340037146 .fill-AB5{fill:#F7F8FE;}
-		.d2-3340037146 .stroke-N1{stroke:#0A0F25;}
-		.d2-3340037146 .stroke-N2{stroke:#676C7E;}
-		.d2-3340037146 .stroke-N3{stroke:#9499AB;}
-		.d2-3340037146 .stroke-N4{stroke:#CFD2DD;}
-		.d2-3340037146 .stroke-N5{stroke:#DEE1EB;}
-		.d2-3340037146 .stroke-N6{stroke:#EEF1F8;}
-		.d2-3340037146 .stroke-N7{stroke:#FFFFFF;}
 		.d2-3340037146 .stroke-B1{stroke:#0D32B2;}
-		.d2-3340037146 .stroke-B2{stroke:#0D32B2;}
-		.d2-3340037146 .stroke-B3{stroke:#E3E9FD;}
-		.d2-3340037146 .stroke-B4{stroke:#E3E9FD;}
-		.d2-3340037146 .stroke-B5{stroke:#EDF0FD;}
-		.d2-3340037146 .stroke-B6{stroke:#F7F8FE;}
-		.d2-3340037146 .stroke-AA2{stroke:#4A6FF3;}
-		.d2-3340037146 .stroke-AA4{stroke:#EDF0FD;}
-		.d2-3340037146 .stroke-AA5{stroke:#F7F8FE;}
-		.d2-3340037146 .stroke-AB4{stroke:#EDF0FD;}
-		.d2-3340037146 .stroke-AB5{stroke:#F7F8FE;}
-		.d2-3340037146 .background-color-N1{background-color:#0A0F25;}
-		.d2-3340037146 .background-color-N2{background-color:#676C7E;}
-		.d2-3340037146 .background-color-N3{background-color:#9499AB;}
-		.d2-3340037146 .background-color-N4{background-color:#CFD2DD;}
-		.d2-3340037146 .background-color-N5{background-color:#DEE1EB;}
-		.d2-3340037146 .background-color-N6{background-color:#EEF1F8;}
-		.d2-3340037146 .background-color-N7{background-color:#FFFFFF;}
-		.d2-3340037146 .background-color-B1{background-color:#0D32B2;}
-		.d2-3340037146 .background-color-B2{background-color:#0D32B2;}
-		.d2-3340037146 .background-color-B3{background-color:#E3E9FD;}
-		.d2-3340037146 .background-color-B4{background-color:#E3E9FD;}
-		.d2-3340037146 .background-color-B5{background-color:#EDF0FD;}
-		.d2-3340037146 .background-color-B6{background-color:#F7F8FE;}
-		.d2-3340037146 .background-color-AA2{background-color:#4A6FF3;}
-		.d2-3340037146 .background-color-AA4{background-color:#EDF0FD;}
-		.d2-3340037146 .background-color-AA5{background-color:#F7F8FE;}
-		.d2-3340037146 .background-color-AB4{background-color:#EDF0FD;}
-		.d2-3340037146 .background-color-AB5{background-color:#F7F8FE;}
-		.d2-3340037146 .color-N1{color:#0A0F25;}
-		.d2-3340037146 .color-N2{color:#676C7E;}
-		.d2-3340037146 .color-N3{color:#9499AB;}
-		.d2-3340037146 .color-N4{color:#CFD2DD;}
-		.d2-3340037146 .color-N5{color:#DEE1EB;}
-		.d2-3340037146 .color-N6{color:#EEF1F8;}
-		.d2-3340037146 .color-N7{color:#FFFFFF;}
-		.d2-3340037146 .color-B1{color:#0D32B2;}
-		.d2-3340037146 .color-B2{color:#0D32B2;}
-		.d2-3340037146 .color-B3{color:#E3E9FD;}
-		.d2-3340037146 .color-B4{color:#E3E9FD;}
-		.d2-3340037146 .color-B5{color:#EDF0FD;}
-		.d2-3340037146 .color-B6{color:#F7F8FE;}
-		.d2-3340037146 .color-AA2{color:#4A6FF3;}
-		.d2-3340037146 .color-AA4{color:#EDF0FD;}
-		.d2-3340037146 .color-AA5{color:#F7F8FE;}
-		.d2-3340037146 .color-AB4{color:#EDF0FD;}
-		.d2-3340037146 .color-AB5{color:#F7F8FE;}.appendix text.text{fill:#0A0F25}.md{--color-fg-default:#0A0F25;--color-fg-muted:#676C7E;--color-fg-subtle:#9499AB;--color-canvas-default:#FFFFFF;--color-canvas-subtle:#EEF1F8;--color-border-default:#0D32B2;--color-border-muted:#0D32B2;--color-neutral-muted:#EEF1F8;--color-accent-fg:#0D32B2;--color-accent-emphasis:#0D32B2;--color-attention-subtle:#676C7E;--color-danger-fg:red;}.sketch-overlay-B1{fill:url(#streaks-darker-d2-3340037146);mix-blend-mode:lighten}.sketch-overlay-B2{fill:url(#streaks-darker-d2-3340037146);mix-blend-mode:lighten}.sketch-overlay-B3{fill:url(#streaks-bright-d2-3340037146);mix-blend-mode:darken}.sketch-overlay-B4{fill:url(#streaks-bright-d2-3340037146);mix-blend-mode:darken}.sketch-overlay-B5{fill:url(#streaks-bright-d2-3340037146);mix-blend-mode:darken}.sketch-overlay-B6{fill:url(#streaks-bright-d2-3340037146);mix-blend-mode:darken}.sketch-overlay-AA2{fill:url(#streaks-dark-d2-3340037146);mix-blend-mode:overlay}.sketch-overlay-AA4{fill:url(#streaks-bright-d2-3340037146);mix-blend-mode:darken}.sketch-overlay-AA5{fill:url(#streaks-bright-d2-3340037146);mix-blend-mode:darken}.sketch-overlay-AB4{fill:url(#streaks-bright-d2-3340037146);mix-blend-mode:darken}.sketch-overlay-AB5{fill:url(#streaks-bright-d2-3340037146);mix-blend-mode:darken}.sketch-overlay-N1{fill:url(#streaks-darker-d2-3340037146);mix-blend-mode:lighten}.sketch-overlay-N2{fill:url(#streaks-dark-d2-3340037146);mix-blend-mode:overlay}.sketch-overlay-N3{fill:url(#streaks-normal-d2-3340037146);mix-blend-mode:color-burn}.sketch-overlay-N4{fill:url(#streaks-normal-d2-3340037146);mix-blend-mode:color-burn}.sketch-overlay-N5{fill:url(#streaks-bright-d2-3340037146);mix-blend-mode:darken}.sketch-overlay-N6{fill:url(#streaks-bright-d2-3340037146);mix-blend-mode:darken}.sketch-overlay-N7{fill:url(#streaks-bright-d2-3340037146);mix-blend-mode:darken}.light-code{display: block}.dark-code{display: none}]]></style><g class="Y29tcHV0ZQ=="><g class="shape" ><rect x="10.000000" y="20.000000" width="591.000000" height="126.000000" stroke="#3B82F6" fill="#EFF6FF" style="stroke-width:2;" /></g><text x="305.500000" y="7.000000" fill="#0A0F25" class="text fill-N1" style="text-anchor:middle;font-size:28px">计算集群（无状态）</text></g><g class="Y2FjaGU="><g class="shape" ><path d="M 190 311 C 190 287 294 287 306 287 C 317 287 421 287 421 311 V 381 C 421 405 317 405 306 405 C 294 405 190 405 190 381 V 311 Z" stroke="#D97706" fill="#FEF3C7" style="stroke-width:2;" /><path d="M 190 311 C 190 335 294 335 306 335 C 317 335 421 335 421 311" stroke="#D97706" fill="#FEF3C7" style="stroke-width:2;" /></g><text x="305.500000" y="363.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">本地 Cache（热数据）</text></g><g class="c2hhcmVk"><g class="shape" ><path d="M 197 550 C 197 526 295 526 306 526 C 316 526 414 526 414 550 V 636 C 414 660 316 660 306 660 C 295 660 197 660 197 636 V 550 Z" stroke="#16A34A" fill="#F0FDF4" style="stroke-width:2;" /><path d="M 197 550 C 197 574 295 574 306 574 C 316 574 414 574 414 550" stroke="#16A34A" fill="#F0FDF4" style="stroke-width:2;" /></g><text x="305.500000" y="602.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="305.500000" dy="0.000000">共享存储 / 对象存储</tspan><tspan x="305.500000" dy="18.500000">S3 · OSS · HDFS</tspan></text></g><g class="ZWxhc3RpYw=="><g class="shape" ><rect x="82.000000" y="781.000000" width="448.000000" height="66.000000" stroke="#475569" fill="#F8FAFC" style="stroke-width:2;stroke-dasharray:10.000000,9.865639;" /></g><text x="306.000000" y="819.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">弹性扩缩容：加节点即加算力，无需搬迁数据</text></g><g class="Y29tcHV0ZS5jMQ=="><g class="shape" ><rect x="40.000000" y="50.000000" width="137.000000" height="66.000000" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="108.500000" y="88.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">查询节点 1</text></g><g class="Y29tcHV0ZS5jMg=="><g class="shape" ><rect x="237.000000" y="50.000000" width="137.000000" height="66.000000" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="305.500000" y="88.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">查询节点 2</text></g><g class="Y29tcHV0ZS5jMw=="><g class="shape" ><rect x="434.000000" y="50.000000" width="137.000000" height="66.000000" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="502.500000" y="88.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">查询节点 3</text></g><g class="KGNvbXB1dGUgLSZndDsgY2FjaGUpWzBd"><marker id="mk-d2-3340037146-3488378134" markerWidth="10.000000" markerHeight="12.000000" refX="7.000000" refY="6.000000" viewBox="0.000000 0.000000 10.000000 12.000000" orient="auto" markerUnits="userSpaceOnUse"> <polygon points="0.000000,0.000000 10.000000,6.000000 0.000000,12.000000" fill="#0D32B2" class="connection fill-B1" stroke-width="2" /> </marker><path d="M 305.500000 147.500000 C 305.500000 210.300003 305.600006 238.600006 305.966944 283.000137" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3340037146-3488378134)" mask="url(#d2-3340037146)" /><text x="306.000000" y="222.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">读请求（命中缓存）</text></g><g class="KGNhY2hlIC0mZ3Q7IHNoYXJlZClbMF0="><path d="M 305.983472 406.999932 C 305.600006 453.399994 305.600006 477.600006 305.966944 522.000137" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3340037146-3488378134)" mask="url(#d2-3340037146)" /><text x="306.000000" y="471.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">未命中，按需加载</text></g><g class="KHNoYXJlZCAtJmd0OyBlbGFzdGljKVswXQ=="><path d="M 305.983472 661.999932 C 305.600006 708.400024 305.500000 732.700012 305.500000 777.500000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3340037146-3488378134)" mask="url(#d2-3340037146)" /><text x="306.000000" y="726.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">独立扩展存储</text></g><mask id="d2-3340037146" maskUnits="userSpaceOnUse" x="-91" y="-121" width="793" height="1069">
+		.d2-3340037146 .stroke-B2{stroke:#0D32B2;}.appendix text.text{fill:#0A0F25}.md{--color-fg-default:#0A0F25;--color-fg-muted:#676C7E;--color-fg-subtle:#9499AB;--color-canvas-default:#FFFFFF;--color-canvas-subtle:#EEF1F8;--color-border-default:#0D32B2;--color-border-muted:#0D32B2;--color-neutral-muted:#EEF1F8;--color-accent-fg:#0D32B2;--color-accent-emphasis:#0D32B2;--color-attention-subtle:#676C7E;--color-danger-fg:red;}.light-code{display: block}.dark-code{display: none}]]></style><g class="Y29tcHV0ZQ=="><g class="shape" ><rect x="10" y="20" width="591" height="126" stroke="#3B82F6" fill="#EFF6FF" style="stroke-width:2;" /></g><text x="305.5" y="7" fill="#0A0F25" class="text fill-N1" style="text-anchor:middle;font-size:28px">计算集群（无状态）</text></g><g class="Y2FjaGU="><g class="shape" ><path d="M 190 311 C 190 287 294 287 306 287 C 317 287 421 287 421 311 V 381 C 421 405 317 405 306 405 C 294 405 190 405 190 381 V 311 Z" stroke="#D97706" fill="#FEF3C7" style="stroke-width:2;" /><path d="M 190 311 C 190 335 294 335 306 335 C 317 335 421 335 421 311" stroke="#D97706" fill="#FEF3C7" style="stroke-width:2;" /></g><text x="305.5" y="363.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">本地 Cache（热数据）</text></g><g class="c2hhcmVk"><g class="shape" ><path d="M 197 550 C 197 526 295 526 306 526 C 316 526 414 526 414 550 V 636 C 414 660 316 660 306 660 C 295 660 197 660 197 636 V 550 Z" stroke="#16A34A" fill="#F0FDF4" style="stroke-width:2;" /><path d="M 197 550 C 197 574 295 574 306 574 C 316 574 414 574 414 550" stroke="#16A34A" fill="#F0FDF4" style="stroke-width:2;" /></g><text x="305.5" y="602.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px"><tspan x="305.5" dy="0">共享存储 / 对象存储</tspan><tspan x="305.5" dy="18.5">S3 · OSS · HDFS</tspan></text></g><g class="ZWxhc3RpYw=="><g class="shape" ><rect x="82" y="781" width="448" height="66" stroke="#475569" fill="#F8FAFC" style="stroke-width:2;stroke-dasharray:10.000000,9.865639;" /></g><text x="306" y="819.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">弹性扩缩容：加节点即加算力，无需搬迁数据</text></g><g class="Y29tcHV0ZS5jMQ=="><g class="shape" ><rect x="40" y="50" width="137" height="66" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="108.5" y="88.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">查询节点 1</text></g><g class="Y29tcHV0ZS5jMg=="><g class="shape" ><rect x="237" y="50" width="137" height="66" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="305.5" y="88.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">查询节点 2</text></g><g class="Y29tcHV0ZS5jMw=="><g class="shape" ><rect x="434" y="50" width="137" height="66" stroke="#0D32B2" fill="#EDF0FD" class=" stroke-B1 fill-B5" style="stroke-width:2;" /></g><text x="502.5" y="88.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">查询节点 3</text></g><g class="KGNvbXB1dGUgLSZndDsgY2FjaGUpWzBd"><marker id="mk-d2-3340037146-3488378134" markerWidth="10" markerHeight="12" refX="7" refY="6" viewBox="0 0 10 12" orient="auto" markerUnits="userSpaceOnUse"> <polygon points="0,0 10,6 0,12" fill="#0D32B2" class="connection fill-B1" stroke-width="2" /> </marker><path d="M 305.5 147.5 C 305.5 210.300003 305.600006 238.600006 305.966944 283.000137" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3340037146-3488378134)" mask="url(#d2-3340037146)" /><text x="306" y="222" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">读请求（命中缓存）</text></g><g class="KGNhY2hlIC0mZ3Q7IHNoYXJlZClbMF0="><path d="M 305.983472 406.999932 C 305.600006 453.399994 305.600006 477.600006 305.966944 522.000137" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3340037146-3488378134)" mask="url(#d2-3340037146)" /><text x="306" y="471" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">未命中，按需加载</text></g><g class="KHNoYXJlZCAtJmd0OyBlbGFzdGljKVswXQ=="><path d="M 305.983472 661.999932 C 305.600006 708.400024 305.5 732.700012 305.5 777.5" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-3340037146-3488378134)" mask="url(#d2-3340037146)" /><text x="306" y="726" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">独立扩展存储</text></g><mask id="d2-3340037146" maskUnits="userSpaceOnUse" x="-91" y="-121" width="793" height="1069">
 <rect x="-91" y="-121" width="793" height="1069" fill="white"></rect>
-<rect x="217.000000" y="206.000000" width="178" height="21" fill="black"></rect>
-<rect x="227.000000" y="455.000000" width="158" height="21" fill="black"></rect>
-<rect x="246.000000" y="710.000000" width="120" height="21" fill="black"></rect>
+<rect x="217" y="206" width="178" height="21" fill="black"></rect>
+<rect x="227" y="455" width="158" height="21" fill="black"></rect>
+<rect x="246" y="710" width="120" height="21" fill="black"></rect>
 </mask></svg></svg>

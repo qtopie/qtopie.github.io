@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-d2-version="v0.8.2" preserveAspectRatio="xMinYMin meet" viewBox="0 0 1199 453"><svg class="d2-1539045396 d2-svg" width="1199" height="453" viewBox="-101 -99 1199 453"><rect x="-101.000000" y="-99.000000" width="1199.000000" height="453.000000" rx="0.000000" fill="#FFFFFF" class=" fill-N7" stroke-width="0" /><style type="text/css"><![CDATA[
+<?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-d2-version="v0.9.0" preserveAspectRatio="xMinYMin meet" viewBox="0 0 1199 453"><svg class="d2-1539045396 d2-svg" width="1199" height="453" viewBox="-101 -99 1199 453"><rect x="-101" y="-99" width="1199" height="453" rx="0" fill="#FFFFFF" class=" fill-N7" stroke-width="0" /><style type="text/css"><![CDATA[
 .d2-1539045396 .text-bold {
 	font-family: "d2-1539045396-font-bold";
 }
@@ -27,80 +27,15 @@
 
 		.d2-1539045396 .fill-N1{fill:#0A0F25;}
 		.d2-1539045396 .fill-N2{fill:#676C7E;}
-		.d2-1539045396 .fill-N3{fill:#9499AB;}
-		.d2-1539045396 .fill-N4{fill:#CFD2DD;}
-		.d2-1539045396 .fill-N5{fill:#DEE1EB;}
-		.d2-1539045396 .fill-N6{fill:#EEF1F8;}
 		.d2-1539045396 .fill-N7{fill:#FFFFFF;}
 		.d2-1539045396 .fill-B1{fill:#0D32B2;}
-		.d2-1539045396 .fill-B2{fill:#0D32B2;}
-		.d2-1539045396 .fill-B3{fill:#E3E9FD;}
-		.d2-1539045396 .fill-B4{fill:#E3E9FD;}
-		.d2-1539045396 .fill-B5{fill:#EDF0FD;}
 		.d2-1539045396 .fill-B6{fill:#F7F8FE;}
-		.d2-1539045396 .fill-AA2{fill:#4A6FF3;}
-		.d2-1539045396 .fill-AA4{fill:#EDF0FD;}
-		.d2-1539045396 .fill-AA5{fill:#F7F8FE;}
-		.d2-1539045396 .fill-AB4{fill:#EDF0FD;}
-		.d2-1539045396 .fill-AB5{fill:#F7F8FE;}
-		.d2-1539045396 .stroke-N1{stroke:#0A0F25;}
-		.d2-1539045396 .stroke-N2{stroke:#676C7E;}
-		.d2-1539045396 .stroke-N3{stroke:#9499AB;}
-		.d2-1539045396 .stroke-N4{stroke:#CFD2DD;}
-		.d2-1539045396 .stroke-N5{stroke:#DEE1EB;}
-		.d2-1539045396 .stroke-N6{stroke:#EEF1F8;}
-		.d2-1539045396 .stroke-N7{stroke:#FFFFFF;}
 		.d2-1539045396 .stroke-B1{stroke:#0D32B2;}
-		.d2-1539045396 .stroke-B2{stroke:#0D32B2;}
-		.d2-1539045396 .stroke-B3{stroke:#E3E9FD;}
-		.d2-1539045396 .stroke-B4{stroke:#E3E9FD;}
-		.d2-1539045396 .stroke-B5{stroke:#EDF0FD;}
-		.d2-1539045396 .stroke-B6{stroke:#F7F8FE;}
-		.d2-1539045396 .stroke-AA2{stroke:#4A6FF3;}
-		.d2-1539045396 .stroke-AA4{stroke:#EDF0FD;}
-		.d2-1539045396 .stroke-AA5{stroke:#F7F8FE;}
-		.d2-1539045396 .stroke-AB4{stroke:#EDF0FD;}
-		.d2-1539045396 .stroke-AB5{stroke:#F7F8FE;}
-		.d2-1539045396 .background-color-N1{background-color:#0A0F25;}
-		.d2-1539045396 .background-color-N2{background-color:#676C7E;}
-		.d2-1539045396 .background-color-N3{background-color:#9499AB;}
-		.d2-1539045396 .background-color-N4{background-color:#CFD2DD;}
-		.d2-1539045396 .background-color-N5{background-color:#DEE1EB;}
-		.d2-1539045396 .background-color-N6{background-color:#EEF1F8;}
-		.d2-1539045396 .background-color-N7{background-color:#FFFFFF;}
-		.d2-1539045396 .background-color-B1{background-color:#0D32B2;}
-		.d2-1539045396 .background-color-B2{background-color:#0D32B2;}
-		.d2-1539045396 .background-color-B3{background-color:#E3E9FD;}
-		.d2-1539045396 .background-color-B4{background-color:#E3E9FD;}
-		.d2-1539045396 .background-color-B5{background-color:#EDF0FD;}
-		.d2-1539045396 .background-color-B6{background-color:#F7F8FE;}
-		.d2-1539045396 .background-color-AA2{background-color:#4A6FF3;}
-		.d2-1539045396 .background-color-AA4{background-color:#EDF0FD;}
-		.d2-1539045396 .background-color-AA5{background-color:#F7F8FE;}
-		.d2-1539045396 .background-color-AB4{background-color:#EDF0FD;}
-		.d2-1539045396 .background-color-AB5{background-color:#F7F8FE;}
-		.d2-1539045396 .color-N1{color:#0A0F25;}
-		.d2-1539045396 .color-N2{color:#676C7E;}
-		.d2-1539045396 .color-N3{color:#9499AB;}
-		.d2-1539045396 .color-N4{color:#CFD2DD;}
-		.d2-1539045396 .color-N5{color:#DEE1EB;}
-		.d2-1539045396 .color-N6{color:#EEF1F8;}
-		.d2-1539045396 .color-N7{color:#FFFFFF;}
-		.d2-1539045396 .color-B1{color:#0D32B2;}
-		.d2-1539045396 .color-B2{color:#0D32B2;}
-		.d2-1539045396 .color-B3{color:#E3E9FD;}
-		.d2-1539045396 .color-B4{color:#E3E9FD;}
-		.d2-1539045396 .color-B5{color:#EDF0FD;}
-		.d2-1539045396 .color-B6{color:#F7F8FE;}
-		.d2-1539045396 .color-AA2{color:#4A6FF3;}
-		.d2-1539045396 .color-AA4{color:#EDF0FD;}
-		.d2-1539045396 .color-AA5{color:#F7F8FE;}
-		.d2-1539045396 .color-AB4{color:#EDF0FD;}
-		.d2-1539045396 .color-AB5{color:#F7F8FE;}.appendix text.text{fill:#0A0F25}.md{--color-fg-default:#0A0F25;--color-fg-muted:#676C7E;--color-fg-subtle:#9499AB;--color-canvas-default:#FFFFFF;--color-canvas-subtle:#EEF1F8;--color-border-default:#0D32B2;--color-border-muted:#0D32B2;--color-neutral-muted:#EEF1F8;--color-accent-fg:#0D32B2;--color-accent-emphasis:#0D32B2;--color-attention-subtle:#676C7E;--color-danger-fg:red;}.sketch-overlay-B1{fill:url(#streaks-darker-d2-1539045396);mix-blend-mode:lighten}.sketch-overlay-B2{fill:url(#streaks-darker-d2-1539045396);mix-blend-mode:lighten}.sketch-overlay-B3{fill:url(#streaks-bright-d2-1539045396);mix-blend-mode:darken}.sketch-overlay-B4{fill:url(#streaks-bright-d2-1539045396);mix-blend-mode:darken}.sketch-overlay-B5{fill:url(#streaks-bright-d2-1539045396);mix-blend-mode:darken}.sketch-overlay-B6{fill:url(#streaks-bright-d2-1539045396);mix-blend-mode:darken}.sketch-overlay-AA2{fill:url(#streaks-dark-d2-1539045396);mix-blend-mode:overlay}.sketch-overlay-AA4{fill:url(#streaks-bright-d2-1539045396);mix-blend-mode:darken}.sketch-overlay-AA5{fill:url(#streaks-bright-d2-1539045396);mix-blend-mode:darken}.sketch-overlay-AB4{fill:url(#streaks-bright-d2-1539045396);mix-blend-mode:darken}.sketch-overlay-AB5{fill:url(#streaks-bright-d2-1539045396);mix-blend-mode:darken}.sketch-overlay-N1{fill:url(#streaks-darker-d2-1539045396);mix-blend-mode:lighten}.sketch-overlay-N2{fill:url(#streaks-dark-d2-1539045396);mix-blend-mode:overlay}.sketch-overlay-N3{fill:url(#streaks-normal-d2-1539045396);mix-blend-mode:color-burn}.sketch-overlay-N4{fill:url(#streaks-normal-d2-1539045396);mix-blend-mode:color-burn}.sketch-overlay-N5{fill:url(#streaks-bright-d2-1539045396);mix-blend-mode:darken}.sketch-overlay-N6{fill:url(#streaks-bright-d2-1539045396);mix-blend-mode:darken}.sketch-overlay-N7{fill:url(#streaks-bright-d2-1539045396);mix-blend-mode:darken}.light-code{display: block}.dark-code{display: none}]]></style><g class="TWFuYWdlcg=="><g class="shape" ><rect x="0.000000" y="61.000000" width="107.000000" height="66.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="53.500000" y="99.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">Manager</text></g><g class="Q29kZXI="><g class="shape" ><rect x="428.000000" y="187.000000" width="88.000000" height="66.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="472.000000" y="225.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">Coder</text></g><g class="UmV2aWV3ZXI="><g class="shape" ><rect x="886.000000" y="103.000000" width="111.000000" height="66.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="941.500000" y="141.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">Reviewer</text></g><g class="VXNlcg=="><g class="shape" ><rect x="433.000000" y="61.000000" width="78.000000" height="66.000000" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="472.000000" y="99.500000" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">User</text></g><g class="KE1hbmFnZXIgLSZndDsgQ29kZXIpWzBd"><marker id="mk-d2-1539045396-3488378134" markerWidth="10.000000" markerHeight="12.000000" refX="7.000000" refY="6.000000" viewBox="0.000000 0.000000 10.000000 12.000000" orient="auto" markerUnits="userSpaceOnUse"> <polygon points="0.000000,0.000000 10.000000,6.000000 0.000000,12.000000" fill="#0D32B2" class="connection fill-B1" stroke-width="2" /> </marker><path d="M 108.222492 126.016377 C 235.300003 201.000000 299.700012 220.000000 424.500000 220.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1539045396-3488378134)" mask="url(#d2-1539045396)" /><text x="258.000000" y="213.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">编写功能实现</text></g><g class="KENvZGVyIC0mZ3Q7IFJldmlld2VyKVswXQ=="><path d="M 517.981985 225.767836 C 664.000000 245.500000 738.000000 232.899994 882.387836 164.218218" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1539045396-3488378134)" mask="url(#d2-1539045396)" /><text x="708.000000" y="243.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">提交代码审查</text></g><g class="KFJldmlld2VyIC0mZ3Q7IENvZGVyKVswXQ=="><path d="M 884.000000 135.500000 C 738.000000 135.500000 664.000000 149.100006 519.754411 202.120000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1539045396-3488378134)" mask="url(#d2-1539045396)" /><text x="696.500000" y="149.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">发现 Bug，打回重写</text></g><g class="KFJldmlld2VyIC0mZ3Q7IE1hbmFnZXIpWzBd"><path d="M 884.224786 105.578796 C 738.000000 29.698999 655.200012 10.500000 586.500000 10.500000 C 517.799011 10.500000 235.300003 23.100000 110.224971 72.042403" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1539045396-3488378134)" mask="url(#d2-1539045396)" /><text x="501.500000" y="17.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">通过审计</text></g><g class="KE1hbmFnZXIgLSZndDsgVXNlcilbMF0="><path d="M 108.500000 94.000000 C 235.300003 94.000000 300.700012 94.000000 429.500000 94.000000" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1539045396-3488378134)" mask="url(#d2-1539045396)" /><text x="270.500000" y="100.000000" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">交付产品</text></g><mask id="d2-1539045396" maskUnits="userSpaceOnUse" x="-101" y="-99" width="1199" height="453">
+		.d2-1539045396 .stroke-B2{stroke:#0D32B2;}.appendix text.text{fill:#0A0F25}.md{--color-fg-default:#0A0F25;--color-fg-muted:#676C7E;--color-fg-subtle:#9499AB;--color-canvas-default:#FFFFFF;--color-canvas-subtle:#EEF1F8;--color-border-default:#0D32B2;--color-border-muted:#0D32B2;--color-neutral-muted:#EEF1F8;--color-accent-fg:#0D32B2;--color-accent-emphasis:#0D32B2;--color-attention-subtle:#676C7E;--color-danger-fg:red;}.light-code{display: block}.dark-code{display: none}]]></style><g class="TWFuYWdlcg=="><g class="shape" ><rect x="0" y="61" width="107" height="66" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="53.5" y="99.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">Manager</text></g><g class="Q29kZXI="><g class="shape" ><rect x="428" y="187" width="88" height="66" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="472" y="225.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">Coder</text></g><g class="UmV2aWV3ZXI="><g class="shape" ><rect x="886" y="103" width="111" height="66" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="941.5" y="141.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">Reviewer</text></g><g class="VXNlcg=="><g class="shape" ><rect x="433" y="61" width="78" height="66" stroke="#0D32B2" fill="#F7F8FE" class=" stroke-B1 fill-B6" style="stroke-width:2;" /></g><text x="472" y="99.5" fill="#0A0F25" class="text-bold fill-N1" style="text-anchor:middle;font-size:16px">User</text></g><g class="KE1hbmFnZXIgLSZndDsgQ29kZXIpWzBd"><marker id="mk-d2-1539045396-3488378134" markerWidth="10" markerHeight="12" refX="7" refY="6" viewBox="0 0 10 12" orient="auto" markerUnits="userSpaceOnUse"> <polygon points="0,0 10,6 0,12" fill="#0D32B2" class="connection fill-B1" stroke-width="2" /> </marker><path d="M 108.222492 126.016377 C 235.300003 201 299.700012 220 424.5 220" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1539045396-3488378134)" mask="url(#d2-1539045396)" /><text x="258" y="213" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">编写功能实现</text></g><g class="KENvZGVyIC0mZ3Q7IFJldmlld2VyKVswXQ=="><path d="M 517.981985 225.767836 C 664 245.5 738 232.899994 882.387836 164.218218" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1539045396-3488378134)" mask="url(#d2-1539045396)" /><text x="708" y="243" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">提交代码审查</text></g><g class="KFJldmlld2VyIC0mZ3Q7IENvZGVyKVswXQ=="><path d="M 884 135.5 C 738 135.5 664 149.100006 519.754411 202.12" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1539045396-3488378134)" mask="url(#d2-1539045396)" /><text x="696.5" y="149" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">发现 Bug，打回重写</text></g><g class="KFJldmlld2VyIC0mZ3Q7IE1hbmFnZXIpWzBd"><path d="M 884.224786 105.578796 C 738 29.698999 655.200012 10.5 586.5 10.5 C 517.799011 10.5 235.300003 23.1 110.224971 72.042403" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1539045396-3488378134)" mask="url(#d2-1539045396)" /><text x="501.5" y="17" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">通过审计</text></g><g class="KE1hbmFnZXIgLSZndDsgVXNlcilbMF0="><path d="M 108.5 94 C 235.300003 94 300.700012 94 429.5 94" stroke="#0D32B2" fill="none" class="connection stroke-B1" style="stroke-width:2;" marker-end="url(#mk-d2-1539045396-3488378134)" mask="url(#d2-1539045396)" /><text x="270.5" y="100" fill="#676C7E" class="text-italic fill-N2" style="text-anchor:middle;font-size:16px">交付产品</text></g><mask id="d2-1539045396" maskUnits="userSpaceOnUse" x="-101" y="-99" width="1199" height="453">
 <rect x="-101" y="-99" width="1199" height="453" fill="white"></rect>
-<rect x="198.000000" y="197.000000" width="120" height="21" fill="black"></rect>
-<rect x="648.000000" y="227.000000" width="120" height="21" fill="black"></rect>
-<rect x="612.000000" y="133.000000" width="169" height="21" fill="black"></rect>
-<rect x="461.000000" y="1.000000" width="81" height="21" fill="black"></rect>
-<rect x="230.000000" y="84.000000" width="81" height="21" fill="black"></rect>
+<rect x="198" y="197" width="120" height="21" fill="black"></rect>
+<rect x="648" y="227" width="120" height="21" fill="black"></rect>
+<rect x="612" y="133" width="169" height="21" fill="black"></rect>
+<rect x="461" y="1" width="81" height="21" fill="black"></rect>
+<rect x="230" y="84" width="81" height="21" fill="black"></rect>
 </mask></svg></svg>
