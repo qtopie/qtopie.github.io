@@ -1,0 +1,505 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>SpringBoot 3.x 优雅停机与 AWS ECS Service Connect 协同实战 | 1001問</title><link rel=stylesheet href=/css/main.min.08d455bd2bde0ee293a59d0cc841b8bb8171fd8a029e994e30c2a2f88344d236.css integrity="sha256-CNRVvSveDuKTpZ0MyEG4u4Fx/YoCnplOMMKi+INE0jY=" crossorigin=anonymous><link rel=stylesheet href=/css/drift-motion.min.2079d25095ff3c7a1f4e3d258109e6a4fcd84dc2801e79c8e81a95bd382caa42.css integrity="sha256-IHnSUJX/PHofTj0lgQnmpPzYTcKAHnnI6BqVvTgsqkI=" crossorigin=anonymous><link rel=stylesheet href=/css/page.min.8b8b43532c226282b5765dbee3eac60a666e6f45af46e227ef222fe15dcd67eb.css integrity="sha256-i4tDUywiYoK1dl2+4+rGCmZub0WvRuIn7yIv4V3NZ+s=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.e114b8cc38f57d520f373580c935a518bc6afd6dec4f1d682365cdbcf5c8218a.css><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css crossorigin=anonymous referrerpolicy=no-referrer><script src=/js/panzoom.min.d1dc01e4727734526981f6101210bf3b5e528e53d530affbaf74a153c6678cd5.js integrity="sha256-0dwB5HJ3NFJpgfYQEhC/O15SjlPVMK/7r3ShU8ZnjNU=" crossorigin=anonymous defer></script><script src=/js/toc.min.fe3bb10d27f504bae00f74910dfea1a96647adf87328870c3f0092db5fa5d5cf.js integrity="sha256-/juxDSf1BLrgD3SRDf6hqWZHrfhzKIcMPwCS21+l1c8=" crossorigin=anonymous type=module defer></script><script src=/js/copy-code.min.3bea0de4cfe8670f94a5d75c177f07b58fc90178efdea7f2a21449798d75b2c9.js integrity="sha256-O+oN5M/oZw+UpddcF38HtY/JAXjv3qfyohRJeY11ssk=" crossorigin=anonymous defer></script><script defer src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js crossorigin=anonymous referrerpolicy=no-referrer></script><script defer src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js crossorigin=anonymous referrerpolicy=no-referrer onload='renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],throwOnError:!1})'></script><script src=/js/katex-block.min.2cf531bbcc318aadf5661baa2d0987ab5cb4daef473e108b1da714a37cff0b25.js integrity="sha256-LPUxu8wxiq31ZhuqLQmHq1y02u9HPhCLHacUo3z/CyU=" crossorigin=anonymous defer></script><script>window.googleTranslateElementInit=function(){new google.translate.TranslateElement({pageLanguage:"zh-CN",includedLanguages:"en,zh-CN",autoDisplay:!1},"google_translate_element")},function(){function i(e){var t=document.cookie.match("(^|;) ?"+e+"=([^;]*)(;|$)");return t?decodeURIComponent(t[2]):null}function e(){var e=i("googtrans");return e==="/zh-CN/en"||e==="/auto/en"||localStorage.getItem("site_lang")==="en"}function t(e){var t=document.getElementById("lang-toggle-btn"),n=document.getElementById("lang-toggle-label");n&&(n.textContent=e?"中":"EN"),t&&(t.setAttribute("title",e?"切换为中文":"Switch to English"),t.classList.toggle("is-en",e))}function s(){var e=window.location.hostname,t=e.split("."),n=t.length>1?"."+t.slice(-2).join("."):e,s=["",e,"."+e,n],o=["/",""];s.forEach(function(e){o.forEach(function(t){document.cookie="googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path="+t+(e?"; domain="+e:"")})})}function a(e){s();var t=window.location.hostname,n=t.split("."),o=n.length>1?"."+n.slice(-2).join("."):t;document.cookie="googtrans="+e+"; path=/",document.cookie="googtrans="+e+"; path=/; domain="+t,n.length>1&&(document.cookie="googtrans="+e+"; path=/; domain="+o)}function n(){var o,n=!e();localStorage.setItem("site_lang",n?"en":"zh"),n?a("/zh-CN/en"):s(),t(n),o=document.querySelector(".goog-te-combo"),o?(o.value=n?"en":"",o.dispatchEvent(new Event("change")),n||setTimeout(function(){window.location.reload()},150)):window.location.reload()}if(window.toggleSiteLanguage=n,document.readyState==="loading")document.addEventListener("DOMContentLoaded",function(){t(e());var s=document.getElementById("lang-toggle-btn");s&&s.addEventListener("click",n)});else{t(e());var o=document.getElementById("lang-toggle-btn");o&&o.addEventListener("click",n)}}()</script><script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async defer></script><script src=/js/drift-motion.min.9b4dc712be8926a577f58d0c954fb980a979a61f764e21bfa7d1f3fc7d32289c.js integrity="sha256-m03HEr6JJqV39Y0MlU+5gKl5ph92TiG/p9Hz/H0yKJw=" crossorigin=anonymous defer></script></head><body><header><nav><a href=/><h1>1001問</h1></a><div id=react-search class=search-root aria-label="Site Search"></div><div class=nav-actions><button id=lang-toggle-btn class=lang-toggle-btn type=button aria-label="Toggle language between Chinese and English" title="Switch English / 中文">
+<svg class="lang-icon" viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52.0 0014.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7 1.62-4.33L19.12 17h-3.24z"/></svg>
+<span class=lang-label id=lang-toggle-label>EN</span></button><div id=google_translate_element style=display:none aria-hidden=true></div><div class=nav-links><a href=/posts/>Posts</a></div></div></nav></header><main><div class=sidebar><section class=toc><div class=toc-title>目录</div><nav id=TableOfContents><ul><li><a href=#核心术语表-core-terminology--glossary>核心术语表 (Core Terminology & Glossary)</a></li><li><a href=#核心痛点为什么仅配置-spring-boot-优雅停机仍会出现-503>核心痛点：为什么仅配置 Spring Boot 优雅停机仍会出现 503？</a><ul><li><a href=#架构与请求链路>架构与请求链路</a></li><li><a href=#下线时序的竞态条件-race-condition>下线时序的竞态条件 (Race Condition)</a></li></ul></li><li><a href=#spring-boot-3x-优雅停机核心参数与机制>Spring Boot 3.x 优雅停机核心参数与机制</a><ul><li><a href=#官方文档索引>官方文档索引</a></li><li><a href=#核心配置清单-applicationyml>核心配置清单 (<code>application.yml</code>)</a></li><li><a href=#源码级参数行为剖析>源码级参数行为剖析</a></li><li><a href=#actuatorhealthreadiness-与-liveness-探针深度对比><code>/actuator/health</code>、Readiness 与 Liveness 探针深度对比</a></li></ul></li><li><a href=#aws-ecs-service-connect-核心参数与架构>AWS ECS Service Connect 核心参数与架构</a><ul><li><a href=#官方文档索引-1>官方文档索引</a></li><li><a href=#关键核心参数剖析>关键核心参数剖析</a></li></ul></li><li><a href=#生产级协同解决方案>生产级协同解决方案</a><ul><li><a href=#方案-a容器-entrypoint-shell-拦截信号并休眠推荐无代码侵入>方案 A：容器 Entrypoint Shell 拦截信号并休眠（推荐，无代码侵入）</a></li><li><a href=#方案-bspring-boot-内部扩展通过-smartlifecycle-自定义停机阶段>方案 B：Spring Boot 内部扩展（通过 <code>SmartLifecycle</code> 自定义停机阶段）</a></li><li><a href=#方案-cecs-task-definition--terraform-配置>方案 C：ECS Task Definition & Terraform 配置</a></li></ul></li><li><a href=#从-999-到-100为什么必须客户端韧性兜底consumer-side-resilience>从 99.9% 到 100%：为什么必须客户端韧性兜底？（Consumer-Side Resilience）</a><ul><li><a href=#核心拷问正确配置后流量能保证-100-平稳吗>核心拷问：正确配置后，流量能保证 100% 平稳吗？</a></li><li><a href=#为什么单靠服务端极难做到数学上的绝对-100>为什么单靠服务端极难做到数学上的“绝对 100%”？</a></li><li><a href=#双端协同闭环架构>双端协同闭环架构</a></li><li><a href=#客户端代码实战配置幂等重试拦截器>客户端代码实战：配置幂等重试拦截器</a></li></ul></li><li><a href=#生产验证与压测验证清单>生产验证与压测验证清单</a><ul><li><a href=#生产环境滚动更新零中断压测>生产环境：滚动更新零中断压测</a></li><li><a href=#本地开发与调试测试ctrl--c-sigint-vs-生产-sigterm>本地开发与调试测试：Ctrl + C (SIGINT) vs 生产 SIGTERM</a></li></ul></li></ul></nav></section></div><article id=content><div class=metadata><h1>SpringBoot 3.x 优雅停机与 AWS ECS Service Connect 协同实战</h1><div class=post-meta-flow><time datetime=2026-10-14T22:00:00+08:00 class=meta-date><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+<span>October 14, 2026</span></time><div class=taxonomy><span id=post-categories><ul><li class=category-item><a href=https://qtopie.github.io/categories/cloud-native>📁 Cloud Native</a></li><li class=category-item><a href=https://qtopie.github.io/categories/java>📁 Java</a></li></ul></span><span id=post-tags><ul><li class=tag-item><a href=https://qtopie.github.io/tags/spring-boot>#Spring Boot</a></li><li class=tag-item><a href=https://qtopie.github.io/tags/aws>#AWS</a></li><li class=tag-item><a href=https://qtopie.github.io/tags/ecs>#ECS</a></li><li class=tag-item><a href=https://qtopie.github.io/tags/service-connect>#Service Connect</a></li><li class=tag-item><a href=https://qtopie.github.io/tags/graceful-shutdown>#Graceful Shutdown</a></li><li class=tag-item><a href=https://qtopie.github.io/tags/envoy>#Envoy</a></li><li class=tag-item><a href=https://qtopie.github.io/tags/microservices>#Microservices</a></li></ul></span></div></div></div><p>在微服务架构中，**优雅停机（Graceful Shutdown）**是保障服务发布、滚动更新（Rolling Update）以及自动缩容（Scale-in）期间系统高可用、用户请求零报错的核心基石。</p><p>当使用 <strong>Spring Boot 3.x</strong> 部署在 <strong>AWS ECS (Elastic Container Service)</strong> 并启用了 <strong>AWS Service Connect (基于 Envoy 的服务网格)</strong> 时，仅在 Spring Boot 中开启 <code>server.shutdown=graceful</code> 往往无法完全避免偶发的 <code>503 Service Unavailable</code> 或 <code>Connection reset by peer</code>。</p><p>本文将从原理深度解构底层竞态条件，附带完整的 Spring Boot 与 AWS 官方文档索引、源码级参数说明，并提供生产环境已验证的协同解决方案。</p><hr><h2 id=核心术语表-core-terminology--glossary>核心术语表 (Core Terminology & Glossary)</h2><p>在微服务生命周期与平滑下线领域，涉及多个网络与系统级专业概念。以下为核心关键术语对照表：</p><table><thead><tr><th style=text-align:left>中文术语</th><th style=text-align:left>英文对照</th><th style=text-align:left>核心含义与技术解释</th></tr></thead><tbody><tr><td style=text-align:left><strong>在途请求 / 处理中的请求</strong></td><td style=text-align:left><strong>In-flight Request</strong></td><td style=text-align:left>指<strong>已经被应用服务器（如 Tomcat）接收，且当前正在执行线程池中计算或等待 I/O 返回、尚未向客户端发出完整响应的 HTTP/RPC 请求</strong>。优雅停机的首要目标就是确保所有在途请求被完整处理完毕，不被强制斩断。</td></tr><tr><td style=text-align:left><strong>流量排空 / 连接排空</strong></td><td style=text-align:left><strong>Traffic Draining / Connection Draining</strong></td><td style=text-align:left>指在实例下线或升级前，<strong>主动阻断新请求的流入，同时维持现有连接通道，给予一定的时间窗口让所有在途流量、活跃 TCP 连接自然结束处理的过程</strong>。在 Envoy、ALB、Nginx 及 WebServer 中均有对应的 Draining 实现。</td></tr><tr><td style=text-align:left><strong>优雅停机 / 平滑下线</strong></td><td style=text-align:left><strong>Graceful Shutdown</strong></td><td style=text-align:left>一种系统关机策略。进程收到停止信号后，不是立刻执行退出，而是按序完成：停止接收新请求 $\to$ 排空在途请求 $\to$ 关闭内部定时/异步任务 $\to$ 安全关闭数据库连接池/MQ 连接 $\to$ 最终销毁 Spring 上下文并干净退出。</td></tr><tr><td style=text-align:left><strong>预停机缓冲 / 预停机钩子</strong></td><td style=text-align:left><strong>Pre-stop Buffer / Pre-stop Hook</strong></td><td style=text-align:left>在进程真正开始关闭网络端口（Acceptor）之前<strong>人为引入的一段安全等待时间（通常为 10~15 秒）</strong>。用于抵消服务发现（Cloud Map/DNS）与全网客户端代理（Envoy）更新路由表的传播延迟，确保没有新请求路由过来后才真正停机。</td></tr><tr><td style=text-align:left><strong>网络接收器 / 连接接收线程</strong></td><td style=text-align:left><strong>Acceptor / Acceptor Thread</strong></td><td style=text-align:left>嵌入式 Web 容器（如 Tomcat/Jetty）专门负责监听客户端 TCP <code>SYN</code> 握手并创建 Socket 连接的底层组件。开启优雅停机后，WebServer 的第一动作就是<strong>关闭 Acceptor 停止监听</strong>。</td></tr><tr><td style=text-align:left><strong>服务发现服务</strong></td><td style=text-align:left><strong>SDS (Service Discovery Service)</strong></td><td style=text-align:left>Envoy 服务网格体系中用于动态发现后端集群端点（Endpoints）的 API 协议。在 ECS Service Connect 中，Cloud Map 维护端点变化，Envoy 通过类似 SDS 的机制从控制面拉取最新的上游实例 IP:Port 列表。</td></tr><tr><td style=text-align:left><strong>任务终止超时</strong></td><td style=text-align:left><strong>Stop Timeout</strong></td><td style=text-align:left>容器编排层（如 AWS ECS Task Definition）设定的宽限期。ECS 向容器下发 <code>SIGTERM</code> 信号后开始倒计时，若容器在达到 <code>stopTimeout</code> 时仍未退出，系统将强制发送不可捕获的 <code>SIGKILL</code> 信号将其强行终止。</td></tr><tr><td style=text-align:left><strong>就绪探针</strong></td><td style=text-align:left><strong>Readiness Probe</strong></td><td style=text-align:left>检查应用**“是否具备接收外部业务流量的能力”**的探针。探针失败仅会导致负载均衡器将其移出路由转发池，不会导致容器被杀死或重启。停机时会主动翻转为不就绪。</td></tr><tr><td style=text-align:left><strong>存活探针</strong></td><td style=text-align:left><strong>Liveness Probe</strong></td><td style=text-align:left>检查应用**“进程内部是否活着、是否陷入死锁或严重损坏”<strong>的探针。若探针连续失败，编排系统会直接判定容器坏死并</strong>强制将其杀死并重启**。停机排空期必须保持为健康。</td></tr><tr><td style=text-align:left><strong>注销延迟</strong></td><td style=text-align:left><strong>Deregistration Delay</strong></td><td style=text-align:left>负载均衡器（如 AWS ALB Target Group）将实例置为 <code>draining</code> 状态后，等待已建立的客户端连接完成请求的最大超时（默认 300s，建议调至 15~30s）。期间 ALB 停止往该实例分发新请求。</td></tr><tr><td style=text-align:left><strong>级联雪崩 / 故障扩散</strong></td><td style=text-align:left><strong>Cascading Failure / Domino Effect</strong></td><td style=text-align:left>由于局部组件（如数据库短时卡顿）导致所有实例的全局健康检查全部报错，进而引发网格/ALB 将所有节点同时摘除，导致服务 100% 瘫痪的故障扩散现象。</td></tr><tr><td style=text-align:left><strong>优雅信号与强制杀死</strong></td><td style=text-align:left><strong>SIGTERM (15) vs SIGKILL (9)</strong></td><td style=text-align:left><code>SIGTERM</code>（Termination Signal）是可被进程捕获的软中断信号，用于通知进程启动优雅退出；<code>SIGKILL</code>（Kill Signal）由操作系统内核直接强杀进程，不可被捕获、不能被忽略，不给进程任何保存现场和清理资源的机会。</td></tr></tbody></table><hr><h2 id=核心痛点为什么仅配置-spring-boot-优雅停机仍会出现-503>核心痛点：为什么仅配置 Spring Boot 优雅停机仍会出现 503？</h2><h3 id=架构与请求链路>架构与请求链路</h3><p>在启用了 ECS Service Connect 的架构下：</p><ul><li>每个服务 Task 内部会自动注入一个 <code>ecs-service-connect</code> 容器（内部运行 Envoy Proxy 作为 Sidecar）。</li><li>服务实例的 IP 与端口由 <strong>AWS Cloud Map</strong> 进行注册与发现。</li><li>客户端 Task 发起 RPC/HTTP 请求时，请求先到达客户端本地的 Envoy，客户端 Envoy 根据从 Cloud Map 同步的 SDS（Service Discovery Service）路由表，将流量负载均衡转发至目标服务端 Task。</li></ul><h3 id=下线时序的竞态条件-race-condition>下线时序的竞态条件 (Race Condition)</h3><p>当 ECS 决定停止某个 Task（例如发布新版本或者集群缩容）时，会同时触发两条独立的链路：</p><div class=mermaid-block data-mermaid-zoom=1><div class=mermaid-toolbar><button class=mermaid-btn type=button data-action=zoom-in aria-label="Zoom in">+</button>
+<button class=mermaid-btn type=button data-action=zoom-out aria-label="Zoom out">-</button>
+<button class=mermaid-btn type=button data-action=reset aria-label="Reset zoom">100%</button>
+<button class=mermaid-btn type=button data-action=fullscreen aria-label="Toggle fullscreen">Full</button></div><div class="mermaid mermaid-canvas">sequenceDiagram
+autonumber
+participant ECS as ECS 控制面
+participant CloudMap as AWS Cloud Map / SDS
+participant ClientEnvoy as 客户端 Task (Envoy)
+participant ServerEnvoy as 服务端 Task (Envoy)
+participant SpringBoot as Spring Boot 3.x 应用
+Note over ECS: 触发任务停止 (Deployment / Scale-in)
+par 链路 1: 控制面注销
+ECS ->> CloudMap: 1. 发起实例注销 (DeregisterInstance)
+CloudMap -->> ClientEnvoy: 2. SDS 端点更新传播 (延迟约 2~10 秒)
+and 链路 2: 数据面信号
+ECS ->> SpringBoot: 1. 发送 SIGTERM 信号
+ECS ->> ServerEnvoy: 1. 发送 SIGTERM 信号
+end
+Note over SpringBoot: Spring Boot 立即执行优雅停机<br>关闭 Acceptor，拒绝新连接!
+ClientEnvoy ->> SpringBoot: 3. 在 SDS 尚未更新前，依然转发新请求
+SpringBoot -->> ClientEnvoy: 4. TCP RST / Connection Refused!
+ClientEnvoy -->> ClientEnvoy: 客户端收到 HTTP 503 / 502 / ECONNRESET</div></div><ul><li><strong>竞态根因</strong>：<ol><li>ECS 向 Cloud Map 发出注销指令后，<strong>端点从全网所有客户端 Envoy 的路由表中移除存在传播延迟（通常在 2 ~ 10 秒之间）</strong>。</li><li>ECS 在发出注销的同时（或极短时间内），就会直接向应用容器进程发送 <code>SIGTERM</code> 信号。</li><li>Spring Boot 收到 <code>SIGTERM</code> 后，其内置 Web 容器（如 Tomcat）会<strong>立刻关闭网络 Acceptor 线程以拒绝新请求</strong>。</li><li>此时，尚未收到路由更新的客户端 Envoy 依然会将新的请求分发过来，导致请求直接遭到拒绝，产生错误。</li></ol></li></ul><p>因此，<strong>必须建立一个缓冲窗口（Pre-stop Buffer），让 Service Connect 的端点下线先完全生效，再允许 Spring Boot 关闭端口</strong>。</p><hr><h2 id=spring-boot-3x-优雅停机核心参数与机制>Spring Boot 3.x 优雅停机核心参数与机制</h2><h3 id=官方文档索引>官方文档索引</h3><ul><li><a href=https://docs.spring.io/spring-boot/reference/web/graceful-shutdown.html>Spring Boot Reference: Graceful Shutdown</a></li><li><a href=https://docs.spring.io/spring-boot/appendix/application-properties/index.html#appendix.application-properties.server>Common Application Properties: Server & Lifecycle</a></li><li><a href=https://docs.spring.io/spring-boot/reference/actuator/endpoints.html#actuator.endpoints.kubernetes-probes>Spring Boot Actuator: Kubernetes Probes & Availability</a></li><li><a href=https://docs.spring.io/spring-framework/reference/core/beans/factory-nature.html#beans-factory-lifecycle-processor>Spring Framework Core: Lifecycle Processing (<code>SmartLifecycle</code>)</a></li></ul><h3 id=核心配置清单-applicationyml>核心配置清单 (<code>application.yml</code>)</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=line><span class=cl><span class=nt>server</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=c># 启用优雅停机。可选值：graceful（优雅停机），immediate（立即强杀，默认值）</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>shutdown</span><span class=p>:</span><span class=w> </span><span class=l>graceful</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>spring</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>lifecycle</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c># 每个 SmartLifecycle 关闭阶段的最大等待宽限时间，默认 30s</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c># 超过此时间仍有未处理完的请求，将被强制打断</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>timeout-per-shutdown-phase</span><span class=p>:</span><span class=w> </span><span class=l>30s</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>task</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>execution</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>shutdown</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=c># 等待 @Async 异步线程池任务完成</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>await-termination</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>await-termination-period</span><span class=p>:</span><span class=w> </span><span class=l>30s</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>scheduling</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>shutdown</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=c># 等待 @Scheduled 定时任务执行完毕</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>await-termination</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>await-termination-period</span><span class=p>:</span><span class=w> </span><span class=l>30s</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nt>management</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>endpoint</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>health</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=c># 开启存活态与就绪态探针 (/actuator/health/liveness 和 /actuator/health/readiness)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>probes</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>enabled</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>  </span><span class=nt>endpoints</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nt>web</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>      </span><span class=nt>exposure</span><span class=p>:</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=nt>include</span><span class=p>:</span><span class=w> </span><span class=l>health,info,metrics</span><span class=w>
+</span></span></span></code></pre></div><h3 id=源码级参数行为剖析>源码级参数行为剖析</h3><table><thead><tr><th style=text-align:left>配置属性</th><th style=text-align:left>默认值</th><th style=text-align:left>作用阶段与行为解释</th></tr></thead><tbody><tr><td style=text-align:left><code>server.shutdown</code></td><td style=text-align:left><code>immediate</code></td><td style=text-align:left>设为 <code>graceful</code> 时，Spring Boot 的 <code>GracefulShutdown</code> 接口会对内嵌的 Tomcat / Jetty / Undertow / Reactor Netty 进行控制：<strong>先停止接受新的 TCP 连接，但保持现有连接通道继续处理 In-flight 请求</strong>。</td></tr><tr><td style=text-align:left><code>spring.lifecycle.timeout-per-shutdown-phase</code></td><td style=text-align:left><code>30s</code></td><td style=text-align:left>Spring 将所有实现 <code>SmartLifecycle</code> 的 Bean 划分为不同阶段（Phase）。Web 服务器关闭位于 <code>WebServerApplicationContext.GRACEFUL_SHUTDOWN_PHASE</code>（<code>Integer.MAX_VALUE - 2048</code>）。此参数指定<strong>每一个 Phase</strong> 允许等待的最大超时时长。</td></tr><tr><td style=text-align:left><code>spring.task.execution.shutdown.await-termination</code></td><td style=text-align:left><code>false</code></td><td style=text-align:left>控制 <code>ThreadPoolTaskExecutor</code> 容器销毁时是否调用 <code>ExecutorService.awaitTermination()</code>，配合后续排空异步计算。</td></tr><tr><td style=text-align:left><code>spring.task.execution.shutdown.await-termination-period</code></td><td style=text-align:left><code>0s</code></td><td style=text-align:left>线程池等待任务完成的最大容忍时间。</td></tr></tbody></table><h3 id=actuatorhealthreadiness-与-liveness-探针深度对比><code>/actuator/health</code>、Readiness 与 Liveness 探针深度对比</h3><p>Spring Boot 2.3+ 引入了对云原生探针（Probes）的一等支持。理解三者的定位、HTTP 状态码映射及在停机信号下的跃迁至关重要。</p><h4 id=三者的核心区别与设计职责>三者的核心区别与设计职责</h4><table><thead><tr><th style=text-align:left>维度</th><th style=text-align:left><code>/actuator/health</code> (全局健康检查)</th><th style=text-align:left><code>/actuator/health/liveness</code> (存活探针)</th><th style=text-align:left><code>/actuator/health/readiness</code> (就绪探针)</th></tr></thead><tbody><tr><td style=text-align:left><strong>核心职责</strong></td><td style=text-align:left>评估应用及其所有依赖项的整体健康度。</td><td style=text-align:left>评估<strong>应用内部自身</strong>是否处于正常运行状态。</td><td style=text-align:left>评估应用是否<strong>已经准备好接受外部请求流量</strong>。</td></tr><tr><td style=text-align:left><strong>底层依据</strong></td><td style=text-align:left>聚合所有 <code>HealthIndicator</code>（包括 DB、Redis、RabbitMQ、DiskSpace 等）。</td><td style=text-align:left>关联 <code>LivenessState</code>。仅关心内部死锁、不可逆致命异常。</td><td style=text-align:left>关联 <code>ReadinessState</code>。关注初始化是否完成、缓存预热及是否处于下线排空期。</td></tr><tr><td style=text-align:left><strong>外部依赖影响</strong></td><td style=text-align:left><strong>强相关</strong>。若 Redis/MySQL 挂掉，此端点立刻变为 <code>DOWN</code>。</td><td style=text-align:left><strong>无关联</strong>。哪怕 DB 断开，Liveness 仍为 <code>CORRECT (UP)</code>。</td><td style=text-align:left><strong>有条件关联</strong>。应用可自定义逻辑在核心依赖不可用时标记为未就绪。</td></tr><tr><td style=text-align:left><strong>探针失败后果</strong></td><td style=text-align:left>通常仅用于报警巡检，<strong>切忌用作编排器重启探针</strong>。</td><td style=text-align:left>编排器（K8s / ECS）判定容器损毁，<strong>直接重启（Kill & Restart）容器</strong>。</td><td style=text-align:left>负载均衡器 / 网格（Envoy）<strong>停止分发新请求到该节点</strong>，但<strong>不重启容器</strong>。</td></tr></tbody></table><blockquote><p>[!WARNING]
+<strong>切勿把 <code>/actuator/health</code> 直接配成 ECS 或 K8s 的存活健康检查（Liveness Check）！</strong><br>一旦下游数据库或缓存发生瞬间网络抖动，全局 health 会变成 503，编排器会误杀所有健康的应用容器，引发大面积雪崩。存活检查必须使用 <code>/actuator/health/liveness</code>。</p></blockquote><h4 id=http-状态码与响应体映射规则>HTTP 状态码与响应体映射规则</h4><p>Spring Boot Actuator 默认使用 <code>HttpCodeStatusMapper</code> 将状态映射为 HTTP 响应码：</p><table><thead><tr><th style=text-align:left>探测端点</th><th style=text-align:left>业务状态 (<code>Status</code>)</th><th style=text-align:left>内部枚举 (<code>AvailabilityState</code>)</th><th style=text-align:left>HTTP 状态码</th><th style=text-align:left>JSON 响应体示例</th><th style=text-align:left>编排层动作</th></tr></thead><tbody><tr><td style=text-align:left><strong>Liveness</strong></td><td style=text-align:left><code>UP</code></td><td style=text-align:left><code>LivenessState.CORRECT</code></td><td style=text-align:left><strong><code>200 OK</code></strong></td><td style=text-align:left><code>{"status":"UP"}</code></td><td style=text-align:left>容器健康，保持运行</td></tr><tr><td style=text-align:left><strong>Liveness</strong></td><td style=text-align:left><code>DOWN</code></td><td style=text-align:left><code>LivenessState.BROKEN</code></td><td style=text-align:left><strong><code>503 Service Unavailable</code></strong></td><td style=text-align:left><code>{"status":"DOWN"}</code></td><td style=text-align:left>判定死锁崩溃，<strong>立即重启容器</strong></td></tr><tr><td style=text-align:left><strong>Readiness</strong></td><td style=text-align:left><code>UP</code></td><td style=text-align:left><code>ReadinessState.ACCEPTING_TRAFFIC</code></td><td style=text-align:left><strong><code>200 OK</code></strong></td><td style=text-align:left><code>{"status":"UP"}</code></td><td style=text-align:left>正常接流，允许流量路由</td></tr><tr><td style=text-align:left><strong>Readiness</strong></td><td style=text-align:left><code>OUT_OF_SERVICE</code></td><td style=text-align:left><code>ReadinessState.REFUSING_TRAFFIC</code></td><td style=text-align:left><strong><code>503 Service Unavailable</code></strong></td><td style=text-align:left><code>{"status":"OUT_OF_SERVICE"}</code></td><td style=text-align:left><strong>摘除路由流量</strong>，保留容器排空</td></tr><tr><td style=text-align:left><strong>Health (全局)</strong></td><td style=text-align:left><code>UP</code></td><td style=text-align:left>-</td><td style=text-align:left><strong><code>200 OK</code></strong></td><td style=text-align:left><code>{"status":"UP", "components": {...}}</code></td><td style=text-align:left>正常</td></tr><tr><td style=text-align:left><strong>Health (全局)</strong></td><td style=text-align:left><code>DOWN</code> / <code>OUT_OF_SERVICE</code></td><td style=text-align:left>-</td><td style=text-align:left><strong><code>503 Service Unavailable</code></strong></td><td style=text-align:left><code>{"status":"DOWN", ...}</code></td><td style=text-align:left>组件异常</td></tr></tbody></table><h4 id=收到-sigterm-信号时的状态机跃迁>收到 <code>SIGTERM</code> 信号时的状态机跃迁</h4><p>当容器收到操作系统的 <code>SIGTERM</code> 信号并开启了优雅停机后，Spring Boot 内部状态跃迁时序如下：</p><div class=mermaid-block data-mermaid-zoom=1><div class=mermaid-toolbar><button class=mermaid-btn type=button data-action=zoom-in aria-label="Zoom in">+</button>
+<button class=mermaid-btn type=button data-action=zoom-out aria-label="Zoom out">-</button>
+<button class=mermaid-btn type=button data-action=reset aria-label="Reset zoom">100%</button>
+<button class=mermaid-btn type=button data-action=fullscreen aria-label="Toggle fullscreen">Full</button></div><div class="mermaid mermaid-canvas">stateDiagram-v2
+[*] --> 正常运行态: 启动完成 (ApplicationReadyEvent)
+state 正常运行态 {
+Liveness_UP: Liveness = CORRECT (200 OK)
+Readiness_UP: Readiness = ACCEPTING_TRAFFIC (200 OK)
+}
+正常运行态 --> 优雅停机排空期: 收到 SIGTERM (JVM Shutdown Hook 触发)
+state 优雅停机排空期 {
+Liveness_Still_UP: Liveness 保持 CORRECT (200 OK)
+Readiness_REFUSING: Readiness 立即翻转为 REFUSING_TRAFFIC (503 OUT_OF_SERVICE)
+Web_Drain: WebServer 停止 Acceptor，排空 In-flight 请求
+}
+优雅停机排空期 --> 容器关闭: 所有请求处理完毕 或 超出 shutdown-phase 超时
+容器关闭 --> [*]: JVM 正常退出 (Exit Code 0)</div></div><ul><li><strong>关键跃迁行为细节</strong>：<ol><li><strong>Readiness 立即变 503</strong>：Spring Boot 发布 <code>AvailabilityChangeEvent</code>，将 <code>ReadinessState</code> 置为 <code>REFUSING_TRAFFIC</code>。就绪探针接口 <code>/actuator/health/readiness</code> 立即返回 <code>503 OUT_OF_SERVICE</code>。如果配置了上游就绪探测，负载均衡器会感知到并停止分发新流量。</li><li><strong>Liveness 必须且始终保持 200 OK</strong>：在停机阶段，<code>LivenessState</code> <strong>绝不会</strong>变为 <code>BROKEN</code>，它依然保持 <code>CORRECT (200 OK)</code>。<ul><li><em>核心设计原因</em>：如果停机时 Liveness 变为 503，ECS/K8s 的存活检查会立即判定容器异常，并直接下发 <code>SIGKILL</code> 强杀容器，这会导致正在处理中的在途请求被粗暴切断，优雅停机前功尽弃。</li></ul></li><li><strong>全局 <code>/actuator/health</code> 变为 503</strong>：因为全局 health 端点默认包含了 Readiness 状态（当开启 probes 时），所以也会随之变为 <code>503 OUT_OF_SERVICE</code>。</li></ol></li></ul><h4 id=能否直接用-actuatorhealth-替代-actuatorhealthreadiness生产避坑分析>能否直接用 <code>/actuator/health</code> 替代 <code>/actuator/health/readiness</code>？（生产避坑分析）</h4><p><strong>结论：技术上“能跑通”，但在生产环境中“极度不推荐直接替代”，存在严重的级联雪崩隐患。</strong></p><h5 id=为什么表面上能跑通>为什么表面上“能跑通”？</h5><ul><li><strong>启动阶段</strong>：Spring Boot 上下文完全启动成功前，<code>/actuator/health</code> 无法访问或返回 503，流量不会进。</li><li><strong>停机阶段</strong>：在开启了探针时，全局 health 会聚合就绪态；收到 <code>SIGTERM</code> 后，Readiness 变为 <code>REFUSING_TRAFFIC</code>，全局 <code>/actuator/health</code> 确实也会同步翻转为 <strong><code>503 OUT_OF_SERVICE</code></strong>。</li></ul><p>从生命周期的表面特征看，它似乎也能起到“启动前阻断流量、停机时切断流量”的作用。</p><h5 id=为什么生产环境极度不推荐三大致命陷阱>为什么生产环境极度不推荐？（三大致命陷阱）</h5><ol><li><p><strong>陷阱 1：下游依赖抖动引发“全集群被负载均衡器全量摘除”（雪崩效应）</strong></p><ul><li><code>/actuator/health</code> 是<strong>全量聚合检查</strong>：它不仅检查本应用，还会去 <code>PING</code> 数据库（<code>SELECT 1</code>）、Redis、RabbitMQ、检查磁盘空间等。</li><li><strong>灾难场景</strong>：假设深夜 MySQL 连接池瞬间被打满，或者 Redis 发生 3 秒的主从切换抖动：<ul><li>应用自身完全健康，只是暂时部分外部请求较慢；</li><li>但因为连不上外部依赖，集群里<strong>所有实例</strong>的 <code>/actuator/health</code> 会在同一秒<strong>全部变成 503</strong>；</li><li>ALB 或网格检测到所有实例均不健康，<strong>直接把 100% 的机器从路由池全部剔除</strong>，导致原本局部的短暂依赖抖动瞬间演变成<strong>全站彻底瘫痪</strong>。</li></ul></li><li><strong>Readiness 的优势</strong>：<code>/actuator/health/readiness</code> 默认<strong>只关注本应用的内部生命周期</strong>（是否初始化完、是否在优雅停机），外部数据库抖动绝不会导致它报 503，保证了故障隔离与爆炸半径最小化。</li></ul></li><li><p><strong>陷阱 2：ECS 容器定义中的 <code>healthCheck</code> 会误杀容器</strong></p><ul><li><strong>ALB Target Group 健康检查</strong>：失败时仅执行**“摘除流量（停止分发请求）”**，不会杀死容器。</li><li><strong>ECS Task Definition 容器内 <code>healthCheck</code></strong>：<ul><li>一旦健康检查连续失败达到 <code>retries</code> 次数，<strong>ECS Agent 会判定容器损毁，直接发送 <code>SIGKILL</code> 强杀并重启容器</strong>！</li><li>如果把全局 <code>/actuator/health</code> 写在 ECS Task Definition 的 <code>healthCheck</code> 里，一旦数据库网络闪断，ECS 会把集群里的所有任务逐个杀光重启，直接引发服务雪崩。</li></ul></li></ul></li><li><p><strong>陷阱 3：高频探测带来的额外 I/O 与连接池开销</strong></p><ul><li>负载均衡或网格的探测频率通常很高（如 5 秒一次）。</li><li>假设集群有 20 个实例，每 5 秒探测一次 <code>/actuator/health</code>，意味着每秒有多次高频查询在打数据库和 Redis，浪费宝贵的数据库连接池资源。</li><li>而 <code>/actuator/health/readiness</code> 仅仅是读取 JVM 内存里的一个<strong>原子状态变量</strong>，无任何网络 I/O 与数据库连接消耗，响应耗时通常低于 1ms。</li></ul></li></ol><h5 id=端点职责与最佳实践分工矩阵>端点职责与最佳实践分工矩阵</h5><table><thead><tr><th style=text-align:left>场景 / 配置位置</th><th style=text-align:left>推荐端点</th><th style=text-align:left>选型原因</th></tr></thead><tbody><tr><td style=text-align:left><strong>ECS Task Definition</strong> (<code>containerDefinitions[].healthCheck</code>)</td><td style=text-align:left><code>/actuator/health/liveness</code></td><td style=text-align:left>仅在进程死锁、彻底无法恢复时才触发 ECS 容器重启。</td></tr><tr><td style=text-align:left><strong>ALB Target Group / Service Connect 路由探测</strong></td><td style=text-align:left><code>/actuator/health/readiness</code></td><td style=text-align:left>仅控制流量的接入与摘除，下游组件短暂抖动绝不影响路由拓扑。</td></tr><tr><td style=text-align:left><strong>Prometheus / 运维监控大盘 / 告警巡检</strong></td><td style=text-align:left><code>/actuator/health</code></td><td style=text-align:left>运维监控需要感知全量依赖状态，一旦数据库异常能第一时间触发报警。</td></tr></tbody></table><h4 id=是否需要手动将健康状态设置为-unhealthy>是否需要手动将健康状态设置为 Unhealthy？</h4><p><strong>核心结论：在标准的 AWS ECS + Service Connect 自动化停机（发布更新、自动缩容）流程中，通常“完全不需要”手动改动健康状态。</strong></p><h5 id=为什么不需要手动设置>为什么不需要手动设置？</h5><ol><li><strong>Service Connect 的摘流基于“控制面事件”，而非“HTTP 轮询”</strong>：<ul><li>在传统自建体系中，往往需要先把节点打成 503 等网关轮询发现。但 ECS Service Connect 是<strong>事件驱动</strong>的：当触发任务停止时，ECS 控制面会主动向 AWS Cloud Map 调用 <code>DeregisterInstance</code> API，各节点的 Envoy 随后通过 SDS 推送端点删除事件。这个过程根本不依赖对应用 HTTP 接口的探测。</li></ul></li><li><strong>Spring Boot 已经自动完成状态翻转</strong>：<ul><li>只要开启了 <code>server.shutdown: graceful</code>，在收到 <code>SIGTERM</code> 的第一毫秒，Spring Boot 内部的 <code>ApplicationAvailabilityBean</code> 就会<strong>自动</strong>发布事件，将 <code>ReadinessState</code> 切换为 <code>REFUSING_TRAFFIC</code>（端点自动返回 503），框架已经替你做了，无需业务代码额外干预。</li></ul></li><li><strong>主要矛盾不在于“状态改不改”，而在于“网络传播延迟”</strong>：<ul><li>即使在收到信号时立即改为 503，全网 Client Envoy 仍需要 2~10 秒才能收到并应用路由更新。因此最关键的手段是<strong>延时缓冲（Sleep Buffer）</strong>，给网络收敛留出安全时间，而不是手动调用 API 改状态。</li></ul></li></ol><h5 id=什么时候才真的需要手动干预>什么时候才“真的需要”手动干预？</h5><ul><li><strong>场景 A：业务主动自我隔离与软熔断</strong>：应用未死但由于核心长连接断开或内部严重降级，希望临时脱离服务发现接流，可通过代码调用 <code>AvailabilityChangeEvent.publish(..., ReadinessState.REFUSING_TRAFFIC)</code> 主动避开流量。</li><li><strong>场景 B：自建外部两阶段平滑下线 Webhook</strong>：部分高要求发布流水线采用两阶段调度：发布脚本先向应用发送自定义 Webhook（如 <code>POST /actuator/drain</code>），应用主动切为 503 并排空，确认流量归零后发布系统才调用 ECS API 停止容器。</li></ul><hr><h2 id=aws-ecs-service-connect-核心参数与架构>AWS ECS Service Connect 核心参数与架构</h2><h3 id=官方文档索引-1>官方文档索引</h3><ul><li><a href=https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html>AWS ECS Developer Guide: Service Connect Overview</a></li><li><a href=https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect-concepts.html>AWS ECS Developer Guide: Service Connect Concepts & Architecture</a></li><li><a href=https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_definition_parameters.html#container_definition_stoptimeout>AWS ECS Task Definition Parameters: Container <code>stopTimeout</code></a></li><li><a href=https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_TimeoutConfiguration.html>AWS ECS API Reference: <code>TimeoutConfiguration</code></a></li><li><a href=https://docs.aws.amazon.com/AmazonECS/latest/developerguide/graceful-shutdown.html>AWS ECS Developer Guide: Graceful Shutdown of Tasks</a></li><li><a href=https://docs.aws.amazon.com/cloud-map/latest/dg/what-is-cloud-map.html>AWS Cloud Map Developer Guide: Service Discovery</a></li></ul><h3 id=关键核心参数剖析>关键核心参数剖析</h3><h4 id=容器级-stoptimeout-ecs-task-definition>容器级 <code>stopTimeout</code> (ECS Task Definition)</h4><ul><li><strong>默认值</strong>：<strong>30 秒</strong>。</li><li><strong>行为</strong>：当 ECS 决定停止某个 Task 时，向容器内 PID 1 发送 <code>SIGTERM</code> 并启动倒计时。如果倒计时耗尽容器尚未正常退出，ECS Agent 将无条件发送 <strong><code>SIGKILL</code></strong> 强制销毁容器。</li><li><strong>协同规则</strong>：
+$$\text{stopTimeout} > \text{Pre-stop Buffer 时间} + \text{Spring Boot timeout-per-shutdown-phase} + \text{安全余量 (约 10s)}$$
+<em>若 Pre-stop 休眠 15s，Spring Boot 宽限期 30s，则 <code>stopTimeout</code> <strong>必须设置在 55s~60s 以上</strong>，否则进程必被 <code>SIGKILL</code> 强杀！</em></li></ul><h4 id=service-connect-timeoutconfiguration>Service Connect <code>TimeoutConfiguration</code></h4><p>在服务配置的 <code>ServiceConnectConfiguration</code> 中可以配置客户端代理的超时规则：</p><ul><li><code>idleTimeoutSeconds</code>：空闲连接超时，建议不要设得过大，防止长连接一直占着下线节点的通道。</li><li><code>perRequestTimeoutSeconds</code>：单个请求的最大处理超时，需根据业务长耗时 API 评估。</li></ul><hr><h2 id=生产级协同解决方案>生产级协同解决方案</h2><p>为了平滑吸收 Cloud Map 与 Envoy 的路由下发延迟，业界推荐以下两种实践方式：</p><h3 id=方案-a容器-entrypoint-shell-拦截信号并休眠推荐无代码侵入>方案 A：容器 Entrypoint Shell 拦截信号并休眠（推荐，无代码侵入）</h3><p>Kubernetes 原生支持 <code>lifecycle.preStop.exec</code>，但 ECS Task Definition 原生没有 <code>preStop</code> 配置。通过自定义 <code>entrypoint.sh</code>，在收到 <code>SIGTERM</code> 时先休眠 10~15 秒，期间 Spring Boot 仍处于活跃状态正常处理残留请求。</p><h4 id=entrypointsh><code>entrypoint.sh</code></h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=cp>#!/bin/sh
+</span></span></span><span class=line><span class=cl><span class=nb>set</span> -e
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 1. 后台启动 Spring Boot 应用，记录其进程 PID</span>
+</span></span><span class=line><span class=cl>java -XX:+UseContainerSupport <span class=se>\
+</span></span></span><span class=line><span class=cl>     -XX:MaxRAMPercentage<span class=o>=</span>75.0 <span class=se>\
+</span></span></span><span class=line><span class=cl>     -jar /app/application.jar <span class=p>&amp;</span>
+</span></span><span class=line><span class=cl><span class=nv>JAVA_PID</span><span class=o>=</span><span class=nv>$!</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 2. 定义 SIGTERM 信号拦截处理函数</span>
+</span></span><span class=line><span class=cl>term_handler<span class=o>()</span> <span class=o>{</span>
+</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;[</span><span class=k>$(</span>date +<span class=s1>&#39;%Y-%m-%dT%H:%M:%S%z&#39;</span><span class=k>)</span><span class=s2>] [INFO] Received SIGTERM from ECS.&#34;</span>
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  <span class=c1># 缓冲时间：给 AWS Cloud Map 注销与客户端 Envoy 更新 SDS 留出足够时间</span>
+</span></span><span class=line><span class=cl>  <span class=nv>BUFFER_SECONDS</span><span class=o>=</span><span class=m>15</span>
+</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;[</span><span class=k>$(</span>date +<span class=s1>&#39;%Y-%m-%dT%H:%M:%S%z&#39;</span><span class=k>)</span><span class=s2>] [INFO] Sleeping </span><span class=si>${</span><span class=nv>BUFFER_SECONDS</span><span class=si>}</span><span class=s2>s for Service Connect draining...&#34;</span>
+</span></span><span class=line><span class=cl>  sleep <span class=nv>$BUFFER_SECONDS</span>
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;[</span><span class=k>$(</span>date +<span class=s1>&#39;%Y-%m-%dT%H:%M:%S%z&#39;</span><span class=k>)</span><span class=s2>] [INFO] Forwarding SIGTERM to Spring Boot (PID: </span><span class=si>${</span><span class=nv>JAVA_PID</span><span class=si>}</span><span class=s2>)...&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=nb>kill</span> -TERM <span class=s2>&#34;</span><span class=nv>$JAVA_PID</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl>  <span class=c1># 等待 Java 进程优雅退出</span>
+</span></span><span class=line><span class=cl>  <span class=nb>wait</span> <span class=s2>&#34;</span><span class=nv>$JAVA_PID</span><span class=s2>&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=nv>EXIT_STATUS</span><span class=o>=</span><span class=nv>$?</span>
+</span></span><span class=line><span class=cl>  <span class=nb>echo</span> <span class=s2>&#34;[</span><span class=k>$(</span>date +<span class=s1>&#39;%Y-%m-%dT%H:%M:%S%z&#39;</span><span class=k>)</span><span class=s2>] [INFO] Application exited cleanly with status </span><span class=si>${</span><span class=nv>EXIT_STATUS</span><span class=si>}</span><span class=s2>.&#34;</span>
+</span></span><span class=line><span class=cl>  <span class=nb>exit</span> <span class=nv>$EXIT_STATUS</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 注册信号陷阱 (Trap)</span>
+</span></span><span class=line><span class=cl><span class=nb>trap</span> <span class=s1>&#39;term_handler&#39;</span> TERM INT
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 3. 前台阻塞等待 Java 进程，直到收到信号或自然退出</span>
+</span></span><span class=line><span class=cl><span class=nb>wait</span> <span class=s2>&#34;</span><span class=nv>$JAVA_PID</span><span class=s2>&#34;</span>
+</span></span></code></pre></div><h4 id=dockerfile><code>Dockerfile</code></h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-dockerfile data-lang=dockerfile><span class=line><span class=cl><span class=k>FROM</span><span class=w> </span><span class=s>eclipse-temurin:21-jre-alpine</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=k>WORKDIR</span><span class=w> </span><span class=s>/app</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=c># 安装 curl 用于健康检查</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=k>RUN</span> apk add --no-cache curl<span class=err>
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=k>COPY</span> target/*.jar application.jar<span class=err>
+</span></span></span><span class=line><span class=cl><span class=k>COPY</span> entrypoint.sh entrypoint.sh<span class=err>
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=k>RUN</span> chmod +x entrypoint.sh<span class=err>
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=c># 务必以 entrypoint 脚本执行</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=k>ENTRYPOINT</span> <span class=p>[</span><span class=s2>&#34;./entrypoint.sh&#34;</span><span class=p>]</span><span class=err>
+</span></span></span></code></pre></div><hr><h3 id=方案-bspring-boot-内部扩展通过-smartlifecycle-自定义停机阶段>方案 B：Spring Boot 内部扩展（通过 <code>SmartLifecycle</code> 自定义停机阶段）</h3><p>如果不希望使用 Shell 包装脚本，可以通过 Spring 的 <code>SmartLifecycle</code> 在 Web 容器关闭前插入一个自定义的优先 Phase。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kn>package</span><span class=w> </span><span class=nn>com.example.config</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kn>import</span><span class=w> </span><span class=nn>org.slf4j.Logger</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kn>import</span><span class=w> </span><span class=nn>org.slf4j.LoggerFactory</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kn>import</span><span class=w> </span><span class=nn>org.springframework.boot.availability.AvailabilityChangeEvent</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kn>import</span><span class=w> </span><span class=nn>org.springframework.boot.availability.ReadinessState</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kn>import</span><span class=w> </span><span class=nn>org.springframework.context.ApplicationEventPublisher</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kn>import</span><span class=w> </span><span class=nn>org.springframework.context.SmartLifecycle</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kn>import</span><span class=w> </span><span class=nn>org.springframework.stereotype.Component</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kn>import</span><span class=w> </span><span class=nn>java.util.concurrent.TimeUnit</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm> * Service Connect 优雅停机缓冲生命周期组件
+</span></span></span><span class=line><span class=cl><span class=cm> */</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nd>@Component</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kd>public</span><span class=w> </span><span class=kd>class</span> <span class=nc>ServiceConnectGracefulShutdownHook</span><span class=w> </span><span class=kd>implements</span><span class=w> </span><span class=n>SmartLifecycle</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=kd>static</span><span class=w> </span><span class=kd>final</span><span class=w> </span><span class=n>Logger</span><span class=w> </span><span class=n>log</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>LoggerFactory</span><span class=p>.</span><span class=na>getLogger</span><span class=p>(</span><span class=n>ServiceConnectGracefulShutdownHook</span><span class=p>.</span><span class=na>class</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=c1>// 缓冲时间 (秒)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=kd>static</span><span class=w> </span><span class=kd>final</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=n>DRAIN_BUFFER_SECONDS</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>15</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=kd>final</span><span class=w> </span><span class=n>ApplicationEventPublisher</span><span class=w> </span><span class=n>eventPublisher</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=kd>volatile</span><span class=w> </span><span class=kt>boolean</span><span class=w> </span><span class=n>running</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=kc>false</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=nf>ServiceConnectGracefulShutdownHook</span><span class=p>(</span><span class=n>ApplicationEventPublisher</span><span class=w> </span><span class=n>eventPublisher</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>this</span><span class=p>.</span><span class=na>eventPublisher</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>eventPublisher</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nd>@Override</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=nf>start</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>this</span><span class=p>.</span><span class=na>running</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=kc>true</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nd>@Override</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=nf>stop</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=c1>// 同步停机逻辑</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nd>@Override</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=nf>stop</span><span class=p>(</span><span class=n>Runnable</span><span class=w> </span><span class=n>callback</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>new</span><span class=w> </span><span class=n>Thread</span><span class=p>(()</span><span class=w> </span><span class=o>-&gt;</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=k>try</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=n>log</span><span class=p>.</span><span class=na>info</span><span class=p>(</span><span class=s>&#34;Shutdown initiated. Marking readiness probe as REFUSING_TRAFFIC...&#34;</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=c1>// 1. 将 Spring Boot Actuator 就绪状态置为拒绝流量 (HTTP 503)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=n>AvailabilityChangeEvent</span><span class=p>.</span><span class=na>publish</span><span class=p>(</span><span class=k>this</span><span class=p>.</span><span class=na>eventPublisher</span><span class=p>,</span><span class=w> </span><span class=k>this</span><span class=p>,</span><span class=w> </span><span class=n>ReadinessState</span><span class=p>.</span><span class=na>REFUSING_TRAFFIC</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=c1>// 2. 阻塞休眠，等待 Service Connect/Cloud Map 完成端点注销广播</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=n>log</span><span class=p>.</span><span class=na>info</span><span class=p>(</span><span class=s>&#34;Waiting {} seconds for Service Connect Envoy SDS propagation...&#34;</span><span class=p>,</span><span class=w> </span><span class=n>DRAIN_BUFFER_SECONDS</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=n>TimeUnit</span><span class=p>.</span><span class=na>SECONDS</span><span class=p>.</span><span class=na>sleep</span><span class=p>(</span><span class=n>DRAIN_BUFFER_SECONDS</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=n>log</span><span class=p>.</span><span class=na>info</span><span class=p>(</span><span class=s>&#34;Drain buffer completed. Proceeding to stop WebServer...&#34;</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=p>}</span><span class=w> </span><span class=k>catch</span><span class=w> </span><span class=p>(</span><span class=n>InterruptedException</span><span class=w> </span><span class=n>e</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=n>Thread</span><span class=p>.</span><span class=na>currentThread</span><span class=p>().</span><span class=na>interrupt</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=n>log</span><span class=p>.</span><span class=na>warn</span><span class=p>(</span><span class=s>&#34;Drain sleep interrupted&#34;</span><span class=p>,</span><span class=w> </span><span class=n>e</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=p>}</span><span class=w> </span><span class=k>finally</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=k>this</span><span class=p>.</span><span class=na>running</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=kc>false</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=n>callback</span><span class=p>.</span><span class=na>run</span><span class=p>();</span><span class=w> </span><span class=c1>// 触发下一个 Phase (即 WebServer 停机)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>},</span><span class=w> </span><span class=s>&#34;service-connect-drain-thread&#34;</span><span class=p>).</span><span class=na>start</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nd>@Override</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kt>boolean</span><span class=w> </span><span class=nf>isRunning</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=k>this</span><span class=p>.</span><span class=na>running</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=cm>/**
+</span></span></span><span class=line><span class=cl><span class=cm>     * WebServer 的 phase 是 Integer.MAX_VALUE - 2048
+</span></span></span><span class=line><span class=cl><span class=cm>     * 设置一个比 WebServer 更大的 Phase 值，确保它在 WebServer 关闭前优先执行 stop()
+</span></span></span><span class=line><span class=cl><span class=cm>     */</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nd>@Override</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kt>int</span><span class=w> </span><span class=nf>getPhase</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=n>Integer</span><span class=p>.</span><span class=na>MAX_VALUE</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
+</span></span></span></code></pre></div><hr><h3 id=方案-cecs-task-definition--terraform-配置>方案 C：ECS Task Definition & Terraform 配置</h3><p>在基础设施定义中，关键是配置合理的 <code>stopTimeout</code> 和容器健康检查。</p><h4 id=ecs-task-definition-json-片段>ECS Task Definition JSON 片段</h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;family&#34;</span><span class=p>:</span> <span class=s2>&#34;order-service&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;networkMode&#34;</span><span class=p>:</span> <span class=s2>&#34;awsvpc&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;requiresCompatibilities&#34;</span><span class=p>:</span> <span class=p>[</span><span class=s2>&#34;FARGATE&#34;</span><span class=p>],</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;cpu&#34;</span><span class=p>:</span> <span class=s2>&#34;1024&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;memory&#34;</span><span class=p>:</span> <span class=s2>&#34;2048&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>  <span class=nt>&#34;containerDefinitions&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;order-service-app&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;image&#34;</span><span class=p>:</span> <span class=s2>&#34;123456789012.dkr.ecr.ap-northeast-1.amazonaws.com/order-service:v1.0.0&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;essential&#34;</span><span class=p>:</span> <span class=kc>true</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;stopTimeout&#34;</span><span class=p>:</span> <span class=mi>60</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;portMappings&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>        <span class=p>{</span>
+</span></span><span class=line><span class=cl>          <span class=nt>&#34;name&#34;</span><span class=p>:</span> <span class=s2>&#34;http-api&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nt>&#34;containerPort&#34;</span><span class=p>:</span> <span class=mi>8080</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nt>&#34;hostPort&#34;</span><span class=p>:</span> <span class=mi>8080</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=nt>&#34;protocol&#34;</span><span class=p>:</span> <span class=s2>&#34;tcp&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>      <span class=p>],</span>
+</span></span><span class=line><span class=cl>      <span class=nt>&#34;healthCheck&#34;</span><span class=p>:</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;command&#34;</span><span class=p>:</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>          <span class=s2>&#34;CMD-SHELL&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>          <span class=s2>&#34;curl -f http://localhost:8080/actuator/health/readiness || exit 1&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=p>],</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;interval&#34;</span><span class=p>:</span> <span class=mi>10</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;timeout&#34;</span><span class=p>:</span> <span class=mi>5</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;retries&#34;</span><span class=p>:</span> <span class=mi>2</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nt>&#34;startPeriod&#34;</span><span class=p>:</span> <span class=mi>30</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></div><h4 id=terraform-aws-provider-配置示例>Terraform (AWS Provider) 配置示例</h4><div class=highlight><pre tabindex=0 class=chroma><code class=language-hcl data-lang=hcl><span class=line><span class=cl><span class=k>resource</span> <span class=s2>&#34;aws_ecs_service&#34; &#34;order_service&#34;</span> {
+</span></span><span class=line><span class=cl><span class=n>  name</span>            <span class=o>=</span> <span class=s2>&#34;order-service&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>  cluster</span>         <span class=o>=</span> <span class=k>aws_ecs_cluster</span><span class=p>.</span><span class=k>main</span><span class=p>.</span><span class=k>id</span>
+</span></span><span class=line><span class=cl><span class=n>  task_definition</span> <span class=o>=</span> <span class=k>aws_ecs_task_definition</span><span class=p>.</span><span class=k>order_service</span><span class=p>.</span><span class=k>arn</span>
+</span></span><span class=line><span class=cl><span class=n>  desired_count</span>   <span class=o>=</span> <span class=m>3</span>
+</span></span><span class=line><span class=cl><span class=n>  launch_type</span>     <span class=o>=</span> <span class=s2>&#34;FARGATE&#34;</span><span class=c1>
+</span></span></span><span class=line><span class=cl><span class=c1>
+</span></span></span><span class=line><span class=cl><span class=c1>  # 滚动部署策略：保证发布时始终有额外健康实例
+</span></span></span><span class=line><span class=cl><span class=n>  deployment_minimum_healthy_percent</span> <span class=o>=</span> <span class=m>100</span>
+</span></span><span class=line><span class=cl><span class=n>  deployment_maximum_percent</span>         <span class=o>=</span> <span class=m>200</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>service_connect_configuration</span> {
+</span></span><span class=line><span class=cl><span class=n>    enabled</span>   <span class=o>=</span> <span class=kt>true</span>
+</span></span><span class=line><span class=cl><span class=n>    namespace</span> <span class=o>=</span> <span class=k>aws_service_discovery_private_dns_namespace</span><span class=p>.</span><span class=k>corp</span><span class=p>.</span><span class=k>arn</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>service</span> {
+</span></span><span class=line><span class=cl><span class=n>      port_name</span>      <span class=o>=</span> <span class=s2>&#34;http-api&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>      discovery_name</span> <span class=o>=</span> <span class=s2>&#34;order-service&#34;</span>
+</span></span><span class=line><span class=cl>      <span class=k>client_alias</span> {
+</span></span><span class=line><span class=cl><span class=n>        port</span> <span class=o>=</span> <span class=m>8080</span>
+</span></span><span class=line><span class=cl>      }
+</span></span><span class=line><span class=cl>      <span class=k>timeout</span> {
+</span></span><span class=line><span class=cl><span class=n>        idle_timeout_seconds</span>        <span class=o>=</span> <span class=m>60</span>
+</span></span><span class=line><span class=cl><span class=n>        per_request_timeout_seconds</span> <span class=o>=</span> <span class=m>30</span>
+</span></span><span class=line><span class=cl>      }
+</span></span><span class=line><span class=cl>    }
+</span></span><span class=line><span class=cl>  }
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>network_configuration</span> {
+</span></span><span class=line><span class=cl><span class=n>    subnets</span>         <span class=o>=</span> <span class=p>[</span><span class=s2>&#34;subnet-abc12345&#34;, &#34;subnet-def67890&#34;</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=n>    security_groups</span> <span class=o>=</span> <span class=p>[</span><span class=k>aws_security_group</span><span class=p>.</span><span class=k>app_sg</span><span class=p>.</span><span class=k>id</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>  }
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></div><h2 id=从-999-到-100为什么必须客户端韧性兜底consumer-side-resilience>从 99.9% 到 100%：为什么必须客户端韧性兜底？（Consumer-Side Resilience）</h2><h3 id=核心拷问正确配置后流量能保证-100-平稳吗>核心拷问：正确配置后，流量能保证 100% 平稳吗？</h3><p><strong>工程结论：服务端做好前述所有配置（Pre-stop Sleep 15s + Spring Boot Graceful + stopTimeout 60s），可以解决 99.9% 以上的常规发布平稳问题；但要在分布式系统中达到面向用户的“绝对 100% 零故障”，必须依赖客户端重试作为最后一块兜底拼图！</strong></p><p>换言之：<strong>真正的 100% 平稳是“服务端优雅排空（99.9%）+ 客户端瞬时重试（0.1%）”双端协同的闭环结果。</strong></p><hr><h3 id=为什么单靠服务端极难做到数学上的绝对-100>为什么单靠服务端极难做到数学上的“绝对 100%”？</h3><p>在分布式网络中，即便服务端做到了极致，仍然存在 <strong>3 个物理层面的微观边角竞态（Edge Cases）</strong>：</p><h4 id=tcp-keep-alive-长连接的飞行碰撞in-flight-collision--tcp-race-condition>TCP Keep-Alive 长连接的“飞行碰撞”（In-flight Collision / TCP Race Condition）</h4><ul><li>客户端 Envoy 与服务端之间往往维持着 HTTP Keep-Alive 空闲长连接池以复用连接。</li><li><strong>微观竞态场景</strong>：<ul><li>在第 14.999 秒（15 秒 Sleep 缓冲即将结束、Spring Boot 准备关闭端口），客户端 Envoy 恰好在这条长连接上发出了一条新的 HTTP 请求报文；</li><li>恰在同一时刻，服务端 Sleep 结束触发 WebServer 关闭，操作系统向客户端发出了 TCP <code>FIN</code> 挥手报文；</li><li>两个数据包在网络光纤物理链路中<strong>并发相遇擦肩而过</strong>；</li><li>客户端网卡收到 <code>FIN</code> 包时发现该连接还有发出去没收到响应的请求，底层就会抛出经典的 <strong><code>Connection reset by peer</code></strong> 或 <strong><code>Broken pipe</code></strong>。</li></ul></li></ul><h4 id=p999-极端长耗时请求超出宽限期>P99.9 极端长耗时请求超出宽限期</h4><ul><li>假设系统配置了 <code>spring.lifecycle.timeout-per-shutdown-phase: 30s</code>，但恰好有一个极低频的超长慢查询或批量计算请求执行了 <strong>32 秒</strong>；</li><li>30 秒倒计时结束时，Spring Boot 会强制中断该请求线程，导致客户端收到非预期的截断异常。</li></ul><h4 id=非计划内的不可抗力强杀non-graceful-termination>非计划内的“不可抗力强杀”（Non-graceful Termination）</h4><ul><li>如果应用容器因堆外内存泄露等原因触发了宿主机 Linux 内核的 <strong>OOM Killer</strong>，内核会直接发送不可捕获的 <strong><code>SIGKILL (Signal 9)</code></strong>，直接瞬间秒杀进程，根本无法执行任何 Pre-stop 脚本或 Java 优雅停机钩子。</li><li>底层 EC2 宿主机硬件坏道、网络物理割接等突发硬件故障。</li></ul><hr><h3 id=双端协同闭环架构>双端协同闭环架构</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>                ┌────────────────────────────────────────────────────────┐
+</span></span><span class=line><span class=cl>                │             100% 业务零中断 (Zero-Downtime)              │
+</span></span><span class=line><span class=cl>                └───────────────────────────┬────────────────────────────┘
+</span></span><span class=line><span class=cl>                                            │
+</span></span><span class=line><span class=cl>                    ┌───────────────────────┴────────────────────────┐
+</span></span><span class=line><span class=cl>                    ▼                                                ▼
+</span></span><span class=line><span class=cl>       【服务端：吸收 99.9% 流量】                       【客户端：兜底剩余 0.1%】
+</span></span><span class=line><span class=cl>    1. Pre-stop Buffer 15s (路由收敛)             1. 捕获 503 / ECONNRESET 瞬断
+</span></span><span class=line><span class=cl>    2. Spring Boot Graceful (在途排空)             2. 幂等 GET/查询请求无感重试 1~2 次
+</span></span><span class=line><span class=cl>    3. stopTimeout 60s (防强杀)                   3. 指数退避 100ms 重试到集群其他存活节点
+</span></span></code></pre></div><p><strong>为什么加上重试对终端用户就是 100%？</strong><br>当碰上那 0.1% 的“TCP 飞行碰撞”或在途连接瞬断时，客户端拦截到网络异常并在 <strong>50~100ms 内自动重试到集群中另一台健康的实例</strong>。对于调用端或前端最终用户而言，仅仅感受到了几十毫秒的轻微网络抖动，业务请求成功率依然是 <strong>100%</strong>。</p><hr><h3 id=客户端代码实战配置幂等重试拦截器>客户端代码实战：配置幂等重试拦截器</h3><p>以 Spring 6 / Spring Boot 3 的 <code>RestClient</code> 为例，配置针对 503 状态码与底层连接重置（<code>Connection reset</code>）的智能重试拦截器：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-java data-lang=java><span class=line><span class=cl><span class=kn>package</span><span class=w> </span><span class=nn>com.example.client</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kn>import</span><span class=w> </span><span class=nn>org.springframework.context.annotation.Bean</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kn>import</span><span class=w> </span><span class=nn>org.springframework.context.annotation.Configuration</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kn>import</span><span class=w> </span><span class=nn>org.springframework.http.HttpStatusCode</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kn>import</span><span class=w> </span><span class=nn>org.springframework.http.client.ClientHttpRequestExecution</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kn>import</span><span class=w> </span><span class=nn>org.springframework.http.client.ClientHttpRequestInterceptor</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kn>import</span><span class=w> </span><span class=nn>org.springframework.http.client.ClientHttpResponse</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kn>import</span><span class=w> </span><span class=nn>org.springframework.web.client.RestClient</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kn>import</span><span class=w> </span><span class=nn>java.io.IOException</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=nd>@Configuration</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=kd>public</span><span class=w> </span><span class=kd>class</span> <span class=nc>RestClientConfig</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=nd>@Bean</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=n>RestClient</span><span class=w> </span><span class=nf>orderServiceRestClient</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=n>RestClient</span><span class=p>.</span><span class=na>builder</span><span class=p>()</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=p>.</span><span class=na>baseUrl</span><span class=p>(</span><span class=s>&#34;http://order-service:8080&#34;</span><span class=p>)</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=p>.</span><span class=na>requestInterceptor</span><span class=p>(</span><span class=n>retryInterceptor</span><span class=p>())</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=p>.</span><span class=na>build</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=kd>private</span><span class=w> </span><span class=n>ClientHttpRequestInterceptor</span><span class=w> </span><span class=nf>retryInterceptor</span><span class=p>()</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=k>return</span><span class=w> </span><span class=p>(</span><span class=n>request</span><span class=p>,</span><span class=w> </span><span class=n>body</span><span class=p>,</span><span class=w> </span><span class=n>execution</span><span class=p>)</span><span class=w> </span><span class=o>-&gt;</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=kt>int</span><span class=w> </span><span class=n>maxAttempts</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>3</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=kt>int</span><span class=w> </span><span class=n>attempt</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>0</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=k>while</span><span class=w> </span><span class=p>(</span><span class=kc>true</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=n>attempt</span><span class=o>++</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=k>try</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=n>ClientHttpResponse</span><span class=w> </span><span class=n>response</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>execution</span><span class=p>.</span><span class=na>execute</span><span class=p>(</span><span class=n>request</span><span class=p>,</span><span class=w> </span><span class=n>body</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=c1>// 如果遇到 503 (下游服务处于停机排空状态) 且属于幂等 GET 请求，进行重试</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>response</span><span class=p>.</span><span class=na>getStatusCode</span><span class=p>().</span><span class=na>value</span><span class=p>()</span><span class=w> </span><span class=o>==</span><span class=w> </span><span class=n>503</span><span class=w> </span><span class=o>&amp;&amp;</span><span class=w> </span><span class=s>&#34;GET&#34;</span><span class=p>.</span><span class=na>equalsIgnoreCase</span><span class=p>(</span><span class=n>request</span><span class=p>.</span><span class=na>getMethod</span><span class=p>().</span><span class=na>name</span><span class=p>()))</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                        </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>attempt</span><span class=w> </span><span class=o>&gt;=</span><span class=w> </span><span class=n>maxAttempts</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                            </span><span class=k>return</span><span class=w> </span><span class=n>response</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                        </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                        </span><span class=n>Thread</span><span class=p>.</span><span class=na>sleep</span><span class=p>(</span><span class=n>100L</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=n>attempt</span><span class=p>);</span><span class=w> </span><span class=c1>// 简易指数退避</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                        </span><span class=k>continue</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=k>return</span><span class=w> </span><span class=n>response</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=p>}</span><span class=w> </span><span class=k>catch</span><span class=w> </span><span class=p>(</span><span class=n>IOException</span><span class=w> </span><span class=n>ex</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=c1>// 遇到底层连接被断开 (Connection reset) 时尝试重试</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=k>if</span><span class=w> </span><span class=p>(</span><span class=n>attempt</span><span class=w> </span><span class=o>&gt;=</span><span class=w> </span><span class=n>maxAttempts</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                        </span><span class=k>throw</span><span class=w> </span><span class=n>ex</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=k>try</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                        </span><span class=n>Thread</span><span class=p>.</span><span class=na>sleep</span><span class=p>(</span><span class=n>100L</span><span class=w> </span><span class=o>*</span><span class=w> </span><span class=n>attempt</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=p>}</span><span class=w> </span><span class=k>catch</span><span class=w> </span><span class=p>(</span><span class=n>InterruptedException</span><span class=w> </span><span class=n>ie</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                        </span><span class=n>Thread</span><span class=p>.</span><span class=na>currentThread</span><span class=p>().</span><span class=na>interrupt</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                        </span><span class=k>throw</span><span class=w> </span><span class=n>ex</span><span class=p>;</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=p>}</span><span class=w> </span><span class=k>catch</span><span class=w> </span><span class=p>(</span><span class=n>InterruptedException</span><span class=w> </span><span class=n>e</span><span class=p>)</span><span class=w> </span><span class=p>{</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=n>Thread</span><span class=p>.</span><span class=na>currentThread</span><span class=p>().</span><span class=na>interrupt</span><span class=p>();</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                    </span><span class=k>throw</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>IOException</span><span class=p>(</span><span class=s>&#34;Request retry interrupted&#34;</span><span class=p>,</span><span class=w> </span><span class=n>e</span><span class=p>);</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>                </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>            </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>        </span><span class=p>};</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=w>    </span><span class=p>}</span><span class=w>
+</span></span></span><span class=line><span class=cl><span class=p>}</span><span class=w>
+</span></span></span></code></pre></div><hr><h2 id=生产验证与压测验证清单>生产验证与压测验证清单</h2><h3 id=生产环境滚动更新零中断压测>生产环境：滚动更新零中断压测</h3><p>在上线到生产环境之前，建议通过如下方式进行零中断停机验证：</p><ol><li><strong>持续压测下滚动更新</strong>：
+使用 <code>hey</code> 或 <code>k6</code> 向被测服务发送持续请求（例如 <code>hey -z 60s -c 20 http://order-service:8080/api/health</code>）。</li><li><strong>触发 Deployment</strong>：
+在压测过程中执行 <code>aws ecs update-service --cluster ... --service ... --force-new-deployment</code>。</li><li><strong>检查指标</strong>：<ul><li>压测工具的 <code>Status code 200</code> 比例必须达到 <strong>100%</strong>，没有 <code>503</code> 或 <code>connection reset</code> 发生。</li><li>查看 ECS CloudWatch 日志，确认 <code>entrypoint.sh</code> 的 15 秒休眠日志正常打印。</li><li>确认 Spring Boot 正常打印 <code>Commencing graceful shutdown. Waiting for active requests to complete</code> 并在 <code>stopTimeout</code> 耗尽前正常退出，没有出现 <code>SIGKILL</code> 强制终结标记（Exit Code 137）。</li></ul></li></ol><hr><h3 id=本地开发与调试测试ctrl--c-sigint-vs-生产-sigterm>本地开发与调试测试：Ctrl + C (SIGINT) vs 生产 SIGTERM</h3><p>在本地开发或者 Docker 容器测试时，按 <strong><code>Ctrl + C</code></strong> 同样可以完整验证优雅停机行为。</p><h4 id=底层信号原理对比>底层信号原理对比</h4><ul><li><strong><code>Ctrl + C</code> 发送的是 <code>SIGINT</code> (Signal 2，中断信号)</strong>。</li><li><strong>AWS ECS / Docker 默认发送的是 <code>SIGTERM</code> (Signal 15，终止信号)</strong>。</li><li><strong>JVM 的处理行为</strong>：JVM 注册的 <code>ShutdownHook</code>（Spring Boot 优雅停机的总触发入口）<strong>对 <code>SIGINT</code> 和 <code>SIGTERM</code> 的响应完全等价</strong>。无论收到哪个信号，Spring Boot 内部都会启动相同的优雅停机与资源清理流程。</li></ul><h4 id=entrypointsh-对本地-docker-调试的天然支持><code>entrypoint.sh</code> 对本地 Docker 调试的天然支持</h4><p>在本文方案 A 提供的 <code>entrypoint.sh</code> 脚本中，已特别注册了双重信号捕获：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>trap</span> <span class=s1>&#39;term_handler&#39;</span> TERM INT  <span class=c1># 同时捕获 SIGTERM 和 SIGINT</span>
+</span></span></code></pre></div><p>当你本地运行 Docker 容器进行交互式调试时：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker run -it --rm -p 8080:8080 my-spring-app:latest
+</span></span></code></pre></div><p>此时按 <strong><code>Ctrl + C</code></strong>，脚本同样会进入 <code>term_handler</code>，打印出 15 秒排空等待日志，随后将 <code>SIGTERM</code> 转交给 Java 进程，完美模拟生产停机流程。</p><h4 id=本地裸跑测试避坑提示>本地裸跑测试避坑提示</h4><ul><li><strong>推荐</strong>：直接运行编译好的可执行 Jar：<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>java -jar target/application.jar
+</span></span></code></pre></div>按 <code>Ctrl + C</code> 后，控制台会清晰打印出 <code>Commencing graceful shutdown. Waiting for active requests to complete</code>。</li><li><strong>避坑</strong>：避免依赖 <code>mvn spring-boot:run</code> 或 <code>./gradlew bootRun</code> 进行停机测试。<ul><li><em>原因</em>：部分构建工具（如 Maven）在捕获到终端的 <code>Ctrl + C</code> 后，会立刻强行终止子进程，导致 Spring Boot 还没来得及执行 Shutdown Hook 就被直接杀掉，无法观测到优雅停机日志。</li></ul></li></ul></article><div id=react-app-components data-post-id=8b4acd318a8c9f52384984ad1542dae2></div><button class=mobile-toc-trigger aria-controls=mobile-toc aria-expanded=false title=目录>☰</button><div class=mobile-toc-overlay hidden></div><div id=mobile-toc class=mobile-toc-drawer aria-hidden=true role=dialog aria-label=目录><div class=mobile-toc-header><span class=mobile-toc-title>目录</span>
+<button class=mobile-toc-close aria-label=关闭>×</button></div><nav class=mobile-toc-body><div class=mobile-toc-list></div></nav><div class=mobile-safe-area-spacer></div></div><script type=module src=/react/page.bundle.js></script></main><footer><div class=copyright><small>© <a href=https://github.com/qtopie>qtopie</a> 2026
+· Licensed under <a href=https://creativecommons.org/licenses/by/4.0/legalcode>CC BY 4.0</a></small></div><div><script type=module src=/react/base.bundle.js></script><script type=module>
+      (async ()=>{
+        try {
+          const mod = await import('https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.mjs');
+          const mermaid = mod.default || mod;
+          
+          
+          
+          mermaid.initialize({
+            startOnLoad: false,
+            theme: 'base',
+            themeVariables: {
+               
+              primaryColor:       '#e8f0fe',    
+              primaryTextColor:   '#1e293b',    
+              primaryBorderColor: '#93b4f8',    
+              secondaryColor:     '#f1f5f9',    
+              secondaryTextColor: '#1e293b',
+              tertiaryColor:      '#fef9ec',    
+              tertiaryTextColor:  '#1e293b',
+               
+              edgeLabelBackground:'#ffffff',
+              lineColor:          '#64748b',
+               
+              actorBkg:           '#dbeafe',
+              actorTextColor:     '#1e293b',
+              actorBorder:        '#93b4f8',
+              activationBkgColor: '#bfdbfe',
+              activationBorderColor: '#3b82f6',
+               
+              noteBkgColor:       '#fefce8',
+              noteTextColor:      '#1e293b',
+              noteBorderColor:    '#fbbf24',
+               
+              classText:          '#1e293b',
+               
+              fontSize:           '14px',
+              fontFamily:         '"Segoe UI", system-ui, -apple-system, sans-serif',
+            },
+          });
+          mermaid.init && mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+
+          const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+          const setupBlock = (block) => {
+            if (block.dataset.mermaidReady === 'true') return;
+            block.dataset.mermaidReady = 'true';
+            const canvas = block.querySelector('.mermaid-canvas');
+            const toolbar = block.querySelector('.mermaid-toolbar');
+            if (!canvas || !toolbar) return;
+
+            const ensureSvg = (callback) => {
+              const svg = canvas.querySelector('svg');
+              if (svg) { callback(svg); return; }
+              const observer = new MutationObserver(() => {
+                const svgNow = canvas.querySelector('svg');
+                if (svgNow) {
+                  observer.disconnect();
+                  callback(svgNow);
+                }
+              });
+              observer.observe(canvas, { childList: true, subtree: true });
+            };
+
+            const setZoom = (nextZoom) => {
+              const zoom = clamp(nextZoom, 0.5, 3);
+              block.dataset.mermaidZoom = String(zoom);
+              const resetBtn = toolbar.querySelector('[data-action="reset"]');
+              if (resetBtn) resetBtn.textContent = `${Math.round(zoom * 100)}%`;
+              ensureSvg((svg) => {
+                svg.style.transform = `scale(${zoom})`;
+              });
+            };
+
+            let pz = null;
+            const onFullscreenChange = () => {
+              const isFullscreen = document.fullscreenElement === block || block.classList.contains('is-fullscreen');
+              block.classList.toggle('is-fullscreen', isFullscreen);
+              const fsBtn = toolbar.querySelector('[data-action="fullscreen"]');
+              if (fsBtn) {
+                fsBtn.textContent = isFullscreen ? 'Exit' : 'Full';
+                fsBtn.setAttribute('aria-label', isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen');
+              }
+
+              ensureSvg((svg) => {
+                if (isFullscreen) {
+                  if (window.panzoom && !pz) {
+                    svg.style.transformOrigin = '50% 50%';
+                    pz = window.panzoom(svg, {
+                      maxZoom: 3,
+                      minZoom: 0.5,
+                      initialZoom: 1,
+                      bounds: false,
+                      boundsPadding: 0.1
+                    });
+                    pz.on('transform', () => {
+                      const transform = pz.getTransform();
+                      const resetBtn = toolbar.querySelector('[data-action="reset"]');
+                      if (resetBtn) resetBtn.textContent = `${Math.round(transform.scale * 100)}%`;
+                    });
+                  }
+                } else {
+                  if (pz) {
+                    pz.dispose();
+                    pz = null;
+                  }
+                  svg.style.transform = '';
+                  svg.style.transformOrigin = '';
+                  const resetBtn = toolbar.querySelector('[data-action="reset"]');
+                  if (resetBtn) resetBtn.textContent = '100%';
+                  block.dataset.mermaidZoom = '1';
+                }
+              });
+            };
+
+            document.addEventListener('fullscreenchange', onFullscreenChange);
+
+            toolbar.addEventListener('click', (event) => {
+              const target = event.target;
+              if (!(target instanceof HTMLElement)) return;
+              const action = target.getAttribute('data-action');
+              if (!action) return;
+
+              if (pz) {
+                const transform = pz.getTransform();
+                const rect = canvas.getBoundingClientRect();
+                const cx = rect.left + rect.width / 2;
+                const cy = rect.top + rect.height / 2;
+                if (action === 'zoom-in') {
+                  pz.smoothZoom(cx, cy, 1.25);
+                } else if (action === 'zoom-out') {
+                  pz.smoothZoom(cx, cy, 0.8);
+                } else if (action === 'reset') {
+                  pz.moveTo(0, 0);
+                  pz.zoomAbs(0, 0, 1);
+                } else if (action === 'fullscreen') {
+                  if (document.fullscreenElement === block) {
+                    document.exitFullscreen && document.exitFullscreen();
+                  } else {
+                    block.classList.remove('is-fullscreen');
+                    onFullscreenChange();
+                  }
+                }
+              } else {
+                const currentZoom = Number(block.dataset.mermaidZoom || '1');
+                if (action === 'zoom-in') return setZoom(currentZoom + 0.1);
+                if (action === 'zoom-out') return setZoom(currentZoom - 0.1);
+                if (action === 'reset') return setZoom(1);
+                if (action === 'fullscreen') {
+                  if (block.requestFullscreen) {
+                    block.requestFullscreen();
+                  } else {
+                    block.classList.add('is-fullscreen');
+                    onFullscreenChange();
+                  }
+                }
+              }
+            });
+
+            setZoom(Number(block.dataset.mermaidZoom || '1'));
+          };
+
+          document.querySelectorAll('.mermaid-block').forEach(setupBlock);
+        } catch (e) { console.error('mermaid load error', e); }
+      })();
+    </script></div></footer></body></html>
