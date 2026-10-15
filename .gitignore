@@ -10,3 +10,5 @@ static/diagrams/
 
 # SDD dynamic task board (agent-managed)
 .agents/TASK.md
+__pycache__/
+
