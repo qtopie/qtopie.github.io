@@ -1,0 +1,232 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>当 AI 遇到 Linux 内核：从十万行遗留代码到 802.11n 驱动全功能闭环 | 1001問</title><link rel=stylesheet href=/css/main.min.08d455bd2bde0ee293a59d0cc841b8bb8171fd8a029e994e30c2a2f88344d236.css integrity="sha256-CNRVvSveDuKTpZ0MyEG4u4Fx/YoCnplOMMKi+INE0jY=" crossorigin=anonymous><link rel=stylesheet href=/css/drift-motion.min.2079d25095ff3c7a1f4e3d258109e6a4fcd84dc2801e79c8e81a95bd382caa42.css integrity="sha256-IHnSUJX/PHofTj0lgQnmpPzYTcKAHnnI6BqVvTgsqkI=" crossorigin=anonymous><link rel=stylesheet href=/css/page.min.8b8b43532c226282b5765dbee3eac60a666e6f45af46e227ef222fe15dcd67eb.css integrity="sha256-i4tDUywiYoK1dl2+4+rGCmZub0WvRuIn7yIv4V3NZ+s=" crossorigin=anonymous><link rel=stylesheet href=/css/syntax.min.e114b8cc38f57d520f373580c935a518bc6afd6dec4f1d682365cdbcf5c8218a.css><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css crossorigin=anonymous referrerpolicy=no-referrer><script src=/js/panzoom.min.d1dc01e4727734526981f6101210bf3b5e528e53d530affbaf74a153c6678cd5.js integrity="sha256-0dwB5HJ3NFJpgfYQEhC/O15SjlPVMK/7r3ShU8ZnjNU=" crossorigin=anonymous defer></script><script src=/js/toc.min.fe3bb10d27f504bae00f74910dfea1a96647adf87328870c3f0092db5fa5d5cf.js integrity="sha256-/juxDSf1BLrgD3SRDf6hqWZHrfhzKIcMPwCS21+l1c8=" crossorigin=anonymous type=module defer></script><script src=/js/copy-code.min.3bea0de4cfe8670f94a5d75c177f07b58fc90178efdea7f2a21449798d75b2c9.js integrity="sha256-O+oN5M/oZw+UpddcF38HtY/JAXjv3qfyohRJeY11ssk=" crossorigin=anonymous defer></script><script defer src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js crossorigin=anonymous referrerpolicy=no-referrer></script><script defer src=https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js crossorigin=anonymous referrerpolicy=no-referrer onload='renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],throwOnError:!1})'></script><script src=/js/katex-block.min.2cf531bbcc318aadf5661baa2d0987ab5cb4daef473e108b1da714a37cff0b25.js integrity="sha256-LPUxu8wxiq31ZhuqLQmHq1y02u9HPhCLHacUo3z/CyU=" crossorigin=anonymous defer></script><script>window.googleTranslateElementInit=function(){new google.translate.TranslateElement({pageLanguage:"zh-CN",includedLanguages:"en,zh-CN",autoDisplay:!1},"google_translate_element")},function(){function i(e){var t=document.cookie.match("(^|;) ?"+e+"=([^;]*)(;|$)");return t?decodeURIComponent(t[2]):null}function e(){var e=i("googtrans");return e==="/zh-CN/en"||e==="/auto/en"||localStorage.getItem("site_lang")==="en"}function t(e){var t=document.getElementById("lang-toggle-btn"),n=document.getElementById("lang-toggle-label");n&&(n.textContent=e?"中":"EN"),t&&(t.setAttribute("title",e?"切换为中文":"Switch to English"),t.classList.toggle("is-en",e))}function s(){var e=window.location.hostname,t=e.split("."),n=t.length>1?"."+t.slice(-2).join("."):e,s=["",e,"."+e,n],o=["/",""];s.forEach(function(e){o.forEach(function(t){document.cookie="googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path="+t+(e?"; domain="+e:"")})})}function a(e){s();var t=window.location.hostname,n=t.split("."),o=n.length>1?"."+n.slice(-2).join("."):t;document.cookie="googtrans="+e+"; path=/",document.cookie="googtrans="+e+"; path=/; domain="+t,n.length>1&&(document.cookie="googtrans="+e+"; path=/; domain="+o)}function n(){var o,n=!e();localStorage.setItem("site_lang",n?"en":"zh"),n?a("/zh-CN/en"):s(),t(n),o=document.querySelector(".goog-te-combo"),o?(o.value=n?"en":"",o.dispatchEvent(new Event("change")),n||setTimeout(function(){window.location.reload()},150)):window.location.reload()}if(window.toggleSiteLanguage=n,document.readyState==="loading")document.addEventListener("DOMContentLoaded",function(){t(e());var s=document.getElementById("lang-toggle-btn");s&&s.addEventListener("click",n)});else{t(e());var o=document.getElementById("lang-toggle-btn");o&&o.addEventListener("click",n)}}()</script><script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async defer></script><script src=/js/drift-motion.min.9b4dc712be8926a577f58d0c954fb980a979a61f764e21bfa7d1f3fc7d32289c.js integrity="sha256-m03HEr6JJqV39Y0MlU+5gKl5ph92TiG/p9Hz/H0yKJw=" crossorigin=anonymous defer></script></head><body><header><nav><a href=/><h1>1001問</h1></a><div id=react-search class=search-root aria-label="Site Search"></div><div class=nav-actions><button id=lang-toggle-btn class=lang-toggle-btn type=button aria-label="Toggle language between Chinese and English" title="Switch English / 中文">
+<svg class="lang-icon" viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52.0 0014.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7 1.62-4.33L19.12 17h-3.24z"/></svg>
+<span class=lang-label id=lang-toggle-label>EN</span></button><div id=google_translate_element style=display:none aria-hidden=true></div><div class=nav-links><a href=/notes/>Notes</a></div></div></nav></header><main><div class=sidebar><section class=toc><div class=toc-title>目录</div><nav id=TableOfContents><ul><li><a href=#1-设备背景>1. 设备背景</a></li><li><a href=#2-知识注入如何让-ai-具备内核级的心智模型>2. 知识注入：如何让 AI 具备内核级的“心智模型”？</a><ul><li><a href=#21-驱动理论与设计哲学>2.1 驱动理论与设计哲学</a></li><li><a href=#22-姊妹芯片的重构经验借鉴mt7601u>2.2 姊妹芯片的重构经验借鉴（MT7601U）</a></li><li><a href=#23-原厂源码作为硬件事实库grounding-truth>2.3 原厂源码作为“硬件事实库”（Grounding Truth）</a></li></ul></li><li><a href=#3-技术框架决断c-骨架--no_std-rust-双擎>3. 技术框架决断：C 骨架 + <code>no_std</code> Rust 双擎</a><ul><li><a href=#决断一全面接入-linux-原生-mac80211>决断一：全面接入 Linux 原生 <code>mac80211</code></a></li><li><a href=#决断二c--纯-no_std-rust-混合架构>决断二：C + 纯 <code>no_std</code> Rust 混合架构</a></li></ul></li><li><a href=#4-目标分解与-spec-first-研发流程>4. 目标分解与 Spec-First 研发流程</a></li><li><a href=#5-破案现场ai-如何定位那些离谱的硬件暗坑>5. 破案现场：AI 如何定位那些“离谱”的硬件暗坑？</a><ul><li><a href=#案例一消失的-eapol-m2-帧表项跨度与-dma-调度器之谜>案例一：消失的 EAPOL M2 帧——表项跨度与 DMA 调度器之谜</a></li></ul></li><li><a href=#6-硬件在环测试流人机协作的高效实战>6. 硬件在环测试流：人机协作的高效实战</a><ul><li><a href=#精彩案例调度-milk-v-duo-s-完成-ap-模式全自动验证>精彩案例：调度 Milk-V Duo S 完成 AP 模式全自动验证</a></li></ul></li><li><a href=#7-结语与思考ai-时代的系统工程范式>7. 结语与思考：AI 时代的系统工程范式</a></li></ul></nav></section></div><article id=content><div class=metadata><h1>当 AI 遇到 Linux 内核：从十万行遗留代码到 802.11n 驱动全功能闭环</h1><div class=post-meta-flow><time datetime=2026-10-18T00:00:00+00:00 class=meta-date><svg class="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+<span>October 18, 2026</span></time><div class=taxonomy><span id=post-categories><ul><li class=category-item><a href=https://qtopie.github.io/categories/drivers>📁 drivers</a></li><li class=category-item><a href=https://qtopie.github.io/categories/ai>📁 ai</a></li></ul></span><span id=post-tags><ul><li class=tag-item><a href=https://qtopie.github.io/tags/linux>#linux</a></li><li class=tag-item><a href=https://qtopie.github.io/tags/rust>#rust</a></li><li class=tag-item><a href=https://qtopie.github.io/tags/wifi>#wifi</a></li><li class=tag-item><a href=https://qtopie.github.io/tags/mac80211>#mac80211</a></li><li class=tag-item><a href=https://qtopie.github.io/tags/ai-agent>#ai-agent</a></li><li class=tag-item><a href=https://qtopie.github.io/tags/mt7603u>#mt7603u</a></li></ul></span></div></div></div><p>项目地址: <a href=https://github.com/qtopie/mt7603u>github.com/qtopie/mt7603u</a></p><blockquote><p>十年前我发现了 360 随身WiFi 3 代这款高性价比的设备（MT7603U 芯片，2.4GHz 2T2R 300M），尝试过修复 vendor 驱动但依然有很多 bug；如今借助 AI，我们基于现代 Linux <code>mac80211</code> 子系统和 Rust/C 混合架构把它彻底重写了，实现了从固件下载到 STA、AP、Monitor 及 802.11n 300M MIMO 的全链路实机闭环。</p><p>本文记录我们如何通过“知识对齐 + 架构决断 + 目标分解 + 硬件在环测试”的人机协作工作流，完成这个内核级无线驱动的开发。</p></blockquote><hr><h2 id=1-设备背景>1. 设备背景</h2><p align=center><img src=360_wifi_3.jpg alt="Qihoo 360 随身WiFi 3" width=550></p><p>十年前我发现了 360 随身WiFi 3 代（USB ID: <code>0x0E8D:0x760C</code>）这款高性价比的无线网卡，搭载联发科 MT7603U 芯片，板载双天线，硬件规格相当不错。当年我曾尝试过去修复官方提供的 vendor 驱动，但由于其基于陈旧的 RTMP 单体架构，代码冗长混乱，修补后依然存在很多 bug，且无法原生接入现代 Linux 的 <code>mac80211</code> 体系。</p><p>如今借助 AI，我们不再给 vendor 旧代码缝缝补补，而是将其作为底层寄存器与协议参考，从零用 C + <code>no_std</code> Rust 重写了一个符合 Linux 主线 <code>mac80211</code> 规范的现代化驱动。</p><hr><h2 id=2-知识注入如何让-ai-具备内核级的心智模型>2. 知识注入：如何让 AI 具备内核级的“心智模型”？</h2><p>让 AI 辅助开发应用程序（如写 Web 后端或前端页面）早已屡见见鲜，但在 Linux 内核驱动开发中，如果直接给 AI 一个 Prompt：“<em>帮我写一个 MT7603U 无线驱动</em>”，得到的结果只会是荒诞的伪代码。硬件开发没有容错空间：一个地址写错、一个位域偏移错误，就会立刻导致 Kernel Panic、Oops，甚至整机死锁重启。</p><p>要让 AI 成为真正的系统级协作者，<strong>第一步不是急于写代码，而是给 AI 建立高精度的领域认知底座</strong>。</p><p>在项目启动之初，我们没有将原厂代码直接粗暴塞进上下文，而是分层注入了三份核心知识：</p><h3 id=21-驱动理论与设计哲学>2.1 驱动理论与设计哲学</h3><p>通过团队沉淀的底层设计笔记，向 AI 对齐 Linux 驱动的核心哲学：</p><ul><li><strong>机制与策略分离（Mechanism vs Policy）</strong>：驱动只负责提供对硬件机制的控制能力（如分配 URB、读写寄存器、下发封包），绝不应该私自实现上层策略；</li><li><strong>虚拟方法表（vtable）抽象</strong>：Linux 内核通过结构体函数指针（如 <code>struct ieee80211_ops</code>、<code>struct usb_driver</code>）实现面向对象式多态；</li><li><strong>统一设备模型与 USB 栈</strong>：USB 控制传输（EP0 Vendor Request）与批量传输（Bulk In/Out Endpoint）的异步模型及生命周期。</li></ul><h3 id=22-姊妹芯片的重构经验借鉴mt7601u>2.2 姊妹芯片的重构经验借鉴（MT7601U）</h3><p>MT7601U 是 MT7603U 的上一代单流姊妹芯片，架构极其相似（同属 Andes N9 MCU 架构）。社区著名开发者 Kuba 曾将 MT7601U 的厂商驱动重构成 Linux 主线驱动：</p><ul><li>梳理了 Andes N9 MCU 的固件散列分片（Scatter Download）下载流程；</li><li>梳理了 USB 端点布局（EP 0x84 数据环、EP 0x85 命令响应环、EP 0x08 管理/Beacon 直通端点、EP 0x05 WMM 数据端点）；</li><li>对比了厂商臃肿的私有 RTMP 框架与主线 <code>mac80211</code> 的精简对接模式。</li></ul><h3 id=23-原厂源码作为硬件事实库grounding-truth>2.3 原厂源码作为“硬件事实库”（Grounding Truth）</h3><p>十万行原厂驱动源码虽然不能直接用，但它是<strong>芯片寄存器地址、位域定义、固件命令字节结构、校准参数计算公式的唯一权威事实来源</strong>。AI 的核心任务之一，就是像考古学家一样，从混乱的 vendor 代码中“提炼”出精确的规范。</p><hr><h2 id=3-技术框架决断c-骨架--no_std-rust-双擎>3. 技术框架决断：C 骨架 + <code>no_std</code> Rust 双擎</h2><p>在架构选型阶段，我们通过架构提案（RFC-0001）做出了两项关键决断：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>┌─────────────────────────────────────────────────────────────────┐
+</span></span><span class=line><span class=cl>│                    Linux Kernel (mt7603u.ko)                     │
+</span></span><span class=line><span class=cl>│                                                                 │
+</span></span><span class=line><span class=cl>│  ┌───────────────────────────────────────────────────────────┐  │
+</span></span><span class=line><span class=cl>│  │                     C 骨架驱动层 (Thin Skeleton)           │  │
+</span></span><span class=line><span class=cl>│  │  • USB 设备总线注册 (probe / disconnect)                   │  │
+</span></span><span class=line><span class=cl>│  │  • mac80211 核心子系统胶水 (struct ieee80211_ops)          │  │
+</span></span><span class=line><span class=cl>│  │  • URB 分配、锚定 (usb_anchor) 与安全卸载击毙               │  │
+</span></span><span class=line><span class=cl>│  │  • sk_buff 内存管理与 DMA 零拷贝接收环                     │  │
+</span></span><span class=line><span class=cl>│  └─────────────────────────────┬─────────────────────────────┘  │
+</span></span><span class=line><span class=cl>│                                │ C ABI (no_std FFI 契约)        │
+</span></span><span class=line><span class=cl>│  ┌─────────────────────────────▼─────────────────────────────┐  │
+</span></span><span class=line><span class=cl>│  │               Rust 纯逻辑核心 (libmt7603u_logic.a)         │  │
+</span></span><span class=line><span class=cl>│  │  • EEPROM / eFuse 1024B 解析与 RSSI 增益校准               │  │
+</span></span><span class=line><span class=cl>│  │  • 硬件寄存器序列生成器 (MAC/BBP/RF/Channel/TBTT)          │  │
+</span></span><span class=line><span class=cl>│  │  • 802.11 / TMAC_TXD / RMAC_RXD 帧协议编解码器            │  │
+</span></span><span class=line><span class=cl>│  │  • Andes N9 MCU 命令帧序列化与 Header 打包                 │  │
+</span></span><span class=line><span class=cl>│  │  • WTBL 速率表与硬件 CCMP 密钥槽状态机                     │  │
+</span></span><span class=line><span class=cl>│  └───────────────────────────────────────────────────────────┘  │
+</span></span><span class=line><span class=cl>└─────────────────────────────────────────────────────────────────┘
+</span></span></code></pre></div><h3 id=决断一全面接入-linux-原生-mac80211>决断一：全面接入 Linux 原生 <code>mac80211</code></h3><p>绝不复用原厂私有协议栈！我们让 MT7603U 注册成为标准的 <code>ieee80211_hw</code> 设备：</p><ul><li>802.11 状态机、SME 关联管理、WPA2 认证握手、Minstrel 动态速率自适应算法全部交给内核成熟的 <code>mac80211</code> 子系统；</li><li>驱动不仅代码体量减少了 80% 以上，而且天然原生支持 <code>iw</code>、<code>nmcli</code>、<code>wpa_supplicant</code>、<code>hostapd</code> 及 GNOME 网络桌面控制面板。</li></ul><h3 id=决断二c--纯-no_std-rust-混合架构>决断二：C + 纯 <code>no_std</code> Rust 混合架构</h3><p>为什么不纯用 C？为什么也不纯用 Rust-for-Linux？</p><ul><li><strong>Linux 现有机制兼容性</strong>：当前主流发行版（如我们测试所用的 Ubuntu 7.x 内核）对纯 Rust 驱动模块的基础设施还在快速演进中，直接使用 C 语言编写极薄的驱动骨架（不到 1000 行），处理 USB 探测和 <code>sk_buff</code> 内存最为稳妥；</li><li><strong>Rust 解决核心痛点</strong>：无线驱动中最容易崩溃、溢出的部分在于<strong>复杂的字节解包、固件命令打包、寄存器序列变换和多级数据结构索引</strong>。我们把这部分纯逻辑全部剥离进 Rust，以 <code>no_std</code>（禁用动态内存分配和标准库）编译为静态库 <code>libmt7603u_logic.a</code>，通过极度严格的 C ABI 与 C 骨架链接；</li><li><strong>内核内存零崩溃</strong>：利用 Rust 严苛的借用检查器与模式匹配，从根本上杜绝了原厂代码里常见的越界读写、野指针悬挂与未初始化内存。</li></ul><hr><h2 id=4-目标分解与-spec-first-研发流程>4. 目标分解与 Spec-First 研发流程</h2><p>驱动开发的复杂性在于依赖链极长：没有总线枚举就读不到 eFuse；没有 eFuse 就无法初始化射频；固件下载不通就无法拉起 MAC；MAC 队列不通数据帧就发不出……</p><p>为了防止 AI 陷入“改东墙补西墙”的混乱试错中，我们确立了一条铁律：<strong>Spec-First Gate（规范先于代码，无 Spec 绝不写代码）</strong>。</p><div class=mermaid-block data-mermaid-zoom=1><div class=mermaid-toolbar><button class=mermaid-btn type=button data-action=zoom-in aria-label="Zoom in">+</button>
+<button class=mermaid-btn type=button data-action=zoom-out aria-label="Zoom out">-</button>
+<button class=mermaid-btn type=button data-action=reset aria-label="Reset zoom">100%</button>
+<button class=mermaid-btn type=button data-action=fullscreen aria-label="Toggle fullscreen">Full</button></div><div class="mermaid mermaid-canvas">flowchart LR
+A["1. 深入原厂源码逆向事实"] --> B["2. 撰写契约规范<br>(specs/ 目录)"]
+B --> C["3. 人工审查与批准<br>(APPROVE Gate)"]
+C --> D["4. 编写用户态测试用例<br>(harness/)"]
+D --> E["5. 实现 Rust/C 业务代码"]
+E --> F["6. 自动化自验证<br>(scripts/check.sh)"]</div></div><p>我们参考 <code>docs/roadmap.md</code> 将整个工程清晰拆解为五大递进阶段：</p><table><thead><tr><th>阶段</th><th>核心任务</th><th>攻坚点与硬件事实</th></tr></thead><tbody><tr><td><strong>Phase 1: 基础流程</strong></td><td>USB 枚举、eFuse 读取、固件下载</td><td>19 片 Scatter 固件上传，Andes N9 在 EP 0x84 上的 150μs 极速 ACK 响应，TOP_MISC2 固件就绪轮询</td></tr><tr><td><strong>Phase 2: STA 客户端模式</strong></td><td>信道切换、主动扫描、认证关联、数据通路</td><td>Group3 接收向量 RSSI 校准、802.11 Probe Request 发送、EAPOL 4-Way 握手、DHCP 与 Ping</td></tr><tr><td><strong>Phase 3: AP 热点模式</strong></td><td><code>hostapd</code> 支持、Beacon 广播、多客户端管理</td><td>LPON/ARB 硬件 BssSync/TBTT 定时器调度、<code>mac80211</code> <code>NL80211_CMD_FRAME_TX_STATUS</code> 异步状态回报</td></tr><tr><td><strong>Phase 4: Monitor 监听模式</strong></td><td>混杂模式抓包、Radiotap 空口元数据逆向</td><td><code>RMAC_RFCR</code> 动态混杂过滤切换、Group3 <code>RXV1_1ST_CYCLE</code> 速率/频点/SGI 解码、Raw 帧注入</td></tr><tr><td><strong>Phase 5: 高级物理层特性</strong></td><td>802.11n 2T2R 300M、HT40 频宽、BlockAck</td><td><code>build_txwi</code> 2 空间流计算（<code>nss = 1 + (mcs >> 3)</code>）、Minstrel-HT 速率控制对接、WTBL2 DW15 A-MPDU 聚合会话</td></tr></tbody></table><p>在整个推进过程中，所有的行为契约全量沉淀在仓库的 <code>specs/modules/</code> 中（<code>mcu.spec.md</code>、<code>sta.spec.md</code>、<code>ap.spec.md</code>、<code>rx_tx.spec.md</code>），成为不可动摇的单一事实来源（SSOT）。</p><hr><h2 id=5-破案现场ai-如何定位那些离谱的硬件暗坑>5. 破案现场：AI 如何定位那些“离谱”的硬件暗坑？</h2><p>硬件开发最痛苦的不是实现逻辑，而是**“驱动代码每行看起来都对，但硬件就是没有任何反应”**。</p><p>在本次开发中，AI 展现出的最震撼能力，并非写普通代码，而是<strong>结合寄存器实测遥测数据、内核 Dump 与原厂源码，跨模块定位深层次硬件 Bug 的破案能力</strong>。</p><h3 id=案例一消失的-eapol-m2-帧表项跨度与-dma-调度器之谜>案例一：消失的 EAPOL M2 帧——表项跨度与 DMA 调度器之谜</h3><p>在推进 STA 模式 WPA2 握手时，出现了一个诡异现象：网卡扫描极其正常，也能顺利收到 AP 的 Authentication 和 Association Response，但在 4-Way 握手阶段，<code>wpa_supplicant</code> 明明发出了 M2 帧，AP 却永远收不到，反复重传 M1，最终超时断开。</p><p>我们与 AI 联合展开了一场抽丝剥茧式的联合排查：</p><ol><li><strong>排除密码与抓包污染</strong>：确认 PSM 密码完全正确，M1 帧 ANonce 每次稳定解包；</li><li><strong>确认 M2 帧内存未损坏</strong>：在驱动入口 Dump skb 字节，确认 MIC、SNonce 和 Replay Counter 逐字节完全正确；</li><li><strong>硬件是否收到数据？</strong>：开启硬件 TX 状态回报（<code>tx_status_2_host</code>），发现 LMAC 对该端点根本没有任何完成包！说明数据帧根本没走出网卡！</li><li><strong>致命破案 1：WTBL1 表项跨度误写（32B vs 20B）</strong>
+AI 深入比对原厂 <code>wf_wtbl.h</code>，发现原厂 <code>WTBL_1_STRUC</code> 包含 5 个数据字加 3 个 dummy 字，<strong>总长应为 32 字节（<code>0x20</code>）</strong>。而此前代码中误定义成了 20 字节（<code>0x14</code>）！
+这一细微偏差导致：写入关联 AP（WCID 1）的地址被错位写进了 WCID 0 的 dummy 区域，而真正的 WCID 1 基址内有效位全为 0！硬件将该数据帧直接判定为非法客户端而静默抛弃。</li><li><strong>致命破案 2：完全未初始化的 HIF/PSE DMA 调度器</strong>
+修完表项后，数据帧依然发不出。我们通过寄存器读取指令读取了硬件调度器寄存器（<code>SCH-DIAG</code>），结果显示：<div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>FC_P0=0x02880288 SCH1=0x00000000 SCH2=0x00000000 G0=0x00000000 BMAP0=0x00000000
+</span></span></code></pre></div><strong>全都是 0！</strong>
+AI 顺藤摸瓜回查原厂 <code>AsicDMASchedulerInit</code>，终于揪出了终极根因：MT7603 内部的硬件调度器极其严苛，当 <code>MT_SCH_REG_2</code>（单包最大页数）、<code>MT_GROUP_THD</code>（组门限）和 <code>MT_BMAP</code> 全为 0 时，芯片内部的 HIF DMA 调度器会判定该队列超出阈值，<strong>将 WMM 数据端点（EP 0x05）永久阻塞在芯片入口，从不送进 LMAC 发射机</strong>！</li></ol><p>当 AI 生成并补齐了包含 40 余个时序寄存器的 <code>build_dma_scheduler_sequence</code> 序列后，再次加载驱动，dmesg 瞬间打出了：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>[1198574.022203] mt7603u: TXS[0]: pid=0x42 dw0=0x00009288 =&gt; LMAC_TX_OK
+</span></span></code></pre></div><p>紧接着，<code>wpa_supplicant</code> 绿灯全亮：<strong>WPA2 握手成功，DHCP 租约获取通过，Ping 网关 0% 丢包！</strong></p><hr><h2 id=6-硬件在环测试流人机协作的高效实战>6. 硬件在环测试流：人机协作的高效实战</h2><p>硬件开发如果必须每次依赖人工在桌面上拿手机点连接、反复插拔网卡，AI 的研发效率就会大打折扣。为此，我们设计了一套<strong>多梯级的闭环测试工程体系</strong>：</p><div class=mermaid-block data-mermaid-zoom=1><div class=mermaid-toolbar><button class=mermaid-btn type=button data-action=zoom-in aria-label="Zoom in">+</button>
+<button class=mermaid-btn type=button data-action=zoom-out aria-label="Zoom out">-</button>
+<button class=mermaid-btn type=button data-action=reset aria-label="Reset zoom">100%</button>
+<button class=mermaid-btn type=button data-action=fullscreen aria-label="Toggle fullscreen">Full</button></div><div class="mermaid mermaid-canvas">flowchart TD
+subgraph L1["第一层: 用户态沙盒 (Zero Risk)"]
+T1["cargo test (65/65 单元测试)"]
+T2["check-spec-drift.sh (契约零漂移)"]
+end
+subgraph L2["第二层: 免重启用户态测试 (No Kernel Panic)"]
+T3["user_runner.rs (基于 libusb)"]
+T4["测试 USB 枚举、eFuse 读取与固件下载"]
+end
+subgraph L3["第三层: 真实物理内核在环 (DUT Hardware)"]
+T5["Ubuntu MOK 自动签名构建 (make)"]
+T6["insmod / dmesg / iw 真实硬件验证"]
+end
+subgraph L4["第四层: 局域网边缘节点自协同 (Milk-V Duo S)"]
+T7["Duo S (RISC-V 边缘硬件 192.168.50.6)"]
+T8["带看门狗的自动化 STA 接入脚本"]
+T9["空中 4-Way 握手 + 双向 ICMP Ping 验收"]
+end
+L1 --> L2 --> L3 --> L4</div></div><h3 id=精彩案例调度-milk-v-duo-s-完成-ap-模式全自动验证>精彩案例：调度 Milk-V Duo S 完成 AP 模式全自动验证</h3><p>在测试 AP 模式时，主机拉起了 <code>hostapd</code>，我们需要一个真实的 WiFi 客户端来验证能不能连上、能不能分配 IP、数据包能不能双向转发。</p><p>我们利用局域网中一台在线的 <strong>Milk-V Duo S（平头哥 SG2000，RISC-V 64 边缘计算板）</strong> 作为测试仪：</p><ol><li><strong>守护看门狗保障安全</strong>：Duo S 自身通过 WiFi 连接路由器进行 SSH 通信，切换热点会导致网络断开。AI 设计了一个带有 <code>trap cleanup EXIT INT TERM</code> 的后台自治脚本：<ul><li>先通过 <code>wpa_cli</code> 临时添加测试 AP <code>MT7603U-Test-AP</code>；</li><li>切换连接、建立 WPA2 关联；</li><li>握手成功后配置 <code>192.168.76.2/24</code>；</li><li>执行空中双向 Ping 测试；</li><li><strong>测试完毕无论成功与否，看门狗自动切回原网络</strong>，确保边缘板永不失联。</li></ul></li><li><strong>测试结果直接闭环</strong>：<div class=highlight><pre tabindex=0 class=chroma><code class=language-text data-lang=text><span class=line><span class=cl>--&gt; Ping from Duo S to AP 192.168.76.1:
+</span></span><span class=line><span class=cl>PING 192.168.76.1 (192.168.76.1) from 192.168.76.2: 56 data bytes
+</span></span><span class=line><span class=cl>64 bytes from 192.168.76.1: seq=0 ttl=64 time=6.669 ms
+</span></span><span class=line><span class=cl>64 bytes from 192.168.76.1: seq=1 ttl=64 time=2.671 ms
+</span></span><span class=line><span class=cl>64 bytes from 192.168.76.1: seq=2 ttl=64 time=2.648 ms
+</span></span><span class=line><span class=cl>--- 192.168.76.1 ping statistics ---
+</span></span><span class=line><span class=cl>4 packets transmitted, 4 packets received, 0% packet loss
+</span></span></code></pre></div></li></ol><p>整个过程无需人工手动掏出手机输密码，几秒内完成从 AP 广播到客户端关联、加解密数据转发的全自动验收。</p><hr><h2 id=7-结语与思考ai-时代的系统工程范式>7. 结语与思考：AI 时代的系统工程范式</h2><p>从十年前尝试修复 vendor 驱动却被各种 bug 困扰，到今天与 AI 一起在现代 Linux 内核中重构出架构清晰、测试完备的开源驱动，这个过程给了我们几点实在的体会：</p><ol><li><strong>AI 并没有“消灭”底层工程师，而是将工程师提升为“系统架构师与裁判员”</strong>：<ul><li>人类工程师决定系统架构（选用 mac80211、C/Rust 边界）、划定安全红线（宿主机网卡保护、看门狗保护）、提供真实测试场景；</li><li>AI 承担了最耗时但极具价值的工作：在数十万行遗留代码中精确定位事实、逆向寄存器逻辑、翻译类型安全的规范与自动化测试套件。</li></ul></li><li><strong>“规范驱动开发（Spec-First）”是让 AI 保持理性的唯一良方</strong>：<ul><li>如果任由 AI 随意改写内核代码，哪怕是经验丰富的工程师也会在连环崩溃中迷失；</li><li>将事实提炼为 SSOT（<code>specs/</code>），并让 Harness 测试门禁卡在每一步代码前面，AI 就能爆发出令人惊叹的高可靠交付能力。</li></ul></li></ol><p>所有的 Spec、Rust 核心与 C 驱动已完整开源：<a href=https://github.com/qtopie/mt7603u>github.com/qtopie/mt7603u</a>。希望这段实践能为探索 AI 辅助嵌入式与底层系统开发的同学提供参考。</p></article><div id=react-app-components data-post-id=f8d0d47833ad43badb1c4e89fdd27a37></div><button class=mobile-toc-trigger aria-controls=mobile-toc aria-expanded=false title=目录>☰</button><div class=mobile-toc-overlay hidden></div><div id=mobile-toc class=mobile-toc-drawer aria-hidden=true role=dialog aria-label=目录><div class=mobile-toc-header><span class=mobile-toc-title>目录</span>
+<button class=mobile-toc-close aria-label=关闭>×</button></div><nav class=mobile-toc-body><div class=mobile-toc-list></div></nav><div class=mobile-safe-area-spacer></div></div><script type=module src=/react/page.bundle.js></script></main><footer><div class=copyright><small>© <a href=https://github.com/qtopie>qtopie</a> 2026
+· Licensed under <a href=https://creativecommons.org/licenses/by/4.0/legalcode>CC BY 4.0</a></small></div><div><script type=module src=/react/base.bundle.js></script><script type=module>
+      (async ()=>{
+        try {
+          const mod = await import('https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.mjs');
+          const mermaid = mod.default || mod;
+          
+          
+          
+          mermaid.initialize({
+            startOnLoad: false,
+            theme: 'base',
+            themeVariables: {
+               
+              primaryColor:       '#e8f0fe',    
+              primaryTextColor:   '#1e293b',    
+              primaryBorderColor: '#93b4f8',    
+              secondaryColor:     '#f1f5f9',    
+              secondaryTextColor: '#1e293b',
+              tertiaryColor:      '#fef9ec',    
+              tertiaryTextColor:  '#1e293b',
+               
+              edgeLabelBackground:'#ffffff',
+              lineColor:          '#64748b',
+               
+              actorBkg:           '#dbeafe',
+              actorTextColor:     '#1e293b',
+              actorBorder:        '#93b4f8',
+              activationBkgColor: '#bfdbfe',
+              activationBorderColor: '#3b82f6',
+               
+              noteBkgColor:       '#fefce8',
+              noteTextColor:      '#1e293b',
+              noteBorderColor:    '#fbbf24',
+               
+              classText:          '#1e293b',
+               
+              fontSize:           '14px',
+              fontFamily:         '"Segoe UI", system-ui, -apple-system, sans-serif',
+            },
+          });
+          mermaid.init && mermaid.init(undefined, document.querySelectorAll('.mermaid'));
+
+          const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+          const setupBlock = (block) => {
+            if (block.dataset.mermaidReady === 'true') return;
+            block.dataset.mermaidReady = 'true';
+            const canvas = block.querySelector('.mermaid-canvas');
+            const toolbar = block.querySelector('.mermaid-toolbar');
+            if (!canvas || !toolbar) return;
+
+            const ensureSvg = (callback) => {
+              const svg = canvas.querySelector('svg');
+              if (svg) { callback(svg); return; }
+              const observer = new MutationObserver(() => {
+                const svgNow = canvas.querySelector('svg');
+                if (svgNow) {
+                  observer.disconnect();
+                  callback(svgNow);
+                }
+              });
+              observer.observe(canvas, { childList: true, subtree: true });
+            };
+
+            const setZoom = (nextZoom) => {
+              const zoom = clamp(nextZoom, 0.5, 3);
+              block.dataset.mermaidZoom = String(zoom);
+              const resetBtn = toolbar.querySelector('[data-action="reset"]');
+              if (resetBtn) resetBtn.textContent = `${Math.round(zoom * 100)}%`;
+              ensureSvg((svg) => {
+                svg.style.transform = `scale(${zoom})`;
+              });
+            };
+
+            let pz = null;
+            const onFullscreenChange = () => {
+              const isFullscreen = document.fullscreenElement === block || block.classList.contains('is-fullscreen');
+              block.classList.toggle('is-fullscreen', isFullscreen);
+              const fsBtn = toolbar.querySelector('[data-action="fullscreen"]');
+              if (fsBtn) {
+                fsBtn.textContent = isFullscreen ? 'Exit' : 'Full';
+                fsBtn.setAttribute('aria-label', isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen');
+              }
+
+              ensureSvg((svg) => {
+                if (isFullscreen) {
+                  if (window.panzoom && !pz) {
+                    svg.style.transformOrigin = '50% 50%';
+                    pz = window.panzoom(svg, {
+                      maxZoom: 3,
+                      minZoom: 0.5,
+                      initialZoom: 1,
+                      bounds: false,
+                      boundsPadding: 0.1
+                    });
+                    pz.on('transform', () => {
+                      const transform = pz.getTransform();
+                      const resetBtn = toolbar.querySelector('[data-action="reset"]');
+                      if (resetBtn) resetBtn.textContent = `${Math.round(transform.scale * 100)}%`;
+                    });
+                  }
+                } else {
+                  if (pz) {
+                    pz.dispose();
+                    pz = null;
+                  }
+                  svg.style.transform = '';
+                  svg.style.transformOrigin = '';
+                  const resetBtn = toolbar.querySelector('[data-action="reset"]');
+                  if (resetBtn) resetBtn.textContent = '100%';
+                  block.dataset.mermaidZoom = '1';
+                }
+              });
+            };
+
+            document.addEventListener('fullscreenchange', onFullscreenChange);
+
+            toolbar.addEventListener('click', (event) => {
+              const target = event.target;
+              if (!(target instanceof HTMLElement)) return;
+              const action = target.getAttribute('data-action');
+              if (!action) return;
+
+              if (pz) {
+                const transform = pz.getTransform();
+                const rect = canvas.getBoundingClientRect();
+                const cx = rect.left + rect.width / 2;
+                const cy = rect.top + rect.height / 2;
+                if (action === 'zoom-in') {
+                  pz.smoothZoom(cx, cy, 1.25);
+                } else if (action === 'zoom-out') {
+                  pz.smoothZoom(cx, cy, 0.8);
+                } else if (action === 'reset') {
+                  pz.moveTo(0, 0);
+                  pz.zoomAbs(0, 0, 1);
+                } else if (action === 'fullscreen') {
+                  if (document.fullscreenElement === block) {
+                    document.exitFullscreen && document.exitFullscreen();
+                  } else {
+                    block.classList.remove('is-fullscreen');
+                    onFullscreenChange();
+                  }
+                }
+              } else {
+                const currentZoom = Number(block.dataset.mermaidZoom || '1');
+                if (action === 'zoom-in') return setZoom(currentZoom + 0.1);
+                if (action === 'zoom-out') return setZoom(currentZoom - 0.1);
+                if (action === 'reset') return setZoom(1);
+                if (action === 'fullscreen') {
+                  if (block.requestFullscreen) {
+                    block.requestFullscreen();
+                  } else {
+                    block.classList.add('is-fullscreen');
+                    onFullscreenChange();
+                  }
+                }
+              }
+            });
+
+            setZoom(Number(block.dataset.mermaidZoom || '1'));
+          };
+
+          document.querySelectorAll('.mermaid-block').forEach(setupBlock);
+        } catch (e) { console.error('mermaid load error', e); }
+      })();
+    </script></div></footer></body></html>
